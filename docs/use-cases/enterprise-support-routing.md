@@ -23,10 +23,12 @@ model, text understanding, provider ability, or production readiness.
 
 The [guided browser interface](../../demos/enterprise-routing/README.md) runs the
 same example locally and reveals its receipts step by step. The
-[silent screen recording](../../artifacts/enterprise/support-routing/demo/walkthrough.mp4)
+[90-second screen recording](../../artifacts/enterprise/support-routing/demo/walkthrough.mp4)
 shows the successful edit, scoped impact, real inverse restoration, abstention,
 and the unseen-symptom failure. Its on-screen concepts connect this domain
-adapter to the generic framework lifecycle.
+adapter to the generic framework lifecycle. A quiet cinematic music bed accompanies
+the footage; [music credit and license](../../artifacts/enterprise/support-routing/demo/MUSIC.md)
+are included.
 
 ## Run and inspect the decision
 

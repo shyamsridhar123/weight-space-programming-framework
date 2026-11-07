@@ -88,8 +88,9 @@ establishes an integration pattern, not enterprise deployment performance.
 [Watch the browser walkthrough](artifacts/enterprise/support-routing/demo/walkthrough.mp4)
 or [run the guided interface](demos/enterprise-routing/README.md). It follows the
 task contract, candidate tradeoff, protected coefficient, sealed evaluation,
-measured impact, and actual parent restoration. The silent recording also shows
-abstention and a final-gate rejection, with explanations on screen.
+measured impact, and actual parent restoration. The 90-second recording also shows
+abstention and a final-gate rejection, with explanations on screen and a quiet
+cinematic music bed. [Music credit](artifacts/enterprise/support-routing/demo/MUSIC.md).
 
 [![The demo interface showing routing impact and preserved behavior.](artifacts/enterprise/support-routing/demo/poster.jpg)](artifacts/enterprise/support-routing/demo/walkthrough.mp4)
 

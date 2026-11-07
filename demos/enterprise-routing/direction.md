@@ -43,5 +43,6 @@ screen footage.
 
 ## Open decisions
 
-No product decisions block execution. A silent, readable walkthrough with in-UI
-explanations is the default because the user did not request a narrator.
+No product decisions block execution. The user requested a 90-second recording
+with subtle, epic background music. Keep the in-UI explanations and normal-speed
+footage, with a restrained cinematic instrumental bed and readable pauses.

@@ -7,8 +7,14 @@ research draft.
 
 ## Unreleased
 
+- Cut the real browser demo to 90 seconds at normal speed, retaining the contract,
+  candidate comparison, protected edit, final gate, impact, rollback, abstention,
+  and rejection. Added a restrained excerpt of Scott Buckley's “Aphelion” under
+  CC BY 4.0, with fades, attribution, a reproducible edit plan, embedded chapters,
+  and updated player timings and provenance.
+
 - Added a simple local enterprise-routing interface backed by actual Python
-  execution and a silent browser screen recording. The walkthrough explains the
+  execution and a browser screen recording. The walkthrough explains the
   task contract, candidate tradeoff, literal protected edit, sealed final gate,
   measured routing impact, and exact-parent restoration. It also shows
   infeasible protection and feature-coverage rejection. Published the video,

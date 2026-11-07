@@ -64,14 +64,21 @@ have not been measured.
 
 ## Recording and reproducibility
 
-The silent MP4 captures actual interactions with the local browser interface.
-Explanations are on screen. Chrome DevTools Protocol `Page.screencastFrame`
-supplied JPEG frames and presentation timestamps; unchanged browser frames are
-held between events, then encoded as H.264 at 24 fps. Browser chrome and the
-workstation desktop are outside the capture. No generated scenes replace the UI.
+The 90-second MP4 uses normal-speed excerpts of actual interactions with the
+local browser interface. Pauses are shortened with hard cuts, retaining all nine
+chapters. Explanations are on screen; a quiet cinematic instrumental bed adds a
+gentle build, with a two-second fade-in and six-second fade-out. There is no
+narrator. [Music credit and license](../../artifacts/enterprise/support-routing/demo/MUSIC.md).
+
+Chrome DevTools Protocol `Page.screencastFrame` supplied the original JPEG frames
+and presentation timestamps; unchanged frames were held between events, encoded
+as H.264 at 24 fps. The edit retains normal speed within each excerpt. Browser
+chrome and the workstation desktop are outside the capture. No generated scenes
+replace the UI.
 
 [The recording receipt](../../artifacts/enterprise/support-routing/demo/recording.json)
-contains its duration, chapters, video hash, and published source snapshot hashes.
+contains its duration, chapters, video hash, published source snapshot hashes,
+original recording identity, source ranges, and music origin and changes.
 Those hashes describe the files supplied with the demo; the receipt is a local
 provenance record, not independent runtime attestation. Private raw capture paths
 and review screenshots stay outside the publication.
@@ -82,12 +89,28 @@ browser. Given a local JSON receipt with `capture_method`, `capture_date`,
 relative JPEG filenames and increasing presentation times:
 
 ```bash
-python demos/enterprise-routing/encode_recording.py .runs/demo-capture/capture.json
+python demos/enterprise-routing/encode_recording.py .runs/demo-capture/capture.json --out .runs/uncut-export
 ```
 
-This export needs `ffmpeg` on PATH. Running the interface requires only the core
-framework's Python dependencies. The published evidence can also be reproduced
-and verified through the commands in the enterprise use-case document.
+That command produces the uncut capture. The source recording and receipt used
+for the current edit are preserved in Git commit
+`e14ea51ee61c689dee389e6d8e060420b1808535`, under
+`artifacts/enterprise/support-routing/demo/`. The 90-second edit is defined in
+[edit-plan.json](edit-plan.json), with source video and original music hashes.
+Using local copies of those two source files and the original Aphelion MP3 from
+the artist's download linked in the plan:
+
+```bash
+python demos/enterprise-routing/edit_recording.py .runs/uncut-walkthrough.mp4 \
+  --source-receipt .runs/uncut-recording.json --music .runs/aphelion-original.mp3
+```
+
+The editor checks input identities, trims the actual footage, adds credited AAC
+music, embeds chapter markers, and checks the output duration before replacing
+the published MP4 and receipt. Encoded bytes can differ across FFmpeg versions.
+It needs `ffmpeg` and `ffprobe` on PATH. Running the interface requires only the
+core framework's Python dependencies. The published evidence can also be
+reproduced and verified through the enterprise use-case commands.
 
 The demo's scoped visual tokens and component guidance live in
 [DESIGN.md](DESIGN.md). Its interface uses local CSS, system fonts, readable
