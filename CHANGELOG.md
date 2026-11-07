@@ -7,6 +7,11 @@ research draft.
 
 ## Unreleased
 
+- Refined the README using STE-Pro-Max's writing and visual guidance. The opening
+  now leads with the generic framework and a small edit; an original image shows
+  the intersecting target and protection conditions. A comparison table preserves
+  both sides of the measured tradeoff, and publication details sit at the end.
+
 The [research plan](ROADMAP.md) defines the next decisions: generic behavioral
 admission, candidate-specific formal binding, numerical execution correspondence,
 a restricted/provider harness, fresh task studies, and cumulative edit contracts.

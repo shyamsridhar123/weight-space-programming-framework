@@ -1,68 +1,47 @@
 # Weight Space Programming Framework
 
-**Research draft · `v0.2.0-draft.4` · publication candidate**
+**Read, diagnose, edit, and create neural-network weights.**
 
-This candidate prepares a sanitized public snapshot of the private draft.3.
-[PUBLICATION.md](PUBLICATION.md) explains the original source identities,
-disclosed redactions and omissions, and verification limits. The draft release
-remains unpublished; this page does not assert a completed public transition
-or a successful hosted run for draft.4.
+A weight edit can improve one output and disturb another. This research framework
+makes that relationship inspectable: it records the model, the proposed edit, the
+candidate actually produced, and the evidence used to evaluate it.
 
-A weight edit can improve one output and disturb another. This framework makes
-that relationship inspectable: it records the exact model and edit, checks
-supported preservation conditions, and keeps evaluation evidence tied to the
-candidate that was actually produced.
+The framework is generic. Common interfaces describe artifacts, proposals, access
+conditions, and evaluation records. Explicit adapters define execution semantics
+and the conditions for behavioral guarantees. RTS is one historical application.
 
-The framework supports **reading, diagnosing, editing, and creating neural-network
-weights**. The common interfaces describe artifacts, proposals, access conditions,
-and evaluation records. Execution semantics and behavioral guarantees come from
-explicit adapters. RTS is one historical application; the framework does not
-require a game.
+[Worked example](#one-edit-two-obligations) · [Quick start](#try-the-example) ·
+[Evidence](#what-the-evidence-shows) · [Documentation](#explore-the-framework)
 
-## Start with an edit you can understand
+## One edit, two obligations
 
-Consider a linear output head with weights `(1, 1)`. Raise its output at feature
-`(1, 1)` from 2 to 3 while preserving its output at `(1, 0)`.
+Start with a linear output head whose weights are `(1, 1)`. Raise its output at
+feature `(1, 1)` from **2 to 3**, while keeping its output at `(1, 0)` equal to **1**.
+
+![Exact linear illustration in update coordinates. The target requires delta w1 plus delta w2 to equal 1; protection requires delta w1 to equal 0. The target-only update (0.5, 0.5) satisfies the target. Their intersection (0, 1) satisfies both conditions.](artifacts/explanations/readme-edit/edit-geometry.png)
 
 | Choice | New weights | Target output | Protected output |
 | --- | --- | ---: | ---: |
 | Keep the parent | `(1, 1)` | 2 | 1 |
-| Minimum Euclidean-norm exact target-only update | `(1.5, 1.5)` | 3 | 1.5 |
-| Edit that protects the second condition | `(1, 2)` | 3 | 1 |
+| Target-only edit | `(1.5, 1.5)` | 3 | 1.5 |
+| Edit with protection | `(1, 2)` | 3 | 1 |
 
-The target-only update changes a coefficient used by both inputs. The protected
-edit uses a direction that leaves the protected output unchanged. If the target
-itself must be preserved, the request becomes impossible under this model.
+The target-only edit has the smallest Euclidean update norm among edits that meet
+the target exactly. It changes a coefficient used by both inputs. The protected
+edit changes only the second coefficient, leaving the protected output unchanged.
+If the target itself must be preserved, the requested change becomes impossible.
 
-This is an illustrative exact-arithmetic case. The [worked example](docs/weight-space/v2/worked-example.md)
-derives it, runs it through the API, and explains how numerical fitting and
-native precision change the obligations. An [interactive version](artifacts/explanations/edit-retention/index.html)
-lets you vary the edit and protected set; download or open it locally to use it.
+This example uses **fixed features, no bias change, and exact arithmetic**. The
+[worked explanation](docs/weight-space/v2/worked-example.md) derives the updates
+and follows them through the API. It also explains why numerical fitting and
+native precision need further checks.
 
-## What the current evidence supports
+[Explore the interactive model](artifacts/explanations/edit-retention/index.html)
+locally to vary the edit and protected set. The still is also available as an
+[editable SVG](artifacts/explanations/readme-edit/edit-geometry.svg), with its
+[source assumptions](artifacts/explanations/readme-edit/source.json).
 
-The synthetic study found a **target–retention tradeoff**. Compared with
-target-only ridge editing, soft retention reduced mean collateral NRMSE from
-`0.888351` to `0.199321`, while mean target NRMSE rose from `0.038695` to
-`0.360218`. Lower is better for both metrics. Both are dimensionless
-root-mean-square errors, divided by the RMS of the requested shift
-`(0.6, -0.3, 0)`, `sqrt(0.15)`; neither is an accuracy or success percentage.
-
-The comparison used paired checkpoints from independently generated synthetic
-worlds, with ReLU, tanh, and convolution-plus-tanh features. Only the output heads
-were trained and edited. The [results](docs/weight-space/v2/results.md) give the
-world-cluster uncertainty, family differences, baselines, precision effects,
-no-op outcomes, and repeated-edit failures. There was no live LLM/provider arm.
-The study tests these editing mechanisms; it does not measure an LLM's ability
-to discover them.
-
-The proofs establish conditional real-valued results: an edit that vanishes on
-protected feature directions also vanishes on their span, and supported sequential
-networks admit explicit output-drift bounds. Applying those results to a deployed
-model still requires the right feature equation, domain, endpoint, and numerical
-execution argument. The [proof guide](PROOFS.md) makes these premises explicit.
-
-## Install and run the example
+## Try the example
 
 Use Python 3.11 or newer from this repository root:
 
@@ -74,60 +53,109 @@ python examples/edit_retention.py
 weight-space --help
 ```
 
-The example reports target outputs, protected residuals, and a request blocked
-by full protection. It also shows why the compiler's positive ridge can leave
-target error even when protection is exact. The core requires NumPy and no
-external model provider. The Python import remains `rlcd.weight_space` to preserve
-the implementation and its recorded evidence.
+The example reports target outputs, protected residuals, and a request blocked by
+full protection. The compiler uses positive ridge regularization, so its fitted
+edit can retain target error even when protection is exact.
 
-For optional PyTorch support, environment details, evidence replay, and proof
-builds, use [REPRODUCING.md](REPRODUCING.md). The retained `requirements*.txt`
-files belong to the original RLCD environment; the standalone installation uses
-`pyproject.toml` through the command above.
+The core requires NumPy and no external model provider. The Python import remains
+`rlcd.weight_space`. For optional PyTorch support, environment details, evidence
+replay, and proof builds, see [Reproducing the work](REPRODUCING.md).
 
-## Read according to the question you need to answer
+The standalone installation uses `pyproject.toml` through the command above.
+The retained `requirements*.txt` files describe the original RLCD environment.
 
-| Reader question | Start here |
-| --- | --- |
-| What does weight-space programming mean, and why is this framework needed? | [Framework guide](docs/weight-space/v2/README.md) |
-| What did the original paper actually establish, and what did it leave open? | [Source review](docs/weight-space/v2/source-review.md) |
-| How do I represent, realize, and check an edit? | [Architecture and API guide](docs/weight-space/v2/architecture.md) |
-| How should access, candidate selection, failures, and held-out evaluation work? | [Task workflow](docs/weight-space/v2/workflow.md) |
-| Which assumptions make the guarantees valid? | [Formal explanation](docs/weight-space/v2/formal.md) and [proof reproduction](PROOFS.md) |
-| How was the study designed, and what happened? | [Methods](docs/weight-space/v2/methods.md) and [results](docs/weight-space/v2/results.md) |
-| What blocks a stronger claim, and what should be done next? | [Limitations and research plan](docs/weight-space/v2/limitations-and-next-steps.md) |
-| Where can I inspect the evidence and implementation obligations? | [Evidence map](EVIDENCE.md) and [requirements](docs/weight-space/v2/requirements.md) |
+## What the evidence shows
 
-![Task lifecycle: declare the request and access, submit an answer or artifact, check the candidate, select or abstain, seal selection, and evaluate on held-out data.](docs/images/task-lifecycle.png)
+The synthetic study found a **target–retention tradeoff**. Soft retention reduced
+collateral error, while leaving more error on the requested target:
 
-The caller runs structural and behavioral checks. Submission alone does not
-certify a candidate. The flowchart is available as an [SVG image](docs/images/task-lifecycle.svg),
-alongside the [architecture](docs/images/architecture.png) and
-[evidence](docs/images/evidence-branches.png) flowcharts.
+| Method | Mean target NRMSE ↓ | Mean collateral NRMSE ↓ |
+| --- | ---: | ---: |
+| Target-only ridge | 0.038695 | 0.888351 |
+| Soft retention | 0.360218 | 0.199321 |
 
-## Draft boundaries and project record
+**Lower is better for both metrics.** Both are dimensionless root-mean-square
+errors divided by the RMS of the requested shift `(0.6, -0.3, 0)`, `sqrt(0.15)`.
+They are not accuracy or success percentages.
+
+The study compared paired checkpoints from independently generated synthetic
+worlds, using ReLU, tanh, and convolution-plus-tanh features. Only the output heads
+were trained and edited. There was no live LLM/provider arm, so this study does
+not measure an LLM's ability to discover edits.
+
+The [results](docs/weight-space/v2/results.md) retain world-cluster uncertainty,
+family differences, baselines, precision effects, no-op outcomes, and repeated-edit
+failures. The [methods](docs/weight-space/v2/methods.md) explain the comparison.
+
+### What the proofs establish
+
+Under the stated real-valued assumptions, an edit that vanishes on protected
+feature directions also vanishes on their span. Supported sequential networks
+also admit explicit output-drift bounds.
+
+Using those results for a deployed model requires the right feature equation,
+domain, endpoint, and numerical execution argument. The [proof guide](PROOFS.md)
+makes these premises explicit.
+
+## What remains open
 
 The current implementation uses inspectable, dense artifacts and explicit
-semantic families. It does not yet provide generic behavioral admission,
-automatic formal binding of new candidates, verified floating execution, an
-isolated live-provider harness, or evidence of useful large-model editing.
+semantic families. Callers must run structural and behavioral checks; submitting
+a candidate does not certify it.
+
+The [research plan](docs/weight-space/v2/limitations-and-next-steps.md) connects
+the remaining limits to concrete success and failure criteria:
+
+- General behavioral admission and automatic binding of new candidates to proofs.
+- Verified floating-point execution and an isolated live-provider harness.
+- Evidence of useful large-model editing and stronger cumulative edit contracts.
+
 All published study seeds have been observed. Replaying them is reproduction;
 fresh confirmation needs untouched units and a newly frozen protocol.
 
-The documentation follows [STE-Pro-Max](https://github.com/shyamsridhar123/STE-Pro-Max)
-at the [recorded revision](provenance/documentation-revision.json): concrete
-examples, explicit mechanisms, evidence with its conditions, and next steps
-with success and failure criteria. The [changelog](CHANGELOG.md) and
-[draft notes](releases/v0.2.0-draft.4.md) describe this revision.
+## Explore the framework
 
-Original code, frozen evidence, and earlier documents retain their recorded
-identities in the [source inventory](provenance/source-files.json). The
+| To understand… | Read |
+| --- | --- |
+| The motivation and original research | [Framework guide](docs/weight-space/v2/README.md) · [Source review](docs/weight-space/v2/source-review.md) |
+| How to represent and check an edit | [Architecture and API](docs/weight-space/v2/architecture.md) · [Task workflow](docs/weight-space/v2/workflow.md) |
+| The guarantees and their premises | [Formal explanation](docs/weight-space/v2/formal.md) · [Proof reproduction](PROOFS.md) |
+| The study and its outcomes | [Methods](docs/weight-space/v2/methods.md) · [Results](docs/weight-space/v2/results.md) |
+| The gaps and next research decisions | [Limitations and next steps](docs/weight-space/v2/limitations-and-next-steps.md) · [Requirements](docs/weight-space/v2/requirements.md) |
+| The supporting records | [Evidence map](EVIDENCE.md) · [Verification scope](VERIFICATION.md) |
+
+The image flowcharts cover the [task lifecycle](docs/images/task-lifecycle.png),
+[architecture](docs/images/architecture.png), and
+[evidence branches](docs/images/evidence-branches.png).
+
+## Project record
+
+**Public research draft · `v0.2.0-draft.4`.** The draft release remains unpublished.
+The [changelog](CHANGELOG.md) records subsequent changes; the
+[draft notes](releases/v0.2.0-draft.4.md) describe the prepared snapshot.
+
+The documentation uses [STE-Pro-Max](https://github.com/shyamsridhar123/STE-Pro-Max):
+concrete examples, explicit mechanisms, and evidence with its conditions. The
+[revision record](provenance/documentation-revision.json) identifies the guidance
+used for the documentation rewrite.
+
+<details>
+<summary>Publication provenance, verification, and rights</summary>
+
+[PUBLICATION.md](PUBLICATION.md) records the source identities, disclosed
+redactions and omissions, and verification limits of the public snapshot.
+Original code, frozen evidence, and earlier documents retain their identities in
+the [source inventory](provenance/source-files.json). The
 [sanitation ledger](provenance/public-sanitization.json) identifies public
-derivatives and omitted files; their original hashes are not rewritten to
-match the public copies. Run `python scripts/verify_publication.py` to check
-publication integrity. This does not establish exact replay of a historical
-freeze whose inputs were sanitized. See
-[VERIFICATION.md](VERIFICATION.md) for what was checked and what those checks
-cannot establish, [CONTRIBUTING.md](CONTRIBUTING.md) for changes, and
-[RIGHTS.md](RIGHTS.md) for attribution and rights. No project-wide license grant
-has been selected for this draft.
+derivatives and omitted files without rewriting the original hashes.
+
+Run `python scripts/verify_publication.py` to check publication integrity. That
+check does not establish exact replay of a historical freeze whose inputs were
+sanitized. [VERIFICATION.md](VERIFICATION.md) explains what was checked; no new
+hosted-CI success is claimed here.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for changes and [RIGHTS.md](RIGHTS.md) for
+attribution and rights. No project-wide license grant has been selected for
+this draft.
+
+</details>

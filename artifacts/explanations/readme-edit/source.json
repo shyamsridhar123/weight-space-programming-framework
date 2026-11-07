@@ -1,0 +1,36 @@
+{
+  "title": "One edit, two obligations",
+  "evidence_type": "Illustrative exact-arithmetic model; not experimental evidence.",
+  "model": {
+    "equation": "y = w_1*x_1 + w_2*x_2",
+    "parent_weights": [1, 1],
+    "target_input": [1, 1],
+    "target_change": 1,
+    "protected_input": [1, 0],
+    "target_condition": "delta_1 + delta_2 = 1",
+    "protection_condition": "delta_1 = 0"
+  },
+  "updates": {
+    "parent": [0, 0],
+    "target_only": [0.5, 0.5],
+    "protected": [0, 1]
+  },
+  "assumptions": [
+    "The feature map is the identity and stays fixed.",
+    "No bias is present or changed.",
+    "The target-only update minimizes Euclidean update norm subject to exact target equality; it has no ridge penalty.",
+    "The target and protected inputs and useful updates are supplied, not discovered.",
+    "The geometry uses equal axis scales and depicts changes to weights, not the resulting weights.",
+    "This illustration does not certify native floating-point execution or live LLM ability."
+  ],
+  "source_documents": [
+    "../edit-retention/source.json",
+    "../../../docs/weight-space/v2/worked-example.md"
+  ],
+  "editorial_guidance": {
+    "repository": "shyamsridhar123/STE-Pro-Max",
+    "commit": "a7da74e83e5fcf8ea23dce075e64b463e5e24584",
+    "application": "Concrete mechanism, original line figure, visible assumptions, and an equivalent table in the README.",
+    "implementation": "Original Matplotlib SVG/PNG; no upstream renderer or figures copied."
+  }
+}
