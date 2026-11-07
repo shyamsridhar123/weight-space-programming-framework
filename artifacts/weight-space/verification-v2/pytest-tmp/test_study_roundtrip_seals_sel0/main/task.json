@@ -1,0 +1,29 @@
+{
+  "schema": "wsp-task/1",
+  "task_id": "world-900006/relu_mlp/conditional-edit",
+  "mode": "edit",
+  "objective": "Add the declared score shift on x0>0.35 while retaining x0<-0.1 behavior",
+  "architecture": "sequential-affine-activation/1",
+  "base_sha256": "66484e3a5e32925509accb0f39aae20d1ff8101c224e910e6af1140023cd547f",
+  "constraints": {
+    "fixed_arms": [
+      "no_op",
+      "unconstrained",
+      "soft_retention",
+      "nullspace",
+      "matched_random",
+      "gradient"
+    ],
+    "head": {
+      "bias": "layers.1.bias",
+      "feature_id": "study-frozen-features/06eb96fabbd9021261a2ff5c28b3e3eaa0af63a545aaff33e7fb929e1ce33a75",
+      "weight": "layers.1.weight"
+    },
+    "regime": "fitting_allowed_algorithmic_control",
+    "shift": [
+      0.6,
+      -0.3,
+      0.0
+    ]
+  }
+}

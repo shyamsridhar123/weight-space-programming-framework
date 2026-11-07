@@ -1,0 +1,206 @@
+{
+  "schema": "wspf-documentation-verification/1",
+  "recorded_at_utc": "2026-11-07T14:50:03.080810+00:00",
+  "revision": "v0.2.0-draft.3",
+  "result": "passed_with_declared_limits",
+  "failures": [],
+  "checks": [
+    {
+      "question": "Do the live explanations retain the supported conclusions, assumptions, and reader actions?",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "provenance/verification/runs/documentation-editorial-review-draft3.json",
+          "bytes": 28898,
+          "sha256": "e373d898473baf76391d55d9e25a618e268410b19c9c9edd354ea71ceb5f8e43"
+        }
+      ],
+      "scope": "Bounded static editorial review of the identified guides, source interpretation, equations as text, release notes, and retained diagram captions. This is a review finding, not a proof of completeness or a learning evaluation."
+    },
+    {
+      "question": "Do the exact Python excerpts in the worked guide run against the identified installed distribution?",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "provenance/verification/runs/worked-example-excerpts-draft3.json",
+          "bytes": 7585,
+          "sha256": "3661122ae6590f9feeeaaa7879caec7c70986e9fdac1cf210b1eaf01540aff1f"
+        },
+        {
+          "path": "provenance/verification/runs/verify_documentation_excerpts_draft3.py",
+          "bytes": 4595,
+          "sha256": "96f23edac93009cdebcc560182c64c5daba3f81e3189777a7a7440e92ef350be"
+        }
+      ],
+      "scope": "The guide's Python fences ran in document order with -I -B against the already installed dev3 wheel. Imports resolved under that isolated environment. Endpoint identity, exact supplied-anchor residual, receipt verification, rollback, and positive-ridge target error were exercised. This run reused the fresh environment created by the separate installation check."
+    },
+    {
+      "question": "Can a reader use the current wheel and runnable examples outside the source checkout?",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "provenance/verification/runs/wheel-build-draft3.json",
+          "bytes": 31589,
+          "sha256": "0006eb4c058b0b189cd831ea48da0f41df618511f3aa7d8e3dbf4d9346c45004"
+        },
+        {
+          "path": "provenance/verification/runs/wheel-build-draft3.log",
+          "bytes": 1802,
+          "sha256": "cbd554e41c4b55ef896dac9d686246869b00656721e697ed2b6b16db3229fc6c"
+        },
+        {
+          "path": "provenance/verification/runs/wheel-install-smoke-draft3.json",
+          "bytes": 43937,
+          "sha256": "f63198e0370c93e91b887f63a13fa401929e9ccb97bc38a16150f149aa8322ad"
+        },
+        {
+          "path": "provenance/verification/runs/wheel-install-smoke-draft3.log",
+          "bytes": 15769,
+          "sha256": "06021e6cbd0d9340012cef1c40d93bc60e33fc66c6f7489f56b51447bf2719f9"
+        }
+      ],
+      "scope": "Fresh PEP 517 build and core-only isolated installation, byte-copied examples, import-prefix checks, pip check, and module/console CLI help. The receipt identifies the wheel, source inputs, registry, Python/NumPy environment, and absent Torch. It is not a full optional-dependency or platform-support result."
+    },
+    {
+      "question": "Does the interactive illustration calculate its declared exact model correctly?",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "provenance/verification/runs/illustration-arithmetic-draft3.json",
+          "bytes": 6635,
+          "sha256": "e9c5884ae98c84a7fbac07f69acce4b3ff498c20026d5ffb9366c9a30248a258"
+        }
+      ],
+      "scope": "The original inline script ran under a minimal DOM stub. An independent BigInt oracle checked the declared slider grid, protected sets, presets, no-op transitions, statuses, output tables, reset, and geometry. Supplied illustrative arithmetic is separate from native model execution and scientific evidence."
+    },
+    {
+      "question": "Does the authored explanation render and respond in the browser surfaces actually exercised?",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "provenance/verification/runs/documentation-browser-draft3.json",
+          "bytes": 10342,
+          "sha256": "7845ea7a2b16dfa454a1ad94eab217ad2cfa65c115dfd111817b56db59fb9760"
+        }
+      ],
+      "scope": "Observed presets, protection choices, supported slider fill, reset, themes, desktop/narrow layouts, reduced-motion state, print emulation, no-JavaScript reading, and local resource-tree inspection. The receipt binds the final artifact and screenshots and explicitly identifies unverified keyboard/drag, assistive-technology, touch, offline-disconnection, and print-pagination surfaces."
+    },
+    {
+      "question": "Can historical proof/document inputs be resolved without silently changing their scientific identity?",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "provenance/verification/runs/docs-preservation-draft3.json",
+          "bytes": 7055,
+          "sha256": "079dba8f1058f99a3693f6cde7019cf12046748464d9de3016dec63f1e5aee89"
+        },
+        {
+          "path": "provenance/verification/runs/integration-draft3-verification.json",
+          "bytes": 10021,
+          "sha256": "c16a0aa72ad10add95451a8db412861c92180a42558035da9a2011f8df73b6dd"
+        },
+        {
+          "path": "provenance/verification/runs/source-freeze-draft3-review.json",
+          "bytes": 539,
+          "sha256": "95118a2a99f46646b0fbd6e1034dc2fc48eed0444dc3f3f1fc575df84177c3ba"
+        },
+        {
+          "path": "provenance/verification/runs/source-freeze-draft3-provenance.json",
+          "bytes": 800,
+          "sha256": "7dc88795699a16812388c151577730963ff32a269acd5c7aaa0cd6abcfa858db"
+        }
+      ],
+      "scope": "Explicit preserved-document lookups and simulated digest mismatch rejection passed. Saved-freeze integrity was accepted in replay mode; strict current-source verification rejected the rewritten live source-review as expected. These are focused checks, not a new proof build, numerical study, or complete-tree verifier result."
+    },
+    {
+      "question": "Are the revised workflow and publication helpers consistent in the locally inspected scope?",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "provenance/verification/runs/ci-draft3-validation/validation.json",
+          "bytes": 26782,
+          "sha256": "0c69608fa3c38b0db245f2c0149cc82971a37c0606c61fbdd31c1c76f9a4c3ee"
+        },
+        {
+          "path": "provenance/verification/runs/ci-draft3-validation/local-execution/validation.json",
+          "bytes": 2474,
+          "sha256": "547a3b5e1adec264975c24321d188cb4a5784f518be6357dc3c690d8b933a57e"
+        },
+        {
+          "path": "provenance/verification/runs/ci-draft3-validation/local-execution/wheel-examples.json",
+          "bytes": 2144,
+          "sha256": "e13a0928599d0ef889e49a293f34609758d25c0f449aee346b23e4b028e5d231"
+        },
+        {
+          "path": "provenance/verification/runs/publication-helper-validation-draft3.json",
+          "bytes": 11923,
+          "sha256": "5cec6bd00e2b41967d475a6b2788089427b566c4aa5ca49e4071dd577b971c56"
+        }
+      ],
+      "scope": "Workflow syntax/embedded code checks and static helper interfaces passed. The example-wrapper execution used the preserved dev2 wheel in an existing environment; the separate fresh dev3 records cover the current wheel. These checks do not establish hosted execution or a remote publication result."
+    }
+  ],
+  "historical_assembly_and_attempt_records": [
+    {
+      "path": "provenance/verification/runs/documentation-editorial-review-draft3-before-assembly.json",
+      "bytes": 14699,
+      "sha256": "d09e688c910193517291dd479f352d3a72db95e5080aa6d5ddb7d3d8c67d45cb"
+    },
+    {
+      "path": "provenance/verification/runs/documentation-links-draft3-assembly.json",
+      "bytes": 178808,
+      "sha256": "e0ca3223f0e61fbf4b78031b6bee287546aaf0c41c21abfa73f5bc8ef263d666"
+    },
+    {
+      "path": "provenance/verification/runs/illustration-arithmetic-draft3-before-layout.json",
+      "bytes": 6343,
+      "sha256": "e987fb7664bec4842cf15e3b5127ac6ccbfbbc91e0b8ec2a92a6eaa561c6e78d"
+    },
+    {
+      "path": "provenance/verification/runs/worked-example-excerpts-draft3-launch.json",
+      "bytes": 808,
+      "sha256": "4b43638cef408cf915f1e72691c21dbfdbe0a05621d5a87e52996b6d56610bd3"
+    },
+    {
+      "path": "provenance/verification/runs/wheel-build-draft3-launch.json",
+      "bytes": 931,
+      "sha256": "b2542af53af22c205635bf09d7d06e70a7caef8de8433e3ba53a99e03e21672f"
+    }
+  ],
+  "final_local_link_record": {
+    "path": "provenance/verification/runs/documentation-links-draft3.json",
+    "interpretation": "Read its actual final outcome and document bindings. Publication finalization requires ok=true, no failures, and no pending-path exceptions. This path-only reference avoids a receipt hash cycle."
+  },
+  "separate_publication_checks": [
+    {
+      "record": "publication-final-verification-draft3-release.json",
+      "question": "Does the finalized publication tree satisfy its preservation and checksum checks?"
+    },
+    {
+      "record": "staging-verification-draft3-release.json",
+      "question": "Does the staged Git tree bind that exact verified snapshot?"
+    },
+    {
+      "record": "source-archive-verification-draft3.json",
+      "question": "Do the archive, wheel, manifest, and source commit match their inputs?"
+    },
+    {
+      "record": "hosted-ci-verification-draft3.json",
+      "question": "Did the required workflow and steps complete successfully for the released commit?"
+    },
+    {
+      "record": "github-draft3-verify operation receipt",
+      "question": "Do remote branch/tag/release/assets match the intended private unpublished draft?"
+    }
+  ],
+  "limitations": [
+    "This documentation receipt summarizes checks with different scopes. Their totals are not a measure of correctness, scientific strength, or explanation quality.",
+    "No new scientific population, live LLM/provider run, or Lean elaboration is reported here. Historical evidence retains its original identities and boundaries.",
+    "The exact toy model, useful edit, and analytic session rows are supplied. Zero toy errors do not establish autonomous discovery or experimental confirmation.",
+    "Native keyboard activation and slider drag were not verified. No touch, screen-reader/accessibility certification, user-learning evaluation, or full offline-disconnection test was performed. Print emulation does not establish PDF pagination.",
+    "The unusable tiled full-page screenshot and the pre-layout observations are retained with their actual limitations. Final viewport captures bind the reviewed layout.",
+    "Fresh core installation used the configured Microsoft mirror on the recorded Windows/Python/NumPy environment without Torch. Public-PyPI portability and every supported platform/optional dependency are not established by it.",
+    "Local destination/fragment checks do not validate external URLs or unpublished release assets. Their actual publication and remote outcomes require separate records.",
+    "The optional STE engine validators were not run. Authored artifact review is not ASD-STE100 certification, factual attestation, or a guarantee of comprehension."
+  ]
+}

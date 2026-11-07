@@ -1,0 +1,25 @@
+{
+  "schema": "wsp-task/1",
+  "task_id": "auxiliary:900004:create-clip",
+  "mode": "create",
+  "objective": "Construct the declared scalar formula using two ReLU units",
+  "architecture": "dense-relu-dense/1",
+  "base_sha256": null,
+  "constraints": {
+    "feedback_allowed": false,
+    "formula": {
+      "high": "-1/4",
+      "kind": "clip",
+      "low": "-7/4"
+    },
+    "privileged_hints": [
+      "Exact target formula and two-ReLU construction family"
+    ],
+    "selection": "analytic arm fixed before evaluation",
+    "semantic_names": {
+      "input": "x",
+      "output": "y"
+    },
+    "training_allowed": false
+  }
+}

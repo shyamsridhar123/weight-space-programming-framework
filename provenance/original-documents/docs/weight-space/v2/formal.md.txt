@@ -1,0 +1,231 @@
+# Formal guarantees for generic weight-space programs
+
+This extension proves properties of frozen-feature readouts and finite sequential networks without assuming a game, policy, observation schema, or task reward. The input type, feature coordinates, output coordinates, layer widths, network depth, and parameter values are mathematical parameters. An RTS scorer is one possible application; the new concrete witnesses use nonlinear features and mixed-activation scalar networks.
+
+The original report's broader ambitions motivate explicit proof obligations. They do not become consequences of supporting a tensor format or successfully changing weights. The [source review](source-review.md) connects the original November 2, 2026 report, its released experiments, the actual “What Comes Next?” discussion, and the repository's existing limitations. This document states the narrower propositions that have now been proved, explains how they relate to executable certificates, and identifies the remaining correspondence work.
+
+**What the source limitations require.** The following mapping separates the motivation for a theorem from the theorem itself.
+
+| Source or existing-framework limitation | Formal response in this extension | Remaining obligation |
+| --- | --- | --- |
+| The report discusses preservation after sparse edits, but changed-parameter counts do not establish preservation. | Prove equality from actual zero residuals and explicit feature-span witnesses; otherwise retain quantitative residual bounds. | Establish the premises for the intended inputs and independently measure task retention. |
+| The prior formal model covered a two-layer ReLU scorer. The report includes deeper and different architectures. | Abstract the frozen feature map, and separately prove arbitrary-depth, variable-width affine/activation drift. | Prove semantics for additional operators and architectures before certifying them. |
+| Numerical compilation and native-dtype realization can produce different endpoints from an intended update. | State both requested-edit identities and actual-endpoint identities. Preservation depends on the latter. | Bind runtime artifacts and their interpretation to the formal definitions; verify numerical execution separately. |
+| A compact factorization does not by itself prove preservation or useful repair. | Prove the exact factored effect and sufficient right-factor nullspace conditions. | Check realized residuals, target utility, and any claimed rank or optimality result separately. |
+| Diagnosis, causal repair, and generalization are distinct claims in the released records. | Keep every result an explicit equality or inequality about declared semantics. | Causal and behavioral experiments remain necessary; theorems do not substitute for them. |
+
+These are mathematical extensions of the framework, not replications of the source experiments. In particular, the executable constrained least-squares proposer belongs to an access regime that permits fitting. The source Go protocol explicitly forbids regression and least squares; this proposer must not be presented as satisfying that protocol. See the [source review's access analysis](source-review.md) and its retained prompt evidence.
+
+**Checked sources and evidence.** The extension adds four modules while preserving the original library root, proof sources, README, lock/configuration, generator, and verification files.
+
+| Module | Purpose | Explicit new `theorem` statements |
+| --- | --- | ---: |
+| [Generic.lean](../../../formal/weight-space/WeightSpace/Generic.lean) | Frozen-feature algebra, endpoint preservation, residual bounds, infeasibility, factored edits | 17 |
+| [Sequential.lean](../../../formal/weight-space/WeightSpace/Sequential.lean) | Activation properties, componentwise radius/drift, arbitrary-depth induction, composition | 17 |
+| [GenericExamples.lean](../../../formal/weight-space/WeightSpace/GenericExamples.lean) | Non-RTS rational witnesses, including an attained residual bound | 19 |
+| [GenericAudit.lean](../../../formal/weight-space/WeightSpace/GenericAudit.lean) | Representative axiom output and full transitive namespace audit | 0 |
+| Total | | **53** |
+
+The separate target successfully builds with Lean **4.24.0** and Mathlib commit **f897ebcf72cd16f89ab4577d0c826cd14afaafc7**. The combined audit visits **376 `WeightSpace` declarations**, including **215 theorem declarations**. The three new namespaces contribute **140 declarations**, including **94 theorem declarations**. These environment counts include compiler-generated declarations; they are not counts of 94 separately authored new theorems. The 53 explicit statements are the source-level count above.
+
+The [verification receipt](../../../formal/weight-space/verification-v2/actual/verification.json), [build log](../../../formal/weight-space/verification-v2/actual/build.log), and [standalone audit log](../../../formal/weight-space/verification-v2/actual/axiom-audit.log) record the actual commands, exit codes, hashes, dependency revisions, counts, and trust boundary. The audit prints 28 representative new theorem dependencies and traverses the dependencies of every loaded `WeightSpace` declaration. Its only permitted and observed axioms are `propext`, `Classical.choice`, and `Quot.sound`. Proof placeholders, additional axioms, and native-evaluation proof shortcuts are rejected transitively. Ordinary `decide` in the small finite-index examples produces kernel-checkable proofs.
+
+**Frozen representations and actual endpoints.** Let `X` be any input type, `F` a finite feature-coordinate type, and `O` any output-coordinate type. A fixed feature map is
+
+```text
+φ : X → (F → ℝ).
+```
+
+For `W : O → F → ℝ`, the declared readout is
+
+```text
+h_W(x)[o] = Σ_f W[o,f] φ(x)[f].
+```
+
+Bias is represented by a declared constant feature equal to one. When applying the theorem, the feature order, the placement of that coordinate, and the correspondence with the stored bias must agree. Merely including a bias tensor in an artifact does not establish that correspondence.
+
+The map `φ` may be nonlinear and may denote a neural backbone, a learned embedding, a manually constructed representation, or a symbolic function. It must remain the same for the before and after readouts. The theorem does not prove that a caller's extractor implements `φ`, or that changing the head leaves hidden state and extraction unchanged in arbitrary software.
+
+The definitions distinguish an intended addition `D` from two realized endpoints `W` and `Q`:
+
+```text
+edit(W,D) = W + D
+endpointDelta(W,Q) = Q − W
+
+h_(W+D)(x)[o] − h_W(x)[o] = Σ_f D[o,f] φ(x)[f]
+h_Q(x)[o]     − h_W(x)[o] = Σ_f (Q[o,f] − W[o,f]) φ(x)[f].
+```
+
+`edit_exact` proves the first equation; `endpoint_exact` proves the second. If a dtype conversion rounds `W + D` to `Q`, the second equation concerns the realized change. Replacing `Q − W` with the requested `D` would require another proof. `effect_add`, `edit_compose`, and `edit_rollback` establish the corresponding real-arithmetic edit algebra. The rollback theorem is algebraic; it does not assert that floating-point addition followed by floating-point subtraction restores checkpoint bytes.
+
+**Exact protection on a feature span.** Choose a finite anchor family `a ↦ x_a`. `InFeatureSpan φ anchor c x` is an explicit coefficient witness:
+
+```text
+for every f, φ(x)[f] = Σ_a c[a] φ(x_a)[f].
+```
+
+This is a proposition to prove, not a rank estimate or an empirical similarity score. `feature_span_effect` proves linearity on that representation:
+
+```text
+Σ_f D[o,f] φ(x)[f] = Σ_a c[a] (Σ_f D[o,f] φ(x_a)[f]).
+```
+
+`protected_span` consequently proves `h_Q(x)[o] = h_W(x)[o]` when the actual endpoint readouts agree on every anchor for that output. `protected_span_edit` gives the requested-edit version using zero anchor effects. The protected set can contain infinitely many inputs, including inputs never evaluated as anchors, provided the feature-span premise holds for each such input.
+
+The conclusion concerns the readout coordinate and its declared representation. It is not automatically a guarantee about classifications, decoded strings, sampled actions, or downstream outcomes. A fixed feature map obtained from a transformer can fit this abstraction for a declared final linear head; this does not certify arbitrary transformer edits, attention operators, or generation behavior.
+
+**Residuals, conditioning, and inputs outside the span.** Exact zero is not inferred from a solver tolerance. If the measured real endpoint residual at anchor `a` is at most `ε[a]`, `endpoint_span_bound` proves
+
+```text
+|h_Q(x)[o] − h_W(x)[o]| ≤ Σ_a |c[a]| ε[a].
+```
+
+`residual_span_bound` states the same bound for an edit. Under a uniform anchor bound `ε`, `residual_span_l1_bound` gives
+
+```text
+|Δh(x)[o]| ≤ ||c||₁ ε,     ||c||₁ = Σ_a |c[a]|.
+```
+
+Large coefficients matter. Two anchors with residual at most `0.01` do not imply a `0.01` bound everywhere in their span. A representation with coefficients `(-2,3)` allows a `0.05` bound, and the checked example below attains it. The theorem accepts any valid witness; it does not find the best-conditioned representation or prove that a numerical routine found one.
+
+`approximate_span_bound` makes the unrepresented feature component explicit. If
+
+```text
+|φ(x)[f] − Σ_a c[a] φ(x_a)[f]| ≤ ρ[f]
+```
+
+and the anchor effects of `D` are bounded by `ε[a]`, then
+
+```text
+|Δh(x)[o]| ≤ Σ_a |c[a]| ε[a] + Σ_f |D[o,f]| ρ[f].
+```
+
+The second term cannot be dropped because the anchors were numerous or a fit residual was small. For an actual endpoint statement, instantiate `D` with `endpointDelta(W,Q)` and use `endpoint_exact`. A useful domain-level certificate must supply both coefficient control and representation-error control over that domain. No distribution-coverage theorem is asserted here.
+
+**Infeasible requests are meaningful outcomes.** `nonzero_target_in_protected_span_impossible` proves that exact anchor protection prevents any prescribed nonzero output change at a target whose features lie in the protected span. The target need not be one of the anchors. This is a necessary infeasibility condition, not a complete solver or a proof that every target outside the span admits a desired edit under additional constraints.
+
+A numerical full-rank retention matrix can therefore leave no useful direction for the requested parameterization. Returning a no-op, reporting unmet target gain, or rejecting the requested contract is a valid result. Neither successful serialization nor an exact zero retention residual establishes useful target change.
+
+**Factored edits.** For a finite factor-coordinate type `R`, `factoredEdit` defines
+
+```text
+D[o,f] = Σ_r U[o,r] V[r,f].
+```
+
+`factored_effect` proves the exact association
+
+```text
+Δh(x)[o] = Σ_r U[o,r] (Σ_f V[r,f] φ(x)[f]).
+```
+
+`factored_preservation` shows that `V φ(x) = 0` is sufficient for preservation for every left factor `U`. `factored_span_preservation` extends a right-factor nullspace condition on anchors to represented inputs. For approximate annihilation, `factored_residual_bound` proves
+
+```text
+if |(V φ(x))[r]| ≤ η[r], then |Δh(x)[o]| ≤ Σ_r |U[o,r]| η[r].
+```
+
+These are factorization and preservation theorems. This module does not formalize `Matrix.rank`, prove minimal rank, certify an SVD, or establish that a compact program changes few stored values. The equations apply to the real factor product. If multiplication, projection, or storage changes the endpoint, its protection must be checked through the actual endpoint residuals. The runtime [structured program lowering](../../../rlcd/weight_space/structured.py) and [feature receipts](../../../rlcd/weight_space/features.py) expose those separate stages; their Python implementations are outside the Lean proof.
+
+**Arbitrary-depth sequential networks.** The second semantic family is a finite prefix of an affine/activation chain. At depth `k`, a finite type `D_k` supplies the coordinates, so widths may change between layers:
+
+```text
+z₀ = x
+z_(k+1)[i] = σ_(k,i)(b_k[i] + Σ_j W_k[i,j] z_k[j]).
+```
+
+The before and after networks share coordinate types and componentwise activations. Each activation must satisfy two explicit assumptions for all real `u,v`:
+
+```text
+|σ(u)| ≤ |u|
+|σ(u) − σ(v)| ≤ |u − v|.
+```
+
+The first condition permits the chosen magnitude recurrence; the second is the one-Lipschitz drift condition. Identity, ReLU, and absolute value have checked proofs of both. The theorem is parameterized by any activation with these properties, but a runtime backend still needs a validated operator mapping. This extension supplies no activation theorem for tanh, sigmoid, GELU, softmax, attention, or normalization. The executable sequential adapter deliberately distinguishes its executable activation set from its certified activation set.
+
+Let `r₀` bound the absolute baseline input coordinates and `d₀` bound a possible difference between the two inputs. The certified recurrence uses baseline radii and edited weights:
+
+```text
+r_(k+1)[i] = |b_k[i]| + Σ_j |W_k[i,j]| r_k[j]
+
+d_(k+1)[i] = |b'_k[i] − b_k[i]|
+             + Σ_j (|W'_k[i,j] − W_k[i,j]| r_k[j]
+                    + |W'_k[i,j]| d_k[j]).
+```
+
+`layer_radius_le` and `layer_drift_le` establish a single step. `chain_radius_le` and `chain_drift_le` prove the recurrence for every natural-number depth by induction, including simultaneous changes to every layer's weights and biases. The theorem is not restricted to an unchanged ReLU activation pattern. `chain_same_input_drift` sets `d₀ = 0` and proves
+
+```text
+|z'_n[i] − z_n[i]| ≤ d_n[i]
+```
+
+for every output coordinate and every input meeting the initial radius premise. On an input box, `r₀[j] = max(|lower[j]|, |upper[j]|)` supplies such a radius. The corresponding runtime [sequential certificate](../../../rlcd/weight_space/sequential.py) computes the same recurrence using exact rational lifts of stored binary64 coefficients and box bounds. The formal theorem is stronger in allowing a separately bounded input perturbation; the current runtime receipt uses the same input for both networks.
+
+Absolute-value propagation discards correlations and cancellation. Bounds can therefore become loose with width and depth. A bound that exceeds a budget is a failure to certify using this recurrence, not a demonstrated semantic violation. The theorem provides no automatic exact range computation, reachability analysis, or probability distribution over inputs.
+
+**Composition and decisions.** `coordinate_drift_compose` adds two output-coordinate budgets by the triangle inequality. The endpoints must actually line up, and the compared coordinates and input meanings must agree. Readout effects add under a common fixed representation; changing that representation invalidates the premise. Repeated edits require cumulative budgets and rechecked endpoint identities. None of these theorems says that target improvements add or that an earlier edit remains useful after a later one.
+
+The preserved [Contracts.lean](../../../formal/weight-space/WeightSpace/Contracts.lean) supplies strict argmax preservation: for a baseline winner `w` and every competitor `c`, require
+
+```text
+base[w] − base[c] > ε[w] + ε[c].
+```
+
+Uniform coordinate budgets give the familiar strict margin greater than `2ε`. Using this result requires the actual candidate set, decision rule, and certified coordinate bounds. Ties are not covered by the strict-winner premise. No statement about stochastic sampling, long-horizon reward, language-model accuracy, or successful unlearning follows merely from this inequality.
+
+**Concrete non-RTS witnesses.** All quantities in `GenericExamples.lean` are explicit reals with rational constants. Their proofs are checked with the general theorems and kernel-checked arithmetic.
+
+| Witness | Construction | Checked result |
+| --- | --- | --- |
+| Nonlinear frozen features | `φ(x,y) = (1,x,y²)`, anchors `(0,0)` and `(1,0)`, coefficients `(1−t,t)` | Every `(t,0)` has an exact anchor representation. |
+| Useful edit with an infinite protected set | Two-output edit has only quadratic-feature coefficients `1/2` and `−1/4` | Both outputs are unchanged on all `(t,0)`; at `(2,2)` their changes are exactly `2` and `−1`. |
+| Attained conditioning bound | Scalar edit coefficients `(-1/100, 1/50, 1/2)` | Both anchor effects have magnitude at most `1/100`; at `(3,0)`, coefficient L1 norm is `5` and drift equals `1/20`. |
+| Factored preservation | One factor coordinate; `U=(1/2,−1/4)`, `V=(0,0,1)` | The factor product equals the selective edit and `V φ(t,0)=0` for every real `t`. |
+| Infeasible protected target | Any candidate head exactly preserving the two anchors | Its output-zero change at `(3,0)` cannot equal `1`. |
+| Three-layer simultaneous parameter edit | Scalar layers with ReLU, absolute value, then identity | Uniform drift at most `987/320` for every `|x|≤1`; actual signed difference at `x=1` is `−443/320`. |
+
+The sequential example changes weights `(1,2,−1)` to `(5/4,7/4,−3/2)` and biases `(0,1/2,0)` to `(1/8,1/4,1/10)`. Baseline radii are `1, 5/2, 5/2` after its three layers. The first drift is `3/8`; the second is `37/32`; the final budget is `987/320`. The absolute actual difference at the displayed input, `443/320`, is below the bound. The example establishes a conservative all-input inequality and a concrete endpoint computation; it does not assert that the bound is sharp.
+
+These examples were written directly in Lean. They are not generated from the new Python study or formally bound to its JSON artifacts. General proofs, rational witnesses, runtime receipts, and empirical results remain distinct pieces of evidence.
+
+**What remains outside the proof.** The precise boundary is part of the deliverable.
+
+| Layer of evidence | Established here | Not established here |
+| --- | --- | --- |
+| Mathematical semantics | The stated equalities and inequalities over real numbers, under their explicit premises | Arbitrary architectures, hidden state, unspecified operators, or unstated feature/span premises |
+| Candidate construction | Algebraic consequences of the supplied real parameters and factors | SVD exactness, solver termination, fitting optimality, minimal rank, or faithful lowering of arbitrary source programs |
+| Numeric realization | Distinction between requested and actual endpoint differences | IEEE rounding-error bounds, hardware kernels, serialization correctness, or exact rollback of stored bytes |
+| Runtime certificate correspondence | Matching recurrence and documented runtime boundaries | A machine-checked refinement proof for Python, NumPy, PyTorch, or the feature extractor |
+| Artifact correspondence | Hashed formal sources and preserved historical evidence | Automatic generation or byte binding of new runtime candidates to the new Lean examples |
+| Behavioral use | Conditional score/readout preservation and coordinate bounds | Causal repair, reward gain, semantic retention beyond the declared outputs/domain, absence of forgetting, or source-result reproduction |
+| Cross-architecture use | A generic language for stating separate instances and obligations | A circuit correspondence, transfer theorem, or certificate for architecture grafting |
+
+The source-review findings make these distinctions consequential. Sparse updates can coexist with regressions, and identifying a mechanism can coexist with unsuccessful repair. A positive mathematical result may hold even when an empirical hypothesis fails. A positive experiment does not repair a missing premise or a missing implementation correspondence.
+
+**Reproduce the check.** From the repository root, with the already installed pinned toolchain and locked dependencies:
+
+```powershell
+pwsh -NoLogo -NoProfile -File formal/weight-space/verification-v2/check.ps1 `
+  -OutputDirectory formal/weight-space/verification-v2/recheck-001
+```
+
+Choose a destination that does not exist. The verifier refuses to overwrite an evidence directory and performs no downloads. It checks the Lean version, locked dependency commits and tracked-source cleanliness, source hashes before and after verification, and the preserved-input snapshot. It then runs
+
+```text
+lake build WeightSpace.GenericAudit
+lake env lean WeightSpace/GenericAudit.lean
+```
+
+The [original root module](../../../formal/weight-space/WeightSpace.lean) and default build target are intentionally unchanged to preserve their earlier evidence identities. A plain `lake build` therefore remains the historical target. The explicit `WeightSpace.GenericAudit` target is required to include the new modules. The new audit also loads the historical library so that its transitive check covers both generations together. Existing historical linter warnings remain in the logs; the new modules build without those warnings.
+
+The [preservation snapshot](../../../formal/weight-space/verification-v2/preserved-v1-inputs.json) identifies 21 historical files. The verifier checks all 21 unchanged both before and after the run. The old [actual-policy verification receipt](../../../formal/weight-space/verification/actual-verification.json) and [generic verification receipt](../../../formal/weight-space/verification/generic-verification.json) retain their original scope. They are not rewritten to claim the new generality.
+
+The verification uses the pinned local toolchain and previously obtained dependency build artifacts; it is not a from-source rebuild of Lean or all of Mathlib. The trusted computing base includes that toolchain, imported compiled libraries, and the execution environment. Source pins, version output, executable/source/log hashes, and the axiom audit make this run inspectable; the receipt is not an independent signed attestation.
+
+**Further formal work with concrete acceptance criteria.** The next proof obligations follow from the current gaps rather than from an assumption of universal applicability.
+
+1. **Bind new runtime candidates to formal instances.** Generate Lean definitions from the exact base/candidate artifacts and domain, independently recompute their identities, and prove numeric premises for the generated values. Acceptance requires deterministic regeneration plus rejection of changed endpoints, shapes, ordering, feature identities, and domains. The existing historical RTS generator is evidence for its own specialization only.
+2. **Prove or bound the feature correspondence.** For a declared extractor, connect the runtime feature vectors to the mathematical `φ`. If only approximation is available, propagate its residual through the explicit off-span term. Acceptance requires a stated extractor model and a proved bound on the intended domain.
+3. **Refine real semantics to numerical execution.** Model the actual dtype, operation order, and supported kernels, including intermediate overflow and rounding. Acceptance requires a numerical error term that composes with the real drift bound; endpoint hashes alone are insufficient.
+4. **Tighten deeper-network bounds.** Add signed interval propagation, activation information, or other certified relaxations while preserving sound fallback behavior. Evaluate certification coverage and bound tightness on frozen tasks; acceptance requires checked inequalities, not only smaller measured estimates.
+5. **Add operators and transfer relations explicitly.** Extend the formal semantics for new activations, attention, normalization, residual paths, or architecture correspondences. Acceptance requires operator-specific proofs and a validated adapter. Supporting their tensor storage is a separate capability.
+6. **Connect contracts to declared decisions and repeated edits.** Supply candidate-set, margin, composition, and domain witnesses for each supported decision rule, then recheck them along a recorded lineage. Behavioral utility and generalization still require appropriately held-out experiments.

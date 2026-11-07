@@ -1,0 +1,69 @@
+{
+  "configuration": {
+    "access": {
+      "activations": false,
+      "feedback": false,
+      "forward": false,
+      "metadata": false,
+      "weight_decimals": null,
+      "weights": true
+    },
+    "architecture": "affine/1",
+    "base_sha256": "997eb0d74588ac6a53d522503e146ddaf42fb831838815fe5711b36f5ce3e022",
+    "callbacks_registered": {
+      "activations": false,
+      "feedback": false,
+      "forward": false
+    },
+    "constraints_sha256": "c4505e4dfa9fe82cc95792d621bbc4d26ea744a7643c7a095f275dee272ae98e",
+    "declared_constraints_automatically_enforced": false,
+    "enforcement": "cooperative_same_process_interface",
+    "execution_accounting": "interface_calls_and_submitted_examples; callback_internal_work_not_observed",
+    "limits": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 3,
+      "weight_values": 51
+    },
+    "mode": "diagnose",
+    "objective": "Read the 16-to-3 affine response and the sign of weight[1,7]; abstain on sign when its displayed value is zero",
+    "schema": "wsp-session-config/1",
+    "splits": {
+      "declared_lineage_overlap": false,
+      "lineage_independence_verified": false,
+      "lineage_scope": "caller_declared_only",
+      "sample_overlap": false,
+      "schema": "wsp-split-validation/1",
+      "sha256": "d42004b474790315a3e2fd363aa43dd23b185fca81e598375b9f6ee47e259090",
+      "splits": [
+        {
+          "lineage_count": 0,
+          "manifest_sha256": "3dfb053233e9b49f9d3b8a559ff87b947000515c0608fdf3c3ed809764bfe5a7",
+          "name": "test",
+          "sample_count": 128
+        }
+      ]
+    },
+    "task_id": "auxiliary:7304:affine-b-exact",
+    "task_sha256": "5d4ab70902a2c5412901f01eb9690c12ad23e1a96ee01f0daeb1100d00f190a0",
+    "token_accounting": "provider_supplied_not_locally_measured"
+  },
+  "usage": {
+    "tool_calls": 3,
+    "weight_values": 51,
+    "feedback_calls": 0,
+    "feedback_examples": 0,
+    "execution_calls": 0,
+    "execution_examples": 0,
+    "proposals": 1,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "sealed": true,
+  "receipt_status": "succeeded"
+}

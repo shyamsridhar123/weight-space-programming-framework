@@ -1,0 +1,86 @@
+{
+  "schema": "wsp-integration-verification/1",
+  "created_at": "2026-11-07T01:16:12.674286+00:00",
+  "scope": "Read-only source audit and repository unit tests/typecheck/production build. No real scientific study units or provider requests.",
+  "all_registered_checks_passed": true,
+  "results": {
+    "python_tests": {
+      "passed": 239,
+      "warnings": 2
+    },
+    "typescript_tests": {
+      "passed": 386,
+      "failed": 0,
+      "skipped": 0
+    },
+    "typescript_check": "passed",
+    "vite_production_build": "passed"
+  },
+  "stages": {
+    "python-tests": {
+      "stage": "python-tests",
+      "started_at": "2026-11-07T01:13:31.714387+00:00",
+      "exit_code": 0,
+      "launch_or_capture_error": null,
+      "finished_at": "2026-11-07T01:15:14.160570+00:00",
+      "elapsed_seconds": 102.44287440000335,
+      "stdout_sha256": "87313d5c256a0139caf32a05ffafb388c3db8e079d7c780ab5c81a6d3cea35c3",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "typescript-tests": {
+      "stage": "typescript-tests",
+      "started_at": "2026-11-07T01:13:31.736483+00:00",
+      "exit_code": 0,
+      "launch_or_capture_error": null,
+      "finished_at": "2026-11-07T01:14:03.425929+00:00",
+      "elapsed_seconds": 31.66086259999429,
+      "stdout_sha256": "be1216b3d90a515bc6522c7ea264e0d58e0d2702890a973f847bfc486442c6b6",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "typescript-check": {
+      "stage": "typescript-check",
+      "started_at": "2026-11-07T01:13:31.646930+00:00",
+      "exit_code": 0,
+      "launch_or_capture_error": null,
+      "finished_at": "2026-11-07T01:13:41.279148+00:00",
+      "elapsed_seconds": 9.624733199976617,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "vite-build": {
+      "stage": "vite-build",
+      "started_at": "2026-11-07T01:14:28.833844+00:00",
+      "exit_code": 0,
+      "launch_or_capture_error": null,
+      "finished_at": "2026-11-07T01:14:38.583539+00:00",
+      "elapsed_seconds": 9.745953500008909,
+      "stdout_sha256": "df267b6bb2a5db8799793e77810eb7a1d2230b4922d0455321c019be95642068",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "sources_checked": 129,
+  "sources_unchanged": true,
+  "changed_sources": [],
+  "wrapper_freeze_audit": "Wrapper arguments agree with Python/TS entry points. Full freeze includes PowerShell wrapper; evaluator source matcher correctly limits provenance to TS evaluator/runtime/weights/package lock.",
+  "known_findings": [
+    {
+      "id": "generic-cli-certificate-boolean-coercion",
+      "location": "rlcd/weight_space/__main__.py::_certificate",
+      "detail": "TensorArtifact CLI verify compares dictionaries with ==. Replacing nested implementation_verified:false by numeric 0 without updating the receipt digest is accepted. Network.verify_certificate rejects this mutation using canonical bytes.",
+      "impact": "Typed receipt integrity gap in generic CLI verify; does not change mathematical score bound and is not on study execution paths.",
+      "evidence": "certificate-diagnostic/result.json",
+      "documentation_correction": "docs/weight-space/README.md currently says the checker rejects altered receipts. Narrow or qualify this statement for the generic CLI until equality is made canonical.",
+      "runtime_modified": false
+    }
+  ],
+  "dependency_warnings": [
+    "Starlette TestClient use of httpx is deprecated in the installed dependency versions.",
+    "anyio.abc.BlockingPortal alias is deprecated in the installed dependency versions."
+  ],
+  "build_output": "web-build",
+  "notes": [
+    "All evidence files were created exclusively; no prior evidence output was overwritten.",
+    "Unit test fixture files are retained under pytest-tmp and are not scientific study results.",
+    "HF offline settings and bytecode/cache options are recorded in stage command metadata."
+  ]
+}

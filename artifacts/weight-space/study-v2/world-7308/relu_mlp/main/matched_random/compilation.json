@@ -1,0 +1,61 @@
+{
+  "reference_artifact_sha256": "a87596b099d58d5a6e37183ead0cb2f6097013cede1c0e0b5336442ea6da785d",
+  "random_seed": 730800,
+  "requested_l2": 0.6285955188231632,
+  "matching_scope": "support and L2 before endpoint addition rounding; realized counts and norm reported separately",
+  "lowering": {
+    "base_sha256": "c0ed7847e2ad8fd3b699046c3c9ca3bb5a6ba7502fb3efca428327a0fe6bf1d7",
+    "behavioral_status": "not_checked",
+    "candidate_sha256": "376ec7a5b9c4c499b473561a53b6720e0c26a6a7a6f0c56423787cf1b2de1be0",
+    "cast": "reject",
+    "command_count": 2,
+    "effective_edits": 50,
+    "native_dtypes": {
+      "layers.0.bias": "float64",
+      "layers.0.weight": "float64",
+      "layers.1.bias": "float64",
+      "layers.1.weight": "float64"
+    },
+    "numerics": "NumPy binary64 operations; explicit native endpoint projection",
+    "numpy_version": "2.5.3",
+    "program_sha256": "59f5e684ad5010f04724ad47cb3cbedec2fc90ec370a4f0f83c35ae42662edc6",
+    "projections": {
+      "layers.0.bias": {
+        "dtype": "float64",
+        "effective_changed_cells": 0,
+        "maximum_rounding_error_exact": "0",
+        "requested_changed_cells": 0,
+        "rounded_cells": 0,
+        "touched_cells": 0
+      },
+      "layers.0.weight": {
+        "dtype": "float64",
+        "effective_changed_cells": 0,
+        "maximum_rounding_error_exact": "0",
+        "requested_changed_cells": 0,
+        "rounded_cells": 0,
+        "touched_cells": 0
+      },
+      "layers.1.bias": {
+        "dtype": "float64",
+        "effective_changed_cells": 2,
+        "maximum_rounding_error_exact": "0",
+        "requested_changed_cells": 2,
+        "rounded_cells": 0,
+        "touched_cells": 3
+      },
+      "layers.1.weight": {
+        "dtype": "float64",
+        "effective_changed_cells": 48,
+        "maximum_rounding_error_exact": "0",
+        "requested_changed_cells": 48,
+        "rounded_cells": 0,
+        "touched_cells": 72
+      }
+    },
+    "proposal_sha256": "bb68874e536e9b171c7a2d90ac194c3f67c57068d8720148c892ca85a74d133d",
+    "requested_candidate_sha256": "376ec7a5b9c4c499b473561a53b6720e0c26a6a7a6f0c56423787cf1b2de1be0",
+    "schema": "wsp-lowering/1",
+    "sha256": "236117b787b52c5ff80f821ae5bdc636d7aa036a01285186633f20129165fc22"
+  }
+}

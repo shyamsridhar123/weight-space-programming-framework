@@ -1,0 +1,220 @@
+# Methods and frozen study protocol
+
+This document defines the second, generic framework study. It explains the executable [protocol](protocol.json), the [runner](../../../rlcd/weight_space/study_v2.py), and the [benchmark fixtures](../../../rlcd/weight_space/benchmarks.py). The [results](results.md) report what happened. The [source review](source-review.md) explains why these questions matter; the [requirements matrix](requirements.md) and [limitations and next steps](limitations-and-next-steps.md) connect them to the broader research program.
+
+The study tests deterministic algorithms and evidence handling. It does **not** measure a language model's ability to infer mechanisms or write useful weights. Least-squares fitting, exact weights, public activations, and validation feedback are allowed. This differs from the original report's Go protocol, which forbids regression and least-squares fitting. No provider is called and no model tokens are consumed.
+
+## Questions, scope, and evidence levels
+
+The study asks whether a common editing interface works across several explicitly implemented architectures; how a retention penalty trades target accuracy against collateral drift; how numerical nullspaces, rounding, and repeated edits affect those outcomes; and whether read, diagnose, edit, and create tasks can retain distinct answers, budgets, and evaluation records.
+
+| Question | Evidence produced | What it cannot establish |
+| --- | --- | --- |
+| Can a candidate be reproduced exactly? | Parent-bound structured proposal, literal program, actual endpoint, lowering receipt, hashes | That its intent is useful or that a native runtime computes the declared real function |
+| Did the edit satisfy structural restrictions? | Allowed tensor names, changed-cell count, endpoint and change bounds | A behavioral contract or absence of forgetting |
+| What does it do on supplied feature rows? | Exact rational endpoint residuals and numerical target/retention errors | Coverage of unseen features or correctness of the feature extractor |
+| What real-valued box guarantee is available? | Sequential ReLU certificate on the whole input box for the supported case | IEEE execution, a tight bound, classification utility, or task reward |
+| Does the requested edit generalize within this generator? | Held-out target/retention observations and world-cluster contrasts | Real-data transfer, transformer-scale benefit, or a broad task-population guarantee |
+| Does the workflow preserve task and access distinctions? | Session traces, budgets, seals, read/diagnose/creation records | Process isolation, evaluator attestation, or live-LLM ability |
+
+These are separate evidence levels. A valid program may fail a target objective. An exact retention certificate may report a small **nonzero** residual. A no-op can achieve perfect preservation while achieving none of the requested change. A conservative drift bound can be valid but too loose for admission. The study retains these possibilities instead of mapping them to a single success flag.
+
+## Freeze, execution, and provenance
+
+The 31 required inputs, including the protocol and source/test/review files, were copied before the reserved study seeds were consumed. The [freeze receipt](../../../artifacts/weight-space/study-v2-freeze/receipt.json) binds the exact required file set, file bytes, protocol semantics, environment, and snapshot identities. The runner checks both the saved snapshots and the current execution sources before and after the study. A self-consistent manifest with missing required files is rejected.
+
+The freeze is local, with timestamp and hashes; it is **not external preregistration or third-party attestation**. Development tests used different world seeds, starting at 900001. The actual study uses seeds 7300–7311. A failure during the study is retained; source or protocol changes require a new version and cannot silently replace this run.
+
+The [execution record](../../../artifacts/weight-space/study-v2-execution/run-command.json) records the exact command, interpreter, elapsed time, exit code, and log hashes. The study saves all worlds, trained endpoints, candidate programs, selections, session receipts, auxiliary cases, and a final exact file manifest. The independent auditor replays the saved data without regenerating worlds, fitting heads, or proposing replacement edits. Its boundary is described in the results guide.
+
+To reproduce the procedure from the repository root, choose unused output paths:
+
+```powershell
+.venv/Scripts/python.exe -m rlcd.weight_space.study_v2 freeze --protocol docs/weight-space/v2/protocol.json --out artifacts/weight-space/my-v2-freeze
+.venv/Scripts/python.exe -m rlcd.weight_space.study_v2 verify-freeze --protocol docs/weight-space/v2/protocol.json --freeze artifacts/weight-space/my-v2-freeze/receipt.json
+.venv/Scripts/python.exe -m rlcd.weight_space.study_v2 run --protocol docs/weight-space/v2/protocol.json --freeze artifacts/weight-space/my-v2-freeze/receipt.json --out artifacts/weight-space/my-v2-study
+```
+
+Reusing the published seeds is reproduction, not fresh confirmation. A confirmation study needs new seeds or task lineages, an independently fixed protocol, and explicit claims. Evidence writers refuse overwrite. Keep rendering and auditing outputs outside the study directory so the study manifest remains closed.
+
+## Independent units and data construction
+
+There are **12 synthetic worlds**, each with an independently generated teacher, inputs, and model-initialization streams. Each world supplies three architecture variants, for 36 trained checkpoints. Architectures within a world share its teacher and split inputs, so they are paired variants rather than independent tasks. The primary uncertainty calculation resamples worlds, not 36 checkpoints or the many individual examples.
+
+An input is a vector of 16 independent uniform coordinates on \([-1,1]\). The convolution fixture interprets the same vector as a single-channel \(4\times4\) field. The teacher has three continuous outputs:
+
+\[
+y(x)=xL+0.2\sin(xN),
+\]
+
+where both \(L\) and \(N\) are \(16\times3\) matrices with independent normal entries divided by four. A separate seed stream generates each split. Within each world the same teacher labels every split. There is no label noise.
+
+| Split | Rows per world | Purpose |
+| --- | ---: | --- |
+| Training, whole box | 256 | Fit the original model's output head |
+| Public target / public retention | 64 each | Fit each requested edit and define retention anchors |
+| Validation target / validation retention | 64 each | Evaluate the six fixed candidates and select once |
+| Test target / test retention | 128 each | Evaluate all fixed arms after selection and sealing |
+| Sequence public, three regions | 32 per region | Construct both complete three-edit chains |
+| Sequence test, three regions | 32 per region | Evaluate all stages after both chains are sealed |
+
+This gives 960 distinct declared input rows per world and 11,520 across the main and sequence datasets. The additional read/create fixtures have their own stored inputs and should not be added to this count without naming that separate task family. The 256 main test inputs in a world are reused across its architectures and ablations. The 96 sequence test inputs use separate streams. Repeated execution of one example does not produce a new independent observation.
+
+The main target region is \(x_0>0.35\), and the retention region is \(x_0<-0.1\). Rejection sampling produces conditional uniform examples. The interval \(-0.1\leq x_0\leq0.35\) is **unmeasured by the main task**. A favorable retained-region result makes no claim about that gap. The ReLU domain bound is a separate, generally more conservative statement on the full box.
+
+Sample IDs encode world, split, and row. The workflow rejects overlaps in declared IDs or lineage records. This is not content-based duplicate detection or proof of independence. In this controlled generator, separate random streams and saved arrays support the split description. An external dataset would need additional provenance checks.
+
+## Architectures and initial training
+
+| Family | Explicit computation | Frozen feature width | Total parameters | Editable head and bias |
+| --- | --- | ---: | ---: | ---: |
+| `relu_mlp` | 16 → 24 ReLU → 3 linear | 24 | 483 | 75 |
+| `tanh_mlp` | 16 → 20 tanh → 24 tanh → 3 linear | 24 | 919 | 75 |
+| `conv_tanh` | Six valid \(2\times2\) filters, tanh, flatten \(6\times3\times3\), linear head | 54 | 195 | 165 |
+
+Hidden weights and biases are randomly initialized and frozen. Only the linear output head is trained on the training split, using ridge coefficient 0.03. Bias is included as a constant feature and regularized. These are trained **readouts over random features**, not end-to-end trained representations or large pretrained models.
+
+Each family has explicit, validated semantics. Sequential fixtures require an identity final activation; an unsupported nonlinear output cannot silently be treated as a linear readout. The convolution fixture checks its tensor shapes, activation, flattening order, and metadata. These checks make the supported fixture precise; they do not supply automatic semantics for an arbitrary network.
+
+Let \(\phi(x)\in\mathbb R^d\) be the frozen feature map, \(z(x)=(\phi(x),1)\), and \(B\in\mathbb R^{(d+1)\times3}\) collect the transposed head and bias. Training solves
+
+\[
+\min_B\;\frac{1}{n}\|ZB-Y\|_F^2+0.03\|B\|_F^2.
+\]
+
+The numerical least-squares solver and feature computation are trusted implementation components, not formally verified algorithms. Saved training diagnostics identify sample count, ridge, design rank, condition estimate, and fit error. The independent result audit replays the saved trained models; it does not retrain them to validate their optimization history.
+
+## Requested change and six fixed arms
+
+The requested score change is \(s=(0.6,-0.3,0)\) on the target region, with zero change on the retention region. It is defined against the original checkpoint's outputs, not directly against the teacher. Teacher-relative errors are reported separately because a successful edit can preserve a checkpoint's existing approximation error.
+
+Let \(A\) contain public target rows \(z(x)\), \(R\) contain public retention rows, \(D\) repeat the requested shift, and \(\Delta\) denote the augmented readout update. All fitting uses public inputs only.
+
+| Arm | Fixed construction | Role |
+| --- | --- | --- |
+| No-op | Empty literal program | Preservation baseline, target error 1, legal selection fallback |
+| Unconstrained | Ridge target fit, retention weight 0 | Maximum target emphasis under the fixed ridge objective |
+| Soft retention | Same fit, retention weight 8 | Explicit target/retention tradeoff |
+| Numerical nullspace | Fit in numerical kernel of the first 12 retained design rows | Anchor-protection and feasibility control |
+| Matched random | One random direction per checkpoint, with requested support and L2 matched to the realized soft endpoint delta | Direction-sensitive control at comparable requested size |
+| Gradient | 200 fixed steps on the soft objective | Conventional iterative optimizer control |
+
+The soft objective is
+
+\[
+J(\Delta)=\frac{1}{|A|}\|A\Delta-D\|_F^2
++8\frac{1}{|R|}\|R\Delta\|_F^2
++0.01\|\Delta\|_F^2.
+\]
+
+Unconstrained fitting removes the middle term. The bias coordinate participates in both fitting and ridge. The numerical nullspace arm uses an SVD threshold \(10^{-12}\sigma_{\max}\), counts singular values strictly above it as nonzero, and takes the remaining right-singular directions as a basis \(Q\). It minimizes the target-plus-ridge objective over \(\Delta=Q U\). If no direction remains, it returns a no-op. A numerical kernel estimate does not certify exactly zero effect after floating-point solving and endpoint realization. The exact rational residual checker reports the actual stored endpoints on the actual supplied feature rows.
+
+For the gradient arm, set
+
+\[
+H=A^\top A/|A|+8R^\top R/|R|+0.01I,
+\qquad C=A^\top D/|A|.
+\]
+
+Starting from zero, the runner takes 200 steps \(\Delta\leftarrow\Delta-\eta(H\Delta-C)\), with \(\eta=1/\lambda_{\max}(H)\). This is a fixed baseline for the same convex head objective. It is not full-network fine-tuning, the best tuned optimizer, or a compute-matched comparison. The compiler and gradient method have different computational costs, which are not normalized by the number of proposals.
+
+The random control samples one normal direction on the soft candidate's changed head/bias coordinates and scales its requested L2 norm to match the measured soft candidate-minus-parent delta. Adding that random update to the parent can round entries, so its realized support and norm are measured separately. One random direction per checkpoint does not estimate the full conditional distribution of random edits.
+
+Every proposal is lowered to a parent-bound literal program before use. The runner checks lowering receipts and feature-retention receipts before admitting a compiled endpoint into the successful candidate set. Failed attempts are retained but are not eligible for selection or held-out arms. These checks validate realized edits; they do not prove the optimizer solved its stated objective.
+
+## Structural checks, selection, and held-out evaluation
+
+The structural policy permits the declared head and bias only. It caps changed cells at the parent parameter count, endpoint magnitude at 100, and per-cell change magnitude at 10. Shape and semantic compatibility are also required. These are structural restrictions, not a generic behavioral admission theorem. In particular, the pre-existing `Contract` API still specializes a two-layer ReLU family; generic feature and sequential certificates are separate facilities.
+
+All six fixed arms receive validation feedback. Eligible candidates must pass structural admission, have retention NRMSE at most 0.35, and have target NRMSE at most 1. Among eligible candidates, the rule minimizes target NRMSE, then delta L2, then the lexical arm name. The no-op is the explicit fallback. The rule contains no hidden-test observations.
+
+The selection record is saved with `heldout_observed: false`, then the chosen candidate is sealed. A single evaluator callback evaluates every successfully registered fixed arm on both test regions. The selected result is an alias of its fixed arm, not a seventh independent candidate. Selection does not establish that the validation thresholds also hold on the test inputs; observed test violations must be reported.
+
+Sealing and traces enforce order through the cooperative API. The Python runner still owns the world object and evaluation functions in one process. It is not a secure data firewall. A stronger access-controlled LLM experiment would need a separate evaluator process and additional checks described in the roadmap.
+
+## Metrics and denominators
+
+Let \(\delta(x)=f_{\mathrm{edited}}(x)-f_{\mathrm{base}}(x)\) and \(q=\sqrt{(0.6^2+(-0.3)^2+0^2)/3}=\sqrt{0.15}\). RMS below averages over all examples **and all three output coordinates**.
+
+\[
+\mathrm{target\ NRMSE}=\frac{\mathrm{RMS}(\delta(x)-s)}q,
+\qquad
+\mathrm{retention\ NRMSE}=\frac{\mathrm{RMS}(\delta(x))}q.
+\]
+
+Both errors are smaller when better. The no-op gives target error 1 and collateral error 0. A uniform perfect shift everywhere gives target error 0 and collateral error 1. These controls fix the meaning of the scale. The main numerical metrics use scaled RMS and parameter-L2 calculations to avoid avoidable overflow or underflow; quantities outside the finite evaluator range are rejected rather than silently reported as valid.
+
+The directional gain is
+
+\[
+g=\frac{\mathbb E_x[\delta(x)^\top s]}{\|s\|_2^2}.
+\]
+
+A value of 1 means the mean projection equals the request, but does not imply low target error, pointwise success, or absence of off-direction change. It can be negative or exceed 1. The report also includes changed-cell count, realized parameter L2, identity-based no-op status, original teacher RMSE, edited target RMSE against teacher-plus-shift, and edited retention RMSE against the teacher.
+
+For each fixed arm, attempted, registered, structurally admitted, and evaluated denominators must remain distinguishable. Family tables use available main results; paired inference uses only complete worlds. Auxiliary sign decisions and analytic creation are heterogeneous outcomes and are not pooled into one accuracy.
+
+## Access and computational accounting
+
+The proposer interface permits exact weights, public feature activations, and validation feedback. A session charges metadata and returned candidates for captured weight values, individual tensor reads, public activation calls/examples, candidate proposals, feedback calls/examples, and tokens. Candidate identities include task/proposal context; two candidates can share an artifact identity without being the same workflow candidate.
+
+For a complete main case, the two public activation requests cover 128 examples, six feedback requests submit 768 examples in total, and six proposals are registered. Actual model-example executions are counted separately from callback invocations: validation runs the base and candidate on both regions for every arm, and test does the same. In the complete design this is 1,536 validation and 3,072 held-out model-example executions per checkpoint. The selected alias requires no extra execution. Public feature extraction, initial training, fitting linear algebra, and ablations must not be hidden inside a claim of only one held-out call.
+
+Validation records contain attempted/completed callback counts and a flag indicating whether the execution count is complete. A callback that fails internally may have performed unknown work; a returned counter cannot reconstruct that work. The workflow is a cooperative accounting interface, not automatic instrumentation of everything a callback does.
+
+Provider calls, input tokens, and output tokens are zero. That fact describes deterministic controls; it is not evidence that an LLM solved a task without tokens or that an equivalent live trial would be inexpensive.
+
+## Feasibility and anchor-span ablation
+
+The nullspace compiler is run with 4, 12, and 64 retained rows. The bias-augmented dimensions are 25 for either MLP and 55 for the convolution fixture. The study saves numerical rank/nullity, the actual endpoint, exact maximum anchor residuals, whether those residuals are exactly zero, and held-out target/retention errors.
+
+Increasing protected rank can remove editable directions. Full rank yields an empty numerical kernel and a no-op. Conversely, preserving a few public anchors can leave substantial drift on unseen retained inputs. Neither outcome is an implementation failure by itself: both expose the tension between expressivity, target compatibility, and protection.
+
+The real-valued theorems establish preservation on the exact feature span under their premises and provide coefficient/residual bounds for approximate or off-span cases. The experiment does not supply a certified span-coverage statement for the full input distribution. Numerical SVD rank is also distinct from a symbolic rank certificate.
+
+## Native precision ablation
+
+The runner projects **all parent tensors** to float64, float32, float16, or bfloat16, then lifts the stored values back into the reference artifact. Each projected parent has its own identity. The soft compiler evaluates features in lifted binary64 semantics and lowers the head update with an explicit native rounding policy.
+
+For each format, the evidence includes requested/touched/effective/rounded cells, exact endpoint rounding error, actual endpoint retention residuals, lifted target/retention errors, and native PyTorch CPU target/retention errors. It also measures maximum base-output, candidate-output, and edit-drift discrepancies between lifted and native execution on the common test inputs. PyTorch uses one CPU thread in the study.
+
+These observations quantify a particular CPU implementation on sampled inputs. They do not prove IEEE error bounds, cover GPU kernels, establish numerical equivalence to the real theorem, or certify unseen inputs. Each precision's task is relative to its own projected parent; comparing precision rows is not a same-parent intervention. The retained native execution code is part of the measured implementation boundary.
+
+## Repeated edits, composition, and interference
+
+The sequence uses three disjoint regions: \(x_0<-0.5\), \(|x_0|<0.2\), and \(x_0>0.5\), with shifts \((0.6,-0.3,0)\), \((0,0.45,-0.3)\), and \((-0.3,0,0.6)\). Both methods—unconstrained and soft retention—construct all three edits before any sequence holdout evaluation.
+
+At step \(i\), the desired behavior in the new region is the **original** checkpoint's output plus that region's shift. The incremental fit subtracts the current output, so it accounts for drift induced by earlier edits. The soft-retention arm penalizes changes to the **current** output on the other two public regions; the unconstrained arm omits that penalty. Neither guarantees protection of the original baseline or fulfillment of every earlier target.
+
+Every stage is saved. Exact literal composition must reproduce the last stored endpoint, and rollback must reproduce the original artifact hash. These identity checks establish restoration of stored parameters, not reversal of deployment side effects or recovery of a stochastic execution trajectory.
+
+The report measures desired-behavior error for all three regions at every stage. Before a region's own edit, the desired change is zero; after it, the desired change is that region's prescribed shift. For previously edited regions, interference is the drift from their output at the time of acquisition. Each region's error and interference are divided by the RMS of that region's prescribed shift; the error uses this denominator even before that region is edited. Final summaries average these normalized target errors across three regions and interference across the first two. Three edits are a bounded stress test, not evidence for indefinite accumulation or no catastrophic forgetting.
+
+## Read, diagnose, and create fixtures
+
+Each world also produces six auxiliary cases. Four are affine-sign decisions: read versus diagnose, each under exact or three-decimal rounded weight access. The designated coefficient is \(+0.0004\) or \(-0.0004\). Exact access reveals its sign; three-decimal rounding produces `+0.0` or `-0.0`, preserving the sign bit. The task requires abstention at either displayed zero, and the deterministic reader follows that rule without using the sign bit. This checks prescribed abstention behavior; it does not establish that the rounded interface hides the sign. Correct sign, incorrect sign, abstention, and full-response reconstruction fidelity are recorded separately. A coefficient-sign exercise is not general mechanistic diagnosis or a causal repair experiment.
+
+The remaining two cases construct small ReLU networks analytically for absolute-value and clipping functions. Zero, random, and analytic candidates are all saved, with the analytic choice fixed in advance. Hidden inputs measure output fidelity. These dyadic fixtures provide transparent positive controls for creation and candidate lifecycle handling; a handwritten construction does not establish autonomous synthesis from unrestricted natural language. They use no fitting, feedback, provider, or language model.
+
+## Statistical analysis and failure handling
+
+Four paired contrasts are fixed in the protocol:
+
+1. Unconstrained minus soft retention collateral NRMSE.
+2. Soft retention minus unconstrained target NRMSE.
+3. Matched random minus soft retention target NRMSE.
+4. Gradient minus soft retention target NRMSE.
+
+For each contrast, family effects are averaged **within each world first**. The resulting 12 values are resampled with replacement 10,000 times. The random seed is 11981 plus the contrast index, and the reported interval uses the 2.5th and 97.5th percentiles. Positive values indicate less soft collateral drift, greater soft target cost, better soft target accuracy than random, or better soft target accuracy than gradient, respectively.
+
+These are exploratory percentile intervals with no multiplicity correction and only 12 independent worlds. They quantify variability under this synthetic generator and analysis. They are not confirmatory population statements about architectures, real tasks, or LLM editors. Precision and feasibility reuse main test inputs and remain descriptive. The sequence uses distinct inputs but the same model/teacher world lineages.
+
+Training, main evaluation, ablations, and sequence components retain separate failure records. A failing ablation does not erase a successful main result. A world enters paired inference only if its exact declared family set and all six main arms are present without main-arm failures. Available main outcomes remain in descriptive tables even when a world is excluded from paired inference. Overall completion also requires all auxiliary cases. Missing outcomes are neither successes nor completed negatives, and complete-case analysis does not eliminate bias from informative failures.
+
+## Mathematical and empirical boundaries
+
+The [formal extension](formal.md) proves arbitrary frozen-feature algebra and arbitrary finite-depth coordinatewise drift for supported real-valued operations. Its direct examples are not generated from this study's models. The runtime checker uses exact rational arithmetic on lifted stored coefficients and feature rows, while the feature extractor, optimizer, native kernels, protocol implementation, and runtime-to-Lean binding remain separate trust boundaries.
+
+Only the ReLU fixture's soft-retention arm receives a full-box sequential runtime certificate in this study. Tanh is executable but has no corresponding runtime sequential certificate here; the convolution fixture is also outside that certificate backend. Feature-retention checks apply to supplied rows from all three extractors, under the declared frozen-readout decomposition. General storage and edit support therefore extend further than formally supported execution semantics.
+
+The findings should be read alongside the [limitations and next steps](limitations-and-next-steps.md): integrated generic admission, runtime-to-proof binding, numerical/extractor correspondence, enforced access controls, new tasks and lineages, live editor trials, longer sequences, and scalable storage/solvers remain substantial work.

@@ -1,0 +1,609 @@
+﻿2026-11-07T04:15:49.1050616Z Current runner version: '2.338.2'
+2026-11-07T04:15:49.1128413Z ##[group]Runner Image Provisioner
+2026-11-07T04:15:49.1130119Z Hosted Compute Agent
+2026-11-07T04:15:49.1131148Z Version: 20261028.624
+2026-11-07T04:15:49.1132417Z Commit: 54898b74c23fde5556c9b3c3a2290865feef0dfe
+2026-11-07T04:15:49.1133667Z Build Date: 2026-10-28T21:51:42Z
+2026-11-07T04:15:49.1134906Z Worker ID: {1c52e594-1b1a-42af-99fc-e8ebbd75519b}
+2026-11-07T04:15:49.1136170Z Region: westus3
+2026-11-07T04:15:49.1137159Z Cloud: Azure
+2026-11-07T04:15:49.1138927Z ##[endgroup]
+2026-11-07T04:15:49.1162441Z ##[group]Operating System
+2026-11-07T04:15:49.1163633Z Ubuntu
+2026-11-07T04:15:49.1164784Z 24.04.5
+2026-11-07T04:15:49.1165737Z LTS
+2026-11-07T04:15:49.1166745Z ##[endgroup]
+2026-11-07T04:15:49.1167869Z ##[group]Runner Image
+2026-11-07T04:15:49.1168979Z Image: ubuntu-24.04
+2026-11-07T04:15:49.1170527Z Version: 20261101.360.1
+2026-11-07T04:15:49.1172755Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261101.360/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-07T04:15:49.1175910Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261101.360
+2026-11-07T04:15:49.1177691Z ##[endgroup]
+2026-11-07T04:15:49.1180205Z ##[group]GITHUB_TOKEN Permissions
+2026-11-07T04:15:49.1183237Z Contents: read
+2026-11-07T04:15:49.1184465Z Metadata: read
+2026-11-07T04:15:49.1185433Z ##[endgroup]
+2026-11-07T04:15:49.1188658Z Secret source: Actions
+2026-11-07T04:15:49.1190694Z Cache mode: write
+2026-11-07T04:15:49.1192424Z Prepare workflow directory
+2026-11-07T04:15:49.2424495Z Prepare all required actions
+2026-11-07T04:15:49.2500440Z Getting action download info
+2026-11-07T04:15:49.5483804Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-07T04:15:49.6669988Z Download action repository 'actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0' (SHA:6d4fd22b20465ccc0f7354476588e8df7c9ca0e0)
+2026-11-07T04:15:50.3081314Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-11-07T04:15:50.4874783Z Complete job name: publication-python
+2026-11-07T04:15:50.5594041Z ##[group]Run git config --global core.autocrlf false
+2026-11-07T04:15:50.5594848Z [36;1mgit config --global core.autocrlf false[0m
+2026-11-07T04:15:50.5619942Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-07T04:15:50.5620904Z env:
+2026-11-07T04:15:50.5621363Z   RUN_ROOT: .runs/ci-python-42337659158-1
+2026-11-07T04:15:50.5621954Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T04:15:50.5622486Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T04:15:50.5623014Z ##[endgroup]
+2026-11-07T04:15:50.6086701Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-07T04:15:50.6087482Z with:
+2026-11-07T04:15:50.6087916Z   persist-credentials: false
+2026-11-07T04:15:50.6088596Z   repository: shyamsridhar123/weight-space-programming-framework
+2026-11-07T04:15:50.6092680Z   token: ***
+2026-11-07T04:15:50.6093127Z   ssh-strict: true
+2026-11-07T04:15:50.6093567Z   ssh-user: git
+2026-11-07T04:15:50.6093997Z   clean: true
+2026-11-07T04:15:50.6094448Z   sparse-checkout-cone-mode: true
+2026-11-07T04:15:50.6094979Z   fetch-depth: 1
+2026-11-07T04:15:50.6095414Z   fetch-tags: false
+2026-11-07T04:15:50.6095859Z   show-progress: true
+2026-11-07T04:15:50.6096303Z   lfs: false
+2026-11-07T04:15:50.6096717Z   submodules: false
+2026-11-07T04:15:50.6097166Z   set-safe-directory: true
+2026-11-07T04:15:50.6097676Z   allow-unsafe-pr-checkout: false
+2026-11-07T04:15:50.6098181Z env:
+2026-11-07T04:15:50.6098600Z   RUN_ROOT: .runs/ci-python-42337659158-1
+2026-11-07T04:15:50.6099334Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T04:15:50.6099861Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T04:15:50.6100366Z ##[endgroup]
+2026-11-07T04:15:50.9331432Z Syncing repository: shyamsridhar123/weight-space-programming-framework
+2026-11-07T04:15:50.9334319Z ##[group]Getting Git version info
+2026-11-07T04:15:50.9335795Z Working directory is '/home/runner/work/weight-space-programming-framework/weight-space-programming-framework'
+2026-11-07T04:15:50.9386393Z [command]/usr/bin/git version
+2026-11-07T04:15:50.9460426Z git version 2.56.0
+2026-11-07T04:15:50.9552700Z ##[endgroup]
+2026-11-07T04:15:50.9574555Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/d46221f8-e0c9-448a-a518-ca06045e2207/.gitconfig'
+2026-11-07T04:15:50.9577895Z Temporarily overriding HOME='/home/runner/work/_temp/d46221f8-e0c9-448a-a518-ca06045e2207' before making global git config changes
+2026-11-07T04:15:50.9583601Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-07T04:15:50.9586468Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/weight-space-programming-framework/weight-space-programming-framework
+2026-11-07T04:15:50.9654361Z Deleting the contents of '/home/runner/work/weight-space-programming-framework/weight-space-programming-framework'
+2026-11-07T04:15:50.9671461Z ##[group]Determining repository object format
+2026-11-07T04:15:50.9673278Z ##[endgroup]
+2026-11-07T04:15:50.9674856Z ##[group]Initializing the repository
+2026-11-07T04:15:50.9681159Z [command]/usr/bin/git init /home/runner/work/weight-space-programming-framework/weight-space-programming-framework
+2026-11-07T04:15:50.9932484Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-07T04:15:50.9960468Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-07T04:15:50.9963769Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-07T04:15:50.9981645Z hint: call:
+2026-11-07T04:15:51.0000181Z hint:
+2026-11-07T04:15:51.0020370Z hint: 	git config --global init.defaultBranch <name>
+2026-11-07T04:15:51.0021847Z hint:
+2026-11-07T04:15:51.0040848Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-07T04:15:51.0060544Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-07T04:15:51.0079985Z hint:
+2026-11-07T04:15:51.0102099Z hint: 	git branch -m <name>
+2026-11-07T04:15:51.0103325Z hint:
+2026-11-07T04:15:51.0120624Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-07T04:15:51.0124475Z Initialized empty Git repository in /home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git/
+2026-11-07T04:15:51.0128901Z [command]/usr/bin/git remote add origin https://github.com/shyamsridhar123/weight-space-programming-framework
+2026-11-07T04:15:51.0138449Z ##[endgroup]
+2026-11-07T04:15:51.0140614Z ##[group]Disabling automatic garbage collection
+2026-11-07T04:15:51.0142562Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-07T04:15:51.0146569Z ##[endgroup]
+2026-11-07T04:15:51.0148045Z ##[group]Setting up auth
+2026-11-07T04:15:51.0149134Z Removing SSH command configuration
+2026-11-07T04:15:51.0154294Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-07T04:15:51.0298990Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-07T04:15:51.1003551Z Removing HTTP extra header
+2026-11-07T04:15:51.1006153Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-07T04:15:51.1024461Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-07T04:15:51.1230194Z Removing includeIf entries pointing to credentials config files
+2026-11-07T04:15:51.1238399Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-07T04:15:51.1301267Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-07T04:15:51.1564876Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-ae195db7-669f-4791-b985-b072a5352faa.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-07T04:15:51.1622444Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git.path /home/runner/work/_temp/git-credentials-ae195db7-669f-4791-b985-b072a5352faa.config
+2026-11-07T04:15:51.2445992Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-ae195db7-669f-4791-b985-b072a5352faa.config
+2026-11-07T04:15:51.2452196Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-ae195db7-669f-4791-b985-b072a5352faa.config
+2026-11-07T04:15:51.2456866Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-ae195db7-669f-4791-b985-b072a5352faa.config
+2026-11-07T04:15:51.2459562Z ##[endgroup]
+2026-11-07T04:15:51.2460697Z ##[group]Fetching the repository
+2026-11-07T04:15:51.2462221Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +93e8a9b7f2cfbbffab6c7d10f831b2cde4b69176:refs/remotes/origin/main
+2026-11-07T04:15:53.4323930Z From https://github.com/shyamsridhar123/weight-space-programming-framework
+2026-11-07T04:15:53.4325923Z  * [new ref]         93e8a9b7f2cfbbffab6c7d10f831b2cde4b69176 -> origin/main
+2026-11-07T04:15:53.4330227Z [command]/usr/bin/git branch --list --remote origin/main
+2026-11-07T04:15:53.4368870Z   origin/main
+2026-11-07T04:15:53.4380393Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+2026-11-07T04:15:53.4421134Z 93e8a9b7f2cfbbffab6c7d10f831b2cde4b69176
+2026-11-07T04:15:53.4426771Z ##[endgroup]
+2026-11-07T04:15:53.4428101Z ##[group]Determining the checkout info
+2026-11-07T04:15:53.4430061Z ##[endgroup]
+2026-11-07T04:15:53.4432211Z [command]/usr/bin/git sparse-checkout disable
+2026-11-07T04:15:53.4504002Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-07T04:15:53.4551135Z ##[group]Checking out the ref
+2026-11-07T04:15:53.4555732Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-11-07T04:15:54.2912412Z Switched to a new branch 'main'
+2026-11-07T04:15:54.2917242Z branch 'main' set up to track 'origin/main'.
+2026-11-07T04:15:54.2958639Z ##[endgroup]
+2026-11-07T04:15:54.3016756Z [command]/usr/bin/git log -1 --format=%H
+2026-11-07T04:15:54.3059546Z 93e8a9b7f2cfbbffab6c7d10f831b2cde4b69176
+2026-11-07T04:15:54.3090636Z ##[group]Removing auth
+2026-11-07T04:15:54.3091589Z Removing SSH command configuration
+2026-11-07T04:15:54.3092686Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-07T04:15:54.3128346Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-07T04:15:54.3404108Z Removing HTTP extra header
+2026-11-07T04:15:54.3407474Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-07T04:15:54.3457432Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-07T04:15:54.3741599Z Removing includeIf entries pointing to credentials config files
+2026-11-07T04:15:54.3751427Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-07T04:15:54.3796395Z includeif.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git.path
+2026-11-07T04:15:54.3806531Z includeif.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git/worktrees/*.path
+2026-11-07T04:15:54.3820286Z includeif.gitdir:/github/workspace/.git.path
+2026-11-07T04:15:54.3821553Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-07T04:15:54.3825163Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git.path
+2026-11-07T04:15:54.3848475Z /home/runner/work/_temp/git-credentials-ae195db7-669f-4791-b985-b072a5352faa.config
+2026-11-07T04:15:54.3870110Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-ae195db7\-669f\-4791\-b985\-b072a5352faa\.config
+2026-11-07T04:15:54.3923672Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git/worktrees/*.path
+2026-11-07T04:15:54.3973686Z /home/runner/work/_temp/git-credentials-ae195db7-669f-4791-b985-b072a5352faa.config
+2026-11-07T04:15:54.3984304Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-ae195db7\-669f\-4791\-b985\-b072a5352faa\.config
+2026-11-07T04:15:54.4033131Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-07T04:15:54.4076272Z /github/runner_temp/git-credentials-ae195db7-669f-4791-b985-b072a5352faa.config
+2026-11-07T04:15:54.4087474Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-ae195db7\-669f\-4791\-b985\-b072a5352faa\.config
+2026-11-07T04:15:54.4136506Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-07T04:15:54.4175803Z /github/runner_temp/git-credentials-ae195db7-669f-4791-b985-b072a5352faa.config
+2026-11-07T04:15:54.4185542Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-ae195db7\-669f\-4791\-b985\-b072a5352faa\.config
+2026-11-07T04:15:54.4234116Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-07T04:15:54.4507580Z Removing credentials config '/home/runner/work/_temp/git-credentials-ae195db7-669f-4791-b985-b072a5352faa.config'
+2026-11-07T04:15:54.4517577Z ##[endgroup]
+2026-11-07T04:15:54.4747580Z ##[group]Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+2026-11-07T04:15:54.4748078Z with:
+2026-11-07T04:15:54.4748330Z   python-version: 3.12
+2026-11-07T04:15:54.4748611Z   check-latest: false
+2026-11-07T04:15:54.4751505Z   token: ***
+2026-11-07T04:15:54.4751917Z   mirror: https://raw.githubusercontent.com/actions/python-versions/main
+2026-11-07T04:15:54.4752389Z   update-environment: true
+2026-11-07T04:15:54.4752716Z   allow-prereleases: false
+2026-11-07T04:15:54.4753001Z   freethreaded: false
+2026-11-07T04:15:54.4753263Z env:
+2026-11-07T04:15:54.4753515Z   RUN_ROOT: .runs/ci-python-42337659158-1
+2026-11-07T04:15:54.4753856Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T04:15:54.4754164Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T04:15:54.4754465Z ##[endgroup]
+2026-11-07T04:15:54.6011916Z ##[group]Installed versions
+2026-11-07T04:15:54.6128607Z Successfully set up CPython (3.12.16)
+2026-11-07T04:15:54.6130376Z ##[endgroup]
+2026-11-07T04:15:54.6308099Z ##[group]Run python scripts/verify_publication.py --out "$RUN_ROOT/publication-before.json"
+2026-11-07T04:15:54.6309694Z [36;1mpython scripts/verify_publication.py --out "$RUN_ROOT/publication-before.json"[0m
+2026-11-07T04:15:54.6362384Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-07T04:15:54.6363030Z env:
+2026-11-07T04:15:54.6363453Z   RUN_ROOT: .runs/ci-python-42337659158-1
+2026-11-07T04:15:54.6364025Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T04:15:54.6364755Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T04:15:54.6365361Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:15:54.6366180Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-07T04:15:54.6366984Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:15:54.6367706Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:15:54.6368429Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:15:54.6369418Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-07T04:15:54.6370083Z ##[endgroup]
+2026-11-07T04:15:58.3639141Z Publication verification: PASS
+2026-11-07T04:15:58.3640669Z Preserved originals: 7279/7279; manifest digests: 7447/7447; publishable files: 7447
+2026-11-07T04:15:58.3641790Z Live Markdown: 26 files, 555 local destinations; failures: 0
+2026-11-07T04:15:58.3643417Z Receipt: /home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.runs/ci-python-42337659158-1/publication-before.json
+2026-11-07T04:15:58.3763972Z ##[group]Run python -m pip install "torch==2.8.0" --index-url https://download.pytorch.org/whl/cpu
+2026-11-07T04:15:58.3764728Z [36;1mpython -m pip install "torch==2.8.0" --index-url https://download.pytorch.org/whl/cpu[0m
+2026-11-07T04:15:58.3765234Z [36;1mpython -m pip install -e ".[test]"[0m
+2026-11-07T04:15:58.3765547Z [36;1mpython -m pip install build[0m
+2026-11-07T04:15:58.3765839Z [36;1mpython -m pip check[0m
+2026-11-07T04:15:58.3766091Z [36;1mpython - <<'PY'[0m
+2026-11-07T04:15:58.3766314Z [36;1mimport sys[0m
+2026-11-07T04:15:58.3766520Z [36;1mimport torch[0m
+2026-11-07T04:15:58.3766734Z [36;1m[0m
+2026-11-07T04:15:58.3766985Z [36;1massert sys.version_info[:2] == (3, 12), sys.version[0m
+2026-11-07T04:15:58.3767439Z [36;1massert torch.__version__.split("+", 1)[0] == "2.8.0", torch.__version__[0m
+2026-11-07T04:15:58.3767970Z [36;1massert torch.version.cuda is None, "The CPU Torch build is required"[0m
+2026-11-07T04:15:58.3768442Z [36;1mprint(f"Python: {sys.version}")[0m
+2026-11-07T04:15:58.3768860Z [36;1mprint(f"Torch: {torch.__version__}; CUDA build: {torch.version.cuda}")[0m
+2026-11-07T04:15:58.3769513Z [36;1mPY[0m
+2026-11-07T04:15:58.3769894Z [36;1mpython -m pip freeze --all > "$RUN_ROOT/python-packages.txt"[0m
+2026-11-07T04:15:58.3792684Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-07T04:15:58.3793041Z env:
+2026-11-07T04:15:58.3793257Z   RUN_ROOT: .runs/ci-python-42337659158-1
+2026-11-07T04:15:58.3793563Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T04:15:58.3793827Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T04:15:58.3794159Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:15:58.3794616Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-07T04:15:58.3795072Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:15:58.3795489Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:15:58.3795916Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:15:58.3796349Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-07T04:15:58.3796679Z ##[endgroup]
+2026-11-07T04:15:59.1573323Z Looking in indexes: https://download.pytorch.org/whl/cpu
+2026-11-07T04:15:59.4408590Z Collecting torch==2.8.0
+2026-11-07T04:15:59.5235910Z   Downloading torch-2.8.0%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (29 kB)
+2026-11-07T04:15:59.5620216Z Collecting filelock (from torch==2.8.0)
+2026-11-07T04:15:59.6310810Z   Downloading filelock-4.2.4-py3-none-any.whl.metadata (2.0 kB)
+2026-11-07T04:15:59.6492340Z Collecting typing-extensions>=4.10.0 (from torch==2.8.0)
+2026-11-07T04:15:59.6650008Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-11-07T04:15:59.6757403Z Collecting setuptools (from torch==2.8.0)
+2026-11-07T04:15:59.6800594Z   Downloading setuptools-78.1.0-py3-none-any.whl.metadata (6.6 kB)
+2026-11-07T04:15:59.7040064Z Collecting sympy>=1.13.3 (from torch==2.8.0)
+2026-11-07T04:15:59.7154354Z   Downloading sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+2026-11-07T04:15:59.7460853Z Collecting networkx (from torch==2.8.0)
+2026-11-07T04:15:59.7570124Z   Downloading networkx-3.7-py3-none-any.whl.metadata (6.7 kB)
+2026-11-07T04:15:59.7721398Z Collecting jinja2 (from torch==2.8.0)
+2026-11-07T04:15:59.7768572Z   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+2026-11-07T04:15:59.8102096Z Collecting fsspec (from torch==2.8.0)
+2026-11-07T04:15:59.8238434Z   Downloading fsspec-2026.9.0-py3-none-any.whl.metadata (10 kB)
+2026-11-07T04:15:59.8575048Z Collecting mpmath<1.4,>=1.1.0 (from sympy>=1.13.3->torch==2.8.0)
+2026-11-07T04:15:59.8706491Z   Downloading mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)
+2026-11-07T04:15:59.8942376Z Collecting MarkupSafe>=2.0 (from jinja2->torch==2.8.0)
+2026-11-07T04:15:59.8989742Z   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+2026-11-07T04:15:59.9211380Z Downloading torch-2.8.0%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl (183.9 MB)
+2026-11-07T04:16:01.5471063Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 183.9/183.9 MB 114.7 MB/s  0:00:01
+2026-11-07T04:16:01.5562785Z Downloading sympy-1.14.0-py3-none-any.whl (6.3 MB)
+2026-11-07T04:16:01.6296479Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.3/6.3 MB 130.0 MB/s  0:00:00
+2026-11-07T04:16:01.6408662Z Downloading mpmath-1.3.0-py3-none-any.whl (536 kB)
+2026-11-07T04:16:01.6484535Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 536.2/536.2 kB 73.7 MB/s  0:00:00
+2026-11-07T04:16:01.6605704Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-11-07T04:16:01.6726705Z Downloading filelock-4.2.4-py3-none-any.whl (162 kB)
+2026-11-07T04:16:01.6889008Z Downloading fsspec-2026.9.0-py3-none-any.whl (221 kB)
+2026-11-07T04:16:01.6961664Z Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+2026-11-07T04:16:01.7025842Z Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+2026-11-07T04:16:01.7151376Z Downloading networkx-3.7-py3-none-any.whl (2.1 MB)
+2026-11-07T04:16:01.7261007Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 237.2 MB/s  0:00:00
+2026-11-07T04:16:01.7311801Z Downloading setuptools-78.1.0-py3-none-any.whl (1.3 MB)
+2026-11-07T04:16:01.7403054Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 152.1 MB/s  0:00:00
+2026-11-07T04:16:02.1254648Z Installing collected packages: mpmath, typing-extensions, sympy, setuptools, networkx, MarkupSafe, fsspec, filelock, jinja2, torch
+2026-11-07T04:16:21.0060005Z 
+2026-11-07T04:16:21.0061597Z Successfully installed MarkupSafe-3.0.3 filelock-4.2.4 fsspec-2026.9.0 jinja2-3.1.6 mpmath-1.3.0 networkx-3.7 setuptools-78.1.0 sympy-1.14.0 torch-2.8.0+cpu typing-extensions-4.16.0
+2026-11-07T04:16:21.3996622Z Obtaining file:///home/runner/work/weight-space-programming-framework/weight-space-programming-framework
+2026-11-07T04:16:21.4015028Z   Installing build dependencies: started
+2026-11-07T04:16:22.2452236Z   Installing build dependencies: finished with status 'done'
+2026-11-07T04:16:22.2459121Z   Checking if build backend supports build_editable: started
+2026-11-07T04:16:22.5661072Z   Checking if build backend supports build_editable: finished with status 'done'
+2026-11-07T04:16:22.5680460Z   Getting requirements to build editable: started
+2026-11-07T04:16:23.0540708Z   Getting requirements to build editable: finished with status 'done'
+2026-11-07T04:16:23.0551336Z   Preparing editable metadata (pyproject.toml): started
+2026-11-07T04:16:23.5441155Z   Preparing editable metadata (pyproject.toml): finished with status 'done'
+2026-11-07T04:16:23.8296714Z Collecting numpy<3,>=2.0 (from weight-space-programming-framework==0.2.0.dev2)
+2026-11-07T04:16:23.8765309Z   Downloading numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+2026-11-07T04:16:23.9040015Z Collecting pytest<10,>=8 (from weight-space-programming-framework==0.2.0.dev2)
+2026-11-07T04:16:23.9073948Z   Downloading pytest-9.2.0-py3-none-any.whl.metadata (7.9 kB)
+2026-11-07T04:16:23.9131998Z Requirement already satisfied: torch==2.8.0 in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from weight-space-programming-framework==0.2.0.dev2) (2.8.0+cpu)
+2026-11-07T04:16:23.9146133Z Requirement already satisfied: filelock in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from torch==2.8.0->weight-space-programming-framework==0.2.0.dev2) (4.2.4)
+2026-11-07T04:16:23.9153906Z Requirement already satisfied: typing-extensions>=4.10.0 in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from torch==2.8.0->weight-space-programming-framework==0.2.0.dev2) (4.16.0)
+2026-11-07T04:16:23.9166906Z Requirement already satisfied: setuptools in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from torch==2.8.0->weight-space-programming-framework==0.2.0.dev2) (78.1.0)
+2026-11-07T04:16:23.9170726Z Requirement already satisfied: sympy>=1.13.3 in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from torch==2.8.0->weight-space-programming-framework==0.2.0.dev2) (1.14.0)
+2026-11-07T04:16:23.9183677Z Requirement already satisfied: networkx in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from torch==2.8.0->weight-space-programming-framework==0.2.0.dev2) (3.7)
+2026-11-07T04:16:23.9186804Z Requirement already satisfied: jinja2 in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from torch==2.8.0->weight-space-programming-framework==0.2.0.dev2) (3.1.6)
+2026-11-07T04:16:23.9190420Z Requirement already satisfied: fsspec in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from torch==2.8.0->weight-space-programming-framework==0.2.0.dev2) (2026.9.0)
+2026-11-07T04:16:23.9270880Z Collecting iniconfig>=2 (from pytest<10,>=8->weight-space-programming-framework==0.2.0.dev2)
+2026-11-07T04:16:23.9304704Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+2026-11-07T04:16:23.9407125Z Collecting packaging>=24 (from pytest<10,>=8->weight-space-programming-framework==0.2.0.dev2)
+2026-11-07T04:16:23.9430138Z   Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-11-07T04:16:23.9530292Z Collecting pluggy<2,>=1.6 (from pytest<10,>=8->weight-space-programming-framework==0.2.0.dev2)
+2026-11-07T04:16:23.9556170Z   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+2026-11-07T04:16:23.9736390Z Collecting pygments>=2.15 (from pytest<10,>=8->weight-space-programming-framework==0.2.0.dev2)
+2026-11-07T04:16:23.9777930Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-11-07T04:16:23.9835768Z Requirement already satisfied: mpmath<1.4,>=1.1.0 in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from sympy>=1.13.3->torch==2.8.0->weight-space-programming-framework==0.2.0.dev2) (1.3.0)
+2026-11-07T04:16:23.9931016Z Requirement already satisfied: MarkupSafe>=2.0 in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from jinja2->torch==2.8.0->weight-space-programming-framework==0.2.0.dev2) (3.0.3)
+2026-11-07T04:16:24.0048055Z Downloading numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+2026-11-07T04:16:24.0721077Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.7/16.7 MB 313.5 MB/s  0:00:00
+2026-11-07T04:16:24.0763732Z Downloading pytest-9.2.0-py3-none-any.whl (411 kB)
+2026-11-07T04:16:24.0838718Z Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+2026-11-07T04:16:24.0918316Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+2026-11-07T04:16:24.0960779Z Using cached packaging-26.3-py3-none-any.whl (129 kB)
+2026-11-07T04:16:24.1028031Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-11-07T04:16:24.1071009Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 194.2 MB/s  0:00:00
+2026-11-07T04:16:24.1440956Z Building wheels for collected packages: weight-space-programming-framework
+2026-11-07T04:16:24.1450528Z   Building editable for weight-space-programming-framework (pyproject.toml): started
+2026-11-07T04:16:24.6521019Z   Building editable for weight-space-programming-framework (pyproject.toml): finished with status 'done'
+2026-11-07T04:16:24.6523474Z   Created wheel for weight-space-programming-framework: filename=weight_space_programming_framework-0.2.0.dev2-0.editable-py3-none-any.whl size=7553 sha256=7ba3473a41b9d71026964ef7f4d9ce75ae581198899af759275d92b0766f460c
+2026-11-07T04:16:24.6525227Z   Stored in directory: /tmp/pip-ephem-wheel-cache-st2xexbr/wheels/83/b8/db/f6e71d7c1bcb617ca7313e78080a61482ba3d5fc86e77aabf5
+2026-11-07T04:16:24.6535149Z Successfully built weight-space-programming-framework
+2026-11-07T04:16:24.6918418Z Installing collected packages: pygments, pluggy, packaging, numpy, iniconfig, weight-space-programming-framework, pytest
+2026-11-07T04:16:27.8431572Z 
+2026-11-07T04:16:27.8454874Z Successfully installed iniconfig-2.3.1 numpy-2.5.4 packaging-26.3 pluggy-1.7.0 pygments-2.21.0 pytest-9.2.0 weight-space-programming-framework-0.2.0.dev2
+2026-11-07T04:16:28.2970817Z Collecting build
+2026-11-07T04:16:28.3529954Z   Downloading build-1.6.1-py3-none-any.whl.metadata (5.6 kB)
+2026-11-07T04:16:28.3584494Z Requirement already satisfied: packaging>=24.0 in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from build) (26.3)
+2026-11-07T04:16:28.3666502Z Collecting pyproject_hooks (from build)
+2026-11-07T04:16:28.3706111Z   Downloading pyproject_hooks-1.3.3-py3-none-any.whl.metadata (1.3 kB)
+2026-11-07T04:16:28.3788816Z Downloading build-1.6.1-py3-none-any.whl (31 kB)
+2026-11-07T04:16:28.3912094Z Downloading pyproject_hooks-1.3.3-py3-none-any.whl (10 kB)
+2026-11-07T04:16:28.4407115Z Installing collected packages: pyproject_hooks, build
+2026-11-07T04:16:28.4775226Z 
+2026-11-07T04:16:28.4797931Z Successfully installed build-1.6.1 pyproject_hooks-1.3.3
+2026-11-07T04:16:28.7507863Z No broken requirements found.
+2026-11-07T04:16:30.2705043Z Python: 3.12.16 (main, Oct 26 2026, 02:50:49) [GCC 13.3.0]
+2026-11-07T04:16:30.2705992Z Torch: 2.8.0+cpu; CUDA build: None
+2026-11-07T04:16:31.8150606Z ##[group]Run python -m pytest -q --basetemp "$RUN_ROOT/pytest-tmp" --junitxml="$RUN_ROOT/pytest.xml"
+2026-11-07T04:16:31.8151364Z [36;1mpython -m pytest -q --basetemp "$RUN_ROOT/pytest-tmp" --junitxml="$RUN_ROOT/pytest.xml"[0m
+2026-11-07T04:16:31.8172641Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-07T04:16:31.8172984Z env:
+2026-11-07T04:16:31.8173199Z   RUN_ROOT: .runs/ci-python-42337659158-1
+2026-11-07T04:16:31.8173495Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T04:16:31.8173763Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T04:16:31.8174084Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:31.8174512Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-07T04:16:31.8174938Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:31.8175323Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:31.8175754Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:31.8176145Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-07T04:16:31.8176470Z ##[endgroup]
+2026-11-07T04:16:36.2010710Z ........................................................................ [ 31%]
+2026-11-07T04:16:36.8953004Z ........................................................................ [ 63%]
+2026-11-07T04:16:39.0682470Z ........................................................................ [ 95%]
+2026-11-07T04:16:39.1908838Z ..........                                                               [100%]
+2026-11-07T04:16:39.1910275Z 226 passed in 7.01s
+2026-11-07T04:16:39.4514842Z ##[group]Run python -m build --wheel --outdir dist
+2026-11-07T04:16:39.4515282Z [36;1mpython -m build --wheel --outdir dist[0m
+2026-11-07T04:16:39.4536646Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-07T04:16:39.4536995Z env:
+2026-11-07T04:16:39.4537212Z   RUN_ROOT: .runs/ci-python-42337659158-1
+2026-11-07T04:16:39.4537705Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T04:16:39.4537977Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T04:16:39.4538307Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:39.4538757Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-07T04:16:39.4539425Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:39.4539899Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:39.4540294Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:39.4540698Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-07T04:16:39.4541070Z ##[endgroup]
+2026-11-07T04:16:39.6200074Z * Creating isolated environment: venv+pip...
+2026-11-07T04:16:39.6320347Z * Installing packages in isolated environment:
+2026-11-07T04:16:39.6321104Z   - setuptools>=77
+2026-11-07T04:16:39.6321727Z   - wheel
+2026-11-07T04:16:40.4223449Z * Getting build dependencies for wheel...
+2026-11-07T04:16:40.8756654Z running egg_info
+2026-11-07T04:16:40.8779948Z writing weight_space_programming_framework.egg-info/PKG-INFO
+2026-11-07T04:16:40.8791202Z writing dependency_links to weight_space_programming_framework.egg-info/dependency_links.txt
+2026-11-07T04:16:40.8794482Z writing entry points to weight_space_programming_framework.egg-info/entry_points.txt
+2026-11-07T04:16:40.8802108Z writing requirements to weight_space_programming_framework.egg-info/requires.txt
+2026-11-07T04:16:40.8803518Z writing top-level names to weight_space_programming_framework.egg-info/top_level.txt
+2026-11-07T04:16:40.8860111Z reading manifest file 'weight_space_programming_framework.egg-info/SOURCES.txt'
+2026-11-07T04:16:40.8879478Z writing manifest file 'weight_space_programming_framework.egg-info/SOURCES.txt'
+2026-11-07T04:16:40.9147545Z * Installed build dependency versions:
+2026-11-07T04:16:40.9160541Z   - setuptools==84.2.1
+2026-11-07T04:16:40.9161287Z   - wheel==0.48.0
+2026-11-07T04:16:40.9162038Z * Building wheel...
+2026-11-07T04:16:41.3677540Z running bdist_wheel
+2026-11-07T04:16:41.3747233Z running build
+2026-11-07T04:16:41.3747937Z running build_py
+2026-11-07T04:16:41.3766802Z creating build/lib/rlcd
+2026-11-07T04:16:41.3769819Z copying rlcd/__init__.py -> build/lib/rlcd
+2026-11-07T04:16:41.3775942Z creating build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3777452Z copying rlcd/weight_space/sequential.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3780249Z copying rlcd/weight_space/structured.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3782704Z copying rlcd/weight_space/contracts.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3785072Z copying rlcd/weight_space/semantics.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3787336Z copying rlcd/weight_space/torch_bridge.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3789890Z copying rlcd/weight_space/study_v2.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3792668Z copying rlcd/weight_space/demo.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3795034Z copying rlcd/weight_space/adapters.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3797389Z copying rlcd/weight_space/study_tasks_v2.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3800076Z copying rlcd/weight_space/experiments.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3803003Z copying rlcd/weight_space/rts_study.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3805959Z copying rlcd/weight_space/symmetry.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3808235Z copying rlcd/weight_space/__init__.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3811153Z copying rlcd/weight_space/artifact.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3813296Z copying rlcd/weight_space/benchmarks.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3815621Z copying rlcd/weight_space/features.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3818066Z copying rlcd/weight_space/program.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3820602Z copying rlcd/weight_space/model.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3823378Z copying rlcd/weight_space/compiler.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3825642Z copying rlcd/weight_space/workflow.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3828240Z copying rlcd/weight_space/evidence.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3830847Z copying rlcd/weight_space/__main__.py -> build/lib/rlcd/weight_space
+2026-11-07T04:16:41.3840276Z warning: build_py: byte-compiling is disabled, skipping.
+2026-11-07T04:16:41.3841007Z 
+2026-11-07T04:16:41.3870825Z installing to build/bdist.linux-x86_64/wheel
+2026-11-07T04:16:41.3871650Z running install
+2026-11-07T04:16:41.3943159Z running install_lib
+2026-11-07T04:16:41.3959551Z creating build/bdist.linux-x86_64/wheel
+2026-11-07T04:16:41.3962351Z creating build/bdist.linux-x86_64/wheel/rlcd
+2026-11-07T04:16:41.3964244Z copying build/lib/rlcd/__init__.py -> build/bdist.linux-x86_64/wheel/./rlcd
+2026-11-07T04:16:41.3966929Z creating build/bdist.linux-x86_64/wheel/rlcd/weight_space
+2026-11-07T04:16:41.3968869Z copying build/lib/rlcd/weight_space/sequential.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3971167Z copying build/lib/rlcd/weight_space/structured.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3973204Z copying build/lib/rlcd/weight_space/contracts.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3975079Z copying build/lib/rlcd/weight_space/semantics.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3976951Z copying build/lib/rlcd/weight_space/torch_bridge.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3978864Z copying build/lib/rlcd/weight_space/study_v2.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3981367Z copying build/lib/rlcd/weight_space/demo.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3983286Z copying build/lib/rlcd/weight_space/adapters.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3985092Z copying build/lib/rlcd/weight_space/study_tasks_v2.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3987090Z copying build/lib/rlcd/weight_space/experiments.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3989018Z copying build/lib/rlcd/weight_space/rts_study.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3991298Z copying build/lib/rlcd/weight_space/symmetry.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3993116Z copying build/lib/rlcd/weight_space/__init__.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3995066Z copying build/lib/rlcd/weight_space/artifact.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3996935Z copying build/lib/rlcd/weight_space/benchmarks.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.3998868Z copying build/lib/rlcd/weight_space/features.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.4001061Z copying build/lib/rlcd/weight_space/program.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.4002905Z copying build/lib/rlcd/weight_space/model.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.4004850Z copying build/lib/rlcd/weight_space/compiler.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.4006717Z copying build/lib/rlcd/weight_space/workflow.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.4009381Z copying build/lib/rlcd/weight_space/evidence.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.4011361Z copying build/lib/rlcd/weight_space/__main__.py -> build/bdist.linux-x86_64/wheel/./rlcd/weight_space
+2026-11-07T04:16:41.4012858Z warning: install_lib: byte-compiling is disabled, skipping.
+2026-11-07T04:16:41.4016705Z 
+2026-11-07T04:16:41.4016923Z running install_egg_info
+2026-11-07T04:16:41.4032657Z running egg_info
+2026-11-07T04:16:41.4048485Z writing weight_space_programming_framework.egg-info/PKG-INFO
+2026-11-07T04:16:41.4060168Z writing dependency_links to weight_space_programming_framework.egg-info/dependency_links.txt
+2026-11-07T04:16:41.4063769Z writing entry points to weight_space_programming_framework.egg-info/entry_points.txt
+2026-11-07T04:16:41.4071788Z writing requirements to weight_space_programming_framework.egg-info/requires.txt
+2026-11-07T04:16:41.4073728Z writing top-level names to weight_space_programming_framework.egg-info/top_level.txt
+2026-11-07T04:16:41.4100770Z reading manifest file 'weight_space_programming_framework.egg-info/SOURCES.txt'
+2026-11-07T04:16:41.4118186Z writing manifest file 'weight_space_programming_framework.egg-info/SOURCES.txt'
+2026-11-07T04:16:41.4121898Z Copying weight_space_programming_framework.egg-info to build/bdist.linux-x86_64/wheel/./weight_space_programming_framework-0.2.0.dev2-py3.12.egg-info
+2026-11-07T04:16:41.4131036Z running install_scripts
+2026-11-07T04:16:41.4141406Z creating build/bdist.linux-x86_64/wheel/weight_space_programming_framework-0.2.0.dev2.dist-info/WHEEL
+2026-11-07T04:16:41.4147338Z creating '/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/dist/.tmp-qdmpfr30/weight_space_programming_framework-0.2.0.dev2-py3-none-any.whl' and adding 'build/bdist.linux-x86_64/wheel' to it
+2026-11-07T04:16:41.4149688Z adding 'rlcd/__init__.py'
+2026-11-07T04:16:41.4153456Z adding 'rlcd/weight_space/__init__.py'
+2026-11-07T04:16:41.4159013Z adding 'rlcd/weight_space/__main__.py'
+2026-11-07T04:16:41.4162325Z adding 'rlcd/weight_space/adapters.py'
+2026-11-07T04:16:41.4166121Z adding 'rlcd/weight_space/artifact.py'
+2026-11-07T04:16:41.4172309Z adding 'rlcd/weight_space/benchmarks.py'
+2026-11-07T04:16:41.4175388Z adding 'rlcd/weight_space/compiler.py'
+2026-11-07T04:16:41.4179404Z adding 'rlcd/weight_space/contracts.py'
+2026-11-07T04:16:41.4184820Z adding 'rlcd/weight_space/demo.py'
+2026-11-07T04:16:41.4186980Z adding 'rlcd/weight_space/evidence.py'
+2026-11-07T04:16:41.4192659Z adding 'rlcd/weight_space/experiments.py'
+2026-11-07T04:16:41.4197331Z adding 'rlcd/weight_space/features.py'
+2026-11-07T04:16:41.4201906Z adding 'rlcd/weight_space/model.py'
+2026-11-07T04:16:41.4205237Z adding 'rlcd/weight_space/program.py'
+2026-11-07T04:16:41.4211200Z adding 'rlcd/weight_space/rts_study.py'
+2026-11-07T04:16:41.4214171Z adding 'rlcd/weight_space/semantics.py'
+2026-11-07T04:16:41.4218084Z adding 'rlcd/weight_space/sequential.py'
+2026-11-07T04:16:41.4222791Z adding 'rlcd/weight_space/structured.py'
+2026-11-07T04:16:41.4229528Z adding 'rlcd/weight_space/study_tasks_v2.py'
+2026-11-07T04:16:41.4243766Z adding 'rlcd/weight_space/study_v2.py'
+2026-11-07T04:16:41.4247317Z adding 'rlcd/weight_space/symmetry.py'
+2026-11-07T04:16:41.4251998Z adding 'rlcd/weight_space/torch_bridge.py'
+2026-11-07T04:16:41.4263653Z adding 'rlcd/weight_space/workflow.py'
+2026-11-07T04:16:41.4269742Z adding 'weight_space_programming_framework-0.2.0.dev2.dist-info/METADATA'
+2026-11-07T04:16:41.4271400Z adding 'weight_space_programming_framework-0.2.0.dev2.dist-info/WHEEL'
+2026-11-07T04:16:41.4273221Z adding 'weight_space_programming_framework-0.2.0.dev2.dist-info/entry_points.txt'
+2026-11-07T04:16:41.4274889Z adding 'weight_space_programming_framework-0.2.0.dev2.dist-info/top_level.txt'
+2026-11-07T04:16:41.4278127Z adding 'weight_space_programming_framework-0.2.0.dev2.dist-info/RECORD'
+2026-11-07T04:16:41.4280527Z removing build/bdist.linux-x86_64/wheel
+2026-11-07T04:16:41.4657091Z Successfully built weight_space_programming_framework-0.2.0.dev2-py3-none-any.whl
+2026-11-07T04:16:41.4853773Z ##[group]Run python -m venv "$RUNNER_TEMP/wsp-wheel-venv"
+2026-11-07T04:16:41.4854275Z [36;1mpython -m venv "$RUNNER_TEMP/wsp-wheel-venv"[0m
+2026-11-07T04:16:41.4854685Z [36;1mwheel_python="$RUNNER_TEMP/wsp-wheel-venv/bin/python"[0m
+2026-11-07T04:16:41.4855060Z [36;1m"$wheel_python" -m pip install dist/*.whl[0m
+2026-11-07T04:16:41.4855547Z [36;1m"$wheel_python" -m pip check[0m
+2026-11-07T04:16:41.4855845Z [36;1mreceipt_dir="$GITHUB_WORKSPACE/$RUN_ROOT"[0m
+2026-11-07T04:16:41.4856139Z [36;1mcd "$RUNNER_TEMP"[0m
+2026-11-07T04:16:41.4856481Z [36;1m"$wheel_python" -I - <<'PY' | tee "$receipt_dir/wheel-smoke.log"[0m
+2026-11-07T04:16:41.4856879Z [36;1mfrom importlib.metadata import version[0m
+2026-11-07T04:16:41.4857196Z [36;1mfrom importlib.util import find_spec[0m
+2026-11-07T04:16:41.4857491Z [36;1mfrom pathlib import Path[0m
+2026-11-07T04:16:41.4857740Z [36;1mimport sys[0m
+2026-11-07T04:16:41.4857969Z [36;1mimport rlcd.weight_space as wsp[0m
+2026-11-07T04:16:41.4858444Z [36;1mfrom rlcd.weight_space import TensorArtifact, apply_program, difference, rollback[0m
+2026-11-07T04:16:41.4858897Z [36;1m[0m
+2026-11-07T04:16:41.4859120Z [36;1mlocation = Path(wsp.__file__).resolve()[0m
+2026-11-07T04:16:41.4859915Z [36;1massert location.is_relative_to(Path(sys.prefix).resolve()), location[0m
+2026-11-07T04:16:41.4860340Z [36;1massert find_spec("torch") is None[0m
+2026-11-07T04:16:41.4860623Z [36;1mparent = TensorArtifact([0m
+2026-11-07T04:16:41.4860895Z [36;1m    "example-linear-readout/1",[0m
+2026-11-07T04:16:41.4861244Z [36;1m    {"readout.weight": [[1.0, 0.0]], "readout.bias": [0.0]},[0m
+2026-11-07T04:16:41.4861574Z [36;1m)[0m
+2026-11-07T04:16:41.4861770Z [36;1mrequested = TensorArtifact([0m
+2026-11-07T04:16:41.4862045Z [36;1m    "example-linear-readout/1",[0m
+2026-11-07T04:16:41.4862380Z [36;1m    {"readout.weight": [[1.0, 0.5]], "readout.bias": [0.0]},[0m
+2026-11-07T04:16:41.4862699Z [36;1m)[0m
+2026-11-07T04:16:41.4863028Z [36;1mprogram = difference(parent, requested, "Change one readout coefficient")[0m
+2026-11-07T04:16:41.4863477Z [36;1mcandidate = apply_program(parent, program)[0m
+2026-11-07T04:16:41.4863819Z [36;1massert candidate.sha256 == requested.sha256[0m
+2026-11-07T04:16:41.4864286Z [36;1massert apply_program(candidate, rollback(parent, program)).sha256 == parent.sha256[0m
+2026-11-07T04:16:41.4864913Z [36;1mprint(f"Installed distribution: {version('weight-space-programming-framework')}")[0m
+2026-11-07T04:16:41.4865393Z [36;1mprint(f"Imported package: {location}")[0m
+2026-11-07T04:16:41.4865741Z [36;1mprint("Wheel edit and rollback checks passed.")[0m
+2026-11-07T04:16:41.4866045Z [36;1mPY[0m
+2026-11-07T04:16:41.4866401Z [36;1m"$wheel_python" -I -m rlcd.weight_space --help >> "$receipt_dir/wheel-smoke.log"[0m
+2026-11-07T04:16:41.4867005Z [36;1m"$RUNNER_TEMP/wsp-wheel-venv/bin/weight-space" --help >> "$receipt_dir/wheel-smoke.log"[0m
+2026-11-07T04:16:41.4887789Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-07T04:16:41.4888139Z env:
+2026-11-07T04:16:41.4888360Z   RUN_ROOT: .runs/ci-python-42337659158-1
+2026-11-07T04:16:41.4888684Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T04:16:41.4888960Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T04:16:41.4889640Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:41.4890124Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-07T04:16:41.4890579Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:41.4890988Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:41.4891388Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:41.4891774Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-07T04:16:41.4892101Z ##[endgroup]
+2026-11-07T04:16:44.4163564Z Processing ./dist/weight_space_programming_framework-0.2.0.dev2-py3-none-any.whl
+2026-11-07T04:16:44.6606064Z Collecting numpy<3,>=2.0 (from weight-space-programming-framework==0.2.0.dev2)
+2026-11-07T04:16:44.6621832Z   Using cached numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+2026-11-07T04:16:44.6660505Z Using cached numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+2026-11-07T04:16:44.7039814Z Installing collected packages: numpy, weight-space-programming-framework
+2026-11-07T04:16:46.8711037Z Successfully installed numpy-2.5.4 weight-space-programming-framework-0.2.0.dev2
+2026-11-07T04:16:47.1458975Z No broken requirements found.
+2026-11-07T04:16:47.3329997Z Installed distribution: 0.2.0.dev2
+2026-11-07T04:16:47.3340438Z Imported package: /home/runner/work/_temp/wsp-wheel-venv/lib/python3.12/site-packages/rlcd/weight_space/__init__.py
+2026-11-07T04:16:47.3359677Z Wheel edit and rollback checks passed.
+2026-11-07T04:16:47.7157928Z ##[group]Run python scripts/verify_publication.py --out "$RUN_ROOT/publication-after.json"
+2026-11-07T04:16:47.7158654Z [36;1mpython scripts/verify_publication.py --out "$RUN_ROOT/publication-after.json"[0m
+2026-11-07T04:16:47.7180006Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-07T04:16:47.7180341Z env:
+2026-11-07T04:16:47.7180552Z   RUN_ROOT: .runs/ci-python-42337659158-1
+2026-11-07T04:16:47.7180842Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T04:16:47.7181120Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T04:16:47.7181488Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:47.7181924Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-07T04:16:47.7182351Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:47.7182733Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:47.7183141Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:47.7183560Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-07T04:16:47.7183884Z ##[endgroup]
+2026-11-07T04:16:51.1920081Z Publication verification: PASS
+2026-11-07T04:16:51.1921293Z Preserved originals: 7279/7279; manifest digests: 7447/7447; publishable files: 7447
+2026-11-07T04:16:51.1922265Z Live Markdown: 26 files, 555 local destinations; failures: 0
+2026-11-07T04:16:51.1923671Z Receipt: /home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.runs/ci-python-42337659158-1/publication-after.json
+2026-11-07T04:16:51.7780953Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-11-07T04:16:51.7781395Z with:
+2026-11-07T04:16:51.7781621Z   name: publication-python-42337659158-1
+2026-11-07T04:16:51.7781946Z   path: .runs/ci-python-42337659158-1/
+dist/*.whl
+
+2026-11-07T04:16:51.7782261Z   include-hidden-files: true
+2026-11-07T04:16:51.7782510Z   if-no-files-found: warn
+2026-11-07T04:16:51.7782736Z   retention-days: 30
+2026-11-07T04:16:51.7782950Z   compression-level: 6
+2026-11-07T04:16:51.7783171Z   overwrite: false
+2026-11-07T04:16:51.7783369Z   archive: true
+2026-11-07T04:16:51.7783558Z env:
+2026-11-07T04:16:51.7783755Z   RUN_ROOT: .runs/ci-python-42337659158-1
+2026-11-07T04:16:51.7784035Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T04:16:51.7784286Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T04:16:51.7784601Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:51.7785039Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-07T04:16:51.7785536Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:51.7785922Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:51.7786304Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T04:16:51.7786683Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-07T04:16:51.7787004Z ##[endgroup]
+2026-11-07T04:16:53.2140893Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-11-07T04:16:53.2143549Z The least common ancestor is /home/runner/work/weight-space-programming-framework/weight-space-programming-framework. This will be the root directory of the artifact
+2026-11-07T04:16:53.2146508Z With the provided path, there will be 1897 files uploaded
+2026-11-07T04:16:53.2147903Z Artifact name is valid!
+2026-11-07T04:16:53.2148498Z Root directory input is valid!
+2026-11-07T04:16:53.5830281Z Uploading artifact: publication-python-42337659158-1.zip
+2026-11-07T04:16:53.5873611Z Beginning upload of artifact content to blob storage
+2026-11-07T04:16:55.7124317Z Uploaded bytes 5335621
+2026-11-07T04:16:55.7685946Z Finished uploading artifact content to blob storage!
+2026-11-07T04:16:55.7687479Z SHA256 digest of uploaded artifact is ee53aebd15c153b44c5e75828ba3e34d7c7b96a0e687ba07772f8cc502148bfe
+2026-11-07T04:16:55.7691543Z Finalizing artifact upload
+2026-11-07T04:16:56.3056365Z Artifact publication-python-42337659158-1 successfully finalized. Artifact ID 13559799233
+2026-11-07T04:16:56.3058182Z Artifact publication-python-42337659158-1 has been successfully uploaded! Final size is 5335621 bytes. Artifact ID is 13559799233
+2026-11-07T04:16:56.3062582Z Artifact download URL: https://github.com/shyamsridhar123/weight-space-programming-framework/actions/runs/42337659158/artifacts/13559799233
+2026-11-07T04:16:56.3396531Z Post job cleanup.
+2026-11-07T04:16:56.4971745Z Post job cleanup.
+2026-11-07T04:16:56.6015214Z [command]/usr/bin/git version
+2026-11-07T04:16:56.6090178Z git version 2.56.0
+2026-11-07T04:16:56.6142441Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/0458fcf6-3d87-4264-b74e-e59a0d6c48db/.gitconfig'
+2026-11-07T04:16:56.6164483Z Temporarily overriding HOME='/home/runner/work/_temp/0458fcf6-3d87-4264-b74e-e59a0d6c48db' before making global git config changes
+2026-11-07T04:16:56.6180519Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-07T04:16:56.6182696Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/weight-space-programming-framework/weight-space-programming-framework
+2026-11-07T04:16:56.6235098Z Removing SSH command configuration
+2026-11-07T04:16:56.6236050Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-07T04:16:56.6301654Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-07T04:16:56.6981083Z Removing HTTP extra header
+2026-11-07T04:16:56.7001436Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-07T04:16:56.7019041Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-07T04:16:56.7917836Z Removing includeIf entries pointing to credentials config files
+2026-11-07T04:16:56.7939444Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-07T04:16:56.7980377Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-07T04:16:56.8405894Z Cleaning up orphan processes

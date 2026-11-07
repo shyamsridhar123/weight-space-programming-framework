@@ -1,0 +1,340 @@
+{
+  "receipt_kind": "new_optional_historical_rts_runtime_validation",
+  "created_at": "2026-11-07T03:38:13.799740+00:00",
+  "staging": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework",
+  "run_directory_relative_to_staging": ".runs\\historical-rts-validation-20261106T2134",
+  "scope": "Install staged locked dependencies, confirm local resolution, run only the three retained test files, and syntax-check the proof shell wrapper; no historical study runner commands executed.",
+  "versions": {
+    "node": {
+      "executable": "C:/public-user\\AppData\\Local\\Programs\\ecorp-tools\\node-v24.21.0-win-x64\\node.exe",
+      "argv": [
+        "C:/public-user\\AppData\\Local\\Programs\\ecorp-tools\\node-v24.21.0-win-x64\\node.exe",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "v24.21.0\n",
+      "stderr": ""
+    },
+    "npm": {
+      "executable": "C:/public-user\\AppData\\Local\\Programs\\ecorp-tools\\node-v24.21.0-win-x64\\npm.cmd",
+      "argv": [
+        "C:/public-user\\AppData\\Local\\Programs\\ecorp-tools\\node-v24.21.0-win-x64\\npm.cmd",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "11.19.0\n",
+      "stderr": ""
+    },
+    "python": {
+      "executable": "C:/public-user\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "argv": [
+        "C:/public-user\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Python 3.12.10\n",
+      "stderr": ""
+    },
+    "git": {
+      "executable": "C:\\Program Files\\Git\\cmd\\git.exe",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "git version 2.56.0.windows.4\n",
+      "stderr": ""
+    }
+  },
+  "node_modules_existed_before": false,
+  "commands": {
+    "npm-ci-original-lock": {
+      "receipt": "npm-ci-original-lock.json",
+      "argv": [
+        "npm.cmd",
+        "ci",
+        "--no-audit",
+        "--no-fund",
+        "--update-notifier=false",
+        "--logs-max=0",
+        "--fetch-retries=0",
+        "--fetch-timeout=30000"
+      ],
+      "exit_code": 0,
+      "stdout_log": "npm-ci-original-lock.stdout.log",
+      "stderr_log": "npm-ci-original-lock.stderr.log",
+      "receipt_file": {
+        "bytes": 2381,
+        "sha256": "41d684be36cdb6d173426de45fa0a5091aeb6a399035d12807193dbeb6b65410"
+      }
+    },
+    "local-dependency-resolution": {
+      "receipt": "local-dependency-resolution.json",
+      "argv": [
+        "node.exe",
+        ".runs/historical-rts-validation-20261106T2134/verify_local_install.mjs"
+      ],
+      "exit_code": 0,
+      "stdout_log": "local-dependency-resolution.stdout.log",
+      "stderr_log": "local-dependency-resolution.stderr.log",
+      "receipt_file": {
+        "bytes": 2318,
+        "sha256": "b53ff483ddfe95595f15ac804a64aee11ecf16ea7f55d9fbb183db929be917b0"
+      }
+    },
+    "historical-rts-tests": {
+      "receipt": "historical-rts-tests.json",
+      "argv": [
+        "npm.cmd",
+        "run",
+        "test:historical:rts"
+      ],
+      "exit_code": 0,
+      "stdout_log": "historical-rts-tests.stdout.log",
+      "stderr_log": "historical-rts-tests.stderr.log",
+      "receipt_file": {
+        "bytes": 2209,
+        "sha256": "0a14903c25fb42882aefa10f3eab0624e1aae6215a56b5e7c1d01c5c59f64b27"
+      }
+    },
+    "proof-shell-syntax": {
+      "receipt": "proof-shell-syntax.json",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "-n",
+        "scripts/check_proofs.sh"
+      ],
+      "exit_code": 0,
+      "stdout_log": "proof-shell-syntax.stdout.log",
+      "stderr_log": "proof-shell-syntax.stderr.log",
+      "receipt_file": {
+        "bytes": 2270,
+        "sha256": "469672ab7ce84498d1bc6ab0ff29bbf269e3152a6db871a013d6b58e8fa23b88"
+      }
+    },
+    "git-bash-version": {
+      "receipt": "git-bash-version.json",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout_log": "git-bash-version.stdout.log",
+      "stderr_log": "git-bash-version.stderr.log",
+      "receipt_file": {
+        "bytes": 2224,
+        "sha256": "d6c7ad99adb4ca690feb758324abdb68593fe82b85313d8785522ca8f48f6684"
+      }
+    },
+    "npm-public-tsx-view": {
+      "receipt": "npm-public-tsx-view.json",
+      "argv": [
+        "npm.cmd",
+        "view",
+        "tsx@4.23.13",
+        "version",
+        "dist",
+        "--json",
+        "--registry=https://registry.npmjs.org",
+        "--fetch-retries=0",
+        "--fetch-timeout=20000",
+        "--no-audit",
+        "--no-fund",
+        "--update-notifier=false",
+        "--logs-max=0"
+      ],
+      "exit_code": 1,
+      "stdout_log": "npm-public-tsx-view.stdout.log",
+      "stderr_log": "npm-public-tsx-view.stderr.log",
+      "receipt_file": {
+        "bytes": 2563,
+        "sha256": "a214b28dbdf7ea0ee057d3f1533726325fef3c0acf25e632704802f67f410a74"
+      }
+    },
+    "public-registry-curl": {
+      "receipt": "public-registry-curl.json",
+      "argv": [
+        "curl.exe",
+        "--head",
+        "--silent",
+        "--show-error",
+        "--connect-timeout",
+        "10",
+        "--max-time",
+        "20",
+        "https://registry.npmjs.org/tsx/4.23.13"
+      ],
+      "exit_code": 35,
+      "stdout_log": "public-registry-curl.stdout.log",
+      "stderr_log": "public-registry-curl.stderr.log",
+      "receipt_file": {
+        "bytes": 2395,
+        "sha256": "2b226a7ae38af35ef263611cc7678057acd1e6abcf1c23b320fbce8943ac47a7"
+      }
+    }
+  },
+  "install_exit_code": 0,
+  "test_exit_code": 0,
+  "test_counts": {
+    "tests": 61,
+    "suites": 0,
+    "pass": 61,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "reported_duration_ms": 3151.6131
+  },
+  "test_files": [
+    "tests/weight-space-empires.test.ts",
+    "tests/empires-weights.test.ts",
+    "tests/empires-weight-coach.test.ts"
+  ],
+  "local_dependency_resolution": {
+    "staging": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework",
+    "node": {
+      "executable": "C:/public-user\\AppData\\Local\\Programs\\ecorp-tools\\node-v24.21.0-win-x64\\node.exe",
+      "version": "v24.21.0"
+    },
+    "node_path": "",
+    "packages": [
+      {
+        "name": "tsx",
+        "version": "4.23.13",
+        "resolved": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\node_modules\\tsx\\package.json",
+        "relative_to_staged_node_modules": "tsx\\package.json",
+        "sha256": "3ace2493a0acd26fc72a8433a38113ee04d5a1976910a3f40815f9e779d5c426"
+      },
+      {
+        "name": "esbuild",
+        "version": "0.28.2",
+        "resolved": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\node_modules\\esbuild\\package.json",
+        "relative_to_staged_node_modules": "esbuild\\package.json",
+        "sha256": "9d0bc453f4e791553c4cc2298ba023b409241fd9801e494741666eb0f6051490"
+      },
+      {
+        "name": "@esbuild/win32-x64",
+        "version": "0.28.2",
+        "resolved": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\node_modules\\@esbuild\\win32-x64\\package.json",
+        "relative_to_staged_node_modules": "@esbuild\\win32-x64\\package.json",
+        "sha256": "89382df45735edcd917c492a810ab514920fa07d36c653cdc122bdfd8f526964"
+      }
+    ],
+    "tsx_launcher": {
+      "path": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\node_modules\\.bin\\tsx.cmd",
+      "sha256": "8d5a61df13caacc23abd35ad8923ef3dcb2c87807560d7b8e4b010fd7f82304d"
+    },
+    "tsx_version_command": {
+      "argv": [
+        "C:/public-user\\AppData\\Local\\Programs\\ecorp-tools\\node-v24.21.0-win-x64\\node.exe",
+        "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\node_modules\\tsx\\dist\\cli.mjs",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "tsx v4.23.13\nnode v24.21.0\r\n",
+      "stderr": ""
+    },
+    "local_esbuild_transform": {
+      "code": "const value = 1;\n",
+      "warnings": []
+    },
+    "all_dependency_paths_inside_staging": true
+  },
+  "installed_package_sources": [
+    {
+      "package_path": "node_modules/@esbuild/win32-x64",
+      "version": "0.28.2",
+      "resolved": "https://redacted.invalid/environment",
+      "registry_host": "redacted.invalid",
+      "integrity": "sha1-shr/uATMFnwTPZX0WzodwTI7moc=",
+      "installed_lock_matches_staged_lock": true,
+      "cache_lookup_method": "exact_locked_integrity_for_registry_blob_redirect",
+      "download_record_in_fresh_run_cache": true,
+      "cache_content_file": "npm-cache\\_cacache\\content-v2\\sha1\\b2\\1a\\ffb804cc167c133d95f45b3a1dc1323b9a87",
+      "cache_content_bytes": 4829680,
+      "cache_content_sha256": "7286c3611b6f1f4c4d9ec90adcbc478407ff0d28ead96567f361d53e67613e19",
+      "cache_integrity": "sha1-shr/uATMFnwTPZX0WzodwTI7moc=",
+      "downloaded_tarball_matches_locked_integrity": true,
+      "download_time_unix_ms": 1794022574798,
+      "download_host": "redacted.invalid",
+      "download_url_without_query": "https://redacted.invalid/environment"
+    },
+    {
+      "package_path": "node_modules/esbuild",
+      "version": "0.28.2",
+      "resolved": "https://redacted.invalid/environment",
+      "registry_host": "redacted.invalid",
+      "integrity": "sha1-D0O9G62VW3LSTiJh46vllXzPCBY=",
+      "installed_lock_matches_staged_lock": true,
+      "cache_lookup_method": "exact_locked_integrity_for_registry_blob_redirect",
+      "download_record_in_fresh_run_cache": true,
+      "cache_content_file": "npm-cache\\_cacache\\content-v2\\sha1\\0f\\43\\bd1bad955b72d24e2261e3abe5957ccf0816",
+      "cache_content_bytes": 34207,
+      "cache_content_sha256": "e045f94c235c7adc50e77ba2a579c7bec41b496b6b47c3a7845f7c1e19959a88",
+      "cache_integrity": "sha1-D0O9G62VW3LSTiJh46vllXzPCBY=",
+      "downloaded_tarball_matches_locked_integrity": true,
+      "download_time_unix_ms": 1794022574417,
+      "download_host": "redacted.invalid",
+      "download_url_without_query": "https://redacted.invalid/environment"
+    },
+    {
+      "package_path": "node_modules/tsx",
+      "version": "4.23.13",
+      "resolved": "https://redacted.invalid/environment",
+      "registry_host": "redacted.invalid",
+      "integrity": "sha1-OTuN2BPUniWu17HXy6xpMNpJ7Ag=",
+      "installed_lock_matches_staged_lock": true,
+      "cache_lookup_method": "exact_locked_integrity_for_registry_blob_redirect",
+      "download_record_in_fresh_run_cache": true,
+      "cache_content_file": "npm-cache\\_cacache\\content-v2\\sha1\\39\\3b\\8dd813d49e25aed7b1d7cbac6930da49ec08",
+      "cache_content_bytes": 187531,
+      "cache_content_sha256": "2596b16677948b542eb1e74518a53d04ab3f504ef32acabcc1cdfdacb2fe20a8",
+      "cache_integrity": "sha1-OTuN2BPUniWu17HXy6xpMNpJ7Ag=",
+      "downloaded_tarball_matches_locked_integrity": true,
+      "download_time_unix_ms": 1794022574633,
+      "download_host": "redacted.invalid",
+      "download_url_without_query": "https://redacted.invalid/environment"
+    }
+  ],
+  "all_installed_sources_verified_against_locked_tarball_integrity": true,
+  "package_files_before": {
+    "package.json": {
+      "bytes": 546,
+      "sha256": "3f015d4fe079bb11fce66985c27fe9f3f71c5dfa0f19af49f6f6f571ab4992c2"
+    },
+    "package-lock.json": {
+      "bytes": 15490,
+      "sha256": "0cb4a1d27ab6207126586842f60d5ad1f98602c01307848e4c7383390fd08068"
+    }
+  },
+  "package_files_after": {
+    "package.json": {
+      "bytes": 546,
+      "sha256": "3f015d4fe079bb11fce66985c27fe9f3f71c5dfa0f19af49f6f6f571ab4992c2"
+    },
+    "package-lock.json": {
+      "bytes": 15490,
+      "sha256": "0cb4a1d27ab6207126586842f60d5ad1f98602c01307848e4c7383390fd08068"
+    }
+  },
+  "package_files_unchanged": true,
+  "temporary_file_directory": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\historical-rts-validation-20261106T2134\\tmp",
+  "npm_cache_directory": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\historical-rts-validation-20261106T2134\\npm-cache",
+  "public_registry_portability": {
+    "verified": false,
+    "reason": "Direct official npm registry requests failed at TLS handshake in Python urllib, npm, and native curl; metadata availability and public tarball byte identity could not be assessed.",
+    "public_registry_receipts": [
+      "public-registry-check.json",
+      "npm-public-tsx-view.json",
+      "public-registry-curl.json",
+      "network-config-sanitized.json"
+    ],
+    "installed_sources_are_public_npm_verified": false,
+    "lock_changed_or_dependencies_upgraded": false
+  },
+  "notes": [
+    "npm ci emitted an esbuild install-script allowScripts warning; the installed native Windows optional dependency worked in a direct local esbuild transform and all retained tests passed.",
+    "NODE_PATH was explicitly empty for the local-resolution check and retained test command; the staged npm launcher points directly to staged node_modules/tsx/dist/cli.mjs.",
+    "The test suite creates and removes its own adapter fixture and receipt files under the run temporary directory; those are new test execution artifacts, not regenerated historical studies."
+  ]
+}

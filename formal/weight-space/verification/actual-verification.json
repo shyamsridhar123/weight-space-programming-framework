@@ -1,0 +1,304 @@
+{
+  "schema": "wsp-lean-verification/1",
+  "stage": "frozen-rts-specialization",
+  "checked_at": "2026-11-07T01:22:12.502843+00:00",
+  "command": "pwsh -NoLogo -NoProfile -File scripts/check_weight_space_proofs.ps1 -SkipCache",
+  "exit_code": 0,
+  "commands": [
+    {
+      "command": "python formal/weight-space/generate_rts_certificate.py artifacts/weight-space/study-v1/rts-candidates/exact-policy.json formal/weight-space/WeightSpace/RTS.lean --source-model artifacts/weight-space/study-v1/rts-export/model.json",
+      "exit_code": 0
+    },
+    {
+      "command": "python formal/weight-space/generate_rts_certificate.py artifacts/weight-space/study-v1/rts-candidates/exact-policy.json formal/weight-space/WeightSpace/RTS.lean --source-model artifacts/weight-space/study-v1/rts-export/model.json --check",
+      "exit_code": 0,
+      "log": "formal/weight-space/verification/actual-regeneration.log"
+    },
+    {
+      "command": "pwsh -NoLogo -NoProfile -File scripts/check_weight_space_proofs.ps1 -SkipCache",
+      "exit_code": 0,
+      "build_log": "formal/weight-space/verification/actual-build.log",
+      "standalone_axiom_audit_log": "formal/weight-space/verification/actual-axiom-audit.log"
+    }
+  ],
+  "lean_version": "4.24.0",
+  "lean_commit": "797c613eb9b6d4ec95db23e3e00af9ac6657f24b",
+  "lean_version_output": "Lean (version 4.24.0, x86_64-w64-windows-gnu, commit 797c613eb9b6d4ec95db23e3e00af9ac6657f24b, Release)",
+  "mathlib_version": "v4.24.0",
+  "mathlib_commit": "f897ebcf72cd16f89ab4577d0c826cd14afaafc7",
+  "dependency_lock": "formal/weight-space/lake-manifest.json",
+  "build_jobs": 987,
+  "explicit_theorem_statements": 59,
+  "explicit_rts_theorem_statements": 21,
+  "explicit_theorem_statements_by_source": {
+    "formal/weight-space/WeightSpace/AxiomAudit.lean": 0,
+    "formal/weight-space/WeightSpace/Bounds.lean": 16,
+    "formal/weight-space/WeightSpace/Contracts.lean": 4,
+    "formal/weight-space/WeightSpace/Core.lean": 7,
+    "formal/weight-space/WeightSpace/Examples.lean": 6,
+    "formal/weight-space/WeightSpace/Gauge.lean": 5,
+    "formal/weight-space/WeightSpace/RTS.lean": 21
+  },
+  "audited_declarations": 236,
+  "audited_theorem_declarations": 121,
+  "audited_rts_declarations": 98,
+  "audited_rts_theorem_declarations": 50,
+  "count_conventions": {
+    "explicit_theorem_statements": "Lines beginning with theorem in the project Lean sources; excludes definitions and compiler-generated declarations.",
+    "audited_declarations": "Every declaration in the Lean environment with the WeightSpace namespace prefix, including compiler-generated declarations.",
+    "audited_theorem_declarations": "Audited declarations whose Lean ConstantInfo kind is thmInfo, including compiler-generated theorem declarations.",
+    "rts_subset": "Audited declarations with the WeightSpace.RTS namespace prefix."
+  },
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "observed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "audit": {
+    "scope": "All 236 WeightSpace declarations, including every RTS endpoint definition and theorem.",
+    "method": "Lean.collectAxioms follows transitive dependencies; elaboration fails for any axiom outside the allowlist.",
+    "printed_representative_theorems": 32,
+    "printed_rts_theorems": 12,
+    "build_stage_passed": true,
+    "standalone_passed": true,
+    "proof_placeholders_or_added_axioms_or_native_evaluation_shortcuts_accepted": false
+  },
+  "source_sha256": {
+    "formal/weight-space/lake-manifest.json": "cd42e2c798056244b8d399857d616d30d2497a78c62f647d7eecb0fb3fd103b0",
+    "formal/weight-space/lakefile.toml": "d6f3654e5118fbe37f64db51bda02f6c3425921153ec03be9d82cdfec3c3d2e5",
+    "formal/weight-space/lean-toolchain": "42779d67b81608af8a12aa4328d2ab47ca201925b3b2bd68369587b5340bb434",
+    "formal/weight-space/generate_rts_certificate.py": "2606bcc3967dcb53ffd215b4be160d42b251c9b24d17d814bed01038e1b4c908",
+    "scripts/check_weight_space_proofs.ps1": "05700d3081fa91f2647c77c46ebb1e3263bb8f1cb2d150c25fe8c0f5e414a8cf",
+    "formal/weight-space/WeightSpace.lean": "85f580b66167cf9e7877348286e17ab8785b26a42ae9003a1dc905fe3c372187",
+    "formal/weight-space/WeightSpace/AxiomAudit.lean": "c5b1e8ccf6b4f44d0d8826c05f5da03c82ad27988abcbfcfb96ea5223390f637",
+    "formal/weight-space/WeightSpace/Bounds.lean": "85c59f76bb5dea11951024db8b1a7e2fd55438583c8613ad912b9b37334e9b17",
+    "formal/weight-space/WeightSpace/Contracts.lean": "80869b222f002222947f5932821d30aa7e38dbdaf18b71f5bf56f4dabf101224",
+    "formal/weight-space/WeightSpace/Core.lean": "bd8e8188ec12ce507a3e6991198622f9ddc43c2595ec261491a3c5ef9d9cd181",
+    "formal/weight-space/WeightSpace/Examples.lean": "8e7f030a60602bc0104ab8fe40e2d131c6066b184ae1d12eca750787a43654ee",
+    "formal/weight-space/WeightSpace/Gauge.lean": "6b353d14398756889b5b1c7908b62008b5c0ab22869de768f58c91da7a82437a",
+    "formal/weight-space/WeightSpace/RTS.lean": "b3b52da81d345a44eac8d26ff4802bfc8561a31f08cb1307d1e41b3aea792ed1"
+  },
+  "input_sha256": {
+    "artifacts/weight-space/study-v1/rts-candidates/exact-policy.json": "25d212fc23e05d139b608ea0a9d0d38ec0c510d3ed5703127e580481c6301716",
+    "artifacts/weight-space/study-v1/rts-export/model.json": "eaae1a4577ef621eab0d4f5c8545499f4315dbed066240c023e45c0bfa09c0da"
+  },
+  "log_sha256": {
+    "formal/weight-space/verification/actual-regeneration.log": "d56882c1813dff8df6a4592e55fb9139ca59aad6ce9e54c8f97a1d2bc3fe36bb",
+    "formal/weight-space/verification/actual-build.log": "929c27eee47622e75d9f40cf100657e89fe5012419b3cd3c244980a83eaaa60f",
+    "formal/weight-space/verification/actual-axiom-audit.log": "5469a8f549b0dcbf7ec7d31608d868eed7ed275bd62820c4e66d49275d1ecb20"
+  },
+  "documentation_sha256": {
+    "formal/weight-space/README.md": "cf2cfa0a0bd017be7168037ab7bfbfcdebab2e3f9fad76a28e257d73d904affa"
+  },
+  "pre_build_snapshot": {
+    "path": "formal/weight-space/verification/actual-build-inputs.json",
+    "sha256": "da293479c0a5697724531f6fb057f18bcc311b4dca466502b8a089126543854b",
+    "recorded_at": "2026-11-07T01:16:05.596662+00:00",
+    "all_13_source_files_unchanged": true,
+    "both_frozen_inputs_unchanged": true,
+    "all_3_generic_evidence_files_unchanged": true
+  },
+  "preserved_generic_evidence_sha256": {
+    "formal/weight-space/verification/generic-axiom-audit.log": "2a82c10616f238e67fbeb9258159fab72364f65a9a1fbbbd12888193d2c9c7f2",
+    "formal/weight-space/verification/generic-build.log": "50c173e491e900dc64ea082bcd39b2c5d3cd1ac67bf124598e625bf52315cd01",
+    "formal/weight-space/verification/generic-verification.json": "2dcee34f0472ad2ee4580829a396a03ffb876594fc31ee1c61ae2bf4d49a3634"
+  },
+  "rts_specialization": {
+    "exact_policy_path": "artifacts/weight-space/study-v1/rts-candidates/exact-policy.json",
+    "source_model_path": "artifacts/weight-space/study-v1/rts-export/model.json",
+    "exact_policy_file_sha256": "25d212fc23e05d139b608ea0a9d0d38ec0c510d3ed5703127e580481c6301716",
+    "source_model_file_sha256": "eaae1a4577ef621eab0d4f5c8545499f4315dbed066240c023e45c0bfa09c0da",
+    "base_canonical_network_sha256": "244f1827a32913f12da47d159c406ec090da0c056b97bbe1045ff233d6235555",
+    "input_dimensions": 32,
+    "hidden_dimensions": 38,
+    "output_dimensions": 1,
+    "base_coefficients_represented": 1293,
+    "feature_names_in_order": [
+      "food_shortage",
+      "wood_shortage",
+      "gold_shortage",
+      "stone_shortage",
+      "idle_workers",
+      "worker_deficit",
+      "population_pressure",
+      "army_readiness",
+      "visible_base_threat",
+      "production_deficit",
+      "age_progress",
+      "resource_surplus",
+      "visible_army_advantage",
+      "army_deficit",
+      "candidate_coverage_gap",
+      "candidate_order_disruption",
+      "gather_food",
+      "gather_wood",
+      "gather_gold",
+      "gather_stone",
+      "train_worker",
+      "build_house",
+      "build_farm",
+      "build_production",
+      "train_army",
+      "advance_age",
+      "research",
+      "defend",
+      "attack",
+      "scout",
+      "build_defense",
+      "continue_orders"
+    ],
+    "hidden_names_in_order": [
+      "food_shortage_gather",
+      "wood_shortage_gather",
+      "gold_shortage_gather",
+      "stone_shortage_gather",
+      "idle_labor_gather",
+      "labor_coverage_gap",
+      "worker_deficit_train",
+      "worker_saturation_train",
+      "worker_train_bias",
+      "population_pressure_house",
+      "spare_capacity_house",
+      "house_bias",
+      "farm_coverage_gap",
+      "food_shortage_farm",
+      "production_coverage_gap",
+      "production_shortage_and_gap",
+      "army_deficit_train",
+      "army_composition_gap",
+      "threat_army_train",
+      "army_train_bias",
+      "surplus_advance",
+      "immature_economy_advance",
+      "advance_bias",
+      "surplus_research",
+      "research_bias",
+      "visible_threat_defend",
+      "ready_army_defend",
+      "ready_army_attack",
+      "visible_advantage_attack",
+      "home_threat_attack",
+      "attack_bias",
+      "scouting_coverage_gap",
+      "scout_bias",
+      "visible_threat_defenses",
+      "defense_coverage_gap",
+      "defense_bias",
+      "continuation_bias",
+      "order_disruption_cost"
+    ],
+    "output_names_in_order": [
+      "candidate_score"
+    ],
+    "selected_hidden_index": 19,
+    "selected_hidden_name": "army_train_bias",
+    "selected_feature_index": 24,
+    "selected_feature_name": "train_army",
+    "selected_hidden_activation": "max(0, x[24])",
+    "selected_base_readout_exact": "3602879701896397/4503599627370496",
+    "exact_score_effect_domain": "All real inputs x : Fin 32 -> Real.",
+    "exact_score_effect": "score(candidate, x) - score(base, x) = actual_delta_exact * max(0, x[24])",
+    "global_bound_domain": "For every i in Fin 32, 0 <= x[i] <= 1.",
+    "protected_bound_domain": "For every i in Fin 32, 0 <= x[i] <= 1, and x[24] = 0.",
+    "global_box_validity_theorem": "WeightSpace.RTS.globalBox_valid",
+    "protected_box_validity_theorem": "WeightSpace.RTS.protectedBox_valid",
+    "candidates": [
+      {
+        "id": "recruit_0_5",
+        "candidate_canonical_network_sha256": "c8ebcc23bb67e950c6763b2d3216cca641f0e4aef0ee44d435d8c6cb582b93a1",
+        "requested_delta_binary64_display": 0.5,
+        "base_readout_exact": "3602879701896397/4503599627370496",
+        "candidate_readout_exact": "5854679515581645/4503599627370496",
+        "actual_delta_exact": "1/2",
+        "global_absolute_score_drift_bound_exact": "1/2",
+        "protected_absolute_score_drift_bound_exact": "0",
+        "theorems": {
+          "eq": "WeightSpace.RTS.recruit_0_5_eq",
+          "exact": "WeightSpace.RTS.recruit_0_5_exact",
+          "bound": "WeightSpace.RTS.recruit_0_5_bound",
+          "protected": "WeightSpace.RTS.recruit_0_5_protected"
+        }
+      },
+      {
+        "id": "recruit_1_0",
+        "candidate_canonical_network_sha256": "b8692104b3ba3ae646dcb8abc158abe9ab174e1d87c6ba766b11c332224a9cdf",
+        "requested_delta_binary64_display": 1.0,
+        "base_readout_exact": "3602879701896397/4503599627370496",
+        "candidate_readout_exact": "8106479329266893/4503599627370496",
+        "actual_delta_exact": "1",
+        "global_absolute_score_drift_bound_exact": "1",
+        "protected_absolute_score_drift_bound_exact": "0",
+        "theorems": {
+          "eq": "WeightSpace.RTS.recruit_1_0_eq",
+          "exact": "WeightSpace.RTS.recruit_1_0_exact",
+          "bound": "WeightSpace.RTS.recruit_1_0_bound",
+          "protected": "WeightSpace.RTS.recruit_1_0_protected"
+        }
+      },
+      {
+        "id": "recruit_2_0",
+        "candidate_canonical_network_sha256": "f32c141a9b0f0e8e37bef9a98392ddc97dd9d0206458634fbe5792765a4eac1e",
+        "requested_delta_binary64_display": 2.0,
+        "base_readout_exact": "3602879701896397/4503599627370496",
+        "candidate_readout_exact": "3152519739159347/1125899906842624",
+        "actual_delta_exact": "9007199254740991/4503599627370496",
+        "global_absolute_score_drift_bound_exact": "9007199254740991/4503599627370496",
+        "protected_absolute_score_drift_bound_exact": "0",
+        "theorems": {
+          "eq": "WeightSpace.RTS.recruit_2_0_eq",
+          "exact": "WeightSpace.RTS.recruit_2_0_exact",
+          "bound": "WeightSpace.RTS.recruit_2_0_bound",
+          "protected": "WeightSpace.RTS.recruit_2_0_protected"
+        }
+      },
+      {
+        "id": "recruit_4_0",
+        "candidate_canonical_network_sha256": "02c31a55a7ffe926d09199aa71ee19d2c1cf12ad41de6c7abccd67bab00acdb7",
+        "requested_delta_binary64_display": 4.0,
+        "base_readout_exact": "3602879701896397/4503599627370496",
+        "candidate_readout_exact": "5404319552844595/1125899906842624",
+        "actual_delta_exact": "18014398509481983/4503599627370496",
+        "global_absolute_score_drift_bound_exact": "18014398509481983/4503599627370496",
+        "protected_absolute_score_drift_bound_exact": "0",
+        "theorems": {
+          "eq": "WeightSpace.RTS.recruit_4_0_eq",
+          "exact": "WeightSpace.RTS.recruit_4_0_exact",
+          "bound": "WeightSpace.RTS.recruit_4_0_bound",
+          "protected": "WeightSpace.RTS.recruit_4_0_protected"
+        }
+      }
+    ],
+    "candidate_selection_dependency": "None. Each of the four explicit endpoint contracts is proved independently of candidate selection or empirical utility."
+  },
+  "independent_source_validation": {
+    "checker": "formal/weight-space/generate_rts_certificate.py --source-model",
+    "all_1293_coefficients_compared": true,
+    "selected_labels_and_full_label_dimensions_checked": true,
+    "source_file_sha256_checked": true,
+    "canonical_base_and_all_candidate_hashes_reconstructed": true,
+    "exact_endpoint_differences_checked": true,
+    "byte_for_byte_regeneration_checked": true,
+    "imports_runtime_exporter": false
+  },
+  "scope": "Finite scalar-output two-layer ReLU networks over the reals, including the frozen 32-feature / 38-hidden-unit RTS model and four explicit readout endpoints. Serialized binary64 coefficients are represented as exact rationals.",
+  "trust_boundary": {
+    "lean_kernel_guarantee": "Proof checking establishes the stated real-arithmetic properties of the explicit Lean definitions.",
+    "external_mapping": "The Python generator and independent source comparison connect external JSON values and content identities to the generated definitions. This mapping and the source extraction remain outside Lean; hash labels are not formal byte-binding theorems.",
+    "trusted_components": [
+      "Lean kernel and the three listed foundational axioms",
+      "Pinned Mathlib libraries, dependency artifacts, and build toolchain",
+      "External JSON parsing, source extraction, and generator mapping to explicit formal coefficients"
+    ],
+    "excluded_claims": [
+      "IEEE binary64 execution or rounding error bounds",
+      "Simulator reachability of the feature boxes",
+      "Candidate selection or gameplay effectiveness",
+      "Equivalence to a different architecture"
+    ]
+  }
+}

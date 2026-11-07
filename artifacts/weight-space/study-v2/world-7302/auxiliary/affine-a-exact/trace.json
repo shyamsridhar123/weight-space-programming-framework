@@ -1,0 +1,365 @@
+[
+  {
+    "action": "session_created",
+    "charges": {},
+    "error": null,
+    "previous_sha256": null,
+    "request": {
+      "access": {
+        "activations": false,
+        "feedback": false,
+        "forward": false,
+        "metadata": false,
+        "weight_decimals": null,
+        "weights": true
+      },
+      "architecture": "affine/1",
+      "base_sha256": "a44dbfa2e853062502d1781f94fa169f76d15e5e6168c522b2defa6139398b0a",
+      "callbacks_registered": {
+        "activations": false,
+        "feedback": false,
+        "forward": false
+      },
+      "constraints_sha256": "c4505e4dfa9fe82cc95792d621bbc4d26ea744a7643c7a095f275dee272ae98e",
+      "declared_constraints_automatically_enforced": false,
+      "enforcement": "cooperative_same_process_interface",
+      "execution_accounting": "interface_calls_and_submitted_examples; callback_internal_work_not_observed",
+      "limits": {
+        "execution_calls": 0,
+        "execution_examples": 0,
+        "feedback_calls": 0,
+        "feedback_examples": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "proposals": 1,
+        "tool_calls": 3,
+        "weight_values": 51
+      },
+      "mode": "read",
+      "objective": "Read the 16-to-3 affine response and the sign of weight[1,7]; abstain on sign when its displayed value is zero",
+      "schema": "wsp-session-config/1",
+      "splits": {
+        "declared_lineage_overlap": false,
+        "lineage_independence_verified": false,
+        "lineage_scope": "caller_declared_only",
+        "sample_overlap": false,
+        "schema": "wsp-split-validation/1",
+        "sha256": "a93a95bb053e5427a90e26ed9495ccce7360f8dae4a65392c25e221d3e82650e",
+        "splits": [
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "b88f720bc44f3e3f652ae8ffc9ba733f9f3ea67994a2d2e4bd0bc47aaa72d37a",
+            "name": "test",
+            "sample_count": 128
+          }
+        ]
+      },
+      "task_id": "auxiliary:7302:affine-a-exact",
+      "task_sha256": "41ba63b2cef2d00b13842faa14b59bf6b29e0215975a62a212ca3162ea2b478a",
+      "token_accounting": "provider_supplied_not_locally_measured"
+    },
+    "requested_charges": {},
+    "result": {},
+    "schema": "wsp-trace-event/1",
+    "sequence": 0,
+    "session_sha256": "5594a2c7604392fca5775eed4215da7759b06cc20fb72d64f8cee3a13a6954b9",
+    "status": "succeeded",
+    "task_sha256": "41ba63b2cef2d00b13842faa14b59bf6b29e0215975a62a212ca3162ea2b478a",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 0,
+      "weight_values": 0
+    },
+    "sha256": "d1960006f02b7d4f6b84eb548e510c3f03c6fde633b43c2dac3e7656c1ab4910"
+  },
+  {
+    "action": "provider_usage",
+    "charges": {
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    "error": null,
+    "previous_sha256": "d1960006f02b7d4f6b84eb548e510c3f03c6fde633b43c2dac3e7656c1ab4910",
+    "request": {
+      "accounting": "provider_supplied_not_locally_measured",
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    "requested_charges": {
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    "result": {
+      "accounting": "provider_supplied_not_locally_measured",
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 1,
+    "session_sha256": "5594a2c7604392fca5775eed4215da7759b06cc20fb72d64f8cee3a13a6954b9",
+    "status": "succeeded",
+    "task_sha256": "41ba63b2cef2d00b13842faa14b59bf6b29e0215975a62a212ca3162ea2b478a",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 0,
+      "weight_values": 0
+    },
+    "sha256": "b1d06e9dacfd21b5d0d00c19779b920d3e956a8fd492623ed76453ee4ed74d32"
+  },
+  {
+    "action": "weights",
+    "charges": {
+      "tool_calls": 1,
+      "weight_values": 48
+    },
+    "error": null,
+    "previous_sha256": "b1d06e9dacfd21b5d0d00c19779b920d3e956a8fd492623ed76453ee4ed74d32",
+    "request": {
+      "indices": null,
+      "tensor": "weight",
+      "weight_decimals": null
+    },
+    "requested_charges": {
+      "tool_calls": 1,
+      "weight_values": 48
+    },
+    "result": [
+      [
+        2.0,
+        -1.75,
+        0.5,
+        1.375,
+        1.25,
+        0.625,
+        -0.625,
+        2.0,
+        0.75,
+        0.625,
+        1.0,
+        -0.5,
+        -0.125,
+        -0.125,
+        1.875,
+        -0.625
+      ],
+      [
+        -1.5,
+        0.625,
+        -0.5,
+        0.125,
+        2.0,
+        -1.25,
+        1.25,
+        0.0004,
+        -1.625,
+        1.375,
+        1.125,
+        -0.625,
+        0.375,
+        -0.25,
+        1.375,
+        -1.75
+      ],
+      [
+        -1.875,
+        -0.75,
+        -2.0,
+        -0.25,
+        0.625,
+        0.25,
+        0.5,
+        -1.375,
+        1.625,
+        1.375,
+        0.25,
+        1.5,
+        -1.125,
+        2.0,
+        -1.5,
+        1.5
+      ]
+    ],
+    "schema": "wsp-trace-event/1",
+    "sequence": 2,
+    "session_sha256": "5594a2c7604392fca5775eed4215da7759b06cc20fb72d64f8cee3a13a6954b9",
+    "status": "succeeded",
+    "task_sha256": "41ba63b2cef2d00b13842faa14b59bf6b29e0215975a62a212ca3162ea2b478a",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 1,
+      "weight_values": 48
+    },
+    "sha256": "70bb5cf06b55838cb1d37bb2d77154a2f688643c58d778f1c879cae381b2e1a4"
+  },
+  {
+    "action": "weights",
+    "charges": {
+      "tool_calls": 1,
+      "weight_values": 3
+    },
+    "error": null,
+    "previous_sha256": "70bb5cf06b55838cb1d37bb2d77154a2f688643c58d778f1c879cae381b2e1a4",
+    "request": {
+      "indices": null,
+      "tensor": "bias",
+      "weight_decimals": null
+    },
+    "requested_charges": {
+      "tool_calls": 1,
+      "weight_values": 3
+    },
+    "result": [
+      -1.0,
+      -0.5,
+      0.75
+    ],
+    "schema": "wsp-trace-event/1",
+    "sequence": 3,
+    "session_sha256": "5594a2c7604392fca5775eed4215da7759b06cc20fb72d64f8cee3a13a6954b9",
+    "status": "succeeded",
+    "task_sha256": "41ba63b2cef2d00b13842faa14b59bf6b29e0215975a62a212ca3162ea2b478a",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 2,
+      "weight_values": 51
+    },
+    "sha256": "71ab1ac4234643fac3c6e59c9b70ee0ed1a31bafe325f198630a26928e535f72"
+  },
+  {
+    "action": "submit_answer",
+    "charges": {
+      "proposals": 1,
+      "tool_calls": 1
+    },
+    "error": null,
+    "previous_sha256": "71ab1ac4234643fac3c6e59c9b70ee0ed1a31bafe325f198630a26928e535f72",
+    "request": {},
+    "requested_charges": {
+      "proposals": 1,
+      "tool_calls": 1
+    },
+    "result": {
+      "artifact_sha256": null,
+      "candidate_sha256": "c2ecfe9726d5af4000c4c8d90157e630a2c0b92b1f175207354aae5ac23fe529",
+      "no_op": false
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 4,
+    "session_sha256": "5594a2c7604392fca5775eed4215da7759b06cc20fb72d64f8cee3a13a6954b9",
+    "status": "succeeded",
+    "task_sha256": "41ba63b2cef2d00b13842faa14b59bf6b29e0215975a62a212ca3162ea2b478a",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 3,
+      "weight_values": 51
+    },
+    "sha256": "0cfaaf4eb220005d3066d9736fca22f83cae9934267328fe7e3af888410dfe4d"
+  },
+  {
+    "action": "seal",
+    "charges": {},
+    "error": null,
+    "previous_sha256": "0cfaaf4eb220005d3066d9736fca22f83cae9934267328fe7e3af888410dfe4d",
+    "request": {
+      "candidate_sha256": "c2ecfe9726d5af4000c4c8d90157e630a2c0b92b1f175207354aae5ac23fe529"
+    },
+    "requested_charges": {},
+    "result": {
+      "selection": "candidate"
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 5,
+    "session_sha256": "5594a2c7604392fca5775eed4215da7759b06cc20fb72d64f8cee3a13a6954b9",
+    "status": "succeeded",
+    "task_sha256": "41ba63b2cef2d00b13842faa14b59bf6b29e0215975a62a212ca3162ea2b478a",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 3,
+      "weight_values": 51
+    },
+    "sha256": "ebdf3091632421016736bebf091c58503112608f9d9821edfcc7074b53093714"
+  },
+  {
+    "action": "heldout_evaluation",
+    "charges": {},
+    "error": null,
+    "previous_sha256": "ebdf3091632421016736bebf091c58503112608f9d9821edfcc7074b53093714",
+    "request": {
+      "candidate_sha256": "c2ecfe9726d5af4000c4c8d90157e630a2c0b92b1f175207354aae5ac23fe529",
+      "evaluator_id": "affine-sign-and-response/1",
+      "split_name": "test"
+    },
+    "requested_charges": {},
+    "result": {
+      "abstained": false,
+      "coefficient_absolute_error": 0.0,
+      "exact_sign": 1,
+      "formal_certificate": null,
+      "hidden_response": {
+        "absolute_tolerance": 1e-12,
+        "exact_array_equality": true,
+        "examples": 128,
+        "maximum_absolute_error": 0.0,
+        "mean_absolute_error": 0.0,
+        "output_dimension": 3,
+        "rmse": 0.0,
+        "within_tolerance": true
+      },
+      "reported_sign": 1,
+      "sign_correct": true
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 6,
+    "session_sha256": "5594a2c7604392fca5775eed4215da7759b06cc20fb72d64f8cee3a13a6954b9",
+    "status": "succeeded",
+    "task_sha256": "41ba63b2cef2d00b13842faa14b59bf6b29e0215975a62a212ca3162ea2b478a",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 3,
+      "weight_values": 51
+    },
+    "sha256": "86499f44ae5200cb31f9cea00b7847e334db7b31bc75be6f95a3fa88481f9871"
+  }
+]

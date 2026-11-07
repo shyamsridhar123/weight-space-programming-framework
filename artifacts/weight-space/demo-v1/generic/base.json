@@ -1,0 +1,57 @@
+{
+  "schema": "wsp-tensors/1",
+  "dtype": "float64",
+  "architecture": "patch-convolution-tanh/1",
+  "metadata": {
+    "input_channels": [
+      "intensity"
+    ],
+    "input_shape": [
+      1,
+      2,
+      2
+    ],
+    "output_names": [
+      "score"
+    ]
+  },
+  "tensors": {
+    "conv.weight": [
+      [
+        [
+          [
+            1.0,
+            -0.5
+          ],
+          [
+            0.0,
+            0.5
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            -0.5,
+            0.0
+          ],
+          [
+            1.0,
+            0.5
+          ]
+        ]
+      ]
+    ],
+    "conv.bias": [
+      0.0,
+      0.25
+    ],
+    "head.weight": [
+      [
+        0.5,
+        -0.25
+      ]
+    ],
+    "head.bias": 0.125
+  }
+}

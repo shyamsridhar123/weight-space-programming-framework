@@ -1,0 +1,77 @@
+
+COMMAND (isolated PEP 517 wheel build)
+["C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.venv\\Scripts\\python.exe", "-I", "-m", "pip", "wheel", "--use-pep517", "--no-deps", "--index-url", "https://redacted.invalid/environment", "--wheel-dir", "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\dist", "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework"]
+CWD C:/public-user\code\RLCD\exports\weight-space-programming-framework
+Looking in indexes: https://redacted.invalid/environment
+Processing C:/public-user\code\rlcd\exports\weight-space-programming-framework
+ERROR: Exception:
+Traceback (most recent call last):
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\cli\base_command.py", line 106, in _run_wrapper
+    status = _inner_run()
+             ^^^^^^^^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\cli\base_command.py", line 97, in _inner_run
+    return self.run(options, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\cli\req_command.py", line 67, in wrapper
+    return func(self, options, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\commands\wheel.py", line 147, in run
+    requirement_set = resolver.resolve(reqs, check_supported_wheels=True)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\resolution\resolvelib\resolver.py", line 76, in resolve
+    collected = self.factory.collect_root_requirements(root_reqs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\resolution\resolvelib\factory.py", line 545, in collect_root_requirements
+    reqs = list(
+           ^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\resolution\resolvelib\factory.py", line 501, in _make_requirements_from_install_req
+    cand = self._make_base_candidate_from_link(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\resolution\resolvelib\factory.py", line 233, in _make_base_candidate_from_link
+    self._link_candidate_cache[link] = LinkCandidate(
+                                       ^^^^^^^^^^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\resolution\resolvelib\candidates.py", line 304, in __init__
+    super().__init__(
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\resolution\resolvelib\candidates.py", line 159, in __init__
+    self.dist = self._prepare()
+                ^^^^^^^^^^^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\resolution\resolvelib\candidates.py", line 236, in _prepare
+    dist = self._prepare_distribution()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\resolution\resolvelib\candidates.py", line 315, in _prepare_distribution
+    return preparer.prepare_linked_requirement(self._ireq, parallel_builds=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\operations\prepare.py", line 527, in prepare_linked_requirement
+    return self._prepare_linked_requirement(req, parallel_builds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\operations\prepare.py", line 642, in _prepare_linked_requirement
+    dist = _get_prepared_distribution(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\operations\prepare.py", line 71, in _get_prepared_distribution
+    with build_tracker.track(req, tracker_id):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/public-user\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\operations\build\build_tracker.py", line 136, in track
+    self.add(req, tracker_id)
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.venv\Lib\site-packages\pip\_internal\operations\build\build_tracker.py", line 108, in add
+    with open(entry_path, "w", encoding="utf-8") as fp:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:/public-user\\AppData\\Local\\Temp\\pip-build-tracker-cezd4up3\\fd054379db4a14150a84f77a9bd10c06a9cba6dad554369f2678990a'
+WARNING: Failed to remove contents in a temporary directory 'C:/public-user\AppData\Local\Temp\pip-build-tracker-cezd4up3'.
+You can safely remove it manually.
+WARNING: Failed to remove contents in a temporary directory 'C:/public-user\AppData\Local\Temp\pip-ephem-wheel-cache-aymmg0p4'.
+You can safely remove it manually.
+WARNING: Failed to remove contents in a temporary directory 'C:/public-user\AppData\Local\Temp\pip-wheel-9z4mi77w'.
+You can safely remove it manually.
+
+EXIT CODE 2
+Traceback (most recent call last):
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.runs\verify_wheel_draft2.py", line 139, in build
+    output = run_command(command, ROOT, log, receipt, "isolated PEP 517 wheel build")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:/public-user\code\RLCD\exports\weight-space-programming-framework\.runs\verify_wheel_draft2.py", line 101, in run_command
+    assert result.returncode == 0, f"{label} exited {result.returncode}; see {log.name}"
+           ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: isolated PEP 517 wheel build exited 2; see C:/public-user\code\RLCD\exports\weight-space-programming-framework\.runs\wheel-build-draft2.log

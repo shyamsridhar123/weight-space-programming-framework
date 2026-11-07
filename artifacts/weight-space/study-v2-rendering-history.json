@@ -1,0 +1,191 @@
+{
+  "schema": "wsp-rendering-history/2",
+  "recorded_utc": "2026-11-07T02:58:36.644093+00:00",
+  "record_kind": "Retrospective session execution note with current file inventory verification",
+  "scope": "Document both report-rendering attempts without modifying either output directory or study evidence.",
+  "execution_observation_source": "Retained assistant tool results as carried in the session summary; separate raw process logs were not saved for these rendering invocations.",
+  "renderer": {
+    "path": "scripts/report_weight_space_v2.py",
+    "sha256": "f214de95781ea42682df4643e234814d70f84e491726710e37678a0f84a0e0ae"
+  },
+  "attempts": [
+    {
+      "output_directory": "artifacts/weight-space/study-v2-report",
+      "status": "interrupted_before_final_receipt",
+      "reported_exit_code": 124,
+      "reported_wall_seconds_approximate": 20.1,
+      "shell_timeout_seconds": 20,
+      "command_description": "python scripts/report_weight_space_v2.py --study artifacts/weight-space/study-v2 --out artifacts/weight-space/study-v2-report",
+      "authoritative": false,
+      "files_present_at_history_record": {
+        "anchor-feasibility.pdf": {
+          "sha256": "7f4c75924bb4147721bccbf036482e26d475cd0f9b1088eb8d5b0d6980069ac1",
+          "bytes": 18050
+        },
+        "anchor-feasibility.png": {
+          "sha256": "305d90e1c6721cd1a436299ab59a6de496feede93b333e2e0697631eb44f50c7",
+          "bytes": 121643
+        },
+        "anchor-feasibility.svg": {
+          "sha256": "0d713d127a60cd869993e9199d7a4be16894250452da4c3fe14a418bf0a07457",
+          "bytes": 59195
+        },
+        "main-arms.pdf": {
+          "sha256": "dbb69b8167e84bb83912d8a42d60ead923fe0af15a33786d467e53824276a277",
+          "bytes": 19370
+        },
+        "main-arms.png": {
+          "sha256": "3f16e34222ebf41d1215a1d8dc3f776f70b077669b432a8711f054a843a52693",
+          "bytes": 113942
+        },
+        "main-arms.svg": {
+          "sha256": "8ba6b64e6e79a2631aa2d074e0e1f99bd3a8b339688cc285c65b8ba891267108",
+          "bytes": 77590
+        },
+        "native-precision.pdf": {
+          "sha256": "2cffe22a0e101cba6c0c67b45ec1e1524cc89063dedceed9247a79684369d7f5",
+          "bytes": 17980
+        },
+        "native-precision.png": {
+          "sha256": "2e23f057951f94d8d17057c7d173f25aa3b309302f3b5c19a754b55499246eb6",
+          "bytes": 75796
+        },
+        "native-precision.svg": {
+          "sha256": "0f544b4e18db588be64ec9de9b798a7a4db341849f119fef10dd0228a2b0614c",
+          "bytes": 47767
+        },
+        "paired-contrasts.pdf": {
+          "sha256": "800c7dc67f6f7a92a6d8aebecb88acf704ee514254801ee3e9180fd21ab1c662",
+          "bytes": 21456
+        },
+        "paired-contrasts.png": {
+          "sha256": "b5678939c53d5dac732dee887af444bf64dfd53e5a52b6508b9df30672b32c7e",
+          "bytes": 77122
+        },
+        "paired-contrasts.svg": {
+          "sha256": "983e17febf338b8545f84c9053a09cb11d3916aea2253e624b8630f652a30c29",
+          "bytes": 61673
+        },
+        "report.md": {
+          "sha256": "2ba83ea9ead200756e3bb87b9831b8a4afabb9a9c521f3586ab45088bcb2208a",
+          "bytes": 7802
+        },
+        "sequential-interference.pdf": {
+          "sha256": "32892ff48c74ca0c7eb2e246f240d482ae6cc826eab0c1fd1612330615eae620",
+          "bytes": 29584
+        },
+        "sequential-interference.png": {
+          "sha256": "f5dcf81692d0fcf70d4253c81b3f4571ea0e5db0a2aa1ad1ffa7277c459402ec",
+          "bytes": 218383
+        },
+        "sequential-interference.svg": {
+          "sha256": "fddf5e3863ec5fff0822ac7c655a61455d357ece233c7545d5ac2c1ff8748a08",
+          "bytes": 133545
+        },
+        "summary.json": {
+          "sha256": "0ac3423eb683f0bd0c5f87ed6b4c166f5e485adab0455ded1a65bb93c84b7a5b",
+          "bytes": 24806
+        }
+      },
+      "limitation": "The original tool call timed out after output generation. There is no completion receipt establishing that its final checks completed. The directory is preserved as an incomplete attempt."
+    },
+    {
+      "output_directory": "artifacts/weight-space/study-v2-report-complete",
+      "status": "complete",
+      "reported_exit_code": 0,
+      "reported_wall_seconds_approximate": 19.7,
+      "command_description": "python scripts/report_weight_space_v2.py --study artifacts/weight-space/study-v2 --out artifacts/weight-space/study-v2-report-complete",
+      "authoritative": true,
+      "receipt_sha256": "df1c3049153e2f79f8004bc1f20785f29ba1ffd0c2088d4878bf7c48562375b0",
+      "receipt_created_utc": "2026-11-07T02:48:59.703440+00:00",
+      "receipt_outputs_checked": 17,
+      "input_files_checked_by_renderer": 5020,
+      "inputs_unchanged_reported_by_renderer": true,
+      "files_present_at_history_record": {
+        "anchor-feasibility.pdf": {
+          "sha256": "3be324e4eb075f0087f040eb6b0e0502959656d2066328f06edb1614b056926d",
+          "bytes": 18050
+        },
+        "anchor-feasibility.png": {
+          "sha256": "305d90e1c6721cd1a436299ab59a6de496feede93b333e2e0697631eb44f50c7",
+          "bytes": 121643
+        },
+        "anchor-feasibility.svg": {
+          "sha256": "ea17cda7f4b6f65a65dd628836ec707fe4615417c0c93e0aa7c3a03ae19b688d",
+          "bytes": 59195
+        },
+        "main-arms.pdf": {
+          "sha256": "f0206f40960e1972fc7309f1ac4c22993728e8baf7dd35ddea3923ec9aa22e25",
+          "bytes": 19370
+        },
+        "main-arms.png": {
+          "sha256": "3f16e34222ebf41d1215a1d8dc3f776f70b077669b432a8711f054a843a52693",
+          "bytes": 113942
+        },
+        "main-arms.svg": {
+          "sha256": "b78c300717ebc349b9d68a5fb7deb5e0f5209af873ab4a6c7959d0b9756a7087",
+          "bytes": 77590
+        },
+        "native-precision.pdf": {
+          "sha256": "c6e6edc0b4185245d44fd8fed8ff87ee3842ece1d752cbb75c41ece79c4fc686",
+          "bytes": 17980
+        },
+        "native-precision.png": {
+          "sha256": "2e23f057951f94d8d17057c7d173f25aa3b309302f3b5c19a754b55499246eb6",
+          "bytes": 75796
+        },
+        "native-precision.svg": {
+          "sha256": "d48ad84c1298e7c7fd40c94a4395c27173047ea8e2134054f41126d23bf600ff",
+          "bytes": 47767
+        },
+        "paired-contrasts.pdf": {
+          "sha256": "3c7ff947ee6073f9dbe07607123b104d0992b2482de1d106e9a42a85dff557d0",
+          "bytes": 21456
+        },
+        "paired-contrasts.png": {
+          "sha256": "b5678939c53d5dac732dee887af444bf64dfd53e5a52b6508b9df30672b32c7e",
+          "bytes": 77122
+        },
+        "paired-contrasts.svg": {
+          "sha256": "baca281e0055024d1694adc32e7e84199fd3fcc42fc11dcad3040c225cf9e9c2",
+          "bytes": 61673
+        },
+        "receipt.json": {
+          "sha256": "df1c3049153e2f79f8004bc1f20785f29ba1ffd0c2088d4878bf7c48562375b0",
+          "bytes": 3215
+        },
+        "report.md": {
+          "sha256": "2ba83ea9ead200756e3bb87b9831b8a4afabb9a9c521f3586ab45088bcb2208a",
+          "bytes": 7802
+        },
+        "sequential-interference.pdf": {
+          "sha256": "9721acb74a79331c012a04acbfebb9974b063936258919063bafe0d90199d866",
+          "bytes": 29584
+        },
+        "sequential-interference.png": {
+          "sha256": "f5dcf81692d0fcf70d4253c81b3f4571ea0e5db0a2aa1ad1ffa7277c459402ec",
+          "bytes": 218383
+        },
+        "sequential-interference.svg": {
+          "sha256": "f40b8a2c11d1a8a61a5edf03c090d0b6e14b0363be36bd192aac8d9cf323e9fc",
+          "bytes": 133545
+        },
+        "summary.json": {
+          "sha256": "0ac3423eb683f0bd0c5f87ed6b4c166f5e485adab0455ded1a65bb93c84b7a5b",
+          "bytes": 24806
+        }
+      }
+    }
+  ],
+  "verification": {
+    "completed_output_membership_matches_receipt": true,
+    "completed_output_hashes_and_sizes_match": true,
+    "current_renderer_matches_completed_receipt": true,
+    "first_attempt_has_no_receipt": true
+  },
+  "limitations": [
+    "This retrospective note is not a trusted timestamp or execution attestation.",
+    "Reported exit codes and durations are session observations, not independently retained process logs.",
+    "Current file inventories do not reconstruct an interrupted run's complete execution history."
+  ]
+}

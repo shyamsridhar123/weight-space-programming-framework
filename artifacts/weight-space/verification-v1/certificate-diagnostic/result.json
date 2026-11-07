@@ -1,0 +1,29 @@
+{
+  "created_at": "2026-11-07T01:14:14.912280+00:00",
+  "mutation": "nested implementation_verified: false -> numeric 0, without updating digest",
+  "network_verifier_rejects_altered": true,
+  "cli_checks": [
+    {
+      "command": [
+        "verify",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\base.json",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\candidate.json",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\valid.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"valid\": true,\n  \"scope\": \"real arithmetic; Python checker and floating execution are not verified\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "verify",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\base.json",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\candidate.json",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\altered.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"valid\": true,\n  \"scope\": \"real arithmetic; Python checker and floating execution are not verified\"\n}\n",
+      "stderr": ""
+    }
+  ]
+}

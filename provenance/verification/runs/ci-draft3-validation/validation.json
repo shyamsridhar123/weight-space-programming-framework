@@ -1,0 +1,623 @@
+{
+  "schema": "local-ci-workflow-validation/3",
+  "started_at": "2026-11-07T14:26:33.616667+00:00",
+  "validator_sha256": "d6e3ff70c1cd5c35c58150aca9e4aabd19348077b658f72292b0467cb4ee0334",
+  "remote_execution": false,
+  "network_access_used": false,
+  "workflow_commands_executed": false,
+  "workflow_hashes_before": {
+    ".github/workflows/historical-rts.yml": "0a3bede2720894a24f3fcc6eddf6f7eed309fe6934091b5b1c81f2508216a328",
+    ".github/workflows/proofs.yml": "632edcad257e8809e179ca8bdfc9994abbc85f3b83c256535ff384e70bae3551",
+    ".github/workflows/publication-python.yml": "b056aa34b21b385cc15681de3a475fb447ca8fbceb0ff87869522bc517b4c059"
+  },
+  "historical_inputs_before": {
+    ".runs/ci-draft2-validation/validate_workflows.py": "2fc33ecd1a5a9d5170eae0b11ad9189aa8b570f82114e770ee11d750e0034afa",
+    ".runs/ci-draft2-validation/validation.json": "954eef2fcc161fdf62933c2edf45c6c46046a8cb45dbe4dbb2b5d247aa63ea1c",
+    ".runs/verify_wheel_draft2.py": "4b37142caa47fa67379e98e13355b28996209bd7f3a20ca76ea641222690750b"
+  },
+  "tools": {
+    "python": {
+      "path": "C:/public-user\\code\\RLCD\\.venv\\Scripts\\python.exe",
+      "version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+    },
+    "pyyaml": {
+      "version": "6.0.3"
+    },
+    "actionlint": {
+      "path": "C:/public-user\\AppData\\Local\\Temp\\wsp-ci-validation-f1702c9e71a94e6da68deebdd3c8d192\\actionlint\\actionlint.exe",
+      "sha256": "54ca21be3de4c7cfa26914aa8b61bd76bf573ef3caac5f80d110558cdf241718"
+    },
+    "bash": {
+      "path": "C:\\Program Files\\Git\\bin\\bash.exe",
+      "sha256": "4740ceda8997f13997da982e32f8bc3d679d8abb30266f0b25804ea927bb4a92"
+    }
+  },
+  "commands": [
+    {
+      "label": "actionlint-version",
+      "argv": [
+        "C:/public-user\\AppData\\Local\\Temp\\wsp-ci-validation-f1702c9e71a94e6da68deebdd3c8d192\\actionlint\\actionlint.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/actionlint-version.stdout.log",
+        "sha256": "ad7ed44e79c7e5d554c2e008819df3a5da44834e9cfdb4aecaef9224a39c87dd"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/actionlint-version.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "bash-version",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/bash-version.stdout.log",
+        "sha256": "64e0c91e1c0ed648eed7e6f287b24f6b3b77338344f3535cf794bebf5907ec01"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/bash-version.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "actionlint",
+      "argv": [
+        "C:/public-user\\AppData\\Local\\Temp\\wsp-ci-validation-f1702c9e71a94e6da68deebdd3c8d192\\actionlint\\actionlint.exe",
+        "-no-color",
+        "-oneline",
+        "-shellcheck=",
+        "-pyflakes=",
+        "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.github\\workflows\\historical-rts.yml",
+        "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.github\\workflows\\proofs.yml",
+        "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.github\\workflows\\publication-python.yml"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/actionlint.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/actionlint.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "historical-rts-historical-rts-0",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/historical-rts-historical-rts-0.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/historical-rts-historical-rts-0.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/historical-rts-historical-rts-0.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "historical-rts-historical-rts-3",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/historical-rts-historical-rts-3.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/historical-rts-historical-rts-3.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/historical-rts-historical-rts-3.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "historical-rts-historical-rts-5",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/historical-rts-historical-rts-5.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/historical-rts-historical-rts-5.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/historical-rts-historical-rts-5.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "historical-rts-historical-rts-6",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/historical-rts-historical-rts-6.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/historical-rts-historical-rts-6.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/historical-rts-historical-rts-6.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "historical-rts-historical-rts-7",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/historical-rts-historical-rts-7.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/historical-rts-historical-rts-7.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/historical-rts-historical-rts-7.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "proofs-proofs-0",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/proofs-proofs-0.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/proofs-proofs-0.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/proofs-proofs-0.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "proofs-proofs-3",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/proofs-proofs-3.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/proofs-proofs-3.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/proofs-proofs-3.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "proofs-proofs-4",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/proofs-proofs-4.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/proofs-proofs-4.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/proofs-proofs-4.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "proofs-proofs-5",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/proofs-proofs-5.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/proofs-proofs-5.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/proofs-proofs-5.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "proofs-proofs-6",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/proofs-proofs-6.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/proofs-proofs-6.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/proofs-proofs-6.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "proofs-proofs-7",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/proofs-proofs-7.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/proofs-proofs-7.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/proofs-proofs-7.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "publication-python-publication-python-0",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/publication-python-publication-python-0.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/publication-python-publication-python-0.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/publication-python-publication-python-0.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "publication-python-publication-python-3",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/publication-python-publication-python-3.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/publication-python-publication-python-3.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/publication-python-publication-python-3.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "publication-python-publication-python-4",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/publication-python-publication-python-4.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/publication-python-publication-python-4.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/publication-python-publication-python-4.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "publication-python-publication-python-5",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/publication-python-publication-python-5.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/publication-python-publication-python-5.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/publication-python-publication-python-5.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "publication-python-publication-python-6",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/publication-python-publication-python-6.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/publication-python-publication-python-6.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/publication-python-publication-python-6.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "publication-python-publication-python-7",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/publication-python-publication-python-7.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/publication-python-publication-python-7.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/publication-python-publication-python-7.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "publication-python-publication-python-8",
+      "argv": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "C:/public-user/code/RLCD/exports/weight-space-programming-framework/.runs/ci-draft3-validation/extracted/publication-python-publication-python-8.sh"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": ".runs/ci-draft3-validation/logs/publication-python-publication-python-8.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".runs/ci-draft3-validation/logs/publication-python-publication-python-8.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "workflows": [
+    {
+      "path": ".github/workflows/historical-rts.yml",
+      "action_pins": [
+        "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+        "actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+        "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+        "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9"
+      ],
+      "matches_draft2_action_pins": true,
+      "bash_steps": [
+        {
+          "name": "Preserve checked-out file bytes",
+          "path": ".runs/ci-draft3-validation/extracted/historical-rts-historical-rts-0.sh",
+          "sha256": "afe84016e9348bd372df31b31b29c4b4e221245e5f643ef9a902a571665bf34e",
+          "exit_code": 0
+        },
+        {
+          "name": "Verify publication before installing dependencies",
+          "path": ".runs/ci-draft3-validation/extracted/historical-rts-historical-rts-3.sh",
+          "sha256": "fedc359738c912e342f24d7b970002c83fc1880dd641ff85f963897788102d7c",
+          "exit_code": 0
+        },
+        {
+          "name": "Install the locked historical runner",
+          "path": ".runs/ci-draft3-validation/extracted/historical-rts-historical-rts-5.sh",
+          "sha256": "c2c663b8f694dce366b91a792891bf819c89e0eea4895622b7eadafe6704b7d6",
+          "exit_code": 0
+        },
+        {
+          "name": "Run historical RTS compatibility tests",
+          "path": ".runs/ci-draft3-validation/extracted/historical-rts-historical-rts-6.sh",
+          "sha256": "ea61099ac6f27859eb9131d7a5d1ebd09d975356eff2dae2b6cd2528d70b401a",
+          "exit_code": 0
+        },
+        {
+          "name": "Verify publication after historical RTS tests",
+          "path": ".runs/ci-draft3-validation/extracted/historical-rts-historical-rts-7.sh",
+          "sha256": "68495896f4a83804538b1489f38655b46047ff15bdfc2f07f49fbd0f9d50fbae",
+          "exit_code": 0
+        }
+      ],
+      "python_heredocs": []
+    },
+    {
+      "path": ".github/workflows/proofs.yml",
+      "action_pins": [
+        "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+        "actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+        "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9"
+      ],
+      "matches_draft2_action_pins": true,
+      "bash_steps": [
+        {
+          "name": "Preserve checked-out file bytes",
+          "path": ".runs/ci-draft3-validation/extracted/proofs-proofs-0.sh",
+          "sha256": "afe84016e9348bd372df31b31b29c4b4e221245e5f643ef9a902a571665bf34e",
+          "exit_code": 0
+        },
+        {
+          "name": "Verify publication before preparing proofs",
+          "path": ".runs/ci-draft3-validation/extracted/proofs-proofs-3.sh",
+          "sha256": "fedc359738c912e342f24d7b970002c83fc1880dd641ff85f963897788102d7c",
+          "exit_code": 0
+        },
+        {
+          "name": "Install pinned Elan and Lean 4.24.0",
+          "path": ".runs/ci-draft3-validation/extracted/proofs-proofs-4.sh",
+          "sha256": "7b1fb4c26bf59add8ad81ee853381e384a29a4696933bd03f0aa0756f4815481",
+          "exit_code": 0
+        },
+        {
+          "name": "Retrieve the cache using the committed dependency manifest",
+          "path": ".runs/ci-draft3-validation/extracted/proofs-proofs-5.sh",
+          "sha256": "1c4469c198a9ea7fa55ef519ae4d90488d72949760c4f8db42cec02e12b995ad",
+          "exit_code": 0
+        },
+        {
+          "name": "Check the generic proof snapshot and transitive axiom audit",
+          "path": ".runs/ci-draft3-validation/extracted/proofs-proofs-6.sh",
+          "sha256": "e339aa966cf480c142e58687529a9953976e3456b9ceb92862d6e6aa55ed5c44",
+          "exit_code": 0
+        },
+        {
+          "name": "Verify publication after the proof check",
+          "path": ".runs/ci-draft3-validation/extracted/proofs-proofs-7.sh",
+          "sha256": "68495896f4a83804538b1489f38655b46047ff15bdfc2f07f49fbd0f9d50fbae",
+          "exit_code": 0
+        }
+      ],
+      "python_heredocs": []
+    },
+    {
+      "path": ".github/workflows/publication-python.yml",
+      "action_pins": [
+        "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+        "actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+        "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9"
+      ],
+      "matches_draft2_action_pins": true,
+      "bash_steps": [
+        {
+          "name": "Preserve checked-out file bytes",
+          "path": ".runs/ci-draft3-validation/extracted/publication-python-publication-python-0.sh",
+          "sha256": "afe84016e9348bd372df31b31b29c4b4e221245e5f643ef9a902a571665bf34e",
+          "exit_code": 0
+        },
+        {
+          "name": "Verify publication before installing dependencies",
+          "path": ".runs/ci-draft3-validation/extracted/publication-python-publication-python-3.sh",
+          "sha256": "fedc359738c912e342f24d7b970002c83fc1880dd641ff85f963897788102d7c",
+          "exit_code": 0
+        },
+        {
+          "name": "Install CPU Torch and the standalone test dependencies",
+          "path": ".runs/ci-draft3-validation/extracted/publication-python-publication-python-4.sh",
+          "sha256": "3b648d01eefc4be496d09120b20dc53d10e54d8cd7ee7ef053258258dd013f2f",
+          "exit_code": 0
+        },
+        {
+          "name": "Run the standalone Python suite",
+          "path": ".runs/ci-draft3-validation/extracted/publication-python-publication-python-5.sh",
+          "sha256": "47bcba1355873d5aef53128c2bc410833d5d74745af9bcba53bd517fc4594feb",
+          "exit_code": 0
+        },
+        {
+          "name": "Build the wheel",
+          "path": ".runs/ci-draft3-validation/extracted/publication-python-publication-python-6.sh",
+          "sha256": "e2ae489f8bb233277c35641139bac8d8b45cd83e29ca505561f7c71201e9b083",
+          "exit_code": 0
+        },
+        {
+          "name": "Validate a fresh wheel installation outside the checkout",
+          "path": ".runs/ci-draft3-validation/extracted/publication-python-publication-python-7.sh",
+          "sha256": "cefdbd56ba9c988df63f9f401ccd5c109e704358e8f344e27de60284387c20dc",
+          "exit_code": 0
+        },
+        {
+          "name": "Verify publication after tests and packaging",
+          "path": ".runs/ci-draft3-validation/extracted/publication-python-publication-python-8.sh",
+          "sha256": "68495896f4a83804538b1489f38655b46047ff15bdfc2f07f49fbd0f9d50fbae",
+          "exit_code": 0
+        }
+      ],
+      "python_heredocs": [
+        {
+          "step": "Install CPU Torch and the standalone test dependencies",
+          "path": ".runs/ci-draft3-validation/extracted/publication-python-publication-python-4-heredoc-4.py",
+          "sha256": "bf45712ed031adc2a35e224e2742453355a616778cef3486fe96e8ce147cc82c",
+          "compiled": true,
+          "executed": false
+        },
+        {
+          "step": "Validate a fresh wheel installation outside the checkout",
+          "path": ".runs/ci-draft3-validation/extracted/publication-python-publication-python-7-heredoc-5.py",
+          "sha256": "a6849c7d89ad95a9492fce8a53d602db8e459f301e067236f0841e3a8f9eef3c",
+          "compiled": true,
+          "executed": false
+        },
+        {
+          "step": "Validate a fresh wheel installation outside the checkout",
+          "path": ".runs/ci-draft3-validation/extracted/publication-python-publication-python-7-heredoc-44.py",
+          "sha256": "6e1c99b73a053a9803fea1bb0755e066446c3e0b9aab5ba4d5ec519d2d9960c2",
+          "compiled": true,
+          "executed": false
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "limitations": [
+    "GitHub-hosted jobs, dependency installation, examples, tests, wheel builds, and proofs were not executed by this validator.",
+    "Bash scripts received syntax checks; Python heredocs were compiled without execution.",
+    "ShellCheck and Pyflakes integrations were disabled.",
+    "Action pins were compared with local draft.2 Git bytes; remote action metadata was not refreshed."
+  ],
+  "workflow_hashes_after": {
+    ".github/workflows/historical-rts.yml": "0a3bede2720894a24f3fcc6eddf6f7eed309fe6934091b5b1c81f2508216a328",
+    ".github/workflows/proofs.yml": "632edcad257e8809e179ca8bdfc9994abbc85f3b83c256535ff384e70bae3551",
+    ".github/workflows/publication-python.yml": "b056aa34b21b385cc15681de3a475fb447ca8fbceb0ff87869522bc517b4c059"
+  },
+  "historical_inputs_after": {
+    ".runs/ci-draft2-validation/validate_workflows.py": "2fc33ecd1a5a9d5170eae0b11ad9189aa8b570f82114e770ee11d750e0034afa",
+    ".runs/ci-draft2-validation/validation.json": "954eef2fcc161fdf62933c2edf45c6c46046a8cb45dbe4dbb2b5d247aa63ea1c",
+    ".runs/verify_wheel_draft2.py": "4b37142caa47fa67379e98e13355b28996209bd7f3a20ca76ea641222690750b"
+  },
+  "finished_at": "2026-11-07T14:26:38.278997+00:00",
+  "status": "passed"
+}

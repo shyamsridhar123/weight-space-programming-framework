@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-04",
+  "scope": "Presentation lab source, numerical arithmetic, simulation replay, export and restore",
+  "typescript": {
+    "command": ".\\node_modules\\.bin\\tsc.cmd --noEmit -p presentations/living-world/lab/tsconfig.json",
+    "exitCode": 0
+  },
+  "tests": {
+    "command": ".\\node_modules\\.bin\\tsx.cmd --test --test-reporter=spec presentations/living-world/lab/lab.test.ts",
+    "exitCode": 0,
+    "passed": 13,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 2783.0049
+  },
+  "bundle": {
+    "command": "node presentations/living-world/lab/build.mjs",
+    "exitCode": 0,
+    "reportedSize": "91.8kb",
+    "entryPoint": "lab.ts",
+    "output": "lab.js"
+  },
+  "fixture": {
+    "seed": 42,
+    "year": 10,
+    "tick": 1728,
+    "civilization": "Iron Ridge",
+    "civilizationId": 10,
+    "conservationWeightOriginal": -0.5,
+    "conservationWeightEdited": 4,
+    "conservationProbabilityOriginal": 0.059019727625896606,
+    "conservationProbabilityEdited": 0.637442943401737,
+    "scoreContribution": 4.5,
+    "comparisonYears": 3,
+    "scheduledConserveChoicesOriginal": 4,
+    "scheduledConserveChoicesEdited": 22,
+    "forestDifference": 0.009814642091766634,
+    "populationDifference": -0.13827262516454653
+  },
+  "browserVerification": "Owned by the parent integration task; no browser session or browser pass is claimed by this record."
+}

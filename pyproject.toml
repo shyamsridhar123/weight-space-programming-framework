@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "weight-space-programming-framework"
+version = "0.2.0.dev4"
+description = "A generic research framework for reading, diagnosing, editing, and creating neural-network weights"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["numpy>=2.0,<3"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.optional-dependencies]
+torch = ["torch==2.8.0"]
+test = ["pytest>=8,<10", "torch==2.8.0"]
+plots = ["matplotlib>=3.9,<4"]
+
+[project.scripts]
+weight-space = "rlcd.weight_space.__main__:main"
+
+[project.urls]
+Repository = "https://github.com/shyamsridhar123/weight-space-programming-framework"
+Documentation = "https://github.com/shyamsridhar123/weight-space-programming-framework/blob/main/docs/weight-space/v2/README.md"
+
+[tool.setuptools]
+packages = ["rlcd", "rlcd.weight_space"]
+include-package-data = false

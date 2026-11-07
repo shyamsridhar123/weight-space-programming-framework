@@ -1,0 +1,257 @@
+{
+  "schema": "wsp-auxiliary-study/1",
+  "seed": 900004,
+  "cases": 6,
+  "case_type_counts": {
+    "read": 2,
+    "diagnose": 2,
+    "create": 2
+  },
+  "errors": 1,
+  "correct": {
+    "coefficient_sign": 2,
+    "analytic_creation": 1
+  },
+  "correct_scope": {
+    "coefficient_sign": "Nonabstained exact-sign classifications, out of four cases",
+    "analytic_creation": "Selected analytic response within tolerance, out of two cases"
+  },
+  "abstentions": 2,
+  "incorrect_signs": 0,
+  "candidate_ids": {
+    "affine-a-exact": [
+      "0c17b85e7ff31891c1ddf0eb6797055857a26b5a508e817a97e2ba2f1e1914ee"
+    ],
+    "affine-a-rounded3": [
+      "e4c355c10366949192b9c72f3688877ff0342d3173c8e42fdadea17cbef21be0"
+    ],
+    "affine-b-exact": [
+      "5e88a03400e485d719bcb8b50e3eb1fa9b8c2b26f03f07a972d4c73f19abc278"
+    ],
+    "affine-b-rounded3": [
+      "17d01cf790dee42370e6739f00452e42ed5d8358d3ad947e26c05d02b419506e"
+    ],
+    "create-scaled_absolute": [
+      "ee7cd5a0b38446c86e1f2e4ed1b9861ca5d047605cda9b9eda7c6f0bff7d1b11",
+      "d8b38718f82e8dbd9913c973cb818806a8fb37a28b88a414e454c22018432c06",
+      "88b54f13ff616182820ebf61e9f144916fc41a6bd62b692d92bd3c877847a71a"
+    ],
+    "create-clip": []
+  },
+  "case_results": [
+    {
+      "case_id": "affine-a-exact",
+      "family": "affine_sign",
+      "mode": "read",
+      "access": "exact",
+      "status": "succeeded",
+      "candidate_ids": [
+        "0c17b85e7ff31891c1ddf0eb6797055857a26b5a508e817a97e2ba2f1e1914ee"
+      ],
+      "abstained": false,
+      "base_sha256": "3165db064f822a94c3afb82f946b7f0775407d852070e72bfc5fa5fb4100b3dc",
+      "receipt_sha256": "38eb0d9008516315d7f790cd2f0778980b9cd3e4108ed31510e857f294d4205f",
+      "metrics": {
+        "abstained": false,
+        "coefficient_absolute_error": 0.0,
+        "exact_sign": 1,
+        "formal_certificate": null,
+        "hidden_response": {
+          "absolute_tolerance": 1e-12,
+          "exact_array_equality": true,
+          "examples": 128,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "output_dimension": 3,
+          "rmse": 0.0,
+          "within_tolerance": true
+        },
+        "reported_sign": 1,
+        "sign_correct": true
+      },
+      "error": null
+    },
+    {
+      "case_id": "affine-a-rounded3",
+      "family": "affine_sign",
+      "mode": "read",
+      "access": "rounded3",
+      "status": "succeeded",
+      "candidate_ids": [
+        "e4c355c10366949192b9c72f3688877ff0342d3173c8e42fdadea17cbef21be0"
+      ],
+      "abstained": true,
+      "base_sha256": "3165db064f822a94c3afb82f946b7f0775407d852070e72bfc5fa5fb4100b3dc",
+      "receipt_sha256": "1258df6c3b3de14f67670d8d4657d7a70fa3049aaf48e6b00d0e6dcf69e5532e",
+      "metrics": {
+        "abstained": true,
+        "coefficient_absolute_error": 0.0004,
+        "exact_sign": 1,
+        "formal_certificate": null,
+        "hidden_response": {
+          "absolute_tolerance": 1e-12,
+          "exact_array_equality": false,
+          "examples": 128,
+          "maximum_absolute_error": 0.0007899473584807026,
+          "mean_absolute_error": 0.0001364152815367872,
+          "output_dimension": 3,
+          "rmse": 0.00026941300921812814,
+          "within_tolerance": false
+        },
+        "reported_sign": null,
+        "sign_correct": null
+      },
+      "error": null
+    },
+    {
+      "case_id": "affine-b-exact",
+      "family": "affine_sign",
+      "mode": "diagnose",
+      "access": "exact",
+      "status": "succeeded",
+      "candidate_ids": [
+        "5e88a03400e485d719bcb8b50e3eb1fa9b8c2b26f03f07a972d4c73f19abc278"
+      ],
+      "abstained": false,
+      "base_sha256": "9cde19e128c8a4b77625d359c8c7d8d54ebc4f067b905038cd82d67c462ac8d6",
+      "receipt_sha256": "d772e8a7d067349829247d8fead942757451a842c94f08f8301edca4fcf80408",
+      "metrics": {
+        "abstained": false,
+        "coefficient_absolute_error": 0.0,
+        "exact_sign": -1,
+        "formal_certificate": null,
+        "hidden_response": {
+          "absolute_tolerance": 1e-12,
+          "exact_array_equality": true,
+          "examples": 128,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "output_dimension": 3,
+          "rmse": 0.0,
+          "within_tolerance": true
+        },
+        "reported_sign": -1,
+        "sign_correct": true
+      },
+      "error": null
+    },
+    {
+      "case_id": "affine-b-rounded3",
+      "family": "affine_sign",
+      "mode": "diagnose",
+      "access": "rounded3",
+      "status": "succeeded",
+      "candidate_ids": [
+        "17d01cf790dee42370e6739f00452e42ed5d8358d3ad947e26c05d02b419506e"
+      ],
+      "abstained": true,
+      "base_sha256": "9cde19e128c8a4b77625d359c8c7d8d54ebc4f067b905038cd82d67c462ac8d6",
+      "receipt_sha256": "606f63dd4697ffb3dfb33a6d77d1db1f3a7e696afa293edbb15b8483b9366b8e",
+      "metrics": {
+        "abstained": true,
+        "coefficient_absolute_error": 0.0004,
+        "exact_sign": -1,
+        "formal_certificate": null,
+        "hidden_response": {
+          "absolute_tolerance": 1e-12,
+          "exact_array_equality": false,
+          "examples": 128,
+          "maximum_absolute_error": 0.0007973356670629705,
+          "mean_absolute_error": 0.00013820994971658804,
+          "output_dimension": 3,
+          "rmse": 0.00027418561200578446,
+          "within_tolerance": false
+        },
+        "reported_sign": null,
+        "sign_correct": null
+      },
+      "error": null
+    },
+    {
+      "case_id": "create-scaled_absolute",
+      "family": "analytic_creation",
+      "mode": "create",
+      "formula": "scaled_absolute",
+      "status": "succeeded",
+      "candidate_ids": [
+        "ee7cd5a0b38446c86e1f2e4ed1b9861ca5d047605cda9b9eda7c6f0bff7d1b11",
+        "d8b38718f82e8dbd9913c973cb818806a8fb37a28b88a414e454c22018432c06",
+        "88b54f13ff616182820ebf61e9f144916fc41a6bd62b692d92bd3c877847a71a"
+      ],
+      "selected_candidate_id": "88b54f13ff616182820ebf61e9f144916fc41a6bd62b692d92bd3c877847a71a",
+      "receipt_sha256": "3511d04773bce52d9fd4cd1944bb4f4d737b33168dc5b751706ec60ecf845ada",
+      "metrics": {
+        "arms": {
+          "analytic": {
+            "artifact_sha256": "6e3d0d0298050cef95e1c3269b68a077bb6007cb1c21f13d2baf06f2ed8a56f4",
+            "candidate_sha256": "88b54f13ff616182820ebf61e9f144916fc41a6bd62b692d92bd3c877847a71a",
+            "hidden_response": {
+              "absolute_tolerance": 1e-12,
+              "exact_array_equality": true,
+              "examples": 128,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "output_dimension": 1,
+              "rmse": 0.0,
+              "within_tolerance": true
+            }
+          },
+          "random": {
+            "artifact_sha256": "b36e6567b2c8969017db9381e8510f2531ca5fd55b40542e9239c4239f06474b",
+            "candidate_sha256": "d8b38718f82e8dbd9913c973cb818806a8fb37a28b88a414e454c22018432c06",
+            "hidden_response": {
+              "absolute_tolerance": 1e-12,
+              "exact_array_equality": false,
+              "examples": 128,
+              "maximum_absolute_error": 8.675354696166085,
+              "mean_absolute_error": 2.451385410420724,
+              "output_dimension": 1,
+              "rmse": 3.335418592471245,
+              "within_tolerance": false
+            }
+          },
+          "zero": {
+            "artifact_sha256": "3b14a24c5223442ce2289bc964e2f49581d1b9867221121eaf24de3201f0a2b0",
+            "candidate_sha256": "ee7cd5a0b38446c86e1f2e4ed1b9861ca5d047605cda9b9eda7c6f0bff7d1b11",
+            "hidden_response": {
+              "absolute_tolerance": 1e-12,
+              "exact_array_equality": false,
+              "examples": 128,
+              "maximum_absolute_error": 8.916544446830283,
+              "mean_absolute_error": 3.94417878117701,
+              "output_dimension": 1,
+              "rmse": 4.533634957598588,
+              "within_tolerance": false
+            }
+          }
+        },
+        "formal_certificate": null,
+        "selected_arm": "analytic",
+        "selection_predeclared": true
+      },
+      "error": null
+    },
+    {
+      "case_id": "create-clip",
+      "family": "analytic_creation",
+      "status": "failed",
+      "metrics": null,
+      "candidate_ids": [],
+      "error": {
+        "type": "ValueError",
+        "message": "Intentional constructor failure"
+      },
+      "partial_trace_present": true
+    }
+  ],
+  "provider": {
+    "kind": "deterministic_fixture",
+    "llm_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "model_ability_measured": false
+  },
+  "formal_certificate": null,
+  "evidence_manifest": "manifest.json",
+  "summary_sha256": "b37080ce02b6150d3c6fbc8cb16fcf29339e10952c607b31eea7c6c4d13bdc15"
+}

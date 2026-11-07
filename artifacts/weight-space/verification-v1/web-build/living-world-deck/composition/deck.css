@@ -1,0 +1,172 @@
+:root {
+  --paper: #f5f2e9;
+  --paper-light: #fcfaf4;
+  --ink: #183d35;
+  --muted: #63736a;
+  --rust: #b65b38;
+  --line: #cbd1c4;
+  --serif: ui-serif, serif;
+  --sans: ui-sans-serif, sans-serif;
+  --mono: ui-monospace, monospace;
+  --deck-paper: var(--paper);
+  --deck-ink: var(--ink);
+  --deck-muted: var(--muted);
+  --deck-rust: var(--rust);
+}
+
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); }
+#root { position: relative; width: 100%; height: 100%; }
+h1, h2, h3, p, figure, ol { margin: 0; }
+button, input, select { font: inherit; }
+a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 7px; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible, video:focus-visible {
+  outline: 4px solid var(--rust);
+  outline-offset: 7px;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 64px 96px;
+  background: var(--paper);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  overflow: hidden;
+}
+.scene--intro { opacity: 1; visibility: visible; pointer-events: auto; }
+h1, h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.035em; text-wrap: balance; }
+h1 { font-size: 112px; line-height: 1.03; }
+h2 { font-size: 88px; line-height: 1.08; }
+h3 { font-size: 46px; line-height: 1.13; font-weight: 600; letter-spacing: -0.025em; }
+p { font-size: 40px; line-height: 1.35; }
+.eyebrow { font-size: 40px; line-height: 1.2; color: var(--muted); }
+.slide-header .eyebrow { margin-bottom: 14px; }
+.slide-header h2 { margin-bottom: 17px; }
+.slide-deck { color: var(--muted); }
+.text-line { display: block; }
+
+/* A wide, quiet opening: the actual world is the hero artwork. */
+.brand-line { display: flex; align-items: center; gap: 24px; padding-bottom: 26px; border-bottom: 2px solid var(--line); }
+.brand-line p { font-size: 40px; line-height: 1.2; }
+.brand-divider { display: inline-block; margin: 0 20px; color: var(--rust); }
+.brand-mark { width: 42px; height: 42px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; flex: 0 0 auto; }
+.brand-mark i { background: var(--ink); }
+.brand-mark i:last-child { background: var(--rust); }
+.intro-grid { display: grid; grid-template-columns: 680px 1fr; gap: 65px; align-items: center; min-height: 728px; padding: 40px 0 24px; }
+.intro-copy h1 span, .invitation-copy h2 span { display: block; }
+.intro-premise { margin-top: 40px; max-width: 650px; font-size: 46px; line-height: 1.35; color: var(--muted); }
+.mode-line { display: flex; align-items: center; gap: 34px; margin-top: 46px; font-size: 40px; }
+.mode-line span { padding-bottom: 9px; border-bottom: 3px solid var(--line); }
+.mode-line span:nth-child(2) { border-color: var(--rust); }
+.hero-world { align-self: center; }
+.image-mat { padding: 18px; background: var(--ink); box-shadow: 22px 24px 0 #e1e3d6; }
+.image-mat img { width: 100%; height: auto; aspect-ratio: 16 / 9; display: block; object-fit: contain; background: #d3ddc2; }
+.hero-world figcaption { margin-top: 44px; font-size: 40px; line-height: 1.3; max-width: 880px; color: var(--muted); }
+.intro-footer { padding-top: 24px; border-top: 2px solid var(--line); font-size: 40px; }
+
+/* Native media stays large and keeps every edge of the source frame. */
+.scene--footage { padding-top: 52px; }
+.footage-header { display: flex; align-items: baseline; justify-content: space-between; gap: 40px; margin-bottom: 34px; }
+.footage-header h2 { font-size: 88px; }
+.footage-grid { display: grid; grid-template-columns: 1440px 1fr; gap: 36px; align-items: stretch; }
+.video-mat { width: 1440px; aspect-ratio: 16 / 9; background: #102b25; box-shadow: 0 0 0 2px var(--ink); }
+.video-mat video { display: block; width: 100%; height: 100%; object-fit: contain; background: #102b25; color: var(--paper-light); }
+.footage-aside { display: flex; flex-direction: column; justify-content: flex-start; padding-top: 6px; }
+.watch-point { padding-bottom: 33px; }
+.watch-point p { font-size: 40px; line-height: 1.22; }
+.watch-stroke { display: block; width: 44px; height: 3px; background: var(--rust); margin-bottom: 16px; }
+.recording-note { margin-top: auto; padding-top: 24px; border-top: 2px solid var(--line); color: var(--muted); font-size: 40px; line-height: 1.25; }
+
+/* A policy is a loop in a world, followed by a progressively deeper lesson. */
+.scene--loop .slide-header { margin-bottom: 38px; }
+.world-loop { position: relative; }
+.loop-nodes { display: grid; grid-template-columns: 1fr 54px 1fr 54px 1fr 54px 1fr; align-items: center; }
+.loop-node { min-height: 265px; padding: 24px 22px; background: var(--paper-light); border-top: 4px solid var(--line); }
+.node-index { display: block; font-size: 40px; line-height: 1; color: var(--muted); margin-bottom: 22px; }
+.loop-node h3 { font-size: 43px; margin-bottom: 15px; }
+.loop-node p { font-size: 40px; line-height: 1.23; color: var(--muted); }
+.loop-node--editable { background: #f0dfd1; border-color: var(--rust); }
+.loop-node--editable .node-index { color: var(--rust); }
+.flow-arrow { font-size: 52px; line-height: 1; text-align: center; color: var(--rust); }
+.return-path { position: relative; height: 66px; margin: 0 172px; border: 2px solid var(--rust); border-top: 0; display: flex; justify-content: center; align-items: flex-end; }
+.return-path::before { content: ""; position: absolute; width: 11px; height: 11px; border-top: 2px solid var(--rust); border-left: 2px solid var(--rust); top: 0; left: -7px; transform: rotate(45deg); }
+.return-path span { position: relative; top: 24px; background: var(--paper); padding: 0 22px; font-size: 40px; line-height: 1.2; color: var(--rust); }
+.learner-path { margin-top: 53px; }
+.path-heading { margin-bottom: 25px; }
+.learner-path ol { padding: 0; list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; border-top: 2px solid var(--line); }
+.learner-path li { padding-top: 22px; }
+.learner-path h3 { font-size: 46px; margin-bottom: 12px; }
+.learner-path li p { font-size: 40px; color: var(--muted); line-height: 1.2; }
+
+/* Both laboratories own their scoped internals; the slide provides a stable canvas. */
+.lab-header { position: relative; }
+.lab-header h2 { font-size: 78px; white-space: nowrap; }
+.lab-header .eyebrow { display: flex; align-items: center; gap: 14px; }
+.lab-open { position: absolute; top: 0; right: 0; display: inline-flex; align-items: center; gap: 13px; font-size: 32px; line-height: 48px; white-space: nowrap; }
+.lab-open:hover { color: var(--rust); }
+.live-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: var(--rust); }
+.lab-mount { position: relative; width: 100%; height: 700px; min-height: 700px; margin-top: 25px; isolation: isolate; }
+.lab-loading { display: grid; place-items: center; height: 100%; padding: 40px; color: var(--muted); border: 2px solid var(--line); }
+
+/* Technical depth remains visible without turning the slide into a code listing. */
+.scene--architecture .slide-header { margin-bottom: 30px; }
+.network-structure { display: grid; grid-template-columns: 1fr 92px 1fr 92px 1fr; align-items: center; }
+.network-stage { padding: 10px 0 15px; }
+.network-number { display: flex; align-items: baseline; gap: 21px; font-family: var(--serif); font-size: 95px; line-height: 1; margin-bottom: 20px; }
+.network-number span { font-family: var(--sans); font-size: 42px; letter-spacing: -0.025em; line-height: 1.1; }
+.network-stage > p:last-child { color: var(--muted); font-size: 40px; line-height: 1.25; }
+.network-arrow { align-self: start; padding-top: 27px; font-size: 65px; color: var(--rust); }
+.parameter-line { display: flex; align-items: baseline; justify-content: space-between; gap: 30px; border-top: 2px solid var(--line); border-bottom: 2px solid var(--line); padding: 19px 0; margin-top: 5px; }
+.parameter-line strong { font-size: 44px; letter-spacing: -0.025em; font-weight: 600; }
+.parameter-line > span { font-size: 40px; color: var(--muted); }
+.laya-band { display: grid; grid-template-columns: 400px 1fr; gap: 14px 36px; padding: 24px 32px; margin-top: 26px; background: var(--ink); color: var(--paper-light); }
+.laya-title { grid-row: 1 / 3; }
+.laya-title .eyebrow { color: #cbd8c9; font-size: 40px; margin-bottom: 18px; }
+.laya-title h3 { font-family: var(--serif); font-weight: 400; font-size: 54px; }
+.laya-options > p { font-size: 40px; line-height: 1.2; }
+.patch-labels { display: flex; gap: 36px; margin-top: 16px; font-size: 40px; line-height: 1.1; color: #e6c6af; }
+.laya-result { grid-column: 2; font-size: 40px; line-height: 1.25; }
+.architecture-footnote { margin-top: 27px; color: var(--muted); font-size: 40px; }
+
+/* Paired columns distinguish a measured observation from the claim it can support. */
+.scene--evidence .slide-header { margin-bottom: 25px; }
+.evidence-table { width: 100%; }
+.evidence-head, .evidence-row { display: grid; grid-template-columns: 1fr 1fr; gap: 78px; }
+.evidence-head { padding-bottom: 13px; border-bottom: 3px solid var(--ink); }
+.evidence-head p { font-size: 40px; color: var(--muted); }
+.evidence-head p:last-child { color: var(--rust); }
+.evidence-row { padding: 14px 0; border-bottom: 2px solid var(--line); }
+.evidence-row h3 { font-size: 42px; margin-bottom: 8px; }
+.evidence-row p { font-size: 40px; line-height: 1.2; color: var(--muted); }
+.evidence-footer { margin-top: 22px; font-size: 40px; line-height: 1.25; }
+
+/* A real destination and the exact implementation behind the demonstration. */
+.invitation-grid { display: grid; grid-template-columns: 915px 1fr; gap: 98px; height: 100%; }
+.invitation-copy { padding-top: 8px; }
+.invitation-copy .eyebrow { margin-bottom: 36px; }
+.invitation-copy h2 { font-size: 96px; line-height: 1.08; }
+.invitation-deck { margin-top: 39px; max-width: 850px; font-size: 46px; line-height: 1.35; color: var(--muted); }
+.open-app { display: inline-flex; align-items: center; gap: 40px; padding: 21px 27px; margin-top: 43px; text-decoration: none; background: var(--ink); color: var(--paper-light); font-size: 42px; line-height: 1.3; }
+.open-app:hover { background: #29564a; }
+.open-app > span { font-size: 50px; line-height: 1; }
+.app-context { font-size: 40px; margin-top: 25px; }
+.scope-note { border-top: 2px solid var(--line); margin-top: 50px; padding-top: 25px; font-size: 40px; line-height: 1.35; color: var(--muted); }
+.invitation-reference { border-left: 2px solid var(--line); padding-left: 48px; }
+.presenter-path h3, .source-list h3 { font-size: 45px; margin-bottom: 24px; }
+.presenter-path ol { padding-left: 51px; }
+.presenter-path li { font-size: 40px; line-height: 1.32; margin-bottom: 10px; padding-left: 12px; }
+.presenter-path li::marker { color: var(--rust); }
+.source-list { display: flex; flex-direction: column; margin-top: 43px; padding-top: 30px; border-top: 2px solid var(--line); }
+.source-list a { position: relative; padding-right: 47px; font-size: 40px; line-height: 1.3; margin-bottom: 18px; text-decoration: none; }
+.source-list a:hover { color: var(--rust); text-decoration: underline; }
+.source-list a > span[aria-hidden] { position: absolute; right: 0; top: 0; color: var(--rust); }
+.source-context { display: block; color: var(--muted); font-size: 40px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+}

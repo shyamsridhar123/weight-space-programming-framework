@@ -1,0 +1,99 @@
+{
+  "schema": "wspf-standalone-wheel-smoke/1",
+  "started_at": "2026-11-07T03:39:12.037149+00:00",
+  "finished_at": "2026-11-07T03:39:35.356191+00:00",
+  "seconds": 23.319,
+  "platform": "Windows-11-10.0.26300-SP0",
+  "commands": [
+    {
+      "command": [
+        "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "install",
+        "--index-url",
+        "https://redacted.invalid/environment",
+        "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\dist\\weight_space_programming_framework-0.2.0.dev1-py3-none-any.whl"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "\nimport importlib.metadata, importlib.util, json, sys\nfrom pathlib import Path\nimport rlcd.weight_space as wsp\nfrom rlcd.weight_space import TensorArtifact, apply_program, difference, rollback\nlocation=Path(wsp.__file__).resolve()\nassert location.is_relative_to(Path(sys.prefix).resolve()), str(location)\nassert importlib.util.find_spec('torch') is None, 'Torch should be absent from core-only environment'\nparent=TensorArtifact('example-linear-readout/1',{'readout.weight':[[1.0,0.0]],'readout.bias':[0.0]})\nrequested=TensorArtifact('example-linear-readout/1',{'readout.weight':[[1.0,0.5]],'readout.bias':[0.0]})\nprogram=difference(parent,requested,'Change one readout coefficient')\ncandidate=apply_program(parent,program)\nassert candidate.sha256 == requested.sha256\nassert apply_program(candidate,rollback(parent,program)).sha256 == parent.sha256\nprint(json.dumps({'status':'passed','import_path':str(location),'distribution':importlib.metadata.version('weight-space-programming-framework'),'numpy':importlib.metadata.version('numpy'),'torch_available':False,'cwd':str(Path.cwd()),'checks':['installed package under venv','Torch absent','README generic edit','README rollback']},indent=2))\n"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "rlcd.weight_space",
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.venv\\Scripts\\weight-space.exe",
+        "--help"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "exit_code": 0,
+  "all_commands_completed": true,
+  "cwd": "C:/public-user\\code\\RLCD\\exports\\wspf-wheel-smoke",
+  "isolated_python_flag": true,
+  "wheel": {
+    "path": "dist/weight_space_programming_framework-0.2.0.dev1-py3-none-any.whl",
+    "bytes": 89202,
+    "sha256": "768e52042080c6c8d80104545d2aabf77797587cb2f9d62b664946b609e24495",
+    "file_count": 28,
+    "files": [
+      "rlcd/__init__.py",
+      "rlcd/weight_space/__init__.py",
+      "rlcd/weight_space/__main__.py",
+      "rlcd/weight_space/adapters.py",
+      "rlcd/weight_space/artifact.py",
+      "rlcd/weight_space/benchmarks.py",
+      "rlcd/weight_space/compiler.py",
+      "rlcd/weight_space/contracts.py",
+      "rlcd/weight_space/demo.py",
+      "rlcd/weight_space/evidence.py",
+      "rlcd/weight_space/experiments.py",
+      "rlcd/weight_space/features.py",
+      "rlcd/weight_space/model.py",
+      "rlcd/weight_space/program.py",
+      "rlcd/weight_space/rts_study.py",
+      "rlcd/weight_space/semantics.py",
+      "rlcd/weight_space/sequential.py",
+      "rlcd/weight_space/structured.py",
+      "rlcd/weight_space/study_tasks_v2.py",
+      "rlcd/weight_space/study_v2.py",
+      "rlcd/weight_space/symmetry.py",
+      "rlcd/weight_space/torch_bridge.py",
+      "rlcd/weight_space/workflow.py",
+      "weight_space_programming_framework-0.2.0.dev1.dist-info/METADATA",
+      "weight_space_programming_framework-0.2.0.dev1.dist-info/WHEEL",
+      "weight_space_programming_framework-0.2.0.dev1.dist-info/entry_points.txt",
+      "weight_space_programming_framework-0.2.0.dev1.dist-info/top_level.txt",
+      "weight_space_programming_framework-0.2.0.dev1.dist-info/RECORD"
+    ]
+  },
+  "registry": "https://redacted.invalid/environment",
+  "public_registry_validated": false,
+  "log_sha256": "57933c17ebd19740a957dc866b3c42a09601d8788300650de2954bacf6531bd4"
+}

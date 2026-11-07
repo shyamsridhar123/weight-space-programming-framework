@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>A living world. A visible mind. — Crown &amp; Charter</title>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #e8e5de; }
+      body { color: #242d29; font-family: system-ui, sans-serif; }
+      [hidden] { display: none !important; }
+      hyperframes-slideshow { display: block; position: relative; width: 100vw; height: 100vh; }
+      hyperframes-player { position: absolute; inset: 0; }
+      .local-help { max-width: 700px; padding: 48px 28px; margin: 10vh auto; line-height: 1.65; }
+      .local-help h1 { font-size: clamp(26px, 5vw, 40px); line-height: 1.2; }
+      .local-help code { padding: .15em .4em; border-radius: 4px; background: #d7dcd3; }
+    </style>
+    <script src="vendor/hyperframes-player.global.js" defer></script>
+    <script src="vendor/hyperframes-slideshow.global.js" defer></script>
+    <script src="runtime/deck-runtime.js" defer></script>
+  </head>
+  <body>
+    <hyperframes-slideshow tabindex="0" notes-storage-key="living-world-deck-v1" sound>
+      <hyperframes-player interactive disable-click-to-play data-composition-src="composition/index.html"></hyperframes-player>
+      <script type="application/hyperframes-slideshow+json">
+      {
+        "slides": [
+          {
+            "sceneId": "open-world",
+            "notes": "Introduce Crown & Charter as a playable explanation of weight-space programming. Each civilization has a small, authored neural policy whose real numbers can be edited. The world provides consequences that people can inspect. This is a working learning application, not evidence that a trained general intelligence understands civilization. Invite the audience to think of one behavior they would want to change."
+          },
+          {
+            "sceneId": "living-footage",
+            "notes": "Press the video's native Play control. This 36.133-second film uses 268 genuine browser frames from 72.004 seconds of active capture, retimed at 2×; the game simulation was independently set to 32×. Seed 42 advances from year 1 to year 49 across four views: five founding societies, settlement growth, wildlife, and Iron Ridge. Pauses between views are omitted. There is no audio; the Scene guide caption track identifies each segment. The recording documents growth of five existing societies, not the emergence of new civilizations. No weights were edited during the film. Pause at a useful moment and invite an observation; the labs that follow provide the controlled weight comparisons. Full provenance is in assets/recording.json."
+          },
+          {
+            "sceneId": "learning-loop",
+            "notes": "The research article describes weight-space programming as a general-purpose language model directly reading and writing neural-network weights around a natural-language specification, without gradient training. This application makes the underlying arithmetic and consequences inspectable through manual auxiliary-weight edits and an optional fixed, bounded Laya selector; general specification-to-weight synthesis is outside its current scope. Follow the actual application's loop from world conditions through local observations, the editable policy, and a sampled endeavor, then back to the world. Ecological dynamics and resource checks also matter; a selected endeavor does not guarantee a completed action. Observe, Edit, Compare, Reflect, and Inspect provide progressively deeper entry points."
+          },
+          {
+            "sceneId": "policy-lab-scene",
+            "notes": "This embedded lab runs the application's actual policy code on a frozen checkpoint: seed 42, Iron Ridge, year 10, tick 1728. Ask the audience to predict a direction before moving one W2 value. Compare original and edited probabilities using the same observations. Use the precise minus/plus controls, then open the trace. A weight changes a score through its hidden activation; probabilities also depend on the other scores and temperature. This deck experiment is detached from the separately running game."
+          },
+          {
+            "sceneId": "futures-lab-scene",
+            "notes": "Carry the same edited policy into a paired future. Start with one year, then choose a longer horizon if useful. Two detached copies begin from the same world and random state; only the selected society's policy differs. Read both a society measure and an ecological measure. The ecology cohort is fixed at the starting point. Decision counts are scheduled selections, not completed buildings or successful raids. Different choices can alter later random draws, so one run is a reproducible scenario, not a general effect estimate."
+          },
+          {
+            "sceneId": "model-architecture",
+            "notes": "Separate the editable auxiliary policy from native Laya. Each society's scorer has 32 inputs, 38 ReLU hidden units, and one score per candidate: 1,293 weights and biases, plus a separate temperature scalar. Sixteen inputs describe local conditions, eight indicate the candidate action, and eight are currently reserved zeros. The authored starting policy is untrained. Optional fixed native Laya chooses among up to three submitted, bounded patches plus keep; it does not synthesize arbitrary tensors or train its own checkpoint. The embedded labs do not make a Laya call."
+          },
+          {
+            "sceneId": "evidence-limits",
+            "notes": "Keep the claims proportional to the evidence. A frozen comparison isolates an immediate model effect at one state. Paired futures demonstrate a reproducible scenario but require more states and seeds for broader conclusions. Terrain streams over a very large finite coordinate range. Persistent state is capped at 2,048 ecological regions, 32 retained civilizations, 128 retained settlements, and 128 concurrent mobile groups; retired ecology can regenerate. Policies choose civilization-level endeavors, and people and wildlife are aggregate simulation quantities."
+          },
+          {
+            "sceneId": "begin-exploring",
+            "notes": "Open the live application if its local server is running. Learn pauses the world on entry, captures a starting point, and supports a prediction, live weight edit, frozen probability comparison, and paired futures. Use Resume world to watch its next scheduled decision. Encourage one edit at a time and more than one checkpoint. The linked implementation files and guide are portable source copies shipped with this deck. Research inspiration: Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights, by Rikiya Takehi, Jayden Teoh, Alex Zhang, and Omar Khattab, published November 2, 2026. Its specification-to-weight synthesis is outside this implementation; see sources/READING.md for the source and scope distinction."
+          }
+        ]
+      }
+    </script>
+    </hyperframes-slideshow>
+    <main id="local-server-help" class="local-help" hidden>
+      <h1>A living world. A visible mind.</h1>
+      <p>This interactive deck needs its small local server so that video seeking, the experiments, and the audience window work together.</p>
+      <p>On Windows, double-click <code>start-deck.cmd</code>, then open the address printed in its window.</p>
+      <p>On any platform with Node.js 22 or newer, open a terminal in this folder and run <code>node serve.mjs</code>. Open <code>http://127.0.0.1:4180/</code> in your browser and keep the terminal open.</p>
+    </main>
+    <noscript><div class="local-help"><h1>JavaScript is required</h1><p>Enable JavaScript to view the presentation and run its embedded experiments.</p></div></noscript>
+  </body>
+</html>

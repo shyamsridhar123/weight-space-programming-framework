@@ -1,0 +1,495 @@
+# Weight-space programming: mathematical and software design
+
+The framework treats a parameter change as an explicit program over an immutable
+artifact. Its reusable core accepts arbitrary named finite tensors. Execution,
+behavioral certification, and task evaluation require additional interfaces whose
+assumptions remain visible. The implemented mathematical specialization is a
+finite two-layer ReLU network with any positive input, hidden, and output widths;
+the RTS policy is one instance of that specialization.
+
+This document describes the implemented APIs and their mathematical obligations.
+It does not report new experiment outcomes. The literature and hypotheses are in
+[research.md](research.md), and completion criteria are in
+[requirements.md](requirements.md).
+
+```mermaid
+flowchart TD
+    S[Examples, rules, optimizer, or LLM proposal] --> P[Program with exact parent and cell preconditions]
+    A[Named tensor artifact and interface metadata] --> P
+    P --> C[Candidate artifact]
+    C --> T[Structural policy]
+    C --> M[Explicit architecture adapter]
+    M --> B[Supported semantic contract]
+    C --> E[Caller evaluator and held-out task trials]
+    T --> R[Recorded identities and receipts]
+    B --> R
+    E --> R
+```
+
+The branches answer different questions. A structurally admitted edit can lack a
+behavioral certificate. A bound on score drift can hold for an edit that fails its
+task objective. An empirical improvement can occur without satisfying a
+conservative certificate. None of these branches silently substitutes for another.
+
+**Parameter spaces and semantic interfaces.** Fix an interface
+
+\[
+\mathcal I=(a,m,\{(n,s_n):n\in N\}),
+\]
+
+where \(a\) is an architecture identifier, \(m\) is JSON metadata, \(N\) is a
+finite nonempty set of tensor names, and \(s_n\) is the shape of tensor \(n\).
+The concrete state space is a product of finite binary64 arrays of those shapes.
+A scalar has shape `()`; a rank-four convolution kernel and an attention matrix
+are ordinary members of the same artifact format. Zero-sized axes and nonfinite
+entries are rejected. Construction normalizes numerical inputs to binary64;
+exactness refers to the resulting stored values, not preservation of arbitrary
+source precision. The associated mathematical parameter space is
+
+\[
+\Theta_{\mathcal I}=\prod_{n\in N}\mathbb R^{s_n}.
+\]
+
+Each stored binary64 entry has an exact rational value. Let \(\iota\) map the
+stored artifact to those real values. The distinction matters: converting the
+binary64 value written as `0.8` yields its exact dyadic rational, not the rational
+\(4/5\).
+
+An architecture semantics is an explicitly supplied map
+
+\[
+\llbracket a,m\rrbracket:
+\Theta_{\mathcal I}\times X_{\mathcal I}\longrightarrow Y_{\mathcal I}.
+\]
+
+For stateful or randomized programs, the caller would need to make the relevant
+state, randomness, and outputs part of that interface. A collection of matching
+tensor shapes alone does not determine this map. Feature order, output meaning,
+preprocessing, forward operations, and decision rules can all change behavior
+without changing a shape.
+
+[`TensorArtifact`](../../rlcd/weight_space/artifact.py) implements the concrete
+representation. Its identity covers schema `wsp-tensors/1`, `dtype: float64`, the
+architecture identifier, metadata, names, and tensor values. Shapes are carried by
+the nested tensor representation. Metadata is canonicalized as JSON; values are
+copied into immutable arrays, with signed zero canonicalized. `parameter_count`
+counts all captured scalar entries, including buffers. `compatible` requires the
+same architecture, canonical metadata, names, and shapes. `replace` preserves
+these facts and rejects added tensors or changed shapes.
+
+The `WeightArtifact` protocol exposes `tensors`, `sha256`, `to_dict`, `compatible`,
+and `replace`. The edit engine depends on this protocol, so it is independent of
+the game and the ReLU evaluator. A caller implementing another artifact class is
+responsible for honoring the protocol's identity and immutability contract.
+
+Hashes are computed from canonical JSON using sorted keys, compact separators,
+UTF-8, and rejection of nonfinite JSON numbers. They identify captured content;
+they do not authenticate its author, establish semantic equivalence, or prove
+that external runtime code implements the declared architecture. Architecture and
+metadata are declarations until an adapter validates their meaning.
+
+**Programs, preconditions, and exact poststates.**
+[`Edit`](../../rlcd/weight_space/program.py) names a tensor coordinate and records
+literal `before` and `after` values. Its coordinate tuple has the tensor's rank,
+including an empty tuple for a scalar. Values must be finite, and the two values
+must differ. A `Program` contains an exact parent SHA-256, an ordered tuple of
+edits, and nonblank `intent` text. Duplicate coordinates are rejected. The intent
+is a proposed interpretation; it has no executable or certified meaning by itself.
+
+For program \(P\) with claimed parent identity \(h\), application is a partial
+operation \(\operatorname{apply}(\theta,P)\). It is defined only when the parent
+hash matches, every named tensor exists, every coordinate is in range, and every
+cell equals its recorded prevalue. `apply_program` checks all those preconditions
+before constructing the new artifact. The result contains the recorded aftervalues
+in the artifact's binary64 representation at edited coordinates and the original
+values everywhere else; the input artifact is unchanged. The candidate's own
+content hash identifies the resulting poststate.
+
+`difference(base, candidate, intent)` constructs this program between compatible
+artifacts. A program stores no arbitrary Python code and needs no model import to
+apply it. Changing an interface requires constructing a new artifact and an
+appropriate adapter; it cannot be smuggled through a parameter edit.
+
+The mathematical additive delta used in a proof is
+
+\[
+\delta=\iota(\theta')-\iota(\theta).
+\]
+
+It must be computed from the exact endpoints. A binary64 subtraction, or the
+optimizer's original proposed increment before rounding, need not equal this
+delta. This is why the implementation records literal endpoints and the bound
+checker subtracts exact rational lifts.
+
+`compose(base, programs)` applies every program against the actual intermediate
+artifact, then returns the net `difference` from the original base to the final
+state. Sequential composition therefore enforces the chain
+
+\[
+\theta_0\xrightarrow{P_1}\theta_1\xrightarrow{P_2}\cdots
+\xrightarrow{P_k}\theta_k
+\]
+
+with each \(P_i\) naming \(\theta_{i-1}\). A program written against the initial
+base cannot automatically be applied after another program changes that base.
+Net composition may cancel cells or become an empty program; preserve the
+original sequence separately when intermediate intent and admissions matter.
+
+`rollback(base, program)` creates a reverse program whose parent is the exact
+forward candidate. Applying it restores the original captured artifact identity.
+It does not reverse optimizer history, random-number state, filesystem changes,
+or game actions that were never part of the artifact. `interpolate` produces a
+coordinate-arithmetic proposal between compatible artifacts. Any finite `alpha`
+is accepted, including extrapolation, subject to finite resulting values; no
+functional interpolation property follows from that operation.
+
+**Structural admission and architecture dispatch.**
+`StructuralPolicy(writable, max_edits, max_parameter_abs, max_change_abs)` checks
+the write set, edit count, resulting parameter magnitudes, and the exact rational
+size of each change. Its receipt explicitly sets `behavioral_status` to
+`"not_checked"` and `formal_certificate` to `None`. These checks apply equally
+to a scalar, a convolution kernel, or a ReLU matrix.
+
+[`SemanticsRegistry`](../../rlcd/weight_space/semantics.py) belongs to its caller.
+A `SemanticsAdapter` registers an architecture identifier, an `evaluate` callable,
+and optionally a `certify` callable and a scope description. Duplicate
+registrations and unknown architectures raise errors. `evaluate` checks that the
+returned numerical outputs are finite; the adapter owns input validation and
+the meaning and shape of those outputs. `certify` requires compatible artifacts
+and an available certificate backend. It raises an error when that backend is
+absent. Registering a Python callable does not formally verify it.
+
+`default_registry()` registers only `dense-relu-dense/1`. Its
+`as_relu_network` conversion requires exactly `w1`, `b1`, `w2`, `b2` and exactly
+the `input_names` and `output_names` metadata fields, followed by the `Network`
+shape and label checks. Unknown or differently declared architectures cannot
+receive this certificate through a shape-based fallback. Generic editing and
+caller-owned execution remain available for those architectures.
+
+The default ReLU certificate envelope retains the original artifact hashes and
+architecture. Its inner certificate identifies the normalized specialized
+`Network` objects. These identities differ because the two representations have
+different serialization schemas; recording both makes the conversion explicit.
+
+**The supported real-valued network.**
+[`Network`](../../rlcd/weight_space/model.py) represents
+
+\[
+h_\theta(x)=\operatorname{ReLU}(Wx+b),\qquad
+f_\theta(x)=Vh_\theta(x)+c,
+\]
+
+with \(W\in\mathbb R^{H\times F}\), \(b\in\mathbb R^H\),
+\(V\in\mathbb R^{O\times H}\), and \(c\in\mathbb R^O\). Runtime names are
+`w1`, `b1`, `w2`, and `b2`. Ordered input and output labels are part of identity
+and compatibility. When labels are omitted, `Network` creates positional names;
+an application still needs to supply or document what those positions mean.
+The NumPy evaluator computes this expression in floating-point arithmetic.
+
+The Lean [`Params`](../../formal/weight-space/WeightSpace/Core.lean) structure
+has finite feature and hidden index types and a scalar output. For output
+coordinate \(o\), instantiate it with shared \(W,b\), readout row \(V_{o,:}\),
+and bias \(c_o\). Every scalar theorem then applies to that coordinate of the
+vector-output model. This is a coordinatewise extension, not a proof that a
+different activation, recurrent state, attention block, or arbitrary module has
+the same semantics.
+
+**Exact symmetry and the quotient it permits.** For a hidden-unit permutation
+\(\pi\) and positive scales \(s_j\), define
+
+\[
+W'_{ji}=s_jW_{\pi(j),i},\quad b'_j=s_jb_{\pi(j)},\quad
+V'_{oj}=V_{o,\pi(j)}/s_j,\quad c'_o=c_o.
+\]
+
+Positive homogeneity of ReLU and invariance of a finite sum under permutation
+give \(f_{\theta'}(x)=f_\theta(x)\) for every real input. Input and output
+coordinates stay fixed. Permutations and positive rescalings generate a group
+action on the real parameter space. The quotient \(\Theta_{\mathcal I}/G\)
+identifies points in the same orbit.
+
+This orbit relation is sufficient for functional equality. It is not a complete
+characterization of all parameters with the same function: zero-output units,
+identical hidden features with redistributed readout weights, and other
+redundancies can yield equal functions outside one such orbit. The framework
+does not compute a canonical representative of full functional equivalence.
+
+[`Gauge`, `transform`, and `transport`](../../rlcd/weight_space/symmetry.py)
+implement the coordinate convention above. `transport` transforms both the base
+and the actual edited candidate, then takes their literal difference. The formal
+claims are `WeightSpace.score_permute`, `WeightSpace.score_rescale`,
+`WeightSpace.transported_edit_score`, and `WeightSpace.rescaled_edit_score`.
+Their supporting equations `permute_applyEdit` and `rescale_applyEdit` ensure
+that an additive edit moves with its base.
+
+The group action is exact over real parameters. Finite binary64 states are not
+closed under arbitrary positive real scaling. Runtime multiplication or division
+may round, underflow, or overflow, and a permutation can change floating-point
+summation order. A transformed runtime artifact must therefore be examined at
+its actual stored endpoints; a Lean real-arithmetic symmetry theorem alone is
+not a bitwise execution-equivalence certificate. Power-of-two scales avoid many
+rounding issues when the results stay in the exactly representable range, but
+that condition still needs checking for the concrete values.
+
+`align_hidden` uses Hungarian matching of normalized incoming affine weights
+\((W_{j,:},b_j)\), with norm-ratio scales. Its matching cost and parameter
+residual are diagnostics. Independent training can produce representations
+outside each other's symmetry orbit. `transfer_edit` adds a raw or aligned
+parameter delta to a compatible target as a new proposal; its admission and task
+evaluation must be rerun on that target.
+
+**Uniform all-layer drift.** Let \(\theta=(W,b,V,c)\) and
+\(\theta'=(W',b',V',c')\). Fix a finite box
+\(\mathcal B=\{x:l_i\leq x_i\leq u_i\}\), with ordered endpoints, and set
+
+\[
+R_i=\max(|l_i|,|u_i|),\qquad
+U_j=\max\!\left(0,b_j+\sum_i\max(W_{ji}l_i,W_{ji}u_i)\right),
+\]
+
+\[
+D_j=|b'_j-b_j|+\sum_i|W'_{ji}-W_{ji}|R_i,
+\]
+
+\[
+B_o=|c'_o-c_o|+\sum_j
+\left(|V'_{oj}-V_{oj}|U_j+|V'_{oj}|D_j\right).
+\]
+
+For every real \(x\in\mathcal B\), the hidden values satisfy
+\(0\leq h_j(x)\leq U_j\). ReLU is globally one-Lipschitz, so
+\(|h'_j(x)-h_j(x)|\leq D_j\), including inputs whose activation pattern
+changes. Expanding one output term as
+
+\[
+V'_{oj}h'_j-V_{oj}h_j
+=(V'_{oj}-V_{oj})h_j+V'_{oj}(h'_j-h_j)
+\]
+
+and applying the triangle inequality gives
+
+\[
+\forall x\in\mathcal B,\quad
+|f_{\theta'}(x)_o-f_\theta(x)_o|\leq B_o.
+\]
+
+[`WeightSpace.score_drift_le`](../../formal/weight-space/WeightSpace/Bounds.lean)
+proves this scalar statement. `WeightSpace.score_drift_le_of_budget` adds the
+premise \(B_o\leq\varepsilon_o\). Instantiating each output coordinate yields
+the componentwise certificate. The Python `InputBox` rejects inconsistent
+endpoints; the formal domain premise is `InBox`, with `InputBox.Valid` available
+for explicit nonempty-box checking.
+
+[`certify_drift`](../../rlcd/weight_space/contracts.py) computes every quantity
+above using `Fraction.from_float` and exact rational endpoint subtraction. The
+receipt contains the base and candidate identities, box, hidden bounds, output
+bounds, theorem name, and its own hash. `verify_certificate` recomputes the full
+receipt and checks equality. Recalculation detects altered claims and identities;
+it is another execution of the Python checker, not a proof of that checker.
+The receipt therefore includes `implementation_verified: False`.
+
+`Contract` combines the input box, one permitted drift per output, writable
+ReLU tensors, a parameter-magnitude limit, and an optional edit-count limit.
+`check_contract` constructs the actual candidate, evaluates those restrictions,
+and compares the rational bounds with the exact represented budget values.
+A rejection by the drift bound can be conservative; it does not by itself show
+an input with excessive true drift. Acceptance establishes the stated bound for
+the corresponding real model, conditional on the mapping and checker. It does
+not establish target gain, reward improvement, or membership of future runtime
+inputs in the box.
+
+**Composition and decisions.** A drift contract on domain \(D\) has the form
+
+\[
+\operatorname{Drift}(f,g,D,\varepsilon)
+\iff \forall x\in D,\ |g(x)-f(x)|\leq\varepsilon.
+\]
+
+`WeightSpace.DriftContract.trans` and `WeightSpace.DriftContract.chain` prove
+that a finite valid sequence on a common domain has total budget
+\(\sum_k\varepsilon_k\). The result is independent of the ReLU architecture;
+what is architecture-specific is obtaining the individual contracts. Different
+domains can be restricted to a shared intersection. Each step must still refer
+to the actual intermediate semantic state. A direct endpoint certificate may
+give a tighter bound than adding the intermediate budgets. Parameter-program
+composition itself does not aggregate semantic receipts or prove additive task
+benefits.
+
+For scores \(s_o\), changed scores \(s'_o\), and valid bounds
+\(|s'_o-s_o|\leq B_o\), a strict winner \(k\) is preserved when
+
+\[
+\forall j\ne k,\qquad s_k-s_j>B_k+B_j.
+\]
+
+`WeightSpace.argmax_preserved` proves this statement;
+`WeightSpace.argmax_preserved_uniform` specializes it to a margin exceeding
+\(2\varepsilon\). `contracts.preserves_argmax` checks the arithmetic condition
+on supplied scores and bounds. It does not establish that the supplied baseline
+scores are exact real evaluations or incorporate floating-point error.
+
+The index can denote output coordinates or a fixed set of legal candidates
+scored by the same scalar network. For candidates, each input must satisfy its
+bound's domain and the candidate set and ordering semantics must be fixed. A tie
+has no strict-margin certificate. A score bound alone also does not certify
+stochastic action samples, a changed legal-action filter, or an entire future
+trajectory. Those conclusions require additional premises or an application
+proof.
+
+**Readout compilation and its limits.** With \(W,b\) fixed, an edit to \(V,c\)
+has the exact real effect
+
+\[
+\Delta f(x)=\Delta V\,h_\theta(x)+\Delta c.
+\]
+
+`WeightSpace.readout_exact` proves the scalar equation;
+`WeightSpace.readoutEffect_add` and `WeightSpace.editReadout_add` prove additive
+composition in this shared hidden representation. `WeightSpace.driftBudget_readout`
+reduces the general drift formula to
+
+\[
+B_o=|\Delta c_o|+\sum_j|\Delta V_{oj}|U_j.
+\]
+
+For a single edited hidden readout coordinate with increment \(\delta\),
+`WeightSpace.readout_single_exact` gives the change \(\delta h_j(x)\), and
+`WeightSpace.readout_single_drift_le_of_budget` requires only
+\(|\delta|U_j\leq\varepsilon\). If that unit is provably inactive on a region,
+the resulting zero bound protects every input in that region, not only sampled
+anchors.
+
+[`compile_readout`](../../rlcd/weight_space/compiler.py) exposes this linear
+subproblem. Let \(\Phi_T\) and \(\Phi_R\) contain hidden features on target and
+retention examples, restricted to `editable_hidden`. With `edit_bias=True`, a
+column of ones is added. For desired target changes \(D_T\), the compiler fits
+an edit matrix \(A\) by
+
+\[
+\min_A\quad
+\frac{\|\Phi_T A-D_T\|_F^2}{|T|}
++\frac{\lambda\|\Phi_R A\|_F^2}{|R|}
++\rho\|A\|_F^2,
+\qquad\lambda\geq0,\quad\rho>0.
+\]
+
+The retention term is omitted when no retention examples are provided. Defaults
+are `retention_weight=8.0`, `ridge=0.01`, and `edit_bias=False`. The implementation
+stacks the weighted systems and uses `np.linalg.lstsq`. It writes the resulting
+readout values into an actual finite candidate, then returns its literal program
+and diagnostics including rank, condition number, fit RMSE, edit count, and norm.
+
+The regularizer makes the mathematical problem strictly convex, but the
+floating-point solve and serialization are not covered by a compiler-correctness
+theorem. Diagnostics describe the fitted numerical coefficient matrix; endpoint
+certification applies to the actual candidate after rounding. The compiler does
+not certify its output or read a held-out evaluation set. Admission and evaluation
+are subsequent operations.
+
+Retention is a soft penalty, so even the supplied anchors need not be exactly
+preserved. An exact constraint \(\Phi_R A=0\), if separately established, would
+protect the span of those feature rows; finite anchors alone do not characterize
+all future hidden features. Changing the first layer also invalidates the shared
+feature premise of the readout equations. The current compiler accepts explicit
+examples and desired output changes. An LLM, learned weight-space model, optimizer,
+or handwritten rule can instead propose a `Program` through the same admission
+boundary, without acquiring a correctness guarantee from the proposal's source.
+
+**Caller-supplied PyTorch modules.**
+[`snapshot_torch`](../../rlcd/weight_space/torch_bridge.py) captures an existing
+`torch.nn.Module` into a generic artifact. It accepts dense finite floating
+persistent state in float16, bfloat16, float32, or float64 and lifts it to
+binary64. Metadata records module types, representations, forward signature,
+per-module training modes, native dtypes, devices, shapes, parameter/buffer roles,
+gradient flags, and exact alias groups. The caller supplies the architecture
+identifier and any additional interface metadata.
+
+The bridge rejects integer buffers, sparse or quantized state, lazy or meta
+tensors, nonfinite or empty state, non-tensor extra state, nonpersistent buffers,
+and different views into shared storage. Thus a module with an unsupported state
+entry cannot be partially captured by silently discarding that entry. Exact tied
+tensor aliases are supported when their candidate values agree.
+
+`apply_torch_program` snapshots the actual source, checks the program, validates
+each candidate value's exact round trip through its native dtype, and loads a
+deep copy. Rounding, overflow, or conflicting tied weights cause rejection. It
+checks that the copied source preserves the captured identity and that the
+loaded copy has the exact candidate identity. The caller's source module is
+preserved under ordinary module behavior; the supplied module's custom Python
+methods and copy/load hooks remain trusted code.
+
+Neither the architecture string nor the snapshot captures the meaning of
+arbitrary Python `forward` code, global RNG state, external resources, hidden
+mutable attributes, or all possible non-state configuration. The caller must
+declare relevant semantics, and arbitrary execution is trusted. The bridge
+does not import or reconstruct a model class from artifact data and does not
+issue behavioral proofs for arbitrary modules.
+
+`network_from_torch` is a deliberately narrower semantic extractor. It requires
+an ordinary, exact `nn.Sequential` containing exact built-in `nn.Linear`,
+`nn.ReLU`, `nn.Linear` types, compatible dimensions, explicit input/output
+labels, and no overridden instance forwards or active local forward hooks.
+It supplies zero biases for bias-free linear layers and constructs the supported
+`Network`. Ambient Python/PyTorch behavior, including global hooks or altered
+library code, remains trusted. This extraction exposes the stored-weight real
+ReLU model; it does not prove equivalence of deployed PyTorch floating-point
+execution to that model.
+
+**Proof boundary and evaluation boundary.** The
+[formal project](../../formal/weight-space/README.md) pins Lean 4.24.0 and Mathlib
+commit `f897ebcf72cd16f89ab4577d0c826cd14afaafc7`. The declarations named above
+are in `Core.lean`, `Gauge.lean`, `Bounds.lean`, and `Contracts.lean`.
+[`AxiomAudit.lean`](../../formal/weight-space/WeightSpace/AxiomAudit.lean) traverses
+the formal namespace and rejects dependencies outside `propext`,
+`Classical.choice`, and `Quot.sound`. Build and audit instructions are in the
+formal README. A declaration's presence and a theorem name in JSON do not replace
+the recorded successful build and concrete certificate check.
+
+The chain from an external checkpoint to a runtime claim has several obligations:
+
+| Obligation | Implemented evidence and remaining trust |
+| --- | --- |
+| Identify captured data and interface | Immutable artifacts, canonical hashes, exact-parent edits; metadata truth still depends on the adapter/caller. |
+| Interpret parameters as a mathematical model | Explicit ReLU conversion and exact rational lift; exporter/parser correspondence needs inspection or separate proof. |
+| Derive the real-valued bound | Lean theorems over finite networks and their explicit domain premises. |
+| Obtain a concrete numeric certificate | Exact rational Python receipt and recomputation; Python is not formally verified. A generated Lean instance needs its own successful check. |
+| Relate real values to numerical execution | Adapter fixtures and numerical comparisons can test agreement; this framework has no general floating-point refinement/error theorem. |
+| Relate outputs to decisions and task utility | Strict-margin premises can establish a local decision result. Held-out trials separately measure application outcomes. |
+
+Research runs should retain the full proposal population, including rejected
+admissions and failed trials; bind evaluated candidates to program/admission
+identities; freeze protocol, source, and selection before held-out evaluation;
+and report both useful admitted outcomes over all proposals and outcomes within
+the admitted subset. The run protocol defines the evidence unit, uncertainty
+procedure, controls, and task horizon. These are evaluation obligations, not
+conclusions of the tensor API or the network theorem.
+
+**Use and scale.** The data-only command line is
+`python -m rlcd.weight_space --help`. Its relevant operations are:
+
+| Operation | Scope |
+| --- | --- |
+| `inspect`, `diff`, `apply`, `compose`, `rollback`, `interpolate` | Generic artifacts or the specialized `Network` schema; behavioral status remains unchecked unless a supported check is requested. |
+| `apply --policy` | Generic structural admission. |
+| `compile`, `apply --contract`, `certify`, `verify` | The supported two-layer ReLU semantics; unsupported architectures raise an error. |
+| `demo` | A generic convolution/Tanh example with caller execution and a separate ReLU example with real-score contracts. |
+| `freeze`, `verify-freeze`, `synthetic`, `rts-prepare`, `rts-select`, `rts-summarize` | Reproducible study plumbing; each study's protocol and artifacts determine its empirical scope. |
+
+The format is a reference implementation, with explicit scale limits. Tensor
+storage uses eight bytes per entry before JSON and Python object overhead.
+Hashing and `difference` scan whole artifacts, and applying a sparse program
+currently copies all tensors. JSON serialization and exact rational arithmetic
+are unsuitable defaults for routinely editing billion-parameter models.
+The all-layer bound uses \(O(HF+OH)\) rational operations, whose bit costs depend
+on the represented values. Hidden matching builds an \(H\times H\) cost matrix
+and uses an \(O(H^3)\) assignment routine. Readout compilation materializes
+example-feature matrices and a dense least-squares system. The PyTorch bridge
+also copies the module and its captured state.
+
+Larger deployments would need chunked immutable storage, streaming identities,
+sparse application, native-dtype schemas, and architecture-specific certificate
+backends. These are extension directions, not implemented performance claims.
+A new architecture can already participate in generic edit/provenance operations
+and caller-owned execution. Behavioral certification requires an explicit
+semantic definition, a sound contract/checking method for that definition, and
+evidence connecting the actual artifact and evaluator to it.

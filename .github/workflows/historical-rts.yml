@@ -1,0 +1,66 @@
+name: Historical RTS (manual)
+
+"on":
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  historical-rts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      RUN_ROOT: .runs/ci-rts-${{ github.run_id }}-${{ github.run_attempt }}
+      PYTHONDONTWRITEBYTECODE: "1"
+      npm_config_registry: https://registry.npmjs.org
+    steps:
+      - name: Preserve checked-out file bytes
+        run: git config --global core.autocrlf false
+
+      - name: Check out publication
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up the publication verifier
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Verify publication before installing dependencies
+        id: publication_before
+        run: python scripts/verify_publication.py --out "$RUN_ROOT/publication-before.json"
+
+      - name: Set up Node 24
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      - name: Install the locked historical runner
+        run: npm ci
+
+      - name: Run historical RTS compatibility tests
+        run: |
+          node --version | tee "$RUN_ROOT/node-version.txt"
+          npm --version | tee "$RUN_ROOT/npm-version.txt"
+          npm run test:historical:rts | tee "$RUN_ROOT/rts-tests.log"
+
+      - name: Verify publication after historical RTS tests
+        if: ${{ always() && steps.publication_before.outcome == 'success' }}
+        run: python scripts/verify_publication.py --out "$RUN_ROOT/publication-after.json"
+
+      - name: Upload new historical RTS validation receipts
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: historical-rts-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.RUN_ROOT }}/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30

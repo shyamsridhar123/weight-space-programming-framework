@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Evidence, recording method, and review scope for the First Conquest weight-programming film.">
+  <title>Evidence &amp; method · First Conquest</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ground: #101b16;
+      --surface: #19271f;
+      --ink: #f3eddf;
+      --muted: #bec7b7;
+      --gold: #e2bd73;
+      --line: #405044;
+      --focus: #ffe2a0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-synthesis: none;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 1.5rem; }
+    body { margin: 0; background: var(--ground); color: var(--ink); line-height: 1.7; }
+    a { color: var(--gold); text-underline-offset: .22em; }
+    a:hover { color: var(--ink); }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 5px; }
+    .skip { position: absolute; z-index: 3; left: 1rem; top: -8rem; padding: .8rem 1rem; background: var(--ink); color: var(--ground); }
+    .skip:focus { top: 1rem; }
+    .shell { max-width: 1180px; margin: auto; padding: 0 clamp(1rem, 3.5vw, 3rem); }
+    .masthead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .75rem 1.5rem; padding-block: 1.3rem; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; flex-wrap: wrap; gap: .2rem .85rem; align-items: baseline; }
+    .brand strong { font-family: Georgia, "Times New Roman", serif; letter-spacing: .025em; font-size: 1.15rem; }
+    .brand span { color: var(--muted); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; }
+    .masthead nav, .links { display: flex; flex-wrap: wrap; gap: .65rem 1.25rem; font-size: .88rem; }
+    main { max-width: 56rem; margin-inline: auto; padding: clamp(2rem, 5vw, 3.8rem) 0 1.4rem; }
+    .eyebrow { margin: 0 0 .75rem; color: var(--gold); text-transform: uppercase; letter-spacing: .16em; font-weight: 700; font-size: .75rem; }
+    h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
+    h1 { margin: 0; font-size: clamp(2.2rem, 5vw, 4.1rem); letter-spacing: -.035em; line-height: 1.12; }
+    h2 { margin: 0 0 .9rem; font-size: clamp(1.55rem, 3vw, 2rem); letter-spacing: -.015em; line-height: 1.25; }
+    h3 { margin: 1.35rem 0 .5rem; color: var(--gold); font-size: 1rem; }
+    p { margin: 0 0 1rem; }
+    .lead { max-width: 49rem; margin: 1.2rem 0; color: var(--muted); font-size: 1.1rem; }
+    .status { padding: .85rem 1.1rem; margin: 1.5rem 0 0; border-left: 3px solid var(--gold); background: var(--surface); font-size: .92rem; }
+    section { margin-top: 2rem; padding-top: 1.8rem; border-top: 1px solid var(--line); }
+    ol, ul { margin: .85rem 0 1.25rem; padding-left: 1.5rem; }
+    li { padding-left: .25rem; margin-bottom: .85rem; }
+    strong { font-weight: 650; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .92em; overflow-wrap: anywhere; }
+    pre { margin: .75rem 0 1.25rem; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: .35rem; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; }
+    .table-wrap { overflow-x: auto; margin: 1.15rem 0 1.25rem; border: 1px solid var(--line); border-radius: .35rem; }
+    table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+    caption { padding: .8rem 1rem; text-align: left; color: var(--muted); font-size: .8rem; }
+    th, td { padding: .7rem 1rem; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+    thead th { background: var(--surface); color: var(--gold); font-weight: 600; }
+    tbody th { font-weight: 500; }
+    .comparison td { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .comparison thead th:not(:first-child) { text-align: right; }
+    .note { color: var(--muted); font-size: .9rem; }
+    blockquote { margin: 1rem 0 1.25rem; padding: 1.2rem 1.4rem; border-left: 3px solid var(--gold); background: var(--surface); }
+    blockquote p:last-child { margin-bottom: 0; }
+    blockquote a { overflow-wrap: anywhere; }
+    dl { margin: 1rem 0; }
+    dt { color: var(--gold); font-size: .85rem; font-weight: 650; margin-top: 1rem; }
+    dd { margin: .25rem 0 0; }
+    footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .65rem 1.5rem; padding: 1.4rem 0 2rem; margin-top: 1.4rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
+    footer p { margin: 0; }
+    @media (max-width: 520px) {
+      .brand { flex-direction: column; gap: 0; }
+      .brand strong { font-size: 1.05rem; }
+      .brand span { font-size: .65rem; }
+      .masthead nav { font-size: .8rem; }
+      th, td { padding: .65rem .75rem; }
+      blockquote { padding: 1rem; }
+    }
+    @media print {
+      :root { color-scheme: light; --ground: #fff; --surface: #f4f4ed; --ink: #17241b; --muted: #34453a; --gold: #64501f; --line: #a7afa8; }
+      .skip { display: none; }
+      main { padding-top: 1.5rem; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to evidence</a>
+  <div class="shell">
+    <header class="masthead">
+      <div class="brand"><strong>Crown &amp; Charter</strong><span>First Conquest</span></div>
+      <nav aria-label="Document navigation">
+        <a href="../index.html#film">Return to the film</a>
+        <a href="../MUSIC-CREDITS.html">Music credit</a>
+      </nav>
+    </header>
+    <main id="content" tabindex="-1">
+      <p class="eyebrow">Evidence &amp; method</p>
+      <h1>What the film shows.</h1>
+      <p class="lead">One real weight edit, a controlled comparison, and a manually commanded mission through victory. This page separates the observed results from the limits of the recording and its review.</p>
+      <p class="status"><strong>Export verified.</strong> Browser playback and all ten chapter controls have been observed. Audio has been technically measured; no complete audiovisual watch or perceptual listening review is claimed.</p>
+
+      <section aria-labelledby="experiment-title">
+        <h2 id="experiment-title">From a weight to an order</h2>
+        <p>The fresh match began paused at <strong>00:00</strong>, with Blue under <strong>I command</strong>. A real coefficient in the authored, untrained auxiliary game policy changed: <strong><code>W2[19]</code>, <code>army_train_bias</code>, 0.8 → 24</strong>, advancing policy revision 0 → 1.</p>
+        <ol>
+          <li><strong>Edit → preview.</strong> The preferred action changed from Train Villager (score <strong>7.86</strong>) to Train Spearman (score <strong>25.98</strong>). Spearman’s own score rose <strong>2.78 → 25.98</strong>. These are preference scores, not probabilities. Preview alone issued no order.</li>
+          <li><strong>Compare 60 seconds.</strong> Two simulations started from the same captured world, using the baseline or edited Blue policy and the same Red policy. The live match stayed at 00:00. Their first different issued decision occurred at <strong>+1.6 seconds</strong>; they issued <strong>25 versus 26 orders</strong>.</li>
+          <li><strong>Execute → paid queue → completed unit.</strong> Run one decision issued Train Spearman. Food fell <strong>500 → 450</strong>, wood <strong>300 → 275</strong>, and the barracks showed one already-paid recruit with <strong>15 seconds remaining</strong>. By <strong>00:48</strong>, that recruit had completed and the army numbered three.</li>
+        </ol>
+        <div class="table-wrap" role="region" aria-label="Baseline and edited policy comparison" tabindex="0">
+          <table class="comparison">
+            <caption>Observed outcomes after 60 simulated seconds</caption>
+            <thead><tr><th scope="col">Outcome</th><th scope="col">Baseline</th><th scope="col">Edited</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Food brought home</th><td>220</td><td>160</td></tr>
+              <tr><th scope="row">Wood brought home</th><td>120</td><td>98</td></tr>
+              <tr><th scope="row">Soldiers completed</th><td>2</td><td>3</td></tr>
+              <tr><th scope="row">Army alive, including two starting guards</th><td>4</td><td>5</td></tr>
+              <tr><th scope="row">Villagers alive</th><td>10</td><td>9</td></tr>
+              <tr><th scope="row">Blue / Red Town Center health</th><td>1800 / 1800</td><td>1800 / 1800</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">This measures a recruitment/economy trade-off. It does not establish a superior strategy.</p>
+      </section>
+
+      <section aria-labelledby="mission-title">
+        <h2 id="mission-title">A manually commanded victory</h2>
+        <p>Manual gathering, house construction, and seven further recruitment orders produced an army of <strong>ten: two starting guards, one policy recruit, and seven manual recruits</strong>. A manual attack at <strong>03:30</strong> won at <strong>04:34</strong>, with <strong>8 soldiers trained, 3 enemies defeated, and 6 Blue survivors</strong>. The weight edit did not autonomously win this battle.</p>
+        <p class="note">Selected segment 38 images begin after the first of its two manual recruitment purchases. Segment 41 confirms the completed ten-soldier army.</p>
+        <h3>Laya proposed an edit; it was not applied</h3>
+        <p>At <strong>03:30 / tick 2110</strong>, native Laya (<code>laya-game</code>, CPU, checkpoint <code>a28adbc55d13</code>) proposed changing attack bias <strong><code>W2[30]</code>, −5 → −4</strong>. That bounded proposal was <strong>not applied</strong>: the policy stayed at revision 1. Laya’s checkpoint remained fixed. The demonstration did not train or rewrite it, and its RTS strategy is unvalidated.</p>
+      </section>
+
+      <section aria-labelledby="capture-title">
+        <h2 id="capture-title">How the film was made</h2>
+        <p>The film uses only fresh-run segments <strong>25–43</strong>: <strong>181.6 seconds of selected capture</strong>, represented by <strong>546 distinct JPEG source files</strong>. These are direct screenshots of the controlled game tab, captured at roughly <strong>3 fps</strong>.</p>
+        <p>The <strong>30 fps export repeats the last observed screenshot</strong> according to recorded timestamps. It does not contain 30 unique captured images per second or invented intermediate motion. Resumed gameplay used UI <strong>2×</strong> speed, with additional editorial acceleration separately labeled. Earlier wrong-tab captures 01–23 are quarantined and excluded.</p>
+        <div class="table-wrap" role="region" aria-label="Verified video export properties" tabindex="0">
+          <table>
+            <caption>Final MP4 — all automated verification checks passed, with no warnings</caption>
+            <thead><tr><th scope="col">Property</th><th scope="col">Verified result</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Duration</th><td>90.000 seconds, container / video / audio</td></tr>
+              <tr><th scope="row">Picture</th><td>1280×880: complete 1280×720 gameplay plus a 160-pixel caption band</td></tr>
+              <tr><th scope="row">Video</th><td>H.264, <code>yuv420p</code>, 30 fps, 2,700 decoded frames</td></tr>
+              <tr><th scope="row">Audio</th><td>AAC, stereo, 48,000 Hz</td></tr>
+              <tr><th scope="row">File size</th><td>5,670,591 bytes</td></tr>
+              <tr><th scope="row">Validation</th><td>Full decode passed; source images and music unchanged</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Final MP4 SHA-256</p>
+        <pre><code>29ee64ca17aaada840508f42527739400c5b868cd3cf10a2b5a20b5d3a880991</code></pre>
+        <nav class="links" aria-label="Export downloads">
+          <a href="../renders/first-conquest-90s.mp4" download>Download the film</a>
+          <a href="verification.json" download>Download export verification (JSON)</a>
+        </nav>
+      </section>
+
+      <section id="review" aria-labelledby="review-title">
+        <h2 id="review-title">What was reviewed</h2>
+        <h3>Picture and captions</h3>
+        <p>The encoded-frame review covers 16 samples; the production reviewer separately inspected 7, 21, 28, and 88 seconds, for <strong>20 sampled frames total</strong>. No material cropping, caption clipping, or readability issue was observed at native resolution. This was not a complete watch.</p>
+        <p>One minor timing issue remains: at <strong>84 seconds</strong>, a destruction caption appears while the enemy town still has <strong>104 health</strong>. Victory follows at approximately <strong>85.825 seconds</strong> and is visible in the reviewed 88-second frame.</p>
+        <p><a href="encoded-frame-review.md" download>Download the sampled-frame review (Markdown)</a></p>
+        <h3>Browser playback and chapters</h3>
+        <p id="browser-checks">On the final viewer, clicking <strong>Play film</strong> started playback at <strong>0.017499 seconds</strong>. It progressed to <strong>12.159805 seconds</strong>, and clicking <strong>Pause film</strong> stopped it at <strong>12.320002 seconds</strong>, without a media error. All ten chapter buttons were retested by mouse and sought to exactly <strong>0, 4, 11, 17, 25, 33, 40, 59, 70, and 86 seconds</strong>, each with the matching explanatory heading, paused state, and no error.</p>
+        <p>Clicking <strong>Play film</strong> at <strong>86 seconds</strong> advanced to <strong>90.000 seconds</strong>, with <code>ended=true</code>, <code>paused=true</code>, and no error; the button changed to <strong>Replay film</strong>. Clicking Replay film restarted at <strong>0 seconds</strong>, with <code>paused=false</code>. Pause film and the baseline chapter then left the player ready at <strong>0 seconds</strong>, paused.</p>
+        <p>The live-game link destination opened in a fresh tab and displayed the original playable mission entry. These checks do not constitute a complete uninterrupted watch or listening review.</p>
+        <p><a href="browser-review.json" download>Download browser observations (JSON)</a></p>
+        <h3 id="audio-review">Music and measured audio</h3>
+        <p>The soundtrack is <strong>“Horizons” by Scott Buckley</strong>, under <strong>CC BY 4.0</strong>. Its prepared 90-second bed retains level adjustment, volume shaping, and fades; gameplay acceleration does not speed up the music. There is no spoken narration or captured game audio.</p>
+        <p>The final encoded AAC measures <strong>−24.02 LUFS integrated</strong>, <strong>−7.68 dBTP true peak</strong>, and <strong>11.20 LU loudness range</strong>, with signal in both channels, a quiet opening, and a measured fade-out. These are technical measurements, <strong>not a listening review</strong>. Musical transitions and subjective playback quality remain unreviewed.</p>
+        <nav class="links" aria-label="Audio evidence">
+          <a href="../MUSIC-CREDITS.html">Read the music credit</a>
+          <a href="audio/RESULT.md" download>Download audio measurements (Markdown)</a>
+        </nav>
+      </section>
+      <section aria-labelledby="audit-title">
+        <h2 id="audit-title">Detailed workspace audit</h2>
+        <p class="note">Raw provenance, historical corrections, the failed first build, and earlier test evidence remain at <code>artifacts/empires/recording-readiness/README.md</code> in the project workspace. That path is a workspace reference, not a file included in this portable evidence bundle.</p>
+      </section>
+    </main>
+    <footer><p>First Conquest · Recorded demonstration</p><a href="../index.html#film">Return to the film</a></footer>
+  </div>
+</body>
+</html>

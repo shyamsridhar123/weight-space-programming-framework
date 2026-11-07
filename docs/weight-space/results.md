@@ -1,0 +1,155 @@
+# Results and reproducible evidence
+
+> **Earlier study results.** This page reports the original regression and RTS
+> study. Its `report-v2` directory is a revised rendering of that study, separate
+> from the later generic `study-v2` experiment. Read the [current results](v2/results.md)
+> for that experiment and the [reproduction guide](../../REPRODUCING.md) for current
+> commands. The [original results document](../../provenance/original-documents/docs/weight-space/results.md.txt)
+> remains preserved.
+
+The generic framework is implemented, its ReLU mathematics is checked in Lean,
+and the frozen study supports alignment and retention on independently trained
+regression networks. The RTS hypothesis is unsupported: validation chose the
+unchanged baseline. These empirical conclusions apply to the recorded protocol;
+they do not certify every architecture or establish general task improvement.
+
+Read the [generated scientific report](../../artifacts/weight-space/report-v2/report.md)
+for plots, per-unit CSVs, admission outcomes, uncertainty, and utility decomposition.
+The [framework guide](README.md) provides the generic tensor and PyTorch examples;
+the [requirement audit](requirements.md#completion-audit) maps the original request
+to delivered evidence.
+
+Report v2 corrects the axis display for the all-zero RTS endpoint. Its numerical
+analysis is unchanged; the [first rendering](../../artifacts/weight-space/report-v1/report.md)
+and [rendering change record](../../artifacts/weight-space/report-v2-run.json) are preserved.
+
+## Main findings
+
+| Endpoint | Mean | 95% paired bootstrap interval | Fixed-rule result |
+| --- | ---: | --- | --- |
+| H1: raw-minus-aligned normalized transfer RMSE | 0.20661 | [0.14866, 0.26882] | Supported |
+| H2: target-only minus retention collateral RMSE | 0.32812 | [0.31304, 0.34320] | Supported |
+| H2 target-gain gate: realized gain / requested shift | 0.63345 | [0.61678, 0.64777] | Mean exceeds 0.5 |
+| H3: selected RTS policy minus baseline utility | 0 | [0, 0] | Unsupported; baseline selected |
+
+The primary experiment completed forty independently initialized and trained
+6→16→3 ReLU regression networks, twenty disjoint source/target pairs, and all
+planned controls without excluding failures. The shared dataset is fixed;
+intervals use 10,000 paired bootstrap resamples and are exploratory and unadjusted.
+Alignment improved the transfer-error endpoint in 19/20 pairs. Retention reduced
+collateral error in 20/20 pairs while meeting the predeclared mean target-gain gate.
+Transfer error compares the target network's realized change with the source
+edit's realized change, not with perfect fulfillment of the requested shift.
+
+Admission is measured separately. Out of twenty proposals per arm, target-only,
+retention, raw transfer, and aligned transfer admitted 20, 8, 7, and 7 respectively.
+All proposals, including rejected proposals, remain in the empirical endpoints.
+Using the report's descriptive per-program gain threshold of at least 0.5, the
+useful-and-admitted counts are 20, 8, 2, and 6. This descriptive threshold is not
+an additional predeclared endpoint. A conservative bound can reject an edit whose
+observed finite-sample behavior looks useful.
+
+RTS validation compared baseline with four recruitment edits; all five options
+tied at mean utility 1.2 and zero observed losses over eight seeds. The fixed
+smallest-delta tie rule selected `control_noop`. Test contains twenty unique
+selected no-op pairs plus twenty bias-control pairs, **forty paired records**.
+The selected and baseline policies each won all twenty worlds and averaged ten
+recruits. This is baseline consistency, not held-out evidence for a nonzero edit.
+All selected/baseline worlds ended before rival recruitment begins at 270 seconds.
+Neither the proxy utility nor this horizon establishes general RTS strategy.
+
+## What has been checked
+
+The [independent evidence audit](../../artifacts/weight-space/study-v1-audit.json)
+recomputes saved evidence without training networks or running simulations. It
+checks frozen source/artifact identities, planned units, literal edit and admission
+linkages, synthetic forward effects and bootstrap intervals, and RTS utility,
+selection, controls, and H3. Its
+[source](../../scripts/audit_weight_space_study.py) uses independent numerical and
+exact-rational calculations rather than importing the framework's implementations.
+
+The [actual Lean verification record](../../formal/weight-space/verification/actual-verification.json)
+retains the successful library build, separate transitive axiom audit, deterministic
+certificate regeneration, source hashes, and frozen inputs. There are **59 explicit
+theorem statements**, including 21 for the RTS instance; the environment audit
+covers **236 declarations**, including 121 theorem declarations and generated
+declarations. Only `propext`, `Classical.choice`, and `Quot.sound` occur.
+
+The proofs establish real-valued symmetry, edit transport, all-layer box drift,
+composition, and sufficient-margin argmax results. The actual RTS specialization
+embeds every coefficient and proves all four candidate contracts, independent of
+whether validation selects an edit. They do not prove the Python checker, exporter,
+floating execution, arbitrary PyTorch forward code, or reward. See the
+[formal scope and reproduction instructions](../../formal/weight-space/README.md).
+
+The [integration verification](../../artifacts/weight-space/verification-v1/summary.json)
+records 239 passing Python tests, 386 passing TypeScript tests, a passing TypeScript
+check, and production build. After the receipt repair described below, all 76
+focused weight-space tests passed. The broader suites preceded that narrow repair;
+the results are not a claim that the full suite was rerun afterward.
+
+## Evidence identity and the later CLI repair
+
+The [protocol](../../artifacts/weight-space/study-v1/freeze/protocol.json) and
+[source archive](../../artifacts/weight-space/study-v1/freeze/receipt.json) were
+frozen locally before results. This is not an externally timestamped preregistration.
+
+| Identity | SHA-256 |
+| --- | --- |
+| Protocol | `ae17fc858130ee06d436eb77218712b9a757ed514183b6bc99cb962ce7231998` |
+| Freeze receipt identity (canonical payload) | `8618af22249c963a70f07966e39dd7db82f53064485707797485dc12d916ac6e` |
+
+The audit found a generic CLI receipt-integrity defect: Python dictionary equality
+treated a substituted numeric `0` as equal to `false`. The current CLI uses canonical
+serialized-byte comparison and rejects that alteration. The mathematical bound
+and study execution logic did not change. The
+[repair receipt](../../artifacts/weight-space/post-study-repair-v1/receipt.json)
+preserves the original diagnostic, before/after code, regression, and checks.
+
+The original study remains bound to its archived code, including the historical
+defect. Current strict freeze verification correctly detects the changed
+`__main__.py`; it must not be bypassed to resume an old study. Reports validate
+the archived sources and disclose the workspace difference. From the repository
+root, this verifies the original archive without rerunning experiments:
+
+```powershell
+$StudyPython = (Resolve-Path .venv/Scripts/python.exe).Path
+Push-Location artifacts/weight-space/study-v1/freeze/sources
+try {
+    & $StudyPython -m rlcd.weight_space verify-freeze --protocol ../protocol.json --freeze ../receipt.json
+    if ($LASTEXITCODE -ne 0) { throw 'Archived study verification failed.' }
+} finally {
+    Pop-Location
+}
+```
+
+Raw RTS records omit initial checkpoint bodies and most final checkpoint bodies.
+Recorded checkpoint hashes cannot be independently regenerated from those omitted
+states. The audit checks utility arithmetic from retained HP/recruitment fields,
+with the 1,800-point maximum supported by frozen initialization code and available
+export snapshots. This provenance limit remains explicit in the report.
+
+## Reproduce or extend
+
+These commands use unused output paths and recompute an audit/report from saved
+evidence; they do not train, select, or simulate:
+
+```powershell
+.venv/Scripts/python.exe scripts/audit_weight_space_study.py --study artifacts/weight-space/study-v1 --out artifacts/weight-space/my-audit.json
+.venv/Scripts/python.exe scripts/report_weight_space.py --study artifacts/weight-space/study-v1 --audit artifacts/weight-space/my-audit.json --out artifacts/weight-space/my-report
+```
+
+For a complete reproduction with a new freeze of the current code:
+
+```powershell
+pwsh -NoLogo -NoProfile -File scripts/run_weight_space_study.ps1 -Out artifacts/weight-space/my-study
+```
+
+The [wrapper](../../scripts/run_weight_space_study.ps1) retains exact commands,
+stdout/stderr, exit status, all planned arms, selection, and raw records. The
+current run has a different source identity from the historical study because of
+the receipt repair. Reusing the protocol's observed seeds is a reproduction, not
+fresh confirmation. New hypotheses or altered environments require a new protocol
+and untouched evaluation units. Broader claims require independent datasets and
+architectures. No new provider calls or Astra proposal-quality measurements were
+part of this study.

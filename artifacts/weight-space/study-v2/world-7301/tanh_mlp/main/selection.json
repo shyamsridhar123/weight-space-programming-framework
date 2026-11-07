@@ -1,0 +1,126 @@
+{
+  "schema": "wsp-generic-selection/2",
+  "selected_arm": "soft_retention",
+  "candidate_sha256": "037d7a97b03fd18e57d24cd128dec7ef93c720e226aea53dc435195bd17d9066",
+  "rule": {
+    "max_retain_nrmse": 0.35,
+    "max_target_nrmse": 1.0,
+    "order": [
+      "minimum validation target_nrmse",
+      "minimum delta_l2",
+      "lexicographic arm name"
+    ],
+    "fallback": "no_op",
+    "structural_policy": {
+      "write_set": "declared head and bias",
+      "max_edits": "parent parameter count",
+      "max_parameter_abs": 100.0,
+      "max_change_abs": 10.0
+    }
+  },
+  "validation": {
+    "no_op": {
+      "status": "completed",
+      "candidate_sha256": "b64460e1096e2d892af3e611367ea9d1aa22e6dd3208e7b94f2ce2f4c2699d80",
+      "artifact_sha256": "e57fcff5d43e82526bed2fc1487db690164647b3cfa034f881a50c01ec92e5ae",
+      "program_sha256": "6f526f9ab58391d7240615833dc2b424920281a14a5d409ebeaa4fbb46f1f54e",
+      "structural_accepted": true,
+      "validation": {
+        "delta_l2": 0.0,
+        "effective_changed_cells": 0,
+        "no_op": true,
+        "retain_nrmse": 0.0,
+        "retain_rmse": 0.0,
+        "target_gain_fraction": 0.0,
+        "target_nrmse": 1.0,
+        "target_rmse": 0.38729833462074165
+      }
+    },
+    "unconstrained": {
+      "status": "completed",
+      "candidate_sha256": "ec7786006413eff109f7804098c08bddb73e5ef774d813e4f71c670e764622c3",
+      "artifact_sha256": "061150eb9092d65df68b47a88865231ba9b9f51c9b98893062a40f622bd71346",
+      "program_sha256": "4f8a95036de957b8d0672c347264122d0dcb75192b25469a60197064520ecb82",
+      "structural_accepted": true,
+      "validation": {
+        "delta_l2": 0.5874590026851211,
+        "effective_changed_cells": 50,
+        "no_op": false,
+        "retain_nrmse": 0.8793232361485374,
+        "retain_rmse": 0.34056042495364963,
+        "target_gain_fraction": 0.9821855400066954,
+        "target_nrmse": 0.0393925629850271,
+        "target_rmse": 0.015256674040543667
+      }
+    },
+    "soft_retention": {
+      "status": "completed",
+      "candidate_sha256": "037d7a97b03fd18e57d24cd128dec7ef93c720e226aea53dc435195bd17d9066",
+      "artifact_sha256": "7f81a8744f8f3ddd2742a9fc1b1a4328f1c35b0e0d571bed5878502e92d536dd",
+      "program_sha256": "539b0a44735f823f0e1a07fe6b712b1a0fdcb51e546a199d3eee1ca198085534",
+      "structural_accepted": true,
+      "validation": {
+        "delta_l2": 1.3030822638264403,
+        "effective_changed_cells": 50,
+        "no_op": false,
+        "retain_nrmse": 0.2043180436974927,
+        "retain_rmse": 0.07913203805700685,
+        "target_gain_fraction": 0.7185851792014442,
+        "target_nrmse": 0.3391479943540595,
+        "target_rmse": 0.13135145340329193
+      }
+    },
+    "nullspace": {
+      "status": "completed",
+      "candidate_sha256": "ae87b5afff6e03be9e111f0c5c425fa9caea2ad3cbcbd282737445385ce0f6f8",
+      "artifact_sha256": "3bc5548c81b6ed36bcf24efef74ab5ad9c4b0c95a53799733d132e04d4ade635",
+      "program_sha256": "fca3c469d36af346e9f1f5020ff1da45e6322131267265aa7a8978b14aec9a09",
+      "structural_accepted": true,
+      "validation": {
+        "delta_l2": 1.934727957846983,
+        "effective_changed_cells": 50,
+        "no_op": false,
+        "retain_nrmse": 0.37892544448002796,
+        "retain_rmse": 0.14675719359253914,
+        "target_gain_fraction": 0.6663286848168689,
+        "target_nrmse": 0.5105581857370658,
+        "target_rmse": 0.19773833506295285
+      }
+    },
+    "matched_random": {
+      "status": "completed",
+      "candidate_sha256": "0bd2a9816958116d4537307ce5c269ef76328370a5d6cec3f5a0674e227cf0f8",
+      "artifact_sha256": "8ccb4997fd763cf499e17ccba89454a5b1b37f59c8204468665880986c59d20f",
+      "program_sha256": "dd83937b50b3be7a06ef1ddb7e66bbcd3d60df355679698d3a908cff53ab3b75",
+      "structural_accepted": true,
+      "validation": {
+        "delta_l2": 1.3030822638264405,
+        "effective_changed_cells": 50,
+        "no_op": false,
+        "retain_nrmse": 0.9147571084199587,
+        "retain_rmse": 0.3542839046735352,
+        "target_gain_fraction": -0.7856373961081298,
+        "target_nrmse": 1.9789297725277066,
+        "target_rmse": 0.7664362052313839
+      }
+    },
+    "gradient": {
+      "status": "completed",
+      "candidate_sha256": "17de0158c615bc9ce8a863b548b18775ff058281c3837f670a5fd99752e912df",
+      "artifact_sha256": "26e963eec884fa6e8866ff2bef2cf172230a79f772aae9e071ae18319e1229bd",
+      "program_sha256": "94f8911cea766d8dceee5ec43723df2715b566db8994df1e4585dbd25b912270",
+      "structural_accepted": true,
+      "validation": {
+        "delta_l2": 0.6722050021562039,
+        "effective_changed_cells": 50,
+        "no_op": false,
+        "retain_nrmse": 0.19678008256605128,
+        "retain_rmse": 0.0762125982643637,
+        "target_gain_fraction": 0.6542249706531893,
+        "target_nrmse": 0.38878205015848233,
+        "target_rmse": 0.15057464055681785
+      }
+    }
+  },
+  "heldout_observed": false
+}

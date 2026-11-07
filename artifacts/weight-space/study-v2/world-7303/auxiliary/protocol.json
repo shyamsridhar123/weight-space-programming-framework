@@ -1,0 +1,89 @@
+{
+  "schema": "wsp-auxiliary-protocol/1",
+  "seed": 7303,
+  "cases": [
+    {
+      "case_id": "affine-a-exact",
+      "family": "affine_sign",
+      "sign": 1,
+      "label": "a",
+      "access": "exact",
+      "mode": "read"
+    },
+    {
+      "case_id": "affine-a-rounded3",
+      "family": "affine_sign",
+      "sign": 1,
+      "label": "a",
+      "access": "rounded3",
+      "mode": "read"
+    },
+    {
+      "case_id": "affine-b-exact",
+      "family": "affine_sign",
+      "sign": -1,
+      "label": "b",
+      "access": "exact",
+      "mode": "diagnose"
+    },
+    {
+      "case_id": "affine-b-rounded3",
+      "family": "affine_sign",
+      "sign": -1,
+      "label": "b",
+      "access": "rounded3",
+      "mode": "diagnose"
+    },
+    {
+      "case_id": "create-scaled_absolute",
+      "family": "analytic_creation",
+      "spec": {
+        "kind": "scaled_absolute",
+        "scale": "1/4",
+        "center": "-1/2"
+      },
+      "index": 0
+    },
+    {
+      "case_id": "create-clip",
+      "family": "analytic_creation",
+      "spec": {
+        "kind": "clip",
+        "low": "-1/2",
+        "high": "3/4"
+      },
+      "index": 1
+    }
+  ],
+  "hidden_examples_per_case": 128,
+  "absolute_tolerance": 1e-12,
+  "creation_arms": [
+    "zero",
+    "random",
+    "analytic"
+  ],
+  "creation_selection": "analytic_a_priori",
+  "programmer_kind": "deterministic_fixture",
+  "model_ability_measured": false,
+  "llm_calls": 0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "affine_streams": {
+    "weights": 1100,
+    "hidden_a": 1200,
+    "hidden_b": 1201
+  },
+  "creation_streams": {
+    "specification": 2100,
+    "random_parameters": [
+      2200,
+      2201
+    ],
+    "hidden_inputs": [
+      2300,
+      2301
+    ]
+  },
+  "enforcement": "cooperative_same_process_interface",
+  "formal_certificate": null
+}

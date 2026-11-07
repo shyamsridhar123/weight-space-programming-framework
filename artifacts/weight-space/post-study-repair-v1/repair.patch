@@ -1,0 +1,54 @@
+--- before/rlcd/weight_space/__main__.py
++++ after/rlcd/weight_space/__main__.py
+@@ -10,7 +10,7 @@
+ from .compiler import compile_readout
+ from .contracts import Contract, check_contract, certify_drift, verify_certificate
+ from .evidence import freeze, read_json, verify_freeze, write_json
+-from .model import InputBox, Network
++from .model import InputBox, Network, canonical_bytes
+ from .program import Program, apply_program, compose, difference, interpolate, rollback
+ from .semantics import as_relu_network, default_registry, to_tensor_artifact
+ 
+@@ -107,7 +107,7 @@
+         else:
+             try:
+                 box = InputBox(**supplied["certificate"]["domain"])
+-                valid = supplied == default_registry().certify(base, candidate, box)
++                valid = canonical_bytes(supplied) == canonical_bytes(default_registry().certify(base, candidate, box))
+             except (KeyError, ValueError, TypeError):
+                 valid = False
+         if not valid:
+--- before/tests/test_weight_space_generic.py
++++ after/tests/test_weight_space_generic.py
+@@ -114,6 +114,31 @@
+     assert failure.value.code == 2 and not (tmp_path / "certificate.json").exists()
+ 
+ 
++def test_cli_generic_certificate_rejects_numeric_substitute_for_boolean(tmp_path, capsys):
++    base = to_tensor_artifact(Network([[1.]], [0.], [[1.]], [0.]))
++    candidate = base.replace(w2=[[2.]])
++    evidence.write_json(tmp_path / "base.json", base.to_dict())
++    evidence.write_json(tmp_path / "candidate.json", candidate.to_dict())
++    evidence.write_json(tmp_path / "box.json", {"lower": [0.], "upper": [1.]})
++    paths = [str(tmp_path / name) for name in ("base.json", "candidate.json")]
++    assert main(["certify", *paths, "--box", str(tmp_path / "box.json"),
++                 "--out", str(tmp_path / "valid.json")]) == 0
++    capsys.readouterr()
++    assert main(["verify", *paths, str(tmp_path / "valid.json")]) == 0
++    assert json.loads(capsys.readouterr().out)["valid"] is True
++
++    # Python container equality conflates False and 0, but these JSON claims
++    # have distinct meanings and identities. Leave the recorded digest intact.
++    altered = evidence.read_json(tmp_path / "valid.json")
++    assert altered["certificate"]["implementation_verified"] is False
++    altered["certificate"]["implementation_verified"] = 0
++    evidence.write_json(tmp_path / "altered.json", altered)
++    with pytest.raises(SystemExit) as failure:
++        main(["verify", *paths, str(tmp_path / "altered.json")])
++    assert failure.value.code == 2
++    assert "Certificate failed exact recomputation" in capsys.readouterr().err
++
++
+ def test_freeze_checks_protocol_current_code_and_archived_copies(tmp_path, monkeypatch):
+     root = tmp_path / "project"
+     root.mkdir()

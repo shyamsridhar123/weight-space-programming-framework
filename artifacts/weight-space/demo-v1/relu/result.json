@@ -1,0 +1,125 @@
+{
+  "global": {
+    "schema": "wsp-admission/1",
+    "accepted": true,
+    "issues": [],
+    "program_sha256": "df51e688e93649157b82307fbe613ca83139884b6f6960ca582a6d0e6ecfd75d",
+    "contract": {
+      "box": {
+        "lower": [
+          -1.0
+        ],
+        "upper": [
+          1.0
+        ]
+      },
+      "max_output_drift": [
+        1.0
+      ],
+      "allowed_tensors": [
+        "w2"
+      ],
+      "max_parameter_abs": 64.0,
+      "max_edits": 1
+    },
+    "certificate": {
+      "schema": "wsp-drift-certificate/1",
+      "arithmetic": "exact-rational-lift-of-binary64",
+      "base_sha256": "ed1f49b60927188ac0152e936eb55b97e5a9eaf45f222d3373e790322aac3312",
+      "candidate_sha256": "5694326bc93aac6ef8e3fbe5205e6fc48d496bf42900a6a7400b8a306a7a617d",
+      "domain": {
+        "lower": [
+          -1.0
+        ],
+        "upper": [
+          1.0
+        ]
+      },
+      "hidden_upper": [
+        "1",
+        "1"
+      ],
+      "hidden_drift": [
+        "0",
+        "0"
+      ],
+      "output_bounds": [
+        "2251799762215539/2251799813685248"
+      ],
+      "theorem": "WeightSpace.score_drift_le",
+      "implementation_verified": false,
+      "scope": "real score drift on the stated box; excludes floating-point error and task reward",
+      "sha256": "b7d713f61fef0eb0363726f12a8ff9d6744adc73f94afebdb7e7c549f7b0c366"
+    },
+    "sha256": "48d11ea5ec4fb019f55911c932f1b05fff76e51b7ec416d9e277867ad0de778d"
+  },
+  "protected": {
+    "schema": "wsp-admission/1",
+    "accepted": true,
+    "issues": [],
+    "program_sha256": "df51e688e93649157b82307fbe613ca83139884b6f6960ca582a6d0e6ecfd75d",
+    "contract": {
+      "box": {
+        "lower": [
+          -1.0
+        ],
+        "upper": [
+          0.0
+        ]
+      },
+      "max_output_drift": [
+        0.0
+      ],
+      "allowed_tensors": [
+        "w2"
+      ],
+      "max_parameter_abs": 64.0,
+      "max_edits": 1
+    },
+    "certificate": {
+      "schema": "wsp-drift-certificate/1",
+      "arithmetic": "exact-rational-lift-of-binary64",
+      "base_sha256": "ed1f49b60927188ac0152e936eb55b97e5a9eaf45f222d3373e790322aac3312",
+      "candidate_sha256": "5694326bc93aac6ef8e3fbe5205e6fc48d496bf42900a6a7400b8a306a7a617d",
+      "domain": {
+        "lower": [
+          -1.0
+        ],
+        "upper": [
+          0.0
+        ]
+      },
+      "hidden_upper": [
+        "0",
+        "1"
+      ],
+      "hidden_drift": [
+        "0",
+        "0"
+      ],
+      "output_bounds": [
+        "0"
+      ],
+      "theorem": "WeightSpace.score_drift_le",
+      "implementation_verified": false,
+      "scope": "real score drift on the stated box; excludes floating-point error and task reward",
+      "sha256": "b373ad3ad2667218aad497ae9fa5a3880393336d6de7a592ead7e5121bf63794"
+    },
+    "sha256": "bd363a62ffb8bad714cd3770440530d54aa23442ac9afbe54e599629a0399181"
+  },
+  "diagnostics": {
+    "compiler": "frozen-feature-ridge-least-squares/1",
+    "target_examples": 3,
+    "retention_examples": 3,
+    "retention_weight": 8.0,
+    "ridge": 1e-08,
+    "rank": 1,
+    "condition_number": 1.0,
+    "edit_cells": 1,
+    "target_rmse": 1.5118578692108284e-08,
+    "retention_rmse": 0.0,
+    "edit_l2": 0.9999999771428575,
+    "semantics": "fit to supplied examples; admission and generalization unproven"
+  },
+  "scope": "exact rational real-score bounds; float execution and task utility remain separate"
+}

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#172b2b" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23172b2b'/%3E%3Cpath d='M12 20l10 9 10-15 10 15 10-9-5 25H17z' fill='%23dfbd78'/%3E%3C/svg%3E" />
+  <title>Crown &amp; Charter · The Riverlands</title>
+  <script type="module" crossorigin src="/assets/skirmish-kIXmZpiy.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/three.module-C-3sAJl9.js">
+  <link rel="modulepreload" crossorigin href="/assets/laya-BNW2gVc9.js">
+  <link rel="modulepreload" crossorigin href="/assets/weight-coach-BCWSJP6K.js">
+  <link rel="stylesheet" crossorigin href="/assets/skirmish-BLtxq6YD.css">
+</head>
+<body>
+  <canvas id="battlefield" tabindex="0" aria-label="Riverlands battlefield. Select units, then right click to issue an order."></canvas>
+  <div class="edge-shade" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="/empires.html" aria-label="Crown and Charter home"><span class="crown" aria-hidden="true">♛</span><span>CROWN <i>&amp;</i> CHARTER<small>THE RIVERLANDS</small></span></a>
+    <div class="resource-strip" aria-label="Kingdom resources">
+      <div class="resource food" title="Food · train villagers and soldiers"><span class="resource-icon">♧</span><div><b id="food">0</b><small>FOOD</small></div><em id="workers-food">0</em></div>
+      <div class="resource wood" title="Wood · buildings, farms and archers"><span class="resource-icon">♠</span><div><b id="wood">0</b><small>WOOD</small></div><em id="workers-wood">0</em></div>
+      <div class="resource gold" title="Gold · ages, upgrades and advanced troops"><span class="resource-icon">◆</span><div><b id="gold">0</b><small>GOLD</small></div><em id="workers-gold">0</em></div>
+      <div class="resource stone" title="Stone · towers and castles"><span class="resource-icon">⬟</span><div><b id="stone">0</b><small>STONE</small></div><em id="workers-stone">0</em></div>
+      <div class="population"><span>♙</span><div><b id="population">0 / 0</b><small>POPULATION</small></div></div>
+    </div>
+    <div class="time-controls"><span id="clock">00:00</span><button id="speed" title="Change simulation speed">1×</button><button id="pause" aria-label="Pause game" title="Pause · Space">Ⅱ</button><button id="help" aria-label="Show controls" title="Controls">?</button></div>
+  </header>
+  <section class="mission-card" aria-label="Mission objective">
+    <div class="eyebrow"><span class="blue-dot"></span> HOUSE OF THE BLUE STAG</div>
+    <h1>The river is the frontier.</h1>
+    <p id="objective">Build your settlement. Cross the river. Claim their crown.</p>
+    <div class="mission-bottom"><span id="age-label">I · FRONTIER AGE</span><button id="advance" title="Advance to the next age">Advance age <span>↗</span></button></div>
+    <div class="age-progress"><i id="age-progress"></i></div>
+  </section>
+  <aside class="commander" aria-label="Commander panel">
+    <button class="commander-heading" id="commander-toggle" aria-expanded="true"><span class="eyebrow">THE WAR COUNCIL</span><span id="commander-chevron">−</span></button>
+    <button class="weight-lab-launch" id="weight-lab-toggle" aria-expanded="false"><span>Weight Lab <small>LIVE COMMANDER EDITOR</small></span><b id="weight-revision">r0</b></button>
+    <div id="commander-content">
+      <label for="pilot">Your commander</label>
+      <select id="pilot"><option value="manual">You · manual command</option><option value="neural">Editable neural commander</option><option value="rule">Rule baseline</option><option value="laya">Laya · experimental</option></select>
+      <div class="commander-note" id="pilot-note">Your orders shape the kingdom.</div>
+      <div class="rival"><span class="red-dot"></span><span>THE ASHEN CROWN</span><b>NEURAL</b></div>
+      <div class="council-line"><span id="decision-status">SCOUT THE RIVERLANDS</span><b id="decision-latency">—</b></div>
+      <p id="decision-label">Six villagers are already gathering. Grow your economy before marching out.</p>
+      <div id="decision-ranks"></div>
+      <button class="text-button" id="export">Export match record <span>↓</span></button>
+    </div>
+  </aside>
+  <div id="weight-lab-host"></div>
+  <div id="selection-box" hidden></div>
+  <div id="placement-hint" hidden><b id="placement-name">Place building</b><span>Click a clear site · Esc to cancel</span></div>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+  <div id="paused-banner" hidden>THE COUNCIL IS IN RECESS <span>Space to resume</span></div>
+  <div id="map-controls"><button id="home" title="Center on your Town Center · H" aria-label="Center on town">⌂</button><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out">−</button></div>
+  <footer class="command-dock">
+    <div class="map-panel"><div class="eyebrow">THE RIVERLANDS <span>N ↑</span></div><canvas id="minimap" width="192" height="192" tabindex="0" aria-label="Minimap. Click to move the camera."></canvas><div class="map-legend"><span><i class="blue-dot"></i> YOU</span><span><i class="red-dot"></i> RIVAL</span><span id="seed-label">SEED 42</span></div></div>
+    <section class="selection-panel" aria-label="Selected units">
+      <div class="eyebrow" id="selection-owner">YOUR KINGDOM</div>
+      <div class="selection-title"><div id="selection-icon" aria-hidden="true">♜</div><div><h2 id="selection-name">Town Center</h2><span id="selection-subtitle">The heart of your kingdom</span></div></div>
+      <div class="health-track"><i id="selection-health"></i></div>
+      <div class="selection-stats"><span id="selection-hp">1800 / 1800 HP</span><span id="selection-order">READY</span></div>
+      <div id="production" aria-label="Production queue"></div>
+      <div class="selection-shortcuts"><button id="idle-workers" title="Select idle villagers · I">Idle villagers <b id="idle-count">0</b></button><button id="select-army" title="Select all military · M">Select army <span>↗</span></button></div>
+    </section>
+    <section class="actions-panel" aria-label="Available orders">
+      <div class="action-tabs" role="tablist" aria-label="Order categories"><button id="tab-context" class="active" role="tab" aria-selected="true">COMMAND</button><button id="tab-build" role="tab" aria-selected="false">BUILD</button><button id="tab-tech" role="tab" aria-selected="false">RESEARCH</button><span id="selection-count"></span></div>
+      <div id="actions" class="action-grid"></div>
+      <div class="controls-hint">DRAG <span>select</span> <i>·</i> RIGHT CLICK <span>order</span> <i>·</i> WASD <span>pan</span> <i>·</i> SCROLL <span>zoom</span> <i>·</i> H <span>home</span></div>
+    </section>
+  </footer>
+  <section id="welcome" class="modal" role="dialog" aria-modal="true" aria-label="Start a kingdom">
+    <div class="welcome-panel">
+      <div class="eyebrow"><span class="gold-line"></span> A REAL-TIME STRATEGY EXPERIMENT</div>
+      <div class="herald" aria-hidden="true">♛</div>
+      <h2>Every empire begins<br>with a <em>small ambition.</em></h2>
+      <p>Beyond these woods, a rival crown is rising. Gather the land’s riches, raise a town, and lead your people through four ages.</p>
+      <div class="welcome-facts"><span><b>01</b> ESTABLISH</span><span><b>02</b> ADVANCE</span><span><b>03</b> CONQUER</span></div>
+      <button id="start" class="primary">Found your kingdom <span>↗</span></button>
+      <button id="watch" class="secondary">Watch the neural commanders <span>▷</span></button>
+      <div class="welcome-options"><label>MAP SEED <input id="seed" type="number" value="42" min="0" max="4294967295" step="1" aria-label="Map seed" /></label><span>LOCAL PLAY · NO SERVICE REQUIRED</span></div>
+      <small class="welcome-footnote">Crown &amp; Charter · playable foundation<br>Original procedural world · authored, untrained neural opponent</small>
+    </div>
+  </section>
+  <section id="help-modal" class="modal" role="dialog" aria-modal="true" hidden aria-label="Controls and guide"><div class="dialog"><div class="eyebrow">A FIELD GUIDE</div><h2>Command the Riverlands</h2><div class="guide-grid"><p><b>Gather</b>Select villagers, then right click trees, berries, gold or stone. Villagers carry resources back to your town.</p><p><b>Build</b>Open Build, pick a building, then click a clear explored site. A villager constructs it over time.</p><p><b>Grow</b>Select the Town Center to train villagers. Houses raise your population cap; farms provide more food.</p><p><b>Conquer</b>Recruit at military buildings. Right click an enemy to attack, or use Attack move to advance while fighting.</p></div><p class="key-guide">Click or drag to select · Shift adds to selection · Right click issues an order · F sets attack move · X stops selected units · I selects idle villagers · M selects the army · WASD / arrow keys pan · Wheel zooms · H centers town · Space pauses · Esc cancels</p><p class="key-guide">Victory: destroy every rival Town Center. Spearmen counter knights; knights threaten archers; rams break buildings. Unexplored land and hidden enemies remain concealed.</p><button class="primary" id="close-help">Return to the kingdom <span>↗</span></button><button class="text-button" id="restart">Start a new kingdom</button></div></section>
+  <section id="outcome" class="modal" role="dialog" aria-modal="true" hidden aria-label="Match result"><div class="dialog outcome-dialog"><div class="herald" aria-hidden="true">♛</div><div class="eyebrow">THE CHRONICLE CLOSES</div><h2 id="outcome-title">A crown claimed.</h2><p id="outcome-detail"></p><div id="outcome-stats"></div><button class="primary" id="play-again">A new beginning <span>↗</span></button><button class="secondary" id="export-result">Export match record <span>↓</span></button></div></section>
+  <section id="render-error" class="modal" role="dialog" aria-modal="true" hidden aria-label="Rendering error"><div class="dialog"><h2>The map could not be drawn.</h2><p id="render-error-detail">This game needs WebGL. Enable hardware acceleration and reload the page.</p><button class="primary" id="reload">Reload the map</button></div></section>
+</body>
+</html>

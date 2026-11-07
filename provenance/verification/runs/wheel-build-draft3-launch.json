@@ -1,0 +1,21 @@
+{
+  "schema": "wspf-local-tool-invocation-observation/1",
+  "recorded_at": "2026-11-07T14:32:14.308746+00:00",
+  "phase": "wheel build launcher",
+  "requested_shell_timeout_ms": 1000,
+  "tool_reported_exit_code": 124,
+  "tool_reported_message": "command timed out after 5050 milliseconds",
+  "interpretation": "The shell tool returned a wait timeout while the spawned Python helper continued. No build retry was started; its original isolated build finished and wrote passing evidence.",
+  "observed_helper_process_ids_after_timeout": [
+    39468,
+    12888
+  ],
+  "completed_build_receipt": {
+    "path": ".runs/wheel-build-draft3.json",
+    "bytes": 31589,
+    "sha256": "0006eb4c058b0b189cd831ea48da0f41df618511f3aa7d8e3dbf4d9346c45004"
+  },
+  "completed_build_status": "passed",
+  "original_attempt_receipt": ".runs/wheel-build-draft3-attempt-1.json",
+  "scope": "Records the tool wait failure, not a package build failure."
+}

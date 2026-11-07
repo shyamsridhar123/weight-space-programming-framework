@@ -1,0 +1,349 @@
+[
+  {
+    "action": "session_created",
+    "charges": {},
+    "error": null,
+    "previous_sha256": null,
+    "request": {
+      "access": {
+        "activations": false,
+        "feedback": false,
+        "forward": false,
+        "metadata": false,
+        "weight_decimals": null,
+        "weights": false
+      },
+      "architecture": "dense-relu-dense/1",
+      "base_sha256": null,
+      "callbacks_registered": {
+        "activations": false,
+        "feedback": false,
+        "forward": false
+      },
+      "constraints_sha256": "5fbeab4a0137191124f8bd7e9a883487c9efb63538653cd3875f8e8a09842f43",
+      "declared_constraints_automatically_enforced": false,
+      "enforcement": "cooperative_same_process_interface",
+      "execution_accounting": "interface_calls_and_submitted_examples; callback_internal_work_not_observed",
+      "limits": {
+        "execution_calls": 0,
+        "execution_examples": 0,
+        "feedback_calls": 0,
+        "feedback_examples": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "proposals": 3,
+        "tool_calls": 3,
+        "weight_values": 0
+      },
+      "mode": "create",
+      "objective": "Construct the declared scalar formula using two ReLU units",
+      "schema": "wsp-session-config/1",
+      "splits": {
+        "declared_lineage_overlap": false,
+        "lineage_independence_verified": false,
+        "lineage_scope": "caller_declared_only",
+        "sample_overlap": false,
+        "schema": "wsp-split-validation/1",
+        "sha256": "91f320c67fdb9e9660edcdf30a9ce53ae7263a41ef5b3f90a17f6edd5a91129a",
+        "splits": [
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "a8d764d7f8a51a975f263f23caaf9a9d76fd8a983ff08db2babb145958738938",
+            "name": "test",
+            "sample_count": 128
+          }
+        ]
+      },
+      "task_id": "auxiliary:7311:create-clip",
+      "task_sha256": "c05353cadb0f074a964f99a2bd8bf1e218da196c0fadf83c10e4c26797eb8138",
+      "token_accounting": "provider_supplied_not_locally_measured"
+    },
+    "requested_charges": {},
+    "result": {},
+    "schema": "wsp-trace-event/1",
+    "sequence": 0,
+    "session_sha256": "7b89b511fc37388748860fec02811edc53e693cf29e49ddbf0bdae54c11705c3",
+    "status": "succeeded",
+    "task_sha256": "c05353cadb0f074a964f99a2bd8bf1e218da196c0fadf83c10e4c26797eb8138",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 0,
+      "weight_values": 0
+    },
+    "sha256": "73fbc58ff700cbb0d58042e37e169e9ba833af6efe45d66f043142b175da5d76"
+  },
+  {
+    "action": "provider_usage",
+    "charges": {
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    "error": null,
+    "previous_sha256": "73fbc58ff700cbb0d58042e37e169e9ba833af6efe45d66f043142b175da5d76",
+    "request": {
+      "accounting": "provider_supplied_not_locally_measured",
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    "requested_charges": {
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    "result": {
+      "accounting": "provider_supplied_not_locally_measured",
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 1,
+    "session_sha256": "7b89b511fc37388748860fec02811edc53e693cf29e49ddbf0bdae54c11705c3",
+    "status": "succeeded",
+    "task_sha256": "c05353cadb0f074a964f99a2bd8bf1e218da196c0fadf83c10e4c26797eb8138",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 0,
+      "weight_values": 0
+    },
+    "sha256": "5dc137f391338d5d7d74d589aaba37626720754a0cb0980c4fe9b96cf6a3ea92"
+  },
+  {
+    "action": "propose_artifact",
+    "charges": {
+      "proposals": 1,
+      "tool_calls": 1
+    },
+    "error": null,
+    "previous_sha256": "5dc137f391338d5d7d74d589aaba37626720754a0cb0980c4fe9b96cf6a3ea92",
+    "request": {
+      "artifact_sha256": "3b14a24c5223442ce2289bc964e2f49581d1b9867221121eaf24de3201f0a2b0",
+      "parser": "typed_artifact_or_declared_schema",
+      "proposal_type": "Network"
+    },
+    "requested_charges": {
+      "proposals": 1,
+      "tool_calls": 1
+    },
+    "result": {
+      "artifact_sha256": "3b14a24c5223442ce2289bc964e2f49581d1b9867221121eaf24de3201f0a2b0",
+      "candidate_sha256": "f86e006044208e76685df575148d0b5119ac6a1fbf0a256f912245ff297df815",
+      "no_op": false
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 2,
+    "session_sha256": "7b89b511fc37388748860fec02811edc53e693cf29e49ddbf0bdae54c11705c3",
+    "status": "succeeded",
+    "task_sha256": "c05353cadb0f074a964f99a2bd8bf1e218da196c0fadf83c10e4c26797eb8138",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 0
+    },
+    "sha256": "305b311c363aba9503487a82e800595462651221fabf7f13e3757fdd865f7e2f"
+  },
+  {
+    "action": "propose_artifact",
+    "charges": {
+      "proposals": 1,
+      "tool_calls": 1
+    },
+    "error": null,
+    "previous_sha256": "305b311c363aba9503487a82e800595462651221fabf7f13e3757fdd865f7e2f",
+    "request": {
+      "artifact_sha256": "8d88724ac68650fcfbb5800e8a643adc9e875427b3023344fcd01ce9fb07e030",
+      "parser": "typed_artifact_or_declared_schema",
+      "proposal_type": "Network"
+    },
+    "requested_charges": {
+      "proposals": 1,
+      "tool_calls": 1
+    },
+    "result": {
+      "artifact_sha256": "8d88724ac68650fcfbb5800e8a643adc9e875427b3023344fcd01ce9fb07e030",
+      "candidate_sha256": "ad1155a50162593b8be2382170c47e75bb651a5f28053cc82dce4f6953e571d1",
+      "no_op": false
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 3,
+    "session_sha256": "7b89b511fc37388748860fec02811edc53e693cf29e49ddbf0bdae54c11705c3",
+    "status": "succeeded",
+    "task_sha256": "c05353cadb0f074a964f99a2bd8bf1e218da196c0fadf83c10e4c26797eb8138",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 2,
+      "tool_calls": 2,
+      "weight_values": 0
+    },
+    "sha256": "2af8f0d82a5492458ff9e172b6f47c8e5728ea88453883cb9ce9fd619f8d7dbe"
+  },
+  {
+    "action": "propose_artifact",
+    "charges": {
+      "proposals": 1,
+      "tool_calls": 1
+    },
+    "error": null,
+    "previous_sha256": "2af8f0d82a5492458ff9e172b6f47c8e5728ea88453883cb9ce9fd619f8d7dbe",
+    "request": {
+      "artifact_sha256": "5529a427adda5bed77d4b53bb8af4485a8cf2c97dab5f1ae126015bee09400a6",
+      "parser": "typed_artifact_or_declared_schema",
+      "proposal_type": "Network"
+    },
+    "requested_charges": {
+      "proposals": 1,
+      "tool_calls": 1
+    },
+    "result": {
+      "artifact_sha256": "5529a427adda5bed77d4b53bb8af4485a8cf2c97dab5f1ae126015bee09400a6",
+      "candidate_sha256": "71b15ac75c80ee336a24f41e1df147fca58779f24a1f121159f8e42da6e2a14a",
+      "no_op": false
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 4,
+    "session_sha256": "7b89b511fc37388748860fec02811edc53e693cf29e49ddbf0bdae54c11705c3",
+    "status": "succeeded",
+    "task_sha256": "c05353cadb0f074a964f99a2bd8bf1e218da196c0fadf83c10e4c26797eb8138",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 3,
+      "tool_calls": 3,
+      "weight_values": 0
+    },
+    "sha256": "851b8416dbd6c3a4559043b1e71ced8db01253f031d1d925f8d0160976314c55"
+  },
+  {
+    "action": "seal",
+    "charges": {},
+    "error": null,
+    "previous_sha256": "851b8416dbd6c3a4559043b1e71ced8db01253f031d1d925f8d0160976314c55",
+    "request": {
+      "candidate_sha256": "71b15ac75c80ee336a24f41e1df147fca58779f24a1f121159f8e42da6e2a14a"
+    },
+    "requested_charges": {},
+    "result": {
+      "selection": "candidate"
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 5,
+    "session_sha256": "7b89b511fc37388748860fec02811edc53e693cf29e49ddbf0bdae54c11705c3",
+    "status": "succeeded",
+    "task_sha256": "c05353cadb0f074a964f99a2bd8bf1e218da196c0fadf83c10e4c26797eb8138",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 3,
+      "tool_calls": 3,
+      "weight_values": 0
+    },
+    "sha256": "50eea9f376f0812ab0b765bc5f02ad73b68808953e99783e8b13536b12bfb73e"
+  },
+  {
+    "action": "heldout_evaluation",
+    "charges": {},
+    "error": null,
+    "previous_sha256": "50eea9f376f0812ab0b765bc5f02ad73b68808953e99783e8b13536b12bfb73e",
+    "request": {
+      "candidate_sha256": "71b15ac75c80ee336a24f41e1df147fca58779f24a1f121159f8e42da6e2a14a",
+      "evaluator_id": "analytic-construction-response/1",
+      "split_name": "test"
+    },
+    "requested_charges": {},
+    "result": {
+      "arms": {
+        "analytic": {
+          "artifact_sha256": "5529a427adda5bed77d4b53bb8af4485a8cf2c97dab5f1ae126015bee09400a6",
+          "candidate_sha256": "71b15ac75c80ee336a24f41e1df147fca58779f24a1f121159f8e42da6e2a14a",
+          "hidden_response": {
+            "absolute_tolerance": 1e-12,
+            "exact_array_equality": true,
+            "examples": 128,
+            "maximum_absolute_error": 0.0,
+            "mean_absolute_error": 0.0,
+            "output_dimension": 1,
+            "rmse": 0.0,
+            "within_tolerance": true
+          }
+        },
+        "random": {
+          "artifact_sha256": "8d88724ac68650fcfbb5800e8a643adc9e875427b3023344fcd01ce9fb07e030",
+          "candidate_sha256": "ad1155a50162593b8be2382170c47e75bb651a5f28053cc82dce4f6953e571d1",
+          "hidden_response": {
+            "absolute_tolerance": 1e-12,
+            "exact_array_equality": false,
+            "examples": 128,
+            "maximum_absolute_error": 1.5,
+            "mean_absolute_error": 0.9652171786831028,
+            "output_dimension": 1,
+            "rmse": 1.1280412204945103,
+            "within_tolerance": false
+          }
+        },
+        "zero": {
+          "artifact_sha256": "3b14a24c5223442ce2289bc964e2f49581d1b9867221121eaf24de3201f0a2b0",
+          "candidate_sha256": "f86e006044208e76685df575148d0b5119ac6a1fbf0a256f912245ff297df815",
+          "hidden_response": {
+            "absolute_tolerance": 1e-12,
+            "exact_array_equality": false,
+            "examples": 128,
+            "maximum_absolute_error": 1.0,
+            "mean_absolute_error": 0.8062790171936507,
+            "output_dimension": 1,
+            "rmse": 0.8443007600801499,
+            "within_tolerance": false
+          }
+        }
+      },
+      "formal_certificate": null,
+      "selected_arm": "analytic",
+      "selection_predeclared": true
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 6,
+    "session_sha256": "7b89b511fc37388748860fec02811edc53e693cf29e49ddbf0bdae54c11705c3",
+    "status": "succeeded",
+    "task_sha256": "c05353cadb0f074a964f99a2bd8bf1e218da196c0fadf83c10e4c26797eb8138",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 3,
+      "tool_calls": 3,
+      "weight_values": 0
+    },
+    "sha256": "dc94eb2e5f4fc807fae12b0be8f430d52d76713994231aecdfe9371f9bd9750b"
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "method": "gradient_descent",
+  "iterations": 200,
+  "step": 0.040045988083163515,
+  "objective": "mean target square error + lambda mean anchor square drift + ridge norm",
+  "lowering": {
+    "base_sha256": "f19e68352f9b54cd5274faf8ce7cc262af38b7ec9ed152e97633086a68abf990",
+    "behavioral_status": "not_checked",
+    "candidate_sha256": "48d7abdc8b2cc21316545abfe17dcd1755377c402905c56a4f8df60df08781c4",
+    "cast": "reject",
+    "command_count": 2,
+    "effective_edits": 50,
+    "native_dtypes": {
+      "layers.0.bias": "float64",
+      "layers.0.weight": "float64",
+      "layers.1.bias": "float64",
+      "layers.1.weight": "float64"
+    },
+    "numerics": "NumPy binary64 operations; explicit native endpoint projection",
+    "numpy_version": "2.5.3",
+    "program_sha256": "c495f991bed58b69f36dc60693685c8675de3a85b2cc15a83721e004fa1c9353",
+    "projections": {
+      "layers.0.bias": {
+        "dtype": "float64",
+        "effective_changed_cells": 0,
+        "maximum_rounding_error_exact": "0",
+        "requested_changed_cells": 0,
+        "rounded_cells": 0,
+        "touched_cells": 0
+      },
+      "layers.0.weight": {
+        "dtype": "float64",
+        "effective_changed_cells": 0,
+        "maximum_rounding_error_exact": "0",
+        "requested_changed_cells": 0,
+        "rounded_cells": 0,
+        "touched_cells": 0
+      },
+      "layers.1.bias": {
+        "dtype": "float64",
+        "effective_changed_cells": 2,
+        "maximum_rounding_error_exact": "0",
+        "requested_changed_cells": 2,
+        "rounded_cells": 0,
+        "touched_cells": 3
+      },
+      "layers.1.weight": {
+        "dtype": "float64",
+        "effective_changed_cells": 48,
+        "maximum_rounding_error_exact": "0",
+        "requested_changed_cells": 48,
+        "rounded_cells": 0,
+        "touched_cells": 72
+      }
+    },
+    "proposal_sha256": "7c8e477ceee9c39b315c8ae7a7174621133e3b827a7294cf98f53ae816badaca",
+    "requested_candidate_sha256": "48d7abdc8b2cc21316545abfe17dcd1755377c402905c56a4f8df60df08781c4",
+    "schema": "wsp-lowering/1",
+    "sha256": "6fb8328a0b54c1009e63e0692df9580cf078a1343a1006f0883022e543037ee2"
+  }
+}

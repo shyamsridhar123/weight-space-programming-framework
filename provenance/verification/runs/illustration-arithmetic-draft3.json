@@ -1,0 +1,206 @@
+{
+  "schema": "wspf-review-receipt/1",
+  "review": "illustration arithmetic and status, draft.3",
+  "reviewed_at_utc": "2026-11-07T14:37:44.187Z",
+  "reviewer": "/root/generic_proofs_v2",
+  "outcome": "passed; no artifact corrections required",
+  "inputs_sha256": {
+    "artifacts/explanations/edit-retention/index.html": "9c1f67dced42fefccd91a7fc5c1279ef59ea62fc75d488cb79bd6c337a14d7b0",
+    "artifacts/explanations/edit-retention/source.json": "bdb202f6da235a07dc5a68bc65f0c16059cf342fb37821dd4568e302ce82d7cb",
+    "docs/weight-space/v2/worked-example.md": "48e60de56987fcb7f9985eb92ad3860b20608f7af8b92df0a59b8b938db46cf9",
+    "examples/edit_retention.py": "c171f586a43e7c07df5a585c71c20ad7e5b9d57cdb5e264caaab32739c41c1b6",
+    "examples/session_edit.py": "a594a529a79878a088cbbf399b766a34bbbf6c5f6f23796526866dc9f0db76be"
+  },
+  "execution": {
+    "runtime": "v24.21.0",
+    "method": "Executed original inline script unchanged with node:vm and a minimal DOM stub; independent integer arithmetic oracle.",
+    "browser_initialized": false,
+    "source_documents": "Read only; examples and scientific/proof code were not executed.",
+    "slider_grid": {
+      "integer_min": -10,
+      "integer_max": 30,
+      "step": 1,
+      "denominator": 20,
+      "protected_sets": [
+        "first",
+        "target",
+        "both"
+      ]
+    },
+    "checked_render_states": 166,
+    "checks": [
+      "Every slider position under each protected set: exact output rows, candidate weights, target/protected statuses, preset flags, accessible value text and diagram state.",
+      "All presets under all protected sets; no-op misses target and preserves protected outputs; input at zero exits no-op and becomes (0,1).",
+      "All ordered protected-set transitions for each preset retain the edit; reset restores target-only, first protection and system theme.",
+      "Both slider endpoints, target/protection line endpoints, marker coordinates and equal coefficient scale.",
+      "Source manifest numerical cases and slider declarations; initial static output table and three-case static comparison.",
+      "Exact dot products and the minimum-norm square-completion identity on the displayed slider grid.",
+      "No-bias span premise checked with exact examples; an editable-bias counterexample demonstrates why the single augmented anchor is insufficient."
+    ]
+  },
+  "inspected_claims": [
+    "Target-only minimum norm is for exact equality without ridge; numerical compiler uses positive ridge and its stored endpoint need not equal the ideal minimizer.",
+    "The worked example and artifact distinguish target success, protection and no-op; both alternative protected sets conflict with a target gain of one.",
+    "Protection outside supplied anchors requires span/feature premises; the x2=0 extension explicitly assumes no bias change.",
+    "Artifact and manifest scope this as supplied illustrative arithmetic; real implementation must check realized stored endpoints and cannot infer native execution certification."
+  ],
+  "edits": [],
+  "selected_cases": [
+    {
+      "label": "slider -10/20, first",
+      "delta": [
+        "-0.5",
+        "1.5"
+      ],
+      "protection": "first",
+      "target": {
+        "output": "3",
+        "change": "+1",
+        "condition": "Met"
+      },
+      "protected": [
+        {
+          "output": "0.5",
+          "change": "-0.5",
+          "condition": "Violated"
+        }
+      ]
+    },
+    {
+      "label": "slider 30/20, first",
+      "delta": [
+        "1.5",
+        "-0.5"
+      ],
+      "protection": "first",
+      "target": {
+        "output": "3",
+        "change": "+1",
+        "condition": "Met"
+      },
+      "protected": [
+        {
+          "output": "2.5",
+          "change": "+1.5",
+          "condition": "Violated"
+        }
+      ]
+    },
+    {
+      "label": "target-preset, first",
+      "delta": [
+        "0.5",
+        "0.5"
+      ],
+      "protection": "first",
+      "target": {
+        "output": "3",
+        "change": "+1",
+        "condition": "Met"
+      },
+      "protected": [
+        {
+          "output": "1.5",
+          "change": "+0.5",
+          "condition": "Violated"
+        }
+      ]
+    },
+    {
+      "label": "protected-preset, first",
+      "delta": [
+        "0",
+        "1"
+      ],
+      "protection": "first",
+      "target": {
+        "output": "3",
+        "change": "+1",
+        "condition": "Met"
+      },
+      "protected": [
+        {
+          "output": "1",
+          "change": "0",
+          "condition": "Met"
+        }
+      ]
+    },
+    {
+      "label": "noop-preset, first",
+      "delta": [
+        "0",
+        "0"
+      ],
+      "protection": "first",
+      "target": {
+        "output": "2",
+        "change": "0",
+        "condition": "Missed"
+      },
+      "protected": [
+        {
+          "output": "1",
+          "change": "0",
+          "condition": "Met"
+        }
+      ]
+    },
+    {
+      "label": "target-preset, target",
+      "delta": [
+        "0.5",
+        "0.5"
+      ],
+      "protection": "target",
+      "target": {
+        "output": "3",
+        "change": "+1",
+        "condition": "Met"
+      },
+      "protected": [
+        {
+          "output": "3",
+          "change": "+1",
+          "condition": "Violated"
+        }
+      ]
+    },
+    {
+      "label": "noop-preset, both",
+      "delta": [
+        "0",
+        "0"
+      ],
+      "protection": "both",
+      "target": {
+        "output": "2",
+        "change": "0",
+        "condition": "Missed"
+      },
+      "protected": [
+        {
+          "output": "1",
+          "change": "0",
+          "condition": "Met"
+        },
+        {
+          "output": "1",
+          "change": "0",
+          "condition": "Met"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Minimal DOM execution is not browser validation; no layout, keyboard, screen-reader, focus, contrast or actual SVG rendering check was performed.",
+    "No scientific experiment, framework example, proof build or native floating-point computation was rerun.",
+    "Polynomial/spanning prose was inspected against the worked example; the executable grid checks are not a formal proof for all real inputs.",
+    "Review covers arithmetic and local interaction declarations at the recorded input hashes; publication and packaging verification remain separate."
+  ],
+  "previous_review": {
+    "path": ".runs/illustration-arithmetic-draft3-before-layout.json",
+    "sha256": "e987fb7664bec4842cf15e3b5127ac6ccbfbbc91e0b8ec2a92a6eaa561c6e78d",
+    "reason": "Preserved before the narrow-screen CSS layout change; this review binds the frozen final HTML."
+  }
+}

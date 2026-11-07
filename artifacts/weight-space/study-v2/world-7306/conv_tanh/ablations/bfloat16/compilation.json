@@ -1,0 +1,85 @@
+{
+  "behavioral_status": "supplied_features_only",
+  "compiler": "generic-frozen-feature-readout/1",
+  "condition_number": 44.570520686161565,
+  "desired_delta_sha256": "1b3b791eefe819f75401fd38ae108f0dfcd0e52441c1ea08bfd60a62817a1caa",
+  "edit_cells": 110,
+  "feature_extractor_verified": false,
+  "fit_rank": 55,
+  "head": {
+    "bias": "head.bias",
+    "feature_id": "study-frozen-features/11993cda9cbc0cb260ea0c37b8694801860a0d873d2e28dfd6492a8826db54b0",
+    "weight": "head.weight"
+  },
+  "lowering": {
+    "base_sha256": "11dc57aa5c0a36e3336e7851dff7eb01704e551fb659f6ce5729c960a849352c",
+    "behavioral_status": "not_checked",
+    "candidate_sha256": "53d14375fa5dacce2b94fef213bc0a01521cedbcdff9356ef405bb4237033a71",
+    "cast": "round",
+    "command_count": 2,
+    "effective_edits": 110,
+    "native_dtypes": {
+      "conv.bias": "bfloat16",
+      "conv.weight": "bfloat16",
+      "head.bias": "bfloat16",
+      "head.weight": "bfloat16"
+    },
+    "numerics": "NumPy binary64 operations; explicit native endpoint projection",
+    "numpy_version": "2.5.3",
+    "program_sha256": "7c08b445dac93cdfe54c00e34ee49450f04b3bd27c56a41a5a9fac74b87957b6",
+    "projections": {
+      "conv.bias": {
+        "dtype": "bfloat16",
+        "effective_changed_cells": 0,
+        "maximum_rounding_error_exact": "0",
+        "requested_changed_cells": 0,
+        "rounded_cells": 0,
+        "touched_cells": 0
+      },
+      "conv.weight": {
+        "dtype": "bfloat16",
+        "effective_changed_cells": 0,
+        "maximum_rounding_error_exact": "0",
+        "requested_changed_cells": 0,
+        "rounded_cells": 0,
+        "touched_cells": 0
+      },
+      "head.bias": {
+        "dtype": "bfloat16",
+        "effective_changed_cells": 2,
+        "maximum_rounding_error_exact": "8175321726767/36028797018963968",
+        "requested_changed_cells": 2,
+        "rounded_cells": 2,
+        "touched_cells": 3
+      },
+      "head.weight": {
+        "dtype": "bfloat16",
+        "effective_changed_cells": 108,
+        "maximum_rounding_error_exact": "6687804383937/9007199254740992",
+        "requested_changed_cells": 108,
+        "rounded_cells": 108,
+        "touched_cells": 162
+      }
+    },
+    "proposal_sha256": "e1ade26d304d1ea0625877d7b9e78b07b757ef1b40255d4f091984b499a2a506",
+    "requested_candidate_sha256": "4da72aa3c38d689a4414361ed7bcf2bc3c9183f6a3ebd372bbc0982861f216a8",
+    "schema": "wsp-lowering/1",
+    "sha256": "c3dcc57667f9f4c4f9d2e2410b0c25a2954f6ae4adfd4392c39f96f64e8d6015",
+    "torch_version": "2.8.0+cpu"
+  },
+  "no_op": false,
+  "nullspace_dimension": null,
+  "nullspace_rtol": 1e-12,
+  "optimizer_verified": false,
+  "retention": "soft",
+  "retention_feature_sha256": "5a46c4a05471dbf76e123e9dd0eeea4b7a8d950b546d105f2192a3bed9e406e2",
+  "retention_rank": null,
+  "retention_rmse_after_projection": 0.03897291440880622,
+  "retention_rows": 64,
+  "retention_weight": 8.0,
+  "ridge": 0.01,
+  "singular_cutoff": null,
+  "target_feature_sha256": "672b76b089ffff33d39d0399c60ad0030f9c8a94d34ee31abc045412996b2506",
+  "target_rmse_after_projection": 0.08614389940652398,
+  "target_rows": 64
+}

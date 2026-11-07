@@ -1,0 +1,170 @@
+{
+  "source_seed": 71039,
+  "source_sha256": "f6a01c92dc6e658b14dc8034efcc34dde75cdfad62c1a0bd94b557e26925681f",
+  "target_sha256": "047d2f5938535434e02007b2b747211d666088d6667e8b04d06b27566c97ac07",
+  "compilation": {
+    "target_only": {
+      "compiler": "frozen-feature-ridge-least-squares/1",
+      "target_examples": 72,
+      "retention_examples": 0,
+      "retention_weight": 0.0,
+      "ridge": 0.01,
+      "rank": 16,
+      "condition_number": 17.93007974142703,
+      "edit_cells": 16,
+      "target_rmse": 0.032589308799154386,
+      "retention_rmse": null,
+      "edit_l2": 0.5637715740844431,
+      "semantics": "fit to supplied examples; admission and generalization unproven"
+    },
+    "retention": {
+      "compiler": "frozen-feature-ridge-least-squares/1",
+      "target_examples": 72,
+      "retention_examples": 184,
+      "retention_weight": 8.0,
+      "ridge": 0.01,
+      "rank": 16,
+      "condition_number": 27.13840654313563,
+      "edit_cells": 16,
+      "target_rmse": 0.17792584476406595,
+      "retention_rmse": 0.05873921639111133,
+      "edit_l2": 0.9644830878738813,
+      "semantics": "fit to supplied examples; admission and generalization unproven"
+    }
+  },
+  "metrics": {
+    "target_only": {
+      "validation": {
+        "target_gain_fraction": 0.9743459480296202,
+        "target_error_rmse": 0.054939854552231875,
+        "retention_rmse": 0.40650465834647165,
+        "maximum_observed_drift": 0.9888458929925432
+      },
+      "test": {
+        "target_gain_fraction": 0.9814903330557506,
+        "target_error_rmse": 0.056372712334001124,
+        "retention_rmse": 0.4020795893408152,
+        "maximum_observed_drift": 1.0167967238327915
+      }
+    },
+    "retention": {
+      "validation": {
+        "target_gain_fraction": 0.6785958972106175,
+        "target_error_rmse": 0.2993300783638242,
+        "retention_rmse": 0.05723734373668604,
+        "maximum_observed_drift": 0.9030218978531084
+      },
+      "test": {
+        "target_gain_fraction": 0.669057243261795,
+        "target_error_rmse": 0.3037558229840075,
+        "retention_rmse": 0.06209104169037436,
+        "maximum_observed_drift": 0.9346449558734444
+      }
+    }
+  },
+  "controls": {
+    "exact_rational_point_checks": true,
+    "exact_point_count": 5,
+    "known_transport_error": 3.503540682557932e-16,
+    "inferred_known_gauge_error": 3.503540682557932e-16,
+    "raw_permuted_error": 0.5550300273849675,
+    "inferred_gauge": {
+      "permutation": [
+        10,
+        5,
+        9,
+        8,
+        7,
+        4,
+        14,
+        13,
+        15,
+        0,
+        12,
+        11,
+        6,
+        3,
+        2,
+        1
+      ],
+      "scales": [
+        2.0,
+        1.0,
+        1.0,
+        1.0,
+        0.5,
+        1.0,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        2.0,
+        0.5,
+        1.0,
+        1.0,
+        0.5
+      ]
+    },
+    "inference_diagnostics": {
+      "mean_matching_cost": 0.0,
+      "relative_parameter_residual": 0.0
+    }
+  },
+  "admission": {
+    "target_only": {
+      "accepted": true,
+      "issues": [],
+      "bounds": [
+        "2239208732329234099971906340046836859/664613997892457936451903530140172288",
+        "0",
+        "0"
+      ]
+    },
+    "retention": {
+      "accepted": false,
+      "issues": [
+        "behavioral-drift"
+      ],
+      "bounds": [
+        "4156699418737465866847972027444749419/664613997892457936451903530140172288",
+        "0",
+        "0"
+      ]
+    }
+  },
+  "alignment": {
+    "mean_matching_cost": 0.5640174596241454,
+    "relative_parameter_residual": 0.7606090265140107
+  },
+  "transfer": {
+    "raw": {
+      "normalized_target_delta_rmse": 0.5264543748852722,
+      "admitted": false,
+      "admission_issues": [
+        "behavioral-drift"
+      ],
+      "bounds": [
+        "266152047285754995193945364219782251/41538374868278621028243970633760768",
+        "0",
+        "0"
+      ]
+    },
+    "aligned": {
+      "normalized_target_delta_rmse": 0.4588598387751383,
+      "admitted": false,
+      "admission_issues": [
+        "behavioral-drift"
+      ],
+      "bounds": [
+        "959549312651982349495046260745927239/166153499473114484112975882535043072",
+        "0",
+        "0"
+      ]
+    }
+  },
+  "H1_raw_minus_aligned": 0.06759453611013394,
+  "H2_retention_rmse_reduction": 0.33998854765044084,
+  "H2_target_gain_fraction": 0.669057243261795,
+  "target_seed": 71040
+}

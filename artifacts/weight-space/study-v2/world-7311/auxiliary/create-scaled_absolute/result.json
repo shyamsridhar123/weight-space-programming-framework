@@ -1,0 +1,64 @@
+{
+  "case_id": "create-scaled_absolute",
+  "family": "analytic_creation",
+  "mode": "create",
+  "formula": "scaled_absolute",
+  "status": "succeeded",
+  "candidate_ids": [
+    "27a0f7e076f1049a12c487ba429edab23dda8d05575c3345d4af1d8511e97a4a",
+    "7778bbddb091d08e8749948e663f5f2e3a6b2e0f86fa89c932412b6c9699ba27",
+    "2faeac858466934870cfc2e777d613835de9b7cd906f497f164e150c8dd8570b"
+  ],
+  "selected_candidate_id": "2faeac858466934870cfc2e777d613835de9b7cd906f497f164e150c8dd8570b",
+  "receipt_sha256": "e6c23b340ffd6a18fbcbcd8d37089d647447f8b94c33ac17485fcc01ed0c5461",
+  "metrics": {
+    "arms": {
+      "analytic": {
+        "artifact_sha256": "2f3470541e9631d7485ac6b1fc2cc57dc02e5da10338da872df316a742d11c49",
+        "candidate_sha256": "2faeac858466934870cfc2e777d613835de9b7cd906f497f164e150c8dd8570b",
+        "hidden_response": {
+          "absolute_tolerance": 1e-12,
+          "exact_array_equality": true,
+          "examples": 128,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "output_dimension": 1,
+          "rmse": 0.0,
+          "within_tolerance": true
+        }
+      },
+      "random": {
+        "artifact_sha256": "45e0fef91b63cd4a439d86605b7b1e119b5d57a0f92772f47602caa2e6dc6740",
+        "candidate_sha256": "7778bbddb091d08e8749948e663f5f2e3a6b2e0f86fa89c932412b6c9699ba27",
+        "hidden_response": {
+          "absolute_tolerance": 1e-12,
+          "exact_array_equality": false,
+          "examples": 128,
+          "maximum_absolute_error": 4.480630485062685,
+          "mean_absolute_error": 1.7778318160842825,
+          "output_dimension": 1,
+          "rmse": 2.364179860741311,
+          "within_tolerance": false
+        }
+      },
+      "zero": {
+        "artifact_sha256": "3b14a24c5223442ce2289bc964e2f49581d1b9867221121eaf24de3201f0a2b0",
+        "candidate_sha256": "27a0f7e076f1049a12c487ba429edab23dda8d05575c3345d4af1d8511e97a4a",
+        "hidden_response": {
+          "absolute_tolerance": 1e-12,
+          "exact_array_equality": false,
+          "examples": 128,
+          "maximum_absolute_error": 4.965565306778106,
+          "mean_absolute_error": 2.1412522604130126,
+          "output_dimension": 1,
+          "rmse": 2.4910897780267574,
+          "within_tolerance": false
+        }
+      }
+    },
+    "formal_certificate": null,
+    "selected_arm": "analytic",
+    "selection_predeclared": true
+  },
+  "error": null
+}

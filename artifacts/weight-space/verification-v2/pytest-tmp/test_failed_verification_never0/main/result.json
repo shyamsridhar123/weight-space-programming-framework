@@ -1,0 +1,120 @@
+{
+  "seed": 900007,
+  "family": "relu_mlp",
+  "base_sha256": "f19e68352f9b54cd5274faf8ce7cc262af38b7ec9ed152e97633086a68abf990",
+  "selected_arm": "soft_retention",
+  "arms": {
+    "gradient": {
+      "delta_l2": 0.6292149212563307,
+      "edited_task_retain_rmse": 0.424231211918244,
+      "edited_task_target_rmse": 0.48211599110958514,
+      "effective_changed_cells": 50,
+      "no_op": false,
+      "original_retain_rmse": 0.42228643152790846,
+      "original_target_rmse": 0.47059944162972267,
+      "retain_nrmse": 0.1912481813423667,
+      "retain_rmse": 0.07407010213314422,
+      "target_gain_fraction": 0.6326231254230031,
+      "target_nrmse": 0.4106459476745208,
+      "target_rmse": 0.1590424916530981
+    },
+    "matched_random": {
+      "delta_l2": 0.7266367450970485,
+      "edited_task_retain_rmse": 0.4641265052810167,
+      "edited_task_target_rmse": 0.7078895438370524,
+      "effective_changed_cells": 50,
+      "no_op": false,
+      "original_retain_rmse": 0.42228643152790846,
+      "original_target_rmse": 0.47059944162972267,
+      "retain_nrmse": 0.5696858316039395,
+      "retain_rmse": 0.22063837383723803,
+      "target_gain_fraction": -0.35594424396080504,
+      "target_nrmse": 1.4207045579968196,
+      "target_rmse": 0.5502365093002651
+    },
+    "no_op": {
+      "delta_l2": 0.0,
+      "edited_task_retain_rmse": 0.42228643152790846,
+      "edited_task_target_rmse": 0.5822302529720698,
+      "effective_changed_cells": 0,
+      "no_op": true,
+      "original_retain_rmse": 0.42228643152790846,
+      "original_target_rmse": 0.47059944162972267,
+      "retain_nrmse": 0.0,
+      "retain_rmse": 0.0,
+      "target_gain_fraction": 0.0,
+      "target_nrmse": 1.0,
+      "target_rmse": 0.38729833462074165
+    },
+    "nullspace": {
+      "delta_l2": 0.9207147456644291,
+      "edited_task_retain_rmse": 0.45413859975012266,
+      "edited_task_target_rmse": 0.4674093887579272,
+      "effective_changed_cells": 50,
+      "no_op": false,
+      "original_retain_rmse": 0.42228643152790846,
+      "original_target_rmse": 0.47059944162972267,
+      "retain_nrmse": 0.40832365921748737,
+      "retain_rmse": 0.1581430732011801,
+      "target_gain_fraction": 0.9059600877666216,
+      "target_nrmse": 0.2792770484101442,
+      "target_rmse": 0.10816353574704511
+    },
+    "soft_retention": {
+      "delta_l2": 0.7266367450970487,
+      "edited_task_retain_rmse": 0.4251311677436,
+      "edited_task_target_rmse": 0.48386843763096526,
+      "effective_changed_cells": 50,
+      "no_op": false,
+      "original_retain_rmse": 0.42228643152790846,
+      "original_target_rmse": 0.47059944162972267,
+      "retain_nrmse": 0.20897877971693737,
+      "retain_rmse": 0.08093713335544467,
+      "target_gain_fraction": 0.6480738462533961,
+      "target_nrmse": 0.40424207575376797,
+      "target_rmse": 0.15656228272306602
+    }
+  },
+  "usage": {
+    "tool_calls": 17,
+    "weight_values": 2898,
+    "feedback_calls": 5,
+    "feedback_examples": 160,
+    "execution_calls": 2,
+    "execution_examples": 128,
+    "proposals": 5,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "failures": [
+    {
+      "arm": "unconstrained",
+      "status": "failed",
+      "type": "ValueError",
+      "message": "Endpoint retention failed exact recomputation"
+    }
+  ],
+  "real_domain_bound": {
+    "output_bounds": [
+      8.205122347745203,
+      4.102561173872601,
+      0.0
+    ],
+    "scope": "real arithmetic on all [-1,1]^16; not an IEEE or task-loss proof"
+  },
+  "validation_model_example_executions": 320,
+  "validation_execution_count_complete": true,
+  "validation_feedback_attempts": {
+    "attempted": 5,
+    "completed": 5
+  },
+  "test_accounting": {
+    "unique_test_examples": 64,
+    "evaluated_splits": {
+      "test_retain": 32,
+      "test_target": 32
+    },
+    "candidate_evaluations": 5,
+    "model_example_executions": 640
+  }
+}

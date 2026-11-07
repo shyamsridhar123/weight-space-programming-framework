@@ -1,0 +1,102 @@
+COMMAND ["C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.venv\\Scripts\\python.exe", "-m", "pip", "install", "--index-url", "https://redacted.invalid/environment", "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\dist\\weight_space_programming_framework-0.2.0.dev1-py3-none-any.whl"]
+Looking in indexes: https://redacted.invalid/environment
+Processing C:/public-user\code\rlcd\exports\weight-space-programming-framework\dist\weight_space_programming_framework-0.2.0.dev1-py3-none-any.whl
+Collecting numpy<3,>=2.0 (from weight-space-programming-framework==0.2.0.dev1)
+  Downloading https://redacted.invalid/environment (6.6 kB)
+Downloading https://redacted.invalid/environment (12.6 MB)
+   ---------------------------------------- 12.6/12.6 MB 87.9 MB/s eta 0:00:00
+Installing collected packages: numpy, weight-space-programming-framework
+Successfully installed numpy-2.5.4 weight-space-programming-framework-0.2.0.dev1
+COMMAND ["C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.venv\\Scripts\\python.exe", "-m", "pip", "check"]
+No broken requirements found.
+COMMAND ["C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.venv\\Scripts\\python.exe", "-I", "-c", "\nimport importlib.metadata, importlib.util, json, sys\nfrom pathlib import Path\nimport rlcd.weight_space as wsp\nfrom rlcd.weight_space import TensorArtifact, apply_program, difference, rollback\nlocation=Path(wsp.__file__).resolve()\nassert location.is_relative_to(Path(sys.prefix).resolve()), str(location)\nassert importlib.util.find_spec('torch') is None, 'Torch should be absent from core-only environment'\nparent=TensorArtifact('example-linear-readout/1',{'readout.weight':[[1.0,0.0]],'readout.bias':[0.0]})\nrequested=TensorArtifact('example-linear-readout/1',{'readout.weight':[[1.0,0.5]],'readout.bias':[0.0]})\nprogram=difference(parent,requested,'Change one readout coefficient')\ncandidate=apply_program(parent,program)\nassert candidate.sha256 == requested.sha256\nassert apply_program(candidate,rollback(parent,program)).sha256 == parent.sha256\nprint(json.dumps({'status':'passed','import_path':str(location),'distribution':importlib.metadata.version('weight-space-programming-framework'),'numpy':importlib.metadata.version('numpy'),'torch_available':False,'cwd':str(Path.cwd()),'checks':['installed package under venv','Torch absent','README generic edit','README rollback']},indent=2))\n"]
+{
+  "status": "passed",
+  "import_path": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.venv\\Lib\\site-packages\\rlcd\\weight_space\\__init__.py",
+  "distribution": "0.2.0.dev1",
+  "numpy": "2.5.4",
+  "torch_available": false,
+  "cwd": "C:/public-user\\code\\RLCD\\exports\\wspf-wheel-smoke",
+  "checks": [
+    "installed package under venv",
+    "Torch absent",
+    "README generic edit",
+    "README rollback"
+  ]
+}
+COMMAND ["C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.venv\\Scripts\\python.exe", "-I", "-m", "rlcd.weight_space", "--help"]
+usage: __main__.py [-h]
+                   {inspect,diff,apply,compose,rollback,interpolate,compile,lower,verify-lowering,compile-features,certify-retention,verify-retention,certify,verify,demo,freeze,verify-freeze,synthetic,rts-prepare,rts-select,rts-summarize}
+                   ...
+
+Generic tensor programs with explicit architecture-specific behavioral checks.
+
+positional arguments:
+  {inspect,diff,apply,compose,rollback,interpolate,compile,lower,verify-lowering,compile-features,certify-retention,verify-retention,certify,verify,demo,freeze,verify-freeze,synthetic,rts-prepare,rts-select,rts-summarize}
+    inspect             Inspect shapes, architecture, interface, and content
+                        identity
+    diff                Create an exact-parent atomic edit program
+    apply               Apply to a new artifact; unchecked behavior is
+                        explicitly reported
+    compose             Compose a sequence of programs with exact intermediate
+                        parents
+    rollback            Create the exact inverse program for an applied edit
+    interpolate         Coordinate interpolation; no behavioral claim
+    compile             Compile examples into a frozen-readout ReLU edit
+    lower               Lower/check data-only tensor blocks and low-rank
+                        proposals
+    verify-lowering     Lower/check data-only tensor blocks and low-rank
+                        proposals
+    compile-features    Compile/check a readout over explicitly supplied
+                        frozen features
+    certify-retention   Compile/check a readout over explicitly supplied
+                        frozen features
+    verify-retention    Compile/check a readout over explicitly supplied
+                        frozen features
+    certify             Compute/check an exact rational certificate for a
+                        registered backend
+    verify              Compute/check an exact rational certificate for a
+                        registered backend
+    demo                Run a generic convolution/Tanh example and a proved
+                        ReLU specialization
+
+options:
+  -h, --help            show this help message and exit
+COMMAND ["C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.venv\\Scripts\\weight-space.exe", "--help"]
+usage: weight-space [-h]
+                    {inspect,diff,apply,compose,rollback,interpolate,compile,lower,verify-lowering,compile-features,certify-retention,verify-retention,certify,verify,demo,freeze,verify-freeze,synthetic,rts-prepare,rts-select,rts-summarize}
+                    ...
+
+Generic tensor programs with explicit architecture-specific behavioral checks.
+
+positional arguments:
+  {inspect,diff,apply,compose,rollback,interpolate,compile,lower,verify-lowering,compile-features,certify-retention,verify-retention,certify,verify,demo,freeze,verify-freeze,synthetic,rts-prepare,rts-select,rts-summarize}
+    inspect             Inspect shapes, architecture, interface, and content
+                        identity
+    diff                Create an exact-parent atomic edit program
+    apply               Apply to a new artifact; unchecked behavior is
+                        explicitly reported
+    compose             Compose a sequence of programs with exact intermediate
+                        parents
+    rollback            Create the exact inverse program for an applied edit
+    interpolate         Coordinate interpolation; no behavioral claim
+    compile             Compile examples into a frozen-readout ReLU edit
+    lower               Lower/check data-only tensor blocks and low-rank
+                        proposals
+    verify-lowering     Lower/check data-only tensor blocks and low-rank
+                        proposals
+    compile-features    Compile/check a readout over explicitly supplied
+                        frozen features
+    certify-retention   Compile/check a readout over explicitly supplied
+                        frozen features
+    verify-retention    Compile/check a readout over explicitly supplied
+                        frozen features
+    certify             Compute/check an exact rational certificate for a
+                        registered backend
+    verify              Compute/check an exact rational certificate for a
+                        registered backend
+    demo                Run a generic convolution/Tanh example and a proved
+                        ReLU specialization
+
+options:
+  -h, --help            show this help message and exit

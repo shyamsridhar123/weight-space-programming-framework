@@ -1,0 +1,52 @@
+{
+  "schema": "local-workflow-smoke-execution/1",
+  "reviewed_at": "2026-11-07T14:27:30.981901+00:00",
+  "status": "passed",
+  "workflow_sha256": "b056aa34b21b385cc15681de3a475fb447ca8fbceb0ff87869522bc517b4c059",
+  "workflow_unchanged": true,
+  "wheel_sha256": "782e99b33d005787b15382087d68f4e3e0ac374e3e1fa3916c2c724415aa8d53",
+  "copied_examples": [
+    {
+      "source": "examples/edit_retention.py",
+      "sha256": "c171f586a43e7c07df5a585c71c20ad7e5b9d57cdb5e264caaab32739c41c1b6"
+    },
+    {
+      "source": "examples/session_edit.py",
+      "sha256": "a594a529a79878a088cbbf399b766a34bbbf6c5f6f23796526866dc9f0db76be"
+    }
+  ],
+  "commands": [
+    {
+      "label": "copy-workflow-inputs",
+      "command": [
+        "C:/public-user\\code\\RLCD\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-"
+      ],
+      "cwd": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework",
+      "exit_code": 0,
+      "stdout": ".runs/ci-draft3-validation/local-execution/copy-workflow-inputs.stdout.log",
+      "stderr": ".runs/ci-draft3-validation/local-execution/copy-workflow-inputs.stderr.log"
+    },
+    {
+      "label": "execute-workflow-smoke",
+      "command": [
+        "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv\\Scripts\\python.exe",
+        "-I",
+        "-",
+        "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\ci-draft3-validation\\local-execution"
+      ],
+      "cwd": "C:/public-user\\AppData\\Local\\Temp\\wspf-draft3-smoke-wrapper-t60xdzx3\\wsp-wheel-smoke",
+      "exit_code": 0,
+      "stdout": ".runs/ci-draft3-validation/local-execution/execute-workflow-smoke.stdout.log",
+      "stderr": ".runs/ci-draft3-validation/local-execution/execute-workflow-smoke.stderr.log"
+    }
+  ],
+  "limitations": [
+    "Used preserved draft.2 wheel in an existing isolated core-only virtual environment; this was not a fresh installation or draft.3 wheel check.",
+    "Executed the exact current workflow Python heredocs locally on Windows; hosted Bash jobs, dependency installation, and CLI smoke were not run.",
+    "No scientific source, frozen evidence, historical validator, or historical receipt was changed."
+  ],
+  "external_staging_directory": "C:/public-user\\AppData\\Local\\Temp\\wspf-draft3-smoke-wrapper-t60xdzx3"
+}

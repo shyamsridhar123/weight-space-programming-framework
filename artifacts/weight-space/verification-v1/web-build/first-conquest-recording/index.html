@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="A 90-second recorded Crown & Charter demonstration: change a policy weight, inspect a changed decision, compare outcomes, then play First Conquest.">
+  <title>First Conquest · A weight becomes a choice</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ground: #101b16;
+      --surface: #19271f;
+      --surface-raised: #213329;
+      --ink: #f3eddf;
+      --muted: #bec7b7;
+      --gold: #e2bd73;
+      --line: #405044;
+      --focus: #ffe2a0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-synthesis: none;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 1.5rem; }
+    body { margin: 0; background: var(--ground); color: var(--ink); line-height: 1.55; }
+    a { color: var(--gold); text-underline-offset: .22em; }
+    a:hover { color: var(--ink); }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 5px; }
+    .skip { position: absolute; z-index: 3; left: 1rem; top: -8rem; padding: .8rem 1rem; background: var(--ink); color: var(--ground); }
+    .skip:focus { top: 1rem; }
+    .shell { max-width: 1280px; margin: auto; padding: 0 clamp(1rem, 3.5vw, 3rem); }
+    .masthead { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.3rem; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; flex-wrap: wrap; column-gap: .85rem; align-items: baseline; }
+    .brand strong { font-family: Georgia, "Times New Roman", serif; letter-spacing: .025em; font-size: 1.15rem; }
+    .brand span { color: var(--muted); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
+    .game-link { display: inline-flex; align-items: center; gap: .6rem; padding: .6rem .9rem; border: 1px solid var(--gold); border-radius: .35rem; text-decoration: none; font-size: .86rem; font-weight: 650; white-space: nowrap; }
+    .game-link:hover { background: var(--gold); color: var(--ground); }
+    .intro { padding: clamp(2rem, 5vw, 3.8rem) 0 1.7rem; max-width: 57rem; }
+    .eyebrow { margin: 0 0 .75rem; font-size: .75rem; color: var(--gold); text-transform: uppercase; letter-spacing: .16em; font-weight: 700; }
+    h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: clamp(2.15rem, 5vw, 4.2rem); letter-spacing: -.035em; line-height: 1.09; }
+    .lead { max-width: 48rem; margin: 1rem 0 0; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.13rem); }
+    .film { margin: 0; }
+    .screen { overflow: hidden; border: 1px solid var(--line); border-radius: .65rem; background: #070d09; }
+    video { display: block; width: 100%; height: auto; max-height: calc(100svh - 3.5rem); aspect-ratio: 1280 / 880; object-fit: contain; background: #070d09; }
+    .film-caption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.25rem; padding: .85rem .1rem; color: var(--muted); font-size: .8rem; }
+    .play-toggle { min-width: 6.7rem; padding: .55rem .9rem; border: 1px solid var(--gold); border-radius: .35rem; background: var(--gold); color: var(--ground); font-weight: 700; cursor: pointer; }
+    .play-toggle:hover { background: #f3d9a8; }
+    .film-caption p { margin: 0; }
+    .film-caption strong { color: var(--ink); font-weight: 600; }
+    .film-caption nav { display: flex; gap: 1.2rem; }
+    .film-error { margin: .25rem 0 1rem; padding: .8rem 1rem; border: 1px solid var(--gold); border-radius: .35rem; color: var(--ink); font-size: .9rem; }
+    .study { padding: 1.6rem 0 0; }
+    .section-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .3rem 1rem; margin-bottom: .85rem; }
+    h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: 1.65rem; letter-spacing: -.015em; }
+    .hint { margin: 0; color: var(--muted); font-size: .8rem; }
+    .chapters { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .55rem; }
+    .chapter { display: flex; flex-direction: column; align-items: flex-start; gap: .25rem; min-height: 5.2rem; padding: .75rem .85rem; border: 1px solid var(--line); border-radius: .4rem; background: var(--surface); color: var(--ink); text-align: left; cursor: pointer; }
+    .chapter:hover { background: var(--surface-raised); border-color: var(--muted); }
+    .chapter[aria-current="true"] { border-color: var(--gold); background: #303526; box-shadow: inset 0 0 0 1px var(--gold); }
+    .chapter time { color: var(--gold); font-variant-numeric: tabular-nums; font-size: .74rem; letter-spacing: .04em; }
+    .chapter span { font-size: .84rem; line-height: 1.35; font-weight: 600; }
+    .chapter-note { margin-top: .9rem; padding: 1.1rem 1.3rem; border-left: 3px solid var(--gold); border-radius: 0 .4rem .4rem 0; background: var(--surface); min-height: 8.2rem; }
+    .chapter-note .eyebrow { margin-bottom: .25rem; font-size: .66rem; }
+    .chapter-note h3 { margin: 0 0 .35rem; font-size: 1.05rem; font-weight: 650; }
+    .chapter-note p:last-child { margin: 0; max-width: 66rem; color: var(--muted); font-size: .94rem; }
+    .meaning { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.6rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
+    .meaning h3 { margin: 0 0 .4rem; font-size: .86rem; color: var(--gold); }
+    .meaning p { margin: 0; color: var(--muted); font-size: .85rem; }
+    .meaning strong { color: var(--ink); font-weight: 600; }
+    footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .65rem 1.5rem; padding: 1.6rem 0 2rem; margin-top: 1.4rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .76rem; }
+    footer p { margin: 0; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .95em; color: var(--ink); }
+    [hidden] { display: none !important; }
+    @media (max-width: 850px) {
+      .chapters { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .meaning { grid-template-columns: 1fr; gap: 1rem; }
+      .chapter-note { min-height: 0; }
+    }
+    @media (max-width: 520px) {
+      .masthead { align-items: flex-start; padding-block: 1rem; }
+      .brand { flex-direction: column; gap: .1rem; }
+      .brand strong { font-size: 1rem; }
+      .brand span { font-size: .65rem; }
+      .game-link { font-size: .75rem; padding: .55rem .65rem; }
+      .intro { padding-top: 2rem; }
+      .chapters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .chapter { min-height: 4.6rem; }
+      .chapter-note { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#film">Skip to the film</a>
+  <div class="shell">
+    <header class="masthead">
+      <div class="brand"><strong>Crown &amp; Charter</strong><span>First Conquest</span></div>
+      <a class="game-link" href="../../empires.html">Open live game <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">A 90-second recorded demonstration</p>
+        <h1 id="page-title">A weight becomes a choice.</h1>
+        <p class="lead" id="film-summary">Change one number in a civilization’s policy. See its preferred order change, measure the trade-off, then follow a manually commanded village into battle.</p>
+      </section>
+
+      <figure class="film">
+        <div class="screen">
+          <video id="film" width="1280" height="880" controls playsinline preload="metadata" poster="poster.png" aria-label="First Conquest: recorded gameplay and weight programming" aria-describedby="film-summary film-caption">
+            <source src="renders/first-conquest-90s.mp4" type="video/mp4">
+            Your browser cannot play this film. <a href="renders/first-conquest-90s.mp4">Download the MP4</a> and read the chapter explanations below.
+          </video>
+        </div>
+        <figcaption class="film-caption" id="film-caption">
+          <button class="play-toggle" id="play-toggle" type="button" aria-controls="film">Play film</button>
+          <p><strong>Recorded gameplay</strong> · Accelerated sequences · Complete game view · Instrumental music</p>
+          <nav aria-label="Film files"><a href="renders/first-conquest-90s.mp4" download>Download film</a><a href="evidence/index.html">Evidence &amp; method</a></nav>
+        </figcaption>
+      </figure>
+      <p class="film-error" id="film-error" role="status" hidden>The film could not be loaded. The chapter explanations are available below; the MP4 must be present in this page’s <code>renders</code> folder.</p>
+
+      <section class="study" aria-labelledby="study-title">
+        <div class="section-heading">
+          <h2 id="study-title">Follow the experiment</h2>
+          <p class="hint">Choose a chapter to seek. Use the player controls to play or pause.</p>
+        </div>
+        <nav class="chapters" aria-label="Film chapters">
+          <button class="chapter" type="button" data-chapter="0" aria-controls="film chapter-note" aria-current="true"><time datetime="PT0S">0:00</time><span>Capture a baseline</span></button>
+          <button class="chapter" type="button" data-chapter="1" aria-controls="film chapter-note"><time datetime="PT4S">0:04</time><span>Edit one weight</span></button>
+          <button class="chapter" type="button" data-chapter="2" aria-controls="film chapter-note"><time datetime="PT11S">0:11</time><span>See the choice change</span></button>
+          <button class="chapter" type="button" data-chapter="3" aria-controls="film chapter-note"><time datetime="PT17S">0:17</time><span>Compare two futures</span></button>
+          <button class="chapter" type="button" data-chapter="4" aria-controls="film chapter-note"><time datetime="PT25S">0:25</time><span>Pay for the order</span></button>
+          <button class="chapter" type="button" data-chapter="5" aria-controls="film chapter-note"><time datetime="PT33S">0:33</time><span>Meet the new soldier</span></button>
+          <button class="chapter" type="button" data-chapter="6" aria-controls="film chapter-note"><time datetime="PT40S">0:40</time><span>Build your village</span></button>
+          <button class="chapter" type="button" data-chapter="7" aria-controls="film chapter-note"><time datetime="PT59S">0:59</time><span>Review Laya’s proposal</span></button>
+          <button class="chapter" type="button" data-chapter="8" aria-controls="film chapter-note"><time datetime="PT70S">1:10</time><span>Command the attack</span></button>
+          <button class="chapter" type="button" data-chapter="9" aria-controls="film chapter-note"><time datetime="PT86S">1:26</time><span>Inspect the result</span></button>
+        </nav>
+        <div class="chapter-note" id="chapter-note" role="status" aria-live="polite" aria-atomic="true">
+          <p class="eyebrow" id="chapter-position">0:00 · Baseline</p>
+          <h3 id="chapter-title">Start from the same world.</h3>
+          <p id="chapter-explanation">Capture the civilization’s state and original policy before editing. This gives the comparison a shared starting point, so you can examine what changing a weight does.</p>
+        </div>
+        <noscript><p>Chapter seeking needs JavaScript. You can still use the video’s native controls and the timestamps above.</p></noscript>
+      </section>
+
+      <section class="meaning" aria-label="How to interpret this demonstration">
+        <div>
+          <h3>What you are programming</h3>
+          <p>A <strong>small authored, untrained auxiliary game policy</strong>. Editing <code>W₂[19]</code> changes a numeric parameter that scores available orders. This demonstration uses no online gradient training.</p>
+        </div>
+        <div>
+          <h3>What Laya contributes</h3>
+          <p>Laya suggests a bounded numerical change for review. Its own checkpoint stays fixed. The attack-bias proposal shown in the film is <strong>left unapplied</strong>.</p>
+        </div>
+        <div>
+          <h3>What the result means</h3>
+          <p>The paired experiment shows a <strong>recruitment/economy trade-off</strong>. The later victory is a separate manual playthrough. It does not establish that the edited policy is a better strategist.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Music: “Horizons” · Scott Buckley · CC BY 4.0 · <a href="MUSIC-CREDITS.html">Credits &amp; license</a></p>
+      <p>Watch here. Experiment in the <a href="../../empires.html">live game</a>.</p>
+    </footer>
+  </div>
+  <script>
+    (() => {
+      'use strict';
+      const chapters = [
+        { time: 0, label: 'Baseline', title: 'Start from the same world.', description: 'Capture the civilization’s state and original policy before editing. This gives the comparison a shared starting point, so you can examine what changing a weight does.' },
+        { time: 4, label: 'The edit', title: 'W₂[19]: 0.8 → 24.', description: 'Raise the army-training bias inside the auxiliary policy. This is a real numeric weight edit. The world stays paused while the new policy is inspected.' },
+        { time: 11, label: 'Decision preview', title: 'Train villager → train spearman.', description: 'The edited policy now prefers a different order. A preview is a prediction of the next choice; it has not yet spent resources or produced a unit.' },
+        { time: 17, label: 'Paired experiment', title: 'One extra soldier, a smaller economy.', description: 'Compare 60 simulated seconds from the captured state. In this recorded comparison, the edited branch completes one more soldier and returns about 60 less food and 22 less wood. Those are measured consequences of this experiment, not a promise for every battle.' },
+        { time: 25, label: 'Executed order', title: 'The choice becomes a paid queue.', description: 'Run the policy’s decision: training a spearman spends 50 food and 25 wood. The barracks now has a production order. A queued unit still needs time to finish.' },
+        { time: 33, label: 'Visible consequence', title: 'The army grows from 2 to 3.', description: 'The policy-ordered spearman completes training and appears in the world. Follow the whole chain: edit the weight, change the preferred order, execute it, pay its cost, then observe the new unit.' },
+        { time: 40, label: 'Manual gameplay', title: 'Gather. Build. Recruit.', description: 'The demonstration now switches to manual commands: villagers collect and return resources, finish a house, and fund further recruitment. These player actions are separate from the paired policy experiment.' },
+        { time: 59, label: 'Laya proposal', title: 'An attack-bias suggestion: −5 → −4.', description: 'Laya proposes a bounded numerical edit for review. The proposal remains unapplied in this recording. Laya’s own checkpoint stays fixed; no online gradient training takes place.' },
+        { time: 70, label: 'Manual attack', title: 'Send the army into battle.', description: 'The player orders the attack on the rival settlement. This shows the game’s command and combat loop. The attack is a manual decision and does not demonstrate autonomous victory by the edited policy.' },
+        { time: 86, label: 'Observed result', title: 'Victory at game time 04:34.', description: 'The recorded mission ends with 8 soldiers trained, 3 enemies defeated, and 6 surviving soldiers. This is the outcome of the manual playthrough. Judge the weight experiment by its separate 60-second comparison.' }
+      ];
+      const film = document.getElementById('film');
+      const playToggle = document.getElementById('play-toggle');
+      const buttons = Array.from(document.querySelectorAll('[data-chapter]'));
+      const position = document.getElementById('chapter-position');
+      const title = document.getElementById('chapter-title');
+      const explanation = document.getElementById('chapter-explanation');
+      const error = document.getElementById('film-error');
+      let activeIndex = 0;
+      let pendingSeek = null;
+
+      function showPlaybackState() {
+        playToggle.textContent = film.ended ? 'Replay film' : film.paused ? 'Play film' : 'Pause film';
+      }
+
+      playToggle.addEventListener('click', async () => {
+        if (film.paused || film.ended) {
+          try {
+            await film.play();
+            error.hidden = true;
+          } catch {
+            error.textContent = 'Playback could not start. Try the video controls or download the film.';
+            error.hidden = false;
+          }
+        } else {
+          film.pause();
+        }
+      });
+      ['play', 'pause', 'ended', 'loadedmetadata'].forEach(event => {
+        film.addEventListener(event, showPlaybackState);
+      });
+
+      function timestamp(seconds) {
+        return Math.floor(seconds / 60) + ':' + String(seconds % 60).padStart(2, '0');
+      }
+
+      function showChapter(index) {
+        activeIndex = index;
+        const chapter = chapters[index];
+        buttons.forEach((button, buttonIndex) => {
+          if (buttonIndex === index) button.setAttribute('aria-current', 'true');
+          else button.removeAttribute('aria-current');
+        });
+        position.textContent = timestamp(chapter.time) + ' · ' + chapter.label;
+        title.textContent = chapter.title;
+        explanation.textContent = chapter.description;
+      }
+
+      function applyPendingSeek() {
+        if (pendingSeek === null || film.readyState < 1) return;
+        const requestedTime = pendingSeek;
+        const seekTime = Number.isFinite(film.duration)
+          ? Math.min(requestedTime, Math.max(0, film.duration - 0.01))
+          : requestedTime;
+        try {
+          film.currentTime = seekTime;
+          pendingSeek = null;
+        } catch {
+          // A loading media source may not accept a seek until it is ready.
+        }
+      }
+
+      buttons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+          showChapter(index);
+          pendingSeek = chapters[index].time;
+          applyPendingSeek();
+        });
+      });
+
+      film.addEventListener('loadedmetadata', applyPendingSeek);
+      film.addEventListener('canplay', applyPendingSeek);
+      film.addEventListener('timeupdate', () => {
+        if (pendingSeek !== null) return;
+        let nextIndex = 0;
+        for (let index = 1; index < chapters.length; index += 1) {
+          if (film.currentTime >= chapters[index].time) nextIndex = index;
+          else break;
+        }
+        if (nextIndex !== activeIndex) showChapter(nextIndex);
+      });
+      const reportMediaError = () => { error.hidden = false; };
+      film.addEventListener('error', reportMediaError);
+      film.querySelector('source').addEventListener('error', reportMediaError);
+      film.addEventListener('loadedmetadata', () => { error.hidden = true; });
+    })();
+  </script>
+</body>
+</html>

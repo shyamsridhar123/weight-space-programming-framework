@@ -1,0 +1,194 @@
+{
+  "inputs": {
+    "game/src/empires/weights/commander-v1.json": {
+      "bytes": 4699,
+      "imports": []
+    },
+    "game/src/empires/types.ts": {
+      "bytes": 5767,
+      "imports": [],
+      "format": "esm"
+    },
+    "game/src/empires/policy.ts": {
+      "bytes": 25010,
+      "imports": [
+        {
+          "path": "game/src/empires/weights/commander-v1.json",
+          "kind": "import-statement",
+          "original": "./weights/commander-v1.json"
+        },
+        {
+          "path": "./simulation",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "game/src/empires/types.ts",
+          "kind": "import-statement",
+          "original": "./types"
+        }
+      ],
+      "format": "esm"
+    },
+    "game/src/world/types.ts": {
+      "bytes": 3226,
+      "imports": [],
+      "format": "esm"
+    },
+    "game/src/world/policy.ts": {
+      "bytes": 23786,
+      "imports": [
+        {
+          "path": "game/src/empires/policy.ts",
+          "kind": "import-statement",
+          "original": "../empires/policy"
+        },
+        {
+          "path": "game/src/world/types.ts",
+          "kind": "import-statement",
+          "original": "./types"
+        }
+      ],
+      "format": "esm"
+    },
+    "game/src/world/terrain.ts": {
+      "bytes": 3473,
+      "imports": [],
+      "format": "esm"
+    },
+    "game/src/world/simulation.ts": {
+      "bytes": 59020,
+      "imports": [
+        {
+          "path": "game/src/empires/policy.ts",
+          "kind": "import-statement",
+          "original": "../empires/policy"
+        },
+        {
+          "path": "game/src/world/policy.ts",
+          "kind": "import-statement",
+          "original": "./policy"
+        },
+        {
+          "path": "game/src/world/terrain.ts",
+          "kind": "import-statement",
+          "original": "./terrain"
+        },
+        {
+          "path": "game/src/world/types.ts",
+          "kind": "import-statement",
+          "original": "./types"
+        }
+      ],
+      "format": "esm"
+    },
+    "game/src/world/learning-experiment.ts": {
+      "bytes": 19524,
+      "imports": [
+        {
+          "path": "game/src/world/policy.ts",
+          "kind": "import-statement",
+          "original": "./policy"
+        },
+        {
+          "path": "game/src/world/simulation.ts",
+          "kind": "import-statement",
+          "original": "./simulation"
+        },
+        {
+          "path": "game/src/world/terrain.ts",
+          "kind": "import-statement",
+          "original": "./terrain"
+        },
+        {
+          "path": "game/src/world/types.ts",
+          "kind": "import-statement",
+          "original": "./types"
+        }
+      ],
+      "format": "esm"
+    },
+    "presentations/living-world/lab/model.ts": {
+      "bytes": 7756,
+      "imports": [
+        {
+          "path": "game/src/world/policy.ts",
+          "kind": "import-statement",
+          "original": "../../../game/src/world/policy"
+        },
+        {
+          "path": "game/src/world/simulation.ts",
+          "kind": "import-statement",
+          "original": "../../../game/src/world/simulation"
+        },
+        {
+          "path": "game/src/world/learning-experiment.ts",
+          "kind": "import-statement",
+          "original": "../../../game/src/world/learning-experiment"
+        },
+        {
+          "path": "game/src/world/types.ts",
+          "kind": "import-statement",
+          "original": "../../../game/src/world/types"
+        }
+      ],
+      "format": "esm"
+    },
+    "presentations/living-world/lab/lab.ts": {
+      "bytes": 37008,
+      "imports": [
+        {
+          "path": "presentations/living-world/lab/model.ts",
+          "kind": "import-statement",
+          "original": "./model"
+        },
+        {
+          "path": "game/src/world/policy.ts",
+          "kind": "import-statement",
+          "original": "../../../game/src/world/policy"
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "presentations/living-world/lab/lab.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "presentations/living-world/lab/lab.ts",
+      "inputs": {
+        "game/src/empires/weights/commander-v1.json": {
+          "bytesInOutput": 4439
+        },
+        "game/src/empires/types.ts": {
+          "bytesInOutput": 1305
+        },
+        "game/src/empires/policy.ts": {
+          "bytesInOutput": 2167
+        },
+        "game/src/world/types.ts": {
+          "bytesInOutput": 86
+        },
+        "game/src/world/policy.ts": {
+          "bytesInOutput": 12144
+        },
+        "game/src/world/terrain.ts": {
+          "bytesInOutput": 1523
+        },
+        "game/src/world/simulation.ts": {
+          "bytesInOutput": 34829
+        },
+        "game/src/world/learning-experiment.ts": {
+          "bytesInOutput": 8082
+        },
+        "presentations/living-world/lab/model.ts": {
+          "bytesInOutput": 2833
+        },
+        "presentations/living-world/lab/lab.ts": {
+          "bytesInOutput": 26595
+        }
+      },
+      "bytes": 94028
+    }
+  }
+}

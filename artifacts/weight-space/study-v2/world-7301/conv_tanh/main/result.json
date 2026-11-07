@@ -1,0 +1,120 @@
+{
+  "seed": 7301,
+  "family": "conv_tanh",
+  "base_sha256": "9a4cfeda91afa85b4b1369286ed636d74fa31094b84670fdd5bcfede7e6e08fa",
+  "selected_arm": "nullspace",
+  "arms": {
+    "gradient": {
+      "delta_l2": 0.7163853431494379,
+      "edited_task_retain_rmse": 0.12063902610404958,
+      "edited_task_target_rmse": 0.1796857742036673,
+      "effective_changed_cells": 110,
+      "no_op": false,
+      "original_retain_rmse": 0.1017499751897727,
+      "original_target_rmse": 0.10936604694511547,
+      "retain_nrmse": 0.18258916768223432,
+      "retain_rmse": 0.07071648056311669,
+      "target_gain_fraction": 0.742978551967799,
+      "target_nrmse": 0.3047797941283135,
+      "target_rmse": 0.11804070669194833
+    },
+    "matched_random": {
+      "delta_l2": 1.1998836436468834,
+      "edited_task_retain_rmse": 0.2719916054013415,
+      "edited_task_target_rmse": 0.4571138487160946,
+      "effective_changed_cells": 110,
+      "no_op": false,
+      "original_retain_rmse": 0.1017499751897727,
+      "original_target_rmse": 0.10936604694511547,
+      "retain_nrmse": 0.7170189885353043,
+      "retain_rmse": 0.277700260151172,
+      "target_gain_fraction": 0.21876132599175344,
+      "target_nrmse": 1.0870194789485752,
+      "target_rmse": 0.42100083389708953
+    },
+    "no_op": {
+      "delta_l2": 0.0,
+      "edited_task_retain_rmse": 0.1017499751897727,
+      "edited_task_target_rmse": 0.43163306675013113,
+      "effective_changed_cells": 0,
+      "no_op": true,
+      "original_retain_rmse": 0.1017499751897727,
+      "original_target_rmse": 0.10936604694511547,
+      "retain_nrmse": 0.0,
+      "retain_rmse": 0.0,
+      "target_gain_fraction": 0.0,
+      "target_nrmse": 1.0,
+      "target_rmse": 0.38729833462074165
+    },
+    "nullspace": {
+      "delta_l2": 1.1125681775948402,
+      "edited_task_retain_rmse": 0.12945527876443624,
+      "edited_task_target_rmse": 0.1490418541244875,
+      "effective_changed_cells": 110,
+      "no_op": false,
+      "original_retain_rmse": 0.1017499751897727,
+      "original_target_rmse": 0.10936604694511547,
+      "retain_nrmse": 0.250524522030801,
+      "retain_rmse": 0.09702773016418652,
+      "target_gain_fraction": 0.8884489680452028,
+      "target_nrmse": 0.2378527715078635,
+      "target_rmse": 0.09211998228992332
+    },
+    "soft_retention": {
+      "delta_l2": 1.1998836436468836,
+      "edited_task_retain_rmse": 0.12448552118708223,
+      "edited_task_target_rmse": 0.16796872979599875,
+      "effective_changed_cells": 110,
+      "no_op": false,
+      "original_retain_rmse": 0.1017499751897727,
+      "original_target_rmse": 0.10936604694511547,
+      "retain_nrmse": 0.19918482563403267,
+      "retain_rmse": 0.07714395124978367,
+      "target_gain_fraction": 0.7969665414902961,
+      "target_nrmse": 0.2725156351030575,
+      "target_rmse": 0.10554485163352788
+    },
+    "unconstrained": {
+      "delta_l2": 0.5936682714827284,
+      "edited_task_retain_rmse": 0.35561597767965913,
+      "edited_task_target_rmse": 0.11224442655439618,
+      "effective_changed_cells": 110,
+      "no_op": false,
+      "original_retain_rmse": 0.1017499751897727,
+      "original_target_rmse": 0.10936604694511547,
+      "retain_nrmse": 0.8510256004606587,
+      "retain_rmse": 0.32960079777802975,
+      "target_gain_fraction": 0.9806393762469792,
+      "target_nrmse": 0.036587061758106616,
+      "target_rmse": 0.014170108087580917
+    }
+  },
+  "usage": {
+    "tool_calls": 19,
+    "weight_values": 1365,
+    "feedback_calls": 6,
+    "feedback_examples": 768,
+    "execution_calls": 2,
+    "execution_examples": 128,
+    "proposals": 6,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "failures": [],
+  "real_domain_bound": null,
+  "validation_model_example_executions": 1536,
+  "validation_execution_count_complete": true,
+  "validation_feedback_attempts": {
+    "attempted": 6,
+    "completed": 6
+  },
+  "test_accounting": {
+    "unique_test_examples": 256,
+    "evaluated_splits": {
+      "test_retain": 128,
+      "test_target": 128
+    },
+    "candidate_evaluations": 6,
+    "model_example_executions": 3072
+  }
+}

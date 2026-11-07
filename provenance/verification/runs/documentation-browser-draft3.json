@@ -1,0 +1,285 @@
+{
+  "schema": "wspf-documentation-browser-review/1",
+  "reviewed_at_utc": "2026-11-07T14:39:04.815Z",
+  "status": "passed_with_declared_unverified_surfaces",
+  "artifact": {
+    "path": "artifacts/explanations/edit-retention/index.html",
+    "bytes": 28346,
+    "sha256": "9c1f67dced42fefccd91a7fc5c1279ef59ea62fc75d488cb79bd6c337a14d7b0"
+  },
+  "source_model": {
+    "path": "artifacts/explanations/edit-retention/source.json",
+    "bytes": 3365,
+    "sha256": "bdb202f6da235a07dc5a68bc65f0c16059cf342fb37821dd4568e302ce82d7cb"
+  },
+  "access": {
+    "method": "in-app browser via documented browser-client capabilities",
+    "url": "http://127.0.0.1:8765/artifacts/explanations/edit-retention/index.html",
+    "server": "loopback-only local HTTP server; authoring artifact itself is standalone HTML",
+    "viewport_tests": [
+      {
+        "width": 1280,
+        "height": 900
+      },
+      {
+        "width": 390,
+        "height": 844
+      }
+    ],
+    "restored": "JavaScript enabled; media and viewport overrides reset"
+  },
+  "checks": [
+    {
+      "name": "initial target-only outcome",
+      "passed": true,
+      "actual": "The target is met. The protected output moves by +0.5."
+    },
+    {
+      "name": "protected preset",
+      "passed": true,
+      "actual": "The target is met. The protected output stays fixed."
+    },
+    {
+      "name": "no-op pointer activation",
+      "passed": true,
+      "actual": "The target is missed. The protected output stays fixed."
+    },
+    {
+      "name": "protect target conflict",
+      "passed": true,
+      "actual": "The target is met. The protected target moves by +1."
+    },
+    {
+      "name": "protect coordinate directions conflict",
+      "passed": true,
+      "actual": "The target is met. At least one protected output moves."
+    },
+    {
+      "name": "both directions permit only no-op",
+      "passed": true,
+      "actual": "The target is missed. Both protected outputs stay fixed."
+    },
+    {
+      "name": "range upper endpoint",
+      "passed": true,
+      "actual": "Δ = (1.5, -0.5)"
+    },
+    {
+      "name": "range lower endpoint",
+      "passed": true,
+      "actual": "Δ = (-0.5, 1.5)"
+    },
+    {
+      "name": "range one-step value",
+      "passed": true,
+      "actual": "Δ = (-0.45, 1.45)"
+    },
+    {
+      "name": "light theme selected",
+      "passed": true,
+      "actual": "light"
+    },
+    {
+      "name": "reset",
+      "passed": true,
+      "actual": {
+        "attribute": "system",
+        "delta": "Δ = (0.5, 0.5)",
+        "protection": "first",
+        "theme": "system"
+      }
+    },
+    {
+      "name": "reduced-motion rendering",
+      "passed": true,
+      "actual": {
+        "animations": [],
+        "scrollBehavior": "auto",
+        "transitions": []
+      }
+    },
+    {
+      "name": "print controls hidden",
+      "passed": true,
+      "actual": "none"
+    },
+    {
+      "name": "print light paper",
+      "passed": true,
+      "actual": "rgb(255, 255, 255)"
+    },
+    {
+      "name": "no-JavaScript controls hidden",
+      "passed": true,
+      "actual": true
+    },
+    {
+      "name": "no-JavaScript static comparison",
+      "passed": true,
+      "actual": true
+    },
+    {
+      "name": "protected preset after narrow-layout correction",
+      "passed": true,
+      "actual": "The target is met. The protected output stays fixed."
+    }
+  ],
+  "observations": {
+    "final_page": {
+      "localResources": [],
+      "status": "The target is met. The protected output moves by +0.5.",
+      "viewport": {
+        "clientWidth": 1265,
+        "innerHeight": 900,
+        "innerWidth": 1280,
+        "scrollWidth": 1265
+      }
+    },
+    "narrow_final": {
+      "viewport_width": 390,
+      "viewport_height": 844,
+      "document_client_width": 375,
+      "document_scroll_width": 375,
+      "presets_column_width": 289,
+      "button_horizontal_overflow": false
+    },
+    "reduced_motion": {
+      "animations": [],
+      "scrollBehavior": "auto",
+      "transitions": []
+    },
+    "print": {
+      "controls": "none",
+      "figureMaxHeight": "350px",
+      "paper": "rgb(255, 255, 255)",
+      "staticRows": "Static comparison with the original protected input (1, 0); readable without the controls.\nChoice\tNew weights\tTarget output\tProtected output\nNo-op\t(1, 1)\t2\t1\nExact target-only\t(1.5, 1.5)\t3\t1.5\nExact protected\t(1, 2)\t3\t1"
+    },
+    "no_javascript": {
+      "controlsDisplay": "none",
+      "controlsHidden": true,
+      "nojs": "The page below shows the target-only edit. JavaScript enables the controls; the figure, comparison table, and explanation are readable without it.",
+      "staticRows": "Static comparison with the original protected input (1, 0); readable without the controls.\nChoice\tNew weights\tTarget output\tProtected output\nNo-op\t(1, 1)\t2\t1\nExact target-only\t(1.5, 1.5)\t3\t1.5\nExact protected\t(1, 2)\t3\t1",
+      "svgTitle": "Target and protection conditions in update space"
+    },
+    "resource_tree": {
+      "frameTree": {
+        "frame": {
+          "adFrameStatus": {
+            "adFrameType": "none"
+          },
+          "crossOriginIsolatedContextType": "NotIsolated",
+          "domainAndRegistry": "",
+          "gatedAPIFeatures": [],
+          "id": "0B48ED375A015B71EBB03515770620E9",
+          "loaderId": "434C46C358D0FB7C8125E1154F31FF68",
+          "mimeType": "text/html",
+          "secureContextType": "SecureLocalhost",
+          "securityOrigin": "http://127.0.0.1:8765",
+          "securityOriginDetails": {
+            "isLocalhost": true
+          },
+          "url": "http://127.0.0.1:8765/artifacts/explanations/edit-retention/index.html"
+        },
+        "resources": []
+      }
+    }
+  },
+  "visual_review": {
+    "finding": "Narrow preset columns crowded mathematical labels.",
+    "correction": "At viewport widths up to 480px, presets stack vertically with choice and equation on one row.",
+    "result": "Final light and dark narrow captures show readable labels without horizontal overflow. Desktop geometry retains equal axis scales and the expected target/protection intersection."
+  },
+  "screenshots": [
+    {
+      "path": ".runs/documentation-desktop.png",
+      "bytes": 258708,
+      "sha256": "546bd39bf8d5c9ffd394ce2f75947d489395373f5e881f8ca276dbbff67020b1",
+      "usable": false,
+      "visually_inspected": false,
+      "scope": "Full-page capture duplicated tiles; unusable as a page rendering record."
+    },
+    {
+      "path": ".runs/documentation-desktop-viewport.png",
+      "bytes": 64216,
+      "sha256": "aecf9a3896e892769d3201189e70d487ae5afe89e950e990752326ca0cc7b582",
+      "usable": true,
+      "visually_inspected": true,
+      "scope": "Pre-layout desktop viewport."
+    },
+    {
+      "path": ".runs/documentation-narrow-viewport.png",
+      "bytes": 47177,
+      "sha256": "5f3dfb8d789d2fc16e48469018819e143e684dcda304dfee253260b618006ee0",
+      "usable": true,
+      "visually_inspected": true,
+      "scope": "Pre-layout narrow viewport; preset crowding motivated correction."
+    },
+    {
+      "path": ".runs/documentation-narrow-final-dark.png",
+      "bytes": 44429,
+      "sha256": "0835001f425ec6adece2effe30fe9383d4507115eea4d83a3e492a28a87b17c1",
+      "usable": true,
+      "visually_inspected": true,
+      "scope": "Final narrow preset layout, dark theme."
+    },
+    {
+      "path": ".runs/documentation-narrow-final-light.png",
+      "bytes": 42731,
+      "sha256": "ffbb53c18dd6333869d4386527e02aac398ee8276a74df8c565eb61d8679812e",
+      "usable": true,
+      "visually_inspected": true,
+      "scope": "Final narrow preset layout, light theme."
+    },
+    {
+      "path": ".runs/documentation-desktop-final-light.png",
+      "bytes": 81869,
+      "sha256": "be0ea48726f7bb2729c9db278041ff99beb7a143d8bf2faeb63abe0b62c11e85",
+      "usable": true,
+      "visually_inspected": true,
+      "scope": "Final desktop controls/results area, light theme."
+    },
+    {
+      "path": ".runs/documentation-geometry-final-light.png",
+      "bytes": 80681,
+      "sha256": "d12c17b14aa90cf1f39f4fb32ca744ec23bc61aa8ec68575909c1f98d1610f41",
+      "usable": true,
+      "visually_inspected": true,
+      "scope": "Final complete plot geometry and controls, light theme."
+    },
+    {
+      "path": ".runs/documentation-desktop-final-dark.png",
+      "bytes": 80108,
+      "sha256": "42b0366715f763fd2fc819e57c0b89cf846b16af2bf048b95cf6fa6d833dffe1",
+      "usable": true,
+      "visually_inspected": true,
+      "scope": "Final desktop plot and controls, dark theme."
+    },
+    {
+      "path": ".runs/documentation-print-emulation.png",
+      "bytes": 75609,
+      "sha256": "47df6d4eb23442843f0ec76b9f70e848b92e78bbc421f941e3a9a32d97386f6d",
+      "usable": true,
+      "visually_inspected": true,
+      "scope": "Print media emulation in screen viewport; not PDF pagination."
+    },
+    {
+      "path": ".runs/documentation-nojs.png",
+      "bytes": 68285,
+      "sha256": "50a67ab32590b8175499244a284ec0fe5ad191bb6b5228c07e417a3a8f36caf4",
+      "usable": true,
+      "visually_inspected": true,
+      "scope": "No-JavaScript static reading path."
+    }
+  ],
+  "limitations": [
+    "Native keyboard Enter/Space activation and native slider pointer/drag automation focused controls without triggering expected default action; keyboard and drag behavior remain unverified. This did not establish an artifact-handler bug.",
+    "Touch interaction and screen-reader behavior were not tested; no accessibility-conformance claim.",
+    "A raw debugger input-dispatch attempt was rejected as unsupported; no bypass used.",
+    "Read-only evaluation did not expose performance for resource timing. Resource-tree observation and the static absence of external script/style/image URLs are narrower checks; no full offline-disconnection test.",
+    "The full-page screenshot duplicated tiles and is retained as an unusable capture attempt. Viewport captures support the visual review.",
+    "Print checks used screen emulation, not PDF output or pagination.",
+    "An earlier reset comparison was falsely rejected because object keys had different insertion order; a canonical-key comparison corrected the harness and passed.",
+    "No STE engine validator, teaching-efficacy study, scientific experiment, or proof build ran as part of this browser review."
+  ],
+  "failures": []
+}

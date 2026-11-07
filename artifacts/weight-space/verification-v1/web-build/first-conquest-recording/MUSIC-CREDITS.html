@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Music attribution and source provenance for the First Conquest film: Horizons by Scott Buckley, CC BY 4.0.">
+  <title>Music credit · First Conquest</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ground: #101b16;
+      --surface: #19271f;
+      --ink: #f3eddf;
+      --muted: #bec7b7;
+      --gold: #e2bd73;
+      --line: #405044;
+      --focus: #ffe2a0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-synthesis: none;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 1.5rem; }
+    body { margin: 0; background: var(--ground); color: var(--ink); line-height: 1.7; }
+    a { color: var(--gold); text-underline-offset: .22em; }
+    a:hover { color: var(--ink); }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 5px; }
+    .skip { position: absolute; z-index: 3; left: 1rem; top: -8rem; padding: .8rem 1rem; background: var(--ink); color: var(--ground); }
+    .skip:focus { top: 1rem; }
+    .shell { max-width: 1180px; margin: auto; padding: 0 clamp(1rem, 3.5vw, 3rem); }
+    .masthead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .75rem 1.5rem; padding-block: 1.3rem; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; flex-wrap: wrap; gap: .2rem .85rem; align-items: baseline; }
+    .brand strong { font-family: Georgia, "Times New Roman", serif; letter-spacing: .025em; font-size: 1.15rem; }
+    .brand span { color: var(--muted); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; }
+    .masthead nav, .links { display: flex; flex-wrap: wrap; gap: .65rem 1.25rem; font-size: .88rem; }
+    main { max-width: 56rem; margin-inline: auto; padding: clamp(2rem, 5vw, 3.8rem) 0 1.4rem; }
+    .eyebrow { margin: 0 0 .75rem; color: var(--gold); text-transform: uppercase; letter-spacing: .16em; font-weight: 700; font-size: .75rem; }
+    h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
+    h1 { margin: 0; font-size: clamp(2.2rem, 5vw, 4.1rem); letter-spacing: -.035em; line-height: 1.12; }
+    h2 { margin: 0 0 .9rem; font-size: clamp(1.55rem, 3vw, 2rem); letter-spacing: -.015em; line-height: 1.25; }
+    h3 { margin: 1.35rem 0 .5rem; color: var(--gold); font-size: 1rem; }
+    p { margin: 0 0 1rem; }
+    .lead { max-width: 49rem; margin: 1.2rem 0; color: var(--muted); font-size: 1.1rem; }
+    .status { padding: .85rem 1.1rem; margin: 1.5rem 0 0; border-left: 3px solid var(--gold); background: var(--surface); font-size: .92rem; }
+    section { margin-top: 2rem; padding-top: 1.8rem; border-top: 1px solid var(--line); }
+    ol, ul { margin: .85rem 0 1.25rem; padding-left: 1.5rem; }
+    li { padding-left: .25rem; margin-bottom: .85rem; }
+    strong { font-weight: 650; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .92em; overflow-wrap: anywhere; }
+    pre { margin: .75rem 0 1.25rem; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: .35rem; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; }
+    .table-wrap { overflow-x: auto; margin: 1.15rem 0 1.25rem; border: 1px solid var(--line); border-radius: .35rem; }
+    table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+    caption { padding: .8rem 1rem; text-align: left; color: var(--muted); font-size: .8rem; }
+    th, td { padding: .7rem 1rem; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+    thead th { background: var(--surface); color: var(--gold); font-weight: 600; }
+    tbody th { font-weight: 500; }
+    .comparison td { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .comparison thead th:not(:first-child) { text-align: right; }
+    .note { color: var(--muted); font-size: .9rem; }
+    blockquote { margin: 1rem 0 1.25rem; padding: 1.2rem 1.4rem; border-left: 3px solid var(--gold); background: var(--surface); }
+    blockquote p:last-child { margin-bottom: 0; }
+    blockquote a { overflow-wrap: anywhere; }
+    dl { margin: 1rem 0; }
+    dt { color: var(--gold); font-size: .85rem; font-weight: 650; margin-top: 1rem; }
+    dd { margin: .25rem 0 0; }
+    footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .65rem 1.5rem; padding: 1.4rem 0 2rem; margin-top: 1.4rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
+    footer p { margin: 0; }
+    @media (max-width: 520px) {
+      .brand { flex-direction: column; gap: 0; }
+      .brand strong { font-size: 1.05rem; }
+      .brand span { font-size: .65rem; }
+      .masthead nav { font-size: .8rem; }
+      th, td { padding: .65rem .75rem; }
+      blockquote { padding: 1rem; }
+    }
+    @media print {
+      :root { color-scheme: light; --ground: #fff; --surface: #f4f4ed; --ink: #17241b; --muted: #34453a; --gold: #64501f; --line: #a7afa8; }
+      .skip { display: none; }
+      main { padding-top: 1.5rem; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to music credit</a>
+  <div class="shell">
+    <header class="masthead">
+      <div class="brand"><strong>Crown &amp; Charter</strong><span>First Conquest</span></div>
+      <nav aria-label="Document navigation">
+        <a href="index.html#film">Return to the film</a>
+        <a href="evidence/index.html">Evidence &amp; method</a>
+      </nav>
+    </header>
+    <main id="content" tabindex="-1">
+      <p class="eyebrow">Soundtrack credit</p>
+      <h1>“Horizons”<br>by Scott Buckley.</h1>
+      <p class="lead">The First Conquest recording uses this instrumental composition under Creative Commons Attribution 4.0 International. Keep its attribution and modification notice with the film.</p>
+      <nav class="links" aria-label="Official music sources">
+        <a href="https://www.scottbuckley.com.au/library/horizons/">Official track page</a>
+        <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 license</a>
+        <a href="https://www.scottbuckley.com.au/">Composer’s website</a>
+      </nav>
+
+      <section aria-labelledby="attribution-title">
+        <h2 id="attribution-title">Attribution to carry with the video</h2>
+        <blockquote>
+          <p>“Horizons” by Scott Buckley — released under CC BY 4.0.<br><a href="https://www.scottbuckley.com.au/">https://www.scottbuckley.com.au/</a></p>
+          <p>Track: <a href="https://www.scottbuckley.com.au/library/horizons/">https://www.scottbuckley.com.au/library/horizons/</a><br>License: <a href="https://creativecommons.org/licenses/by/4.0/">https://creativecommons.org/licenses/by/4.0/</a></p>
+          <p>Adapted for this film: 90-second excerpt, level adjustment, volume shaping, and fades.</p>
+        </blockquote>
+        <p>Keep this attribution with the local video. Include it in a hosting description if the film is later shared externally. This does not imply that the composer endorses the game or its explanations.</p>
+      </section>
+
+      <section aria-labelledby="use-title">
+        <h2 id="use-title">How the music is used</h2>
+        <p>The film reuses the existing authorized soundtrack. The prepared bed is <strong>90.000000 seconds</strong>, <strong>48 kHz stereo PCM s16le</strong>, with its existing three-second entrance fade, five-second ending fade at 85–90 seconds, and volume envelope.</p>
+        <p>The assembler applies unity gain and encodes that bed to AAC, preserving the existing preparation without another attenuation or fade. Gameplay acceleration does not change the music’s speed. No earlier gameplay footage, experiment captions, or old video export is reused.</p>
+        <p class="note">Earlier-export loudness figures in the source credit are historical. The final film has its own independent <a href="evidence/index.html#audio-review">encoded-audio measurement summary</a>; neither set of technical measurements constitutes a perceptual listening review.</p>
+      </section>
+
+      <section aria-labelledby="provenance-title">
+        <h2 id="provenance-title">Source and preparation</h2>
+        <p>The download URL recorded in the existing provenance is the composer’s <a href="https://www.scottbuckley.com.au/library/wp-content/uploads/2020/02/sb_horizons.mp3">official MP3 source</a>.</p>
+        <p class="note">Original downloaded source SHA-256</p>
+        <pre><code>e61b3588333d284fab24411f3f7dcc495890235c49e465e33ceb072012df45c6</code></pre>
+        <p>The following are project-workspace paths. They are retained as source references, rather than links to files in the portable film bundle.</p>
+        <dl>
+          <dt>Prepared audio</dt>
+          <dd><code>presentations/living-world-highlights/assets/music/horizons-90s-bed.wav</code></dd>
+          <dt>Original downloaded source</dt>
+          <dd><code>presentations/living-world-highlights/assets/music/horizons-scott-buckley.mp3</code></dd>
+          <dt>Existing audio provenance</dt>
+          <dd><code>presentations/living-world-highlights/assets/music/music.json</code></dd>
+          <dt>Existing attribution source</dt>
+          <dd><code>presentations/living-world-highlights/MUSIC-CREDITS.md</code></dd>
+        </dl>
+        <p class="note">The render records the actual prepared-WAV SHA-256 and copies the original provenance metadata into its build directory. The source credit remains preserved in <code>MUSIC-CREDITS.md</code> beside this page.</p>
+      </section>
+    </main>
+    <footer><p>First Conquest · Music attribution</p><a href="index.html#film">Return to the film</a></footer>
+  </div>
+</body>
+</html>

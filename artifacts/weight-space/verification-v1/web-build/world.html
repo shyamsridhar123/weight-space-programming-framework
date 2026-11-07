@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#182e29" />
+  <meta name="description" content="An interactive world for learning weight-space programming. Play with civilizations, edit real neural weights, and compare their possible futures." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23182e29'/%3E%3Cpath d='M32 9L13 40h13v15h12V40h13z' fill='%23c9d8a2'/%3E%3C/svg%3E" />
+  <title>Crown &amp; Charter · Living World Lab</title>
+  <script type="module" crossorigin src="/assets/world-CWLX92Fe.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/three.module-C-3sAJl9.js">
+  <link rel="modulepreload" crossorigin href="/assets/laya-BNW2gVc9.js">
+  <link rel="stylesheet" crossorigin href="/assets/world-CeWjtmlw.css">
+</head>
+<body>
+  <canvas id="world-canvas" tabindex="0" aria-label="Living world. Drag to explore, scroll to zoom, and select a settlement to inspect its civilization."></canvas>
+  <div class="world-vignette" aria-hidden="true"></div>
+  <div id="settlement-labels" aria-label="Visible settlements"></div>
+  <header class="world-brand glass">
+    <span class="world-mark" aria-hidden="true">♜</span>
+    <div><span class="eyebrow">CROWN &amp; CHARTER</span><h1>Living World Lab<span class="live-dot" aria-hidden="true"></span></h1><p>A world to explore. A mind to understand.</p></div>
+  </header>
+  <nav id="learning-modes" class="learning-modes glass" aria-label="Application mode">
+    <button data-mode="play" aria-pressed="false"><span aria-hidden="true">▷</span> Play</button>
+    <button data-mode="learn" aria-pressed="true"><span aria-hidden="true">◇</span> Learn</button>
+    <button data-mode="inspect" aria-pressed="false"><span aria-hidden="true">⌘</span> Inspect</button>
+  </nav>
+  <section class="world-pulse glass" aria-label="World population and civilizations">
+    <button id="open-civilizations" title="Inspect every civilization"><strong id="civilization-count">—</strong><span>CIVILIZATIONS</span></button>
+    <i></i><div><strong id="population-count">—</strong><span>PEOPLE</span></div>
+    <i></i><button id="open-ecology" title="Inspect the living ecosystem"><strong id="biodiversity-count">—</strong><span>WILDLIFE</span></button>
+  </section>
+  <nav id="civilization-roster" class="civilization-roster" aria-label="Civilizations"></nav>
+  <section class="world-time glass" aria-label="Time controls">
+    <div class="date"><span id="season-symbol" aria-hidden="true">✿</span><div><strong id="year">Year 1</strong><span id="season">SPRING</span></div></div>
+    <button id="pause-world" aria-label="Pause world" title="Pause · Space">Ⅱ</button>
+    <div class="speed-options" role="group" aria-label="World speed"><button data-speed="1" class="active" aria-pressed="true">1×</button><button data-speed="4" aria-pressed="false">4×</button><button data-speed="12" aria-pressed="false">12×</button><button data-speed="32" aria-pressed="false">32×</button></div>
+    <button id="open-world-settings" aria-label="World settings and saves" title="World settings and saves">☷</button>
+  </section>
+  <nav class="world-tools glass" aria-label="World tools">
+    <button id="tool-observe" class="active" aria-pressed="true" title="Observe and explore"><span>◎</span>Observe</button>
+    <button id="tool-found" aria-pressed="false" title="Place an independent founding clan"><span>⚑</span>Seed a clan</button>
+    <button id="tool-shape" aria-pressed="false" title="Shape the ecosystem"><span>♧</span>Nature</button>
+    <button id="open-chronicle" aria-pressed="false" title="Read the world chronicle"><span>≋</span>Chronicle</button>
+  </nav>
+  <div id="placement-prompt" role="status" hidden><strong id="placement-title">Choose a place for a new beginning.</strong><span>Click fertile land · Esc to cancel</span></div>
+  <div id="paused-indicator" hidden>TIME IS STILL <span>Space to resume</span></div>
+  <section class="world-story glass" aria-label="Latest world event"><button id="story-focus"><span class="eyebrow"><i class="event-dot"></i><span id="story-year">THE WORLD CHRONICLE</span></span><span id="story-text">Five small beginnings. An open horizon.</span><span class="story-action">Follow this story ↗</span></button></section>
+  <div class="world-help"><span>DRAG <b>explore</b></span><i>·</i><span>SCROLL <b>zoom</b></span><i>·</i><span>CLICK <b>inspect</b></span><button id="open-help" aria-label="Show world controls">?</button></div>
+  <aside class="world-atlas glass" aria-label="Regional atlas">
+    <div><span class="eyebrow">REGIONAL ATLAS</span><button id="center-world" title="Return to the first settlement · H" aria-label="Center on first settlement">⌂</button></div>
+    <canvas id="atlas" width="180" height="138" aria-label="Regional map. Click to travel." tabindex="0"></canvas>
+    <div class="atlas-footer"><span id="coordinates">0 E · 0 N</span><span id="region-count">0 REGIONS</span></div>
+  </aside>
+  <div class="layer-controls glass"><label for="map-layer">MAP</label><select id="map-layer" aria-label="Map layer"><option value="terrain">Living terrain</option><option value="territory">Civilizations</option><option value="fertility">Land fertility</option><option value="wildlife">Wildlife</option></select><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out">−</button></div>
+  <section id="play-learning-card" class="play-learning-card glass" aria-label="Learn with this world" hidden>
+    <div><span class="eyebrow">A WORLD WITH A MIND</span><h2 id="play-society">Every civilization makes choices.</h2><p id="play-society-detail">Change the weights behind them and see what follows.</p></div>
+    <button id="play-start-learning" class="primary-button">Shape their behavior <span aria-hidden="true">↗</span></button>
+  </section>
+  <aside id="learning-panel" class="learning-panel" aria-label="Weight-space learning lab" hidden>
+    <header class="learn-heading"><div><span class="eyebrow">THE WEIGHT-SPACE LAB</span><h2 tabindex="-1" id="learn-heading">Small edits. Living consequences.</h2><p>No coding needed. Curiosity is enough.</p></div><button id="learn-collapse" aria-label="Collapse learning panel" aria-controls="learn-content" aria-expanded="true">−</button></header>
+    <div id="learn-content" class="learn-body">
+      <nav id="lesson-nav" class="lesson-nav" aria-label="Guided lessons"></nav>
+      <section class="learn-lesson" aria-labelledby="lesson-title">
+        <div class="learn-kicker"><span id="lesson-level">START HERE</span><span id="lesson-progress">0 / 5 explored</span></div>
+        <h3 id="lesson-title"></h3><p id="lesson-summary"></p>
+        <button id="lesson-try" class="learn-try-button">Try this step ↓</button>
+        <details id="lesson-guide"><summary>What to try</summary><ol id="lesson-steps"></ol><p id="lesson-notice"></p></details>
+      </section>
+      <section class="learn-society" aria-labelledby="learn-society-label">
+        <div class="learn-label-row"><label id="learn-society-label" for="learn-civilization">Your decision maker</label><button id="learn-focus" class="learn-text-button">Find on map ↗</button></div>
+        <select id="learn-civilization" aria-describedby="learn-society-note"></select>
+        <div class="learn-live-stats"><div><strong id="learn-population">—</strong><span>people</span></div><div><strong id="learn-food">—</strong><span>food stored</span></div><div><strong id="learn-endeavor">—</strong><span>current endeavor</span></div></div>
+        <div class="learn-observations"><span>Food need <b id="learn-food-need">—</b></span><span>Land pressure <b id="learn-pressure">—</b></span></div>
+        <p id="learn-society-note" class="learn-small">Each society has its own neural policy.</p>
+        <button id="learn-toggle-time" class="learn-time-button">Resume world</button><span id="learn-time-note" class="learn-small"></span>
+      </section>
+      <section class="learn-section" aria-labelledby="learn-shape-title">
+        <h3 id="learn-shape-title"><span>01</span> Shape a priority</h3>
+        <label class="learn-field" for="learn-action">Choose an endeavor<select id="learn-action"></select></label>
+        <p id="learn-action-description"></p>
+        <fieldset class="learn-prediction"><legend id="learn-prediction-label">Predict its choice probability after your edit</legend><div><button type="button" data-prediction="more" aria-pressed="false">More likely</button><button type="button" data-prediction="less" aria-pressed="false">Less likely</button><button type="button" data-prediction="same" aria-pressed="false">About the same</button></div></fieldset>
+        <div class="learn-weight-label"><label for="learn-weight" id="learn-weight-label">Priority weight</label><div class="learn-weight-stepper"><button id="learn-weight-down" type="button" aria-label="Decrease priority weight by 0.1">−</button><output id="learn-weight-value" for="learn-weight">0.0</output><button id="learn-weight-up" type="button" aria-label="Increase priority weight by 0.1">+</button></div></div>
+        <input id="learn-weight" type="range" min="-6" max="8" step="0.1" value="0" aria-describedby="learn-weight-help learn-effect" />
+        <div class="learn-weight-extents"><span id="learn-range-min">−6</span><code id="learn-weight-address">W2[0]</code><span id="learn-range-max">8</span></div>
+        <div class="learn-label-row"><button id="learn-restore-weight" class="learn-text-button">Restore this weight</button><span id="learn-original-weight" class="learn-small"></span></div>
+        <p id="learn-weight-help" class="learn-small"></p>
+        <div id="learn-effect" class="learn-effect" aria-live="polite" aria-atomic="true"></div>
+        <p id="learn-prediction-feedback" class="learn-small"></p>
+      </section>
+      <section class="learn-section" aria-labelledby="learn-choice-title">
+        <h3 id="learn-choice-title"><span>02</span> Watch the decision change</h3>
+        <div class="learn-checkpoint"><div><strong id="learn-checkpoint-title">One shared starting point</strong><span id="learn-checkpoint-detail"></span></div><button id="learn-capture" title="Capture the current world and current model as a new original">New starting point</button></div>
+        <p id="learn-checkpoint-drift" class="learn-small"></p>
+        <div class="learn-legend"><span><i class="original"></i> Original</span><span><i class="edited"></i> Edited</span><span>Choice probability</span></div>
+        <div id="learn-probabilities" class="learn-probabilities" aria-label="Original and edited choice probabilities"></div>
+        <p class="learn-small">Both models see the same captured observations. These are chances of choosing, not chances of success.</p>
+        <details id="learn-math" class="learn-details"><summary>Why did that happen?</summary><div id="learn-trace"></div><button id="learn-open-model" class="secondary-button">Open the full model inspector ↗</button></details>
+      </section>
+      <section class="learn-section" aria-labelledby="learn-futures-title">
+        <h3 id="learn-futures-title"><span>03</span> Follow two possible futures</h3>
+        <p>Run the original and edited policies in two copies of your captured world. Your live world stays yours.</p>
+        <div class="learn-run-controls"><label for="learn-horizon">Compare over<select id="learn-horizon"><option value="1">1 year</option><option value="3" selected>3 years</option><option value="5">5 years</option><option value="10">10 years</option></select></label><button id="learn-run" class="primary-button">Compare futures <span aria-hidden="true">→</span></button></div>
+        <div id="learn-running" class="learn-running" hidden><progress id="learn-progress" max="1" value="0" aria-label="Paired experiment progress"></progress><div><span id="learn-progress-label">Preparing two worlds…</span><button id="learn-cancel" class="learn-text-button">Cancel</button></div></div>
+        <p id="learn-run-status" class="learn-small" role="status" aria-live="polite"></p>
+        <div id="learn-results" class="learn-results" hidden>
+          <div class="learn-result-heading"><h4>What changed?</h4><span id="learn-result-meta"></span></div>
+          <p id="learn-result-stale" class="learn-result-stale" hidden></p>
+          <label class="learn-field" for="learn-chart-metric">Follow an outcome<select id="learn-chart-metric"><option value="population">Population</option><option value="food">Food stores + traveling supplies</option><option value="knowledge">Knowledge</option><option value="forest">Forest cover</option><option value="wildlife">Local wildlife</option></select></label>
+          <div id="learn-chart" class="learn-chart"></div>
+          <div class="learn-table-wrap"><table class="learn-outcomes"><caption>At the end of the experiment</caption><thead><tr><th scope="col">Measure</th><th scope="col">Original</th><th scope="col">Edited</th><th scope="col">Difference</th></tr></thead><tbody id="learn-outcomes"></tbody></table></div>
+          <p class="learn-small">Population includes travelers. Food includes carried supplies. Ecology follows the same regions occupied at the starting point.</p>
+          <details class="learn-details"><summary>Which endeavors were chosen?</summary><div id="learn-decisions"></div><p class="learn-small">Counts are scheduled choices. Resources and destinations can still block the actions.</p></details>
+          <p id="learn-tradeoff" class="learn-tradeoff"></p><p id="learn-experiment-warnings" class="learn-small"></p>
+          <details class="learn-details"><summary>Reproduce this comparison</summary><div id="learn-reproducibility"></div><button id="learn-export" class="secondary-button">Download experiment + starting world</button></details>
+          <p class="learn-small">One reproducible pair, not a universal rule. Different decisions can change later random draws. Try other starting points before generalizing.</p>
+        </div>
+      </section>
+      <details class="learn-details learn-reference"><summary>A little vocabulary. A deeper idea.</summary><div id="learn-glossary"></div><p id="learn-model-note"></p><p id="learn-source-note"></p><p id="learn-laya-note"></p><p id="learn-limit-note"></p><a id="learn-source" target="_blank" rel="noopener noreferrer">Read the weight-space programming article ↗</a></details>
+      <footer class="learn-lesson-footer"><p id="lesson-takeaway"></p><p id="lesson-requirement" class="learn-small"></p><button id="lesson-next" class="primary-button">Continue learning →</button></footer>
+    </div>
+  </aside>
+  <aside id="world-drawer" class="world-drawer glass" hidden aria-label="World inspector">
+    <header class="drawer-heading"><div><span class="eyebrow" id="drawer-eyebrow">THE WORLD</span><h2 id="drawer-title">Civilizations</h2></div><button id="close-drawer" aria-label="Close inspector" title="Close · Esc">×</button></header>
+    <nav id="drawer-tabs" class="drawer-tabs" aria-label="Inspector views" hidden><button data-tab="society" class="active">Society</button><button data-tab="mind">Live weights</button><button data-tab="history">History</button></nav>
+    <div id="drawer-content" class="drawer-content"></div>
+  </aside>
+  <div id="world-toast" role="status" hidden></div>
+  <dialog id="world-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close dialog">×</button></form><div id="world-dialog-content"></div></dialog>
+  <input id="world-file" type="file" accept="application/json,.json" hidden />
+  <section id="world-error" class="world-error" hidden><h2>The world could not be drawn.</h2><p id="world-error-text"></p><button id="reload-world">Reload world</button><a href="/skirmish.html">Open the original skirmish</a></section>
+</body>
+</html>

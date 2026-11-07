@@ -1,0 +1,57 @@
+Command: C:/public-user\AppData\Local\Microsoft\WinGet\Links\ffmpeg.EXE -hide_banner -nostats -threads 1 -i C:/public-user\code\RLCD\presentations\first-conquest-recording\renders\first-conquest-90s.mp4 -map 0:a:0 -vn -sn -dn -filter_threads 1 -af loudnorm=I=-24:TP=-1:LRA=11:print_format=json -f null NUL
+Exit code: 0
+
+STDERR
+[in#0 @ 000001dad3a7c080] UDTA parsing failed retrying raw
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:/public-user\code\RLCD\presentations\first-conquest-recording\renders\first-conquest-90s.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    title           : Crown & Charter — learn by changing real weights
+    comment         : Horizons by Scott Buckley - released under CC BY 4.0. www.scottbuckley.com.au. Source: https://www.scottbuckley.com.au/library/horizons/ . License: https://creativecommons.org/licenses/by/4.0/ . Adaptations: 90-second excerpt, level adjustment, fades.
+    copyright       : Horizons by Scott Buckley - released under CC BY 4.0. www.scottbuckley.com.au. Source: https://www.scottbuckley.com.au/library/horizons/ . License: https://creativecommons.org/licenses/by/4.0/ . Adaptations: 90-second excerpt, level adjustment, fades.
+    encoder         : Lavf63.1.101
+  Duration: 00:01:30.00, start: 0.000000, bitrate: 504 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt470bg/unknown/unknown, progressive), 1280x880 [SAR 1:1 DAR 16:11], 303 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      encoder         : Lavc63.1.101 libx264
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 191 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      name            : Horizons — Scott Buckley (CC BY 4.0)
+Stream mapping:
+  Stream #0:1 -> #0:0 (aac (native) -> pcm_s16le (native))
+Press [q] to stop, [?] for help
+Output #0, null, to 'NUL':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    title           : Crown & Charter — learn by changing real weights
+    comment         : Horizons by Scott Buckley - released under CC BY 4.0. www.scottbuckley.com.au. Source: https://www.scottbuckley.com.au/library/horizons/ . License: https://creativecommons.org/licenses/by/4.0/ . Adaptations: 90-second excerpt, level adjustment, fades.
+    copyright       : Horizons by Scott Buckley - released under CC BY 4.0. www.scottbuckley.com.au. Source: https://www.scottbuckley.com.au/library/horizons/ . License: https://creativecommons.org/licenses/by/4.0/ . Adaptations: 90-second excerpt, level adjustment, fades.
+    encoder         : Lavf63.1.101
+  Stream #0:0(und): Audio: pcm_s16le, 192000 Hz, stereo, s16, 6144 kb/s (default)
+    Metadata:
+      encoder         : Lavc63.1.101 pcm_s16le
+      handler_name    : SoundHandler
+      name            : Horizons — Scott Buckley (CC BY 4.0)
+[Parsed_loudnorm_0 @ 000001dad3a7ba40] 
+{
+	"input_i" : "-24.02",
+	"input_tp" : "-7.68",
+	"input_lra" : "11.20",
+	"input_thresh" : "-34.14",
+	"output_i" : "-21.39",
+	"output_tp" : "-6.47",
+	"output_lra" : "4.80",
+	"output_thresh" : "-31.43",
+	"normalization_type" : "dynamic",
+	"target_offset" : "-2.61"
+}
+[out#0/null @ 000001dad3ad7900] video:0KiB audio:67500KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+size=N/A time=00:01:30.00 bitrate=N/A speed=13.4x elapsed=0:00:06.69    
+
+STDOUT

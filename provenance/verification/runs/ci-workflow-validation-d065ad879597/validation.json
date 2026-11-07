@@ -1,0 +1,191 @@
+{
+  "schema": "local-ci-workflow-validation/1",
+  "generated_at": "2026-11-07T03:40:59.854068+00:00",
+  "result": "passed",
+  "remote_execution": false,
+  "actionlint": {
+    "version": "1.7.12",
+    "exit_code": 0,
+    "shellcheck_enabled": false,
+    "pyflakes_enabled": false,
+    "stdout": "",
+    "stderr": ""
+  },
+  "yaml_workflows_checked": 3,
+  "pinned_action_steps_checked": 10,
+  "bash_steps_syntax_checked": 18,
+  "python_heredocs_compiled": [
+    {
+      "workflow": "publication-python.yml",
+      "step": "Install CPU Torch and the standalone test dependencies"
+    },
+    {
+      "workflow": "publication-python.yml",
+      "step": "Validate a fresh wheel installation outside the checkout"
+    }
+  ],
+  "readme_generic_quickstart_ast_matched": true,
+  "core_wheel_smoke_asserts_no_torch": true,
+  "project_commands_and_paths_checked": true,
+  "action_pins": {
+    "actions/checkout": {
+      "version": "v7.0.1",
+      "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+    },
+    "actions/setup-python": {
+      "version": "v7.1.0",
+      "sha": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0"
+    },
+    "actions/setup-node": {
+      "version": "v7.1.0",
+      "sha": "949feb2413d6458794dcd2491c4babbbce0c15c1"
+    },
+    "actions/upload-artifact": {
+      "version": "v7.0.2",
+      "sha": "cf430e030ddbb5b0abf93d22962f4752f3646cd9"
+    }
+  },
+  "workflows": [
+    {
+      "path": ".github/workflows/historical-rts.yml",
+      "sha256": "0a3bede2720894a24f3fcc6eddf6f7eed309fe6934091b5b1c81f2508216a328",
+      "triggers": [
+        "workflow_dispatch"
+      ],
+      "actions": [
+        {
+          "name": "actions/checkout",
+          "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "inputs_checked": [
+            "persist-credentials"
+          ]
+        },
+        {
+          "name": "actions/setup-python",
+          "sha": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+          "inputs_checked": [
+            "python-version"
+          ]
+        },
+        {
+          "name": "actions/setup-node",
+          "sha": "949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "inputs_checked": [
+            "node-version",
+            "package-manager-cache"
+          ]
+        },
+        {
+          "name": "actions/upload-artifact",
+          "sha": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+          "inputs_checked": [
+            "if-no-files-found",
+            "include-hidden-files",
+            "name",
+            "path",
+            "retention-days"
+          ]
+        }
+      ],
+      "bash_syntax_steps": [
+        "Preserve checked-out file bytes",
+        "Verify publication before installing dependencies",
+        "Install the locked historical runner",
+        "Run historical RTS compatibility tests",
+        "Verify publication after historical RTS tests"
+      ]
+    },
+    {
+      "path": ".github/workflows/proofs.yml",
+      "sha256": "632edcad257e8809e179ca8bdfc9994abbc85f3b83c256535ff384e70bae3551",
+      "triggers": [
+        "workflow_dispatch"
+      ],
+      "actions": [
+        {
+          "name": "actions/checkout",
+          "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "inputs_checked": [
+            "persist-credentials"
+          ]
+        },
+        {
+          "name": "actions/setup-python",
+          "sha": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+          "inputs_checked": [
+            "python-version"
+          ]
+        },
+        {
+          "name": "actions/upload-artifact",
+          "sha": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+          "inputs_checked": [
+            "if-no-files-found",
+            "include-hidden-files",
+            "name",
+            "path",
+            "retention-days"
+          ]
+        }
+      ],
+      "bash_syntax_steps": [
+        "Preserve checked-out file bytes",
+        "Verify publication before preparing proofs",
+        "Install pinned Elan and Lean 4.24.0",
+        "Retrieve the cache using the committed dependency manifest",
+        "Check the generic proof snapshot and transitive axiom audit",
+        "Verify publication after the proof check"
+      ]
+    },
+    {
+      "path": ".github/workflows/publication-python.yml",
+      "sha256": "9ba9544d2a0cd50012c6b2ba709a09ced3afc8609d6970ccfbfb536a70d71e00",
+      "triggers": [
+        "pull_request",
+        "push",
+        "workflow_dispatch"
+      ],
+      "actions": [
+        {
+          "name": "actions/checkout",
+          "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "inputs_checked": [
+            "persist-credentials"
+          ]
+        },
+        {
+          "name": "actions/setup-python",
+          "sha": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+          "inputs_checked": [
+            "python-version"
+          ]
+        },
+        {
+          "name": "actions/upload-artifact",
+          "sha": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+          "inputs_checked": [
+            "if-no-files-found",
+            "include-hidden-files",
+            "name",
+            "path",
+            "retention-days"
+          ]
+        }
+      ],
+      "bash_syntax_steps": [
+        "Preserve checked-out file bytes",
+        "Verify publication before installing dependencies",
+        "Install CPU Torch and the standalone test dependencies",
+        "Run the standalone Python suite",
+        "Build the wheel",
+        "Validate a fresh wheel installation outside the checkout",
+        "Verify publication after tests and packaging"
+      ]
+    }
+  ],
+  "limitations": [
+    "GitHub-hosted workflows have not been executed.",
+    "Bash was checked for syntax locally, without running workflow commands.",
+    "Full dependency, runtime, wheel, and proof results are recorded separately by their owning checks."
+  ]
+}

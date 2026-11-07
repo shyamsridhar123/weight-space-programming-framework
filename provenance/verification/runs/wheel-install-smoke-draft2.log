@@ -1,0 +1,166 @@
+
+COMMAND (create fresh core-only virtual environment)
+["C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.venv\\Scripts\\python.exe", "-I", "-m", "venv", "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv"]
+CWD C:/public-user\code\RLCD\exports\wspf-wheel-smoke
+
+EXIT CODE 0
+
+COMMAND (verify initial environment isolation)
+["C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv\\Scripts\\python.exe", "-I", "-c", "import importlib.metadata, importlib.util, json, sys\nfrom pathlib import Path\nassert sys.flags.isolated == 1\nassert sys.prefix != sys.base_prefix\nassert importlib.util.find_spec('torch') is None\nassert importlib.util.find_spec('rlcd') is None\nassert importlib.util.find_spec('numpy') is None\nprint(json.dumps({'python': sys.executable, 'prefix': sys.prefix, 'base_prefix': sys.base_prefix,\n                  'isolated': bool(sys.flags.isolated), 'installed_distributions': sorted(\n                      [{'name': d.metadata['Name'], 'version': d.version} for d in importlib.metadata.distributions()], key=lambda d: d['name'])}))\n"]
+CWD C:/public-user\code\RLCD\exports\wspf-wheel-smoke
+{"python": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv\\Scripts\\python.exe", "prefix": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv", "base_prefix": "C:/public-user\\AppData\\Local\\Programs\\Python\\Python312", "isolated": true, "installed_distributions": [{"name": "pip", "version": "25.0.1"}]}
+
+EXIT CODE 0
+
+COMMAND (install core wheel and dependencies)
+["C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv\\Scripts\\python.exe", "-I", "-m", "pip", "install", "--index-url", "https://redacted.invalid/environment", "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\dist\\weight_space_programming_framework-0.2.0.dev2-py3-none-any.whl"]
+CWD C:/public-user\code\RLCD\exports\wspf-wheel-smoke
+Looking in indexes: https://redacted.invalid/environment
+Processing C:/public-user\code\rlcd\exports\weight-space-programming-framework\dist\weight_space_programming_framework-0.2.0.dev2-py3-none-any.whl
+Collecting numpy<3,>=2.0 (from weight-space-programming-framework==0.2.0.dev2)
+  Downloading https://redacted.invalid/environment (6.6 kB)
+Downloading https://redacted.invalid/environment (12.6 MB)
+   ---------------------------------------- 12.6/12.6 MB 87.3 MB/s eta 0:00:00
+Installing collected packages: numpy, weight-space-programming-framework
+Successfully installed numpy-2.5.4 weight-space-programming-framework-0.2.0.dev2
+
+EXIT CODE 0
+
+COMMAND (pip check)
+["C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv\\Scripts\\python.exe", "-I", "-m", "pip", "check"]
+CWD C:/public-user\code\RLCD\exports\wspf-wheel-smoke
+No broken requirements found.
+
+EXIT CODE 0
+
+COMMAND (installed-package checks and verbatim README example)
+["C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv\\Scripts\\python.exe", "-I", "-c", "import importlib.metadata, importlib.util, json, sys, sysconfig\nfrom pathlib import Path\nimport numpy\nimport rlcd.weight_space as wsp\nenvironment = Path('C:/public-user\\\\code\\\\RLCD\\\\exports\\\\weight-space-programming-framework\\\\.runs\\\\wheel-smoke-draft2-venv').resolve()\nsite_packages = Path(sysconfig.get_paths()['purelib']).resolve()\nlocation = Path(wsp.__file__).resolve()\nassert Path(sys.prefix).resolve() == environment\nassert site_packages == environment / 'Lib' / 'site-packages'\nassert location.is_relative_to(site_packages), str(location)\nassert Path(numpy.__file__).resolve().is_relative_to(site_packages)\nassert sys.flags.isolated == 1\nassert sys.flags.optimize == 0\nassert importlib.util.find_spec('torch') is None\nassert importlib.metadata.version('weight-space-programming-framework') == '0.2.0.dev2'\nnamespace = {'__name__': '__main__'}\nexec(compile('from rlcd.weight_space import TensorArtifact, apply_program, difference, rollback\\n\\nparent = TensorArtifact(\\n    \"example-linear-readout/1\",\\n    {\"readout.weight\": [[1.0, 0.0]], \"readout.bias\": [0.0]},\\n)\\nrequested = TensorArtifact(\\n    \"example-linear-readout/1\",\\n    {\"readout.weight\": [[1.0, 0.5]], \"readout.bias\": [0.0]},\\n)\\nprogram = difference(parent, requested, \"Change one readout coefficient\")\\ncandidate = apply_program(parent, program)\\nassert candidate.sha256 == requested.sha256\\nassert apply_program(candidate, rollback(parent, program)).sha256 == parent.sha256\\n', 'README.md::python-example', 'exec'), namespace)\nprint(json.dumps({'status': 'passed', 'import_path': str(location), 'site_packages': str(site_packages),\n                  'numpy_import_path': str(Path(numpy.__file__).resolve()), 'python': sys.executable, 'python_version': sys.version,\n                  'prefix': sys.prefix, 'base_prefix': sys.base_prefix, 'cwd': str(Path.cwd()),\n                  'distribution': importlib.metadata.version('weight-space-programming-framework'),\n                  'numpy': importlib.metadata.version('numpy'), 'torch_available': False, 'isolated_python': bool(sys.flags.isolated),\n                  'parent_sha256': namespace['parent'].sha256, 'requested_sha256': namespace['requested'].sha256,\n                  'candidate_sha256': namespace['candidate'].sha256,\n                  'checks': ['fresh environment site-packages import', 'isolated Python', 'Torch absent', 'distribution version',\n                             'verbatim README edit', 'verbatim README rollback'],\n                  'installed_distributions': sorted([{'name': d.metadata['Name'], 'version': d.version} for d in importlib.metadata.distributions()], key=lambda d: d['name'])}, indent=2))\n"]
+CWD C:/public-user\code\RLCD\exports\wspf-wheel-smoke
+{
+  "status": "passed",
+  "import_path": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv\\Lib\\site-packages\\rlcd\\weight_space\\__init__.py",
+  "site_packages": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv\\Lib\\site-packages",
+  "numpy_import_path": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv\\Lib\\site-packages\\numpy\\__init__.py",
+  "python": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv\\Scripts\\python.exe",
+  "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "prefix": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv",
+  "base_prefix": "C:/public-user\\AppData\\Local\\Programs\\Python\\Python312",
+  "cwd": "C:/public-user\\code\\RLCD\\exports\\wspf-wheel-smoke",
+  "distribution": "0.2.0.dev2",
+  "numpy": "2.5.4",
+  "torch_available": false,
+  "isolated_python": true,
+  "parent_sha256": "05347ba83d444e4b0a4b702856433725d688658a020297d69d2a9a9b6ab51f9b",
+  "requested_sha256": "c3235523c73e9d7e1fee347fedc799780d9ff4400348c618e8f7475aca7d0331",
+  "candidate_sha256": "c3235523c73e9d7e1fee347fedc799780d9ff4400348c618e8f7475aca7d0331",
+  "checks": [
+    "fresh environment site-packages import",
+    "isolated Python",
+    "Torch absent",
+    "distribution version",
+    "verbatim README edit",
+    "verbatim README rollback"
+  ],
+  "installed_distributions": [
+    {
+      "name": "numpy",
+      "version": "2.5.4"
+    },
+    {
+      "name": "pip",
+      "version": "25.0.1"
+    },
+    {
+      "name": "weight-space-programming-framework",
+      "version": "0.2.0.dev2"
+    }
+  ]
+}
+
+EXIT CODE 0
+
+COMMAND (isolated module CLI help)
+["C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv\\Scripts\\python.exe", "-I", "-m", "rlcd.weight_space", "--help"]
+CWD C:/public-user\code\RLCD\exports\wspf-wheel-smoke
+usage: __main__.py [-h]
+                   {inspect,diff,apply,compose,rollback,interpolate,compile,lower,verify-lowering,compile-features,certify-retention,verify-retention,certify,verify,demo,freeze,verify-freeze,synthetic,rts-prepare,rts-select,rts-summarize}
+                   ...
+
+Generic tensor programs with explicit architecture-specific behavioral checks.
+
+positional arguments:
+  {inspect,diff,apply,compose,rollback,interpolate,compile,lower,verify-lowering,compile-features,certify-retention,verify-retention,certify,verify,demo,freeze,verify-freeze,synthetic,rts-prepare,rts-select,rts-summarize}
+    inspect             Inspect shapes, architecture, interface, and content
+                        identity
+    diff                Create an exact-parent atomic edit program
+    apply               Apply to a new artifact; unchecked behavior is
+                        explicitly reported
+    compose             Compose a sequence of programs with exact intermediate
+                        parents
+    rollback            Create the exact inverse program for an applied edit
+    interpolate         Coordinate interpolation; no behavioral claim
+    compile             Compile examples into a frozen-readout ReLU edit
+    lower               Lower/check data-only tensor blocks and low-rank
+                        proposals
+    verify-lowering     Lower/check data-only tensor blocks and low-rank
+                        proposals
+    compile-features    Compile/check a readout over explicitly supplied
+                        frozen features
+    certify-retention   Compile/check a readout over explicitly supplied
+                        frozen features
+    verify-retention    Compile/check a readout over explicitly supplied
+                        frozen features
+    certify             Compute/check an exact rational certificate for a
+                        registered backend
+    verify              Compute/check an exact rational certificate for a
+                        registered backend
+    demo                Run a generic convolution/Tanh example and a proved
+                        ReLU specialization
+
+options:
+  -h, --help            show this help message and exit
+
+EXIT CODE 0
+
+COMMAND (console entry-point help)
+["C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\wheel-smoke-draft2-venv\\Scripts\\weight-space.exe", "--help"]
+CWD C:/public-user\code\RLCD\exports\wspf-wheel-smoke
+usage: weight-space [-h]
+                    {inspect,diff,apply,compose,rollback,interpolate,compile,lower,verify-lowering,compile-features,certify-retention,verify-retention,certify,verify,demo,freeze,verify-freeze,synthetic,rts-prepare,rts-select,rts-summarize}
+                    ...
+
+Generic tensor programs with explicit architecture-specific behavioral checks.
+
+positional arguments:
+  {inspect,diff,apply,compose,rollback,interpolate,compile,lower,verify-lowering,compile-features,certify-retention,verify-retention,certify,verify,demo,freeze,verify-freeze,synthetic,rts-prepare,rts-select,rts-summarize}
+    inspect             Inspect shapes, architecture, interface, and content
+                        identity
+    diff                Create an exact-parent atomic edit program
+    apply               Apply to a new artifact; unchecked behavior is
+                        explicitly reported
+    compose             Compose a sequence of programs with exact intermediate
+                        parents
+    rollback            Create the exact inverse program for an applied edit
+    interpolate         Coordinate interpolation; no behavioral claim
+    compile             Compile examples into a frozen-readout ReLU edit
+    lower               Lower/check data-only tensor blocks and low-rank
+                        proposals
+    verify-lowering     Lower/check data-only tensor blocks and low-rank
+                        proposals
+    compile-features    Compile/check a readout over explicitly supplied
+                        frozen features
+    certify-retention   Compile/check a readout over explicitly supplied
+                        frozen features
+    verify-retention    Compile/check a readout over explicitly supplied
+                        frozen features
+    certify             Compute/check an exact rational certificate for a
+                        registered backend
+    verify              Compute/check an exact rational certificate for a
+                        registered backend
+    demo                Run a generic convolution/Tanh example and a proved
+                        ReLU specialization
+
+options:
+  -h, --help            show this help message and exit
+
+EXIT CODE 0

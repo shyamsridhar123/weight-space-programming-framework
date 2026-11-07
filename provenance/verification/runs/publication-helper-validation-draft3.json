@@ -1,0 +1,349 @@
+{
+  "schema": "wspf-publication-helper-validation/1",
+  "checked_at_utc": "2026-11-07T14:43:31.635355+00:00",
+  "root": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework",
+  "status": "passed",
+  "scope": "Syntax, static control-flow/interface review, preserved-original identities, and existing wheel evidence/input hashes only. Publication helpers were neither imported nor executed; this is not runtime or remote publication verification.",
+  "helpers": [
+    {
+      "path": ".runs/stage_publication_draft3.py",
+      "bytes": 5345,
+      "sha256": "c1360e2a130e12a531aeb0ab47c41b482fe216395e717061cf2cfdb68c147891",
+      "compile_passed": true,
+      "ast_parse_passed": true,
+      "main_guard_present": true,
+      "no_unguarded_publication_or_subprocess_calls": true,
+      "top_level_initializer_call_kinds": [
+        "Path",
+        "Path(__file__).resolve"
+      ]
+    },
+    {
+      "path": ".runs/create_source_archive_draft3.py",
+      "bytes": 10348,
+      "sha256": "84f86002765b3e9219670856ae1cb1775c5732fc6c33378d5a8df47fa3cc55fd",
+      "compile_passed": true,
+      "ast_parse_passed": true,
+      "main_guard_present": true,
+      "no_unguarded_publication_or_subprocess_calls": true,
+      "top_level_initializer_call_kinds": [
+        "Path",
+        "Path(__file__).resolve"
+      ]
+    },
+    {
+      "path": ".runs/github_publication_draft3.py",
+      "bytes": 24963,
+      "sha256": "73be036858545720db37776cc43f9ddfe78e6de29d8bfed42e5517c7071e20f3",
+      "compile_passed": true,
+      "ast_parse_passed": true,
+      "main_guard_present": true,
+      "no_unguarded_publication_or_subprocess_calls": true,
+      "top_level_initializer_call_kinds": [
+        "Path",
+        "Path(__file__).resolve"
+      ]
+    },
+    {
+      "path": ".runs/monitor_hosted_ci_draft3.py",
+      "bytes": 17426,
+      "sha256": "690675b55092b6f2c783c5ca5050c5a89b78d8a7b2a2d90a03c2f34e5be387a2",
+      "compile_passed": true,
+      "ast_parse_passed": true,
+      "main_guard_present": true,
+      "no_unguarded_publication_or_subprocess_calls": true,
+      "top_level_initializer_call_kinds": [
+        "Path",
+        "Path(__file__).resolve",
+        "re.compile"
+      ]
+    }
+  ],
+  "preservation_snapshot": {
+    "path": ".runs/publication-helper-originals-draft3.json",
+    "bytes": 926,
+    "sha256": "3903c675da768765b65a03c033648b0d895ab88d65dcf470a89a4b433c886985"
+  },
+  "original_helpers": [
+    {
+      "path": ".runs/stage_publication_draft2.py",
+      "bytes": 2350,
+      "sha256": "03fbc55088a826344387053df693722c241dc8397db49f71a7724c9975d1b76f",
+      "unchanged": true
+    },
+    {
+      "path": ".runs/create_source_archive_draft2.py",
+      "bytes": 2807,
+      "sha256": "f6ca6aebbca44f0896355c0a193fdff6fd40a044ada1914534acaf60fc45e750",
+      "unchanged": true
+    },
+    {
+      "path": ".runs/github_publication_draft2.py",
+      "bytes": 18185,
+      "sha256": "524e777806fbbd4ddf4867e860d249bb2d0a68af5f4a04c41ecd0bef0c35d4d2",
+      "unchanged": true
+    },
+    {
+      "path": ".runs/monitor_hosted_ci_draft2.py",
+      "bytes": 18149,
+      "sha256": "a0ea1711ed940e668cdf8f1337bf3c974fa01da6c86c01989bda1bfea6d7b2b1",
+      "unchanged": true
+    }
+  ],
+  "original_helpers_unchanged": true,
+  "publication_identity": {
+    "tag": "v0.2.0-draft.3",
+    "python_distribution": "0.2.0.dev3",
+    "repository": "shyamsridhar123/weight-space-programming-framework",
+    "owner": "shyamsridhar123",
+    "owner_id": 117464342,
+    "release_id": 437312686,
+    "previous_tag": "v0.2.0-draft.2",
+    "historical_tag_commit_bindings": {
+      "v0.2.0-draft.1": "1f4d48ee14e85f9d1d16f163ad9254a1515c8919",
+      "v0.2.0-draft.2": "93e8a9b7f2cfbbffab6c7d10f831b2cde4b69176"
+    }
+  },
+  "workflow": {
+    "path": ".github/workflows/publication-python.yml",
+    "bytes": 7687,
+    "sha256": "b056aa34b21b385cc15681de3a475fb447ca8fbceb0ff87869522bc517b4c059",
+    "required_steps": [
+      "Preserve checked-out file bytes",
+      "Check out publication",
+      "Set up Python 3.12",
+      "Verify publication before installing dependencies",
+      "Install CPU Torch and the standalone test dependencies",
+      "Run the standalone Python suite",
+      "Build the wheel",
+      "Validate a fresh wheel installation outside the checkout",
+      "Verify publication after tests and packaging",
+      "Upload new validation receipts and wheel"
+    ],
+    "monitor_and_publication_driver_match_workflow": true,
+    "monitor_http_methods": [
+      "GET"
+    ],
+    "test_total_quality_gate": false
+  },
+  "interfaces": {
+    "stage_receipt_fields": [
+      "all_manifest_paths_staged",
+      "all_staged_git_blobs_match_raw_bytes",
+      "checked_at_utc",
+      "git_object_format",
+      "manifest",
+      "manifest_sha256",
+      "publication_check",
+      "publication_verification",
+      "python_distribution",
+      "schema",
+      "scope",
+      "staged_tree",
+      "tag"
+    ],
+    "stage_fields_required_by_archive_and_publication_driver": [
+      "all_manifest_paths_staged",
+      "all_staged_git_blobs_match_raw_bytes",
+      "manifest",
+      "publication_verification",
+      "staged_tree",
+      "tag"
+    ],
+    "source_archive_receipt_fields": [
+      "all_archive_file_bytes_match_commit_and_manifest",
+      "archived_wheel_evidence",
+      "commit",
+      "exact_git_tree_membership",
+      "git_staging_verification",
+      "manifest",
+      "publication_verification",
+      "python_distribution",
+      "schema",
+      "scope",
+      "source_zip",
+      "staged_tree_matches_committed_tree",
+      "tag",
+      "tree",
+      "verified_at_utc",
+      "wheel",
+      "wheel_build_log",
+      "wheel_build_verification",
+      "wheel_install_smoke_log",
+      "wheel_install_smoke_verification"
+    ],
+    "archive_fields_required_by_publication_driver": [
+      "all_archive_file_bytes_match_commit_and_manifest",
+      "commit",
+      "exact_git_tree_membership",
+      "git_staging_verification",
+      "manifest",
+      "publication_verification",
+      "python_distribution",
+      "source_zip",
+      "staged_tree_matches_committed_tree",
+      "tag",
+      "tree",
+      "wheel",
+      "wheel_build_log",
+      "wheel_build_verification",
+      "wheel_install_smoke_log",
+      "wheel_install_smoke_verification"
+    ],
+    "monitor_receipt_fields": [
+      "attempt_log",
+      "attempt_receipt",
+      "authenticated_login",
+      "authenticated_user_id",
+      "canonical_receipt",
+      "checked_at_utc",
+      "completed_at_utc",
+      "conclusion",
+      "created_at",
+      "downloaded_log",
+      "event",
+      "head_branch",
+      "head_sha",
+      "html_url",
+      "job_id",
+      "job_ids",
+      "jobs",
+      "local_head_sha",
+      "log",
+      "log_bytes_preserved",
+      "log_transport",
+      "matching_run_ids",
+      "operations",
+      "python_suite_step",
+      "remote_mutations",
+      "repository",
+      "required_steps",
+      "run_attempt",
+      "run_id",
+      "run_started_at",
+      "run_started_to_last_update_seconds",
+      "schema",
+      "secrets_pattern_scan",
+      "status",
+      "success_rule",
+      "test_total_quality_gate",
+      "updated_at",
+      "url",
+      "verification_failures",
+      "verification_passed",
+      "workflow_id",
+      "workflow_name",
+      "workflow_path"
+    ],
+    "monitor_fields_required_by_publication_driver": [
+      "conclusion",
+      "event",
+      "head_branch",
+      "head_sha",
+      "job_id",
+      "job_ids",
+      "log",
+      "repository",
+      "required_steps",
+      "run_attempt",
+      "run_id",
+      "secrets_pattern_scan",
+      "status",
+      "verification_failures",
+      "verification_passed",
+      "workflow_name",
+      "workflow_path"
+    ],
+    "all_consumed_fields_produced": true,
+    "artifact_paths_agree": true,
+    "release_asset_paths": [
+      "dist/weight_space_programming_framework-0.2.0.dev3-py3-none-any.whl",
+      "dist/weight-space-programming-framework-v0.2.0-draft.3-source.zip",
+      "MANIFEST.sha256",
+      ".runs/publication-final-verification-draft3-release.json",
+      ".runs/staging-verification-draft3-release.json",
+      ".runs/source-archive-verification-draft3.json",
+      ".runs/hosted-ci-verification-draft3.json",
+      ".runs/hosted-ci-job-draft3.log"
+    ],
+    "canonical_hosted_evidence_written_only_after_success": true,
+    "final_verification": {
+      "path": ".runs/publication-final-verification-draft3-release.json",
+      "required_fields": {
+        "ok": true,
+        "failures": [],
+        "root": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework"
+      }
+    },
+    "publication_record_required_version_fields": {
+      "draft_tag": "v0.2.0-draft.3",
+      "python_distribution": "0.2.0.dev3"
+    },
+    "archived_wheel_evidence_paths_required": [
+      "provenance/verification/runs/wheel-build-draft3.json",
+      "provenance/verification/runs/wheel-build-draft3.log",
+      "provenance/verification/runs/wheel-install-smoke-draft3.json",
+      "provenance/verification/runs/wheel-install-smoke-draft3.log"
+    ]
+  },
+  "static_review": {
+    "current_artifact_references_identify_draft3": true,
+    "historical_references_are_preservation_or_previous_asset_authority": true,
+    "main_guards_prevent_automatic_publication_actions_on_import": true,
+    "no_fixed_pytest_total_or_word_or_file_total_quality_gate": true,
+    "remaining_cardinality_checks_are_membership_uniqueness_or_complete_api_response_checks": true,
+    "stage_binds_final_receipt_manifest_and_stable_index_tree": true,
+    "archive_binds_committed_tree_manifest_wheel_and_wheel_evidence": true,
+    "refresh_requires_successful_exact_commit_hosted_evidence": true,
+    "refresh_checks_existing_unpublished_private_release_and_known_asset_identities": true,
+    "refresh_rechecks_prepared_assets_and_committed_notes": true,
+    "new_evidence_outputs_use_exclusive_creation": true,
+    "polling_progress_is_rewritable_scratch_only": true
+  },
+  "previous_asset_identity_authority": {
+    "path": ".runs/github-draft2-verify-20261107T041913.json",
+    "bytes": 8561,
+    "sha256": "8eff056cec721933aa8695009b0d95e26381a656805c3c03be8bb3a5d4fc8c17"
+  },
+  "wheel": {
+    "path": "dist/weight_space_programming_framework-0.2.0.dev3-py3-none-any.whl",
+    "bytes": 88802,
+    "sha256": "9d018555b7b06a2de57e184227550e9f764160fa668bfe122a0fc3cceaedb89a"
+  },
+  "wheel_evidence": [
+    {
+      "path": ".runs/wheel-build-draft3.json",
+      "bytes": 31589,
+      "sha256": "0006eb4c058b0b189cd831ea48da0f41df618511f3aa7d8e3dbf4d9346c45004",
+      "source_input_hashes_still_current": true,
+      "example_input_hashes_still_current": true
+    },
+    {
+      "path": ".runs/wheel-install-smoke-draft3.json",
+      "bytes": 43937,
+      "sha256": "f63198e0370c93e91b887f63a13fa401929e9ccb97bc38a16150f149aa8322ad",
+      "source_input_hashes_still_current": true,
+      "example_input_hashes_still_current": true
+    },
+    {
+      "path": ".runs/wheel-build-draft3.log",
+      "bytes": 1802,
+      "sha256": "cbd554e41c4b55ef896dac9d686246869b00656721e697ed2b6b16db3229fc6c"
+    },
+    {
+      "path": ".runs/wheel-install-smoke-draft3.log",
+      "bytes": 15769,
+      "sha256": "06021e6cbd0d9340012cef1c40d93bc60e33fc66c6f7489f56b51447bf2719f9"
+    }
+  ],
+  "wheel_evidence_interfaces_compatible": true,
+  "runtime_preconditions_not_evaluated": [
+    "The parent finalizer must finish draft.3 publication metadata, archival evidence copies, manifest, and final publication verification before staging.",
+    "The parent must commit and tag the exact verified staged tree before source-archive creation.",
+    "Pushed commit, hosted CI, private release state, server asset identities, and preserved remote tags are checked by the helpers when the parent runs them."
+  ],
+  "executed_helpers": [],
+  "imported_helpers": [],
+  "remote_mutations": [],
+  "git_mutations": []
+}

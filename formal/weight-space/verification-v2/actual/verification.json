@@ -1,0 +1,115 @@
+{
+  "schema": "wsp-generic-formal-verification/2",
+  "started_at": "2026-11-07T02:25:39.0757737+00:00",
+  "checked_at": "2026-11-07T02:26:56.8929922+00:00",
+  "elapsed_seconds": 77.8130604,
+  "exit_code": 0,
+  "commands": [
+    {
+      "command": "lake build WeightSpace.GenericAudit",
+      "exit_code": 0,
+      "log": "build.log"
+    },
+    {
+      "command": "lake env lean WeightSpace/GenericAudit.lean",
+      "exit_code": 0,
+      "log": "axiom-audit.log"
+    }
+  ],
+  "lean_version_output": "Lean (version 4.24.0, x86_64-w64-windows-gnu, commit 797c613eb9b6d4ec95db23e3e00af9ac6657f24b, Release)",
+  "lean_executable_sha256": "20bc808248e38cf072f84f4eb389f8f98e5925d703bcbfa400d9dd44f310c4db",
+  "mathlib_revision": "f897ebcf72cd16f89ab4577d0c826cd14afaafc7",
+  "dependency_revisions": {
+    "plausible": "dfd06ebfe8d0e8fa7faba9cb5e5a2e74e7bd2805",
+    "LeanSearchClient": "99657ad92e23804e279f77ea6dbdeebaa1317b98",
+    "importGraph": "d768126816be17600904726ca7976b185786e6b9",
+    "proofwidgets": "556caed0eadb7901e068131d1be208dd907d07a2",
+    "aesop": "725ac8cd67acd70a7beaf47c3725e23484c1ef50",
+    "Qq": "dea6a3361fa36d5a13f87333dc506ada582e025c",
+    "batteries": "8da40b72fece29b7d3fe3d768bac4c8910ce9bee",
+    "Cli": "91c18fa62838ad0ab7384c03c9684d99d306e1da",
+    "mathlib": "f897ebcf72cd16f89ab4577d0c826cd14afaafc7"
+  },
+  "dependency_tracked_sources_unmodified": true,
+  "explicit_new_theorem_statements": 53,
+  "explicit_new_theorem_statements_by_source": {
+    "formal/weight-space/WeightSpace/Generic.lean": 17,
+    "formal/weight-space/WeightSpace/Sequential.lean": 17,
+    "formal/weight-space/WeightSpace/GenericExamples.lean": 19,
+    "formal/weight-space/WeightSpace/GenericAudit.lean": 0
+  },
+  "audited_declarations": 376,
+  "audited_theorem_declarations": 215,
+  "audited_new_declarations": 140,
+  "audited_new_theorem_declarations": 94,
+  "audited_new_namespaces": {
+    "WeightSpace.Generic": {
+      "declarations": 27,
+      "theorem_declarations": 22
+    },
+    "WeightSpace.Sequential": {
+      "declarations": 62,
+      "theorem_declarations": 32
+    },
+    "WeightSpace.GenericExamples": {
+      "declarations": 51,
+      "theorem_declarations": 40
+    }
+  },
+  "count_conventions": {
+    "explicit_new_theorem_statements": "Lines beginning with theorem in the four new sources; excludes definitions and compiler-generated declarations.",
+    "audited_declarations": "All WeightSpace namespace declarations loaded by GenericAudit, including the original library and compiler-generated declarations.",
+    "audited_new_declarations": "Declarations in Generic, Sequential, or GenericExamples; includes compiler-generated declarations.",
+    "audited_theorem_declarations": "Declarations whose Lean ConstantInfo kind is thmInfo, including compiler-generated theorem declarations."
+  },
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "observed_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "audit_method": "Lean.collectAxioms follows transitive dependencies of every WeightSpace declaration; elaboration fails for any axiom outside the allowlist.",
+  "printed_representative_new_theorems": 28,
+  "proof_placeholders_or_added_axioms_or_native_evaluation_shortcuts_accepted": false,
+  "source_sha256": {
+    "formal/weight-space/WeightSpace/Generic.lean": "114da4c7fe42955476fa80214e7f7d51ba565eeadf8982ec2b6da678c014319c",
+    "formal/weight-space/WeightSpace/Sequential.lean": "5cb1ca354a52a31244fb63d702f5d9277fe5663371d762071861088a02d98116",
+    "formal/weight-space/WeightSpace/GenericExamples.lean": "9f385b60f3d3f6ca65607fd8c6039ea9588ffaf690fa593339d138cbf0fe4100",
+    "formal/weight-space/WeightSpace/GenericAudit.lean": "5c596da6925dc1a2278d933a063264c5199d7c225dcd08eb082df4325977a874",
+    "formal/weight-space/lake-manifest.json": "cd42e2c798056244b8d399857d616d30d2497a78c62f647d7eecb0fb3fd103b0",
+    "formal/weight-space/lakefile.toml": "d6f3654e5118fbe37f64db51bda02f6c3425921153ec03be9d82cdfec3c3d2e5",
+    "formal/weight-space/lean-toolchain": "42779d67b81608af8a12aa4328d2ab47ca201925b3b2bd68369587b5340bb434",
+    "formal/weight-space/verification-v2/check.ps1": "308b258bf54cb98ef463d8476a90948ab8856ea49ab61acb37744599d99c58d9",
+    "formal/weight-space/verification-v2/preserved-v1-inputs.json": "bfde17569c918303934b6a3beb5f20f759e76fd3a8f4567cfdbab2476da161ba",
+    "docs/weight-space/v2/formal.md": "a3a92404751b917afdde19cefadebcc06fd1d11a5531440fbe528ec10d233603"
+  },
+  "all_verification_sources_unchanged_during_run": true,
+  "log_sha256": {
+    "build.log": "48a25f6a868d47620084400a517f17019eff889bb51e0823722768e0d52a9b97",
+    "axiom-audit.log": "f0482ab504ad4b5262d3546d49d06ac0e02815a5552c5502c128d84af073cfa9"
+  },
+  "preserved_v1": {
+    "snapshot": "formal/weight-space/verification-v2/preserved-v1-inputs.json",
+    "snapshot_sha256": "bfde17569c918303934b6a3beb5f20f759e76fd3a8f4567cfdbab2476da161ba",
+    "files_checked": 21,
+    "all_unchanged": true
+  },
+  "scope": "Real-valued arbitrary frozen feature maps with finite feature coordinates; exact and approximate span protection; factored edit effect and preservation; arbitrary-depth variable-width affine layers with shared componentwise one-Lipschitz activations; explicit non-RTS rational witnesses.",
+  "trust_boundary": {
+    "formal_guarantee": "Lean kernel checking establishes the stated theorems of the explicit definitions under their stated premises.",
+    "endpoint_witnesses": "Hand-written rational examples. No claim that these definitions are generated from or formally byte-bound to new Python artifacts.",
+    "excluded_claims": [
+      "Numerical SVD exactness or solver optimality",
+      "IEEE floating-point execution or rounding error bounds",
+      "Arbitrary Python or PyTorch forward-program refinement",
+      "General transformer or cross-architecture certificate",
+      "Unstated feature-span membership or distribution coverage",
+      "Task reward, causal repair, absence of forgetting, or source-paper replication",
+      "Minimal matrix rank or rank optimality of the factored representation"
+    ]
+  }
+}

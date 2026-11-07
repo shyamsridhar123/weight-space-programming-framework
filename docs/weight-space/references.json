@@ -1,0 +1,1086 @@
+{
+  "schema_version": "wsp-references/1",
+  "review": {
+    "local_date": "2026-11-06",
+    "timezone": "America/Chicago",
+    "retrieval_utc_date": "2026-11-07",
+    "latest_reviewed_report_publication_date": "2026-11-02",
+    "primary_paper_count": 24,
+    "total_source_count": 28,
+    "scope": "Selected primary methods, theory and evaluation sections; recent author-report evidence checked against selected released artifacts. Not an exhaustive review, every-page review, independent reproduction, or complete code audit.",
+    "retrieval": "Versioned PDFs from arXiv, author HTML, and commit-pinned GitHub raw artifacts; browser retrieval returned empty results, so direct HTTPS retrieval supplied the inspected source bytes.",
+    "citation_policy": "Reference IDs and physical PDF page locators in research.md resolve to sources below. ArXiv version dates describe the reviewed version, not necessarily a later journal publication. No claim that each selected version is the latest version of the work."
+  },
+  "sources": [
+    {
+      "id": "DWS",
+      "source_type": "primary_research_paper",
+      "title": "Equivariant Architectures for Learning in Deep Weight Spaces",
+      "authors": [
+        "Navon, Aviv",
+        "Shamsian, Aviv",
+        "Achituve, Idan",
+        "Fetaya, Ethan",
+        "Chechik, Gal",
+        "Maron, Haggai"
+      ],
+      "first_arxiv_date": "2023-01-30",
+      "reviewed_version_date": "2023-05-31",
+      "arxiv_id": "2301.12780",
+      "version": 2,
+      "url": "https://arxiv.org/abs/2301.12780v2",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2301.12780v2",
+        "sha256": "a685648be137c17bf20d0cd71317f08f24240d40ace17bfbb85992473f684f6e",
+        "page_count": 27
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          2,
+          3,
+          4,
+          6
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Constructs layers equivariant to hidden-neuron permutations and evaluates weight-space prediction and editing.",
+      "limitation": "Function preservation requires consistent incoming/outgoing permutations and biases; generalization of a learned editor is empirical.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "NFN",
+      "source_type": "primary_research_paper",
+      "title": "Permutation Equivariant Neural Functionals",
+      "authors": [
+        "Zhou, Allan",
+        "Yang, Kaien",
+        "Burns, Kaylee",
+        "Cardace, Adriano",
+        "Jiang, Yiding",
+        "Sokota, Samuel",
+        "Kolter, J. Zico",
+        "Finn, Chelsea"
+      ],
+      "first_arxiv_date": "2023-02-27",
+      "reviewed_version_date": "2023-09-26",
+      "arxiv_id": "2302.14040",
+      "version": 3,
+      "url": "https://arxiv.org/abs/2302.14040v3",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2302.14040v3",
+        "sha256": "068640b6b12e90ad82729aa82759131cca400e1bbb2d4839c7c895be33e55a2a",
+        "page_count": 25
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          5
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Develops permutation-equivariant neural functionals for processing neural parameters.",
+      "limitation": "The full NP symmetry includes input/output permutations; those are not hidden-unit function symmetries when feature and label meanings are fixed.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "UNF",
+      "source_type": "primary_research_paper",
+      "title": "Universal Neural Functionals",
+      "authors": [
+        "Zhou, Allan",
+        "Finn, Chelsea",
+        "Harrison, James"
+      ],
+      "first_arxiv_date": "2024-02-07",
+      "reviewed_version_date": "2024-02-07",
+      "arxiv_id": "2402.05232",
+      "version": 1,
+      "url": "https://arxiv.org/abs/2402.05232v1",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2402.05232v1",
+        "sha256": "c99c028cd93f4c75565146459dff67bcad0723ea23f88d053d51b82d290b53df",
+        "page_count": 12
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          4
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Uses computation-graph information to build neural functionals across parameter structures.",
+      "limitation": "The paper distinguishes unwanted spatial filter permutations from function-preserving symmetries; universality is not behavioral correctness.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "GMN",
+      "source_type": "primary_research_paper",
+      "title": "Graph Metanetworks for Processing Diverse Neural Architectures",
+      "authors": [
+        "Lim, Derek",
+        "Maron, Haggai",
+        "Law, Marc T.",
+        "Lorraine, Jonathan",
+        "Lucas, James"
+      ],
+      "first_arxiv_date": "2023-12-07",
+      "reviewed_version_date": "2023-12-29",
+      "arxiv_id": "2312.04501",
+      "version": 2,
+      "url": "https://arxiv.org/abs/2312.04501v2",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2312.04501v2",
+        "sha256": "bde36c9e74801b9757024c7be036fa8c365f24927c8f8eb5044aeb2791a3781a",
+        "page_count": 29
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          4
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Represents diverse neural architectures as parameter graphs processed by metanetworks.",
+      "limitation": "Graph representation support does not imply a verifier for every represented operator or architecture.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "ScaleGMN",
+      "source_type": "primary_research_paper",
+      "title": "Scale Equivariant Graph Metanetworks",
+      "authors": [
+        "Kalogeropoulos, Ioannis",
+        "Bouritsas, Giorgos",
+        "Panagakis, Yannis"
+      ],
+      "first_arxiv_date": "2024-06-15",
+      "reviewed_version_date": "2024-10-30",
+      "arxiv_id": "2406.10685",
+      "version": 2,
+      "url": "https://arxiv.org/abs/2406.10685v2",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2406.10685v2",
+        "sha256": "4425b55bc760977e91c0de9e7ee301bc334cea8e8fa4b9f0b413ab66b0b11957",
+        "page_count": 34
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          2,
+          3,
+          4,
+          6
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Accounts for activation-dependent permutation, positive-scale, and sign symmetries.",
+      "limitation": "ReLU scaling must be positive and transform the bias and outgoing weights; tanh/sine sign symmetries have different assumptions.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "DeepAlign",
+      "source_type": "primary_research_paper",
+      "title": "Equivariant Deep Weight Space Alignment",
+      "authors": [
+        "Navon, Aviv",
+        "Shamsian, Aviv",
+        "Fetaya, Ethan",
+        "Chechik, Gal",
+        "Dym, Nadav",
+        "Maron, Haggai"
+      ],
+      "first_arxiv_date": "2023-10-20",
+      "reviewed_version_date": "2024-11-09",
+      "arxiv_id": "2310.13397",
+      "version": 4,
+      "url": "https://arxiv.org/abs/2310.13397v4",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2310.13397v4",
+        "sha256": "9882f534572d8cc420c363c68be7bf5109ec0a4b3c2c1b91d660a5ca7124c889",
+        "page_count": 20
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          4,
+          7
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Learns equivariant alignment of neural network weights.",
+      "limitation": "Optimal-alignment equivariance needs uniqueness or set-valued treatment; perfect recovery has activation and genericity assumptions.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "ReBasin",
+      "source_type": "primary_research_paper",
+      "title": "Git Re-Basin: Merging Models modulo Permutation Symmetries",
+      "authors": [
+        "Ainsworth, Samuel K.",
+        "Hayase, Jonathan",
+        "Srinivasa, Siddhartha"
+      ],
+      "first_arxiv_date": "2022-09-11",
+      "reviewed_version_date": "2023-03-01",
+      "arxiv_id": "2209.04836",
+      "version": 6,
+      "url": "https://arxiv.org/abs/2209.04836v6",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2209.04836v6",
+        "sha256": "2d8350e70134c66d2ef0dddb58c32675d920408bf075a1aa913c2ddcd1099583",
+        "page_count": 29
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          4,
+          7
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Aligns hidden permutations before merging independently trained models; gives multilayer weight-matching heuristics.",
+      "limitation": "Applying a permutation is exactly function preserving; interpolation quality is empirical, coordinate descent is heuristic, and the paper does not establish a zero-barrier ImageNet result.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "HyperNetworks",
+      "source_type": "primary_research_paper",
+      "title": "HyperNetworks",
+      "authors": [
+        "Ha, David",
+        "Dai, Andrew",
+        "Le, Quoc V."
+      ],
+      "first_arxiv_date": "2016-09-27",
+      "reviewed_version_date": "2016-12-01",
+      "arxiv_id": "1609.09106",
+      "version": 4,
+      "url": "https://arxiv.org/abs/1609.09106v4",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/1609.09106v4",
+        "sha256": "cc7057fe9b03ea8aa98d581eae1630bd6e03e25ac6057f7c53f45c50610cb4c5",
+        "page_count": 29
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          4
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Trains networks that generate another network's parameters.",
+      "limitation": "Generator training uses gradient-based optimization; generating weights does not certify their behavior.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "HyperDiffusion",
+      "source_type": "primary_research_paper",
+      "title": "HyperDiffusion: Generating Implicit Neural Fields with Weight-Space Diffusion",
+      "authors": [
+        "Erkoç, Ziya",
+        "Ma, Fangchang",
+        "Shan, Qi",
+        "Nießner, Matthias",
+        "Dai, Angela"
+      ],
+      "first_arxiv_date": "2023-03-29",
+      "reviewed_version_date": "2023-03-29",
+      "arxiv_id": "2303.17015",
+      "version": 1,
+      "url": "https://arxiv.org/abs/2303.17015v1",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2303.17015v1",
+        "sha256": "db81fc7621a62de5816efb825f87cc8432f2bb8d3ab80023d7e3467c57ef415e",
+        "page_count": 11
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          2,
+          3
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Trains diffusion over weights of fitted implicit neural fields.",
+      "limitation": "The fitted-field corpus and diffusion model incur training costs and restrict the demonstrated distribution.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "SANE",
+      "source_type": "primary_research_paper",
+      "title": "Towards Scalable and Versatile Weight Space Learning",
+      "authors": [
+        "Schürholt, Konstantin",
+        "Mahoney, Michael W.",
+        "Borth, Damian"
+      ],
+      "first_arxiv_date": "2024-06-14",
+      "reviewed_version_date": "2024-06-14",
+      "arxiv_id": "2406.09997",
+      "version": 1,
+      "url": "https://arxiv.org/abs/2406.09997v1",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2406.09997v1",
+        "sha256": "fb61a31819d7dc0defc4c8d48a576eb438fdff468aa392a8bc59a5f21998ea22",
+        "page_count": 20
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          4
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Uses sequence-based weight representations and autoencoding for scalable weight-space learning and generation.",
+      "limitation": "A scalable representation does not remove lineage leakage, reconstruction controls, or generator-training costs.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "Memorization",
+      "source_type": "primary_research_paper",
+      "title": "Generative Modeling of Weights: Generalization or Memorization?",
+      "authors": [
+        "Zeng, Boya",
+        "Yin, Yida",
+        "Xu, Zhiqiu",
+        "Liu, Zhuang"
+      ],
+      "first_arxiv_date": "2025-06-09",
+      "reviewed_version_date": "2025-10-03",
+      "arxiv_id": "2506.07998",
+      "version": 2,
+      "url": "https://arxiv.org/abs/2506.07998v2",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2506.07998v2",
+        "sha256": "a7f20642ac104ce3266f1ca05a18ac18084c5a62897bc04ef27549b81a819d1a",
+        "page_count": 35
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          4,
+          5
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Studies memorization and generalization of generative weight models with empirical controls.",
+      "limitation": "Findings motivate strong baselines and lineage-aware splits; they are not a universal impossibility theorem for useful weight generation.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "DnD",
+      "source_type": "primary_research_paper",
+      "title": "Drag-and-Drop LLMs: Zero-Shot Prompt-to-Weights",
+      "authors": [
+        "Liang, Zhiyuan",
+        "Tang, Dongwen",
+        "Zhou, Yuhao",
+        "Zhao, Xuanlei",
+        "Shi, Mingjia",
+        "Zhao, Wangbo",
+        "Li, Zekai",
+        "Wang, Peihao",
+        "Schürholt, Konstantin",
+        "Borth, Damian",
+        "Bronstein, Michael M.",
+        "You, Yang",
+        "Wang, Zhangyang",
+        "Wang, Kai"
+      ],
+      "first_arxiv_date": "2025-06-19",
+      "reviewed_version_date": "2025-06-19",
+      "arxiv_id": "2506.16406",
+      "version": 1,
+      "url": "https://arxiv.org/abs/2506.16406v1",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2506.16406v1",
+        "sha256": "45907caf14d36fcf812b75b9af100f5cc9b5455679035c3e1e8b7ac6d6e692c2",
+        "page_count": 18
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          4
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Learns a mapping from prompts to adaptation weights and evaluates zero-shot target-time generation.",
+      "limitation": "The generator is trained using prompt/LoRA checkpoint pairs; zero-shot at inference does not mean no gradient training or no task-specific provenance.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "WaRP",
+      "source_type": "primary_research_paper",
+      "title": "Weight-Space Linear Recurrent Neural Networks",
+      "authors": [
+        "Nzoyem, Roussel Desmond",
+        "Keshtmand, Nawid",
+        "Fernandez, Enrique Crespo",
+        "Tsayem, Idriss",
+        "Santos-Rodriguez, Raul",
+        "Barton, David A. W.",
+        "Deakin, Tom"
+      ],
+      "first_arxiv_date": "2025-06-01",
+      "reviewed_version_date": "2026-03-02",
+      "arxiv_id": "2506.01153",
+      "version": 3,
+      "url": "https://arxiv.org/abs/2506.01153v3",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2506.01153v3",
+        "sha256": "971d1ed1f97464027a1de3cbc94fd5155ad5361aae3b341ab17da7d9ed098929",
+        "page_count": 40
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          4
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Models recurrent weight dynamics using a linear recurrence driven by input differences.",
+      "limitation": "Evidence concerns learned dynamic models, not guaranteed semantic correctness of arbitrary static edits.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "Soups",
+      "source_type": "primary_research_paper",
+      "title": "Model soups: averaging weights of multiple fine-tuned models improves accuracy without increasing inference time",
+      "authors": [
+        "Wortsman, Mitchell",
+        "Ilharco, Gabriel",
+        "Gadre, Samir Yitzhak",
+        "Roelofs, Rebecca",
+        "Gontijo-Lopes, Raphael",
+        "Morcos, Ari S.",
+        "Namkoong, Hongseok",
+        "Farhadi, Ali",
+        "Carmon, Yair",
+        "Kornblith, Simon",
+        "Schmidt, Ludwig"
+      ],
+      "first_arxiv_date": "2022-03-10",
+      "reviewed_version_date": "2022-07-01",
+      "arxiv_id": "2203.05482",
+      "version": 3,
+      "url": "https://arxiv.org/abs/2203.05482v3",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2203.05482v3",
+        "sha256": "226ac91243bdf4ebe79652991f59fa1c0c84d5d624a50b88210bf7e9316869e3",
+        "page_count": 34
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          7
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Averages fine-tuned model weights and evaluates accuracy without ensemble inference cost.",
+      "limitation": "Results rely on model compatibility, shared pretraining and validation/selection choices.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "TaskArithmetic",
+      "source_type": "primary_research_paper",
+      "title": "Editing Models with Task Arithmetic",
+      "authors": [
+        "Ilharco, Gabriel",
+        "Ribeiro, Marco Tulio",
+        "Wortsman, Mitchell",
+        "Gururangan, Suchin",
+        "Schmidt, Ludwig",
+        "Hajishirzi, Hannaneh",
+        "Farhadi, Ali"
+      ],
+      "first_arxiv_date": "2022-12-08",
+      "reviewed_version_date": "2023-03-31",
+      "arxiv_id": "2212.04089",
+      "version": 3,
+      "url": "https://arxiv.org/abs/2212.04089v3",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2212.04089v3",
+        "sha256": "6d8bb9f18b58f6cafae018139746afc90023be5dc18586b665863db5028c4191",
+        "page_count": 31
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          2,
+          3
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Uses fine-tuning differences as task vectors for addition, negation and analogy experiments.",
+      "limitation": "Vector algebra does not itself establish independent or compositional task semantics.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "TIES",
+      "source_type": "primary_research_paper",
+      "title": "TIES-Merging: Resolving Interference When Merging Models",
+      "authors": [
+        "Yadav, Prateek",
+        "Tam, Derek",
+        "Choshen, Leshem",
+        "Raffel, Colin",
+        "Bansal, Mohit"
+      ],
+      "first_arxiv_date": "2023-06-02",
+      "reviewed_version_date": "2023-10-27",
+      "arxiv_id": "2306.01708",
+      "version": 2,
+      "url": "https://arxiv.org/abs/2306.01708v2",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2306.01708v2",
+        "sha256": "828742490193a58a3be52c339318f341e7eafced2ffa919d8e45e0ffeebaeb6f",
+        "page_count": 23
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          4
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Reduces merging interference through trimming, sign election and disjoint merging.",
+      "limitation": "Conflict handling is empirically evaluated; it is not a proof that merged behavior meets independent task contracts.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "TangentArithmetic",
+      "source_type": "primary_research_paper",
+      "title": "Task Arithmetic in the Tangent Space: Improved Editing of Pre-Trained Models",
+      "authors": [
+        "Ortiz-Jimenez, Guillermo",
+        "Favero, Alessandro",
+        "Frossard, Pascal"
+      ],
+      "first_arxiv_date": "2023-05-22",
+      "reviewed_version_date": "2023-11-21",
+      "arxiv_id": "2305.12827",
+      "version": 3,
+      "url": "https://arxiv.org/abs/2305.12827v3",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2305.12827v3",
+        "sha256": "95ce2f3b532b7ab5ed91ab24648d7668bcd7d905ec35efb8306c31bfb70b48f1",
+        "page_count": 28
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          4
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Studies task arithmetic via linearization and task-support/disentanglement conditions.",
+      "limitation": "Theoretical conditions are explicit; ordinary nonlinear fine-tuning need not satisfy the linearized setting.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "LoRA",
+      "source_type": "primary_research_paper",
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": [
+        "Hu, Edward J.",
+        "Shen, Yelong",
+        "Wallis, Phillip",
+        "Allen-Zhu, Zeyuan",
+        "Li, Yuanzhi",
+        "Wang, Shean",
+        "Wang, Lu",
+        "Chen, Weizhu"
+      ],
+      "first_arxiv_date": "2021-06-17",
+      "reviewed_version_date": "2021-10-16",
+      "arxiv_id": "2106.09685",
+      "version": 2,
+      "url": "https://arxiv.org/abs/2106.09685v2",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2106.09685v2",
+        "sha256": "e9a0d3128767db616085dc0f4e6e455e672e89af823e8ed1282793682787395a",
+        "page_count": 26
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          4
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Trains low-rank parameter updates with a frozen base model.",
+      "limitation": "Low rank bounds a representation dimension, not output drift, locality, or successful task transfer.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "ROME",
+      "source_type": "primary_research_paper",
+      "title": "Locating and Editing Factual Associations in GPT",
+      "authors": [
+        "Meng, Kevin",
+        "Bau, David",
+        "Andonian, Alex",
+        "Belinkov, Yonatan"
+      ],
+      "first_arxiv_date": "2022-02-10",
+      "reviewed_version_date": "2023-01-13",
+      "arxiv_id": "2202.05262",
+      "version": 5,
+      "url": "https://arxiv.org/abs/2202.05262v5",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2202.05262v5",
+        "sha256": "d7c17f896cca512fb258261421b073baa6f4e6e44b6bb7ada5c90185f423054a",
+        "page_count": 35
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          4,
+          5
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Derives a constrained rank-one update for a linear associative-memory component and evaluates factual editing.",
+      "limitation": "Covariance/key estimates and end-to-end locality are empirical; a local layer equation is not preservation of all model knowledge.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "AlphaEdit",
+      "source_type": "primary_research_paper",
+      "title": "AlphaEdit: Null-Space Constrained Knowledge Editing for Language Models",
+      "authors": [
+        "Fang, Junfeng",
+        "Jiang, Houcheng",
+        "Wang, Kun",
+        "Ma, Yunshan",
+        "Jie, Shi",
+        "Wang, Xiang",
+        "He, Xiangnan",
+        "Chua, Tat-seng"
+      ],
+      "first_arxiv_date": "2024-10-03",
+      "reviewed_version_date": "2025-04-22",
+      "arxiv_id": "2410.02355",
+      "version": 4,
+      "url": "https://arxiv.org/abs/2410.02355v4",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2410.02355v4",
+        "sha256": "1b99c31b28f5e5e069f111beaf286258092bd0fac1e81ff9bacbd936259736cc",
+        "page_count": 32
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          4,
+          5
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Constrains edit directions using the nullspace of preserved keys.",
+      "limitation": "Exact protection applies to specified keys with delta K0 = 0; the practical 1e-2 eigenvalue cutoff yields approximate nullspaces, and sampled keys do not cover all knowledge.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "Reluplex",
+      "source_type": "primary_research_paper",
+      "title": "Reluplex: An Efficient SMT Solver for Verifying Deep Neural Networks",
+      "authors": [
+        "Katz, Guy",
+        "Barrett, Clark",
+        "Dill, David",
+        "Julian, Kyle",
+        "Kochenderfer, Mykel"
+      ],
+      "first_arxiv_date": "2017-02-03",
+      "reviewed_version_date": "2017-05-19",
+      "arxiv_id": "1702.01135",
+      "version": 2,
+      "url": "https://arxiv.org/abs/1702.01135v2",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/1702.01135v2",
+        "sha256": "27e596f4fc5f433369d959a2eac39a5212daaa0d9ef20ee3925620f645bcfe6d",
+        "page_count": 31
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          8,
+          9,
+          11,
+          12
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Presents a sound and complete abstract decision procedure for the stated piecewise-linear verification problem.",
+      "limitation": "PDF page 12 explicitly states that floating-point tableau restoration in the implementation does not guarantee soundness.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "CROWN",
+      "source_type": "primary_research_paper",
+      "title": "Efficient Neural Network Robustness Certification with General Activation Functions",
+      "authors": [
+        "Zhang, Huan",
+        "Weng, Tsui-Wei",
+        "Chen, Pin-Yu",
+        "Hsieh, Cho-Jui",
+        "Daniel, Luca"
+      ],
+      "first_arxiv_date": "2018-11-02",
+      "reviewed_version_date": "2018-11-02",
+      "arxiv_id": "1811.00866",
+      "version": 1,
+      "url": "https://arxiv.org/abs/1811.00866v1",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/1811.00866v1",
+        "sha256": "7b57198bb3693c7a32c1000f2585b7772b5e76c6954614d8d3392c7a1a32ad32",
+        "page_count": 17
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          3,
+          4,
+          5
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Derives certified output bounds using valid local affine envelopes of activation functions on a specified input domain.",
+      "limitation": "Bound validity depends on those envelopes and domain assumptions; failure to certify can reflect loose bounds rather than an actual violation.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "ProvableRepair",
+      "source_type": "primary_research_paper",
+      "title": "Provable Repair of Deep Neural Networks",
+      "authors": [
+        "Sotoudeh, Matthew",
+        "Thakur, Aditya V."
+      ],
+      "first_arxiv_date": "2021-04-09",
+      "reviewed_version_date": "2021-04-25",
+      "arxiv_id": "2104.04413",
+      "version": 2,
+      "url": "https://arxiv.org/abs/2104.04413v2",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2104.04413v2",
+        "sha256": "948b259ed6e359ad7926182ebce4f62a5a3c0c3c431f660687460abbdf8d2302",
+        "page_count": 20
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          4,
+          5,
+          7,
+          8,
+          9
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Decouples activation and value computations so repair of a single value layer becomes linear constraints.",
+      "limitation": "The architecture is changed to a decoupled network; polytope repair uses activation-region vertices, whose number can be exponential.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "TorchLean",
+      "source_type": "primary_research_paper",
+      "title": "TorchLean: Formalizing Neural Networks in Lean",
+      "authors": [
+        "George, Robert Joseph",
+        "Cruden, Jennifer",
+        "Adkisson, Will",
+        "Zhong, Xiangru",
+        "Zhang, Huan",
+        "Anandkumar, Anima"
+      ],
+      "first_arxiv_date": "2026-02-26",
+      "reviewed_version_date": "2026-05-24",
+      "arxiv_id": "2602.22631",
+      "version": 2,
+      "url": "https://arxiv.org/abs/2602.22631v2",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2602.22631v2",
+        "sha256": "dd8b7ce74b70d6a5bd928bf32f5caaeaf9354b56902d8f9a47f6f14f77c0c4d3",
+        "page_count": 55
+      },
+      "reviewed_locator": {
+        "type": "physical_pdf_pages",
+        "numbering": "one-based, including the title page",
+        "pages": [
+          1,
+          2,
+          3,
+          4,
+          7,
+          8,
+          9,
+          19,
+          42,
+          43
+        ],
+        "scope": "selected methods, theoretical claims and/or evaluation sections, not an every-page review"
+      },
+      "finding": "Formalizes shared SSA/DAG semantics, differentiation, robustness analysis and certificate checking in Lean.",
+      "limitation": "Table 3 limits the proved operator/compiler coverage; finite-path IEEE32Exec refinement is internal and is not a proof of deployed CPU/CUDA floating-point execution.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "Survey",
+      "source_type": "secondary_survey",
+      "title": "A Survey of Weight Space Learning: Understanding, Representation, and Generation",
+      "authors": [
+        "Han, Xiaolong",
+        "Wang, Zehong",
+        "Zhao, Bo",
+        "Zhang, Binchi",
+        "Li, Jundong",
+        "Borth, Damian",
+        "Yu, Rose",
+        "Maron, Haggai",
+        "Ye, Yanfang",
+        "Yin, Lu",
+        "Neri, Ferrante"
+      ],
+      "first_arxiv_date": "2026-03-10",
+      "reviewed_version_date": "2026-03-10",
+      "arxiv_id": "2603.10090",
+      "version": 1,
+      "url": "https://arxiv.org/abs/2603.10090v1",
+      "reviewed_artifact": {
+        "media_type": "application/pdf",
+        "url": "https://arxiv.org/pdf/2603.10090v1",
+        "sha256": "542e410a7e38ddc5fde8c7a89ea4d6fa0e98daaa3f5a97ca49a065f7fe649968",
+        "page_count": 51
+      },
+      "reviewed_locator": {
+        "type": "abstract_and_taxonomy",
+        "scope": "abstract and top-level understanding/representation/generation taxonomy; used for discovery, not as primary experimental evidence"
+      },
+      "independently_reproduced": false
+    },
+    {
+      "id": "Index",
+      "source_type": "discovery_index",
+      "title": "Awesome Weight Space Learning",
+      "repository": "Zehong-Wang/Awesome-Weight-Space-Learning",
+      "commit": "929ecc819301d2ad0b3ccea99e976529998abb81",
+      "commit_date": "2026-05-12T17:06:53Z",
+      "url": "https://github.com/Zehong-Wang/Awesome-Weight-Space-Learning/tree/929ecc819301d2ad0b3ccea99e976529998abb81",
+      "reviewed_artifact": {
+        "path": "README.md",
+        "url": "https://raw.githubusercontent.com/Zehong-Wang/Awesome-Weight-Space-Learning/929ecc819301d2ad0b3ccea99e976529998abb81/README.md",
+        "sha256": "10a3ebe55b145187f853ac766e35aafe6221be5a0c135c13121d8753f3207282"
+      },
+      "reviewed_locator": {
+        "type": "readme",
+        "scope": "taxonomy, source links and selection of primary work"
+      },
+      "limitation": "Pinned supplied index is a discovery aid, not evidence that a listed method works or an exhaustive snapshot of later work."
+    },
+    {
+      "id": "Sparks",
+      "source_type": "primary_author_report",
+      "title": "Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights",
+      "authors": [
+        "Rikiya Takehi",
+        "Jayden Teoh",
+        "Alex Zhang",
+        "Omar Khattab"
+      ],
+      "publication_date": "2026-11-02",
+      "date_evidence": "citation_publication_date and article:published_time in retrieved HTML; visible publication date agrees",
+      "url": "https://rikiyat.github.io/blog/weight-space-programming/",
+      "reviewed_artifact": {
+        "media_type": "text/html",
+        "url": "https://rikiyat.github.io/blog/weight-space-programming/",
+        "sha256": "a326bc5b34b3152a93bf38013f412bb140c9e0a299c72491d27fb17b1b7d9cbb"
+      },
+      "reviewed_locator": {
+        "type": "named_experiments",
+        "experiments": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "scope": "experiment methods, reported outcomes and limitations; selected released README/result/manifest cross-checks are recorded under SparksLogs"
+      },
+      "limitation": "Recent author report, not peer reviewed; no independent reproduction or complete code audit performed. Some prompt history, trial history, checkpoints and harness assets are not included in the inspected release.",
+      "independently_reproduced": false
+    },
+    {
+      "id": "SparksLogs",
+      "source_type": "primary_released_experiment_artifacts",
+      "title": "lm_understand-logs: released prompts, traces, evaluation records and edit assets",
+      "repository": "RikiyaT/lm_understand-logs",
+      "commit": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+      "commit_date": "2026-10-29T04:47:04Z",
+      "url": "https://github.com/RikiyaT/lm_understand-logs/tree/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+      "reviewed_artifacts": [
+        {
+          "id": "SparksRoot",
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/README.md",
+          "sha256": "b1c51eeb9b9e2935ff227fdc7796c2a67bd3a55014cf99291224f9cc7b93d342",
+          "review_scope": "selected artifact inspected; no rerun of underlying experiment"
+        },
+        {
+          "id": "SparksKinetix",
+          "path": "exp4_fix_car/README.md",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp4_fix_car/README.md",
+          "sha256": "97cf395dd262069b09137807c492fc96dee396f45505fd5df2ab4b85a71102ce",
+          "review_scope": "selected artifact inspected; no rerun of underlying experiment"
+        },
+        {
+          "id": "SparksMinAtar",
+          "path": "exp5_write_from_scratch/README.md",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp5_write_from_scratch/README.md",
+          "sha256": "e74367e0e4eb32d93685441332aceae4b47b1751a07caead42b1630d5547bb16",
+          "review_scope": "selected artifact inspected; no rerun of underlying experiment"
+        },
+        {
+          "id": "SparksGo",
+          "path": "exp6_go_from_scratch/README.md",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp6_go_from_scratch/README.md",
+          "sha256": "835e03d29cae4041d41a6b822593434dd455fa331ba4611cee0ec47fa685a5b1",
+          "review_scope": "selected artifact inspected; no rerun of underlying experiment"
+        },
+        {
+          "id": "SparksSycophancy",
+          "path": "exp7_sycophancy/README.md",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp7_sycophancy/README.md",
+          "sha256": "daebb6645cbeb778529eb98ce8f6aaa7ff85038ffc875f61443e69308a8cd8b5",
+          "review_scope": "selected artifact inspected; no rerun of underlying experiment"
+        },
+        {
+          "id": "SparksMath",
+          "path": "exp8_math/README.md",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/README.md",
+          "sha256": "473e386ade21ff52240103003b6b125e4362d9fa11010916c1b770ddb0edcbbd",
+          "review_scope": "selected artifact inspected; no rerun of underlying experiment"
+        },
+        {
+          "id": "SparksGemma",
+          "path": "exp8_math/gemma_followup/README.md",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/gemma_followup/README.md",
+          "sha256": "a1920da492020d92a24439bbe5ffa711faf1c48e17b071d09a9bc3a26575e674",
+          "review_scope": "selected artifact inspected; no rerun of underlying experiment"
+        },
+        {
+          "id": "SparksKinetixResult",
+          "path": "exp4_fix_car/eval/oneshot_result.json",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp4_fix_car/eval/oneshot_result.json",
+          "sha256": "d9e57db254079b776ee574ba94bfc061ca1e4ce199fad316dea6f8faa2049330",
+          "review_scope": "selected artifact inspected; no rerun of underlying experiment"
+        },
+        {
+          "id": "SparksMathBase",
+          "path": "exp8_math/eval/unedited/merged.json",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/eval/unedited/merged.json",
+          "sha256": "5c31370485b9f197f592745e935eeaee6b09dc127daa5b2a8be1ebbcbc210221",
+          "review_scope": "selected artifact inspected; no rerun of underlying experiment"
+        },
+        {
+          "id": "SparksMathEdited",
+          "path": "exp8_math/eval/p50c/merged.json",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/eval/p50c/merged.json",
+          "sha256": "c93d3db30a612ef0da396014fdfbe011efbcf2cd417e2e6125664d7effdd0471",
+          "review_scope": "selected artifact inspected; no rerun of underlying experiment"
+        },
+        {
+          "id": "SparksMathManifest",
+          "path": "exp8_math/runs/p50c/edit/manifest.json",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/edit/manifest.json",
+          "sha256": "83185c1db46e3dafb34af645f8c5ce033c09cc99d4512b9e1b8e3aba9d269225",
+          "review_scope": "selected artifact inspected; no rerun of underlying experiment"
+        },
+        {
+          "id": "SparksGemmaBase",
+          "path": "exp8_math/gemma_followup/eval/unedited/merged.json",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/gemma_followup/eval/unedited/merged.json",
+          "sha256": "b6b97ef8cc1e1700c6b59e371908b40a662928a71dd0d984b7521fff56571404",
+          "review_scope": "selected artifact inspected; no rerun of underlying experiment"
+        },
+        {
+          "id": "SparksGemmaEdited",
+          "path": "exp8_math/gemma_followup/eval/g25b/merged.json",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/gemma_followup/eval/g25b/merged.json",
+          "sha256": "eb1831ee55b39412c7dfcaaa8b9ce84a757fd5c856d1c5fdec05d257b26acf77",
+          "review_scope": "selected artifact inspected; no rerun of underlying experiment"
+        }
+      ],
+      "reviewed_locator": {
+        "type": "selected_repository_artifacts",
+        "artifact_count": 13,
+        "scope": "root README, experiment 4-8 README files, Gemma README, selected result JSON files and edit manifest"
+      },
+      "limitation": "Hashes identify inspected bytes at one pinned commit. Repository inspection does not constitute independent reproduction or a full implementation audit.",
+      "independently_reproduced": false
+    }
+  ]
+}

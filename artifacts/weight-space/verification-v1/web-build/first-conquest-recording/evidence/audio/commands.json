@@ -1,0 +1,101 @@
+[
+  {
+    "name": "ffmpeg-version",
+    "argv": [
+      "C:/public-user\\AppData\\Local\\Microsoft\\WinGet\\Links\\ffmpeg.EXE",
+      "-version"
+    ],
+    "windows_command_line": "C:/public-user\\AppData\\Local\\Microsoft\\WinGet\\Links\\ffmpeg.EXE -version"
+  },
+  {
+    "name": "ffprobe",
+    "argv": [
+      "C:/public-user\\AppData\\Local\\Microsoft\\WinGet\\Links\\ffprobe.EXE",
+      "-v",
+      "error",
+      "-select_streams",
+      "a:0",
+      "-show_streams",
+      "-show_format",
+      "-of",
+      "json",
+      "C:/public-user\\code\\RLCD\\presentations\\first-conquest-recording\\renders\\first-conquest-90s.mp4"
+    ],
+    "windows_command_line": "C:/public-user\\AppData\\Local\\Microsoft\\WinGet\\Links\\ffprobe.EXE -v error -select_streams a:0 -show_streams -show_format -of json C:/public-user\\code\\RLCD\\presentations\\first-conquest-recording\\renders\\first-conquest-90s.mp4"
+  },
+  {
+    "name": "ffmpeg-loudness",
+    "argv": [
+      "C:/public-user\\AppData\\Local\\Microsoft\\WinGet\\Links\\ffmpeg.EXE",
+      "-hide_banner",
+      "-nostats",
+      "-threads",
+      "1",
+      "-i",
+      "C:/public-user\\code\\RLCD\\presentations\\first-conquest-recording\\renders\\first-conquest-90s.mp4",
+      "-map",
+      "0:a:0",
+      "-vn",
+      "-sn",
+      "-dn",
+      "-filter_threads",
+      "1",
+      "-af",
+      "loudnorm=I=-24:TP=-1:LRA=11:print_format=json",
+      "-f",
+      "null",
+      "NUL"
+    ],
+    "windows_command_line": "C:/public-user\\AppData\\Local\\Microsoft\\WinGet\\Links\\ffmpeg.EXE -hide_banner -nostats -threads 1 -i C:/public-user\\code\\RLCD\\presentations\\first-conquest-recording\\renders\\first-conquest-90s.mp4 -map 0:a:0 -vn -sn -dn -filter_threads 1 -af loudnorm=I=-24:TP=-1:LRA=11:print_format=json -f null NUL"
+  },
+  {
+    "name": "ffmpeg-ebur128",
+    "argv": [
+      "C:/public-user\\AppData\\Local\\Microsoft\\WinGet\\Links\\ffmpeg.EXE",
+      "-hide_banner",
+      "-nostats",
+      "-threads",
+      "1",
+      "-i",
+      "C:/public-user\\code\\RLCD\\presentations\\first-conquest-recording\\renders\\first-conquest-90s.mp4",
+      "-map",
+      "0:a:0",
+      "-vn",
+      "-sn",
+      "-dn",
+      "-filter_threads",
+      "1",
+      "-af",
+      "ebur128=peak=true:framelog=verbose",
+      "-f",
+      "null",
+      "NUL"
+    ],
+    "windows_command_line": "C:/public-user\\AppData\\Local\\Microsoft\\WinGet\\Links\\ffmpeg.EXE -hide_banner -nostats -threads 1 -i C:/public-user\\code\\RLCD\\presentations\\first-conquest-recording\\renders\\first-conquest-90s.mp4 -map 0:a:0 -vn -sn -dn -filter_threads 1 -af ebur128=peak=true:framelog=verbose -f null NUL"
+  },
+  {
+    "name": "ffmpeg-decode",
+    "argv": [
+      "C:/public-user\\AppData\\Local\\Microsoft\\WinGet\\Links\\ffmpeg.EXE",
+      "-hide_banner",
+      "-nostats",
+      "-threads",
+      "1",
+      "-i",
+      "C:/public-user\\code\\RLCD\\presentations\\first-conquest-recording\\renders\\first-conquest-90s.mp4",
+      "-map",
+      "0:a:0",
+      "-vn",
+      "-sn",
+      "-dn",
+      "-filter_threads",
+      "1",
+      "-c:a",
+      "pcm_f32le",
+      "-f",
+      "f32le",
+      "pipe:1"
+    ],
+    "windows_command_line": "C:/public-user\\AppData\\Local\\Microsoft\\WinGet\\Links\\ffmpeg.EXE -hide_banner -nostats -threads 1 -i C:/public-user\\code\\RLCD\\presentations\\first-conquest-recording\\renders\\first-conquest-90s.mp4 -map 0:a:0 -vn -sn -dn -filter_threads 1 -c:a pcm_f32le -f f32le pipe:1"
+  }
+]

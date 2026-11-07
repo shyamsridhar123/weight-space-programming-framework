@@ -1,0 +1,61 @@
+{
+  "schema": "wsp-adapter-certificate/1",
+  "base_artifact_sha256": "0fca6d66c5066dae31c8d71db4c699438e50b24e7b63243c15d87032aa325011",
+  "candidate_artifact_sha256": "95151a47eadca11b7784c906c850edfb58f338538ae84b70bec747a1592445d5",
+  "architecture": "sequential-affine-activation/1",
+  "certificate": {
+    "schema": "wsp-sequential-drift/1",
+    "base_artifact_sha256": "0fca6d66c5066dae31c8d71db4c699438e50b24e7b63243c15d87032aa325011",
+    "candidate_artifact_sha256": "95151a47eadca11b7784c906c850edfb58f338538ae84b70bec747a1592445d5",
+    "architecture": "sequential-affine-activation/1",
+    "domain": {
+      "lower": [
+        -1.0,
+        -1.0
+      ],
+      "upper": [
+        1.0,
+        1.0
+      ]
+    },
+    "layers": [
+      {
+        "layer": {
+          "activation": "relu",
+          "bias": "layers.0.bias",
+          "weight": "layers.0.weight"
+        },
+        "base_radius": [
+          "1",
+          "1"
+        ],
+        "drift": [
+          "0",
+          "0"
+        ]
+      },
+      {
+        "layer": {
+          "activation": "identity",
+          "bias": "layers.1.bias",
+          "weight": "layers.1.weight"
+        },
+        "base_radius": [
+          "0"
+        ],
+        "drift": [
+          "1/4"
+        ]
+      }
+    ],
+    "output_bounds": [
+      "1/4"
+    ],
+    "arithmetic": "Exact rationals lifted from stored binary64 endpoints",
+    "scope": "All real inputs in the declared box; shared certified activation per layer",
+    "implementation_verified": false,
+    "floating_execution_verified": false,
+    "reward_verified": 0,
+    "sha256": "405166b6b60bd3a1de622b3a104aa7990619015ee565837cd02850c9dcdaa9a9"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "wsp-task/1",
+  "task_id": "world-7309/conv_tanh/conditional-edit",
+  "mode": "edit",
+  "objective": "Add the declared score shift on x0>0.35 while retaining x0<-0.1 behavior",
+  "architecture": "study-conv2d-tanh-flatten-linear/1",
+  "base_sha256": "ed02cb2fb539e3df862b298471f4c75ddea7b24aaa5baef75411e4f1af5e4a26",
+  "constraints": {
+    "fixed_arms": [
+      "no_op",
+      "unconstrained",
+      "soft_retention",
+      "nullspace",
+      "matched_random",
+      "gradient"
+    ],
+    "head": {
+      "bias": "head.bias",
+      "feature_id": "study-frozen-features/138628db458c209b100a590ac430949394acf837bd9c2e95a1c88f4a173ee242",
+      "weight": "head.weight"
+    },
+    "regime": "fitting_allowed_algorithmic_control",
+    "shift": [
+      0.6,
+      -0.3,
+      0.0
+    ]
+  }
+}

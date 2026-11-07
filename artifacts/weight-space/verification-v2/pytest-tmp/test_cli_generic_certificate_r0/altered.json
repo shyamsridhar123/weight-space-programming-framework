@@ -1,0 +1,33 @@
+{
+  "schema": "wsp-adapter-certificate/1",
+  "base_artifact_sha256": "368ecb549d252165fdd8037be89eff373caa5d74275ee47504f3aeda3db3e19d",
+  "candidate_artifact_sha256": "35be24ae6df0d1d6fb5066b666aa8c24e01062ccdc5a6b8d7ddbf0de65e10940",
+  "architecture": "dense-relu-dense/1",
+  "certificate": {
+    "schema": "wsp-drift-certificate/1",
+    "arithmetic": "exact-rational-lift-of-binary64",
+    "base_sha256": "b7d2cfe08ea07a55c783ed519667b3d5afa58f4b4e65c00bb55c3f81148a9c21",
+    "candidate_sha256": "5a9c7f87732d407261d3c6fbf86482dedfa841203e1eee99be18a10a676b4189",
+    "domain": {
+      "lower": [
+        0.0
+      ],
+      "upper": [
+        1.0
+      ]
+    },
+    "hidden_upper": [
+      "1"
+    ],
+    "hidden_drift": [
+      "0"
+    ],
+    "output_bounds": [
+      "1"
+    ],
+    "theorem": "WeightSpace.score_drift_le",
+    "implementation_verified": 0,
+    "scope": "real score drift on the stated box; excludes floating-point error and task reward",
+    "sha256": "ed1a066481571a85b87ae027a8c2cb9dea0dc284c9996c07ca1eb35cdebd1258"
+  }
+}

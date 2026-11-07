@@ -1,0 +1,407 @@
+{
+  "schema": "local-ci-workflow-validation/2",
+  "started_at": "2026-11-07T04:03:09.097467+00:00",
+  "root": "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework",
+  "remote_execution": false,
+  "network_access_used": false,
+  "workflow_commands_executed": false,
+  "workflow_hashes_before": {
+    ".github/workflows/historical-rts.yml": "0a3bede2720894a24f3fcc6eddf6f7eed309fe6934091b5b1c81f2508216a328",
+    ".github/workflows/proofs.yml": "632edcad257e8809e179ca8bdfc9994abbc85f3b83c256535ff384e70bae3551",
+    ".github/workflows/publication-python.yml": "0046dcf6f3bbe83ef4a50e2e8201952cd26033bcd63f2e3c8ce8594b60ea3b15"
+  },
+  "readme_sha256_before": "03b5f2f60584d6efdc81aa6d8e24883b36ed042f5a05a51557705791399319ec",
+  "validator_sha256": "2fc33ecd1a5a9d5170eae0b11ad9189aa8b570f82114e770ee11d750e0034afa",
+  "prior_receipt": {
+    "path": ".runs/ci-workflow-validation-d065ad879597/validation.json",
+    "sha256": "9c61d1787bcfd8ce065e2e71f50a8cab71afb1760449e29a67c82910a97de9ab"
+  },
+  "environment_overrides": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "environment_unset": [
+    "BASH_ENV",
+    "ENV"
+  ],
+  "workflows": [
+    {
+      "path": ".github/workflows/historical-rts.yml",
+      "sha256_before": "0a3bede2720894a24f3fcc6eddf6f7eed309fe6934091b5b1c81f2508216a328",
+      "prior_receipt_sha256": "0a3bede2720894a24f3fcc6eddf6f7eed309fe6934091b5b1c81f2508216a328",
+      "matches_prior_receipt": true,
+      "triggers": [
+        "workflow_dispatch"
+      ],
+      "actions": [
+        {
+          "name": "actions/checkout",
+          "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "version_from_prior_receipt": "v7.0.1",
+          "inputs_checked": [
+            "persist-credentials"
+          ],
+          "cached_metadata_path": "C:/public-user\\AppData\\Local\\Temp\\wsp-ci-validation-f1702c9e71a94e6da68deebdd3c8d192\\actions-checkout.yml",
+          "cached_metadata_sha256": "d59219cb79590abdb877deaa14e3b65a00c05318bf5a6f3b989b9162b5d08c35"
+        },
+        {
+          "name": "actions/setup-python",
+          "sha": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+          "version_from_prior_receipt": "v7.1.0",
+          "inputs_checked": [
+            "python-version"
+          ],
+          "cached_metadata_path": "C:/public-user\\AppData\\Local\\Temp\\wsp-ci-validation-f1702c9e71a94e6da68deebdd3c8d192\\actions-setup-python.yml",
+          "cached_metadata_sha256": "0829b3f54d769f8b25cefd4d856c735bc8e097d6597835b838ebb4da497c838d"
+        },
+        {
+          "name": "actions/setup-node",
+          "sha": "949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "version_from_prior_receipt": "v7.1.0",
+          "inputs_checked": [
+            "node-version",
+            "package-manager-cache"
+          ],
+          "cached_metadata_path": "C:/public-user\\AppData\\Local\\Temp\\wsp-ci-validation-f1702c9e71a94e6da68deebdd3c8d192\\actions-setup-node.yml",
+          "cached_metadata_sha256": "84cd55863dbadfb83ed786c0bb4336553c2f4ceb52e102fccec01848f1977387"
+        },
+        {
+          "name": "actions/upload-artifact",
+          "sha": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+          "version_from_prior_receipt": "v7.0.2",
+          "inputs_checked": [
+            "if-no-files-found",
+            "include-hidden-files",
+            "name",
+            "path",
+            "retention-days"
+          ],
+          "cached_metadata_path": "C:/public-user\\AppData\\Local\\Temp\\wsp-ci-validation-f1702c9e71a94e6da68deebdd3c8d192\\actions-upload-artifact.yml",
+          "cached_metadata_sha256": "c5979822866a72362e609844b6ebe77d4b7e759af68cc1c2c425dcf51481fab4"
+        }
+      ],
+      "bash_syntax_steps": [
+        {
+          "name": "Preserve checked-out file bytes",
+          "job": "historical-rts",
+          "step_index": 0,
+          "path": ".runs/ci-draft2-validation/extracted/historical-rts-historical-rts-0.sh",
+          "sha256": "afe84016e9348bd372df31b31b29c4b4e221245e5f643ef9a902a571665bf34e",
+          "exit_code": 0
+        },
+        {
+          "name": "Verify publication before installing dependencies",
+          "job": "historical-rts",
+          "step_index": 3,
+          "path": ".runs/ci-draft2-validation/extracted/historical-rts-historical-rts-3.sh",
+          "sha256": "fedc359738c912e342f24d7b970002c83fc1880dd641ff85f963897788102d7c",
+          "exit_code": 0
+        },
+        {
+          "name": "Install the locked historical runner",
+          "job": "historical-rts",
+          "step_index": 5,
+          "path": ".runs/ci-draft2-validation/extracted/historical-rts-historical-rts-5.sh",
+          "sha256": "c2c663b8f694dce366b91a792891bf819c89e0eea4895622b7eadafe6704b7d6",
+          "exit_code": 0
+        },
+        {
+          "name": "Run historical RTS compatibility tests",
+          "job": "historical-rts",
+          "step_index": 6,
+          "path": ".runs/ci-draft2-validation/extracted/historical-rts-historical-rts-6.sh",
+          "sha256": "ea61099ac6f27859eb9131d7a5d1ebd09d975356eff2dae2b6cd2528d70b401a",
+          "exit_code": 0
+        },
+        {
+          "name": "Verify publication after historical RTS tests",
+          "job": "historical-rts",
+          "step_index": 7,
+          "path": ".runs/ci-draft2-validation/extracted/historical-rts-historical-rts-7.sh",
+          "sha256": "68495896f4a83804538b1489f38655b46047ff15bdfc2f07f49fbd0f9d50fbae",
+          "exit_code": 0
+        }
+      ],
+      "sha256_after": "0a3bede2720894a24f3fcc6eddf6f7eed309fe6934091b5b1c81f2508216a328"
+    },
+    {
+      "path": ".github/workflows/proofs.yml",
+      "sha256_before": "632edcad257e8809e179ca8bdfc9994abbc85f3b83c256535ff384e70bae3551",
+      "prior_receipt_sha256": "632edcad257e8809e179ca8bdfc9994abbc85f3b83c256535ff384e70bae3551",
+      "matches_prior_receipt": true,
+      "triggers": [
+        "workflow_dispatch"
+      ],
+      "actions": [
+        {
+          "name": "actions/checkout",
+          "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "version_from_prior_receipt": "v7.0.1",
+          "inputs_checked": [
+            "persist-credentials"
+          ],
+          "cached_metadata_path": "C:/public-user\\AppData\\Local\\Temp\\wsp-ci-validation-f1702c9e71a94e6da68deebdd3c8d192\\actions-checkout.yml",
+          "cached_metadata_sha256": "d59219cb79590abdb877deaa14e3b65a00c05318bf5a6f3b989b9162b5d08c35"
+        },
+        {
+          "name": "actions/setup-python",
+          "sha": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+          "version_from_prior_receipt": "v7.1.0",
+          "inputs_checked": [
+            "python-version"
+          ],
+          "cached_metadata_path": "C:/public-user\\AppData\\Local\\Temp\\wsp-ci-validation-f1702c9e71a94e6da68deebdd3c8d192\\actions-setup-python.yml",
+          "cached_metadata_sha256": "0829b3f54d769f8b25cefd4d856c735bc8e097d6597835b838ebb4da497c838d"
+        },
+        {
+          "name": "actions/upload-artifact",
+          "sha": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+          "version_from_prior_receipt": "v7.0.2",
+          "inputs_checked": [
+            "if-no-files-found",
+            "include-hidden-files",
+            "name",
+            "path",
+            "retention-days"
+          ],
+          "cached_metadata_path": "C:/public-user\\AppData\\Local\\Temp\\wsp-ci-validation-f1702c9e71a94e6da68deebdd3c8d192\\actions-upload-artifact.yml",
+          "cached_metadata_sha256": "c5979822866a72362e609844b6ebe77d4b7e759af68cc1c2c425dcf51481fab4"
+        }
+      ],
+      "bash_syntax_steps": [
+        {
+          "name": "Preserve checked-out file bytes",
+          "job": "proofs",
+          "step_index": 0,
+          "path": ".runs/ci-draft2-validation/extracted/proofs-proofs-0.sh",
+          "sha256": "afe84016e9348bd372df31b31b29c4b4e221245e5f643ef9a902a571665bf34e",
+          "exit_code": 0
+        },
+        {
+          "name": "Verify publication before preparing proofs",
+          "job": "proofs",
+          "step_index": 3,
+          "path": ".runs/ci-draft2-validation/extracted/proofs-proofs-3.sh",
+          "sha256": "fedc359738c912e342f24d7b970002c83fc1880dd641ff85f963897788102d7c",
+          "exit_code": 0
+        },
+        {
+          "name": "Install pinned Elan and Lean 4.24.0",
+          "job": "proofs",
+          "step_index": 4,
+          "path": ".runs/ci-draft2-validation/extracted/proofs-proofs-4.sh",
+          "sha256": "7b1fb4c26bf59add8ad81ee853381e384a29a4696933bd03f0aa0756f4815481",
+          "exit_code": 0
+        },
+        {
+          "name": "Retrieve the cache using the committed dependency manifest",
+          "job": "proofs",
+          "step_index": 5,
+          "path": ".runs/ci-draft2-validation/extracted/proofs-proofs-5.sh",
+          "sha256": "1c4469c198a9ea7fa55ef519ae4d90488d72949760c4f8db42cec02e12b995ad",
+          "exit_code": 0
+        },
+        {
+          "name": "Check the generic proof snapshot and transitive axiom audit",
+          "job": "proofs",
+          "step_index": 6,
+          "path": ".runs/ci-draft2-validation/extracted/proofs-proofs-6.sh",
+          "sha256": "e339aa966cf480c142e58687529a9953976e3456b9ceb92862d6e6aa55ed5c44",
+          "exit_code": 0
+        },
+        {
+          "name": "Verify publication after the proof check",
+          "job": "proofs",
+          "step_index": 7,
+          "path": ".runs/ci-draft2-validation/extracted/proofs-proofs-7.sh",
+          "sha256": "68495896f4a83804538b1489f38655b46047ff15bdfc2f07f49fbd0f9d50fbae",
+          "exit_code": 0
+        }
+      ],
+      "sha256_after": "632edcad257e8809e179ca8bdfc9994abbc85f3b83c256535ff384e70bae3551"
+    },
+    {
+      "path": ".github/workflows/publication-python.yml",
+      "sha256_before": "0046dcf6f3bbe83ef4a50e2e8201952cd26033bcd63f2e3c8ce8594b60ea3b15",
+      "prior_receipt_sha256": "9ba9544d2a0cd50012c6b2ba709a09ced3afc8609d6970ccfbfb536a70d71e00",
+      "matches_prior_receipt": false,
+      "triggers": [
+        "pull_request",
+        "push",
+        "workflow_dispatch"
+      ],
+      "actions": [
+        {
+          "name": "actions/checkout",
+          "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "version_from_prior_receipt": "v7.0.1",
+          "inputs_checked": [
+            "persist-credentials"
+          ],
+          "cached_metadata_path": "C:/public-user\\AppData\\Local\\Temp\\wsp-ci-validation-f1702c9e71a94e6da68deebdd3c8d192\\actions-checkout.yml",
+          "cached_metadata_sha256": "d59219cb79590abdb877deaa14e3b65a00c05318bf5a6f3b989b9162b5d08c35"
+        },
+        {
+          "name": "actions/setup-python",
+          "sha": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+          "version_from_prior_receipt": "v7.1.0",
+          "inputs_checked": [
+            "python-version"
+          ],
+          "cached_metadata_path": "C:/public-user\\AppData\\Local\\Temp\\wsp-ci-validation-f1702c9e71a94e6da68deebdd3c8d192\\actions-setup-python.yml",
+          "cached_metadata_sha256": "0829b3f54d769f8b25cefd4d856c735bc8e097d6597835b838ebb4da497c838d"
+        },
+        {
+          "name": "actions/upload-artifact",
+          "sha": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+          "version_from_prior_receipt": "v7.0.2",
+          "inputs_checked": [
+            "if-no-files-found",
+            "include-hidden-files",
+            "name",
+            "path",
+            "retention-days"
+          ],
+          "cached_metadata_path": "C:/public-user\\AppData\\Local\\Temp\\wsp-ci-validation-f1702c9e71a94e6da68deebdd3c8d192\\actions-upload-artifact.yml",
+          "cached_metadata_sha256": "c5979822866a72362e609844b6ebe77d4b7e759af68cc1c2c425dcf51481fab4"
+        }
+      ],
+      "bash_syntax_steps": [
+        {
+          "name": "Preserve checked-out file bytes",
+          "job": "publication-python",
+          "step_index": 0,
+          "path": ".runs/ci-draft2-validation/extracted/publication-python-publication-python-0.sh",
+          "sha256": "afe84016e9348bd372df31b31b29c4b4e221245e5f643ef9a902a571665bf34e",
+          "exit_code": 0
+        },
+        {
+          "name": "Verify publication before installing dependencies",
+          "job": "publication-python",
+          "step_index": 3,
+          "path": ".runs/ci-draft2-validation/extracted/publication-python-publication-python-3.sh",
+          "sha256": "fedc359738c912e342f24d7b970002c83fc1880dd641ff85f963897788102d7c",
+          "exit_code": 0
+        },
+        {
+          "name": "Install CPU Torch and the standalone test dependencies",
+          "job": "publication-python",
+          "step_index": 4,
+          "path": ".runs/ci-draft2-validation/extracted/publication-python-publication-python-4.sh",
+          "sha256": "3b648d01eefc4be496d09120b20dc53d10e54d8cd7ee7ef053258258dd013f2f",
+          "exit_code": 0
+        },
+        {
+          "name": "Run the standalone Python suite",
+          "job": "publication-python",
+          "step_index": 5,
+          "path": ".runs/ci-draft2-validation/extracted/publication-python-publication-python-5.sh",
+          "sha256": "47bcba1355873d5aef53128c2bc410833d5d74745af9bcba53bd517fc4594feb",
+          "exit_code": 0
+        },
+        {
+          "name": "Build the wheel",
+          "job": "publication-python",
+          "step_index": 6,
+          "path": ".runs/ci-draft2-validation/extracted/publication-python-publication-python-6.sh",
+          "sha256": "d1af8625ed3d7464d69a57bdcaa42bf002e53cef987372e8bff7306564a38750",
+          "exit_code": 0
+        },
+        {
+          "name": "Validate a fresh wheel installation outside the checkout",
+          "job": "publication-python",
+          "step_index": 7,
+          "path": ".runs/ci-draft2-validation/extracted/publication-python-publication-python-7.sh",
+          "sha256": "3a15f21eefb5cf344be838cd824676f5f6d1e2bded00101a9754f80c480ce308",
+          "exit_code": 0
+        },
+        {
+          "name": "Verify publication after tests and packaging",
+          "job": "publication-python",
+          "step_index": 8,
+          "path": ".runs/ci-draft2-validation/extracted/publication-python-publication-python-8.sh",
+          "sha256": "68495896f4a83804538b1489f38655b46047ff15bdfc2f07f49fbd0f9d50fbae",
+          "exit_code": 0
+        }
+      ],
+      "sha256_after": "0046dcf6f3bbe83ef4a50e2e8201952cd26033bcd63f2e3c8ce8594b60ea3b15"
+    }
+  ],
+  "python_heredocs_compiled": [
+    {
+      "workflow": "publication-python.yml",
+      "step": "Install CPU Torch and the standalone test dependencies",
+      "path": ".runs/ci-draft2-validation/extracted/publication-python-publication-python-4-heredoc-1.py",
+      "sha256": "bf45712ed031adc2a35e224e2742453355a616778cef3486fe96e8ce147cc82c",
+      "compiled": true,
+      "executed": false
+    },
+    {
+      "workflow": "publication-python.yml",
+      "step": "Validate a fresh wheel installation outside the checkout",
+      "path": ".runs/ci-draft2-validation/extracted/publication-python-publication-python-7-heredoc-2.py",
+      "sha256": "73761b10dc5b64cfef1330859225ea162ffbe053da2a799efd52249344fe10dc",
+      "compiled": true,
+      "executed": false
+    }
+  ],
+  "limitations": [
+    "GitHub-hosted workflows were not executed; hosted-runner behavior is not established by these checks.",
+    "ShellCheck and Pyflakes integrations were disabled; Bash received syntax checks only.",
+    "Python heredocs were compiled without execution or bytecode output.",
+    "Action pins and inputs were compared with the prior receipt and cached action metadata; remote metadata was not refreshed.",
+    "No dependency installation, Python test suite, wheel build, wheel smoke execution, or proof build was performed by this validator."
+  ],
+  "yaml_workflows_checked": 3,
+  "tools": {
+    "pyyaml": {
+      "version": "6.0.3"
+    },
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": {
+      "path": "C:/public-user\\code\\RLCD\\.venv\\Scripts\\python.exe",
+      "sha256": "0b471133e110cfb53a061cad528ce8e517d7b9ac41a0a396c39ad795a487fc14",
+      "version_output": "Python 3.12.10"
+    },
+    "actionlint": {
+      "path": "C:/public-user\\AppData\\Local\\Temp\\wsp-ci-validation-f1702c9e71a94e6da68deebdd3c8d192\\actionlint\\actionlint.exe",
+      "sha256": "54ca21be3de4c7cfa26914aa8b61bd76bf573ef3caac5f80d110558cdf241718",
+      "version_output": "1.7.12\ninstalled by downloading from release page\nbuilt with go1.26.1 compiler for windows/amd64"
+    },
+    "bash": {
+      "path": "C:\\Program Files\\Git\\bin\\bash.exe",
+      "sha256": "4740ceda8997f13997da982e32f8bc3d679d8abb30266f0b25804ea927bb4a92",
+      "version_output": "GNU bash, version 5.3.15(2)-release (x86_64-pc-cygwin)\nCopyright (C) 2025 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\n\nThis is free software; you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law."
+    }
+  },
+  "actionlint": {
+    "exit_code": 0,
+    "shellcheck_enabled": false,
+    "pyflakes_enabled": false,
+    "stdout": "",
+    "stderr": ""
+  },
+  "pytest_basetemp": {
+    "command": "python -m pytest -q --basetemp \"$RUN_ROOT/pytest-tmp\" --junitxml=\"$RUN_ROOT/pytest.xml\"",
+    "value": "$RUN_ROOT/pytest-tmp",
+    "repository_local": true,
+    "run_root": ".runs/ci-python-${{ github.run_id }}-${{ github.run_attempt }}"
+  },
+  "pinned_action_steps_checked": 10,
+  "bash_steps_syntax_checked": 18,
+  "readme_generic_quickstart_ast_matched": true,
+  "readme_generic_quickstart_statement_count": 7,
+  "core_wheel_smoke_asserts_no_torch": true,
+  "prior_publication_hash_reproduced_by_removing_only_basetemp_fix": true,
+  "reconstructed_prior_publication_sha256": "9ba9544d2a0cd50012c6b2ba709a09ced3afc8609d6970ccfbfb536a70d71e00",
+  "workflow_hashes_after": {
+    ".github/workflows/historical-rts.yml": "0a3bede2720894a24f3fcc6eddf6f7eed309fe6934091b5b1c81f2508216a328",
+    ".github/workflows/proofs.yml": "632edcad257e8809e179ca8bdfc9994abbc85f3b83c256535ff384e70bae3551",
+    ".github/workflows/publication-python.yml": "0046dcf6f3bbe83ef4a50e2e8201952cd26033bcd63f2e3c8ce8594b60ea3b15"
+  },
+  "workflows_unchanged_during_validation": true,
+  "readme_sha256_after": "03b5f2f60584d6efdc81aa6d8e24883b36ed042f5a05a51557705791399319ec",
+  "completed_at": "2026-11-07T04:03:11.096542+00:00",
+  "failures": [],
+  "result": "passed",
+  "command_count": 22
+}

@@ -1,0 +1,756 @@
+{
+  "schema": "wsp-flowchart-images/1",
+  "purpose": "Generic framework diagrams; no experiments, audits, tests, or proof builds are run.",
+  "renderer": {
+    "path": "scripts/render_flowcharts.py",
+    "sha256": "52e736121fb56c2e793c7e6b1a3cd1c14cf13d09518f4af7f72ab4dd70f8be67",
+    "python": "3.12.10",
+    "matplotlib": "3.11.2",
+    "font": "DejaVu Sans",
+    "png_dpi": 220,
+    "svg_labels": "editable text",
+    "determinism": "Fixed coordinates, font, SVG hash salt, and metadata; no timestamps. Byte identity assumes matching renderer and dependencies."
+  },
+  "source_hash_convention": "SHA-256 of the original fenced diagram body, excluding fences, with LF newlines and its trailing newline retained.",
+  "diagrams": [
+    {
+      "id": "task-lifecycle",
+      "title": "A generic task lifecycle",
+      "original_source_document": "docs/weight-space/v2/README.md",
+      "original_source_fence_start_line": 32,
+      "original_source_diagram_sha256": "eae3711068d95ba8110bef94b4ac84773365504968ade3f77482272356ef820f",
+      "alt_text": "Generic task lifecycle. A declared task enters a programmer session and branches to an answer candidate, an edit program, or a complete artifact. Edit programs are lowered and projected while retaining the actual endpoint. All three routes join caller checks of structure and required behavior, then validation and declared selection or abstention, sealing the selected identity, held-out evaluation, and a receipt with complete history and independent replay.",
+      "caller_and_scope_notes": [
+        "Caller responsibility: structural and behavioral checks, selection, and held-out evaluation.",
+        "Retain all attempts, observations, refusals, failures, and decisions."
+      ],
+      "nodes": [
+        {
+          "id": "T",
+          "label": "Task, semantics, access, budgets, splits"
+        },
+        {
+          "id": "S",
+          "label": "Programmer session"
+        },
+        {
+          "id": "A",
+          "label": "Read or diagnose: answer candidate"
+        },
+        {
+          "id": "P",
+          "label": "Edit: structured or literal program"
+        },
+        {
+          "id": "C",
+          "label": "Create: complete artifact"
+        },
+        {
+          "id": "L",
+          "label": "Lower, project, retain actual endpoint"
+        },
+        {
+          "id": "V",
+          "label": "Caller checks structure and required behavior"
+        },
+        {
+          "id": "D",
+          "label": "Validation, declared selection, or abstention"
+        },
+        {
+          "id": "F",
+          "label": "Seal selected identity"
+        },
+        {
+          "id": "E",
+          "label": "Held-out evaluation"
+        },
+        {
+          "id": "R",
+          "label": "Receipt, complete history, independent replay"
+        }
+      ],
+      "edges": [
+        {
+          "source": "T",
+          "target": "S",
+          "points": [
+            [
+              7,
+              13.875
+            ],
+            [
+              7,
+              13.35
+            ]
+          ]
+        },
+        {
+          "source": "S",
+          "target": "A",
+          "points": [
+            [
+              7,
+              12.549999999999999
+            ],
+            [
+              7,
+              12.1
+            ],
+            [
+              2.5,
+              12.1
+            ],
+            [
+              2.5,
+              11.8
+            ]
+          ]
+        },
+        {
+          "source": "S",
+          "target": "P",
+          "points": [
+            [
+              7,
+              12.549999999999999
+            ],
+            [
+              7,
+              11.8
+            ]
+          ]
+        },
+        {
+          "source": "S",
+          "target": "C",
+          "points": [
+            [
+              7,
+              12.549999999999999
+            ],
+            [
+              7,
+              12.1
+            ],
+            [
+              11.5,
+              12.1
+            ],
+            [
+              11.5,
+              11.8
+            ]
+          ]
+        },
+        {
+          "source": "P",
+          "target": "L",
+          "points": [
+            [
+              7,
+              10.8
+            ],
+            [
+              7,
+              10.15
+            ]
+          ]
+        },
+        {
+          "source": "L",
+          "target": "V",
+          "points": [
+            [
+              7,
+              9.15
+            ],
+            [
+              7,
+              8.45
+            ]
+          ]
+        },
+        {
+          "source": "A",
+          "target": "V",
+          "points": [
+            [
+              2.5,
+              10.8
+            ],
+            [
+              2.5,
+              7.95
+            ],
+            [
+              4.1,
+              7.95
+            ]
+          ]
+        },
+        {
+          "source": "C",
+          "target": "V",
+          "points": [
+            [
+              11.5,
+              10.8
+            ],
+            [
+              11.5,
+              7.95
+            ],
+            [
+              9.9,
+              7.95
+            ]
+          ]
+        },
+        {
+          "source": "V",
+          "target": "D",
+          "points": [
+            [
+              7,
+              7.45
+            ],
+            [
+              7,
+              6.8
+            ]
+          ]
+        },
+        {
+          "source": "D",
+          "target": "F",
+          "points": [
+            [
+              7,
+              5.8
+            ],
+            [
+              7,
+              5.2
+            ]
+          ]
+        },
+        {
+          "source": "F",
+          "target": "E",
+          "points": [
+            [
+              7,
+              4.3999999999999995
+            ],
+            [
+              7,
+              3.8
+            ]
+          ]
+        },
+        {
+          "source": "E",
+          "target": "R",
+          "points": [
+            [
+              7,
+              3.0
+            ],
+            [
+              7,
+              2.35
+            ]
+          ]
+        }
+      ],
+      "node_count": 11,
+      "edge_count": 12,
+      "outputs": [
+        {
+          "file": "task-lifecycle.png",
+          "bytes": 255706,
+          "sha256": "176f53451cb8622c1a043f901217a9280de6610b17d7baf16e9f29e8690f9475",
+          "width_px": 2640,
+          "height_px": 3111
+        },
+        {
+          "file": "task-lifecycle.svg",
+          "bytes": 16269,
+          "sha256": "d0777f332cb8858fc982bff7a211502812b3a3e2f4d432b02e85ef1925803c8d"
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "title": "Framework architecture",
+      "original_source_document": "docs/weight-space/v2/architecture.md",
+      "original_source_fence_start_line": 20,
+      "original_source_diagram_sha256": "164355cd33cadc2fbf4fb01295493e89f27f105dd2b35e28fa263fab50d20fc5",
+      "alt_text": "Generic framework architecture. A StructuredProgram passes through explicit lowering to a literal Program. The literal Program, TaskSpec with access and budgets, and an answer or complete artifact feed ProgrammerSession. Candidate history proceeds to caller checks and selection, sealing a candidate or abstaining, a caller-owned held-out evaluator, and EvaluationReceipt. Callers must run checks and retain structured proposals and lowering receipts.",
+      "caller_and_scope_notes": [
+        "Caller responsibility: run required checks and retain structured proposals and lowering receipts.",
+        "Submitting a literal program does not automatically retain those files or certify a candidate."
+      ],
+      "nodes": [
+        {
+          "id": "P",
+          "label": "StructuredProgram"
+        },
+        {
+          "id": "L",
+          "label": "Explicit lowering"
+        },
+        {
+          "id": "I",
+          "label": "Literal Program"
+        },
+        {
+          "id": "T",
+          "label": "TaskSpec, access, budgets"
+        },
+        {
+          "id": "S",
+          "label": "ProgrammerSession"
+        },
+        {
+          "id": "A",
+          "label": "Answer or complete artifact"
+        },
+        {
+          "id": "C",
+          "label": "Candidate history"
+        },
+        {
+          "id": "V",
+          "label": "Caller checks and selection"
+        },
+        {
+          "id": "F",
+          "label": "Seal candidate or abstain"
+        },
+        {
+          "id": "E",
+          "label": "Caller-owned held-out evaluator"
+        },
+        {
+          "id": "R",
+          "label": "EvaluationReceipt"
+        }
+      ],
+      "edges": [
+        {
+          "source": "T",
+          "target": "S",
+          "points": [
+            [
+              4.550000000000001,
+              8.95
+            ],
+            [
+              5.1,
+              8.95
+            ]
+          ]
+        },
+        {
+          "source": "P",
+          "target": "L",
+          "points": [
+            [
+              4.550000000000001,
+              11.4
+            ],
+            [
+              5.2,
+              11.4
+            ]
+          ]
+        },
+        {
+          "source": "L",
+          "target": "I",
+          "points": [
+            [
+              8.8,
+              11.4
+            ],
+            [
+              9.450000000000001,
+              11.4
+            ]
+          ]
+        },
+        {
+          "source": "I",
+          "target": "S",
+          "points": [
+            [
+              11.3,
+              10.975
+            ],
+            [
+              11.3,
+              9.95
+            ],
+            [
+              7,
+              9.95
+            ],
+            [
+              7,
+              9.375
+            ]
+          ]
+        },
+        {
+          "source": "A",
+          "target": "S",
+          "points": [
+            [
+              9.450000000000001,
+              8.95
+            ],
+            [
+              8.9,
+              8.95
+            ]
+          ]
+        },
+        {
+          "source": "S",
+          "target": "C",
+          "points": [
+            [
+              7,
+              8.524999999999999
+            ],
+            [
+              7,
+              7.95
+            ]
+          ]
+        },
+        {
+          "source": "C",
+          "target": "V",
+          "points": [
+            [
+              7,
+              7.1499999999999995
+            ],
+            [
+              7,
+              6.6
+            ]
+          ]
+        },
+        {
+          "source": "V",
+          "target": "F",
+          "points": [
+            [
+              7,
+              5.6
+            ],
+            [
+              7,
+              5.050000000000001
+            ]
+          ]
+        },
+        {
+          "source": "F",
+          "target": "E",
+          "points": [
+            [
+              7,
+              4.25
+            ],
+            [
+              7,
+              3.7
+            ]
+          ]
+        },
+        {
+          "source": "E",
+          "target": "R",
+          "points": [
+            [
+              7,
+              2.7
+            ],
+            [
+              7,
+              2.225
+            ]
+          ]
+        }
+      ],
+      "node_count": 11,
+      "edge_count": 10,
+      "outputs": [
+        {
+          "file": "architecture.png",
+          "bytes": 228988,
+          "sha256": "1e04ab9f54b87cc51ebc65090378915c16bfc71a5783d6de51259cfb067b1278",
+          "width_px": 2640,
+          "height_px": 2574
+        },
+        {
+          "file": "architecture.svg",
+          "bytes": 14990,
+          "sha256": "226ed11366822aa814d4d2a15cb1d0db5745f6ab69270365e3859f01e58021ab"
+        }
+      ]
+    },
+    {
+      "id": "evidence-branches",
+      "title": "Three evidence branches",
+      "original_source_document": "docs/weight-space/design.md",
+      "original_source_fence_start_line": 15,
+      "original_source_diagram_sha256": "03657c937ea85a581ef7462dc1de514049c4142a14da3fe708d75cdd8e405f24",
+      "alt_text": "Three distinct evidence branches. Examples, rules, an optimizer, or an LLM proposal and a named tensor artifact with interface metadata feed a program with exact-parent and cell preconditions. Its candidate artifact branches to a structural policy, an explicit architecture adapter followed by a supported semantic contract, and a caller evaluator with held-out task trials. All branches feed recorded identities and receipts. Evidence from one branch does not substitute for another.",
+      "caller_and_scope_notes": [
+        "Each branch establishes a different claim; none substitutes for another."
+      ],
+      "nodes": [
+        {
+          "id": "S",
+          "label": "Examples, rules, optimizer, or LLM proposal"
+        },
+        {
+          "id": "A",
+          "label": "Named tensor artifact and interface metadata"
+        },
+        {
+          "id": "P",
+          "label": "Program with exact parent and cell preconditions"
+        },
+        {
+          "id": "C",
+          "label": "Candidate artifact"
+        },
+        {
+          "id": "T",
+          "label": "Structural policy"
+        },
+        {
+          "id": "M",
+          "label": "Explicit architecture adapter"
+        },
+        {
+          "id": "B",
+          "label": "Supported semantic contract"
+        },
+        {
+          "id": "E",
+          "label": "Caller evaluator and held-out task trials"
+        },
+        {
+          "id": "R",
+          "label": "Recorded identities and receipts"
+        }
+      ],
+      "edges": [
+        {
+          "source": "S",
+          "target": "P",
+          "points": [
+            [
+              3.65,
+              9.25
+            ],
+            [
+              3.65,
+              8.85
+            ],
+            [
+              7,
+              8.85
+            ],
+            [
+              7,
+              8.5
+            ]
+          ]
+        },
+        {
+          "source": "A",
+          "target": "P",
+          "points": [
+            [
+              10.35,
+              9.25
+            ],
+            [
+              10.35,
+              8.85
+            ],
+            [
+              7,
+              8.85
+            ],
+            [
+              7,
+              8.5
+            ]
+          ]
+        },
+        {
+          "source": "P",
+          "target": "C",
+          "points": [
+            [
+              7,
+              7.5
+            ],
+            [
+              7,
+              6.875
+            ]
+          ]
+        },
+        {
+          "source": "C",
+          "target": "T",
+          "points": [
+            [
+              7,
+              6.025
+            ],
+            [
+              7,
+              5.65
+            ],
+            [
+              2.5,
+              5.65
+            ],
+            [
+              2.5,
+              5.1000000000000005
+            ]
+          ]
+        },
+        {
+          "source": "C",
+          "target": "M",
+          "points": [
+            [
+              7,
+              6.025
+            ],
+            [
+              7,
+              5.15
+            ]
+          ]
+        },
+        {
+          "source": "M",
+          "target": "B",
+          "points": [
+            [
+              7,
+              4.15
+            ],
+            [
+              7,
+              3.5
+            ]
+          ]
+        },
+        {
+          "source": "C",
+          "target": "E",
+          "points": [
+            [
+              7,
+              6.025
+            ],
+            [
+              7,
+              5.65
+            ],
+            [
+              11.5,
+              5.65
+            ],
+            [
+              11.5,
+              5.275
+            ]
+          ]
+        },
+        {
+          "source": "T",
+          "target": "R",
+          "points": [
+            [
+              2.5,
+              4.2
+            ],
+            [
+              2.5,
+              1.4
+            ],
+            [
+              3.8,
+              1.4
+            ]
+          ]
+        },
+        {
+          "source": "B",
+          "target": "R",
+          "points": [
+            [
+              7,
+              2.5
+            ],
+            [
+              7,
+              1.9
+            ]
+          ]
+        },
+        {
+          "source": "E",
+          "target": "R",
+          "points": [
+            [
+              11.5,
+              4.025
+            ],
+            [
+              11.5,
+              1.4
+            ],
+            [
+              10.2,
+              1.4
+            ]
+          ]
+        }
+      ],
+      "node_count": 9,
+      "edge_count": 10,
+      "outputs": [
+        {
+          "file": "evidence-branches.png",
+          "bytes": 200329,
+          "sha256": "030fb02f0b26c84cb8afb7789fa0e138c180104663004446afc2e346e3d79c7c",
+          "width_px": 2640,
+          "height_px": 2281
+        },
+        {
+          "file": "evidence-branches.svg",
+          "bytes": 14068,
+          "sha256": "ae4c24052fcb55d026f55a0ddbf9b6f4f8f23dd462b967c946c455f4572ad37f"
+        }
+      ]
+    }
+  ]
+}

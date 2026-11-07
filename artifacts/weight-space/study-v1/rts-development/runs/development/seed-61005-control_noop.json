@@ -1,0 +1,2690 @@
+{
+  "schema_version": 1,
+  "protocol_sha256": "ae17fc858130ee06d436eb77218712b9a757ed514183b6bc99cb962ce7231998",
+  "programs_sha256": "cf7bfc4c4f187d6ee356e41e5de945c73fde8dc9da98c5fb16d6ce1e60a8330a",
+  "split": "development",
+  "seed": 61005,
+  "program": {
+    "id": "control_noop",
+    "source": "Exact authored commander-v1 baseline; no parameter edits.",
+    "control": true,
+    "model_sha256": "eaae1a4577ef621eab0d4f5c8545499f4315dbed066240c023e45c0bfa09c0da",
+    "model_fingerprint": "fnv1a64_158a041c6d65ee4e"
+  },
+  "team": 0,
+  "otherControl": "policy",
+  "requestedSeconds": 420,
+  "startTick": 0,
+  "startTime": 0,
+  "initialMetrics": {
+    "gathered": {
+      "food": 0,
+      "wood": 0,
+      "gold": 0,
+      "stone": 0
+    },
+    "stockpile": {
+      "food": 500,
+      "wood": 300,
+      "gold": 0,
+      "stone": 0
+    },
+    "trained": {},
+    "constructed": {},
+    "recruitsCompleted": 0,
+    "buildingsCompleted": 0,
+    "units": 8,
+    "army": 2,
+    "villagers": 6,
+    "buildings": 3,
+    "population": 8,
+    "capacity": 15,
+    "queued": 0,
+    "townHealth": 1800,
+    "kills": 0,
+    "status": "playing",
+    "age": 1
+  },
+  "initialOtherMetrics": {
+    "gathered": {
+      "food": 0,
+      "wood": 0,
+      "gold": 0,
+      "stone": 0
+    },
+    "stockpile": {
+      "food": 500,
+      "wood": 300,
+      "gold": 0,
+      "stone": 0
+    },
+    "trained": {},
+    "constructed": {},
+    "recruitsCompleted": 0,
+    "buildingsCompleted": 0,
+    "units": 8,
+    "army": 2,
+    "villagers": 6,
+    "buildings": 3,
+    "population": 8,
+    "capacity": 15,
+    "queued": 0,
+    "townHealth": 1800,
+    "kills": 0,
+    "status": "playing",
+    "age": 1
+  },
+  "baseline": {
+    "elapsedSeconds": 174.0999999999944,
+    "metrics": {
+      "gathered": {
+        "food": 1567.3600000000001,
+        "wood": 809.9999999999962,
+        "gold": 0,
+        "stone": 0
+      },
+      "stockpile": {
+        "food": 367.36,
+        "wood": 299.9999999999962,
+        "gold": 0,
+        "stone": 0
+      },
+      "trained": {
+        "villager": 14,
+        "spearman": 10
+      },
+      "constructed": {
+        "house": 5,
+        "farm": 3
+      },
+      "recruitsCompleted": 10,
+      "buildingsCompleted": 8,
+      "units": 27,
+      "army": 7,
+      "villagers": 20,
+      "buildings": 11,
+      "population": 37,
+      "capacity": 40,
+      "queued": 10,
+      "townHealth": 1800,
+      "kills": 3,
+      "status": "won",
+      "age": 1
+    },
+    "otherMetrics": {
+      "gathered": {
+        "food": 540,
+        "wood": 519.9999999999982,
+        "gold": 0,
+        "stone": 0
+      },
+      "stockpile": {
+        "food": 1040,
+        "wood": 819.9999999999981,
+        "gold": 0,
+        "stone": 0
+      },
+      "trained": {},
+      "constructed": {},
+      "recruitsCompleted": 0,
+      "buildingsCompleted": 0,
+      "units": 6,
+      "army": 0,
+      "villagers": 6,
+      "buildings": 2,
+      "population": 6,
+      "capacity": 5,
+      "queued": 0,
+      "townHealth": 0,
+      "kills": 5,
+      "status": "won",
+      "age": 1
+    },
+    "executedOrders": 69,
+    "otherExecutedOrders": 4,
+    "decisions": 87,
+    "waitDecisions": 18,
+    "orders": [
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 7.857142857142857,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 20,
+        "time": 2.0000000000000004,
+        "elapsedSeconds": 2.0000000000000004
+      },
+      {
+        "id": "gather_food_37",
+        "label": "Gather food",
+        "score": 7.2,
+        "command": {
+          "type": "gather",
+          "ids": [
+            29,
+            30,
+            31
+          ],
+          "targetId": 37
+        },
+        "executed": true,
+        "team": 1,
+        "tick": 20,
+        "time": 2.0000000000000004,
+        "elapsedSeconds": 2.0000000000000004
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 7.5,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 40,
+        "time": 4.000000000000002,
+        "elapsedSeconds": 4.000000000000002
+      },
+      {
+        "id": "gather_wood_39",
+        "label": "Gather wood",
+        "score": 5.1,
+        "command": {
+          "type": "gather",
+          "ids": [
+            32,
+            33,
+            34
+          ],
+          "targetId": 39
+        },
+        "executed": true,
+        "team": 1,
+        "tick": 40,
+        "time": 4.000000000000002,
+        "elapsedSeconds": 4.000000000000002
+      },
+      {
+        "id": "gather_food_12",
+        "label": "Gather food",
+        "score": 7.2,
+        "command": {
+          "type": "gather",
+          "ids": [
+            4,
+            5,
+            6
+          ],
+          "targetId": 12
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 60,
+        "time": 5.999999999999995,
+        "elapsedSeconds": 5.999999999999995
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 7.142857142857143,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 80,
+        "time": 7.999999999999988,
+        "elapsedSeconds": 7.999999999999988
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 6.7857142857142865,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 100,
+        "time": 9.99999999999998,
+        "elapsedSeconds": 9.99999999999998
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 6.42857142857143,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 120,
+        "time": 11.999999999999973,
+        "elapsedSeconds": 11.999999999999973
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 6.07142857142857,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 140,
+        "time": 13.999999999999966,
+        "elapsedSeconds": 13.999999999999966
+      },
+      {
+        "id": "build_house",
+        "label": "Build House",
+        "score": 6.55,
+        "command": {
+          "type": "build",
+          "kind": "house",
+          "x": 14,
+          "z": 28,
+          "workerIds": [
+            7
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 160,
+        "time": 15.99999999999996,
+        "elapsedSeconds": 15.99999999999996
+      },
+      {
+        "id": "gather_wood_14",
+        "label": "Gather wood",
+        "score": 5.1,
+        "command": {
+          "type": "gather",
+          "ids": [
+            8,
+            9,
+            51
+          ],
+          "targetId": 14
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 180,
+        "time": 17.999999999999986,
+        "elapsedSeconds": 17.999999999999986
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.7800000000000002,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 200,
+        "time": 20.000000000000014,
+        "elapsedSeconds": 20.000000000000014
+      },
+      {
+        "id": "build_farm",
+        "label": "Build Farm",
+        "score": 3,
+        "command": {
+          "type": "build",
+          "kind": "farm",
+          "x": 19,
+          "z": 28,
+          "workerIds": [
+            4
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 220,
+        "time": 22.000000000000043,
+        "elapsedSeconds": 22.000000000000043
+      },
+      {
+        "id": "gather_food_13",
+        "label": "Gather food",
+        "score": 3.0910256410256407,
+        "command": {
+          "type": "gather",
+          "ids": [
+            54
+          ],
+          "targetId": 13
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 260,
+        "time": 26.0000000000001,
+        "elapsedSeconds": 26.0000000000001
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 5.7142857142857135,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 300,
+        "time": 30.000000000000156,
+        "elapsedSeconds": 30.000000000000156
+      },
+      {
+        "id": "gather_food_12",
+        "label": "Gather food",
+        "score": 3.4115384615384614,
+        "command": {
+          "type": "gather",
+          "ids": [
+            7
+          ],
+          "targetId": 12
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 320,
+        "time": 32.000000000000185,
+        "elapsedSeconds": 32.000000000000185
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.67,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 340,
+        "time": 34.00000000000021,
+        "elapsedSeconds": 34.00000000000021
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.5600000000000005,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 360,
+        "time": 36.00000000000024,
+        "elapsedSeconds": 36.00000000000024
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 5.357142857142857,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 380,
+        "time": 38.00000000000027,
+        "elapsedSeconds": 38.00000000000027
+      },
+      {
+        "id": "build_house",
+        "label": "Build House",
+        "score": 6.55,
+        "command": {
+          "type": "build",
+          "kind": "house",
+          "x": 22,
+          "z": 28,
+          "workerIds": [
+            56
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 400,
+        "time": 40.0000000000003,
+        "elapsedSeconds": 40.0000000000003
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.45,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 420,
+        "time": 42.00000000000033,
+        "elapsedSeconds": 42.00000000000033
+      },
+      {
+        "id": "build_farm",
+        "label": "Build Farm",
+        "score": 2.25,
+        "command": {
+          "type": "build",
+          "kind": "farm",
+          "x": 14,
+          "z": 32,
+          "workerIds": [
+            4
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 440,
+        "time": 44.000000000000355,
+        "elapsedSeconds": 44.000000000000355
+      },
+      {
+        "id": "gather_food_13",
+        "label": "Gather food",
+        "score": 0.3108974358974361,
+        "command": {
+          "type": "gather",
+          "ids": [
+            8
+          ],
+          "targetId": 13
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 460,
+        "time": 46.000000000000384,
+        "elapsedSeconds": 46.000000000000384
+      },
+      {
+        "id": "gather_food_57",
+        "label": "Gather food",
+        "score": 5.190384615384616,
+        "command": {
+          "type": "gather",
+          "ids": [
+            60
+          ],
+          "targetId": 57
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 500,
+        "time": 50.00000000000044,
+        "elapsedSeconds": 50.00000000000044
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 5,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 560,
+        "time": 56.000000000000526,
+        "elapsedSeconds": 56.000000000000526
+      },
+      {
+        "id": "gather_food_57",
+        "label": "Gather food",
+        "score": 4.866666666666667,
+        "command": {
+          "type": "gather",
+          "ids": [
+            56
+          ],
+          "targetId": 57
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 580,
+        "time": 58.000000000000554,
+        "elapsedSeconds": 58.000000000000554
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.34,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 600,
+        "time": 60.00000000000058,
+        "elapsedSeconds": 60.00000000000058
+      },
+      {
+        "id": "gather_food_57",
+        "label": "Gather food",
+        "score": 5.075,
+        "command": {
+          "type": "gather",
+          "ids": [
+            63
+          ],
+          "targetId": 57
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 620,
+        "time": 62.00000000000061,
+        "elapsedSeconds": 62.00000000000061
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 4.642857142857143,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 640,
+        "time": 64.00000000000064,
+        "elapsedSeconds": 64.00000000000064
+      },
+      {
+        "id": "build_house",
+        "label": "Build House",
+        "score": 2.3,
+        "command": {
+          "type": "build",
+          "kind": "house",
+          "x": 22,
+          "z": 31,
+          "workerIds": [
+            4
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 660,
+        "time": 66.00000000000053,
+        "elapsedSeconds": 66.00000000000053
+      },
+      {
+        "id": "build_farm",
+        "label": "Build Farm",
+        "score": 0.16666666666666674,
+        "command": {
+          "type": "build",
+          "kind": "farm",
+          "x": 24,
+          "z": 37,
+          "workerIds": [
+            5
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 680,
+        "time": 68.00000000000041,
+        "elapsedSeconds": 68.00000000000041
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.2300000000000004,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 700,
+        "time": 70.0000000000003,
+        "elapsedSeconds": 70.0000000000003
+      },
+      {
+        "id": "gather_wood_14",
+        "label": "Gather wood",
+        "score": 1.2954545454545459,
+        "command": {
+          "type": "gather",
+          "ids": [
+            6
+          ],
+          "targetId": 14
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 720,
+        "time": 72.00000000000018,
+        "elapsedSeconds": 72.00000000000018
+      },
+      {
+        "id": "gather_wood_14",
+        "label": "Gather wood",
+        "score": 5.85625,
+        "command": {
+          "type": "gather",
+          "ids": [
+            67
+          ],
+          "targetId": 14
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 740,
+        "time": 74.00000000000007,
+        "elapsedSeconds": 74.00000000000007
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 4.2857142857142865,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 760,
+        "time": 75.99999999999996,
+        "elapsedSeconds": 75.99999999999996
+      },
+      {
+        "id": "assault_inferred_base",
+        "label": "March on rival territory",
+        "score": 0.43333333333333357,
+        "command": {
+          "type": "move",
+          "ids": [
+            10,
+            11,
+            55,
+            61,
+            64,
+            68
+          ],
+          "x": 43.5,
+          "z": 31.5,
+          "attackMove": true
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 800,
+        "time": 79.99999999999973,
+        "elapsedSeconds": 79.99999999999973
+      },
+      {
+        "id": "defend_10",
+        "label": "Defend the settlement",
+        "score": 3.7333333333333325,
+        "command": {
+          "type": "attack",
+          "ids": [
+            35,
+            36
+          ],
+          "targetId": 10
+        },
+        "executed": true,
+        "team": 1,
+        "tick": 820,
+        "time": 81.99999999999962,
+        "elapsedSeconds": 81.99999999999962
+      },
+      {
+        "id": "defend_36",
+        "label": "Defend the settlement",
+        "score": 4.533333333333332,
+        "command": {
+          "type": "attack",
+          "ids": [
+            10,
+            11,
+            55,
+            61,
+            64,
+            68
+          ],
+          "targetId": 36
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 840,
+        "time": 83.9999999999995,
+        "elapsedSeconds": 83.9999999999995
+      },
+      {
+        "id": "gather_wood_17",
+        "label": "Gather wood",
+        "score": 5.077884615384633,
+        "command": {
+          "type": "gather",
+          "ids": [
+            4,
+            69
+          ],
+          "targetId": 17
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 860,
+        "time": 85.99999999999939,
+        "elapsedSeconds": 85.99999999999939
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 3.928571428571428,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 880,
+        "time": 87.99999999999928,
+        "elapsedSeconds": 87.99999999999928
+      },
+      {
+        "id": "defend_11",
+        "label": "Defend the settlement",
+        "score": 10.2,
+        "command": {
+          "type": "attack",
+          "ids": [
+            35
+          ],
+          "targetId": 11
+        },
+        "executed": true,
+        "team": 1,
+        "tick": 880,
+        "time": 87.99999999999928,
+        "elapsedSeconds": 87.99999999999928
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.12,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 900,
+        "time": 89.99999999999916,
+        "elapsedSeconds": 89.99999999999916
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.0100000000000002,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 920,
+        "time": 91.99999999999905,
+        "elapsedSeconds": 91.99999999999905
+      },
+      {
+        "id": "build_house",
+        "label": "Build House",
+        "score": 2.3,
+        "command": {
+          "type": "build",
+          "kind": "house",
+          "x": 14,
+          "z": 36,
+          "workerIds": [
+            4
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 940,
+        "time": 93.99999999999893,
+        "elapsedSeconds": 93.99999999999893
+      },
+      {
+        "id": "assault_inferred_base",
+        "label": "March on rival territory",
+        "score": 1.2833333333333323,
+        "command": {
+          "type": "move",
+          "ids": [
+            10,
+            11,
+            55,
+            61,
+            64,
+            68,
+            72
+          ],
+          "x": 43.5,
+          "z": 31.5,
+          "attackMove": true
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 960,
+        "time": 95.99999999999882,
+        "elapsedSeconds": 95.99999999999882
+      },
+      {
+        "id": "gather_wood_15",
+        "label": "Gather wood",
+        "score": 4.918750000000018,
+        "command": {
+          "type": "gather",
+          "ids": [
+            73
+          ],
+          "targetId": 15
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 980,
+        "time": 97.9999999999987,
+        "elapsedSeconds": 97.9999999999987
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 3.571428571428572,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1000,
+        "time": 99.9999999999986,
+        "elapsedSeconds": 99.9999999999986
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 1.9000000000000001,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1020,
+        "time": 101.99999999999848,
+        "elapsedSeconds": 101.99999999999848
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 1.9000000000000001,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1060,
+        "time": 105.99999999999825,
+        "elapsedSeconds": 105.99999999999825
+      },
+      {
+        "id": "gather_wood_20",
+        "label": "Gather wood",
+        "score": 4.918750000000018,
+        "command": {
+          "type": "gather",
+          "ids": [
+            4
+          ],
+          "targetId": 20
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1080,
+        "time": 107.99999999999814,
+        "elapsedSeconds": 107.99999999999814
+      },
+      {
+        "id": "gather_wood_17",
+        "label": "Gather wood",
+        "score": 4.543750000000018,
+        "command": {
+          "type": "gather",
+          "ids": [
+            74
+          ],
+          "targetId": 17
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1100,
+        "time": 109.99999999999802,
+        "elapsedSeconds": 109.99999999999802
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 3.2142857142857135,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1120,
+        "time": 111.99999999999791,
+        "elapsedSeconds": 111.99999999999791
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 1.79,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1140,
+        "time": 113.9999999999978,
+        "elapsedSeconds": 113.9999999999978
+      },
+      {
+        "id": "assault_inferred_base",
+        "label": "March on rival territory",
+        "score": 1.2833333333333323,
+        "command": {
+          "type": "move",
+          "ids": [
+            75
+          ],
+          "x": 43.5,
+          "z": 31.5,
+          "attackMove": true
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1160,
+        "time": 115.99999999999768,
+        "elapsedSeconds": 115.99999999999768
+      },
+      {
+        "id": "gather_food_62",
+        "label": "Gather food",
+        "score": 3.5226282051282043,
+        "command": {
+          "type": "gather",
+          "ids": [
+            76
+          ],
+          "targetId": 62
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1220,
+        "time": 121.99999999999734,
+        "elapsedSeconds": 121.99999999999734
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 2.8571428571428568,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1240,
+        "time": 123.99999999999723,
+        "elapsedSeconds": 123.99999999999723
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 1.79,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1260,
+        "time": 125.99999999999712,
+        "elapsedSeconds": 125.99999999999712
+      },
+      {
+        "id": "build_house",
+        "label": "Build House",
+        "score": 2.3,
+        "command": {
+          "type": "build",
+          "kind": "house",
+          "x": 22,
+          "z": 34,
+          "workerIds": [
+            4
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1280,
+        "time": 127.999999999997,
+        "elapsedSeconds": 127.999999999997
+      },
+      {
+        "id": "assault_inferred_base",
+        "label": "March on rival territory",
+        "score": 1.2833333333333323,
+        "command": {
+          "type": "move",
+          "ids": [
+            77
+          ],
+          "x": 43.5,
+          "z": 31.5,
+          "attackMove": true
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1300,
+        "time": 129.9999999999969,
+        "elapsedSeconds": 129.9999999999969
+      },
+      {
+        "id": "gather_wood_15",
+        "label": "Gather wood",
+        "score": 2.630125000000036,
+        "command": {
+          "type": "gather",
+          "ids": [
+            79
+          ],
+          "targetId": 15
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1340,
+        "time": 133.99999999999667,
+        "elapsedSeconds": 133.99999999999667
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 2.5,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1360,
+        "time": 135.99999999999656,
+        "elapsedSeconds": 135.99999999999656
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 1.79,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1400,
+        "time": 139.99999999999633,
+        "elapsedSeconds": 139.99999999999633
+      },
+      {
+        "id": "assault_inferred_base",
+        "label": "March on rival territory",
+        "score": 1.2833333333333323,
+        "command": {
+          "type": "move",
+          "ids": [
+            80
+          ],
+          "x": 43.5,
+          "z": 31.5,
+          "attackMove": true
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1420,
+        "time": 141.99999999999622,
+        "elapsedSeconds": 141.99999999999622
+      },
+      {
+        "id": "gather_wood_20",
+        "label": "Gather wood",
+        "score": 1.786375000000036,
+        "command": {
+          "type": "gather",
+          "ids": [
+            4
+          ],
+          "targetId": 20
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1440,
+        "time": 143.9999999999961,
+        "elapsedSeconds": 143.9999999999961
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 2.1428571428571432,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1460,
+        "time": 145.999999999996,
+        "elapsedSeconds": 145.999999999996
+      },
+      {
+        "id": "gather_food_57",
+        "label": "Gather food",
+        "score": 2.0242307692307686,
+        "command": {
+          "type": "gather",
+          "ids": [
+            81
+          ],
+          "targetId": 57
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1480,
+        "time": 147.99999999999588,
+        "elapsedSeconds": 147.99999999999588
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 1.79,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1560,
+        "time": 155.99999999999542,
+        "elapsedSeconds": 155.99999999999542
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 1.785714285714286,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1580,
+        "time": 157.9999999999953,
+        "elapsedSeconds": 157.9999999999953
+      },
+      {
+        "id": "assault_inferred_base",
+        "label": "March on rival territory",
+        "score": 1.2833333333333323,
+        "command": {
+          "type": "move",
+          "ids": [
+            82
+          ],
+          "x": 43.5,
+          "z": 31.5,
+          "attackMove": true
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1600,
+        "time": 159.9999999999952,
+        "elapsedSeconds": 159.9999999999952
+      },
+      {
+        "id": "build_farm",
+        "label": "Build Farm",
+        "score": 1,
+        "command": {
+          "type": "build",
+          "kind": "farm",
+          "x": 11,
+          "z": 25,
+          "workerIds": [
+            83
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1620,
+        "time": 161.99999999999508,
+        "elapsedSeconds": 161.99999999999508
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 1.79,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1700,
+        "time": 169.99999999999463,
+        "elapsedSeconds": 169.99999999999463
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 1.428571428571428,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1720,
+        "time": 171.99999999999451,
+        "elapsedSeconds": 171.99999999999451
+      },
+      {
+        "id": "assault_inferred_base",
+        "label": "March on rival territory",
+        "score": 1.2833333333333323,
+        "command": {
+          "type": "move",
+          "ids": [
+            86
+          ],
+          "x": 43.5,
+          "z": 31.5,
+          "attackMove": true
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1740,
+        "time": 173.9999999999944,
+        "elapsedSeconds": 173.9999999999944
+      }
+    ],
+    "final_checkpoint_sha256": "b8204c385c3bf50f17acb6ac129c311959c1740fd519a64a5250348138b65ae3",
+    "checkpoint_file": null
+  },
+  "candidate": {
+    "elapsedSeconds": 174.0999999999944,
+    "metrics": {
+      "gathered": {
+        "food": 1567.3600000000001,
+        "wood": 809.9999999999962,
+        "gold": 0,
+        "stone": 0
+      },
+      "stockpile": {
+        "food": 367.36,
+        "wood": 299.9999999999962,
+        "gold": 0,
+        "stone": 0
+      },
+      "trained": {
+        "villager": 14,
+        "spearman": 10
+      },
+      "constructed": {
+        "house": 5,
+        "farm": 3
+      },
+      "recruitsCompleted": 10,
+      "buildingsCompleted": 8,
+      "units": 27,
+      "army": 7,
+      "villagers": 20,
+      "buildings": 11,
+      "population": 37,
+      "capacity": 40,
+      "queued": 10,
+      "townHealth": 1800,
+      "kills": 3,
+      "status": "won",
+      "age": 1
+    },
+    "otherMetrics": {
+      "gathered": {
+        "food": 540,
+        "wood": 519.9999999999982,
+        "gold": 0,
+        "stone": 0
+      },
+      "stockpile": {
+        "food": 1040,
+        "wood": 819.9999999999981,
+        "gold": 0,
+        "stone": 0
+      },
+      "trained": {},
+      "constructed": {},
+      "recruitsCompleted": 0,
+      "buildingsCompleted": 0,
+      "units": 6,
+      "army": 0,
+      "villagers": 6,
+      "buildings": 2,
+      "population": 6,
+      "capacity": 5,
+      "queued": 0,
+      "townHealth": 0,
+      "kills": 5,
+      "status": "won",
+      "age": 1
+    },
+    "executedOrders": 69,
+    "otherExecutedOrders": 4,
+    "decisions": 87,
+    "waitDecisions": 18,
+    "orders": [
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 7.857142857142857,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 20,
+        "time": 2.0000000000000004,
+        "elapsedSeconds": 2.0000000000000004
+      },
+      {
+        "id": "gather_food_37",
+        "label": "Gather food",
+        "score": 7.2,
+        "command": {
+          "type": "gather",
+          "ids": [
+            29,
+            30,
+            31
+          ],
+          "targetId": 37
+        },
+        "executed": true,
+        "team": 1,
+        "tick": 20,
+        "time": 2.0000000000000004,
+        "elapsedSeconds": 2.0000000000000004
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 7.5,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 40,
+        "time": 4.000000000000002,
+        "elapsedSeconds": 4.000000000000002
+      },
+      {
+        "id": "gather_wood_39",
+        "label": "Gather wood",
+        "score": 5.1,
+        "command": {
+          "type": "gather",
+          "ids": [
+            32,
+            33,
+            34
+          ],
+          "targetId": 39
+        },
+        "executed": true,
+        "team": 1,
+        "tick": 40,
+        "time": 4.000000000000002,
+        "elapsedSeconds": 4.000000000000002
+      },
+      {
+        "id": "gather_food_12",
+        "label": "Gather food",
+        "score": 7.2,
+        "command": {
+          "type": "gather",
+          "ids": [
+            4,
+            5,
+            6
+          ],
+          "targetId": 12
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 60,
+        "time": 5.999999999999995,
+        "elapsedSeconds": 5.999999999999995
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 7.142857142857143,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 80,
+        "time": 7.999999999999988,
+        "elapsedSeconds": 7.999999999999988
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 6.7857142857142865,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 100,
+        "time": 9.99999999999998,
+        "elapsedSeconds": 9.99999999999998
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 6.42857142857143,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 120,
+        "time": 11.999999999999973,
+        "elapsedSeconds": 11.999999999999973
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 6.07142857142857,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 140,
+        "time": 13.999999999999966,
+        "elapsedSeconds": 13.999999999999966
+      },
+      {
+        "id": "build_house",
+        "label": "Build House",
+        "score": 6.55,
+        "command": {
+          "type": "build",
+          "kind": "house",
+          "x": 14,
+          "z": 28,
+          "workerIds": [
+            7
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 160,
+        "time": 15.99999999999996,
+        "elapsedSeconds": 15.99999999999996
+      },
+      {
+        "id": "gather_wood_14",
+        "label": "Gather wood",
+        "score": 5.1,
+        "command": {
+          "type": "gather",
+          "ids": [
+            8,
+            9,
+            51
+          ],
+          "targetId": 14
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 180,
+        "time": 17.999999999999986,
+        "elapsedSeconds": 17.999999999999986
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.7800000000000002,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 200,
+        "time": 20.000000000000014,
+        "elapsedSeconds": 20.000000000000014
+      },
+      {
+        "id": "build_farm",
+        "label": "Build Farm",
+        "score": 3,
+        "command": {
+          "type": "build",
+          "kind": "farm",
+          "x": 19,
+          "z": 28,
+          "workerIds": [
+            4
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 220,
+        "time": 22.000000000000043,
+        "elapsedSeconds": 22.000000000000043
+      },
+      {
+        "id": "gather_food_13",
+        "label": "Gather food",
+        "score": 3.0910256410256407,
+        "command": {
+          "type": "gather",
+          "ids": [
+            54
+          ],
+          "targetId": 13
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 260,
+        "time": 26.0000000000001,
+        "elapsedSeconds": 26.0000000000001
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 5.7142857142857135,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 300,
+        "time": 30.000000000000156,
+        "elapsedSeconds": 30.000000000000156
+      },
+      {
+        "id": "gather_food_12",
+        "label": "Gather food",
+        "score": 3.4115384615384614,
+        "command": {
+          "type": "gather",
+          "ids": [
+            7
+          ],
+          "targetId": 12
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 320,
+        "time": 32.000000000000185,
+        "elapsedSeconds": 32.000000000000185
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.67,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 340,
+        "time": 34.00000000000021,
+        "elapsedSeconds": 34.00000000000021
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.5600000000000005,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 360,
+        "time": 36.00000000000024,
+        "elapsedSeconds": 36.00000000000024
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 5.357142857142857,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 380,
+        "time": 38.00000000000027,
+        "elapsedSeconds": 38.00000000000027
+      },
+      {
+        "id": "build_house",
+        "label": "Build House",
+        "score": 6.55,
+        "command": {
+          "type": "build",
+          "kind": "house",
+          "x": 22,
+          "z": 28,
+          "workerIds": [
+            56
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 400,
+        "time": 40.0000000000003,
+        "elapsedSeconds": 40.0000000000003
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.45,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 420,
+        "time": 42.00000000000033,
+        "elapsedSeconds": 42.00000000000033
+      },
+      {
+        "id": "build_farm",
+        "label": "Build Farm",
+        "score": 2.25,
+        "command": {
+          "type": "build",
+          "kind": "farm",
+          "x": 14,
+          "z": 32,
+          "workerIds": [
+            4
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 440,
+        "time": 44.000000000000355,
+        "elapsedSeconds": 44.000000000000355
+      },
+      {
+        "id": "gather_food_13",
+        "label": "Gather food",
+        "score": 0.3108974358974361,
+        "command": {
+          "type": "gather",
+          "ids": [
+            8
+          ],
+          "targetId": 13
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 460,
+        "time": 46.000000000000384,
+        "elapsedSeconds": 46.000000000000384
+      },
+      {
+        "id": "gather_food_57",
+        "label": "Gather food",
+        "score": 5.190384615384616,
+        "command": {
+          "type": "gather",
+          "ids": [
+            60
+          ],
+          "targetId": 57
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 500,
+        "time": 50.00000000000044,
+        "elapsedSeconds": 50.00000000000044
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 5,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 560,
+        "time": 56.000000000000526,
+        "elapsedSeconds": 56.000000000000526
+      },
+      {
+        "id": "gather_food_57",
+        "label": "Gather food",
+        "score": 4.866666666666667,
+        "command": {
+          "type": "gather",
+          "ids": [
+            56
+          ],
+          "targetId": 57
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 580,
+        "time": 58.000000000000554,
+        "elapsedSeconds": 58.000000000000554
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.34,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 600,
+        "time": 60.00000000000058,
+        "elapsedSeconds": 60.00000000000058
+      },
+      {
+        "id": "gather_food_57",
+        "label": "Gather food",
+        "score": 5.075,
+        "command": {
+          "type": "gather",
+          "ids": [
+            63
+          ],
+          "targetId": 57
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 620,
+        "time": 62.00000000000061,
+        "elapsedSeconds": 62.00000000000061
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 4.642857142857143,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 640,
+        "time": 64.00000000000064,
+        "elapsedSeconds": 64.00000000000064
+      },
+      {
+        "id": "build_house",
+        "label": "Build House",
+        "score": 2.3,
+        "command": {
+          "type": "build",
+          "kind": "house",
+          "x": 22,
+          "z": 31,
+          "workerIds": [
+            4
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 660,
+        "time": 66.00000000000053,
+        "elapsedSeconds": 66.00000000000053
+      },
+      {
+        "id": "build_farm",
+        "label": "Build Farm",
+        "score": 0.16666666666666674,
+        "command": {
+          "type": "build",
+          "kind": "farm",
+          "x": 24,
+          "z": 37,
+          "workerIds": [
+            5
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 680,
+        "time": 68.00000000000041,
+        "elapsedSeconds": 68.00000000000041
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.2300000000000004,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 700,
+        "time": 70.0000000000003,
+        "elapsedSeconds": 70.0000000000003
+      },
+      {
+        "id": "gather_wood_14",
+        "label": "Gather wood",
+        "score": 1.2954545454545459,
+        "command": {
+          "type": "gather",
+          "ids": [
+            6
+          ],
+          "targetId": 14
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 720,
+        "time": 72.00000000000018,
+        "elapsedSeconds": 72.00000000000018
+      },
+      {
+        "id": "gather_wood_14",
+        "label": "Gather wood",
+        "score": 5.85625,
+        "command": {
+          "type": "gather",
+          "ids": [
+            67
+          ],
+          "targetId": 14
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 740,
+        "time": 74.00000000000007,
+        "elapsedSeconds": 74.00000000000007
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 4.2857142857142865,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 760,
+        "time": 75.99999999999996,
+        "elapsedSeconds": 75.99999999999996
+      },
+      {
+        "id": "assault_inferred_base",
+        "label": "March on rival territory",
+        "score": 0.43333333333333357,
+        "command": {
+          "type": "move",
+          "ids": [
+            10,
+            11,
+            55,
+            61,
+            64,
+            68
+          ],
+          "x": 43.5,
+          "z": 31.5,
+          "attackMove": true
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 800,
+        "time": 79.99999999999973,
+        "elapsedSeconds": 79.99999999999973
+      },
+      {
+        "id": "defend_10",
+        "label": "Defend the settlement",
+        "score": 3.7333333333333325,
+        "command": {
+          "type": "attack",
+          "ids": [
+            35,
+            36
+          ],
+          "targetId": 10
+        },
+        "executed": true,
+        "team": 1,
+        "tick": 820,
+        "time": 81.99999999999962,
+        "elapsedSeconds": 81.99999999999962
+      },
+      {
+        "id": "defend_36",
+        "label": "Defend the settlement",
+        "score": 4.533333333333332,
+        "command": {
+          "type": "attack",
+          "ids": [
+            10,
+            11,
+            55,
+            61,
+            64,
+            68
+          ],
+          "targetId": 36
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 840,
+        "time": 83.9999999999995,
+        "elapsedSeconds": 83.9999999999995
+      },
+      {
+        "id": "gather_wood_17",
+        "label": "Gather wood",
+        "score": 5.077884615384633,
+        "command": {
+          "type": "gather",
+          "ids": [
+            4,
+            69
+          ],
+          "targetId": 17
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 860,
+        "time": 85.99999999999939,
+        "elapsedSeconds": 85.99999999999939
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 3.928571428571428,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 880,
+        "time": 87.99999999999928,
+        "elapsedSeconds": 87.99999999999928
+      },
+      {
+        "id": "defend_11",
+        "label": "Defend the settlement",
+        "score": 10.2,
+        "command": {
+          "type": "attack",
+          "ids": [
+            35
+          ],
+          "targetId": 11
+        },
+        "executed": true,
+        "team": 1,
+        "tick": 880,
+        "time": 87.99999999999928,
+        "elapsedSeconds": 87.99999999999928
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.12,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 900,
+        "time": 89.99999999999916,
+        "elapsedSeconds": 89.99999999999916
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 2.0100000000000002,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 920,
+        "time": 91.99999999999905,
+        "elapsedSeconds": 91.99999999999905
+      },
+      {
+        "id": "build_house",
+        "label": "Build House",
+        "score": 2.3,
+        "command": {
+          "type": "build",
+          "kind": "house",
+          "x": 14,
+          "z": 36,
+          "workerIds": [
+            4
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 940,
+        "time": 93.99999999999893,
+        "elapsedSeconds": 93.99999999999893
+      },
+      {
+        "id": "assault_inferred_base",
+        "label": "March on rival territory",
+        "score": 1.2833333333333323,
+        "command": {
+          "type": "move",
+          "ids": [
+            10,
+            11,
+            55,
+            61,
+            64,
+            68,
+            72
+          ],
+          "x": 43.5,
+          "z": 31.5,
+          "attackMove": true
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 960,
+        "time": 95.99999999999882,
+        "elapsedSeconds": 95.99999999999882
+      },
+      {
+        "id": "gather_wood_15",
+        "label": "Gather wood",
+        "score": 4.918750000000018,
+        "command": {
+          "type": "gather",
+          "ids": [
+            73
+          ],
+          "targetId": 15
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 980,
+        "time": 97.9999999999987,
+        "elapsedSeconds": 97.9999999999987
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 3.571428571428572,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1000,
+        "time": 99.9999999999986,
+        "elapsedSeconds": 99.9999999999986
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 1.9000000000000001,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1020,
+        "time": 101.99999999999848,
+        "elapsedSeconds": 101.99999999999848
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 1.9000000000000001,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1060,
+        "time": 105.99999999999825,
+        "elapsedSeconds": 105.99999999999825
+      },
+      {
+        "id": "gather_wood_20",
+        "label": "Gather wood",
+        "score": 4.918750000000018,
+        "command": {
+          "type": "gather",
+          "ids": [
+            4
+          ],
+          "targetId": 20
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1080,
+        "time": 107.99999999999814,
+        "elapsedSeconds": 107.99999999999814
+      },
+      {
+        "id": "gather_wood_17",
+        "label": "Gather wood",
+        "score": 4.543750000000018,
+        "command": {
+          "type": "gather",
+          "ids": [
+            74
+          ],
+          "targetId": 17
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1100,
+        "time": 109.99999999999802,
+        "elapsedSeconds": 109.99999999999802
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 3.2142857142857135,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1120,
+        "time": 111.99999999999791,
+        "elapsedSeconds": 111.99999999999791
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 1.79,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1140,
+        "time": 113.9999999999978,
+        "elapsedSeconds": 113.9999999999978
+      },
+      {
+        "id": "assault_inferred_base",
+        "label": "March on rival territory",
+        "score": 1.2833333333333323,
+        "command": {
+          "type": "move",
+          "ids": [
+            75
+          ],
+          "x": 43.5,
+          "z": 31.5,
+          "attackMove": true
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1160,
+        "time": 115.99999999999768,
+        "elapsedSeconds": 115.99999999999768
+      },
+      {
+        "id": "gather_food_62",
+        "label": "Gather food",
+        "score": 3.5226282051282043,
+        "command": {
+          "type": "gather",
+          "ids": [
+            76
+          ],
+          "targetId": 62
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1220,
+        "time": 121.99999999999734,
+        "elapsedSeconds": 121.99999999999734
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 2.8571428571428568,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1240,
+        "time": 123.99999999999723,
+        "elapsedSeconds": 123.99999999999723
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 1.79,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1260,
+        "time": 125.99999999999712,
+        "elapsedSeconds": 125.99999999999712
+      },
+      {
+        "id": "build_house",
+        "label": "Build House",
+        "score": 2.3,
+        "command": {
+          "type": "build",
+          "kind": "house",
+          "x": 22,
+          "z": 34,
+          "workerIds": [
+            4
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1280,
+        "time": 127.999999999997,
+        "elapsedSeconds": 127.999999999997
+      },
+      {
+        "id": "assault_inferred_base",
+        "label": "March on rival territory",
+        "score": 1.2833333333333323,
+        "command": {
+          "type": "move",
+          "ids": [
+            77
+          ],
+          "x": 43.5,
+          "z": 31.5,
+          "attackMove": true
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1300,
+        "time": 129.9999999999969,
+        "elapsedSeconds": 129.9999999999969
+      },
+      {
+        "id": "gather_wood_15",
+        "label": "Gather wood",
+        "score": 2.630125000000036,
+        "command": {
+          "type": "gather",
+          "ids": [
+            79
+          ],
+          "targetId": 15
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1340,
+        "time": 133.99999999999667,
+        "elapsedSeconds": 133.99999999999667
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 2.5,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1360,
+        "time": 135.99999999999656,
+        "elapsedSeconds": 135.99999999999656
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 1.79,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1400,
+        "time": 139.99999999999633,
+        "elapsedSeconds": 139.99999999999633
+      },
+      {
+        "id": "assault_inferred_base",
+        "label": "March on rival territory",
+        "score": 1.2833333333333323,
+        "command": {
+          "type": "move",
+          "ids": [
+            80
+          ],
+          "x": 43.5,
+          "z": 31.5,
+          "attackMove": true
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1420,
+        "time": 141.99999999999622,
+        "elapsedSeconds": 141.99999999999622
+      },
+      {
+        "id": "gather_wood_20",
+        "label": "Gather wood",
+        "score": 1.786375000000036,
+        "command": {
+          "type": "gather",
+          "ids": [
+            4
+          ],
+          "targetId": 20
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1440,
+        "time": 143.9999999999961,
+        "elapsedSeconds": 143.9999999999961
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 2.1428571428571432,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1460,
+        "time": 145.999999999996,
+        "elapsedSeconds": 145.999999999996
+      },
+      {
+        "id": "gather_food_57",
+        "label": "Gather food",
+        "score": 2.0242307692307686,
+        "command": {
+          "type": "gather",
+          "ids": [
+            81
+          ],
+          "targetId": 57
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1480,
+        "time": 147.99999999999588,
+        "elapsedSeconds": 147.99999999999588
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 1.79,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1560,
+        "time": 155.99999999999542,
+        "elapsedSeconds": 155.99999999999542
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 1.785714285714286,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1580,
+        "time": 157.9999999999953,
+        "elapsedSeconds": 157.9999999999953
+      },
+      {
+        "id": "assault_inferred_base",
+        "label": "March on rival territory",
+        "score": 1.2833333333333323,
+        "command": {
+          "type": "move",
+          "ids": [
+            82
+          ],
+          "x": 43.5,
+          "z": 31.5,
+          "attackMove": true
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1600,
+        "time": 159.9999999999952,
+        "elapsedSeconds": 159.9999999999952
+      },
+      {
+        "id": "build_farm",
+        "label": "Build Farm",
+        "score": 1,
+        "command": {
+          "type": "build",
+          "kind": "farm",
+          "x": 11,
+          "z": 25,
+          "workerIds": [
+            83
+          ]
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1620,
+        "time": 161.99999999999508,
+        "elapsedSeconds": 161.99999999999508
+      },
+      {
+        "id": "train_spearman_2",
+        "label": "Train Spearman",
+        "score": 1.79,
+        "command": {
+          "type": "train",
+          "buildingId": 2,
+          "kind": "spearman"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1700,
+        "time": 169.99999999999463,
+        "elapsedSeconds": 169.99999999999463
+      },
+      {
+        "id": "train_villager_1",
+        "label": "Train Villager",
+        "score": 1.428571428571428,
+        "command": {
+          "type": "train",
+          "buildingId": 1,
+          "kind": "villager"
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1720,
+        "time": 171.99999999999451,
+        "elapsedSeconds": 171.99999999999451
+      },
+      {
+        "id": "assault_inferred_base",
+        "label": "March on rival territory",
+        "score": 1.2833333333333323,
+        "command": {
+          "type": "move",
+          "ids": [
+            86
+          ],
+          "x": 43.5,
+          "z": 31.5,
+          "attackMove": true
+        },
+        "executed": true,
+        "team": 0,
+        "tick": 1740,
+        "time": 173.9999999999944,
+        "elapsedSeconds": 173.9999999999944
+      }
+    ],
+    "final_checkpoint_sha256": "b8204c385c3bf50f17acb6ac129c311959c1740fd519a64a5250348138b65ae3",
+    "checkpoint_file": null
+  },
+  "firstChangedChoice": null
+}

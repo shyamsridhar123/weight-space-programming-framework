@@ -1,0 +1,711 @@
+﻿2026-11-07T03:53:48.2768258Z Current runner version: '2.338.2'
+2026-11-07T03:53:48.2802829Z ##[group]Runner Image Provisioner
+2026-11-07T03:53:48.2804366Z Hosted Compute Agent
+2026-11-07T03:53:48.2805641Z Version: 20261028.624
+2026-11-07T03:53:48.2806683Z Commit: 54898b74c23fde5556c9b3c3a2290865feef0dfe
+2026-11-07T03:53:48.2808044Z Build Date: 2026-10-28T21:51:42Z
+2026-11-07T03:53:48.2809339Z Worker ID: {0ddca7cc-3e16-425e-bac0-89deac04dba3}
+2026-11-07T03:53:48.2810675Z Region: westus
+2026-11-07T03:53:48.2811674Z Cloud: Azure
+2026-11-07T03:53:48.2812628Z ##[endgroup]
+2026-11-07T03:53:48.2828757Z ##[group]Operating System
+2026-11-07T03:53:48.2829830Z Ubuntu
+2026-11-07T03:53:48.2830797Z 24.04.5
+2026-11-07T03:53:48.2831716Z LTS
+2026-11-07T03:53:48.2832660Z ##[endgroup]
+2026-11-07T03:53:48.2833830Z ##[group]Runner Image
+2026-11-07T03:53:48.2835281Z Image: ubuntu-24.04
+2026-11-07T03:53:48.2836489Z Version: 20261101.360.1
+2026-11-07T03:53:48.2838810Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261101.360/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-07T03:53:48.2841710Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261101.360
+2026-11-07T03:53:48.2843589Z ##[endgroup]
+2026-11-07T03:53:48.2846529Z ##[group]GITHUB_TOKEN Permissions
+2026-11-07T03:53:48.2849714Z Contents: read
+2026-11-07T03:53:48.2850949Z Metadata: read
+2026-11-07T03:53:48.2852019Z ##[endgroup]
+2026-11-07T03:53:48.2855302Z Secret source: Actions
+2026-11-07T03:53:48.2857099Z Cache mode: write
+2026-11-07T03:53:48.2876541Z Prepare workflow directory
+2026-11-07T03:53:48.3861520Z Prepare all required actions
+2026-11-07T03:53:48.3943958Z Getting action download info
+2026-11-07T03:53:48.7998446Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-07T03:53:48.9838577Z Download action repository 'actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0' (SHA:6d4fd22b20465ccc0f7354476588e8df7c9ca0e0)
+2026-11-07T03:53:49.4118232Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-11-07T03:53:49.7890158Z Complete job name: publication-python
+2026-11-07T03:53:49.8740148Z ##[group]Run git config --global core.autocrlf false
+2026-11-07T03:53:49.8741704Z [36;1mgit config --global core.autocrlf false[0m
+2026-11-07T03:53:49.8768126Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-07T03:53:49.8769829Z env:
+2026-11-07T03:53:49.8770740Z   RUN_ROOT: .runs/ci-python-42336025906-1
+2026-11-07T03:53:49.8771963Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T03:53:49.8773079Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T03:53:49.8774174Z ##[endgroup]
+2026-11-07T03:53:49.9353494Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-07T03:53:49.9355370Z with:
+2026-11-07T03:53:49.9356251Z   persist-credentials: false
+2026-11-07T03:53:49.9357612Z   repository: shyamsridhar123/weight-space-programming-framework
+2026-11-07T03:53:49.9366446Z   token: ***
+2026-11-07T03:53:49.9367312Z   ssh-strict: true
+2026-11-07T03:53:49.9368190Z   ssh-user: git
+2026-11-07T03:53:49.9369022Z   clean: true
+2026-11-07T03:53:49.9369920Z   sparse-checkout-cone-mode: true
+2026-11-07T03:53:49.9370978Z   fetch-depth: 1
+2026-11-07T03:53:49.9371827Z   fetch-tags: false
+2026-11-07T03:53:49.9372699Z   show-progress: true
+2026-11-07T03:53:49.9373590Z   lfs: false
+2026-11-07T03:53:49.9374403Z   submodules: false
+2026-11-07T03:53:49.9375404Z   set-safe-directory: true
+2026-11-07T03:53:49.9376415Z   allow-unsafe-pr-checkout: false
+2026-11-07T03:53:49.9377432Z env:
+2026-11-07T03:53:49.9378271Z   RUN_ROOT: .runs/ci-python-42336025906-1
+2026-11-07T03:53:49.9379455Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T03:53:49.9380499Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T03:53:49.9381527Z ##[endgroup]
+2026-11-07T03:53:50.2595478Z Syncing repository: shyamsridhar123/weight-space-programming-framework
+2026-11-07T03:53:50.2600692Z ##[group]Getting Git version info
+2026-11-07T03:53:50.2606804Z Working directory is '/home/runner/work/weight-space-programming-framework/weight-space-programming-framework'
+2026-11-07T03:53:50.2611478Z [command]/usr/bin/git version
+2026-11-07T03:53:50.2680275Z git version 2.56.0
+2026-11-07T03:53:50.2729440Z ##[endgroup]
+2026-11-07T03:53:50.2746351Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/668d435c-0473-47c1-bf45-af2c05f068f2/.gitconfig'
+2026-11-07T03:53:50.2805243Z Temporarily overriding HOME='/home/runner/work/_temp/668d435c-0473-47c1-bf45-af2c05f068f2' before making global git config changes
+2026-11-07T03:53:50.2825624Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-07T03:53:50.2852919Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/weight-space-programming-framework/weight-space-programming-framework
+2026-11-07T03:53:50.2878437Z Deleting the contents of '/home/runner/work/weight-space-programming-framework/weight-space-programming-framework'
+2026-11-07T03:53:50.2883821Z ##[group]Determining repository object format
+2026-11-07T03:53:50.2887245Z ##[endgroup]
+2026-11-07T03:53:50.2889831Z ##[group]Initializing the repository
+2026-11-07T03:53:50.2898243Z [command]/usr/bin/git init /home/runner/work/weight-space-programming-framework/weight-space-programming-framework
+2026-11-07T03:53:50.3044735Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-07T03:53:50.3048833Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-07T03:53:50.3052443Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-07T03:53:50.3055522Z hint: call:
+2026-11-07T03:53:50.3057300Z hint:
+2026-11-07T03:53:50.3059445Z hint: 	git config --global init.defaultBranch <name>
+2026-11-07T03:53:50.3061800Z hint:
+2026-11-07T03:53:50.3063966Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-07T03:53:50.3069053Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-07T03:53:50.3073425Z hint:
+2026-11-07T03:53:50.3085290Z hint: 	git branch -m <name>
+2026-11-07T03:53:50.3098457Z hint:
+2026-11-07T03:53:50.3103855Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-07T03:53:50.3109759Z Initialized empty Git repository in /home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git/
+2026-11-07T03:53:50.3157762Z [command]/usr/bin/git remote add origin https://github.com/shyamsridhar123/weight-space-programming-framework
+2026-11-07T03:53:50.3185615Z ##[endgroup]
+2026-11-07T03:53:50.3188815Z ##[group]Disabling automatic garbage collection
+2026-11-07T03:53:50.3216645Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-07T03:53:50.3247341Z ##[endgroup]
+2026-11-07T03:53:50.3287035Z ##[group]Setting up auth
+2026-11-07T03:53:50.3289253Z Removing SSH command configuration
+2026-11-07T03:53:50.3308887Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-07T03:53:50.3399160Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-07T03:53:50.4597156Z Removing HTTP extra header
+2026-11-07T03:53:50.4603247Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-07T03:53:50.4612670Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-07T03:53:50.4730424Z Removing includeIf entries pointing to credentials config files
+2026-11-07T03:53:50.4735564Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-07T03:53:50.4781252Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-07T03:53:50.5062106Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-99c02aba-e598-4c9f-97ba-a7a09d644725.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-07T03:53:50.5128003Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git.path /home/runner/work/_temp/git-credentials-99c02aba-e598-4c9f-97ba-a7a09d644725.config
+2026-11-07T03:53:50.5182488Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-99c02aba-e598-4c9f-97ba-a7a09d644725.config
+2026-11-07T03:53:50.5233593Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-99c02aba-e598-4c9f-97ba-a7a09d644725.config
+2026-11-07T03:53:50.5284168Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-99c02aba-e598-4c9f-97ba-a7a09d644725.config
+2026-11-07T03:53:50.5339186Z ##[endgroup]
+2026-11-07T03:53:50.5342270Z ##[group]Fetching the repository
+2026-11-07T03:53:50.5349676Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +1f4d48ee14e85f9d1d16f163ad9254a1515c8919:refs/remotes/origin/main
+2026-11-07T03:53:52.4275220Z From https://github.com/shyamsridhar123/weight-space-programming-framework
+2026-11-07T03:53:52.4286310Z  * [new ref]         1f4d48ee14e85f9d1d16f163ad9254a1515c8919 -> origin/main
+2026-11-07T03:53:52.4316162Z [command]/usr/bin/git branch --list --remote origin/main
+2026-11-07T03:53:52.4344082Z   origin/main
+2026-11-07T03:53:52.4377879Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+2026-11-07T03:53:52.4406262Z 1f4d48ee14e85f9d1d16f163ad9254a1515c8919
+2026-11-07T03:53:52.4449975Z ##[endgroup]
+2026-11-07T03:53:52.4451306Z ##[group]Determining the checkout info
+2026-11-07T03:53:52.4466551Z ##[endgroup]
+2026-11-07T03:53:52.4481717Z [command]/usr/bin/git sparse-checkout disable
+2026-11-07T03:53:52.4553945Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-07T03:53:52.4583691Z ##[group]Checking out the ref
+2026-11-07T03:53:52.4589213Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-11-07T03:53:53.2880961Z Switched to a new branch 'main'
+2026-11-07T03:53:53.2900790Z branch 'main' set up to track 'origin/main'.
+2026-11-07T03:53:53.2966827Z ##[endgroup]
+2026-11-07T03:53:53.3015954Z [command]/usr/bin/git log -1 --format=%H
+2026-11-07T03:53:53.3080024Z 1f4d48ee14e85f9d1d16f163ad9254a1515c8919
+2026-11-07T03:53:53.3123902Z ##[group]Removing auth
+2026-11-07T03:53:53.3124712Z Removing SSH command configuration
+2026-11-07T03:53:53.3126080Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-07T03:53:53.3167434Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-07T03:53:53.3450455Z Removing HTTP extra header
+2026-11-07T03:53:53.3454137Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-07T03:53:53.3504238Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-07T03:53:53.3797060Z Removing includeIf entries pointing to credentials config files
+2026-11-07T03:53:53.3798236Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-07T03:53:53.3843551Z includeif.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git.path
+2026-11-07T03:53:53.3846632Z includeif.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git/worktrees/*.path
+2026-11-07T03:53:53.3850181Z includeif.gitdir:/github/workspace/.git.path
+2026-11-07T03:53:53.3851481Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-07T03:53:53.3856808Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git.path
+2026-11-07T03:53:53.3896080Z /home/runner/work/_temp/git-credentials-99c02aba-e598-4c9f-97ba-a7a09d644725.config
+2026-11-07T03:53:53.3912367Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-99c02aba\-e598\-4c9f\-97ba\-a7a09d644725\.config
+2026-11-07T03:53:53.3964893Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git/worktrees/*.path
+2026-11-07T03:53:53.4020309Z /home/runner/work/_temp/git-credentials-99c02aba-e598-4c9f-97ba-a7a09d644725.config
+2026-11-07T03:53:53.4032739Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-99c02aba\-e598\-4c9f\-97ba\-a7a09d644725\.config
+2026-11-07T03:53:53.4082346Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-07T03:53:53.4126733Z /github/runner_temp/git-credentials-99c02aba-e598-4c9f-97ba-a7a09d644725.config
+2026-11-07T03:53:53.4137840Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-99c02aba\-e598\-4c9f\-97ba\-a7a09d644725\.config
+2026-11-07T03:53:53.4226234Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-07T03:53:53.4259240Z /github/runner_temp/git-credentials-99c02aba-e598-4c9f-97ba-a7a09d644725.config
+2026-11-07T03:53:53.4297018Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-99c02aba\-e598\-4c9f\-97ba\-a7a09d644725\.config
+2026-11-07T03:53:53.4376179Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-07T03:53:53.4817239Z Removing credentials config '/home/runner/work/_temp/git-credentials-99c02aba-e598-4c9f-97ba-a7a09d644725.config'
+2026-11-07T03:53:53.4835413Z ##[endgroup]
+2026-11-07T03:53:53.5061628Z ##[group]Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+2026-11-07T03:53:53.5062037Z with:
+2026-11-07T03:53:53.5062236Z   python-version: 3.12
+2026-11-07T03:53:53.5062462Z   check-latest: false
+2026-11-07T03:53:53.5064685Z   token: ***
+2026-11-07T03:53:53.5065442Z   mirror: https://raw.githubusercontent.com/actions/python-versions/main
+2026-11-07T03:53:53.5066026Z   update-environment: true
+2026-11-07T03:53:53.5066308Z   allow-prereleases: false
+2026-11-07T03:53:53.5066539Z   freethreaded: false
+2026-11-07T03:53:53.5066740Z env:
+2026-11-07T03:53:53.5066946Z   RUN_ROOT: .runs/ci-python-42336025906-1
+2026-11-07T03:53:53.5067234Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T03:53:53.5067482Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T03:53:53.5067724Z ##[endgroup]
+2026-11-07T03:53:53.6347213Z ##[group]Installed versions
+2026-11-07T03:53:53.6446927Z Successfully set up CPython (3.12.16)
+2026-11-07T03:53:53.6447987Z ##[endgroup]
+2026-11-07T03:53:53.6678291Z ##[group]Run python scripts/verify_publication.py --out "$RUN_ROOT/publication-before.json"
+2026-11-07T03:53:53.6679406Z [36;1mpython scripts/verify_publication.py --out "$RUN_ROOT/publication-before.json"[0m
+2026-11-07T03:53:53.6723792Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-07T03:53:53.6724457Z env:
+2026-11-07T03:53:53.6725118Z   RUN_ROOT: .runs/ci-python-42336025906-1
+2026-11-07T03:53:53.6725676Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T03:53:53.6726472Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T03:53:53.6727013Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:53:53.6727751Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-07T03:53:53.6728471Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:53:53.6729129Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:53:53.6729776Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:53:53.6730489Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-07T03:53:53.6731049Z ##[endgroup]
+2026-11-07T03:53:57.3468203Z Publication verification: PASS
+2026-11-07T03:53:57.3469225Z Preserved originals: 7279/7279; manifest digests: 7383/7383; publishable files: 7383
+2026-11-07T03:53:57.3485858Z Live Markdown: 26 files, 538 local destinations; failures: 0
+2026-11-07T03:53:57.3506428Z Receipt: /home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.runs/ci-python-42336025906-1/publication-before.json
+2026-11-07T03:53:57.3592839Z ##[group]Run python -m pip install "torch==2.8.0" --index-url https://download.pytorch.org/whl/cpu
+2026-11-07T03:53:57.3593554Z [36;1mpython -m pip install "torch==2.8.0" --index-url https://download.pytorch.org/whl/cpu[0m
+2026-11-07T03:53:57.3594023Z [36;1mpython -m pip install -e ".[test]"[0m
+2026-11-07T03:53:57.3594323Z [36;1mpython -m pip install build[0m
+2026-11-07T03:53:57.3594587Z [36;1mpython -m pip check[0m
+2026-11-07T03:53:57.3594820Z [36;1mpython - <<'PY'[0m
+2026-11-07T03:53:57.3595413Z [36;1mimport sys[0m
+2026-11-07T03:53:57.3595634Z [36;1mimport torch[0m
+2026-11-07T03:53:57.3595840Z [36;1m[0m
+2026-11-07T03:53:57.3596091Z [36;1massert sys.version_info[:2] == (3, 12), sys.version[0m
+2026-11-07T03:53:57.3596543Z [36;1massert torch.__version__.split("+", 1)[0] == "2.8.0", torch.__version__[0m
+2026-11-07T03:53:57.3597049Z [36;1massert torch.version.cuda is None, "The CPU Torch build is required"[0m
+2026-11-07T03:53:57.3597498Z [36;1mprint(f"Python: {sys.version}")[0m
+2026-11-07T03:53:57.3597899Z [36;1mprint(f"Torch: {torch.__version__}; CUDA build: {torch.version.cuda}")[0m
+2026-11-07T03:53:57.3598272Z [36;1mPY[0m
+2026-11-07T03:53:57.3598560Z [36;1mpython -m pip freeze --all > "$RUN_ROOT/python-packages.txt"[0m
+2026-11-07T03:53:57.3619419Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-07T03:53:57.3619753Z env:
+2026-11-07T03:53:57.3619961Z   RUN_ROOT: .runs/ci-python-42336025906-1
+2026-11-07T03:53:57.3620251Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T03:53:57.3620506Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T03:53:57.3620829Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:53:57.3621258Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-07T03:53:57.3621679Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:53:57.3622070Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:53:57.3622500Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:53:57.3622903Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-07T03:53:57.3623221Z ##[endgroup]
+2026-11-07T03:53:59.9925938Z Looking in indexes: https://download.pytorch.org/whl/cpu
+2026-11-07T03:54:00.3016000Z Collecting torch==2.8.0
+2026-11-07T03:54:00.5046326Z   Downloading torch-2.8.0%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (29 kB)
+2026-11-07T03:54:00.5435953Z Collecting filelock (from torch==2.8.0)
+2026-11-07T03:54:00.7524737Z   Downloading filelock-4.2.4-py3-none-any.whl.metadata (2.0 kB)
+2026-11-07T03:54:00.7718873Z Collecting typing-extensions>=4.10.0 (from torch==2.8.0)
+2026-11-07T03:54:00.8290384Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-11-07T03:54:00.8404722Z Collecting setuptools (from torch==2.8.0)
+2026-11-07T03:54:00.8442132Z   Downloading setuptools-78.1.0-py3-none-any.whl.metadata (6.6 kB)
+2026-11-07T03:54:00.8674906Z Collecting sympy>=1.13.3 (from torch==2.8.0)
+2026-11-07T03:54:00.9246033Z   Downloading sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+2026-11-07T03:54:00.9630970Z Collecting networkx (from torch==2.8.0)
+2026-11-07T03:54:01.0209839Z   Downloading networkx-3.7-py3-none-any.whl.metadata (6.7 kB)
+2026-11-07T03:54:01.0413028Z Collecting jinja2 (from torch==2.8.0)
+2026-11-07T03:54:01.0460945Z   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+2026-11-07T03:54:01.0866336Z Collecting fsspec (from torch==2.8.0)
+2026-11-07T03:54:01.1434342Z   Downloading fsspec-2026.9.0-py3-none-any.whl.metadata (10 kB)
+2026-11-07T03:54:01.1834663Z Collecting mpmath<1.4,>=1.1.0 (from sympy>=1.13.3->torch==2.8.0)
+2026-11-07T03:54:01.2404503Z   Downloading mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)
+2026-11-07T03:54:01.2703672Z Collecting MarkupSafe>=2.0 (from jinja2->torch==2.8.0)
+2026-11-07T03:54:01.2748451Z   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+2026-11-07T03:54:01.2937393Z Downloading torch-2.8.0%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl (183.9 MB)
+2026-11-07T03:54:02.8300004Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 183.9/183.9 MB 120.1 MB/s  0:00:01
+2026-11-07T03:54:02.8872955Z Downloading sympy-1.14.0-py3-none-any.whl (6.3 MB)
+2026-11-07T03:54:03.2916134Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.3/6.3 MB 25.3 MB/s  0:00:00
+2026-11-07T03:54:03.3490403Z Downloading mpmath-1.3.0-py3-none-any.whl (536 kB)
+2026-11-07T03:54:03.3559932Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 536.2/536.2 kB 90.0 MB/s  0:00:00
+2026-11-07T03:54:03.4142237Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-11-07T03:54:03.4827529Z Downloading filelock-4.2.4-py3-none-any.whl (162 kB)
+2026-11-07T03:54:03.5429261Z Downloading fsspec-2026.9.0-py3-none-any.whl (221 kB)
+2026-11-07T03:54:03.5500024Z Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+2026-11-07T03:54:03.5568070Z Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+2026-11-07T03:54:03.6208457Z Downloading networkx-3.7-py3-none-any.whl (2.1 MB)
+2026-11-07T03:54:03.6339049Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 192.1 MB/s  0:00:00
+2026-11-07T03:54:03.6388394Z Downloading setuptools-78.1.0-py3-none-any.whl (1.3 MB)
+2026-11-07T03:54:03.6466782Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 186.2 MB/s  0:00:00
+2026-11-07T03:54:04.3482605Z Installing collected packages: mpmath, typing-extensions, sympy, setuptools, networkx, MarkupSafe, fsspec, filelock, jinja2, torch
+2026-11-07T03:54:24.3329202Z 
+2026-11-07T03:54:24.3350205Z Successfully installed MarkupSafe-3.0.3 filelock-4.2.4 fsspec-2026.9.0 jinja2-3.1.6 mpmath-1.3.0 networkx-3.7 setuptools-78.1.0 sympy-1.14.0 torch-2.8.0+cpu typing-extensions-4.16.0
+2026-11-07T03:54:25.2966053Z Obtaining file:///home/runner/work/weight-space-programming-framework/weight-space-programming-framework
+2026-11-07T03:54:25.2984516Z   Installing build dependencies: started
+2026-11-07T03:54:26.8978801Z   Installing build dependencies: finished with status 'done'
+2026-11-07T03:54:26.8985692Z   Checking if build backend supports build_editable: started
+2026-11-07T03:54:27.3826506Z   Checking if build backend supports build_editable: finished with status 'done'
+2026-11-07T03:54:27.3835515Z   Getting requirements to build editable: started
+2026-11-07T03:54:27.9381964Z   Getting requirements to build editable: finished with status 'done'
+2026-11-07T03:54:27.9406294Z   Preparing editable metadata (pyproject.toml): started
+2026-11-07T03:54:28.4526767Z   Preparing editable metadata (pyproject.toml): finished with status 'done'
+2026-11-07T03:54:28.8299442Z Collecting numpy<3,>=2.0 (from weight-space-programming-framework==0.2.0.dev1)
+2026-11-07T03:54:28.9317909Z   Downloading numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+2026-11-07T03:54:28.9782094Z Collecting pytest<10,>=8 (from weight-space-programming-framework==0.2.0.dev1)
+2026-11-07T03:54:29.0012655Z   Downloading pytest-9.2.0-py3-none-any.whl.metadata (7.9 kB)
+2026-11-07T03:54:29.0096662Z Requirement already satisfied: torch==2.8.0 in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from weight-space-programming-framework==0.2.0.dev1) (2.8.0+cpu)
+2026-11-07T03:54:29.0109480Z Requirement already satisfied: filelock in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from torch==2.8.0->weight-space-programming-framework==0.2.0.dev1) (4.2.4)
+2026-11-07T03:54:29.0117650Z Requirement already satisfied: typing-extensions>=4.10.0 in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from torch==2.8.0->weight-space-programming-framework==0.2.0.dev1) (4.16.0)
+2026-11-07T03:54:29.0125944Z Requirement already satisfied: setuptools in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from torch==2.8.0->weight-space-programming-framework==0.2.0.dev1) (78.1.0)
+2026-11-07T03:54:29.0132848Z Requirement already satisfied: sympy>=1.13.3 in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from torch==2.8.0->weight-space-programming-framework==0.2.0.dev1) (1.14.0)
+2026-11-07T03:54:29.0138726Z Requirement already satisfied: networkx in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from torch==2.8.0->weight-space-programming-framework==0.2.0.dev1) (3.7)
+2026-11-07T03:54:29.0144522Z Requirement already satisfied: jinja2 in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from torch==2.8.0->weight-space-programming-framework==0.2.0.dev1) (3.1.6)
+2026-11-07T03:54:29.0150695Z Requirement already satisfied: fsspec in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from torch==2.8.0->weight-space-programming-framework==0.2.0.dev1) (2026.9.0)
+2026-11-07T03:54:29.0424112Z Collecting iniconfig>=2 (from pytest<10,>=8->weight-space-programming-framework==0.2.0.dev1)
+2026-11-07T03:54:29.0640920Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+2026-11-07T03:54:29.0753877Z Collecting packaging>=24 (from pytest<10,>=8->weight-space-programming-framework==0.2.0.dev1)
+2026-11-07T03:54:29.0768741Z   Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-11-07T03:54:29.1055661Z Collecting pluggy<2,>=1.6 (from pytest<10,>=8->weight-space-programming-framework==0.2.0.dev1)
+2026-11-07T03:54:29.1267347Z   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+2026-11-07T03:54:29.1634167Z Collecting pygments>=2.15 (from pytest<10,>=8->weight-space-programming-framework==0.2.0.dev1)
+2026-11-07T03:54:29.1850988Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-11-07T03:54:29.1916517Z Requirement already satisfied: mpmath<1.4,>=1.1.0 in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from sympy>=1.13.3->torch==2.8.0->weight-space-programming-framework==0.2.0.dev1) (1.3.0)
+2026-11-07T03:54:29.2015525Z Requirement already satisfied: MarkupSafe>=2.0 in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from jinja2->torch==2.8.0->weight-space-programming-framework==0.2.0.dev1) (3.0.3)
+2026-11-07T03:54:29.2426779Z Downloading numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+2026-11-07T03:54:29.4289620Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.7/16.7 MB 128.1 MB/s  0:00:00
+2026-11-07T03:54:29.4498885Z Downloading pytest-9.2.0-py3-none-any.whl (411 kB)
+2026-11-07T03:54:29.4775900Z Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+2026-11-07T03:54:29.5037401Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+2026-11-07T03:54:29.5072884Z Using cached packaging-26.3-py3-none-any.whl (129 kB)
+2026-11-07T03:54:29.5321501Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-11-07T03:54:29.5416495Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 148.6 MB/s  0:00:00
+2026-11-07T03:54:29.5795678Z Building wheels for collected packages: weight-space-programming-framework
+2026-11-07T03:54:29.5805186Z   Building editable for weight-space-programming-framework (pyproject.toml): started
+2026-11-07T03:54:30.1148240Z   Building editable for weight-space-programming-framework (pyproject.toml): finished with status 'done'
+2026-11-07T03:54:30.1151022Z   Created wheel for weight-space-programming-framework: filename=weight_space_programming_framework-0.2.0.dev1-0.editable-py3-none-any.whl size=7432 sha256=dfd4b5711120f834268d2b0e1b28f6e12290f1898c0ae7d421c7f43890b88241
+2026-11-07T03:54:30.1153620Z   Stored in directory: /tmp/pip-ephem-wheel-cache-8_5xr_gj/wheels/83/b8/db/f6e71d7c1bcb617ca7313e78080a61482ba3d5fc86e77aabf5
+2026-11-07T03:54:30.1173806Z Successfully built weight-space-programming-framework
+2026-11-07T03:54:30.1557645Z Installing collected packages: pygments, pluggy, packaging, numpy, iniconfig, weight-space-programming-framework, pytest
+2026-11-07T03:54:33.5125827Z 
+2026-11-07T03:54:33.5136648Z Successfully installed iniconfig-2.3.1 numpy-2.5.4 packaging-26.3 pluggy-1.7.0 pygments-2.21.0 pytest-9.2.0 weight-space-programming-framework-0.2.0.dev1
+2026-11-07T03:54:34.5180929Z Collecting build
+2026-11-07T03:54:34.5967121Z   Downloading build-1.6.1-py3-none-any.whl.metadata (5.6 kB)
+2026-11-07T03:54:34.6021765Z Requirement already satisfied: packaging>=24.0 in /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages (from build) (26.3)
+2026-11-07T03:54:34.6267099Z Collecting pyproject_hooks (from build)
+2026-11-07T03:54:34.6413361Z   Downloading pyproject_hooks-1.3.3-py3-none-any.whl.metadata (1.3 kB)
+2026-11-07T03:54:34.6584492Z Downloading build-1.6.1-py3-none-any.whl (31 kB)
+2026-11-07T03:54:34.6883690Z Downloading pyproject_hooks-1.3.3-py3-none-any.whl (10 kB)
+2026-11-07T03:54:34.7404893Z Installing collected packages: pyproject_hooks, build
+2026-11-07T03:54:34.7770521Z 
+2026-11-07T03:54:34.7793296Z Successfully installed build-1.6.1 pyproject_hooks-1.3.3
+2026-11-07T03:54:35.0532431Z No broken requirements found.
+2026-11-07T03:54:37.7874839Z Python: 3.12.16 (main, Oct 26 2026, 02:50:49) [GCC 13.3.0]
+2026-11-07T03:54:37.7876034Z Torch: 2.8.0+cpu; CUDA build: None
+2026-11-07T03:54:39.4757214Z ##[group]Run python -m pytest -q --junitxml="$RUN_ROOT/pytest.xml"
+2026-11-07T03:54:39.4758084Z [36;1mpython -m pytest -q --junitxml="$RUN_ROOT/pytest.xml"[0m
+2026-11-07T03:54:39.4789619Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-07T03:54:39.4790180Z env:
+2026-11-07T03:54:39.4790543Z   RUN_ROOT: .runs/ci-python-42336025906-1
+2026-11-07T03:54:39.4791063Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T03:54:39.4791528Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T03:54:39.4792164Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:54:39.4792925Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-07T03:54:39.4793678Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:54:39.4794354Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:54:39.4795318Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:54:39.4796089Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-07T03:54:39.4796686Z ##[endgroup]
+2026-11-07T03:54:44.2531055Z ........................................................................ [ 31%]
+2026-11-07T03:54:44.9526428Z ........................................................................ [ 63%]
+2026-11-07T03:54:46.5927524Z ................FFFFFFF................................................. [ 95%]
+2026-11-07T03:54:46.6286487Z ..........                                                               [100%]
+2026-11-07T03:54:46.6287508Z =================================== FAILURES ===================================
+2026-11-07T03:54:46.6288545Z ________ test_freeze_binds_protocol_and_snapshot_and_rejects_overwrite _________
+2026-11-07T03:54:46.6289320Z 
+2026-11-07T03:54:46.6289967Z tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-0/test_freeze_binds_protocol_and0')
+2026-11-07T03:54:46.6291804Z protocol = {'schema': 'wsp-generic-study/2', 'name': 'Generic framework algorithmic controls, version 2', 'study_kind': 'deterministic_algorithmic_controls', 'seeds': [900001, 900002], ...}
+2026-11-07T03:54:46.6293500Z 
+2026-11-07T03:54:46.6294135Z     def test_freeze_binds_protocol_and_snapshot_and_rejects_overwrite(tmp_path, protocol):
+2026-11-07T03:54:46.6295420Z         protocol_path = tmp_path / "protocol.json"
+2026-11-07T03:54:46.6296278Z         write_json(protocol_path, protocol)
+2026-11-07T03:54:46.6297209Z         snapshot = tmp_path / "freeze"
+2026-11-07T03:54:46.6307434Z >       frozen = freeze(protocol_path, snapshot)
+2026-11-07T03:54:46.6308193Z                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-07T03:54:46.6308685Z 
+2026-11-07T03:54:46.6309033Z tests/test_weight_space_study_v2.py:245: 
+2026-11-07T03:54:46.6309770Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-07T03:54:46.6310569Z rlcd/weight_space/study_v2.py:171: in freeze
+2026-11-07T03:54:46.6311360Z     paths = source_paths(protocol_path, protocol)
+2026-11-07T03:54:46.6312109Z             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-07T03:54:46.6312875Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-07T03:54:46.6313491Z 
+2026-11-07T03:54:46.6314251Z protocol_path = PosixPath('/tmp/pytest-of-runner/pytest-0/test_freeze_binds_protocol_and0/protocol.json')
+2026-11-07T03:54:46.6316448Z protocol = {'schema': 'wsp-generic-study/2', 'name': 'Generic framework algorithmic controls, version 2', 'study_kind': 'deterministic_algorithmic_controls', 'seeds': [900001, 900002], ...}
+2026-11-07T03:54:46.6317860Z 
+2026-11-07T03:54:46.6318521Z     def source_paths(protocol_path: str | Path, protocol: dict[str, Any]) -> list[Path]:
+2026-11-07T03:54:46.6319623Z         """Freeze this generic runner's code, not the RTS application or its assets."""
+2026-11-07T03:54:46.6320543Z         modules = [p for p in (ROOT / "rlcd/weight_space").glob("*.py")
+2026-11-07T03:54:46.6321373Z                    if p.name not in {"rts_study.py", "experiments.py", "demo.py"}]
+2026-11-07T03:54:46.6322835Z         paths = modules + [Path(protocol_path).resolve(), ROOT / "rlcd/__init__.py", ROOT / "requirements.lock.txt",
+2026-11-07T03:54:46.6324096Z                            ROOT / "requirements.txt", ROOT / "pytest.ini", ROOT / protocol["source_review"],
+2026-11-07T03:54:46.6325351Z                            ROOT / "artifacts/weight-space/source-review-v2/provenance.json",
+2026-11-07T03:54:46.6326364Z                            ROOT / "artifacts/weight-space/source-review-v2/review-evidence.json"]
+2026-11-07T03:54:46.6327214Z         paths += [ROOT / "tests" / name for name in (
+2026-11-07T03:54:46.6327942Z             "test_weight_space_v2.py", "test_weight_space_workflow.py",
+2026-11-07T03:54:46.6328792Z             "test_weight_space_study_v2.py", "test_weight_space_study_tasks_v2.py")]
+2026-11-07T03:54:46.6329563Z         for path in paths:
+2026-11-07T03:54:46.6330208Z             if not path.resolve().is_relative_to(ROOT) or not path.is_file():
+2026-11-07T03:54:46.6331177Z >               raise ValueError(f"A frozen input is absent or outside this repository: {path}")
+2026-11-07T03:54:46.6332600Z E               ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_binds_protocol_and0/protocol.json
+2026-11-07T03:54:46.6333634Z 
+2026-11-07T03:54:46.6333955Z rlcd/weight_space/study_v2.py:165: ValueError
+2026-11-07T03:54:46.6334785Z _ test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[empty_manifest] _
+2026-11-07T03:54:46.6335684Z 
+2026-11-07T03:54:46.6336193Z tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi0')
+2026-11-07T03:54:46.6337769Z protocol = {'schema': 'wsp-generic-study/2', 'name': 'Generic framework algorithmic controls, version 2', 'study_kind': 'deterministic_algorithmic_controls', 'seeds': [900001, 900002], ...}
+2026-11-07T03:54:46.6339171Z tamper = 'empty_manifest'
+2026-11-07T03:54:46.6339568Z 
+2026-11-07T03:54:46.6340292Z     @pytest.mark.parametrize("tamper", ["empty_manifest", "protocol_path", "float_bytes", "extra_file", "frozen_protocol"])
+2026-11-07T03:54:46.6341897Z     def test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest(tmp_path, protocol, tamper):
+2026-11-07T03:54:46.6342855Z         protocol_path = tmp_path / "protocol.json"
+2026-11-07T03:54:46.6343471Z         write_json(protocol_path, protocol)
+2026-11-07T03:54:46.6344081Z         snapshot = tmp_path / "freeze"
+2026-11-07T03:54:46.6344746Z >       receipt = freeze(protocol_path, snapshot)
+2026-11-07T03:54:46.6345595Z                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-07T03:54:46.6346045Z 
+2026-11-07T03:54:46.6346370Z tests/test_weight_space_study_v2.py:261: 
+2026-11-07T03:54:46.6347027Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-07T03:54:46.6347706Z rlcd/weight_space/study_v2.py:171: in freeze
+2026-11-07T03:54:46.6348338Z     paths = source_paths(protocol_path, protocol)
+2026-11-07T03:54:46.6348929Z             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-07T03:54:46.6349558Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-07T03:54:46.6350089Z 
+2026-11-07T03:54:46.6350732Z protocol_path = PosixPath('/tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi0/protocol.json')
+2026-11-07T03:54:46.6352474Z protocol = {'schema': 'wsp-generic-study/2', 'name': 'Generic framework algorithmic controls, version 2', 'study_kind': 'deterministic_algorithmic_controls', 'seeds': [900001, 900002], ...}
+2026-11-07T03:54:46.6353657Z 
+2026-11-07T03:54:46.6354188Z     def source_paths(protocol_path: str | Path, protocol: dict[str, Any]) -> list[Path]:
+2026-11-07T03:54:46.6355397Z         """Freeze this generic runner's code, not the RTS application or its assets."""
+2026-11-07T03:54:46.6356301Z         modules = [p for p in (ROOT / "rlcd/weight_space").glob("*.py")
+2026-11-07T03:54:46.6357150Z                    if p.name not in {"rts_study.py", "experiments.py", "demo.py"}]
+2026-11-07T03:54:46.6358422Z         paths = modules + [Path(protocol_path).resolve(), ROOT / "rlcd/__init__.py", ROOT / "requirements.lock.txt",
+2026-11-07T03:54:46.6359620Z                            ROOT / "requirements.txt", ROOT / "pytest.ini", ROOT / protocol["source_review"],
+2026-11-07T03:54:46.6360636Z                            ROOT / "artifacts/weight-space/source-review-v2/provenance.json",
+2026-11-07T03:54:46.6361588Z                            ROOT / "artifacts/weight-space/source-review-v2/review-evidence.json"]
+2026-11-07T03:54:46.6362441Z         paths += [ROOT / "tests" / name for name in (
+2026-11-07T03:54:46.6363147Z             "test_weight_space_v2.py", "test_weight_space_workflow.py",
+2026-11-07T03:54:46.6364147Z             "test_weight_space_study_v2.py", "test_weight_space_study_tasks_v2.py")]
+2026-11-07T03:54:46.6365127Z         for path in paths:
+2026-11-07T03:54:46.6365817Z             if not path.resolve().is_relative_to(ROOT) or not path.is_file():
+2026-11-07T03:54:46.6366783Z >               raise ValueError(f"A frozen input is absent or outside this repository: {path}")
+2026-11-07T03:54:46.6368190Z E               ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi0/protocol.json
+2026-11-07T03:54:46.6369220Z 
+2026-11-07T03:54:46.6369545Z rlcd/weight_space/study_v2.py:165: ValueError
+2026-11-07T03:54:46.6370374Z _ test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[protocol_path] _
+2026-11-07T03:54:46.6371066Z 
+2026-11-07T03:54:46.6371566Z tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi1')
+2026-11-07T03:54:46.6373111Z protocol = {'schema': 'wsp-generic-study/2', 'name': 'Generic framework algorithmic controls, version 2', 'study_kind': 'deterministic_algorithmic_controls', 'seeds': [900001, 900002], ...}
+2026-11-07T03:54:46.6374440Z tamper = 'protocol_path'
+2026-11-07T03:54:46.6374802Z 
+2026-11-07T03:54:46.6375823Z     @pytest.mark.parametrize("tamper", ["empty_manifest", "protocol_path", "float_bytes", "extra_file", "frozen_protocol"])
+2026-11-07T03:54:46.6377612Z     def test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest(tmp_path, protocol, tamper):
+2026-11-07T03:54:46.6378565Z         protocol_path = tmp_path / "protocol.json"
+2026-11-07T03:54:46.6379138Z         write_json(protocol_path, protocol)
+2026-11-07T03:54:46.6379617Z         snapshot = tmp_path / "freeze"
+2026-11-07T03:54:46.6380167Z >       receipt = freeze(protocol_path, snapshot)
+2026-11-07T03:54:46.6380683Z                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-07T03:54:46.6381016Z 
+2026-11-07T03:54:46.6381220Z tests/test_weight_space_study_v2.py:261: 
+2026-11-07T03:54:46.6381827Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-07T03:54:46.6382471Z rlcd/weight_space/study_v2.py:171: in freeze
+2026-11-07T03:54:46.6383038Z     paths = source_paths(protocol_path, protocol)
+2026-11-07T03:54:46.6383564Z             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-07T03:54:46.6384125Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-07T03:54:46.6384546Z 
+2026-11-07T03:54:46.6385316Z protocol_path = PosixPath('/tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi1/protocol.json')
+2026-11-07T03:54:46.6387034Z protocol = {'schema': 'wsp-generic-study/2', 'name': 'Generic framework algorithmic controls, version 2', 'study_kind': 'deterministic_algorithmic_controls', 'seeds': [900001, 900002], ...}
+2026-11-07T03:54:46.6388183Z 
+2026-11-07T03:54:46.6388593Z     def source_paths(protocol_path: str | Path, protocol: dict[str, Any]) -> list[Path]:
+2026-11-07T03:54:46.6389544Z         """Freeze this generic runner's code, not the RTS application or its assets."""
+2026-11-07T03:54:46.6390367Z         modules = [p for p in (ROOT / "rlcd/weight_space").glob("*.py")
+2026-11-07T03:54:46.6391113Z                    if p.name not in {"rts_study.py", "experiments.py", "demo.py"}]
+2026-11-07T03:54:46.6392393Z         paths = modules + [Path(protocol_path).resolve(), ROOT / "rlcd/__init__.py", ROOT / "requirements.lock.txt",
+2026-11-07T03:54:46.6393249Z                            ROOT / "requirements.txt", ROOT / "pytest.ini", ROOT / protocol["source_review"],
+2026-11-07T03:54:46.6393804Z                            ROOT / "artifacts/weight-space/source-review-v2/provenance.json",
+2026-11-07T03:54:46.6394318Z                            ROOT / "artifacts/weight-space/source-review-v2/review-evidence.json"]
+2026-11-07T03:54:46.6394756Z         paths += [ROOT / "tests" / name for name in (
+2026-11-07T03:54:46.6395662Z             "test_weight_space_v2.py", "test_weight_space_workflow.py",
+2026-11-07T03:54:46.6396385Z             "test_weight_space_study_v2.py", "test_weight_space_study_tasks_v2.py")]
+2026-11-07T03:54:46.6397002Z         for path in paths:
+2026-11-07T03:54:46.6397550Z             if not path.resolve().is_relative_to(ROOT) or not path.is_file():
+2026-11-07T03:54:46.6398351Z >               raise ValueError(f"A frozen input is absent or outside this repository: {path}")
+2026-11-07T03:54:46.6399583Z E               ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi1/protocol.json
+2026-11-07T03:54:46.6400421Z 
+2026-11-07T03:54:46.6400598Z rlcd/weight_space/study_v2.py:165: ValueError
+2026-11-07T03:54:46.6401255Z _ test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[float_bytes] _
+2026-11-07T03:54:46.6401772Z 
+2026-11-07T03:54:46.6402123Z tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi2')
+2026-11-07T03:54:46.6403501Z protocol = {'schema': 'wsp-generic-study/2', 'name': 'Generic framework algorithmic controls, version 2', 'study_kind': 'deterministic_algorithmic_controls', 'seeds': [900001, 900002], ...}
+2026-11-07T03:54:46.6404640Z tamper = 'float_bytes'
+2026-11-07T03:54:46.6404852Z 
+2026-11-07T03:54:46.6405588Z     @pytest.mark.parametrize("tamper", ["empty_manifest", "protocol_path", "float_bytes", "extra_file", "frozen_protocol"])
+2026-11-07T03:54:46.6407053Z     def test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest(tmp_path, protocol, tamper):
+2026-11-07T03:54:46.6407833Z         protocol_path = tmp_path / "protocol.json"
+2026-11-07T03:54:46.6408306Z         write_json(protocol_path, protocol)
+2026-11-07T03:54:46.6408734Z         snapshot = tmp_path / "freeze"
+2026-11-07T03:54:46.6409158Z >       receipt = freeze(protocol_path, snapshot)
+2026-11-07T03:54:46.6409594Z                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-07T03:54:46.6409869Z 
+2026-11-07T03:54:46.6410041Z tests/test_weight_space_study_v2.py:261: 
+2026-11-07T03:54:46.6410550Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-07T03:54:46.6411091Z rlcd/weight_space/study_v2.py:171: in freeze
+2026-11-07T03:54:46.6411562Z     paths = source_paths(protocol_path, protocol)
+2026-11-07T03:54:46.6412004Z             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-07T03:54:46.6412478Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-07T03:54:46.6412859Z 
+2026-11-07T03:54:46.6413347Z protocol_path = PosixPath('/tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi2/protocol.json')
+2026-11-07T03:54:46.6414855Z protocol = {'schema': 'wsp-generic-study/2', 'name': 'Generic framework algorithmic controls, version 2', 'study_kind': 'deterministic_algorithmic_controls', 'seeds': [900001, 900002], ...}
+2026-11-07T03:54:46.6416102Z 
+2026-11-07T03:54:46.6416479Z     def source_paths(protocol_path: str | Path, protocol: dict[str, Any]) -> list[Path]:
+2026-11-07T03:54:46.6417299Z         """Freeze this generic runner's code, not the RTS application or its assets."""
+2026-11-07T03:54:46.6418027Z         modules = [p for p in (ROOT / "rlcd/weight_space").glob("*.py")
+2026-11-07T03:54:46.6418701Z                    if p.name not in {"rts_study.py", "experiments.py", "demo.py"}]
+2026-11-07T03:54:46.6419608Z         paths = modules + [Path(protocol_path).resolve(), ROOT / "rlcd/__init__.py", ROOT / "requirements.lock.txt",
+2026-11-07T03:54:46.6420853Z                            ROOT / "requirements.txt", ROOT / "pytest.ini", ROOT / protocol["source_review"],
+2026-11-07T03:54:46.6421718Z                            ROOT / "artifacts/weight-space/source-review-v2/provenance.json",
+2026-11-07T03:54:46.6422525Z                            ROOT / "artifacts/weight-space/source-review-v2/review-evidence.json"]
+2026-11-07T03:54:46.6423213Z         paths += [ROOT / "tests" / name for name in (
+2026-11-07T03:54:46.6423773Z             "test_weight_space_v2.py", "test_weight_space_workflow.py",
+2026-11-07T03:54:46.6424467Z             "test_weight_space_study_v2.py", "test_weight_space_study_tasks_v2.py")]
+2026-11-07T03:54:46.6425247Z         for path in paths:
+2026-11-07T03:54:46.6425744Z             if not path.resolve().is_relative_to(ROOT) or not path.is_file():
+2026-11-07T03:54:46.6426525Z >               raise ValueError(f"A frozen input is absent or outside this repository: {path}")
+2026-11-07T03:54:46.6427731Z E               ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi2/protocol.json
+2026-11-07T03:54:46.6428554Z 
+2026-11-07T03:54:46.6428733Z rlcd/weight_space/study_v2.py:165: ValueError
+2026-11-07T03:54:46.6429376Z _ test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[extra_file] _
+2026-11-07T03:54:46.6429893Z 
+2026-11-07T03:54:46.6430255Z tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi3')
+2026-11-07T03:54:46.6431626Z protocol = {'schema': 'wsp-generic-study/2', 'name': 'Generic framework algorithmic controls, version 2', 'study_kind': 'deterministic_algorithmic_controls', 'seeds': [900001, 900002], ...}
+2026-11-07T03:54:46.6432729Z tamper = 'extra_file'
+2026-11-07T03:54:46.6432928Z 
+2026-11-07T03:54:46.6433442Z     @pytest.mark.parametrize("tamper", ["empty_manifest", "protocol_path", "float_bytes", "extra_file", "frozen_protocol"])
+2026-11-07T03:54:46.6434741Z     def test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest(tmp_path, protocol, tamper):
+2026-11-07T03:54:46.6435703Z         protocol_path = tmp_path / "protocol.json"
+2026-11-07T03:54:46.6436164Z         write_json(protocol_path, protocol)
+2026-11-07T03:54:46.6436567Z         snapshot = tmp_path / "freeze"
+2026-11-07T03:54:46.6437005Z >       receipt = freeze(protocol_path, snapshot)
+2026-11-07T03:54:46.6437506Z                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-07T03:54:46.6437773Z 
+2026-11-07T03:54:46.6437931Z tests/test_weight_space_study_v2.py:261: 
+2026-11-07T03:54:46.6438434Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-07T03:54:46.6438955Z rlcd/weight_space/study_v2.py:171: in freeze
+2026-11-07T03:54:46.6439440Z     paths = source_paths(protocol_path, protocol)
+2026-11-07T03:54:46.6439873Z             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-07T03:54:46.6440339Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-07T03:54:46.6440702Z 
+2026-11-07T03:54:46.6441180Z protocol_path = PosixPath('/tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi3/protocol.json')
+2026-11-07T03:54:46.6442630Z protocol = {'schema': 'wsp-generic-study/2', 'name': 'Generic framework algorithmic controls, version 2', 'study_kind': 'deterministic_algorithmic_controls', 'seeds': [900001, 900002], ...}
+2026-11-07T03:54:46.6443635Z 
+2026-11-07T03:54:46.6443989Z     def source_paths(protocol_path: str | Path, protocol: dict[str, Any]) -> list[Path]:
+2026-11-07T03:54:46.6444818Z         """Freeze this generic runner's code, not the RTS application or its assets."""
+2026-11-07T03:54:46.6445733Z         modules = [p for p in (ROOT / "rlcd/weight_space").glob("*.py")
+2026-11-07T03:54:46.6446374Z                    if p.name not in {"rts_study.py", "experiments.py", "demo.py"}]
+2026-11-07T03:54:46.6447235Z         paths = modules + [Path(protocol_path).resolve(), ROOT / "rlcd/__init__.py", ROOT / "requirements.lock.txt",
+2026-11-07T03:54:46.6448390Z                            ROOT / "requirements.txt", ROOT / "pytest.ini", ROOT / protocol["source_review"],
+2026-11-07T03:54:46.6449238Z                            ROOT / "artifacts/weight-space/source-review-v2/provenance.json",
+2026-11-07T03:54:46.6450020Z                            ROOT / "artifacts/weight-space/source-review-v2/review-evidence.json"]
+2026-11-07T03:54:46.6450674Z         paths += [ROOT / "tests" / name for name in (
+2026-11-07T03:54:46.6451244Z             "test_weight_space_v2.py", "test_weight_space_workflow.py",
+2026-11-07T03:54:46.6451925Z             "test_weight_space_study_v2.py", "test_weight_space_study_tasks_v2.py")]
+2026-11-07T03:54:46.6452502Z         for path in paths:
+2026-11-07T03:54:46.6452991Z             if not path.resolve().is_relative_to(ROOT) or not path.is_file():
+2026-11-07T03:54:46.6453762Z >               raise ValueError(f"A frozen input is absent or outside this repository: {path}")
+2026-11-07T03:54:46.6455152Z E               ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi3/protocol.json
+2026-11-07T03:54:46.6455999Z 
+2026-11-07T03:54:46.6456169Z rlcd/weight_space/study_v2.py:165: ValueError
+2026-11-07T03:54:46.6456848Z _ test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[frozen_protocol] _
+2026-11-07T03:54:46.6457379Z 
+2026-11-07T03:54:46.6457731Z tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi4')
+2026-11-07T03:54:46.6459093Z protocol = {'schema': 'wsp-generic-study/2', 'name': 'Generic framework algorithmic controls, version 2', 'study_kind': 'deterministic_algorithmic_controls', 'seeds': [900001, 900002], ...}
+2026-11-07T03:54:46.6460228Z tamper = 'frozen_protocol'
+2026-11-07T03:54:46.6460454Z 
+2026-11-07T03:54:46.6460980Z     @pytest.mark.parametrize("tamper", ["empty_manifest", "protocol_path", "float_bytes", "extra_file", "frozen_protocol"])
+2026-11-07T03:54:46.6462086Z     def test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest(tmp_path, protocol, tamper):
+2026-11-07T03:54:46.6463059Z         protocol_path = tmp_path / "protocol.json"
+2026-11-07T03:54:46.6463529Z         write_json(protocol_path, protocol)
+2026-11-07T03:54:46.6463954Z         snapshot = tmp_path / "freeze"
+2026-11-07T03:54:46.6464380Z >       receipt = freeze(protocol_path, snapshot)
+2026-11-07T03:54:46.6464806Z                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-07T03:54:46.6465273Z 
+2026-11-07T03:54:46.6465428Z tests/test_weight_space_study_v2.py:261: 
+2026-11-07T03:54:46.6465920Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-07T03:54:46.6466445Z rlcd/weight_space/study_v2.py:171: in freeze
+2026-11-07T03:54:46.6466904Z     paths = source_paths(protocol_path, protocol)
+2026-11-07T03:54:46.6467344Z             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-07T03:54:46.6467813Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-07T03:54:46.6468210Z 
+2026-11-07T03:54:46.6468679Z protocol_path = PosixPath('/tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi4/protocol.json')
+2026-11-07T03:54:46.6470191Z protocol = {'schema': 'wsp-generic-study/2', 'name': 'Generic framework algorithmic controls, version 2', 'study_kind': 'deterministic_algorithmic_controls', 'seeds': [900001, 900002], ...}
+2026-11-07T03:54:46.6471191Z 
+2026-11-07T03:54:46.6471564Z     def source_paths(protocol_path: str | Path, protocol: dict[str, Any]) -> list[Path]:
+2026-11-07T03:54:46.6472377Z         """Freeze this generic runner's code, not the RTS application or its assets."""
+2026-11-07T03:54:46.6473091Z         modules = [p for p in (ROOT / "rlcd/weight_space").glob("*.py")
+2026-11-07T03:54:46.6473755Z                    if p.name not in {"rts_study.py", "experiments.py", "demo.py"}]
+2026-11-07T03:54:46.6474622Z         paths = modules + [Path(protocol_path).resolve(), ROOT / "rlcd/__init__.py", ROOT / "requirements.lock.txt",
+2026-11-07T03:54:46.6475990Z                            ROOT / "requirements.txt", ROOT / "pytest.ini", ROOT / protocol["source_review"],
+2026-11-07T03:54:46.6476818Z                            ROOT / "artifacts/weight-space/source-review-v2/provenance.json",
+2026-11-07T03:54:46.7336669Z                            ROOT / "artifacts/weight-space/source-review-v2/review-evidence.json"]
+2026-11-07T03:54:46.7337974Z         paths += [ROOT / "tests" / name for name in (
+2026-11-07T03:54:46.7339037Z             "test_weight_space_v2.py", "test_weight_space_workflow.py",
+2026-11-07T03:54:46.7340127Z             "test_weight_space_study_v2.py", "test_weight_space_study_tasks_v2.py")]
+2026-11-07T03:54:46.7340995Z         for path in paths:
+2026-11-07T03:54:46.7341703Z             if not path.resolve().is_relative_to(ROOT) or not path.is_file():
+2026-11-07T03:54:46.7342700Z >               raise ValueError(f"A frozen input is absent or outside this repository: {path}")
+2026-11-07T03:54:46.7344226Z E               ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi4/protocol.json
+2026-11-07T03:54:46.7345579Z 
+2026-11-07T03:54:46.7345955Z rlcd/weight_space/study_v2.py:165: ValueError
+2026-11-07T03:54:46.7346818Z _ test_component_and_auxiliary_failures_keep_main_outcomes_and_mark_incomplete _
+2026-11-07T03:54:46.7347516Z 
+2026-11-07T03:54:46.7348073Z tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-0/test_component_and_auxiliary_f0')
+2026-11-07T03:54:46.7349689Z protocol = {'schema': 'wsp-generic-study/2', 'name': 'Generic framework algorithmic controls, version 2', 'study_kind': 'deterministic_algorithmic_controls', 'seeds': [900008], ...}
+2026-11-07T03:54:46.7351210Z monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f8757ea2420>
+2026-11-07T03:54:46.7351848Z 
+2026-11-07T03:54:46.7352561Z     def test_component_and_auxiliary_failures_keep_main_outcomes_and_mark_incomplete(tmp_path, protocol, monkeypatch):
+2026-11-07T03:54:46.7353611Z         import rlcd.weight_space.study_v2 as study
+2026-11-07T03:54:46.7354815Z         import rlcd.weight_space.study_tasks_v2 as auxiliary
+2026-11-07T03:54:46.7355897Z         protocol["seeds"], protocol["families"] = [900008], ["relu_mlp"]
+2026-11-07T03:54:46.7356638Z         path = tmp_path / "protocol.json"
+2026-11-07T03:54:46.7357239Z         write_json(path, protocol)
+2026-11-07T03:54:46.7357817Z         snapshot = tmp_path / "freeze"
+2026-11-07T03:54:46.7358435Z >       freeze(path, snapshot)
+2026-11-07T03:54:46.7358891Z 
+2026-11-07T03:54:46.7359284Z tests/test_weight_space_study_v2.py:292: 
+2026-11-07T03:54:46.7360060Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-07T03:54:46.7360878Z rlcd/weight_space/study_v2.py:171: in freeze
+2026-11-07T03:54:46.7361627Z     paths = source_paths(protocol_path, protocol)
+2026-11-07T03:54:46.7362350Z             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-07T03:54:46.7363084Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-07T03:54:46.7363711Z 
+2026-11-07T03:54:46.7364478Z protocol_path = PosixPath('/tmp/pytest-of-runner/pytest-0/test_component_and_auxiliary_f0/protocol.json')
+2026-11-07T03:54:46.7366589Z protocol = {'schema': 'wsp-generic-study/2', 'name': 'Generic framework algorithmic controls, version 2', 'study_kind': 'deterministic_algorithmic_controls', 'seeds': [900008], ...}
+2026-11-07T03:54:46.7367887Z 
+2026-11-07T03:54:46.7368476Z     def source_paths(protocol_path: str | Path, protocol: dict[str, Any]) -> list[Path]:
+2026-11-07T03:54:46.7369629Z         """Freeze this generic runner's code, not the RTS application or its assets."""
+2026-11-07T03:54:46.7370669Z         modules = [p for p in (ROOT / "rlcd/weight_space").glob("*.py")
+2026-11-07T03:54:46.7371605Z                    if p.name not in {"rts_study.py", "experiments.py", "demo.py"}]
+2026-11-07T03:54:46.7372790Z         paths = modules + [Path(protocol_path).resolve(), ROOT / "rlcd/__init__.py", ROOT / "requirements.lock.txt",
+2026-11-07T03:54:46.7374370Z                            ROOT / "requirements.txt", ROOT / "pytest.ini", ROOT / protocol["source_review"],
+2026-11-07T03:54:46.7375841Z                            ROOT / "artifacts/weight-space/source-review-v2/provenance.json",
+2026-11-07T03:54:46.7376944Z                            ROOT / "artifacts/weight-space/source-review-v2/review-evidence.json"]
+2026-11-07T03:54:46.7377888Z         paths += [ROOT / "tests" / name for name in (
+2026-11-07T03:54:46.7379113Z             "test_weight_space_v2.py", "test_weight_space_workflow.py",
+2026-11-07T03:54:46.7390786Z             "test_weight_space_study_v2.py", "test_weight_space_study_tasks_v2.py")]
+2026-11-07T03:54:46.7391708Z         for path in paths:
+2026-11-07T03:54:46.7392447Z             if not path.resolve().is_relative_to(ROOT) or not path.is_file():
+2026-11-07T03:54:46.7393515Z >               raise ValueError(f"A frozen input is absent or outside this repository: {path}")
+2026-11-07T03:54:46.7395318Z E               ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_component_and_auxiliary_f0/protocol.json
+2026-11-07T03:54:46.7396460Z 
+2026-11-07T03:54:46.7396868Z rlcd/weight_space/study_v2.py:165: ValueError
+2026-11-07T03:54:46.7397720Z =========================== short test summary info ============================
+2026-11-07T03:54:46.7399851Z FAILED tests/test_weight_space_study_v2.py::test_freeze_binds_protocol_and_snapshot_and_rejects_overwrite - ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_binds_protocol_and0/protocol.json
+2026-11-07T03:54:46.7403110Z FAILED tests/test_weight_space_study_v2.py::test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[empty_manifest] - ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi0/protocol.json
+2026-11-07T03:54:46.7406602Z FAILED tests/test_weight_space_study_v2.py::test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[protocol_path] - ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi1/protocol.json
+2026-11-07T03:54:46.7410228Z FAILED tests/test_weight_space_study_v2.py::test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[float_bytes] - ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi2/protocol.json
+2026-11-07T03:54:46.7413270Z FAILED tests/test_weight_space_study_v2.py::test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[extra_file] - ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi3/protocol.json
+2026-11-07T03:54:46.7416682Z FAILED tests/test_weight_space_study_v2.py::test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[frozen_protocol] - ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi4/protocol.json
+2026-11-07T03:54:46.7419877Z FAILED tests/test_weight_space_study_v2.py::test_component_and_auxiliary_failures_keep_main_outcomes_and_mark_incomplete - ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_component_and_auxiliary_f0/protocol.json
+2026-11-07T03:54:46.7421713Z 7 failed, 219 passed in 6.64s
+2026-11-07T03:54:47.0350255Z ##[error]Process completed with exit code 1.
+2026-11-07T03:54:47.0415974Z ##[group]Run python scripts/verify_publication.py --out "$RUN_ROOT/publication-after.json"
+2026-11-07T03:54:47.0416691Z [36;1mpython scripts/verify_publication.py --out "$RUN_ROOT/publication-after.json"[0m
+2026-11-07T03:54:47.0437405Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-07T03:54:47.0437746Z env:
+2026-11-07T03:54:47.0437961Z   RUN_ROOT: .runs/ci-python-42336025906-1
+2026-11-07T03:54:47.0438251Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T03:54:47.0438509Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T03:54:47.0438842Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:54:47.0439278Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-07T03:54:47.0439704Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:54:47.0440080Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:54:47.0440455Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:54:47.0440869Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-07T03:54:47.0441188Z ##[endgroup]
+2026-11-07T03:54:50.4396143Z Publication verification: PASS
+2026-11-07T03:54:50.4397508Z Preserved originals: 7279/7279; manifest digests: 7383/7383; publishable files: 7383
+2026-11-07T03:54:50.4398942Z Live Markdown: 26 files, 538 local destinations; failures: 0
+2026-11-07T03:54:50.4400369Z Receipt: /home/runner/work/weight-space-programming-framework/weight-space-programming-framework/.runs/ci-python-42336025906-1/publication-after.json
+2026-11-07T03:54:50.4591121Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-11-07T03:54:50.4591554Z with:
+2026-11-07T03:54:50.4591777Z   name: publication-python-42336025906-1
+2026-11-07T03:54:50.4592096Z   path: .runs/ci-python-42336025906-1/
+dist/*.whl
+
+2026-11-07T03:54:50.4592405Z   include-hidden-files: true
+2026-11-07T03:54:50.4592655Z   if-no-files-found: warn
+2026-11-07T03:54:50.4592877Z   retention-days: 30
+2026-11-07T03:54:50.4593091Z   compression-level: 6
+2026-11-07T03:54:50.4593298Z   overwrite: false
+2026-11-07T03:54:50.4593491Z   archive: true
+2026-11-07T03:54:50.4593678Z env:
+2026-11-07T03:54:50.4593873Z   RUN_ROOT: .runs/ci-python-42336025906-1
+2026-11-07T03:54:50.4594151Z   PYTHONDONTWRITEBYTECODE: 1
+2026-11-07T03:54:50.4594402Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-11-07T03:54:50.4594720Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:54:50.4595506Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-07T03:54:50.4596200Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:54:50.4596589Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:54:50.4596963Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-07T03:54:50.4597342Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-07T03:54:50.4597660Z ##[endgroup]
+2026-11-07T03:54:50.6309299Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-11-07T03:54:50.6310586Z The least common ancestor is /home/runner/work/weight-space-programming-framework/weight-space-programming-framework. This will be the root directory of the artifact
+2026-11-07T03:54:50.6311382Z With the provided path, there will be 4 files uploaded
+2026-11-07T03:54:50.6311869Z Artifact name is valid!
+2026-11-07T03:54:50.6312102Z Root directory input is valid!
+2026-11-07T03:54:51.0404085Z Uploading artifact: publication-python-42336025906-1.zip
+2026-11-07T03:54:51.0448799Z Beginning upload of artifact content to blob storage
+2026-11-07T03:54:51.3877713Z Uploaded bytes 8551
+2026-11-07T03:54:51.4610450Z Finished uploading artifact content to blob storage!
+2026-11-07T03:54:51.4613593Z SHA256 digest of uploaded artifact is 8d1c39491ee646b3cc36cbad7a27c35486c6c55ba20e56d3bd6d9bc841df42f7
+2026-11-07T03:54:51.4614765Z Finalizing artifact upload
+2026-11-07T03:54:52.0825348Z Artifact publication-python-42336025906-1 successfully finalized. Artifact ID 13559019651
+2026-11-07T03:54:52.0827255Z Artifact publication-python-42336025906-1 has been successfully uploaded! Final size is 8551 bytes. Artifact ID is 13559019651
+2026-11-07T03:54:52.0830950Z Artifact download URL: https://github.com/shyamsridhar123/weight-space-programming-framework/actions/runs/42336025906/artifacts/13559019651
+2026-11-07T03:54:52.1055804Z Post job cleanup.
+2026-11-07T03:54:52.2035962Z [command]/usr/bin/git version
+2026-11-07T03:54:52.2131224Z git version 2.56.0
+2026-11-07T03:54:52.2181953Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/4f9f626b-7a3d-4b5d-aba2-f9aef0b41f90/.gitconfig'
+2026-11-07T03:54:52.2229032Z Temporarily overriding HOME='/home/runner/work/_temp/4f9f626b-7a3d-4b5d-aba2-f9aef0b41f90' before making global git config changes
+2026-11-07T03:54:52.2241073Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-07T03:54:52.2262286Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/weight-space-programming-framework/weight-space-programming-framework
+2026-11-07T03:54:52.2358227Z Removing SSH command configuration
+2026-11-07T03:54:52.2382907Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-07T03:54:52.2484888Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-07T03:54:52.3168702Z Removing HTTP extra header
+2026-11-07T03:54:52.3196099Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-07T03:54:52.3286760Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-07T03:54:52.3737908Z Removing includeIf entries pointing to credentials config files
+2026-11-07T03:54:52.3746337Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-07T03:54:52.3799442Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-07T03:54:52.4242138Z Cleaning up orphan processes

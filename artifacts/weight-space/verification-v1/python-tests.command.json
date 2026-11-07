@@ -1,0 +1,28 @@
+{
+  "stage": "python-tests",
+  "arguments": [
+    "C:/public-user\\code\\RLCD\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\pytest-tmp",
+    "tests"
+  ],
+  "cwd": "C:/public-user\\code\\RLCD",
+  "environment_overrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "HF_DATASETS_OFFLINE": "1",
+    "HF_HUB_DISABLE_TELEMETRY": "1",
+    "OMP_NUM_THREADS": "2",
+    "MKL_NUM_THREADS": "2",
+    "TSX_DISABLE_CACHE": "1"
+  },
+  "started_at": "2026-11-07T01:13:31.714387+00:00",
+  "runner_sha256": "a1765eb2f8612054141ee004ed74ac2078d53a47b447838bf1cde0d9507d7f7f"
+}

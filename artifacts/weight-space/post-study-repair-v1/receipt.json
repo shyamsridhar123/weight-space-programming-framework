@@ -1,0 +1,149 @@
+{
+  "schema": "wsp-post-study-repair/1",
+  "created_at": "2026-11-07T01:21:45.384631+00:00",
+  "passed": true,
+  "study_root": "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\study-v1",
+  "freeze_sha256": "8618af22249c963a70f07966e39dd7db82f53064485707797485dc12d916ac6e",
+  "protocol_sha256": "ae17fc858130ee06d436eb77218712b9a757ed514183b6bc99cb962ce7231998",
+  "changed_runtime_sources": [
+    "rlcd/weight_space/__main__.py"
+  ],
+  "before_files_sha256": {
+    "rlcd/weight_space/__main__.py": "9b13f0c0e3b6f29acca2712d34490959d2f69ff28e5113690e2067f3def641ad",
+    "tests/test_weight_space_generic.py": "e005937a858bac30d566058d320a3116625bc5cf6e66c51c339b28aea6782576"
+  },
+  "after_files_sha256": {
+    "rlcd/weight_space/__main__.py": "bf66979b77db9dba0634503518cd8665b7054328982d8f1938357a1c9501794d",
+    "tests/test_weight_space_generic.py": "aa2c1a6bd20accf1e725f86ebfd356a0176cde566a0ed6c4a211ec7fc808cb32"
+  },
+  "verification": [
+    {
+      "name": "focused-regression",
+      "command": [
+        "C:/public-user\\code\\RLCD\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_weight_space.py",
+        "tests/test_weight_space_generic.py",
+        "tests/test_weight_space_torch.py",
+        "tests/test_weight_space_boundaries.py"
+      ],
+      "cwd": "C:/public-user\\code\\RLCD",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 10.203000000008615
+    },
+    {
+      "name": "current-valid-receipt",
+      "command": [
+        "C:/public-user\\code\\RLCD\\.venv\\Scripts\\python.exe",
+        "-m",
+        "rlcd.weight_space",
+        "verify",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\base.json",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\candidate.json",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\valid.json"
+      ],
+      "cwd": "C:/public-user\\code\\RLCD",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 1.0780000000086147
+    },
+    {
+      "name": "current-altered-receipt",
+      "command": [
+        "C:/public-user\\code\\RLCD\\.venv\\Scripts\\python.exe",
+        "-m",
+        "rlcd.weight_space",
+        "verify",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\base.json",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\candidate.json",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\altered.json"
+      ],
+      "cwd": "C:/public-user\\code\\RLCD",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "passed": true,
+      "elapsed_seconds": 0.9059999999881256
+    },
+    {
+      "name": "archived-altered-receipt",
+      "command": [
+        "C:/public-user\\code\\RLCD\\.venv\\Scripts\\python.exe",
+        "-m",
+        "rlcd.weight_space",
+        "verify",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\base.json",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\candidate.json",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\verification-v1\\certificate-diagnostic\\altered.json"
+      ],
+      "cwd": "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\study-v1\\freeze\\sources",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 1.2969999999913853
+    },
+    {
+      "name": "archived-freeze",
+      "command": [
+        "C:/public-user\\code\\RLCD\\.venv\\Scripts\\python.exe",
+        "-m",
+        "rlcd.weight_space",
+        "verify-freeze",
+        "--protocol",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\study-v1\\freeze\\protocol.json",
+        "--freeze",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\study-v1\\freeze\\receipt.json"
+      ],
+      "cwd": "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\study-v1\\freeze\\sources",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 1.2820000000065193
+    },
+    {
+      "name": "current-freeze-mismatch",
+      "command": [
+        "C:/public-user\\code\\RLCD\\.venv\\Scripts\\python.exe",
+        "-m",
+        "rlcd.weight_space",
+        "verify-freeze",
+        "--protocol",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\study-v1\\freeze\\protocol.json",
+        "--freeze",
+        "C:/public-user\\code\\RLCD\\artifacts\\weight-space\\study-v1\\freeze\\receipt.json"
+      ],
+      "cwd": "C:/public-user\\code\\RLCD",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "passed": true,
+      "elapsed_seconds": 1.0780000000086147
+    }
+  ],
+  "scope": "Only generic CLI certificate comparison and its regression test changed. The study retains the original runtime, including its demonstrated comparison defect. No training, selection, simulations, mathematical checker edits, or frozen-evidence rewrites occurred.",
+  "study_verification": "Archived runtime passes its exact source freeze. Current runtime correctly rejects the old freeze because __main__.py changed; this failure is expected and retained.",
+  "artifacts": {
+    "after/rlcd/weight_space/__main__.py": "bf66979b77db9dba0634503518cd8665b7054328982d8f1938357a1c9501794d",
+    "after/tests/test_weight_space_generic.py": "aa2c1a6bd20accf1e725f86ebfd356a0176cde566a0ed6c4a211ec7fc808cb32",
+    "archived-altered-receipt.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archived-altered-receipt.stdout.log": "4b1bd750e7253c799b48f824daf2fbb0c8ab9140f6f6ca4582a965da0d130322",
+    "archived-freeze.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archived-freeze.stdout.log": "2d283a175aafc843b40ea89d9c98a9d0b04311a2cd28cb42720d9872596b38a5",
+    "before/rlcd/weight_space/__main__.py": "9b13f0c0e3b6f29acca2712d34490959d2f69ff28e5113690e2067f3def641ad",
+    "before/tests/test_weight_space_generic.py": "e005937a858bac30d566058d320a3116625bc5cf6e66c51c339b28aea6782576",
+    "before.json": "03d5c9a2837b7ebac77c0a9ec6313d51afa7cca596ce6515e39b820d78d97b7b",
+    "current-altered-receipt.stderr.log": "ae1ba35a444e03e678eed5154ae032ed92fae6013595b059929e15f1d6ad79ab",
+    "current-altered-receipt.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "current-freeze-mismatch.stderr.log": "36046c4caca8c480461465d3ba54fbed0d1e11842859c1c8adbd5b89c3c71b55",
+    "current-freeze-mismatch.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "current-valid-receipt.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "current-valid-receipt.stdout.log": "4b1bd750e7253c799b48f824daf2fbb0c8ab9140f6f6ca4582a965da0d130322",
+    "focused-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "focused-regression.stdout.log": "5b6fd3dc5612768e7dda0066f7623ded85dac5b837968d8a751f6d046161f6aa",
+    "repair.patch": "070ab6abb4a51329f826fa7461484798a4c970d54fab4bce94061f30f8366fac",
+    "verify-repair.py": "d6b15a7753d55b7aad93762e53c69c3dbc829282452bcbec9b6c6436131b8450"
+  }
+}

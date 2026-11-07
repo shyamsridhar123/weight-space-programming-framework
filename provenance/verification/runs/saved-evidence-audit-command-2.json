@@ -1,0 +1,37 @@
+{
+  "schema": "wspf-standalone-audit-command/1",
+  "status": "completed",
+  "started_at": "2026-11-07T03:39:49.430061+00:00",
+  "finished_at": "2026-11-07T03:42:18.090923+00:00",
+  "seconds": 148.661,
+  "command": [
+    "C:/public-user\\code\\RLCD\\.venv\\Scripts\\python.exe",
+    "scripts/audit_weight_space_v2.py",
+    "--study-root",
+    "artifacts/weight-space/study-v2",
+    "--freeze",
+    "artifacts/weight-space/study-v2-freeze/receipt.json",
+    "--expected-freeze",
+    "0aef8bc624bc5ea501558a807c3c90afa46b3b8ab5d27ea1423943cbb986349e",
+    "--expected-protocol",
+    "c809fc30b69d9fec2fd720c2e80e0d35a08d49a1dd7f6e2f352a6b78e2cbb3de",
+    "--repo",
+    ".",
+    "--out",
+    ".runs/saved-evidence-audit-2.json"
+  ],
+  "exit_code": 0,
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "numpy": "2.5.3",
+  "torch": "2.8.0+cpu",
+  "inputs_sha256": {
+    "scripts/audit_weight_space_v2.py": "b7ad808a592539dfb2097fdfb4d53589d11c48e9b77a8ea02b9c494411addad6",
+    "artifacts/weight-space/study-v2/manifest.json": "dea4a2d00d403c6e186681fe5e0cb7b3e12ef6a2026c2c7e70d8555a07989a8e",
+    "artifacts/weight-space/study-v2-freeze/receipt.json": "8f34dcd1f7f80250446e9fc26d87722b9cd3d2c66cce0af8586a9b880b7fbb89"
+  },
+  "inputs_unchanged": true,
+  "log_sha256": "f10d2ab7b826345f22a18d12612739c707e9a922d61c3a8f2d8a87a1fe7c2ea8",
+  "audit_report_sha256": "602f9d5e8dadaa94c8d35a07304e4b16bcb75d40ac5dd4d8c9b01e5ef42d8686",
+  "scope": "Saved-evidence replay only; no retraining, candidate generation, or fresh-world experiment."
+}

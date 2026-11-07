@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-11-07T16:05:27+00:00",
+  "source_lock_sha256": "0cb4a1d27ab6207126586842f60d5ad1f98602c01307848e4c7383390fd08068",
+  "fallback_sha256": "eaccba6d4439e4f2accd99b050bf8b810d5f29cedd3c4af37c0599642157b6d7",
+  "source_graph_sha256": "ccd45faa48535db8d4eb1b107cb43958c87bd2575e6ef75dc086379c9873811a",
+  "fallback_graph_sha256": "ccd45faa48535db8d4eb1b107cb43958c87bd2575e6ef75dc086379c9873811a",
+  "only_resolved_removed": true,
+  "resolved_fields_removed": 29,
+  "all_versions_and_integrities_unchanged": true,
+  "public_availability_verified": false,
+  "tarball_byte_equivalence_verified": false,
+  "independent_review": {
+    "reviewer": "local_limits_scan",
+    "status": "passed",
+    "comparison": "29 resolved fields removed; every other parsed field preserved; no URLs or corporate markers remain",
+    "source_lock_unchanged": true,
+    "verifier_static_review": "No material integrity or network-scope issue found; minor receipt-failure candidate-presence reporting corrected and covered by synthetic self-check."
+  },
+  "documentation_evidence": [
+    {
+      "distribution": "npm@11.19.0",
+      "relative_path": "docs/content/using-npm/config.md",
+      "line": 1353,
+      "sha256": "a9247377e52c3f67b5d78182185b89ebaee151d9659c965527a89f090dfefe01",
+      "statement": "npm supports writing registry dependencies without resolved keys; later installation resolves tarball endpoints from the configured registry.",
+      "inspection_method": "read from installed official npm distribution; no web fetch claimed"
+    },
+    {
+      "distribution": "npm@11.19.0",
+      "relative_path": "docs/content/commands/npm-approve-scripts.md",
+      "line": 62,
+      "sha256": "385bc4a3dc74e612d7741f8951d140e549d5fc4568d14be9d248e677bf9e6fae",
+      "statement": "Without a registry dependency resolved URL, npm cannot version-pin its script approval; approve-scripts falls back to name approval with a warning.",
+      "inspection_method": "read from installed official npm distribution; no web fetch claimed"
+    },
+    {
+      "distribution": "npm@11.19.0",
+      "relative_path": "node_modules/@npmcli/config/lib/definitions/definitions.js",
+      "line": 1627,
+      "sha256": "6b5b2a453284d60a99c3a6d84bb7db548ac25aea001abea6a3692bafcdd8252f",
+      "statement": "The installed npm configuration implementation defines the boolean omit-lockfile-registry-resolved option, default false, with the documented behavior.",
+      "inspection_method": "read from installed official npm distribution; no web fetch claimed"
+    }
+  ]
+}

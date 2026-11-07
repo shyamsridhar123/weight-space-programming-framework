@@ -1,0 +1,82 @@
+{
+  "schema": "wspf-github-ci-diagnosis/1",
+  "diagnosed_at_utc": "2026-11-07T03:56:23.710807+00:00",
+  "repository": "shyamsridhar123/weight-space-programming-framework",
+  "commit": "1f4d48ee14e85f9d1d16f163ad9254a1515c8919",
+  "run_id": 42336025906,
+  "job_id": 128293033475,
+  "event": "push",
+  "head_branch": "main",
+  "status": "completed",
+  "conclusion": "failure",
+  "completed_at_utc": "2026-11-07T03:54:54Z",
+  "failed_step": "Run the standalone Python suite",
+  "pytest_summary": "7 failed, 219 passed in 6.64s",
+  "failed_tests_and_errors": [
+    "FAILED tests/test_weight_space_study_v2.py::test_freeze_binds_protocol_and_snapshot_and_rejects_overwrite - ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_binds_protocol_and0/protocol.json",
+    "FAILED tests/test_weight_space_study_v2.py::test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[empty_manifest] - ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi0/protocol.json",
+    "FAILED tests/test_weight_space_study_v2.py::test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[protocol_path] - ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi1/protocol.json",
+    "FAILED tests/test_weight_space_study_v2.py::test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[float_bytes] - ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi2/protocol.json",
+    "FAILED tests/test_weight_space_study_v2.py::test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[extra_file] - ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi3/protocol.json",
+    "FAILED tests/test_weight_space_study_v2.py::test_freeze_rejects_self_consistent_incomplete_or_misbound_manifest[frozen_protocol] - ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_freeze_rejects_self_consi4/protocol.json",
+    "FAILED tests/test_weight_space_study_v2.py::test_component_and_auxiliary_failures_keep_main_outcomes_and_mark_incomplete - ValueError: A frozen input is absent or outside this repository: /tmp/pytest-of-runner/pytest-0/test_component_and_auxiliary_f0/protocol.json"
+  ],
+  "cause": "The CI pytest command did not set --basetemp. Pytest created protocol fixtures under /tmp/pytest-of-runner, outside the repository. study_v2.source_paths() intentionally requires every frozen input to resolve inside repository ROOT, so all seven cases raised ValueError at line 165 before reaching their intended assertions.",
+  "classification": "CI test invocation / temporary-directory configuration mismatch. The observed tracebacks do not indicate dependency-version, numeric-runtime, or freeze-guard implementation failure.",
+  "source_guard": {
+    "path": "rlcd/weight_space/study_v2.py",
+    "line": 164,
+    "condition": "not path.resolve().is_relative_to(ROOT) or not path.is_file()"
+  },
+  "failing_workflow_command": "python -m pytest -q --junitxml=\"$RUN_ROOT/pytest.xml\"",
+  "proposed_minimum_correction": "python -m pytest -q --basetemp \"$RUN_ROOT/pytest-tmp\" --junitxml=\"$RUN_ROOT/pytest.xml\"",
+  "correction_scope": ".github/workflows/publication-python.yml:66; keep runtime/test/frozen source bytes unchanged; refresh publication manifest and draft receipts through the parent publication procedure",
+  "correction_applied_by_this_agent": false,
+  "local_passing_comparison": {
+    "receipt": ".runs/python-tests-2.json",
+    "command": [
+      "C:/public-user\\code\\RLCD\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pytest",
+      "-q",
+      "--basetemp",
+      "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\pytest-standalone-2",
+      "--junitxml",
+      "C:/public-user\\code\\RLCD\\exports\\weight-space-programming-framework\\.runs\\pytest-junit-2.xml"
+    ],
+    "basis": "The prior 226-pass run explicitly placed --basetemp under the standalone repository's .runs directory."
+  },
+  "successful_steps": [
+    "Set up job",
+    "Preserve checked-out file bytes",
+    "Check out publication",
+    "Set up Python 3.12",
+    "Verify publication before installing dependencies",
+    "Install CPU Torch and the standalone test dependencies",
+    "Verify publication after tests and packaging",
+    "Upload new validation receipts and wheel",
+    "Post Check out publication",
+    "Complete job"
+  ],
+  "skipped_build_steps": [
+    "Build the wheel",
+    "Validate a fresh wheel installation outside the checkout"
+  ],
+  "evidence": [
+    {
+      "path": ".runs/github-workflow-run-42336025906-job-128293033475.log",
+      "bytes": 69970,
+      "sha256": "717170ef12271a37e7018f4a2a61039e742d4a4552ccde24786c910706646970",
+      "notes": "Retrieved through gh api GET with owner-checked GCM credential held only in memory. Any exact credential match was redacted before saving; ANSI sequences remain in the full log."
+    },
+    {
+      "path": ".runs/github-workflow-monitor-20261107T035511.json",
+      "sha256": "79978699b0040d86faf9311cde693d78a5ae13d70b6b141526b040554877da61"
+    },
+    {
+      "path": ".runs/github-status-20261107T035559.json"
+    }
+  ],
+  "remote_mutations": [],
+  "publication_files_edited": []
+}

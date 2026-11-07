@@ -1,0 +1,87 @@
+name: Pinned proof snapshot (manual)
+
+"on":
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  proofs:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      RUN_ROOT: .runs/ci-proofs-${{ github.run_id }}-${{ github.run_attempt }}
+      PROOF_RUN: .proof-runs/ci-${{ github.run_id }}-${{ github.run_attempt }}
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - name: Preserve checked-out file bytes
+        run: git config --global core.autocrlf false
+
+      - name: Check out publication
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up the proof receipt runner
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Verify publication before preparing proofs
+        id: publication_before
+        run: python scripts/verify_publication.py --out "$RUN_ROOT/publication-before.json"
+
+      - name: Install pinned Elan and Lean 4.24.0
+        run: |
+          curl --fail --location --retry 3 \
+            https://github.com/leanprover/elan/releases/download/v4.2.4/elan-x86_64-unknown-linux-gnu.tar.gz \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          printf '%s  %s\n' \
+            42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63 \
+            "$RUNNER_TEMP/elan.tar.gz" | sha256sum --check
+          mkdir -p "$RUNNER_TEMP/wsp-elan-installer"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP/wsp-elan-installer"
+          "$RUNNER_TEMP/wsp-elan-installer/elan-init" -y --no-modify-path --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/elan" toolchain install leanprover/lean4:v4.24.0
+
+      - name: Retrieve the cache using the committed dependency manifest
+        working-directory: formal/weight-space
+        run: |
+          sha256sum lake-manifest.json > "$RUNNER_TEMP/wsp-lake-manifest.sha256"
+          lake exe cache get \
+            Mathlib.Data.Real.Basic \
+            Mathlib.Algebra.BigOperators.Fin \
+            Mathlib.Algebra.Order.BigOperators.Group.Finset \
+            Mathlib.Tactic.Ring \
+            Mathlib.Tactic.Linarith \
+            Mathlib.Tactic.NormNum
+          sha256sum --check "$RUNNER_TEMP/wsp-lake-manifest.sha256"
+          git diff --exit-code -- lake-manifest.json lean-toolchain lakefile.toml
+
+      # The runner explicitly builds WeightSpace.GenericAudit, checks every
+      # locked dependency commit, and creates a new receipt without changing
+      # preserved proof sources, locks, or historical verification receipts.
+      - name: Check the generic proof snapshot and transitive axiom audit
+        run: python scripts/check_proofs.py --output "$PROOF_RUN"
+
+      - name: Verify publication after the proof check
+        if: ${{ always() && steps.publication_before.outcome == 'success' }}
+        run: python scripts/verify_publication.py --out "$RUN_ROOT/publication-after.json"
+
+      - name: Upload new proof logs and receipts
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: proof-snapshot-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ env.RUN_ROOT }}/
+            ${{ env.PROOF_RUN }}/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30

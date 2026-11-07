@@ -1,0 +1,213 @@
+# Limitations and a prioritized research program
+
+The framework can represent several weight-space tasks, preserve exact candidate identities, compile frozen-feature edits, and state real-valued preservation or drift guarantees for explicit semantic families. The central remaining gaps are connecting those guarantees to executable artifacts and numerical execution, enforcing claimed access regimes, and establishing useful behavior on independent tasks, model lineages, and editor trials.
+
+This program is grounded in the [source review](source-review.md), the actual older limitation sections listed in its [local-boundary table](source-review.md#prior-documented-boundaries-in-this-repository), the [requirements matrix](requirements.md), and the current [workflow](workflow.md), [formal guide](formal.md), [protocol](protocol.json), and [runner](../../../rlcd/weight_space/study_v2.py). It specifies future work as of November 6, 2026, America/Chicago. It does not add outcome numbers, imply that a planned run completed, or revise the scope of historical evidence.
+
+## What the present work can and cannot establish
+
+| Area | Available capability or declared study design | Limitation that remains consequential |
+| --- | --- | --- |
+| Generic representation | Named tensors, exact-parent literal edits, structured lowering, and caller-supplied semantics are available. | Accepting tensors does not establish a model's forward semantics, support every operator, preserve hidden state, or certify arbitrary programs. |
+| Task workflow | Reading, diagnosis, editing, and creation have distinct output routes; candidates, failures, budgets, selection, and evaluation receipts can be retained. | Mode names do not supply rubrics. The deterministic sign fixture exercises answer routing; it is not evidence of discovering a causal mechanism. |
+| Mathematical guarantees | Frozen-feature endpoint/span results and arbitrary-depth affine/activation drift are checked over real numbers under explicit premises. | New runtime candidates are not automatically bound to Lean instances. Feature-extractor correspondence and numerical execution are not proved. |
+| Numeric realization | Supported native projection, exact endpoint residuals, and supported PyTorch state round trips are inspectable. | Projection receipts do not model intermediate rounding, kernels, accumulation order, overflow, arbitrary storage layouts, or numerical execution equivalence. |
+| Access and budgets | The session checks capabilities and charges work crossing its methods. | It is cooperative code in one process. It cannot establish that no fitting, hidden forward computation, network access, outside selection, or private-data access occurred. |
+| Algorithmic study | The protocol compares fixed readout-editing controls, permits fitting and public feature access, and selects before private evaluation. | It has no live language-model proposer. Its gradient arm is a fixed head optimizer, not a fully tuned or compute-matched full-network training baseline. |
+| Architecture variants | ReLU MLP, tanh MLP, and convolution-plus-tanh extractors have linear heads in a common synthetic world. | Shared teachers and splits make these paired variants, not independent task families. Random frozen representations with trained heads do not test end-to-end learning or transformer repair. |
+| Retention evaluation | The design measures target and collateral regions and exact residuals on supplied rows. | The intervening input region is unmeasured by the main target/retention metrics. Anchor retention is not global retention; real scores are not automatically task reward. |
+| Precision and feasibility | Declared ablations vary native formats and anchor counts. | They reuse the main holdout and are descriptive. A precision arm first projects its parent, so differences include the changed baseline as well as edit realization and execution. |
+| Sequential edits | Fixed chains retain lineage and test intermediate behavior; endpoint composition and rollback can be checked. | Retention targets on other regions refer to the current checkpoint, while requested target shifts reference the original checkpoint. This does not impose an original-baseline cumulative retention contract. |
+| Uncertainty | Paired family effects can be averaged within worlds and worlds resampled. | The planned intervals are exploratory, without multiplicity adjustment. Complete-world aggregation can be biased by informative failures, and more examples do not create more independent worlds or tasks. |
+| Source reproduction | Retained sources and hashes support inspection and some reconstruction prerequisites. | Missing checkpoint bodies, observations, graders, work directories, and provider state still limit stronger replay claims. None is supplied by the new synthetic fixture. |
+
+The older [design](../design.md) described a ReLU-only default registry and exact nullspace protection as an extension. Those two boundaries are partly superseded: v2 registers sequential semantics and implements numerical nullspace proposals with exact realized-endpoint residual receipts. The unresolved boundaries are broader operator coverage, domain coverage, checked implementation correspondence, and useful behavior. The [historical results](../results.md) and [formal README](../../../formal/weight-space/README.md#semantic-scope-and-trust-boundary) retain their original scope.
+
+## Priority and dependencies
+
+Priorities identify the next evidence needed for a claim. They do not require completing all formal work before running an honestly labeled empirical experiment. For example, a live access-ablation study can report measured behavior while marking numerical and implementation proofs absent; it cannot report those absent proofs as established guarantees.
+
+| Priority | Work package | Main requirement IDs | Dependency or decision enabled |
+| --- | --- | --- | --- |
+| P0 | 1. Bind admission to one exact candidate and contract | R05, R07, R27, R29, R32, R40 | Makes structural, semantic, and behavioral decisions inspectable without conflating them. |
+| P0 | 2. Generate and check new formal instances | R31, R34, R37–R39 | Required for a new candidate-specific machine-checked guarantee. |
+| P0 | 3. Bound or explicitly measure numerical execution | R24–R28, R39 | Required before extending a real-valued bound to deployed arithmetic. |
+| P0 | 4. Build an auditable restricted and live-provider harness | R06, R09–R20, R46 | Required for a credible live-editor trial and any enforced no-fitting/no-forward claim. |
+| P1 | 5. Run independent task and access experiments | R03, R04, R08, R41–R54 | Estimates what weight access contributes, and to which tasks, beyond supplied context. |
+| P1 | 6. Establish feature coverage and feasibility limits | R27, R33–R35, R39, R47 | Separates useful selective edits from anchor overfitting or mathematically conflicting requests. |
+| P1 | 7. Test causal diagnosis and repair | R04, R45, R53, R54 | Connects a frozen explanation to intervention effects and retained behavior. |
+| P1 | 8. Admit and evaluate cumulative edit sequences | R32, R55–R57 | Tests whether locally useful edits remain acceptable over a recorded lineage. |
+| P2 | 9. Extend operators and tighten bounds | R29–R31, R34, R40 | Expands a specifically supported semantic family, with measured certification coverage. |
+| P2 | 10. Measure and improve scale and total cost | R15, R23–R26, R42, R59 | Tests context/harness efficiency and any optimization-cost claim. |
+| P2 | 11. Reconstruct and independently repeat selected source tasks | R01, R02, R18, R46, R54, R58 | Separates source reconstruction, reevaluation, replay, and scientific replication. |
+
+Packages 1–4 can proceed in parallel where their artifacts and interfaces are independent. Packages 5–8 need frozen evaluation rules and untouched units. Architecture and storage extensions should be judged against the same candidate-identity and evidence requirements, rather than weakening them to obtain a larger demo.
+
+## Common design for the next experiments
+
+Every new experiment should name its primary claim, target population, allowed information, allowed computation, comparison, independent unit, selection rule, and minimum worthwhile effect before using confirmatory data. The full planned population includes failed runs and abstentions. A local freeze records when a protocol was fixed; an external preregistration is a separate choice and evidence claim.
+
+For a repair study, let `U` denote a declared target-utility metric and `H` a declared retention-harm metric. Fix a minimum useful gain `Δmin`, maximum acceptable harm `ε`, and resource limit before confirmation. A meaningful primary success rule can require a lower confidence bound on paired target gain above `Δmin` **and** an upper confidence bound on harm below `ε`, calibrated for the declared comparison family. Report raw paired effects and uncertainty even when the binary rule fails. The current protocol's normalized-error selection thresholds are a fixture-specific design, not universal values for these future margins.
+
+A preservation theorem has a different acceptance rule: its premises and claimed bound must be checked for the declared artifact and domain. Measured agreement on a finite sample cannot substitute for an all-input premise. Conversely, an empirically useful candidate does not become invalid merely because a conservative certificate fails to establish it; the report must state which claim was and was not supported.
+
+### Information, computation, and task axes
+
+Treat the following as separate factors. A label such as “weights only” or “zero data” is insufficient without their values.
+
+| Axis | Conditions worth distinguishing | Current coverage and future comparison |
+| --- | --- | --- |
+| Semantic context | Architecture/interface only; named inputs/outputs; task rules; training/corpus descriptions; explicit mechanism hints | Context can be recorded. A future paired study must hold hints constant while adding weights, and separately ablate hints. |
+| Parameter view | No weights; summaries; exact values; rounded values; permitted coordinate subsets | Exact/rounded reads exist. The sign fixture mandates abstention at either signed zero while preserving its sign bit; future information-loss claims must account for that visible information. Round-only editing needs a submission interface that does not leak an exact realized parent through returned candidate state. |
+| Labels and examples | No examples; unlabeled inputs; labeled public examples; worked solutions; evaluator specification | The algorithmic compiler uses examples/features and fitting. Analytic creation fixtures receive a supplied formula and construction family, which are privileged information. |
+| Target observations | None; public scalar feedback; logits/scores; generated outputs; internal activations | Capability flags exist. Equal callback counts must not be interpreted as equal information or compute. |
+| Allowed computation | No tools; arithmetic weight analysis; target execution; analytic construction; regression/least squares; gradient fitting | A fitting-permitted compiler, a no-fitting constructor, and a tool-free LLM require separate arms. Reconstructing the target forward pass in another tool still counts as target execution under a no-forward rule. |
+| Proposer | Fixed analytic program; fitted algorithm; scripted replay; live language model; human-assisted workflow | Current deterministic controls support the first three categories. Only actual provider trials measure a live model's proposal ability; human involvement must be recorded. |
+| Task | Read a label/property; diagnose a mechanism; repair behavior; create a network; transfer an edit | Score each task separately. Correct identification does not imply a causal explanation, and a valid creation artifact does not imply useful performance. |
+| Distribution | Familiar construction; unseen parameter seed; unseen training lineage; unseen task variant; unseen dataset/operator/model family | Progressively stronger claims require the corresponding untouched units. A new random seed of one generator does not become a new real-world task. |
+
+The original Go protocol explicitly forbids regression and least squares; see the [source access analysis](source-review.md#no-training-tool-free-and-few-passes-need-operational-definitions). An analytic, no-example constructor can satisfy a specifically audited no-fitting regime, but success with a supplied formula does not establish that a language model inferred that formula from anonymous weights. A live no-fitting study must preserve both its restrictions and its privileged inputs.
+
+### Independent units, uncertainty, and missingness
+
+| Quantity or claim | Unit to preserve in design and inference | What must not be treated as additional independent evidence |
+| --- | --- | --- |
+| Current synthetic algorithm comparison | World, with paired arms and architecture variants inside it | Families sharing that world's teacher/splits, the selected-arm alias, and repeated test rows |
+| Checkpoint or training generalization | Independent training lineage; record common pretrained bases and shared ancestors | Descendants, repeated exports, edits of one checkpoint, or correlated fine-tunes treated as unrelated model families |
+| Editor variability | Independent editor trial with frozen provider/configuration, paired or nested within the relevant checkpoint/task | Retries, handoffs, multiple candidates, and adaptive turns counted as new independently selected editors |
+| Language-task accuracy | Problem, with repeated answers nested within problem; retain checkpoint/editor structure | Every sampled answer counted as an independent problem |
+| Rollout reward | Episode randomness conditional on an editor/checkpoint; independent lineages/editors for broader claims | Many episodes of one edit interpreted as many independent edits |
+| Cross-task generalization | Held-out task family or dataset, with model and editor sampling made explicit | Multiple input rows or architecture variants from one task generator |
+| Sequence robustness | Whole lineage and assigned task order, with time points retained together | Every edit step treated as a fresh unrelated trial |
+
+Choose paired contrasts and a resampling or hierarchical model that matches the actual nesting and crossed factors. For repeated language generations, resample problems together with all their answers; preserve common problems across methods. For descendants of one model, preserve their shared lineage. When tasks, lineages, and editors are crossed, do not force them into a false one-level independent-sample analysis. Report cluster counts and model assumptions, and keep estimates descriptive when there are too few independent units for the proposed inferential claim.
+
+Plan sample sizes from a separate pilot or a conservative variance assumption and the prespecified minimum useful effect. More evaluations of existing candidates may reduce conditional measurement noise, but cannot repair an absence of independent editor trials or task families. A pilot used to choose prompts, budgets, or hyperparameters is development data and must not silently return as untouched confirmation.
+
+Retain attempted, completed, admitted, selected, abstained, failed, and missing counts. Report unconditional joint useful-success rate over all assigned trials, admission rate, and useful-success rate conditional on admission. For missing behavioral measurements, give reason-specific counts and prespecified conservative bounds or sensitivity analyses where justified; do not silently assign a score or rely only on successful complete cases. For the existing world summary, complete-world restriction and unadjusted exploratory intervals must remain visible.
+
+Freeze a primary contrast or state a multiplicity method for a confirmatory family. Precision and feasibility ablations sharing a holdout remain descriptive unless a separate confirmatory protocol is run. Hold out entire task or model lineages when the claim concerns transfer, and retain problem-level separation within them when repeated generations are measured. Split-ID checks are useful bookkeeping but do not prove content independence, absence of shared ancestry, or absence of pretraining exposure.
+
+## 1. Bind admission to one exact candidate and contract
+
+**Gap and objective.** The [design's structural and decision boundaries](../design.md) and requirements R05/R32 identify an integration gap. Generic structural policy, the older two-layer `Contract`, sequential certificates, feature receipts, and workflow evaluation are separate mechanisms. Build a contract record that binds the exact parent and candidate, interface, semantic adapter/version, domain, output coordinates, allowed structural change, semantic budgets, and any decision rule or feature witnesses.
+
+**Design and evidence.** Keep every check's result and scope. Admission must distinguish invalid input, unsupported semantics, missing correspondence, a conservative bound above budget, an observed violation, and a passing bound. Bind receipts to the declared endpoints rather than accepting a compatible-looking receipt from another candidate. For strict argmax preservation, retain the actual candidate set, winner, margins, and coordinate budgets; ties and stochastic sampling need their own semantics. Behavioral acceptance remains a separately evaluated condition.
+
+**Success and falsification.** Acceptance requires deterministic admission on the frozen record and rejection of substituted endpoints, domains, adapters, coordinate order, and witnesses. Independent recomputation must reproduce the bound and decision. A mutation accepted under the wrong identity, or an unsupported backend silently treated as certified, falsifies the integration claim. A sound but loose rejection is a coverage limitation to measure, not a semantic counterexample. Success does not establish numerical execution or task utility.
+
+## 2. Generate and check new formal instances
+
+**Gap and objective.** The [formal guide's correspondence boundary](formal.md) is explicit: new examples are authored directly in Lean, not generated from the Python study. Connect a deliberately supported subset of runtime artifacts to the checked frozen-feature and sequential theorems, preserving R37–R39.
+
+**Design and evidence.** Generate exact rational definitions from immutable endpoints, the input domain, activation list, feature order, and bias convention. Independently recompute artifact identities and check that generated values decode to the same endpoints. Produce the required numeric premises and the precise theorem being instantiated. Pin the generator, generated source, Lean target, dependencies, and logs; preserve the historical source identities and use the explicit v2 audit target. Treat the parser/generator as part of the trust boundary until it too is checked or independently validated.
+
+**Success and falsification.** Deterministic regeneration, checked theorem application, and adversarial mutation rejection are the exit criteria. A mismatch in endpoint, shape, ordering, feature ID, or domain must invalidate the binding. Exercise cases beyond a single hand-chosen witness, including zero edits, simultaneous layer edits, and rejected unsupported activations. One incorrectly bound candidate is a counterexample to the binding claim. Even a successful bridge proves the stated real semantics, not the floating implementation or the desired behavior.
+
+## 3. Bound or explicitly measure numerical execution
+
+**Gap and objective.** [Exact candidate realization](source-review.md#exact-candidate-realization-matters) and the [PyTorch-module boundary](../design.md) motivate R24–R28. Separate conversion of endpoints from execution using those endpoints.
+
+**Design and evidence.** Start with a small supported execution backend whose dtype, operation order, accumulation, and activation behavior can be specified. Compare requested arithmetic, projected stored parameters, real lifted execution, and actual native execution separately. Include cancellation, very small and large finite values, zeros, rounding boundaries, ties, bias, and nonrepresentable proposed edits. Treat bfloat16 conversion through installed PyTorch as a named trusted operation until independently characterized. Preserve alias/state round-trip checks and reject unsupported layouts explicitly.
+
+For a deployed drift bound, derive numerical error terms for both the base and candidate computations and combine them with the real drift bound under the stated domain assumptions. If only empirical error measurements are available, report them as measurements on their input set. A hardware comparison should retain backend/library versions and repeated-run variability, not merely a dtype label.
+
+**Success and falsification.** A verified numerical extension must bound every supported case within its stated assumptions and fail closed on unsupported or potentially nonfinite executions. A native output outside the combined bound falsifies the claimed numerical guarantee. Zero sampled violations alone is not a proof. A change in projected baseline across precision conditions must be reported; attributing all observed differences to edit rounding would fail the experimental interpretation even if conversion was implemented correctly.
+
+## 4. Build an auditable restricted and live-provider harness
+
+**Gap and objective.** R09–R20 and the [workflow's trust boundary](workflow.md) distinguish cooperative accounting from enforcement. Implement a live-provider adapter and, for claims that require it, an isolated execution boundary with an explicit allowed-computation policy.
+
+**Design and evidence.** Retain exact visible prompts and observations, provider/model identifiers and settings, requests, responses, errors, retries, token telemetry, candidate attempts, parser revisions, manual interventions, and selection. Keep the evaluator in a separate ownership boundary; bind scorer code/configuration and data manifests, and specify which results can return. Preserve an external commitment to the completed evidence manifest if tamper detection beyond self-consistency is claimed. Record actual target calls, examples, tokens, activations, bytes, wall time, memory, and work hidden inside adapters.
+
+For no-forward or no-fitting conditions, define prohibited operations by semantics, not tool names. General arbitrary Python cannot be declared fitting-free because no gradient API appeared in a log. A narrower audited construction language, restricted capabilities, or a separately reviewed execution trace can support a narrower compliance claim. For rounded-weight editing, opaque candidate handles or another carefully scoped submission route must prevent program-return values from disclosing exact parent state. Existing read-only fixtures avoid that problem by returning answers.
+
+**Success and falsification.** Predeclared adversarial probes must fail to reach forbidden data/tools or leak evaluator content, and independent accounting must reconcile with provider and target records. Every abandoned or retried live attempt remains in the population. A successful bypass invalidates the corresponding enforced-access claim; undisclosed usage invalidates a cost-matched comparison. Successful harness validation does not establish any language model's task ability. Live trials must still be run and evaluated.
+
+## 5. Run independent task and access experiments
+
+**Gap and hypothesis.** The [source context analysis](source-review.md#supplied-semantics-and-hints-are-part-of-the-task) suggests a testable hypothesis: access to weights adds task-relevant information beyond identical architecture, semantics, rules, and hints. The current fitting controls and analytic fixtures do not test a live model's contribution.
+
+**Design and evidence.** Build separate read, diagnose, repair, and create task families with independent ground truth and mode-specific rubrics. Hold metadata fixed for a primary metadata-only versus weights-plus-metadata contrast; separately vary precision, labels, feedback, activations, and hints. Include unfamiliar but well-defined variants, no-op/abstention, fixed analytic algorithms, and fitting-permitted baselines where allowed. A no-fitting condition needs its own admissible baselines and audit from package 4. Candidate return values and feedback must not contaminate the intended access contrast.
+
+Repeat editor trials across independently trained lineages and untouched task families, retaining all candidates and failures. Randomize access-condition assignment or use a paired design with controlled context isolation. Permutation or decoy controls must remain valid tasks with correctly recomputed ground truth; changing weights while retaining an obsolete behavior label is not an information-ablation control. Prespecify access budgets by actual disclosed information and work, in addition to call limits.
+
+**Success and falsification.** The primary weight-information hypothesis requires a prespecified improvement over the context-matched baseline with uncertainty at the lineage/task/editor unit, and appropriate retention for edit tasks. If metadata alone explains performance, or if gains disappear on new lineages, the stronger weight-understanding claim fails on that tested population. Report descriptive properties and calibration separately from labels. Analytic construction from a supplied formula can validate a route without supporting a live inference claim. A null result applies to its task, model, access, and budget conditions, not every possible weight-space method.
+
+## 6. Establish feature coverage and feasibility limits
+
+**Gap and hypothesis.** The [old readout limitation](../design.md) and [new span/residual results](formal.md) motivate testing when selective head edits can change a target while retaining a defined domain. Exact anchor residuals alone are insufficient; rank, conditioning, and off-span features may dominate.
+
+**Design and evidence.** Begin with extractors whose mathematical features and domain are known. Supply explicit anchor representations or bounded off-span residuals, including bias augmentation. Vary anchor rank, conditioning, target distance from the protected span, requested shift, and native realization under a frozen design. Include provably infeasible targets inside an exactly protected span, useful feasible constructions, and numerical near-degeneracy. Compare unconstrained, soft, nullspace, and no-op behavior, measuring realized target effect, residuals, coefficient norms, off-span terms, and edit magnitude.
+
+Then use independently trained feature extractors and untouched lineages. Evaluate the intended retention domain, including the current fixture's unmeasured intervening region when making a domain-wide claim. Separate error in the feature representation from error in solving the edit and error in execution. Record whether a claimed `feature_id` is merely a label, a hash of concrete fixture extraction code/state, or a checked semantic correspondence.
+
+**Success and falsification.** An exact-protection claim requires zero actual endpoint residuals plus valid representation premises. An approximate claim requires the complete coefficient-weighted and off-span bound; small anchor residuals with uncontrolled coefficients do not pass. A target gain under a provably conflicting exact contract must trigger a search for a violated premise or implementation defect. Reporting a no-op on an infeasible case is correct but not useful target success. For generalization, require held-out target gain and retention on independent lineages under prespecified margins; success still applies to that representation and domain.
+
+## 7. Test causal diagnosis and repair
+
+**Gap and hypothesis.** The [source distinction between identification and repair](source-review.md#identification-mechanistic-diagnosis-and-causal-repair-are-separate-claims) motivates a direct intervention study. A proposed mechanism should predict a directional change in a measurable behavior, and the proposed edit should improve that behavior without unacceptable collateral harm.
+
+**Design and evidence.** Before interventions or hidden evaluation, freeze the diagnosis, target components, predicted sign, expected behavioral effect, and possible falsifying observations. Compare the proposal with no-op, support/magnitude-matched random edits, largest-change or simple heuristic baselines where relevant, opposite-direction edits, and restoration to the actual original endpoint. Use multiple control draws if estimating a random-control distribution. Match realized support and norm after native projection or report the residual mismatch.
+
+Keep classification of a checkpoint pair, continuous diagnostic scores, mechanism localization, target repair, and retention as separate outcomes. For language generation, distinguish task correctness, termination, length/cutoff effects, and format compliance. Repeat on untouched problems and lineages; cluster repeated answers by problem and retain editor variability.
+
+**Success and falsification.** A causal claim needs its frozen intervention prediction to outperform the specified controls with the expected directional/restoration behavior and an effect large enough to matter under the declared rubric. Similar effects from unrelated edits, an opposite directional effect, or failure of restoration undermine the proposed explanation. Repair additionally needs target utility and retention to pass their joint criterion. A continuous score shift without useful behavioral repair remains a measured effect, not a successful repair.
+
+## 8. Admit and evaluate cumulative edit sequences
+
+**Gap and hypothesis.** [Composition and decisions](formal.md) supplies conditional budget addition, while R55–R57 require lineage-level behavior. The testable question is whether a controller can maintain a declared cumulative contract while accepting a useful sequence of edits.
+
+**Design and evidence.** Bind every intermediate parent/candidate and declare whether retention refers to the original checkpoint, the current checkpoint, or an accumulated task set. Maintain a global budget on a fixed domain and coordinate interpretation; recheck it after each step rather than reusing a per-step threshold. Freeze task order, selection, stopping, and abstention policies. Compare the current-checkpoint retention strategy, an original-baseline strategy, and a cumulative-budget controller on the same assigned sequences.
+
+Use independent training lineages and task orders, revisits to earlier tasks, a range of sequence lengths, and untouched per-step and final evaluation units. Report target utility at each stage, erosion of earlier edits, cumulative collateral drift, budget utilization, abstentions, and rejected edits. Artifact rollback should be checked by identity; external deployment state or random trajectories require separate handling.
+
+**Success and falsification.** Every admitted intermediate candidate must satisfy the declared cumulative contract; one admitted violation falsifies that controller guarantee. Behavioral success also needs useful progress under the prespecified global retention criterion across independent sequences. Per-step acceptance accompanied by excess total drift or systematic loss of earlier gains refutes the proposed accumulation rule. A controller that always selects no-op may be sound but fails a nonzero-progress objective. No bounded experiment establishes unlimited editing or absence of all future forgetting.
+
+## 9. Extend operators and tighten bounds
+
+**Gap and objective.** The current sequential proof is depth-general but operator-limited, and absolute-value propagation discards correlations and cancellation. The [formal guide's further work](formal.md) calls for explicit operator mappings and tighter sound relaxations.
+
+**Design and evidence.** Choose extensions from concrete tasks rather than claiming arbitrary architecture support. Specify activation/operator semantics, state and shape constraints, input domain, and adapter correspondence. Add checked lemmas and independent executable references. For deeper chains, compare the present recurrence with signed intervals, activation information, or other certified relaxations on a frozen task set. For attention, normalization, residual paths, or convolutional graphs, state their distinct obligations; a final linear head abstraction does not certify edits inside them.
+
+**Success and falsification.** Report certified coverage at fixed budgets, bound tightness against measured or exactly solved small cases, runtime, and failure/unsupported rates. Any violated claimed bound is a soundness failure. A tighter empirical estimate without a proof is not an improved certificate. Universal refusal or a sound bound too loose for the declared use is a practical failure even when mathematically valid. An operator extension establishes its own supported family, not a transfer theorem between architectures.
+
+## 10. Measure and improve scale and total cost
+
+**Gap and hypothesis.** The report identifies context/harness inefficiency, and the [design's Use and scale section](../design.md) describes dense snapshots, copies, full scans, dense compilation, and rational-arithmetic costs. Test whether a proposed representation or editing method reduces total cost at a fixed quality/retention target.
+
+**Design and evidence.** First profile the current pipeline by artifact size, feature width, anchor count, factor rank, and sequence length. Include model preparation, representation extraction, serialization, reads, copies, compilation, native projection, certificate computation, provider context/latency, target calls, and final evaluation. Distinguish peak memory, persistent bytes, wall time, and work units. Record failure and out-of-resource cases, not only completed sizes.
+
+Then prototype chunked/content-addressed storage, explicit sparse deltas, or compact execution where profiling supports them. Preserve deterministic lowering, native dtype, alias rules, parent checks, and exact endpoint verification. Run differential reconstruction against the existing dense reference on supported cases before measuring throughput. For optimization savings, compare equally informed baselines under matched quality, retention, tuning, and training-versus-target-time accounting; one fixed gradient configuration cannot establish broad optimizer superiority.
+
+**Success and falsification.** Require identical declared endpoints and a prespecified resource reduction at the target scale, with no hidden relocation of work into preprocessing or callbacks. Reconstruction mismatches invalidate the storage change. Cost savings that vanish after full accounting, or that trade away required target/retention quality, fail the efficiency hypothesis. Sparse changed entries or a small factor program alone do not establish lower runtime or context cost.
+
+## 11. Reconstruct and independently repeat selected source tasks
+
+**Gap and objective.** The [reproducibility review](source-review.md#reproducibility-is-a-set-of-distinct-obligations) distinguishes inspection, reconstruction, reevaluation, replay, and independent replication. Choose one task at a time and publish the exact tier attempted.
+
+**Design and evidence.** Inventory model bodies, base revisions, native dtypes, prompts, parser versions, intermediate observations, harness code, evaluators, data, environment, provider access, and stochastic settings. Record unavailable inputs explicitly. For candidate reconstruction, verify parent and resulting tensor identities against retained manifests. For reevaluation, preserve the original metric/decoding rules and separately label intentional changes. For full replay, disclose missing visible observations or hidden infrastructure work that prevents equivalence.
+
+An independent scientific repeat requires fresh editor trials and appropriate new checkpoints or tasks under a frozen protocol, with no-op eligibility and the complete attempt population. Use the same access and fitting restrictions when claiming protocol replication. A constrained least-squares control may be informative alongside the source task, but cannot replace its prohibited-fitting condition. Existing historical seeds and retained final patches are reproduction inputs, not new independent confirmation.
+
+**Success and falsification.** Reconstruction passes only when the exact declared endpoint checks pass. Reevaluation agreement needs a prespecified tolerance appropriate to numerical/stochastic variability; disagreement should trigger an input/protocol audit and be retained. Independent replication needs its own effect and uncertainty criterion. An unavailable checkpoint or grader is a blocked reproduction tier, not a negative scientific result, and a successfully reconstructed patch is not evidence of a reproduced editing process.
+
+## Source future directions and their unresolved tests
+
+The original report's **What Comes Next?** proposals remain hypotheses; see the [retained review](source-review.md#actual-limitations-and-next-steps-in-the-original-report). They should become separate programs after the relevant measurement and access boundaries are in place.
+
+| Direction | Minimum credible next experiment | Success and falsification boundary |
+| --- | --- | --- |
+| Auditing without evaluation | Blindly identify a predefined property or planted mechanism from allowed weights/context on untouched lineages, with metadata-only and simple statistical baselines. The proposer receives no target evaluation; an independent evaluator still needs ground truth. | Report sensitivity, specificity, calibration, abstention, and performance under domain shift. Failure to beat context-matched controls refutes the tested added-information claim. A few correct labels do not establish broad auditing or backdoor detection. |
+| Zero-data steering | Define exactly which labels, examples, rules, hints, and training information are absent, then compare analytic and live-editor proposals under the audited regime. | Require useful target behavior with retention on independent tasks. Supplied target formulas or task rules must remain disclosed; “no labeled examples” must not become “no privileged information.” |
+| Unlearning | Predefine the requested information/behavior removal, retained capabilities, threat/evaluation model, and relevant held-out extraction or membership probes. Include appropriate retraining/editing baselines under matched budgets. | Reduced output on one prompt is insufficient. Residual recoverability under the declared probes or excessive collateral loss fails the stated objective. Finite tests cannot establish universal information erasure. |
+| Reducing optimization cost | Compare complete preparation, training, editing, inference, tuning, and evaluation costs at matched target/retention quality across independent tasks. | Require a prespecified cost/quality improvement with uncertainty. Moving work into prompts, feature extraction, hidden fitting, or evaluator calls does not establish a reduction in total work. |
+| Recursive self-improvement | Record each proposer/model version and exact edit lineage, freeze independent evaluations, maintain cumulative contracts, and compare with repeated nonrecursive editing under matched resources. | Require sustained improvement beyond selection noise while retaining required behavior. Repeatedly fitting to a reused evaluator or losing earlier capabilities fails the tested claim. A short sequence does not establish open-ended improvement. |
+| Circuit grafting across architectures | Specify the source/target computation, a validated correspondence, admissible transformations, native realization, and task-level causal controls on untouched architecture pairs. | Require the transferred component to produce its predicted effect and retained behavior beyond matched controls. Weight-shape compatibility or feature alignment alone is insufficient; no general cross-architecture transfer theorem is supplied here. |
+| Benchmark and harness development | Release mode-specific rubrics, access regimes, complete populations, task/lineage splits, scorer identities, and retained failures, with an independent reproduction path. | The benchmark must expose abstention, negative outcomes, and restrictions rather than collapse them into one success rate. A convenient API is useful infrastructure but not evidence of the evaluated ability. |
+
+## Reviewable completion criteria
+
+A work package is complete only for its declared scope. Engineering packages should produce versioned code, focused tests or checked proof obligations, exact artifact/receipt identities, and an explicit unsupported boundary. Experimental packages should produce a frozen protocol, raw per-unit records, a full failure/selection ledger, a reproducible analysis, and conclusions matched to their independent units. Both should retain negative results and make the stated falsification checks reproducible.
+
+For a claim that remains unsupported, the useful deliverable is a precise remaining obligation: a missing artifact, an unproved correspondence, an unenforced restriction, a domain not covered, an unmeasured cost, or an experiment with inadequate independent units. Those obligations determine the next experiment or implementation change; they should not be replaced by a universal architecture claim or an unqualified success label.

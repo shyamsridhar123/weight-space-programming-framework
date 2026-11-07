@@ -1,0 +1,88 @@
+Installed distribution: 0.2.0.dev2
+Imported package: C:/public-user\code\RLCD\exports\weight-space-programming-framework\.runs\wheel-smoke-draft2-venv\Lib\site-packages\rlcd\weight_space\__init__.py
+Running byte-identical example: examples/edit_retention.py
+{
+  "scope": "Illustrative linear head; exact cases use explicit edits, not fitting",
+  "parent_outputs": {
+    "target": "2",
+    "protected": "1"
+  },
+  "cases": [
+    {
+      "case": "no-op",
+      "target_output": "2",
+      "protected_output": "1",
+      "target_change_is_one": false,
+      "protected_exactly": true,
+      "protected_residual_exact": "0"
+    },
+    {
+      "case": "target-only exact edit",
+      "target_output": "3",
+      "protected_output": "3/2",
+      "target_change_is_one": true,
+      "protected_exactly": false,
+      "protected_residual_exact": "1/2"
+    },
+    {
+      "case": "protected exact edit",
+      "target_output": "3",
+      "protected_output": "1",
+      "target_change_is_one": true,
+      "protected_exactly": true,
+      "protected_residual_exact": "0"
+    },
+    {
+      "case": "numerical nullspace fit with ridge=0.01",
+      "target_change_rounded": 0.990099,
+      "target_change_exact": "2229504766024999/2251799813685248",
+      "protected_exactly": true,
+      "target_rmse_after_projection": 0.009900990099009466
+    },
+    {
+      "case": "protect both independent feature directions",
+      "target_change": "0",
+      "protected_exactly": true,
+      "requested_target_change_met": false
+    }
+  ]
+}
+Running byte-identical example: examples/session_edit.py
+{
+  "scope": "Constructed API example with an explicit formula and explicit edits",
+  "public_candidates": [
+    {
+      "proposal": "no-op",
+      "protected_drift": 0.0,
+      "target_error": 1.0
+    },
+    {
+      "proposal": "target-only exact",
+      "protected_drift": 0.5,
+      "target_error": 0.0
+    },
+    {
+      "proposal": "protected exact",
+      "protected_drift": 0.0,
+      "target_error": 0.0
+    }
+  ],
+  "selected": "protected exact",
+  "evaluation_status": "succeeded",
+  "heldout_result": {
+    "max_protected_drift": 0.0,
+    "max_target_error": 0.0
+  },
+  "interface_usage": {
+    "execution_calls": 0,
+    "execution_examples": 0,
+    "feedback_calls": 3,
+    "feedback_examples": 6,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "proposals": 3,
+    "tool_calls": 8,
+    "weight_values": 8
+  }
+}
+Installed-wheel examples passed with unchanged source bytes.

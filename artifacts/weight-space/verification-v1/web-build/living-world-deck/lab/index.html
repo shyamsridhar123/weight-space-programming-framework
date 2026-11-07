@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="description" content="Learn weight-space programming by editing a real policy, tracing its decisions, and comparing two simulated futures.">
+    <title>Living World · Learning lab</title>
+    <link rel="stylesheet" href="./lab.css">
+    <link rel="stylesheet" href="./standalone.css">
+    <script defer src="./lab.js"></script>
+    <script defer src="./standalone.js"></script>
+  </head>
+  <body class="lw-standalone">
+    <a class="lw-skip-link" href="#learning-main">Skip to the laboratory</a>
+    <div class="lw-page-shell">
+      <header class="lw-page-topbar">
+        <div class="lw-page-brand"><span class="lw-page-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div><strong>Living World</strong><span>Interactive learning lab</span></div></div>
+        <nav class="lw-page-nav" aria-label="Learning lab navigation">
+          <div class="lw-page-tabs" role="tablist" aria-label="Choose a laboratory">
+            <button type="button" role="tab" id="weight-tab" aria-controls="weights" aria-selected="true" tabindex="0" data-lab-view="weights">Weight lab</button>
+            <button type="button" role="tab" id="future-tab" aria-controls="futures" aria-selected="false" tabindex="-1" data-lab-view="futures">Paired futures</button>
+          </div>
+          <a class="lw-back-link" href="../index.html">Back to presentation <span aria-hidden="true">↗</span></a>
+        </nav>
+      </header>
+
+      <main id="learning-main" tabindex="-1">
+        <header class="lw-page-intro">
+          <div><p class="lw-page-eyebrow">A policy you can explore</p><h1>Learn by changing a weight.</h1><p>Edit the decision, inspect the numbers, then see how the world responds.</p></div>
+          <p class="lw-shared-note"><span aria-hidden="true">↔</span> Your edits stay with you<br>when you switch labs.</p>
+        </header>
+
+        <section id="weights" class="lw-page-view" role="tabpanel" aria-labelledby="weight-tab" tabindex="0">
+          <div class="lw-view-intro"><span class="lw-step-number" aria-hidden="true">01</span><p><strong>Start with one decision.</strong> Try conservation = 4, watch the probabilities change, then inspect the network.</p></div>
+          <div id="policy-lab"><p class="lw-page-loading" role="status">Preparing the policy laboratory…</p></div>
+          <p class="lw-view-next">Have a prediction? <button type="button" data-lab-go="futures">Test it in Paired futures <span aria-hidden="true">→</span></button></p>
+        </section>
+
+        <section id="futures" class="lw-page-view" role="tabpanel" aria-labelledby="future-tab" tabindex="0" hidden>
+          <div class="lw-view-intro"><span class="lw-step-number" aria-hidden="true">02</span><p><strong>Test your prediction.</strong> Compare the original and your edited policy from the same frozen world.</p></div>
+          <div id="future-lab"><p class="lw-page-loading" role="status">Preparing the paired futures laboratory…</p></div>
+          <p class="lw-view-next">What would you change next? <button type="button" data-lab-go="weights">Return to Weight lab <span aria-hidden="true">→</span></button></p>
+        </section>
+
+        <noscript><p class="lw-script-notice">Enable JavaScript to edit the policy and run the simulation.</p></noscript>
+      </main>
+      <footer class="lw-page-footer"><p>Iron Ridge · Seed 42 · Year 10</p><p>Predict → edit → inspect → compare</p></footer>
+    </div>
+  </body>
+</html>

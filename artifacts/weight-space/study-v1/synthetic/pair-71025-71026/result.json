@@ -1,0 +1,164 @@
+{
+  "source_seed": 71025,
+  "source_sha256": "9cef069407376023a1819e04159a6fa5f2660731428e28428098bfc78e99b715",
+  "target_sha256": "686c874809fe0ce2a7bdd6de95c3f20758ff717334e2975829440c95f976ddc4",
+  "compilation": {
+    "target_only": {
+      "compiler": "frozen-feature-ridge-least-squares/1",
+      "target_examples": 72,
+      "retention_examples": 0,
+      "retention_weight": 0.0,
+      "ridge": 0.01,
+      "rank": 16,
+      "condition_number": 20.610398609476984,
+      "edit_cells": 16,
+      "target_rmse": 0.033639435825335406,
+      "retention_rmse": null,
+      "edit_l2": 0.4957544468951158,
+      "semantics": "fit to supplied examples; admission and generalization unproven"
+    },
+    "retention": {
+      "compiler": "frozen-feature-ridge-least-squares/1",
+      "target_examples": 72,
+      "retention_examples": 184,
+      "retention_weight": 8.0,
+      "ridge": 0.01,
+      "rank": 16,
+      "condition_number": 23.09943440487876,
+      "edit_cells": 16,
+      "target_rmse": 0.1842365975384287,
+      "retention_rmse": 0.06573983018939504,
+      "edit_l2": 0.8472688896054196,
+      "semantics": "fit to supplied examples; admission and generalization unproven"
+    }
+  },
+  "metrics": {
+    "target_only": {
+      "validation": {
+        "target_gain_fraction": 0.9810219208601912,
+        "target_error_rmse": 0.07599291303630436,
+        "retention_rmse": 0.33061809351442445,
+        "maximum_observed_drift": 0.9167464094047937
+      },
+      "test": {
+        "target_gain_fraction": 0.9866509292529724,
+        "target_error_rmse": 0.07057729744835126,
+        "retention_rmse": 0.33083368523390405,
+        "maximum_observed_drift": 0.9974383102739337
+      }
+    },
+    "retention": {
+      "validation": {
+        "target_gain_fraction": 0.6085549305975392,
+        "target_error_rmse": 0.32544815159492846,
+        "retention_rmse": 0.05944215196967159,
+        "maximum_observed_drift": 0.7336082253193013
+      },
+      "test": {
+        "target_gain_fraction": 0.6135335379867014,
+        "target_error_rmse": 0.3220943702507758,
+        "retention_rmse": 0.06490213382468657,
+        "maximum_observed_drift": 0.820189538867496
+      }
+    }
+  },
+  "controls": {
+    "exact_rational_point_checks": true,
+    "exact_point_count": 5,
+    "known_transport_error": 3.7415188318801414e-16,
+    "inferred_known_gauge_error": 3.7415188318801414e-16,
+    "raw_permuted_error": 0.3659833439340696,
+    "inferred_gauge": {
+      "permutation": [
+        7,
+        13,
+        1,
+        9,
+        6,
+        15,
+        4,
+        5,
+        3,
+        0,
+        2,
+        8,
+        11,
+        10,
+        12,
+        14
+      ],
+      "scales": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.5,
+        0.5,
+        2.0,
+        0.5,
+        1.0,
+        0.5,
+        0.5,
+        2.0,
+        1.0,
+        1.0,
+        1.0,
+        2.0
+      ]
+    },
+    "inference_diagnostics": {
+      "mean_matching_cost": 0.0,
+      "relative_parameter_residual": 0.0
+    }
+  },
+  "admission": {
+    "target_only": {
+      "accepted": true,
+      "issues": [],
+      "bounds": [
+        "990167723788846256737350335743715153/332306998946228968225951765070086144",
+        "0",
+        "0"
+      ]
+    },
+    "retention": {
+      "accepted": true,
+      "issues": [],
+      "bounds": [
+        "1132024555504900170877130136644231227/332306998946228968225951765070086144",
+        "0",
+        "0"
+      ]
+    }
+  },
+  "alignment": {
+    "mean_matching_cost": 0.6372240419491072,
+    "relative_parameter_residual": 0.816510124027439
+  },
+  "transfer": {
+    "raw": {
+      "normalized_target_delta_rmse": 0.5063242127245606,
+      "admitted": true,
+      "admission_issues": [],
+      "bounds": [
+        "634818535784190083339563145199119917/166153499473114484112975882535043072",
+        "0",
+        "0"
+      ]
+    },
+    "aligned": {
+      "normalized_target_delta_rmse": 0.28575176679710323,
+      "admitted": true,
+      "admission_issues": [],
+      "bounds": [
+        "626556593498642261119297852430478855/166153499473114484112975882535043072",
+        "0",
+        "0"
+      ]
+    }
+  },
+  "H1_raw_minus_aligned": 0.2205724459274574,
+  "H2_retention_rmse_reduction": 0.2659315514092175,
+  "H2_target_gain_fraction": 0.6135335379867014,
+  "target_seed": 71026
+}

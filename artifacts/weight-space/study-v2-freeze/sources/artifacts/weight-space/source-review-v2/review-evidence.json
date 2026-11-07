@@ -1,0 +1,3853 @@
+{
+  "schema": "wsp-source-review-evidence/2",
+  "generated_at_utc": "2026-11-07T02:26:34.156871+00:00",
+  "review_local_date": "2026-11-06",
+  "local_timezone": "America/Chicago",
+  "release_commit": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+  "source_manifest_sha256": "d9afd56835690bdc4ba9ab5a7c9e9b1b3f6bc2488bdf2a4f29a7c4618a745bfe",
+  "source_review_sha256": "a9d7b3887ba0f8e1b9f7a550ed5e9975f4c00ddc94331adf0190d40e13ae50c4",
+  "evidence_builder_sha256": "0edf21917622fba311c2dc53803ca967a9e2267402791b933c3d31955ae9eb32",
+  "execution_boundary": {
+    "released_code_executed": false,
+    "models_reconstructed": false,
+    "provider_calls": 0,
+    "training_runs": 0,
+    "simulation_runs": 0,
+    "independent_scientific_reproductions": 0,
+    "performed": "Source retrieval, text reading, JSON parsing, hashing, local-link and arithmetic checks only.",
+    "third_party_replication": "The article credits a third-party Qwen rebuild/evaluation; it was not independently inspected here."
+  },
+  "integrity": {
+    "acquisition_records": 84,
+    "successful_retrievals": 77,
+    "release_files": 75,
+    "failed_acquisitions": 7,
+    "all_successful_byte_counts_and_hashes_match": true,
+    "prior_article_hash_matches": true,
+    "article_sha256": "a326bc5b34b3152a93bf38013f412bb140c9e0a299c72491d27fb17b1b7d9cbb",
+    "prior_release_hash_comparisons": [
+      {
+        "path": "release/README.md",
+        "reference_id": "SparksRoot",
+        "sha256": "b1c51eeb9b9e2935ff227fdc7796c2a67bd3a55014cf99291224f9cc7b93d342",
+        "matches_prior_hash": true
+      },
+      {
+        "path": "release/exp4_fix_car/README.md",
+        "reference_id": "SparksKinetix",
+        "sha256": "97cf395dd262069b09137807c492fc96dee396f45505fd5df2ab4b85a71102ce",
+        "matches_prior_hash": true
+      },
+      {
+        "path": "release/exp5_write_from_scratch/README.md",
+        "reference_id": "SparksMinAtar",
+        "sha256": "e74367e0e4eb32d93685441332aceae4b47b1751a07caead42b1630d5547bb16",
+        "matches_prior_hash": true
+      },
+      {
+        "path": "release/exp6_go_from_scratch/README.md",
+        "reference_id": "SparksGo",
+        "sha256": "835e03d29cae4041d41a6b822593434dd455fa331ba4611cee0ec47fa685a5b1",
+        "matches_prior_hash": true
+      },
+      {
+        "path": "release/exp7_sycophancy/README.md",
+        "reference_id": "SparksSycophancy",
+        "sha256": "daebb6645cbeb778529eb98ce8f6aaa7ff85038ffc875f61443e69308a8cd8b5",
+        "matches_prior_hash": true
+      },
+      {
+        "path": "release/exp8_math/README.md",
+        "reference_id": "SparksMath",
+        "sha256": "473e386ade21ff52240103003b6b125e4362d9fa11010916c1b770ddb0edcbbd",
+        "matches_prior_hash": true
+      },
+      {
+        "path": "release/exp8_math/gemma_followup/README.md",
+        "reference_id": "SparksGemma",
+        "sha256": "a1920da492020d92a24439bbe5ffa711faf1c48e17b071d09a9bc3a26575e674",
+        "matches_prior_hash": true
+      },
+      {
+        "path": "release/exp4_fix_car/eval/oneshot_result.json",
+        "reference_id": "SparksKinetixResult",
+        "sha256": "d9e57db254079b776ee574ba94bfc061ca1e4ce199fad316dea6f8faa2049330",
+        "matches_prior_hash": true
+      },
+      {
+        "path": "release/exp8_math/eval/unedited/merged.json",
+        "reference_id": "SparksMathBase",
+        "sha256": "5c31370485b9f197f592745e935eeaee6b09dc127daa5b2a8be1ebbcbc210221",
+        "matches_prior_hash": true
+      },
+      {
+        "path": "release/exp8_math/eval/p50c/merged.json",
+        "reference_id": "SparksMathEdited",
+        "sha256": "c93d3db30a612ef0da396014fdfbe011efbcf2cd417e2e6125664d7effdd0471",
+        "matches_prior_hash": true
+      },
+      {
+        "path": "release/exp8_math/runs/p50c/edit/manifest.json",
+        "reference_id": "SparksMathManifest",
+        "sha256": "83185c1db46e3dafb34af645f8c5ce033c09cc99d4512b9e1b8e3aba9d269225",
+        "matches_prior_hash": true
+      },
+      {
+        "path": "release/exp8_math/gemma_followup/eval/unedited/merged.json",
+        "reference_id": "SparksGemmaBase",
+        "sha256": "b6b97ef8cc1e1700c6b59e371908b40a662928a71dd0d984b7521fff56571404",
+        "matches_prior_hash": true
+      },
+      {
+        "path": "release/exp8_math/gemma_followup/eval/g25b/merged.json",
+        "reference_id": "SparksGemmaEdited",
+        "sha256": "eb1831ee55b39412c7dfcaaa8b9ce84a757fd5c856d1c5fdec05d257b26acf77",
+        "matches_prior_hash": true
+      }
+    ],
+    "review_local_link_targets_checked": 64,
+    "missing_link_targets": []
+  },
+  "tree_verification": {
+    "source": "repository-tree.html",
+    "locator": "payload.codeViewTreeRoute",
+    "current_oid": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+    "root_entries": [
+      {
+        "name": "exp1_which_game",
+        "path": "exp1_which_game",
+        "contentType": "directory"
+      },
+      {
+        "name": "exp2_diffusion",
+        "path": "exp2_diffusion",
+        "contentType": "directory"
+      },
+      {
+        "name": "exp3_language",
+        "path": "exp3_language",
+        "contentType": "directory"
+      },
+      {
+        "name": "exp4_fix_car",
+        "path": "exp4_fix_car",
+        "contentType": "directory"
+      },
+      {
+        "name": "exp5_write_from_scratch",
+        "path": "exp5_write_from_scratch",
+        "contentType": "directory"
+      },
+      {
+        "name": "exp6_go_from_scratch",
+        "path": "exp6_go_from_scratch",
+        "contentType": "directory"
+      },
+      {
+        "name": "exp7_sycophancy",
+        "path": "exp7_sycophancy",
+        "contentType": "directory"
+      },
+      {
+        "name": "exp8_math",
+        "path": "exp8_math",
+        "contentType": "directory"
+      },
+      {
+        "name": "harness",
+        "path": "harness",
+        "contentType": "directory"
+      },
+      {
+        "name": "LICENSE",
+        "path": "LICENSE",
+        "contentType": "file"
+      },
+      {
+        "name": "README.md",
+        "path": "README.md",
+        "contentType": "file"
+      }
+    ],
+    "recursive_audit": false,
+    "commit_timestamp_freshly_verified": false
+  },
+  "acquisition_failures": [
+    {
+      "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp1_1_mnist/README.md",
+      "local_path": "release/exp1_1_mnist/README.md",
+      "source_type": "commit_pinned_release_file",
+      "retrieved_at_utc": "2026-11-07T02:11:51.838732+00:00",
+      "status": "failed",
+      "error": "HTTPError: HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp1_2_kuzushiji/README.md",
+      "local_path": "release/exp1_2_kuzushiji/README.md",
+      "source_type": "commit_pinned_release_file",
+      "retrieved_at_utc": "2026-11-07T02:11:51.839741+00:00",
+      "status": "failed",
+      "error": "HTTPError: HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp1_3_cifar/README.md",
+      "local_path": "release/exp1_3_cifar/README.md",
+      "source_type": "commit_pinned_release_file",
+      "retrieved_at_utc": "2026-11-07T02:11:51.840734+00:00",
+      "status": "failed",
+      "error": "HTTPError: HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp2_gameplaying/README.md",
+      "local_path": "release/exp2_gameplaying/README.md",
+      "source_type": "commit_pinned_release_file",
+      "retrieved_at_utc": "2026-11-07T02:11:51.841736+00:00",
+      "status": "failed",
+      "error": "HTTPError: HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp3_rotated_mnist/README.md",
+      "local_path": "release/exp3_rotated_mnist/README.md",
+      "source_type": "commit_pinned_release_file",
+      "retrieved_at_utc": "2026-11-07T02:11:51.863821+00:00",
+      "status": "failed",
+      "error": "HTTPError: HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://api.github.com/repos/RikiyaT/lm_understand-logs/git/trees/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f?recursive=1",
+      "local_path": "repository-tree.json",
+      "source_type": "commit_pinned_repository_tree",
+      "retrieved_at_utc": "2026-11-07T02:11:52.607548+00:00",
+      "status": "failed",
+      "error": "HTTPError: HTTP Error 504: Gateway Timeout"
+    },
+    {
+      "url": "https://api.github.com/repos/RikiyaT/lm_understand-logs/commits/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+      "local_path": "repository-commit.json",
+      "source_type": "repository_commit_metadata",
+      "retrieved_at_utc": "2026-11-07T02:11:52.658857+00:00",
+      "status": "failed",
+      "error": "HTTPError: HTTP Error 504: Gateway Timeout"
+    }
+  ],
+  "article_reading_aid": {
+    "path": "article-text.txt",
+    "sha256": "87024159d0a88fb0e9d18fa2428805a1140c824fcc3360b8ad7f2c7211345033",
+    "derived_from": "article.html",
+    "source_sha256": "a326bc5b34b3152a93bf38013f412bb140c9e0a299c72491d27fb17b1b7d9cbb",
+    "method": "Built-in HTML parser used during review; exact extraction implementation was not archived.",
+    "deterministic_reconstruction_claimed": false,
+    "authority": "Raw article.html is the primary retained source; text is a derived reading aid."
+  },
+  "source_inventory": [
+    {
+      "path": "release/README.md",
+      "sha256": "b1c51eeb9b9e2935ff227fdc7796c2a67bd3a55014cf99291224f9cc7b93d342",
+      "bytes": 6198,
+      "review_scope": "full_text_read",
+      "note": "Setup, results, limitations/omissions and reconstruction sections read."
+    },
+    {
+      "path": "release/exp4_fix_car/README.md",
+      "sha256": "97cf395dd262069b09137807c492fc96dee396f45505fd5df2ab4b85a71102ce",
+      "bytes": 6997,
+      "review_scope": "full_text_read",
+      "note": "Setup, results, limitations/omissions and reconstruction sections read."
+    },
+    {
+      "path": "release/exp5_write_from_scratch/README.md",
+      "sha256": "e74367e0e4eb32d93685441332aceae4b47b1751a07caead42b1630d5547bb16",
+      "bytes": 6305,
+      "review_scope": "full_text_read",
+      "note": "Setup, results, limitations/omissions and reconstruction sections read."
+    },
+    {
+      "path": "release/exp6_go_from_scratch/README.md",
+      "sha256": "835e03d29cae4041d41a6b822593434dd455fa331ba4611cee0ec47fa685a5b1",
+      "bytes": 8611,
+      "review_scope": "full_text_read",
+      "note": "Setup, results, limitations/omissions and reconstruction sections read."
+    },
+    {
+      "path": "release/exp7_sycophancy/README.md",
+      "sha256": "daebb6645cbeb778529eb98ce8f6aaa7ff85038ffc875f61443e69308a8cd8b5",
+      "bytes": 14046,
+      "review_scope": "full_text_read",
+      "note": "Setup, results, limitations/omissions and reconstruction sections read."
+    },
+    {
+      "path": "release/exp8_math/README.md",
+      "sha256": "473e386ade21ff52240103003b6b125e4362d9fa11010916c1b770ddb0edcbbd",
+      "bytes": 13447,
+      "review_scope": "full_text_read",
+      "note": "Setup, results, limitations/omissions and reconstruction sections read."
+    },
+    {
+      "path": "release/exp8_math/gemma_followup/README.md",
+      "sha256": "a1920da492020d92a24439bbe5ffa711faf1c48e17b071d09a9bc3a26575e674",
+      "bytes": 5861,
+      "review_scope": "full_text_read",
+      "note": "Setup, results, limitations/omissions and reconstruction sections read."
+    },
+    {
+      "path": "article.html",
+      "sha256": "a326bc5b34b3152a93bf38013f412bb140c9e0a299c72491d27fb17b1b7d9cbb",
+      "bytes": 85874,
+      "review_scope": "text_read",
+      "note": "Report text and What Comes Next? discussion read; no claim to audit every figure asset."
+    },
+    {
+      "path": "release/exp1_which_game/README.md",
+      "sha256": "37d3210c9644449810c2eb2e6d63835925484caabefbe87559eacdf58c227d8d",
+      "bytes": 5456,
+      "review_scope": "full_text_read",
+      "note": "Setup, results, limitations/omissions and reconstruction sections read."
+    },
+    {
+      "path": "release/exp2_diffusion/README.md",
+      "sha256": "6bde052987957f89bcdd030651674782436b23da85acf186d644a428563122ca",
+      "bytes": 5420,
+      "review_scope": "full_text_read",
+      "note": "Setup, results, limitations/omissions and reconstruction sections read."
+    },
+    {
+      "path": "release/exp3_language/README.md",
+      "sha256": "d0466181a173b636b203f8e9b238a724203d5915d83b50524fb1e9347f529a5c",
+      "bytes": 12071,
+      "review_scope": "full_text_read",
+      "note": "Setup, results, limitations/omissions and reconstruction sections read."
+    },
+    {
+      "path": "release/harness/codex_config.toml",
+      "sha256": "0ed095ea5be86d47daade93f8fac2d0fd102681b6e2d2e46273cdd70e30bf93c",
+      "bytes": 973,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/harness/instructions.md",
+      "sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+      "bytes": 27,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/harness/sandbox.py",
+      "sha256": "f3e81f9ae9edac578a64b4f7d19e742beea2950866da969b41c576512cfbc46d",
+      "bytes": 3282,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/LICENSE",
+      "sha256": "395f7febedfda6b5498ca36cfe3344d3986659ce4385dd8b03d2d75604250a8e",
+      "bytes": 1819,
+      "review_scope": "full_text_read",
+      "note": "License allocation for logs/data, author scripts, embedded MinAtar and third-party data read."
+    },
+    {
+      "path": "repository-tree.html",
+      "sha256": "bdd881bd430d44184180ff126092c69459fa8e785e5759982ebd353a84e22cc2",
+      "bytes": 247585,
+      "review_scope": "structured_metadata",
+      "note": "Only pinned object identity and root entries inspected; not a recursive tree audit."
+    },
+    {
+      "path": "release/exp1_which_game/networks/description.txt",
+      "sha256": "2361ff107c85c3dafa85420e79503cc01747eed462a8216f7c06ef711d8d93bd",
+      "bytes": 1810,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp1_which_game/eval/scores.json",
+      "sha256": "d45bd7eeb5c8bcd620a60020f4583071fadb02e1400e41e0c7815d5dea41f480",
+      "bytes": 2454,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp2_diffusion/networks/description.txt",
+      "sha256": "6e7e5e117a252190adbab0015f1e179befc3ea0004204545455a1492256db658",
+      "bytes": 1520,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp2_diffusion/eval/scores.json",
+      "sha256": "9ef4bce69f10568a36de535d1fced0ff65074b65fd0a8d6f12ec71b9e4326c55",
+      "bytes": 1549,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp2_diffusion/eval/answer_key.json",
+      "sha256": "0e6f67ceb2af59bfedcbaae39974184250933cf98ed8230462a32f49a84d93b3",
+      "bytes": 891,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp3_language/runs/python_r0/message.txt",
+      "sha256": "1d6122b6eb6505820637edcc330e863baa459fa05cc7ca93319a615dcf8c39c3",
+      "bytes": 6618,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp3_language/runs/python_r0/state.json",
+      "sha256": "40d25171e531f54408ef6534523bf6da08a66ae231424efd25ae250f4398b410",
+      "bytes": 1923,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp3_language/eval/scores.json",
+      "sha256": "795a562695e2d6e39419d2842a09322af40e6dc452af315ab7b2639eb6d273bb",
+      "bytes": 5983,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp3_language/eval/heads.json",
+      "sha256": "3e12103ac6e30a569ac044b6539a2252b414e985d71db37541939b5e0b9da32b",
+      "bytes": 6582,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp3_language/python_dataset/stats.json",
+      "sha256": "fdd6c0292f2c33b90e89e696b5b53f7096de5c2c002ab247df2c8c6310a9e12b",
+      "bytes": 599,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp4_fix_car/eval/oneshot_result.json",
+      "sha256": "d9e57db254079b776ee574ba94bfc061ca1e4ce199fad316dea6f8faa2049330",
+      "bytes": 4333,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp4_fix_car/runs/oneshot_repair/reply/answer.md",
+      "sha256": "dc295adb701bb943a6a324fd7fd4aeb97bb69a2d8fb73b9472e3a9371275f959",
+      "bytes": 2748,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp4_fix_car/runs/oneshot_repair/reply/run.json",
+      "sha256": "0d8e476c05ed5c194a0dde7660976f06d9df51bfbe3706b6d7212748ca99207d",
+      "bytes": 1078,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp5_write_from_scratch/runs/seaquest/message.txt",
+      "sha256": "81e51857d7cffac29b12a389dee6ffcda2256a9e03f6cf91f4fd96e1eb855bf6",
+      "bytes": 18266,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp5_write_from_scratch/runs/seaquest/apply.json",
+      "sha256": "bbdc6acc51f93b0011dbee07f2fdac810554870e6726da529b65ff36e125d790",
+      "bytes": 677,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp5_write_from_scratch/eval/minatar_eval.json",
+      "sha256": "bc10c6f957af95cdd52ee4be085acd249046f6117dbdb8c735fd5ddb2195c47c",
+      "bytes": 4693,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp5_write_from_scratch/LICENSE-MinAtar",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "bytes": 35147,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp6_go_from_scratch/runs/budget_0/message.txt",
+      "sha256": "725a0248901a40d9168a6f8845cded5ef2afd522284e5c9fbcf07ba18da2415f",
+      "bytes": 4634,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp6_go_from_scratch/runs/budget_50/message.txt",
+      "sha256": "16093754f0b499cdf5197b44e9b92c69f9ffb75625138e307eb9eeb18f332e78",
+      "bytes": 6312,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp6_go_from_scratch/runs/budget_50/state.json",
+      "sha256": "9e62a68ffc7984f55a7f2a0a1a0bcf9eb69681c4f32962ba67cacabdb9d3dbc2",
+      "bytes": 1187,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp6_go_from_scratch/runs/budget_0/tool_calls.jsonl",
+      "sha256": "b08a2cd492c1e0844df30b5e1be47d78bbc19a6575741e25943ed10f1aa96eb5",
+      "bytes": 10837,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp6_go_from_scratch/eval/budget_0/eval_submission.json",
+      "sha256": "5c88386d0b48062ea9e7946f512784cbcbe0a00087f2f25cf4966191bedcc35f",
+      "bytes": 2362,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp6_go_from_scratch/eval/budget_50/eval_submission.json",
+      "sha256": "7553b503535dbe517e5218337be11bd465824024c282d4d92d61a05a00e4fe79",
+      "bytes": 2317,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp6_go_from_scratch/eval/ppo_same_size/ppo_big_eval/h2h_lr_scan.json",
+      "sha256": "0829492ab0fd840a7ad7a0c1c678db52406550e37487d1fac5dba014c1937319",
+      "bytes": 1103,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp7_sycophancy/runs/weights_only_1/prompt.txt",
+      "sha256": "c1580a7567a274a27b4f94d0c019dce7dd18a2e855b9522877f074c5acdc1a7b",
+      "bytes": 6687,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp7_sycophancy/runs/weights_only_4/prompt.txt",
+      "sha256": "ac61aac5f388c19fd2c5de3db6cc312e9d7df55e8eef502f9bba82601a42a2f2",
+      "bytes": 9399,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp7_sycophancy/runs/attention_tool/prompt.txt",
+      "sha256": "98f2f9a9996d0fa699ef5446bf791224507dd1cf1cc4a649ca594a56f749e963",
+      "bytes": 10406,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp7_sycophancy/eval/weights_only_1/score.json",
+      "sha256": "6cc69d050cbdd2231bee111a3672025b8adfc1744e16780853a8543e331daf8c",
+      "bytes": 3301,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp7_sycophancy/eval/weights_only_2/score.json",
+      "sha256": "1183aa084d088c3cf850fc6b01889fb33bb53b7ddc490fc66e2ea0cdbfa67fd9",
+      "bytes": 9063,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp7_sycophancy/eval/weights_only_3/score.json",
+      "sha256": "a6e8154fd35eb8e4c45868c80f95a5784e67b48b14ffa6e20f8f24eee945e266",
+      "bytes": 10049,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp7_sycophancy/eval/weights_only_1/patch_score.json",
+      "sha256": "c089ea6192f89b7bfbd9e253b62e56853711426f9023c3c0e3212748ce8ad8ac",
+      "bytes": 14358,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp7_sycophancy/eval/weights_only_2/patch_score.json",
+      "sha256": "6927a51228308a8babe322508decc46c3e2885e0d59a3149a7a6e66e45a9eb53",
+      "bytes": 22937,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp7_sycophancy/eval/weights_only_3/patch_score.json",
+      "sha256": "e986e359f3fcfa0a0fb7feb5238a5a66b28541b9368b0c1adc69c569dcdffae6",
+      "bytes": 24050,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp7_sycophancy/eval/attention_tool/score.json",
+      "sha256": "b3d2a61d704dcf93f4caf2934f80c9b00f783580883ecd7259cd53dddf249566",
+      "bytes": 8616,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp7_sycophancy/runs/attention_tool/ask_devemb_s2.log",
+      "sha256": "f2392e0544896a828119cf464d509a898caccbd1cffaa0ea6bbc176d7e22173c",
+      "bytes": 1051,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp8_math/runs/p50c/turns/t001/prompt.txt",
+      "sha256": "b676831fd616c469722e7e34accec542c12a5558eb7ff62e5d4a1722d6031aac",
+      "bytes": 10315,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp8_math/runs/p50c/state.json",
+      "sha256": "3eaceeef9fac9324b330704873bd807dfa1abd26ec60938a2e042ab402875aa5",
+      "bytes": 3889,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp8_math/runs/p50c/requests/fwd_1.done.json",
+      "sha256": "28c231ff6b3eb06dbc85666b9b736637f2b743062f796e8b0f2098096f5d888b",
+      "bytes": 679,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "sha256": "83185c1db46e3dafb34af645f8c5ce033c09cc99d4512b9e1b8e3aba9d269225",
+      "bytes": 1326,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp8_math/eval/unedited/merged.json",
+      "sha256": "5c31370485b9f197f592745e935eeaee6b09dc127daa5b2a8be1ebbcbc210221",
+      "bytes": 1706,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp8_math/eval/p10c/merged.json",
+      "sha256": "30a0aadac571cdf400554216fea9d51771d60e0a4d691a9fe9d674e74c25c3b1",
+      "bytes": 1719,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp8_math/eval/p25c/merged.json",
+      "sha256": "283a121ae5783e242fdfdc0bcc25cbeed66e3224afcca67bd461d709767908c6",
+      "bytes": 1717,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp8_math/eval/p50c/merged.json",
+      "sha256": "c93d3db30a612ef0da396014fdfbe011efbcf2cd417e2e6125664d7effdd0471",
+      "bytes": 1777,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp8_math/eval/RESULTS_excerpt.md",
+      "sha256": "5f4e24a45b86ada2890ef999b7fca4b07c22765de4816a0aa3255f63288a4881",
+      "bytes": 6256,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp8_math/code/apply_edit.py",
+      "sha256": "d2b627a6cf344f309cca4bcab4ff6ccc6ad1c8f29cabda78d11f99c19d1b1c5d",
+      "bytes": 3005,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp8_math/code/build_ckpt.py",
+      "sha256": "da0759bd0a150392b7aaa330f9d242429f47b49c0f900d0d890c91832c9217db",
+      "bytes": 2437,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp8_math/code/evaluate.py",
+      "sha256": "c93f477c02b3ae0d6b37abe3afad8bb7353e273322ff963eec7ff2270012035d",
+      "bytes": 13371,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp8_math/code/profiles.py",
+      "sha256": "ba4be365e44c3e165b9c3982af9dbcd8ec94f7fd0430e5fd9de1d57f249a4ae4",
+      "bytes": 9144,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp8_math/practice/stats.json",
+      "sha256": "34a3be5db6095e0968bdc5555faa1c4149898e4ea8d6c4c6578975703a208dd6",
+      "bytes": 154,
+      "review_scope": "archived_context",
+      "note": "Retained and hash-checked; no claim to full content review or execution."
+    },
+    {
+      "path": "release/exp8_math/notices/001_pass_size.txt",
+      "sha256": "9dccaf85de47449e5be9eea61192393d05e708ea69dd2215a6d7a61a7ff2ac12",
+      "bytes": 406,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp8_math/notices/002_tool_facts.txt",
+      "sha256": "1c1948f70fee560a180a2411f4449d242db6bb03d6abe82900fe11924856db15",
+      "bytes": 933,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp8_math/notices/004_failure_counts.txt",
+      "sha256": "224e0686d748b667f16652797b8ea0b24bde73d24a8d5d870c172e1f1dcd1d5f",
+      "bytes": 328,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp8_math/gemma_followup/runs/g25b/turns/t001/prompt.txt",
+      "sha256": "3097ddb715641a8f18488541150ae480df804a4ef0bcdadbd65cce7740e9c36c",
+      "bytes": 7875,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp8_math/gemma_followup/runs/g50b/final_answer.md",
+      "sha256": "d09b024ac484112f5cb40d5ee3c4359ddd17446be5787f1896d48cbeea355d8c",
+      "bytes": 1485,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp8_math/gemma_followup/eval/unedited/merged.json",
+      "sha256": "b6b97ef8cc1e1700c6b59e371908b40a662928a71dd0d984b7521fff56571404",
+      "bytes": 341,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp8_math/gemma_followup/eval/g05b/merged.json",
+      "sha256": "c1e8a6c72a4dfac01392d77e626ba2c83dbe0050c971fae01b1da7038259eeaa",
+      "bytes": 151,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp8_math/gemma_followup/eval/g10b/merged.json",
+      "sha256": "28f1fb10311fcfaceb68008007f7ef3c484b8abc576cab0e3c6377b16528e2d6",
+      "bytes": 147,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp8_math/gemma_followup/eval/g25b/merged.json",
+      "sha256": "eb1831ee55b39412c7dfcaaa8b9ce84a757fd5c856d1c5fdec05d257b26acf77",
+      "bytes": 150,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp8_math/gemma_followup/eval/g50b/merged.json",
+      "sha256": "ee4ef93537eaaca9d341dae53d13cfe5883900aaf437c683f3ce67167d43dac6",
+      "bytes": 146,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    },
+    {
+      "path": "release/exp8_math/code/st_numpy.py",
+      "sha256": "3c4e532fb8edf374e1a4636aa806a04d062f824943eaf4bca0d3af5b0e7dca40",
+      "bytes": 2230,
+      "review_scope": "selected_sections",
+      "note": "Protocol, output, or implementation sections relevant to cited claims inspected; code was not executed."
+    },
+    {
+      "path": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "sha256": "2bb4a93a93e3dc6d9673835a50f46d773a04faa66f312ba25cd7ae765acd4b99",
+      "bytes": 20780,
+      "review_scope": "selected_structured_values",
+      "note": "Values and JSON locators in observations checked; this is not execution or a whole-log audit."
+    }
+  ],
+  "review_scope_counts": {
+    "full_text_read": 11,
+    "text_read": 1,
+    "archived_context": 23,
+    "selected_sections": 19,
+    "structured_metadata": 1,
+    "selected_structured_values": 22
+  },
+  "observations": [
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/0/id",
+      "value": "0bbcc3ea"
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/0/true",
+      "value": "freeway"
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/0/guess",
+      "value": "freeway"
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/0/correct",
+      "value": true
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/0/tool_free",
+      "value": true
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/1/id",
+      "value": "a9f535cc"
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/1/true",
+      "value": "breakout"
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/1/guess",
+      "value": "breakout"
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/1/correct",
+      "value": true
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/1/tool_free",
+      "value": true
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/2/id",
+      "value": "bdf99279"
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/2/true",
+      "value": "pacman"
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/2/guess",
+      "value": "pacman"
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/2/correct",
+      "value": true
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/2/tool_free",
+      "value": true
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/3/id",
+      "value": "dfc6cb65"
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/3/true",
+      "value": "pong"
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/3/guess",
+      "value": "pong"
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/3/correct",
+      "value": true
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/3/tool_free",
+      "value": true
+    },
+    {
+      "source": "release/exp1_which_game/eval/scores.json",
+      "locator": "/0/answer_line",
+      "value": "contains frogger",
+      "interpretation_boundary": "Released scoring accepts Frogger for Freeway; see experiment README lines 21 and 33."
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/0/id",
+      "value": "246a5b58"
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/0/true",
+      "value": "triangle"
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/0/guess",
+      "value": "triangle"
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/0/correct",
+      "value": true
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/0/tool_free",
+      "value": true
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/1/id",
+      "value": "a6a9dfb7"
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/1/true",
+      "value": "square"
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/1/guess",
+      "value": "square"
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/1/correct",
+      "value": true
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/1/tool_free",
+      "value": true
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/2/id",
+      "value": "d88aba69"
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/2/true",
+      "value": "circle"
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/2/guess",
+      "value": "circle"
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/2/correct",
+      "value": true
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/2/tool_free",
+      "value": true
+    },
+    {
+      "source": "release/exp2_diffusion/eval/scores.json",
+      "locator": "/*/answer_line",
+      "value": "all three describe hollow/outline shapes",
+      "interpretation_boundary": "Filled targets are stated in README lines 8 and 32, not an explicit answer-key field."
+    },
+    {
+      "source": "release/exp2_diffusion/eval/answer_key.json",
+      "locator": "/246a5b58/shape",
+      "value": "triangle"
+    },
+    {
+      "source": "release/exp2_diffusion/eval/answer_key.json",
+      "locator": "/246a5b58/quality/intended",
+      "value": 1.0
+    },
+    {
+      "source": "release/exp2_diffusion/eval/answer_key.json",
+      "locator": "/a6a9dfb7/shape",
+      "value": "square"
+    },
+    {
+      "source": "release/exp2_diffusion/eval/answer_key.json",
+      "locator": "/a6a9dfb7/quality/intended",
+      "value": 0.984
+    },
+    {
+      "source": "release/exp2_diffusion/eval/answer_key.json",
+      "locator": "/d88aba69/shape",
+      "value": "circle"
+    },
+    {
+      "source": "release/exp2_diffusion/eval/answer_key.json",
+      "locator": "/d88aba69/quality/intended",
+      "value": 0.994
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/0/net",
+      "value": "python_L4_H6_d384_s0"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/0/corpus_correct",
+      "value": true
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/0/order",
+      "value": "as is"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/0/order_guess",
+      "value": "as is"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/0/true_copy_heads",
+      "value": [
+        "L3H5"
+      ]
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/0/copy_named",
+      "value": [
+        "L2H1",
+        "L3H1",
+        "L3H5"
+      ]
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/1/net",
+      "value": "python_L4_H6_d384_s0"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/1/corpus_correct",
+      "value": true
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/1/order",
+      "value": "as is"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/1/order_guess",
+      "value": "as is"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/1/true_copy_heads",
+      "value": [
+        "L3H5"
+      ]
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/1/copy_named",
+      "value": [
+        "L2H1",
+        "L3H1",
+        "L3H5"
+      ]
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/2/net",
+      "value": "romaji_L4_H6_d384_s0"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/2/corpus_correct",
+      "value": true
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/2/order",
+      "value": "as is"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/2/order_guess",
+      "value": "as is"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/2/true_copy_heads",
+      "value": []
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/2/copy_named",
+      "value": [
+        "L3H3"
+      ]
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/3/net",
+      "value": "romaji_L4_H6_d384_s0"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/3/corpus_correct",
+      "value": true
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/3/order",
+      "value": "as is"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/3/order_guess",
+      "value": "as is"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/3/true_copy_heads",
+      "value": []
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/3/copy_named",
+      "value": [
+        "L3H3"
+      ]
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/4/net",
+      "value": "english_L4_H6_d384_s0"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/4/corpus_correct",
+      "value": true
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/4/order",
+      "value": "as is"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/4/order_guess",
+      "value": "as is"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/4/true_copy_heads",
+      "value": [
+        "L3H1"
+      ]
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/4/copy_named",
+      "value": [
+        "L3H1"
+      ]
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/5/net",
+      "value": "english_L4_H6_d384_s0"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/5/corpus_correct",
+      "value": true
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/5/order",
+      "value": "as is"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/5/order_guess",
+      "value": "as is"
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/5/true_copy_heads",
+      "value": [
+        "L3H1"
+      ]
+    },
+    {
+      "source": "release/exp3_language/eval/scores.json",
+      "locator": "/5/copy_named",
+      "value": [
+        "L3H1"
+      ]
+    },
+    {
+      "source": "release/exp3_language/eval/heads.json",
+      "locator": "/python_L4_H6_d384_s0/L2H1/induct",
+      "value": 0.245
+    },
+    {
+      "source": "release/exp3_language/eval/heads.json",
+      "locator": "/python_L4_H6_d384_s0/L3H1/induct",
+      "value": 0.269
+    },
+    {
+      "source": "release/exp3_language/eval/heads.json",
+      "locator": "/python_L4_H6_d384_s0/L3H5/induct",
+      "value": 0.546
+    },
+    {
+      "source": "release/exp3_language/eval/heads.json",
+      "locator": "/romaji_L4_H6_d384_s0/L3H3/induct",
+      "value": 0.22
+    },
+    {
+      "source": "release/exp3_language/eval/heads.json",
+      "locator": "/english_L4_H6_d384_s0/L3H1/induct",
+      "value": 0.524
+    },
+    {
+      "source": "release/exp4_fix_car/eval/oneshot_result.json",
+      "locator": "/edit_report/statements",
+      "value": 51
+    },
+    {
+      "source": "release/exp4_fix_car/eval/oneshot_result.json",
+      "locator": "/edit_report/applied",
+      "value": 51
+    },
+    {
+      "source": "release/exp4_fix_car/eval/oneshot_result.json",
+      "locator": "/edit_report/entries_written",
+      "value": 6318
+    },
+    {
+      "source": "release/exp4_fix_car/eval/oneshot_result.json",
+      "locator": "/edit_report/errors",
+      "value": []
+    },
+    {
+      "source": "release/exp4_fix_car/eval/oneshot_result.json",
+      "locator": "/edit_report/cut_off",
+      "value": false
+    },
+    {
+      "source": "release/exp4_fix_car/eval/oneshot_result.json",
+      "locator": "/changes/changed",
+      "value": 6073
+    },
+    {
+      "source": "release/exp4_fix_car/eval/oneshot_result.json",
+      "locator": "/changes/entries",
+      "value": 171664
+    },
+    {
+      "source": "release/exp4_fix_car/eval/oneshot_result.json",
+      "locator": "/changes/frac_changed",
+      "value": 0.035377248578618695
+    },
+    {
+      "source": "release/exp4_fix_car/eval/oneshot_result.json",
+      "locator": "/test/success",
+      "value": 1.0
+    },
+    {
+      "source": "release/exp4_fix_car/eval/oneshot_result.json",
+      "locator": "/test/episodes",
+      "value": 1024
+    },
+    {
+      "source": "release/exp4_fix_car/eval/oneshot_result.json",
+      "locator": "/base/success",
+      "value": 0.0
+    },
+    {
+      "source": "release/exp5_write_from_scratch/eval/minatar_eval.json",
+      "locator": "/breakout/hand/mean",
+      "value": 517.411,
+      "interpretation_boundary": "PPO comparator is the best retained 500M-step seed by mean reward."
+    },
+    {
+      "source": "release/exp5_write_from_scratch/eval/minatar_eval.json",
+      "locator": "/breakout/hand/episodes",
+      "value": 1000,
+      "interpretation_boundary": "PPO comparator is the best retained 500M-step seed by mean reward."
+    },
+    {
+      "source": "release/exp5_write_from_scratch/eval/minatar_eval.json",
+      "locator": "/breakout/ppo500_s0/mean",
+      "value": 25.344,
+      "interpretation_boundary": "PPO comparator is the best retained 500M-step seed by mean reward."
+    },
+    {
+      "source": "release/exp5_write_from_scratch/eval/minatar_eval.json",
+      "locator": "/breakout/ppo500_s0/episodes",
+      "value": 1000,
+      "interpretation_boundary": "PPO comparator is the best retained 500M-step seed by mean reward."
+    },
+    {
+      "source": "release/exp5_write_from_scratch/eval/minatar_eval.json",
+      "locator": "/seaquest/hand/mean",
+      "value": 53.11,
+      "interpretation_boundary": "PPO comparator is the best retained 500M-step seed by mean reward."
+    },
+    {
+      "source": "release/exp5_write_from_scratch/eval/minatar_eval.json",
+      "locator": "/seaquest/hand/episodes",
+      "value": 1000,
+      "interpretation_boundary": "PPO comparator is the best retained 500M-step seed by mean reward."
+    },
+    {
+      "source": "release/exp5_write_from_scratch/eval/minatar_eval.json",
+      "locator": "/seaquest/ppo500_s2/mean",
+      "value": 88.884,
+      "interpretation_boundary": "PPO comparator is the best retained 500M-step seed by mean reward."
+    },
+    {
+      "source": "release/exp5_write_from_scratch/eval/minatar_eval.json",
+      "locator": "/seaquest/ppo500_s2/episodes",
+      "value": 1000,
+      "interpretation_boundary": "PPO comparator is the best retained 500M-step seed by mean reward."
+    },
+    {
+      "source": "release/exp5_write_from_scratch/eval/minatar_eval.json",
+      "locator": "/asterix/hand/mean",
+      "value": 53.178,
+      "interpretation_boundary": "PPO comparator is the best retained 500M-step seed by mean reward."
+    },
+    {
+      "source": "release/exp5_write_from_scratch/eval/minatar_eval.json",
+      "locator": "/asterix/hand/episodes",
+      "value": 1000,
+      "interpretation_boundary": "PPO comparator is the best retained 500M-step seed by mean reward."
+    },
+    {
+      "source": "release/exp5_write_from_scratch/eval/minatar_eval.json",
+      "locator": "/asterix/ppo500_s1/mean",
+      "value": 55.204,
+      "interpretation_boundary": "PPO comparator is the best retained 500M-step seed by mean reward."
+    },
+    {
+      "source": "release/exp5_write_from_scratch/eval/minatar_eval.json",
+      "locator": "/asterix/ppo500_s1/episodes",
+      "value": 1000,
+      "interpretation_boundary": "PPO comparator is the best retained 500M-step seed by mean reward."
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/budget_0/eval_submission.json",
+      "locator": "/ppo_s0/games",
+      "value": 2000
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/budget_0/eval_submission.json",
+      "locator": "/ppo_s0/score",
+      "value": 0.5414999723434448
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/budget_0/eval_submission.json",
+      "locator": "/ppo_s0/wins",
+      "value": 1083
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/budget_0/eval_submission.json",
+      "locator": "/ppo_s0/losses",
+      "value": 917
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/budget_0/eval_submission.json",
+      "locator": "/ppo_s2/games",
+      "value": 2000
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/budget_0/eval_submission.json",
+      "locator": "/ppo_s2/score",
+      "value": 0.5490000247955322
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/budget_0/eval_submission.json",
+      "locator": "/ppo_s2/wins",
+      "value": 1098
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/budget_0/eval_submission.json",
+      "locator": "/ppo_s2/losses",
+      "value": 902
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/ppo_same_size/ppo_big_eval/h2h_lr_scan.json",
+      "locator": "/v1_b0_vs_lr1e-4/score",
+      "value": 0.5090000033378601
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/ppo_same_size/ppo_big_eval/h2h_lr_scan.json",
+      "locator": "/v1_b50_vs_lr1e-4/score",
+      "value": 0.8335000276565552
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/ppo_same_size/ppo_big_eval/h2h_lr_scan.json",
+      "locator": "/v1_b0_vs_lr3e-5/score",
+      "value": 0.4255000054836273
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/ppo_same_size/ppo_big_eval/h2h_lr_scan.json",
+      "locator": "/v1_b50_vs_lr3e-5/score",
+      "value": 0.7415000200271606
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/ppo_same_size/ppo_big_eval/h2h_lr_scan.json",
+      "locator": "/v1_b0_vs_lr3e-5_s1/score",
+      "value": 0.2630000114440918
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/ppo_same_size/ppo_big_eval/h2h_lr_scan.json",
+      "locator": "/v1_b50_vs_lr3e-5_s1/score",
+      "value": 0.6995000243186951
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/ppo_same_size/ppo_big_eval/h2h_lr_scan.json",
+      "locator": "/v1_b0_vs_lr3e-5_s2/score",
+      "value": 0.36250001192092896
+    },
+    {
+      "source": "release/exp6_go_from_scratch/eval/ppo_same_size/ppo_big_eval/h2h_lr_scan.json",
+      "locator": "/v1_b50_vs_lr3e-5_s2/score",
+      "value": 0.7854999899864197
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_1/patch_score.json",
+      "locator": "/pair_343898/astra/gap_closed_h2s",
+      "value": 0.0,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_1/patch_score.json",
+      "locator": "/pair_343898/astra/margin_closed_h2s",
+      "value": 0.00036853454293402305,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_1/patch_score.json",
+      "locator": "/pair_e2c2af/astra/gap_closed_h2s",
+      "value": 0.0,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_1/patch_score.json",
+      "locator": "/pair_e2c2af/astra/margin_closed_h2s",
+      "value": 0.061566472259668596,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_1/patch_score.json",
+      "locator": "/pair_3f2101/astra/gap_closed_h2s",
+      "value": 0.0,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_1/patch_score.json",
+      "locator": "/pair_3f2101/astra/margin_closed_h2s",
+      "value": 0.015290238123486743,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_2/patch_score.json",
+      "locator": "/pair_343898/astra/gap_closed_h2s",
+      "value": 0.0,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_2/patch_score.json",
+      "locator": "/pair_343898/astra/margin_closed_h2s",
+      "value": -0.001204088065168873,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_2/patch_score.json",
+      "locator": "/pair_e2c2af/astra/gap_closed_h2s",
+      "value": 0.0,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_2/patch_score.json",
+      "locator": "/pair_e2c2af/astra/margin_closed_h2s",
+      "value": 0.23136807782579197,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_2/patch_score.json",
+      "locator": "/pair_3f2101/astra/gap_closed_h2s",
+      "value": 0.0,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_2/patch_score.json",
+      "locator": "/pair_3f2101/astra/margin_closed_h2s",
+      "value": 0.14068064881957107,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_3/patch_score.json",
+      "locator": "/pair_343898/astra/gap_closed_h2s",
+      "value": 0.0,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_3/patch_score.json",
+      "locator": "/pair_343898/astra/margin_closed_h2s",
+      "value": -0.0003410548108408689,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_3/patch_score.json",
+      "locator": "/pair_e2c2af/astra/gap_closed_h2s",
+      "value": 0.0,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_3/patch_score.json",
+      "locator": "/pair_e2c2af/astra/margin_closed_h2s",
+      "value": 0.07017392483158673,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_3/patch_score.json",
+      "locator": "/pair_3f2101/astra/gap_closed_h2s",
+      "value": 0.0,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp7_sycophancy/eval/weights_only_3/patch_score.json",
+      "locator": "/pair_3f2101/astra/margin_closed_h2s",
+      "value": 0.07223499238116797,
+      "interpretation_boundary": "Classification-gap closure and continuous margin closure are distinct metrics."
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/olympiad/acc",
+      "value": 0.013353115727002967
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/olympiad/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/olympiad/problems",
+      "value": 674
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/olympiad/cut_share",
+      "value": 0.9870178041543026
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/olympiad/mean_tokens",
+      "value": 32484.688427299705
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/ifeval/acc",
+      "value": 0.2097966728280961
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/ifeval/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/ifeval/problems",
+      "value": 541
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/ifeval/cut_share",
+      "value": 0.7486136783733827
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/ifeval/mean_tokens",
+      "value": 25296.210720887248
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/gpqa/acc",
+      "value": 0.22727272727272727
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/gpqa/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/gpqa/problems",
+      "value": 198
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/gpqa/cut_share",
+      "value": 0.5946969696969697
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/gpqa/mean_tokens",
+      "value": 23193.217171717173
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/gsm8k/acc",
+      "value": 0.13836239575435935
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/gsm8k/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/gsm8k/problems",
+      "value": 1319
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/gsm8k/cut_share",
+      "value": 0.8749052312357847
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/gsm8k/mean_tokens",
+      "value": 29288.653904473085
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/mmlupro1k/acc",
+      "value": 0.403
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/mmlupro1k/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/mmlupro1k/problems",
+      "value": 1000
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/mmlupro1k/cut_share",
+      "value": 0.289
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/mmlupro1k/mean_tokens",
+      "value": 13705.696
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/math500/acc",
+      "value": 0.079
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/math500/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/math500/problems",
+      "value": 500
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/math500/cut_share",
+      "value": 0.93
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/math500/mean_tokens",
+      "value": 30868.4345
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/aime25/acc",
+      "value": 0.0
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/aime25/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/aime25/problems",
+      "value": 30
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/aime25/cut_share",
+      "value": 1.0
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/aime25/mean_tokens",
+      "value": 32768.0
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/amc23/acc",
+      "value": 0.0046875
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/amc23/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/amc23/problems",
+      "value": 40
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/amc23/cut_share",
+      "value": 0.9953125
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/amc23/mean_tokens",
+      "value": 32679.809375
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/aime24/acc",
+      "value": 0.0
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/aime24/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/aime24/problems",
+      "value": 30
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/aime24/cut_share",
+      "value": 1.0
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/aime24/mean_tokens",
+      "value": 32768.0
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/minerva/acc",
+      "value": 0.014705882352941176
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/minerva/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/minerva/problems",
+      "value": 272
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/minerva/cut_share",
+      "value": 0.9816176470588235
+    },
+    {
+      "source": "release/exp8_math/eval/unedited/merged.json",
+      "locator": "/minerva/mean_tokens",
+      "value": 32301.77573529412
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/math500/acc",
+      "value": 0.481
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/math500/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/math500/problems",
+      "value": 500
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/math500/cut_share",
+      "value": 0.3305
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/math500/mean_tokens",
+      "value": 22037.1475
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/gsm8k/acc",
+      "value": 0.6709628506444276
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/gsm8k/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/gsm8k/problems",
+      "value": 1319
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/gsm8k/cut_share",
+      "value": 0.07240333586050038
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/gsm8k/mean_tokens",
+      "value": 11993.395375284306
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/mmlupro1k/acc",
+      "value": 0.455
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/mmlupro1k/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/mmlupro1k/problems",
+      "value": 1000
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/mmlupro1k/cut_share",
+      "value": 0.005
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/mmlupro1k/mean_tokens",
+      "value": 7558.804
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/gpqa/acc",
+      "value": 0.3661616161616162
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/gpqa/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/gpqa/problems",
+      "value": 198
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/gpqa/cut_share",
+      "value": 0.023989898989898988
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/gpqa/mean_tokens",
+      "value": 12261.306818181818
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/olympiad/acc",
+      "value": 0.21810089020771514
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/olympiad/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/olympiad/problems",
+      "value": 674
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/olympiad/cut_share",
+      "value": 0.46698813056379823
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/olympiad/mean_tokens",
+      "value": 26679.96884272997
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/minerva/acc",
+      "value": 0.2536764705882353
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/minerva/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/minerva/problems",
+      "value": 272
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/minerva/cut_share",
+      "value": 0.25827205882352944
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/minerva/mean_tokens",
+      "value": 22485.914522058825
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/amc23/acc",
+      "value": 0.234375
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/amc23/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/amc23/problems",
+      "value": 40
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/amc23/cut_share",
+      "value": 0.5046875
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/amc23/mean_tokens",
+      "value": 27465.2828125
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/ifeval/acc",
+      "value": 0.6229205175600739
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/ifeval/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/ifeval/problems",
+      "value": 541
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/ifeval/cut_share",
+      "value": 0.022181146025878003
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/ifeval/mean_tokens",
+      "value": 4240.579482439926
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/aime24/acc",
+      "value": 0.00625
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/aime24/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/aime24/problems",
+      "value": 30
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/aime24/cut_share",
+      "value": 0.6520833333333333
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/aime24/mean_tokens",
+      "value": 29258.995833333334
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/aime25/acc",
+      "value": 0.022916666666666665
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/aime25/complete",
+      "value": true
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/aime25/problems",
+      "value": 30
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/aime25/cut_share",
+      "value": 0.6458333333333334
+    },
+    {
+      "source": "release/exp8_math/eval/p50c/merged.json",
+      "locator": "/aime25/mean_tokens",
+      "value": 29408.039583333335
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/state.json",
+      "locator": "/runs",
+      "value": 80
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/state.json",
+      "locator": "/requests",
+      "value": 69
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/state.json",
+      "locator": "/passes",
+      "value": 50
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/state.json",
+      "locator": "/handoffs",
+      "value": 3
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/changed_tensors",
+      "value": 2
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/changed_entries_total",
+      "value": 130188
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/note",
+      "value": "changed_entries counts bfloat16 entries whose bits differ from the base model; an entry the edit touched but that rounds back to the same bfloat16 value is not counted"
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/tensors/0/name",
+      "value": "model.language_model.layers.15.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/tensors/0/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/tensors/0/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/tensors/0/changed_entries",
+      "value": 65260
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/tensors/0/changed_columns",
+      "value": 64
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/tensors/0/form",
+      "value": "sparse"
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/tensors/1/name",
+      "value": "model.language_model.layers.19.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/tensors/1/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/tensors/1/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/tensors/1/changed_entries",
+      "value": 64928
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/tensors/1/changed_columns",
+      "value": 64
+    },
+    {
+      "source": "release/exp8_math/runs/p50c/edit/manifest.json",
+      "locator": "/tensors/1/form",
+      "value": "sparse"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/changed_tensors",
+      "value": 30
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/changed_entries_total",
+      "value": 72986982
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/note",
+      "value": "changed_entries counts bfloat16 entries whose bits differ from the base model; an entry the edit touched but that rounds back to the same bfloat16 value is not counted"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/0/name",
+      "value": "model.language_model.layers.10.linear_attn.out_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/0/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/0/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/0/changed_entries",
+      "value": 1838146
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/0/changed_columns",
+      "value": 2048
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/0/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/0/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/0/fixups",
+      "value": 8
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/1/name",
+      "value": "model.language_model.layers.10.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/1/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/1/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/1/changed_entries",
+      "value": 3207668
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/1/changed_columns",
+      "value": 3584
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/1/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/1/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/1/fixups",
+      "value": 15
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/2/name",
+      "value": "model.language_model.layers.11.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/2/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/2/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/2/changed_entries",
+      "value": 3199525
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/2/changed_columns",
+      "value": 3584
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/2/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/2/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/2/fixups",
+      "value": 15
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/3/name",
+      "value": "model.language_model.layers.11.self_attn.o_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/3/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/3/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/3/changed_entries",
+      "value": 1854441
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/3/changed_columns",
+      "value": 2047
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/3/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/3/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/3/fixups",
+      "value": 12
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/4/name",
+      "value": "model.language_model.layers.12.linear_attn.out_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/4/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/4/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/4/changed_entries",
+      "value": 1806630
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/4/changed_columns",
+      "value": 2048
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/4/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/4/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/4/fixups",
+      "value": 4
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/5/name",
+      "value": "model.language_model.layers.12.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/5/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/5/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/5/changed_entries",
+      "value": 3126907
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/5/changed_columns",
+      "value": 3584
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/5/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/5/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/5/fixups",
+      "value": 10
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/6/name",
+      "value": "model.language_model.layers.13.linear_attn.out_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/6/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/6/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/6/changed_entries",
+      "value": 1821858
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/6/changed_columns",
+      "value": 2048
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/6/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/6/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/6/fixups",
+      "value": 10
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/7/name",
+      "value": "model.language_model.layers.13.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/7/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/7/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/7/changed_entries",
+      "value": 3143337
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/7/changed_columns",
+      "value": 3583
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/7/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/7/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/7/fixups",
+      "value": 22
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/8/name",
+      "value": "model.language_model.layers.14.linear_attn.out_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/8/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/8/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/8/changed_entries",
+      "value": 1786208
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/8/changed_columns",
+      "value": 2048
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/8/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/8/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/8/fixups",
+      "value": 7
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/9/name",
+      "value": "model.language_model.layers.14.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/9/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/9/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/9/changed_entries",
+      "value": 3077921
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/9/changed_columns",
+      "value": 3583
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/9/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/9/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/9/fixups",
+      "value": 13
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/10/name",
+      "value": "model.language_model.layers.15.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/10/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/10/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/10/changed_entries",
+      "value": 3036185
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/10/changed_columns",
+      "value": 3584
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/10/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/10/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/10/fixups",
+      "value": 17
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/11/name",
+      "value": "model.language_model.layers.15.self_attn.o_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/11/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/11/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/11/changed_entries",
+      "value": 1778365
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/11/changed_columns",
+      "value": 2048
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/11/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/11/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/11/fixups",
+      "value": 10
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/12/name",
+      "value": "model.language_model.layers.16.linear_attn.out_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/12/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/12/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/12/changed_entries",
+      "value": 1752956
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/12/changed_columns",
+      "value": 2048
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/12/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/12/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/12/fixups",
+      "value": 3
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/13/name",
+      "value": "model.language_model.layers.16.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/13/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/13/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/13/changed_entries",
+      "value": 3003946
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/13/changed_columns",
+      "value": 3584
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/13/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/13/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/13/fixups",
+      "value": 13
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/14/name",
+      "value": "model.language_model.layers.17.linear_attn.out_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/14/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/14/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/14/changed_entries",
+      "value": 1758590
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/14/changed_columns",
+      "value": 2048
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/14/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/14/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/14/fixups",
+      "value": 7
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/15/name",
+      "value": "model.language_model.layers.17.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/15/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/15/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/15/changed_entries",
+      "value": 3013386
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/15/changed_columns",
+      "value": 3584
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/15/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/15/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/15/fixups",
+      "value": 9
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/16/name",
+      "value": "model.language_model.layers.18.linear_attn.out_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/16/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/16/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/16/changed_entries",
+      "value": 1711544
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/16/changed_columns",
+      "value": 2047
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/16/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/16/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/16/fixups",
+      "value": 4
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/17/name",
+      "value": "model.language_model.layers.18.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/17/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/17/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/17/changed_entries",
+      "value": 2954165
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/17/changed_columns",
+      "value": 3584
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/17/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/17/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/17/fixups",
+      "value": 8
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/18/name",
+      "value": "model.language_model.layers.19.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/18/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/18/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/18/changed_entries",
+      "value": 3043697
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/18/changed_columns",
+      "value": 3582
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/18/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/18/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/18/fixups",
+      "value": 14
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/19/name",
+      "value": "model.language_model.layers.19.self_attn.o_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/19/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/19/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/19/changed_entries",
+      "value": 1727860
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/19/changed_columns",
+      "value": 2048
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/19/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/19/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/19/fixups",
+      "value": 11
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/20/name",
+      "value": "model.language_model.layers.20.linear_attn.out_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/20/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/20/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/20/changed_entries",
+      "value": 1758062
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/20/changed_columns",
+      "value": 2048
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/20/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/20/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/20/fixups",
+      "value": 8
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/21/name",
+      "value": "model.language_model.layers.20.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/21/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/21/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/21/changed_entries",
+      "value": 2982508
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/21/changed_columns",
+      "value": 3584
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/21/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/21/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/21/fixups",
+      "value": 10
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/22/name",
+      "value": "model.language_model.layers.21.linear_attn.out_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/22/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/22/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/22/changed_entries",
+      "value": 1770315
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/22/changed_columns",
+      "value": 2048
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/22/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/22/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/22/fixups",
+      "value": 12
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/23/name",
+      "value": "model.language_model.layers.21.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/23/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/23/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/23/changed_entries",
+      "value": 3061835
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/23/changed_columns",
+      "value": 3584
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/23/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/23/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/23/fixups",
+      "value": 9
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/24/name",
+      "value": "model.language_model.layers.22.linear_attn.out_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/24/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/24/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/24/changed_entries",
+      "value": 1795459
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/24/changed_columns",
+      "value": 2048
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/24/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/24/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/24/fixups",
+      "value": 7
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/25/name",
+      "value": "model.language_model.layers.22.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/25/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/25/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/25/changed_entries",
+      "value": 3103784
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/25/changed_columns",
+      "value": 3584
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/25/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/25/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/25/fixups",
+      "value": 8
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/26/name",
+      "value": "model.language_model.layers.8.linear_attn.out_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/26/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/26/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/26/changed_entries",
+      "value": 1769753
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/26/changed_columns",
+      "value": 2048
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/26/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/26/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/26/fixups",
+      "value": 9
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/27/name",
+      "value": "model.language_model.layers.8.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/27/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/27/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/27/changed_entries",
+      "value": 3069682
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/27/changed_columns",
+      "value": 3583
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/27/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/27/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/27/fixups",
+      "value": 18
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/28/name",
+      "value": "model.language_model.layers.9.linear_attn.out_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/28/shape",
+      "value": [
+        1024,
+        2048
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/28/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/28/changed_entries",
+      "value": 1844797
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/28/changed_columns",
+      "value": 2048
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/28/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/28/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/28/fixups",
+      "value": 13
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/29/name",
+      "value": "model.language_model.layers.9.mlp.down_proj.weight"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/29/shape",
+      "value": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/29/dtype",
+      "value": "bfloat16"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/29/changed_entries",
+      "value": 3187452
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/29/changed_columns",
+      "value": 3584
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/29/form",
+      "value": "lowrank"
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/29/rank",
+      "value": 1
+    },
+    {
+      "source": "release/exp8_math/runs/p10c/edit/manifest.json",
+      "locator": "/tensors/29/fixups",
+      "value": 14
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/unedited/merged.json",
+      "locator": "/math500/acc_lenient",
+      "value": 0.068,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/unedited/merged.json",
+      "locator": "/math500/acc",
+      "value": 0.0275,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/unedited/merged.json",
+      "locator": "/math500/problems",
+      "value": 500,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/unedited/merged.json",
+      "locator": "/math500/complete",
+      "value": true,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/unedited/merged.json",
+      "locator": "/math500/cut_share",
+      "value": 0.085,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g05b/merged.json",
+      "locator": "/math500/acc_lenient",
+      "value": 0.0705,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g05b/merged.json",
+      "locator": "/math500/acc",
+      "value": 0.0355,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g05b/merged.json",
+      "locator": "/math500/problems",
+      "value": 500,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g05b/merged.json",
+      "locator": "/math500/complete",
+      "value": true,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g05b/merged.json",
+      "locator": "/math500/cut_share",
+      "value": 0.0695,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g10b/merged.json",
+      "locator": "/math500/acc_lenient",
+      "value": 0.076,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g10b/merged.json",
+      "locator": "/math500/acc",
+      "value": 0.031,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g10b/merged.json",
+      "locator": "/math500/problems",
+      "value": 500,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g10b/merged.json",
+      "locator": "/math500/complete",
+      "value": true,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g10b/merged.json",
+      "locator": "/math500/cut_share",
+      "value": 0.073,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g25b/merged.json",
+      "locator": "/math500/acc_lenient",
+      "value": 0.077,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g25b/merged.json",
+      "locator": "/math500/acc",
+      "value": 0.0375,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g25b/merged.json",
+      "locator": "/math500/problems",
+      "value": 500,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g25b/merged.json",
+      "locator": "/math500/complete",
+      "value": true,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g25b/merged.json",
+      "locator": "/math500/cut_share",
+      "value": 0.1075,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g50b/merged.json",
+      "locator": "/math500/acc_lenient",
+      "value": 0.07,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g50b/merged.json",
+      "locator": "/math500/acc",
+      "value": 0.026,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g50b/merged.json",
+      "locator": "/math500/problems",
+      "value": 500,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g50b/merged.json",
+      "locator": "/math500/complete",
+      "value": true,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/eval/g50b/merged.json",
+      "locator": "/math500/cut_share",
+      "value": 0.104,
+      "interpretation_boundary": "The report uses acc_lenient; raw g05b is 7.05%, displayed as 7.0% in its README."
+    }
+  ],
+  "textual_cross_checks": [
+    {
+      "source": "release/exp2_diffusion/README.md",
+      "lines": [
+        8,
+        32
+      ],
+      "finding": "Training targets are filled; all three descriptions erroneously depict outlines."
+    },
+    {
+      "source": "release/exp3_language/README.md",
+      "lines": [
+        57,
+        58,
+        59
+      ],
+      "finding": "The authors disclose post threshold >0.2 versus scores.json true_copy_heads threshold >0.3."
+    },
+    {
+      "source": "release/exp4_fix_car/README.md",
+      "lines": [
+        13,
+        47,
+        57,
+        58
+      ],
+      "finding": "Base evaluated on 256 episodes; changes counted from rounded displayed network."
+    },
+    {
+      "source": "release/exp8_math/README.md",
+      "lines": [
+        81,
+        82,
+        83,
+        134,
+        138
+      ],
+      "finding": "Final GPQA baseline replaces an interim 149/198 subset; Qwen base pinned; touched and changed bf16 counts distinguished."
+    },
+    {
+      "source": "release/exp8_math/gemma_followup/runs/g50b/final_answer.md",
+      "lines": [
+        10,
+        12
+      ],
+      "finding": "Author-reported HOLDOUT: 128 problems, 16384 answers/model, +0.421 percentage points, cluster SE 0.365, approximate 95% CI [-0.300, 1.143]; cutoffs 7.31% to 10.50%."
+    },
+    {
+      "source": "release/exp8_math/code/apply_edit.py",
+      "lines": [
+        26,
+        39,
+        50,
+        51,
+        53,
+        54
+      ],
+      "finding": "Reconstruction verifies base and edited tensor hashes; sparse and low-rank reconstruction read, not executed."
+    },
+    {
+      "source": "release/exp8_math/code/build_ckpt.py",
+      "lines": [
+        37
+      ],
+      "finding": "Submitted tensors cast to original dtype before saving."
+    },
+    {
+      "source": "release/exp8_math/code/st_numpy.py",
+      "lines": [
+        53,
+        55,
+        56
+      ],
+      "finding": "bf16 conversion implements nearest-even rounding through low-bit adjustment."
+    },
+    {
+      "source": "release/harness/sandbox.py",
+      "lines": [
+        33,
+        46,
+        50,
+        68
+      ],
+      "finding": "Saved-array shape/finiteness and execution resource controls are distinct from semantic restrictions; saved tool output is truncated to 6000 characters."
+    }
+  ],
+  "model_versions": {
+    "Qwen/Qwen3.5-0.8B": "2fc06364715b967f1860aea9cf38778875588b17",
+    "Gemma_followup_base": "ac82b4e820549b854eebf28ce6dedaf9fdfa17b3",
+    "source": "release/exp8_math/README.md:134; release/exp8_math/gemma_followup/README.md:15"
+  },
+  "local_limitations_sources": [
+    {
+      "path": "docs/weight-space/README.md",
+      "sha256_at_review": "9f2305b6c1bcec194cca38b010f9a7a7c93b9b8c723b4515ab1e92b5916ec286",
+      "review_scope": "selected sections",
+      "locators": [
+        {
+          "section_or_paragraph": "Understand the guarantees",
+          "start_line": 179
+        }
+      ]
+    },
+    {
+      "path": "docs/weight-space/design.md",
+      "sha256_at_review": "cc119f1821d092de56223095abfcdbbc0bfa955201c197bec7454d7265233833",
+      "review_scope": "selected sections",
+      "locators": [
+        {
+          "section_or_paragraph": "Readout compilation and its limits",
+          "start_line": 339
+        },
+        {
+          "section_or_paragraph": "Caller-supplied PyTorch modules",
+          "start_line": 398
+        },
+        {
+          "section_or_paragraph": "Proof boundary and evaluation boundary",
+          "start_line": 438
+        },
+        {
+          "section_or_paragraph": "Use and scale",
+          "start_line": 467
+        }
+      ]
+    },
+    {
+      "path": "docs/weight-space/research.md",
+      "sha256_at_review": "e107a2aa865e6a635897fb64a150e9a803dc6dc765e11f370185b38b0258b318",
+      "review_scope": "selected sections",
+      "locators": [
+        {
+          "section_or_paragraph": "Follow-up hypotheses are",
+          "start_line": 231
+        },
+        {
+          "section_or_paragraph": "Project-specific interpretation and remaining gaps",
+          "start_line": 240
+        }
+      ]
+    },
+    {
+      "path": "docs/weight-space/results.md",
+      "sha256_at_review": "aff2d5a3956df5ae81edc5d94ef7884d66dc2c35bcee7311e520cd8df3dcf501",
+      "review_scope": "selected sections",
+      "locators": [
+        {
+          "section_or_paragraph": "Raw RTS records omit initial checkpoint bodies",
+          "start_line": 119
+        },
+        {
+          "section_or_paragraph": "Reproduce or extend",
+          "start_line": 125
+        }
+      ]
+    },
+    {
+      "path": "docs/PROJECT_MEMORY.md",
+      "sha256_at_review": "72fef935904a24a0197dd6d22052fb729808becb2e1567ff9a08c990b57fd8be",
+      "review_scope": "selected sections",
+      "locators": [
+        {
+          "section_or_paragraph": "Follow-up research and existing applications",
+          "start_line": 109
+        }
+      ]
+    },
+    {
+      "path": "formal/weight-space/README.md",
+      "sha256_at_review": "cf2cfa0a0bd017be7168037ab7bfbfcdebab2e3f9fad76a28e257d73d904affa",
+      "review_scope": "selected sections",
+      "locators": [
+        {
+          "section_or_paragraph": "Semantic scope and trust boundary",
+          "start_line": 181
+        }
+      ]
+    }
+  ],
+  "bounded_document_search": {
+    "roots": [
+      "docs/weight-space",
+      "formal/weight-space"
+    ],
+    "excluded_path_components": [
+      ".git",
+      ".lake",
+      ".venv",
+      "__pycache__"
+    ],
+    "files_observed": [
+      "docs/weight-space/README.md",
+      "docs/weight-space/design.md",
+      "docs/weight-space/references.json",
+      "docs/weight-space/requirements.md",
+      "docs/weight-space/research.md",
+      "docs/weight-space/results.md",
+      "docs/weight-space/v2/formal.md",
+      "docs/weight-space/v2/source-review.md",
+      "docs/weight-space/v2/workflow.md",
+      "formal/weight-space/.gitignore",
+      "formal/weight-space/README.md",
+      "formal/weight-space/WeightSpace.lean",
+      "formal/weight-space/WeightSpace/AxiomAudit.lean",
+      "formal/weight-space/WeightSpace/Bounds.lean",
+      "formal/weight-space/WeightSpace/Contracts.lean",
+      "formal/weight-space/WeightSpace/Core.lean",
+      "formal/weight-space/WeightSpace/Examples.lean",
+      "formal/weight-space/WeightSpace/Gauge.lean",
+      "formal/weight-space/WeightSpace/Generic.lean",
+      "formal/weight-space/WeightSpace/GenericAudit.lean",
+      "formal/weight-space/WeightSpace/GenericExamples.lean",
+      "formal/weight-space/WeightSpace/RTS.lean",
+      "formal/weight-space/WeightSpace/Sequential.lean",
+      "formal/weight-space/generate_rts_certificate.py",
+      "formal/weight-space/lake-manifest.json",
+      "formal/weight-space/lakefile.toml",
+      "formal/weight-space/lean-toolchain",
+      "formal/weight-space/verification-v2/actual/build.log",
+      "formal/weight-space/verification-v2/check.ps1",
+      "formal/weight-space/verification-v2/preserved-v1-inputs.json",
+      "formal/weight-space/verification/actual-axiom-audit.log",
+      "formal/weight-space/verification/actual-build-inputs.json",
+      "formal/weight-space/verification/actual-build.log",
+      "formal/weight-space/verification/actual-regeneration.log",
+      "formal/weight-space/verification/actual-verification.json",
+      "formal/weight-space/verification/generic-axiom-audit.log",
+      "formal/weight-space/verification/generic-build.log",
+      "formal/weight-space/verification/generic-verification.json"
+    ],
+    "standalone_limitation_next_steps_roadmap_matches": [],
+    "original_release_root_matches": [],
+    "original_actual_discussion": "article What Comes Next? and experiment README setup/results/omitted-artifact sections",
+    "boundary": "Only these local roots and the archived release root were scanned; no claim of global absence or complete recursive release audit."
+  },
+  "licensing": {
+    "release_source": "release/LICENSE",
+    "logs_data_networks": "CC BY 4.0",
+    "author_python_shell_scripts": "MIT",
+    "embedded_minatar_source": "GPL-3.0; release/exp5_write_from_scratch/LICENSE-MinAtar",
+    "third_party_data": "Retains original licenses",
+    "article_html": "Separate source; no release-license assignment made."
+  }
+}

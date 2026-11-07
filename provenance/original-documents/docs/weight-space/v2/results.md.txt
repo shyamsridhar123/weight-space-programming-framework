@@ -1,0 +1,263 @@
+# Generic study results and interpretation
+
+The completed study shows a reproducible **target-change versus retention tradeoff** across three explicitly implemented model families. Soft retention lowers collateral drift substantially compared with target-only fitting, while sacrificing target accuracy. Numerical anchor protection, finite precision, and repeated edits introduce distinct limits. Exact parameter reconstruction and real-valued theorems help make those limits inspectable; neither substitutes for useful behavior on an intended task population.
+
+This is a deterministic, fitting-permitted synthetic study. It does not evaluate a live language model, independently replicate the original report, or establish large-model or real-world gains. The [source review](source-review.md), [methods](methods.md), [formal guide](formal.md), and [limitations and next steps](limitations-and-next-steps.md) supply those boundaries in detail.
+
+## Completion, identities, and independent units
+
+The [saved results](../../../artifacts/weight-space/study-v2/results.json) record 36 completed checkpoints from 36 attempts, 12 complete worlds, no omitted incomplete worlds, no failures, and unchanged execution sources. The wrapper completed with exit code zero in **162.4463912 seconds**. Its [command record](../../../artifacts/weight-space/study-v2-execution/run-command.json) and logs retain execution details. Times are November 7, 2026 in UTC and November 6 in America/Chicago.
+
+| Identity | Value |
+| --- | --- |
+| World seeds | 7300–7311; all now observed |
+| Frozen inputs | 31 files, including the protocol |
+| Freeze receipt SHA-256 | `0aef8bc624bc5ea501558a807c3c90afa46b3b8ab5d27ea1423943cbb986349e` |
+| Protocol semantic SHA-256 | `c809fc30b69d9fec2fd720c2e80e0d35a08d49a1dd7f6e2f352a6b78e2cbb3de` |
+| Closed study inventory | 5,020 files including `manifest.json` |
+| Primary uncertainty unit | 12 independently generated worlds |
+
+Each world has its own synthetic teacher, data streams, and initialization streams. Its ReLU MLP, tanh MLP, and convolution-plus-tanh variants share teacher and split inputs, so the 36 checkpoints are **paired architecture variants within 12 independent worlds**. They are not 36 independent task populations. The inputs have 16 coordinates and the models have three outputs. Only output heads over random frozen features were trained; total model sizes are 483, 919, and 195 parameters respectively.
+
+The 960 declared main/sequence input rows per world give 11,520 rows across the study. Auxiliary tasks have separate inputs. Reusing an input for another architecture, arm, precision condition, or stage does not create another independent observation. The source/protocol freeze is local integrity evidence, not external preregistration.
+
+## What the errors measure
+
+The target request adds \(s=(0.6,-0.3,0)\) to the original checkpoint's output when \(x_0>0.35\). Retention asks for unchanged original output when \(x_0<-0.1\). The intervening region is not measured by this main task. Both main metrics use the requested-shift RMS, \(\sqrt{0.15}\), as their denominator:
+
+\[
+E_T=\frac{\operatorname{RMS}(f_{\mathrm{edit}}(x)-f_{\mathrm{base}}(x)-s)}{\operatorname{RMS}(s)},\qquad
+E_R=\frac{\operatorname{RMS}(f_{\mathrm{edit}}(x)-f_{\mathrm{base}}(x))}{\operatorname{RMS}(s)}.
+\]
+
+The first is evaluated on target inputs and the second on retention inputs. Lower is better for both. The no-op has target error one and retention error zero. These are score-space errors, not classification accuracy, reward, or probabilities. Directional gain is a separate projection onto the requested shift; it is not generally one minus target NRMSE. Teacher-relative task errors are reported separately below.
+
+## Six fixed arms
+
+Each arm has 36 held-out checkpoint outcomes. These descriptive means weight all three families equally because every world completed every family.
+
+| Arm | Target NRMSE | Retention NRMSE | Directional gain | Parameter-change L2 |
+| --- | ---: | ---: | ---: | ---: |
+| No-op | 1.000000 | 0.000000 | 0.000000 | 0.000000 |
+| Unconstrained target fit | 0.038695 | 0.888351 | 0.989872 | 0.569264 |
+| Soft retention | 0.360218 | 0.199321 | 0.700712 | 0.978042 |
+| Numerical nullspace, 12 anchors | 0.343031 | 0.338563 | 0.834693 | 1.334016 |
+| Matched random | 1.210108 | 0.682883 | 0.001962 | 0.978042 |
+| Gradient, 200 steps | 0.383597 | 0.185988 | 0.663043 | 0.655744 |
+
+The target-only fit nearly realizes the requested shift but spreads a large change into the retained region. Soft retention gives up target accuracy to reduce that spread. The numerical-nullspace arm has better mean target error than soft retention but worse mean unseen retention; protecting 12 supplied anchors is a different objective from penalizing all public retention rows.
+
+The matched-random direction has the same requested support and L2 as the realized soft endpoint delta. Its mean realized L2 matches to the displayed precision. Its poor target result indicates that direction matters in this fixture. There is only one random direction per checkpoint, so this is not a characterization of the entire random-edit distribution or a complete causal-mechanism test.
+
+The gradient arm optimizes the same soft objective for a fixed 200 steps. It has slightly worse target error and lower collateral drift than the direct soft fit. Different endpoints on this tradeoff do not establish that the compiler dominates optimization. The study does not tune competing optimizers, match total computation, or compare end-to-end fine-tuning.
+
+![Held-out errors for all six fixed arms by architecture](../../../artifacts/weight-space/study-v2-report-complete/main-arms.png)
+
+The family-specific means show which patterns are shared and which vary. Each table cell is **target / retention NRMSE**, with 12 checkpoints per family; no-op is 1 / 0 for each.
+
+| Family | Target-only | Soft retention | Nullspace, 12 | Matched random | Gradient |
+| --- | --- | --- | --- | --- | --- |
+| ReLU MLP | 0.049059 / 0.960867 | 0.501459 / 0.200386 | 0.432874 / 0.411429 | 1.033477 / 0.443767 | 0.512377 / 0.187046 |
+| Tanh MLP | 0.027892 / 0.918076 | 0.358731 / 0.205812 | 0.387209 / 0.345725 | 1.317485 / 0.813380 | 0.398428 / 0.192992 |
+| Convolution + tanh | 0.039135 / 0.786109 | 0.220463 / 0.191765 | 0.209009 / 0.258535 | 1.279361 / 0.791500 | 0.239986 / 0.177925 |
+
+The convolution fixture has a wider editable feature representation, 55 augmented coordinates instead of 25, despite its smaller total parameter count. Its lower target errors are descriptive results of this design, not an architecture-superiority test with matched capacity or training.
+
+## Four predeclared paired contrasts
+
+For each contrast, the runner first averages the three family differences within each world, then bootstraps the 12 world values with 10,000 draws and the fixed analysis seed. The intervals are exploratory percentile intervals without multiplicity correction. None should be reinterpreted as a new confirmatory test of a broad neural-network population.
+
+| Contrast and interpretation | Mean | Exploratory 95% interval |
+| --- | ---: | --- |
+| Target-only retention NRMSE minus soft-retention retention NRMSE: lower collateral drift | 0.689030 | [0.674819, 0.703416] |
+| Soft minus target-only target error: target cost of retention | 0.321522 | [0.299410, 0.344362] |
+| Random minus soft target error: directional advantage over this random control | 0.849890 | [0.765373, 0.917724] |
+| Gradient minus soft target error: difference from the fixed iterative control | 0.023379 | [0.017805, 0.029224] |
+
+![World-cluster paired contrast intervals](../../../artifacts/weight-space/study-v2-report-complete/paired-contrasts.png)
+
+All four intervals exclude zero for their stated directions under this generator. The first two must be read together: the large collateral improvement comes with a target cost. The final contrast says nothing by itself about retention, total objective value, tuning, or computational efficiency.
+
+## Validation selection and structural admission
+
+All 216 fixed arm candidates, six per checkpoint, passed their declared structural policy. This verifies allowed tensors and parameter limits; it does not certify target utility or retention. Selection required structural acceptance, validation target NRMSE at most one, and validation retention NRMSE at most 0.35, followed by the fixed target-error, edit-size, and lexical ordering. The no-op remained eligible as a fallback.
+
+| Family | Soft retention selected | Nullspace selected | Gradient selected |
+| --- | ---: | ---: | ---: |
+| ReLU MLP | 9 | 1 | 2 |
+| Tanh MLP | 7 | 5 | 0 |
+| Convolution + tanh | 3 | 9 | 0 |
+| Total | 19 | 15 | 2 |
+
+The selected candidates' held-out mean target NRMSE is **0.345246**, and mean retention NRMSE is **0.229042**. All 36 also meet the same numerical thresholds on their test inputs. Their test target errors range from 0.124955 to 0.644140, and retention errors from 0.137529 to 0.337184.
+
+The test-threshold count is a **post-result descriptive check**, not an additional predeclared success endpoint, a distributional guarantee, or a formally certified contract. The selected candidate is an alias of one already evaluated fixed arm; it is not a seventh independent candidate. Selection never uses the test outcomes.
+
+## Anchor feasibility and exact endpoint residuals
+
+The feasibility ablation fits numerical-nullspace proposals with 4, 12, or 64 public retention anchors. Bias is an augmented feature, giving 25 head coordinates for each MLP and 55 for the convolution fixture. All conditions have 12 checkpoints per family.
+
+| Family | Anchors | Numerical rank | Nullity | No-ops | Exactly zero on anchors | Largest exact-residual magnitude | Target / retention NRMSE |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| ReLU MLP | 4 | 4 | 21 | 0 | 0 | 2.355e-16 | 0.331434 / 0.522103 |
+| ReLU MLP | 12 | 12 | 13 | 0 | 0 | 3.594e-16 | 0.432874 / 0.411429 |
+| ReLU MLP | 64 | 25 | 0 | 12 | 12 | 0 | 1.000000 / 0.000000 |
+| Tanh MLP | 4 | 4 | 21 | 0 | 0 | 3.889e-16 | 0.254601 / 0.359670 |
+| Tanh MLP | 12 | 12 | 13 | 0 | 0 | 6.321e-16 | 0.387209 / 0.345725 |
+| Tanh MLP | 64 | 25 | 0 | 12 | 12 | 0 | 1.000000 / 0.000000 |
+| Convolution + tanh | 4 | 4 | 51 | 0 | 0 | 4.695e-16 | 0.160404 / 0.247932 |
+| Convolution + tanh | 12 | 12 | 43 | 0 | 0 | 5.920e-16 | 0.209009 / 0.258535 |
+| Convolution + tanh | 64 | 55 | 0 | 12 | 12 | 0 | 1.000000 / 0.000000 |
+
+Ranks and nullities are identical across the 12 checkpoints within each displayed condition. The residual column is a rounded display of values computed from exact rational differences of actual stored endpoints and supplied feature rows. All 72 non-no-op feasibility candidates have **nonzero** exact anchor residuals. Their small magnitudes do not satisfy an exact-zero preservation premise.
+
+![Anchor constraints, target error, and collateral drift](../../../artifacts/weight-space/study-v2-report-complete/anchor-feasibility.png)
+
+At 64 anchors all 36 proposals become no-ops, giving exact preservation and no target progress. This is a useful feasibility outcome. The numerical-rank calculation is not itself a theorem about exact rank, and the study does not supply domain-wide feature-span witnesses. The formal infeasibility result separately states what follows if exact protection and span membership are established.
+
+More protected anchors also do not guarantee monotonically better unseen retention. In the convolution fixture, mean retention NRMSE increases from 0.247932 at four anchors to 0.258535 at twelve. The next experiment needs to vary span coverage and conditioning explicitly, rather than treating anchor count as a sufficient coverage measure.
+
+## Native precision and realized changes
+
+Each precision condition first projects its own parent model to the declared format. The compiler extracts binary64-lifted features from that parent, fits the soft edit, and projects the candidate. CPU PyTorch executes the native parent and candidate on the saved test inputs. The comparison therefore measures execution and endpoint differences for each format's own parent, not the effect of only changing the output dtype of one identical model.
+
+| Format | Checkpoints | Native target NRMSE | Native retention NRMSE | Maximum native-versus-lifted edit-drift discrepancy | Rounded endpoint cells | Requested / effective changed cells |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Float64 | 36 | 0.360218 | 0.199321 | 1.554e-15 | 0 | 2520 / 2520 |
+| Float32 | 36 | 0.360218 | 0.199321 | 4.337e-07 | 2520 | 2520 / 2520 |
+| Float16 | 36 | 0.360231 | 0.199307 | 1.287e-03 | 2520 | 2520 / 2520 |
+| Bfloat16 | 36 | 0.360280 | 0.199336 | 1.034e-02 | 2520 | 2520 / 2512 |
+
+Cell counts are sums across checkpoints. Rounded endpoint cells count requested edit endpoints that change during projection, excluding the initial projection of each parent model. Rounding is measured against the requested binary64 endpoint; a rounded cell can still count as an effective change. Eight requested bfloat16 changes disappear. The maximum discrepancy is over saved test outputs and checkpoints, not a population-wide or worst-case input bound.
+
+![Measured native arithmetic discrepancy](../../../artifacts/weight-space/study-v2-report-complete/native-precision.png)
+
+Aggregate target and retention errors change little in these small fixtures, while the maximum execution discrepancy grows with lower precision. This is evidence for recording both endpoint realization and actual execution. It does not justify ignoring rounding in other models, near decision boundaries, on GPUs, or under different operation orders. No IEEE-execution theorem is supplied, even for float64.
+
+## Three-edit sequences and interference
+
+For every checkpoint, both complete three-edit chains were constructed and sealed before sequence test evaluation. The three target regions are \(x_0<-0.5\), \(|x_0|<0.2\), and \(x_0>0.5\), with different requested output shifts. At each stage the target remains the original model plus that region's prescribed shift; soft retention penalizes changes to the current model in the other regions. This strategy is not a cumulative contract against the original model.
+
+| Family | Method | Chains | Final mean target NRMSE | Final prior-region interference NRMSE | Exact compositions | Exact rollbacks |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| ReLU MLP | Target-only | 12 | 1.178485 | 1.715786 | 12 | 12 |
+| ReLU MLP | Soft retention | 12 | 0.853399 | 0.304080 | 12 | 12 |
+| Tanh MLP | Target-only | 12 | 1.124716 | 1.642258 | 12 | 12 |
+| Tanh MLP | Soft retention | 12 | 0.784631 | 0.285124 | 12 | 12 |
+| Convolution + tanh | Target-only | 12 | 0.976328 | 1.400464 | 12 | 12 |
+| Convolution + tanh | Soft retention | 12 | 0.753396 | 0.333682 | 12 | 12 |
+
+Prior-region interference compares the final outputs with each earlier region's outputs immediately after its own edit, normalized by that region's prescribed-shift RMS. It measures erosion from a previously reached state, not how close that state was to the desired behavior. Final target error measures the latter separately. The [methods](methods.md) give the complete definitions.
+
+![Per-stage desired-behavior error for every region and method](../../../artifacts/weight-space/study-v2-report-complete/sequential-interference.png)
+
+Before a region is targeted, its desired behavior is the unchanged baseline. The heatmap uses each region's own prescribed-shift RMS throughout. Target-only edits acquire the newest shift accurately but strongly disrupt prior regions. Soft retention substantially reduces interference, yet its second region's final mean desired-behavior error exceeds one in every family, approximately 1.14–1.16. Lower interference alone is therefore not evidence that all requested tasks were successfully acquired and retained.
+
+Every one of the 72 chains composes to the same final parameter identity as sequential application, and every rollback restores the original artifact identity. These structural results remain true despite imperfect behavior. Literal rollback restores stored parameters; it cannot reverse prior deployed actions, external state, or random trajectories. Three fixed edits and one task order do not establish long-horizon retention, additive improvement, or absence of forgetting.
+
+## Reading, diagnosis, and creation controls
+
+The auxiliary suite completes six cases per world, 72 total. Four cases are read/diagnose sign fixtures under exact or three-decimal access; two are analytic creation fixtures. The hidden response evaluation uses 128 examples per case. These cases are separate task routes, not an additional large-model benchmark or a pooled accuracy measure.
+
+| Read/diagnose access | Cases | Correct sign | Incorrect sign | Abstentions | Exact response arrays | Maximum response error |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Exact | 24 | 24 | 0 | 0 | 24 | 0 |
+| Rounded to three decimals | 24 | 0 | 0 | 24 | 0 | 7.998e-04 |
+
+The designated coefficient has magnitude 0.0004. Three-decimal access displays `0.0` or `-0.0`; the interface preserves the sign bit. The task prescribes abstention at displayed zero, and the fixed reader follows that rule without using the sign bit. Exact access yields the correct sign. This is a fixed-policy abstention control, not evidence that rounding makes sign information unrecoverable. The positive read and negative diagnosis fixtures are simple routing controls; they do not establish that the framework discovers unknown mechanisms. An abstention is retained as an abstention, not silently counted as an incorrect guess or a successful identification.
+
+The creation cases compare zero, one seeded random artifact, and a preselected analytic construction for each supplied formula. The numerical tolerance is \(10^{-12}\).
+
+| Formula | Arm | Cases | Within tolerance | Exact response arrays | Mean RMSE |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Scaled absolute value | Zero | 12 | 0 | 0 | 3.373145 |
+| Scaled absolute value | Random | 12 | 0 | 0 | 4.306598 |
+| Scaled absolute value | Analytic | 12 | 12 | 12 | 0 |
+| Clip | Zero | 12 | 0 | 0 | 0.799402 |
+| Clip | Random | 12 | 0 | 0 | 3.083414 |
+| Clip | Analytic | 12 | 12 | 12 | 0 |
+
+The analytic artifacts match their supplied formulas exactly on these hidden arrays. This checks the creation route and known positive controls. It does not measure autonomous synthesis, inference from natural language, or generalization to unknown formulas. Each creation case retains all three arms; the analytic arm was fixed before test access.
+
+## Teacher-relative errors and real-valued domain bounds
+
+Editing is defined against the checkpoint's outputs, while the synthetic teacher supplies an independent task reference. The original checkpoints' mean target-region RMSE against the unshifted teacher is 0.249446, and retained-region RMSE is 0.247854. The desired edited teacher adds the target shift in the target region.
+
+| Arm | RMSE against shifted teacher on target | RMSE against unchanged teacher on retention |
+| --- | ---: | ---: |
+| No-op | 0.470232 | 0.247854 |
+| Target-only | 0.250060 | 0.432415 |
+| Soft retention | 0.288673 | 0.264259 |
+| Nullspace, 12 anchors | 0.284989 | 0.287193 |
+| Matched random | 0.549483 | 0.385287 |
+| Gradient | 0.293504 | 0.262675 |
+
+These values are raw output RMSE, not the normalized edit metrics. A faithful edit can retain the original model's approximation error; preserving the parent is not equivalent to recovering the teacher. No-op's shifted-target error should not be confused with the original checkpoint's error against the unshifted teacher.
+
+The ReLU soft-retention candidates also have exact-rational sequential drift receipts on the whole input box. Across the 12 checkpoints, the first-output bound ranges from **5.570890 to 8.295392**, the second from **2.785445 to 4.147696**, and the third is zero. These full-box bounds include the intended target effect and discard cancellation. They are conservative and cannot be substituted for a tight retention-region bound merely because the measured retention error is low.
+
+The runtime receipts evaluate a real-valued recurrence. The separate Lean theorem proves that recurrence under its mathematical premises, but these new JSON endpoints are not automatically generated as checked Lean instances. There is no corresponding all-layer tanh or convolution proof in this study. Generic head residuals for those fixtures concern supplied lifted features, not a proof of their extractor or native execution.
+
+## Access, accounting, and reproducibility
+
+The main sessions record the following interface usage across all 36 checkpoints:
+
+| Counter | Recorded total |
+| --- | ---: |
+| Tool calls | 708 |
+| Weight values charged | 134,148 |
+| Feedback calls | 216 |
+| Feedback examples submitted | 27,648 |
+| Execution calls | 72 |
+| Execution examples submitted | 4,608 |
+| Proposals | 216 |
+| Provider input/output tokens | 0 / 0 |
+
+Separate evaluator-side model-example counts are 55,296 for validation, 110,592 for main held-out evaluation, 55,296 for feasibility held-out evaluation, 221,184 for precision held-out evaluation, and 24,192 for sequence held-out evaluation. These are actual repeated model/example executions for those evaluation components, not unique data counts; they exclude public setup, fitting, and initial training. The table of session charges and evaluator-side counts must not be added as if they were disjoint units of computation. Training, feature extraction, linear algebra, auxiliary work, memory, and other costs require their own accounting. No provider calls occurred.
+
+The session interface is cooperative Python. It records methods, disclosed values, candidates, and callbacks, while the runner controls the fixed procedure and sealing order. It does not attest a private evaluator or prevent hostile code from reaching objects in the same process. A no-forward or no-fitting scientific claim requires a separately enforceable regime; a method-call log alone cannot establish one.
+
+The completed [renderer receipt](../../../artifacts/weight-space/study-v2-report-complete/receipt.json) binds its script, dependencies, input identities, and all 17 generated outputs. It checked the exact 5,020-file study inventory before and after rendering without changing it. The [machine-readable summary](../../../artifacts/weight-space/study-v2-report-complete/summary.json) retains unrounded derived values, while the [generated report](../../../artifacts/weight-space/study-v2-report-complete/report.md) and figures provide reusable tables and PNG/SVG/PDF outputs. An earlier rendering attempt timed out after writing outputs but before its receipt; that directory remains an incomplete attempt and is not the authoritative report. The [rendering history](../../../artifacts/weight-space/study-v2-rendering-history.json) identifies both attempts and the limits of the retrospective record.
+
+## Independent audit and verification
+
+The standalone [independent auditor](../../../scripts/audit_weight_space_v2.py) completed **211 of 211 checks**, with exit code zero in 143.18 seconds. The [audit report](../../../artifacts/weight-space/study-v2-audit.json), [recorded command](../../../artifacts/weight-space/study-v2-audit-execution/command.json), [completion record](../../../artifacts/weight-space/study-v2-audit-execution/completion.json), and [output log](../../../artifacts/weight-space/study-v2-audit-execution/audit.stdout.log) retain the result. It imports no RLCD modules and replays saved evidence with separately implemented equations rather than regenerating worlds, fitting heads, or proposing edits.
+
+| Independently replayed or checked evidence | Count |
+| --- | ---: |
+| Closed study files / frozen source inputs | 5,020 / 31 |
+| Worlds / trained checkpoint endpoints | 12 / 36 |
+| Fixed candidates, structural admissions, and held-out candidate evaluations | 216 each |
+| Feasibility / native precision conditions | 108 / 144 |
+| Sequential chains / exact compositions / exact rollbacks | 72 each |
+| Auxiliary read/diagnose/create cases | 72 |
+| Literal programs / structured lowerings | 900 / 648 |
+| Exact anchor-residual / full-box ReLU receipts | 576 / 12 |
+| World-cluster contrasts / bootstrap draws per contrast | 4 / 10,000 |
+
+Every before/after input inventory matches. No evidence file was left unvisited, and no current frozen-source difference was found. Hashes, literal endpoints, types, counters, and rational certificate payloads are checked exactly. Numerical observations use absolute tolerance \(10^{-12}\) and relative tolerance \(10^{-10}\). The independent implementation still shares NumPy and PyTorch with the experiment. It does not reconstruct random seed-to-sample generation, optimization paths, or training history; prove solver optimality or native arithmetic; or establish that a declared process actually executed without hidden access. Its successful result is saved-evidence consistency and replay under those boundaries.
+
+| Audit identity | SHA-256 |
+| --- | --- |
+| Auditor source | `b7ad808a592539dfb2097fdfb4d53589d11c48e9b77a8ea02b9c494411addad6` |
+| Audit report file bytes | `07cc2034a6ca1ee7f730a455523269b627287c473810a8df91a8da64cb84e620` |
+| Canonical audit payload identity | `61d353a88c79e51c47d93c5f12ad318177df0c570858ec17ca85575af457614f` |
+
+The auditor's separate [adversarial test suite](../../../tests/test_independent_weight_space_v2_audit.py) passed **49 tests**; its [log](../../../artifacts/weight-space/study-v2-audit-execution/focused-tests.log) is retained. The [integration verification](../../../artifacts/weight-space/verification-v2/README.md) records **341 passed Python tests**, zero failures, errors, or skips, and two dependency deprecation warnings. It also checks the frozen execution inputs and local import coverage. These are distinct runs, not a claim that the full suite contained 390 tests. The [formal verification](../../../formal/weight-space/verification-v2/actual/verification.json) records the successful new proof build and axiom audit while preserving 21 historical formal files. Neither test counts nor theorem counts are additional experimental units.
+
+A separate read-only review recomputed the report's summaries and intervals from component JSON, reconstructed all 144 precision endpoint counts and rounding errors, and visually inspected all five figures. It reported 39,338 successful checks and a maximum aggregation difference of \(6.66\times10^{-16}\). That review ran through the session's tool interface and did not produce its own persisted machine-readable receipt. The linked standalone audit, rendering receipt, integration receipt, and formal receipt are the reproducible evidence records.
+
+To audit or render an existing study, choose unused destinations outside its directory:
+
+```powershell
+.venv/Scripts/python.exe scripts/audit_weight_space_v2.py --study-root artifacts/weight-space/study-v2 --freeze artifacts/weight-space/study-v2-freeze/receipt.json --repo . --expected-freeze 0aef8bc624bc5ea501558a807c3c90afa46b3b8ab5d27ea1423943cbb986349e --expected-protocol c809fc30b69d9fec2fd720c2e80e0d35a08d49a1dd7f6e2f352a6b78e2cbb3de --out artifacts/weight-space/my-v2-audit.json
+.venv/Scripts/python.exe scripts/report_weight_space_v2.py --study artifacts/weight-space/study-v2 --out artifacts/weight-space/my-v2-report
+```
+
+## Conclusions that follow, and experiments still needed
+
+The evidence supports the following bounded conclusions. One common artifact and workflow layer can run explicit non-RTS task families and architectures. The fixed retention-aware algorithms expose an observable target/collateral tradeoff. Anchor count, exact realized residuals, dtype projection, and task sequence materially affect what a valid edit means. Parameter composition and rollback can be checked independently of behavioral success. The new theorems clarify conditional preservation and infeasibility rather than declaring every proposed change useful.
+
+The remaining claims need different evidence: unseen feature-domain coverage needs representation witnesses or bounded residuals; generic behavioral admission needs an integrated contract; runtime proof binding and native error need further correspondence work; live weight understanding needs context-matched access experiments; causal repair needs directional intervention controls; repeated usefulness needs cumulative contracts, new task orders, and longer sequences; and scale needs complete resource measurements. The [prioritized program](limitations-and-next-steps.md) gives concrete designs and falsification criteria for each.
+
+All seeds in this study are now observed. A fresh confirmation must freeze new units and its analysis before observation. The old first-study regression estimates remain conditional on their shared dataset, and the historical RTS result remains a selected no-op with zero held-out effect. This broader generic study does not retroactively change either result or repair missing historical checkpoint bodies. See the [version-one results](../results.md) and [project memory](../../PROJECT_MEMORY.md) for their original scope.

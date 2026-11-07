@@ -1,0 +1,127 @@
+{
+  "seed": 7301,
+  "family": "relu_mlp",
+  "base_sha256": "77cf4fdb459f49624de580469e5de0be4827138f319cbba8821ae57707432b53",
+  "selected_arm": "soft_retention",
+  "arms": {
+    "gradient": {
+      "delta_l2": 0.6196772345682391,
+      "edited_task_retain_rmse": 0.32362012986080113,
+      "edited_task_target_rmse": 0.4678680989414414,
+      "effective_changed_cells": 50,
+      "no_op": false,
+      "original_retain_rmse": 0.3213428069904355,
+      "original_target_rmse": 0.3761362681962269,
+      "retain_nrmse": 0.20357056247903701,
+      "retain_rmse": 0.07884253982593867,
+      "target_gain_fraction": 0.475104898819348,
+      "target_nrmse": 0.5502379805031216,
+      "target_rmse": 0.21310625349393908
+    },
+    "matched_random": {
+      "delta_l2": 0.8210426145900402,
+      "edited_task_retain_rmse": 0.37201191923502885,
+      "edited_task_target_rmse": 0.5520447994443439,
+      "effective_changed_cells": 50,
+      "no_op": false,
+      "original_retain_rmse": 0.3213428069904355,
+      "original_target_rmse": 0.3761362681962269,
+      "retain_nrmse": 0.5370274762697085,
+      "retain_rmse": 0.20798984720483793,
+      "target_gain_fraction": 0.23413078955764313,
+      "target_nrmse": 0.8852137138652877,
+      "target_rmse": 0.34284179716346763
+    },
+    "no_op": {
+      "delta_l2": 0.0,
+      "edited_task_retain_rmse": 0.3213428069904355,
+      "edited_task_target_rmse": 0.5939031623621828,
+      "effective_changed_cells": 0,
+      "no_op": true,
+      "original_retain_rmse": 0.3213428069904355,
+      "original_target_rmse": 0.3761362681962269,
+      "retain_nrmse": 0.0,
+      "retain_rmse": 0.0,
+      "target_gain_fraction": 0.0,
+      "target_nrmse": 1.0,
+      "target_rmse": 0.38729833462074165
+    },
+    "nullspace": {
+      "delta_l2": 1.3068064929312706,
+      "edited_task_retain_rmse": 0.3483397093993131,
+      "edited_task_target_rmse": 0.4312980909372439,
+      "effective_changed_cells": 50,
+      "no_op": false,
+      "original_retain_rmse": 0.3213428069904355,
+      "original_target_rmse": 0.3761362681962269,
+      "retain_nrmse": 0.4191359020641776,
+      "retain_rmse": 0.16233063684921825,
+      "target_gain_fraction": 0.7619765402157169,
+      "target_nrmse": 0.3986313618235115,
+      "target_rmse": 0.1543892625618443
+    },
+    "soft_retention": {
+      "delta_l2": 0.8210426145900402,
+      "edited_task_retain_rmse": 0.32531018508697224,
+      "edited_task_target_rmse": 0.4572316844237309,
+      "effective_changed_cells": 50,
+      "no_op": false,
+      "original_retain_rmse": 0.3213428069904355,
+      "original_target_rmse": 0.3761362681962269,
+      "retain_nrmse": 0.23322518281473384,
+      "retain_rmse": 0.09032772489576443,
+      "target_gain_fraction": 0.5277345218465342,
+      "target_nrmse": 0.5089093740078542,
+      "target_rmse": 0.19709975302612606
+    },
+    "unconstrained": {
+      "delta_l2": 0.5843334551913464,
+      "edited_task_retain_rmse": 0.5109275596412961,
+      "edited_task_target_rmse": 0.3772402519877752,
+      "effective_changed_cells": 50,
+      "no_op": false,
+      "original_retain_rmse": 0.3213428069904355,
+      "original_target_rmse": 0.3761362681962269,
+      "retain_nrmse": 1.0228490537568897,
+      "retain_rmse": 0.39614773508844486,
+      "target_gain_fraction": 0.9939728804665575,
+      "target_nrmse": 0.04207988953787697,
+      "target_rmse": 0.01629747113904452
+    }
+  },
+  "usage": {
+    "tool_calls": 19,
+    "weight_values": 3381,
+    "feedback_calls": 6,
+    "feedback_examples": 768,
+    "execution_calls": 2,
+    "execution_examples": 128,
+    "proposals": 6,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "failures": [],
+  "real_domain_bound": {
+    "output_bounds": [
+      7.665321396309189,
+      3.832660698154594,
+      0.0
+    ],
+    "scope": "real arithmetic on all [-1,1]^16; not an IEEE or task-loss proof"
+  },
+  "validation_model_example_executions": 1536,
+  "validation_execution_count_complete": true,
+  "validation_feedback_attempts": {
+    "attempted": 6,
+    "completed": 6
+  },
+  "test_accounting": {
+    "unique_test_examples": 256,
+    "evaluated_splits": {
+      "test_retain": 128,
+      "test_target": 128
+    },
+    "candidate_evaluations": 6,
+    "model_example_executions": 3072
+  }
+}

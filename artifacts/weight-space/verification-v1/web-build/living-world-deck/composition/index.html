@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>A living world. A visible mind. — Crown &amp; Charter</title>
+    <link rel="stylesheet" href="deck.css" />
+    <link rel="stylesheet" href="../lab/lab.css" />
+  </head>
+  <body>
+    <script type="application/hyperframes-slideshow+json">
+      {
+        "slides": [
+          {
+            "sceneId": "open-world",
+            "notes": "Introduce Crown & Charter as a playable explanation of weight-space programming. Each civilization has a small, authored neural policy whose real numbers can be edited. The world provides consequences that people can inspect. This is a working learning application, not evidence that a trained general intelligence understands civilization. Invite the audience to think of one behavior they would want to change."
+          },
+          {
+            "sceneId": "living-footage",
+            "notes": "Press the video's native Play control. This 36.133-second film uses 268 genuine browser frames from 72.004 seconds of active capture, retimed at 2×; the game simulation was independently set to 32×. Seed 42 advances from year 1 to year 49 across four views: five founding societies, settlement growth, wildlife, and Iron Ridge. Pauses between views are omitted. There is no audio; the Scene guide caption track identifies each segment. The recording documents growth of five existing societies, not the emergence of new civilizations. No weights were edited during the film. Pause at a useful moment and invite an observation; the labs that follow provide the controlled weight comparisons. Full provenance is in assets/recording.json."
+          },
+          {
+            "sceneId": "learning-loop",
+            "notes": "The research article describes weight-space programming as a general-purpose language model directly reading and writing neural-network weights around a natural-language specification, without gradient training. This application makes the underlying arithmetic and consequences inspectable through manual auxiliary-weight edits and an optional fixed, bounded Laya selector; general specification-to-weight synthesis is outside its current scope. Follow the actual application's loop from world conditions through local observations, the editable policy, and a sampled endeavor, then back to the world. Ecological dynamics and resource checks also matter; a selected endeavor does not guarantee a completed action. Observe, Edit, Compare, Reflect, and Inspect provide progressively deeper entry points."
+          },
+          {
+            "sceneId": "policy-lab-scene",
+            "notes": "This embedded lab runs the application's actual policy code on a frozen checkpoint: seed 42, Iron Ridge, year 10, tick 1728. Ask the audience to predict a direction before moving one W2 value. Compare original and edited probabilities using the same observations. Use the precise minus/plus controls, then open the trace. A weight changes a score through its hidden activation; probabilities also depend on the other scores and temperature. This deck experiment is detached from the separately running game."
+          },
+          {
+            "sceneId": "futures-lab-scene",
+            "notes": "Carry the same edited policy into a paired future. Start with one year, then choose a longer horizon if useful. Two detached copies begin from the same world and random state; only the selected society's policy differs. Read both a society measure and an ecological measure. The ecology cohort is fixed at the starting point. Decision counts are scheduled selections, not completed buildings or successful raids. Different choices can alter later random draws, so one run is a reproducible scenario, not a general effect estimate."
+          },
+          {
+            "sceneId": "model-architecture",
+            "notes": "Separate the editable auxiliary policy from native Laya. Each society's scorer has 32 inputs, 38 ReLU hidden units, and one score per candidate: 1,293 weights and biases, plus a separate temperature scalar. Sixteen inputs describe local conditions, eight indicate the candidate action, and eight are currently reserved zeros. The authored starting policy is untrained. Optional fixed native Laya chooses among up to three submitted, bounded patches plus keep; it does not synthesize arbitrary tensors or train its own checkpoint. The embedded labs do not make a Laya call."
+          },
+          {
+            "sceneId": "evidence-limits",
+            "notes": "Keep the claims proportional to the evidence. A frozen comparison isolates an immediate model effect at one state. Paired futures demonstrate a reproducible scenario but require more states and seeds for broader conclusions. Terrain streams over a very large finite coordinate range. Persistent state is capped at 2,048 ecological regions, 32 retained civilizations, 128 retained settlements, and 128 concurrent mobile groups; retired ecology can regenerate. Policies choose civilization-level endeavors, and people and wildlife are aggregate simulation quantities."
+          },
+          {
+            "sceneId": "begin-exploring",
+            "notes": "Open the live application if its local server is running. Learn pauses the world on entry, captures a starting point, and supports a prediction, live weight edit, frozen probability comparison, and paired futures. Use Resume world to watch its next scheduled decision. Encourage one edit at a time and more than one checkpoint. The linked implementation files and guide are portable source copies shipped with this deck. Research inspiration: Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights, by Rikiya Takehi, Jayden Teoh, Alex Zhang, and Omar Khattab, published November 2, 2026. Its specification-to-weight synthesis is outside this implementation; see sources/READING.md for the source and scope distinction."
+          }
+        ]
+      }
+    </script>
+
+    <div id="root" data-composition-id="root" data-duration="129" data-width="1920" data-height="1080">
+    <section id="open-world" class="clip scene scene--intro" data-composition-id="open-world" data-start="0" data-duration="12" data-label="A living world. A visible mind." data-width="1920" data-height="1080" aria-labelledby="intro-title">
+      <header class="brand-line">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <p>Crown &amp; Charter <span class="brand-divider" aria-hidden="true">/</span> A living-world learning lab</p>
+      </header>
+      <div class="intro-grid">
+        <div class="intro-copy">
+          <h1 id="intro-title"><span>A living world.</span><span>A visible mind.</span></h1>
+          <p class="intro-premise">Explore a civilization. Change a real weight. Watch a different future unfold.</p>
+          <div class="mode-line" aria-label="Three ways to explore the application">
+            <span>Play</span><span>Learn</span><span>Inspect</span>
+          </div>
+        </div>
+        <figure class="hero-world">
+          <div class="image-mat">
+            <img src="../assets/gameplay-poster.jpg" alt="The running Crown and Charter application, with its procedural landscape and civilization interface." width="1280" height="720" />
+          </div>
+          <figcaption>An ecosystem you can observe, interrupt, and understand.</figcaption>
+        </figure>
+      </div>
+      <p class="intro-footer">An interactive introduction to weight-space programming</p>
+    </section>
+
+    <section id="living-footage" class="clip scene scene--footage" data-composition-id="living-footage" data-start="12" data-duration="45" data-label="Watch the world unfold" data-width="1920" data-height="1080" aria-labelledby="footage-title">
+      <header class="footage-header">
+        <h2 id="footage-title">A world in motion.</h2>
+        <p class="eyebrow">Recorded gameplay</p>
+      </header>
+      <div class="footage-grid">
+        <div class="video-mat">
+          <video id="gameplay-video" data-start="0" src="../assets/gameplay-timelapse.mp4" poster="../assets/gameplay-poster.jpg" controls playsinline muted preload="metadata" aria-label="Accelerated recording of the running Crown and Charter living world" aria-describedby="recording-note">
+            <track kind="captions" src="../assets/gameplay-captions.vtt" srclang="en" label="Scene guide" default />
+            Your browser cannot play this recording. <a href="../assets/gameplay-timelapse.mp4">Open the gameplay video.</a>
+          </video>
+        </div>
+        <aside class="footage-aside" aria-label="What to watch for">
+          <div class="watch-point"><span class="watch-stroke" aria-hidden="true"></span><p>Settlements grow.</p></div>
+          <div class="watch-point"><span class="watch-stroke" aria-hidden="true"></span><p>Groups travel.</p></div>
+          <div class="watch-point"><span class="watch-stroke" aria-hidden="true"></span><p>Ecologies respond.</p></div>
+          <p class="recording-note" id="recording-note"><span class="text-line">World: 32×</span><span class="text-line">Video: 2×</span><span class="text-line">Seed 42</span><span class="text-line">Years 1–49</span></p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="learning-loop" class="clip scene scene--loop" data-composition-id="learning-loop" data-start="57" data-duration="12" data-label="From a world to a choice and back" data-width="1920" data-height="1080" aria-labelledby="loop-title">
+      <header class="slide-header">
+        <p class="eyebrow">The idea</p>
+        <h2 id="loop-title">Follow a choice around the world.</h2>
+        <p class="slide-deck">The research idea: a language model reads and writes weights from a written specification.</p>
+      </header>
+      <div class="world-loop" role="img" aria-label="Living world conditions produce observations. An editable policy scores endeavors. A sampled endeavor influences the world, which changes future observations.">
+        <div class="loop-nodes">
+          <div class="loop-node"><span class="node-index">01</span><h3>Living world</h3><p><span class="text-line">Food, forests,</span><span class="text-line">people, neighbors</span></p></div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="loop-node"><span class="node-index">02</span><h3>Observations</h3><p><span class="text-line">16 local signals</span><span class="text-line">describe a need</span></p></div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="loop-node loop-node--editable"><span class="node-index">03</span><h3>Editable policy</h3><p><span class="text-line">Real weights</span><span class="text-line">shape the scores</span></p></div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="loop-node"><span class="node-index">04</span><h3>Endeavor</h3><p><span class="text-line">One focus sampled</span><span class="text-line">from eight choices</span></p></div>
+        </div>
+        <div class="return-path" aria-hidden="true"><span>Actions reshape conditions</span></div>
+      </div>
+      <div class="learner-path">
+        <p class="path-heading">Here, you edit a small policy and inspect its effects.</p>
+        <ol>
+          <li><h3>Observe</h3><p>Notice a need.</p></li>
+          <li><h3>Edit</h3><p>Edit one value.</p></li>
+          <li><h3>Compare</h3><p>Test two futures.</p></li>
+          <li><h3>Reflect</h3><p>Ask why.</p></li>
+          <li><h3>Inspect</h3><p>Read the math.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="policy-lab-scene" class="clip scene scene--lab" data-composition-id="policy-lab-scene" data-start="69" data-duration="12" data-label="Interactive policy lab" data-width="1920" data-height="1080" aria-labelledby="policy-title">
+      <header class="slide-header lab-header">
+        <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Try it · the real policy engine</p>
+        <a class="lab-open" href="../lab/index.html#weights" target="_blank" rel="noopener" aria-label="Open the full-page policy lab in a new tab">Open full-page lab <span aria-hidden="true">↗</span></a>
+        <h2 id="policy-title">Change a number. See a choice shift.</h2>
+        <p class="slide-deck">Make a prediction, then edit one real output weight.</p>
+      </header>
+      <div id="policy-lab" class="lab-mount" aria-label="Interactive policy experiment">
+        <p class="lab-loading" role="status">Loading the policy and its starting world…</p>
+      </div>
+    </section>
+
+    <section id="futures-lab-scene" class="clip scene scene--lab" data-composition-id="futures-lab-scene" data-start="81" data-duration="12" data-label="Interactive paired futures" data-width="1920" data-height="1080" aria-labelledby="futures-title">
+      <header class="slide-header lab-header">
+        <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Test it · the real simulation engine</p>
+        <a class="lab-open" href="../lab/index.html#futures" target="_blank" rel="noopener" aria-label="Open the full-page paired futures lab in a new tab">Open full-page lab <span aria-hidden="true">↗</span></a>
+        <h2 id="futures-title">One starting world. Two possible futures.</h2>
+        <p class="slide-deck">Keep the original mind. Test your edited mind beside it.</p>
+      </header>
+      <div id="future-lab" class="lab-mount" aria-label="Interactive paired simulation experiment">
+        <p class="lab-loading" role="status">Preparing two copies of the same starting world…</p>
+      </div>
+    </section>
+
+    <section id="model-architecture" class="clip scene scene--architecture" data-composition-id="model-architecture" data-start="93" data-duration="12" data-label="The editable policy and the fixed Laya selector" data-width="1920" data-height="1080" aria-labelledby="architecture-title">
+      <header class="slide-header">
+        <p class="eyebrow">Inside the mind</p>
+        <h2 id="architecture-title">What actually changes?</h2>
+        <p class="slide-deck">Each civilization owns a small, inspectable neural policy.</p>
+      </header>
+      <div class="network-structure" aria-label="The auxiliary model has 32 inputs, 38 ReLU hidden units, and one score per candidate">
+        <div class="network-stage">
+          <p class="network-number">32<span>inputs</span></p>
+          <p><span class="text-line">16 state · 8 action</span><span class="text-line">8 reserved zeros</span></p>
+        </div>
+        <span class="network-arrow" aria-hidden="true">→</span>
+        <div class="network-stage">
+          <p class="network-number">38<span>hidden units</span></p>
+          <p><span class="text-line">Weights combine signals.</span><span class="text-line">ReLU activates.</span></p>
+        </div>
+        <span class="network-arrow" aria-hidden="true">→</span>
+        <div class="network-stage">
+          <p class="network-number">1<span>score per candidate</span></p>
+          <p><span class="text-line">Eight action scores.</span><span class="text-line">Softmax probabilities.</span></p>
+        </div>
+      </div>
+      <div class="parameter-line"><strong>1,293 editable parameters</strong><span>Authored, untrained · temperature is separate</span></div>
+      <div class="laya-band">
+        <div class="laya-title"><p class="eyebrow">Optional native Laya</p><h3>A fixed selector</h3></div>
+        <div class="laya-options"><p>Up to three authored patches + keep</p><div class="patch-labels"><span>Sustain</span><span>Connect</span><span>Secure</span><span>Keep</span></div></div>
+        <p class="laya-result">Selects one option; a patch changes at most two W2 values.</p>
+      </div>
+      <p class="architecture-footnote">Laya’s own checkpoint stays fixed. No gradient training runs during play.</p>
+    </section>
+
+    <section id="evidence-limits" class="clip scene scene--evidence" data-composition-id="evidence-limits" data-start="105" data-duration="12" data-label="What the evidence can tell us" data-width="1920" data-height="1080" aria-labelledby="evidence-title">
+      <header class="slide-header">
+        <p class="eyebrow">How to read the result</p>
+        <h2 id="evidence-title">Keep the question in view.</h2>
+        <p class="slide-deck">A useful experiment makes its assumptions visible.</p>
+      </header>
+      <div class="evidence-table" role="table" aria-label="What the experiments demonstrate and how to interpret them">
+        <div class="evidence-head" role="row"><p role="columnheader">What you can observe</p><p role="columnheader">What to keep in mind</p></div>
+        <div class="evidence-row" role="row">
+          <div role="cell"><h3>An immediate model effect</h3><p>Fixed observations isolate how an edit changes choice probabilities.</p></div>
+          <div role="cell"><h3>A probability is a tendency</h3><p>A higher chance guarantees neither the next choice nor a better outcome.</p></div>
+        </div>
+        <div class="evidence-row" role="row">
+          <div role="cell"><h3>A reproducible scenario</h3><p>Two branches begin with the same world and the same random state.</p></div>
+          <div role="cell"><h3>One run is a case study</h3><p>Choices can change later random draws. Repeat across states and seeds.</p></div>
+        </div>
+        <div class="evidence-row" role="row">
+          <div role="cell"><h3>A landscape that unfolds</h3><p>Terrain streams as you explore. Societies and ecology change over time.</p></div>
+          <div role="cell"><h3>A finite simulation</h3><p>Stored regions and societies are capped. Population and wildlife are aggregates.</p></div>
+        </div>
+      </div>
+      <p class="evidence-footer">The policy guides a society’s endeavors; resources and world conditions govern execution.</p>
+    </section>
+
+    <section id="begin-exploring" class="clip scene scene--invitation" data-composition-id="begin-exploring" data-start="117" data-duration="12" data-label="Begin your own experiment" data-width="1920" data-height="1080" aria-labelledby="invitation-title">
+      <div class="invitation-grid">
+        <div class="invitation-copy">
+          <p class="eyebrow">Keep exploring</p>
+          <h2 id="invitation-title"><span>Change a mind.</span><span>Learn from a world.</span></h2>
+          <p class="invitation-deck">Begin with a prediction. Change one value. Compare, reflect, and try again.</p>
+          <a class="open-app" href="http://127.0.0.1:4176/empires.html" target="_blank" rel="noopener noreferrer">Open Crown &amp; Charter <span aria-hidden="true">↗</span></a>
+          <p class="app-context">Play → Learn → Inspect</p>
+          <p class="scope-note"><span class="text-line">Implemented: manual auxiliary-weight edits.</span><span class="text-line">Future: specification-to-weight synthesis.</span></p>
+        </div>
+        <div class="invitation-reference">
+          <div class="presenter-path">
+            <h3>A simple presenter path</h3>
+            <ol><li>Watch the world.</li><li>Invite a prediction.</li><li>Compare two futures.</li><li>Let someone try.</li></ol>
+          </div>
+          <nav class="source-list" aria-label="Sources and implementation">
+            <h3>Follow the evidence</h3>
+            <a href="../sources/EMPIRES.md" target="_blank" rel="noopener noreferrer">Application guide <span aria-hidden="true">↗</span></a>
+            <a href="../sources/policy.ts" target="_blank" rel="noopener noreferrer">Policy implementation <span aria-hidden="true">↗</span></a>
+            <a href="../sources/learning-experiment.ts" target="_blank" rel="noopener noreferrer">Paired experiment engine <span aria-hidden="true">↗</span></a>
+            <a href="../sources/coach.ts" target="_blank" rel="noopener noreferrer">Native Laya proposal adapter <span aria-hidden="true">↗</span></a>
+            <a href="https://rikiyat.github.io/blog/weight-space-programming/" target="_blank" rel="noopener noreferrer">Weight-space programming <span class="source-context">Takehi et al. · Nov 2, 2026</span><span class="source-external" aria-hidden="true">↗</span></a>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    </div>
+
+    <script>window.__timelines = window.__timelines || {};</script>
+    <script src="../vendor/gsap.min.js"></script>
+    <script src="../runtime/composition-runtime.js" defer></script>
+    <script src="../lab/lab.js" defer></script>
+  </body>
+</html>

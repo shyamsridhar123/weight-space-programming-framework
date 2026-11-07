@@ -1,0 +1,27 @@
+{
+  "name": "rlcd-cinder-station",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite game --host 127.0.0.1 --port 4173 --strictPort",
+    "dev:empires": "vite game --host 127.0.0.1 --port 4176 --strictPort --open /empires.html",
+    "build": "tsc --noEmit && vite build game",
+    "test": "tsx --test tests/*.test.ts",
+    "bench:empires": "tsx scripts/empires-benchmark.ts",
+    "bench": "tsx scripts/benchmark.ts",
+    "playtest": "tsx scripts/playtest.ts",
+    "verify-report": "tsx scripts/verify-report.ts"
+  },
+  "dependencies": {
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/three": "^0.180.0",
+    "playwright": "^1.55.1",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.7"
+  }
+}

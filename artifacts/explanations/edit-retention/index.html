@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="An illustrative linear head: see why changing a target output can disturb protected behavior, and when both conditions are feasible.">
+  <title>Change one output. Keep another. · Weight Space Programming Framework</title>
+  <style>
+    :root {
+      color-scheme: light; --paper:#f5f4ee; --panel:#fffefa; --ink:#182c32;
+      --muted:#4e6267; --line:#d3d9d4; --grid:#e8ebe5; --target:#925314;
+      --protect:#087681; --edit:#b13f28; --focus:#225db3; --soft:#eaf1ed;
+      --serif:Georgia,"Times New Roman",serif;
+      --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+      --mono:ui-monospace,"Cascadia Code","SFMono-Regular",Consolas,monospace;
+    }
+    :root[data-theme="dark"] {
+      color-scheme:dark; --paper:#142126; --panel:#192b31; --ink:#f1f1e8;
+      --muted:#b4c7ca; --line:#42585b; --grid:#2c4145; --target:#e7b970;
+      --protect:#77d6da; --edit:#ffab91; --focus:#a6c8ff; --soft:#243c40;
+    }
+    @media(prefers-color-scheme:dark) {
+      :root[data-theme="system"] {
+        color-scheme:dark; --paper:#142126; --panel:#192b31; --ink:#f1f1e8;
+        --muted:#b4c7ca; --line:#42585b; --grid:#2c4145; --target:#e7b970;
+        --protect:#77d6da; --edit:#ffab91; --focus:#a6c8ff; --soft:#243c40;
+      }
+    }
+    *{box-sizing:border-box} [hidden]{display:none!important}
+    body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans)}
+    a{color:var(--protect);text-underline-offset:.2em;overflow-wrap:anywhere}
+    a:hover{text-decoration-thickness:2px}
+    :focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+    .skip{position:absolute;left:1rem;top:-6rem;padding:.7rem;background:var(--panel);z-index:5}
+    .skip:focus{top:1rem}
+    .shell{max-width:1180px;margin:auto;padding:0 32px}
+    .masthead{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;border-bottom:1px solid var(--line);font-size:13px}
+    .brand{font-weight:650;letter-spacing:.015em}
+    .meta{color:var(--muted);text-align:right}
+    h1,h2,h3,p{margin-top:0}
+    h1{font:normal clamp(38px,5vw,62px)/1.08 var(--serif);letter-spacing:-.035em;max-width:760px;margin-bottom:20px}
+    h2{font:normal 29px/1.2 var(--serif);letter-spacing:-.015em;margin-bottom:16px}
+    h3{font-size:16px;line-height:1.4;margin-bottom:8px}
+    .intro{padding:42px 0 30px}
+    .kicker{color:var(--protect);font:600 12px/1.5 var(--sans);text-transform:uppercase;letter-spacing:.11em;margin-bottom:14px}
+    .lead{font-size:19px;line-height:1.55;max-width:770px;margin-bottom:20px}
+    .premise{display:flex;flex-wrap:wrap;gap:10px 24px;color:var(--muted);font-size:14px}
+    .premise strong{color:var(--ink);font-weight:550}
+    code,.math{font-family:var(--mono);font-size:.92em;white-space:nowrap}
+    .lab{display:grid;grid-template-columns:minmax(265px,.83fr) minmax(0,1.4fr);gap:0;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+    .controls{padding:28px;border-right:1px solid var(--line)}
+    .controls h2{font-size:25px}
+    fieldset{margin:0 0 25px;padding:0;border:0;min-width:0}
+    legend,.fieldlabel{display:block;font-weight:650;font-size:14px;margin-bottom:10px}
+    .hint{color:var(--muted);font-size:13px;line-height:1.55;margin:9px 0 0}
+    .presets{display:grid;gap:8px}
+    button,select{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:5px;min-height:44px}
+    button{cursor:pointer;padding:9px 12px;text-align:left}
+    button:hover{border-color:var(--protect)}
+    button[aria-pressed="true"]{border-color:var(--protect);background:var(--soft);box-shadow:inset 3px 0 var(--protect)}
+    button .choice{display:block;font-size:14px;font-weight:600}
+    button .math{display:block;font-size:13px;color:var(--muted)}
+    select{width:100%;padding:8px 10px;font-size:14px}
+    input[type="range"]{width:100%;height:44px;margin:0;accent-color:var(--edit);cursor:pointer}
+    .range-ends{display:flex;justify-content:space-between;font:12px var(--mono);color:var(--muted)}
+    .coordinates{margin-top:12px;padding:10px 12px;background:var(--soft);border-radius:4px;font-family:var(--mono);font-size:14px}
+    .utility{display:flex;align-items:center;gap:14px;margin-top:24px}
+    .utility button{font-size:13px;padding:8px 12px;white-space:nowrap}
+    .utility label{font-size:12px;color:var(--muted)}
+    .utility select{min-height:38px;padding:5px 8px}
+    .visual{padding:26px 26px 20px;min-width:0}
+    .figure-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:4px}
+    .figure-head h2{font:600 15px var(--sans);letter-spacing:0;margin:0}
+    .figure-head span{font-size:12px;color:var(--muted)}
+    figure{margin:0}
+    svg{width:100%;height:auto;display:block;max-height:520px;overflow:visible}
+    svg text{font-family:var(--sans);fill:var(--muted);font-size:14px}
+    svg .axis-label{fill:var(--ink);font-weight:600;font-size:17px}
+    .grid{stroke:var(--grid);stroke-width:1}.axis{stroke:var(--muted);stroke-width:1.3}
+    .target-line{stroke:var(--target);stroke-width:3;fill:none}
+    .protected-line{stroke:var(--protect);stroke-width:3;stroke-dasharray:8 7;fill:none}
+    .edit-line{stroke:var(--edit);stroke-width:3;fill:none}
+    .edit-dot{fill:var(--edit);stroke:var(--panel);stroke-width:3}
+    .legend{display:flex;gap:10px 22px;flex-wrap:wrap;font-size:12px;line-height:1.5;margin:0 0 14px}
+    .legend span{display:inline-flex;align-items:center;gap:7px}
+    .swatch{display:inline-block;width:25px;border-top:3px solid var(--target)}
+    .swatch.protect{border-color:var(--protect);border-top-style:dashed}
+    .swatch.point{width:9px;height:9px;border:0;border-radius:100%;background:var(--edit)}
+    figcaption{font-size:13px;color:var(--muted);line-height:1.55}
+    .outcome{margin-top:20px;padding:16px 18px;border:1px solid var(--line);border-left:4px solid var(--edit);border-radius:4px}
+    .outcome p{margin:0;font-size:15px}.outcome .hint{margin-top:7px;font-size:13px}
+    .result-section{grid-column:1/-1;border-top:1px solid var(--line);padding:24px 28px}
+    .result-section h2{font-size:23px;margin-bottom:6px}
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;font-size:14px;text-align:left}
+    caption{text-align:left;color:var(--muted);font-size:13px;padding:0 0 14px}
+    th,td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+    th:first-child,td:first-child{padding-left:0}th:last-child,td:last-child{padding-right:0}
+    thead th{font-size:12px;color:var(--muted);font-weight:600}
+    tbody th{font-weight:550}td.num{font-family:var(--mono);white-space:nowrap}
+    .ok{color:var(--protect);font-weight:600}.miss{color:var(--edit);font-weight:600}
+    .explanation{padding:38px 0 24px;max-width:900px}
+    .reading-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin:24px 0 36px}
+    .reading-grid article{border-top:2px solid var(--line);padding-top:16px}
+    .reading-grid p{font-size:14px;color:var(--muted);margin:0}
+    .reading-grid strong{color:var(--ink);font-weight:600}
+    .static-table{margin:22px 0 28px}
+    .boundary{border-left:3px solid var(--protect);padding:4px 0 4px 20px;margin:28px 0}
+    .boundary p{margin:0 0 8px}.boundary p:last-child{margin:0}
+    .references{font-size:14px;color:var(--muted);padding:24px 0 38px;border-top:1px solid var(--line)}
+    .references p{margin-bottom:10px}.references p:last-child{margin-bottom:0}
+    .nojs{padding:14px 18px;border:1px solid var(--line);margin:0 0 20px;font-size:14px}
+    @media(max-width:760px){
+      .shell{padding:0 20px}.masthead{align-items:flex-start;padding:18px 0}.meta{max-width:130px}
+      .intro{padding-top:30px}.lead{font-size:17px}.lab{grid-template-columns:1fr}
+      .controls{border-right:0;border-bottom:1px solid var(--line);padding:22px}
+      .presets{grid-template-columns:repeat(3,minmax(0,1fr))}.presets button{padding:9px}
+      button .choice{font-size:12px}button .math{font-size:11px}
+      .visual{padding:22px 18px}.result-section{padding:22px 18px}
+      .reading-grid{grid-template-columns:1fr;gap:18px}.reading-grid p{font-size:15px}
+      th,td{padding:10px 7px;font-size:12px}.figure-head{flex-wrap:wrap}
+    }
+    @media(max-width:480px){
+      .presets{grid-template-columns:1fr}
+      .presets button{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px}
+      button .choice{font-size:14px}button .math{font-size:12px}
+    }
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+    @media print {
+      :root,:root[data-theme="dark"],:root[data-theme="system"]{color-scheme:light;--paper:#fff;--panel:#fff;--ink:#111;--muted:#333;--line:#aaa;--grid:#eee;--target:#744000;--protect:#005560;--edit:#8e2b14;--soft:#eee}
+      body{font-size:11pt}.shell{max-width:none;padding:0}.masthead{padding:0 0 10px}
+      .intro{padding:20px 0}h1{font-size:32pt}.lead{font-size:12pt}.controls,.skip{display:none!important}
+      .lab{display:block;overflow:visible}.visual{padding:14px}.visual svg{max-height:350px}
+      .result-section{padding:14px}table,figure,.outcome,.boundary{break-inside:avoid}
+      .explanation{padding-top:22px}.reading-grid{gap:16px;margin:18px 0}
+      .reading-grid p,.references,figcaption{font-size:10pt}.references{padding-bottom:0}
+      a{color:#111}.nojs{display:none}
+    }
+  </style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to explanation</a>
+<div class="shell">
+  <header class="masthead">
+    <span class="brand">Weight Space Programming Framework</span>
+    <span class="meta">Research draft · Interactive explanation</span>
+  </header>
+  <main id="main">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="kicker">Illustrative linear head</p>
+      <h1 id="page-title">Change one output.<br>Keep another.</h1>
+      <p class="lead">Start with weights <span class="math">(1, 1)</span>. Raise the output at
+        <span class="math">(1, 1)</span> from 2 to 3, while keeping the output at
+        <span class="math">(1, 0)</span> equal to 1. Which direction can the edit take?</p>
+      <div class="premise"><span>Model <strong class="math">y = w₁x₁ + w₂x₂</strong></span>
+        <span>Fixed features · No bias · Exact illustrative arithmetic</span></div>
+    </section>
+    <noscript><p class="nojs">The page below shows the target-only edit. JavaScript enables the controls;
+      the figure, comparison table, and explanation are readable without it.</p></noscript>
+    <section class="lab" aria-label="Explore target change and protection">
+      <div class="controls" id="controls" hidden>
+        <h2>Choose an edit</h2>
+        <fieldset>
+          <legend>Start with a comparison</legend>
+          <div class="presets">
+            <button type="button" id="target-preset" aria-pressed="true"><span class="choice">Target-only</span><span class="math">Δ = (0.5, 0.5)</span></button>
+            <button type="button" id="protected-preset" aria-pressed="false"><span class="choice">Keep (1, 0)</span><span class="math">Δ = (0, 1)</span></button>
+            <button type="button" id="noop-preset" aria-pressed="false"><span class="choice">No-op</span><span class="math">Δ = (0, 0)</span></button>
+          </div>
+          <p class="hint">Target-only is the exact solution with minimum Euclidean update norm.
+            “Keep (1, 0)” changes only the second weight.</p>
+        </fieldset>
+        <fieldset>
+          <legend><label for="delta-one">Move along exact-target edits</label></legend>
+          <input type="range" id="delta-one" min="-10" max="30" step="1" value="10"
+            aria-describedby="slider-help" aria-valuetext="Delta one 0.5; delta two 0.5">
+          <div class="range-ends" aria-hidden="true"><span>Δ₁ = −0.5</span><span>Δ₁ = 1.5</span></div>
+          <p class="hint" id="slider-help">Each step changes Δ₁ by 0.05. Δ₂ becomes 1 − Δ₁,
+            so the target increase stays exactly +1. Moving the slider leaves no-op mode.</p>
+          <div class="coordinates" id="edit-values">Δ = (0.5, 0.5)</div>
+        </fieldset>
+        <label class="fieldlabel" for="protection">What must stay unchanged?</label>
+        <select id="protection">
+          <option value="first">Output at (1, 0)</option>
+          <option value="target">Output at the target (1, 1)</option>
+          <option value="both">Outputs at (1, 0) and (0, 1)</option>
+        </select>
+        <p class="hint" id="protection-equation">Protection requires Δ₁ = 0.</p>
+        <div class="utility">
+          <button type="button" id="reset">Reset all</button>
+          <div><label for="theme">Appearance</label><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></div>
+        </div>
+      </div>
+      <div class="visual">
+        <div class="figure-head"><h2>The space of possible edits</h2><span>Equal scale on both axes</span></div>
+        <figure>
+          <svg id="geometry" viewBox="0 0 600 530" role="img" aria-labelledby="plot-title plot-desc">
+            <title id="plot-title">Target and protection conditions in update space</title>
+            <desc id="plot-desc">The solid line is delta one plus delta two equals one. The dashed vertical line is delta one equals zero. Their intersection is the protected edit (0, 1). The selected target-only edit (0.5, 0.5) lies on the target line but misses protection.</desc>
+            <defs><marker id="edit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" style="fill:var(--edit)"></path></marker></defs>
+            <g class="grid"><path d="M80 55V455 M180 55V455 M280 55V455 M380 55V455 M480 55V455 M80 55H480 M80 155H480 M80 255H480 M80 355H480 M80 455H480"></path></g>
+            <path class="axis" d="M80 355H500 M180 475V35" fill="none"></path>
+            <g aria-hidden="true">
+              <text x="80" y="482" text-anchor="middle">−0.5</text><text x="180" y="482" text-anchor="middle">0</text><text x="280" y="482" text-anchor="middle">0.5</text><text x="380" y="482" text-anchor="middle">1</text><text x="480" y="482" text-anchor="middle">1.5</text>
+              <text x="65" y="460" text-anchor="end">−0.5</text><text x="65" y="360" text-anchor="end">0</text><text x="65" y="260" text-anchor="end">0.5</text><text x="65" y="160" text-anchor="end">1</text><text x="65" y="60" text-anchor="end">1.5</text>
+              <text x="280" y="516" text-anchor="middle" class="axis-label">Δ₁ · change to first weight</text>
+              <text transform="translate(24 255) rotate(-90)" text-anchor="middle" class="axis-label">Δ₂ · change to second weight</text>
+            </g>
+            <path id="target-line" class="target-line" d="M80 55L480 455"></path>
+            <path id="protection-line" class="protected-line" d="M180 55V455"></path>
+            <path id="protection-second" class="protected-line" d="M80 355H480" visibility="hidden"></path>
+            <circle id="feasible-point" cx="180" cy="155" r="10" fill="none" style="stroke:var(--protect);stroke-width:2"></circle>
+            <circle cx="180" cy="355" r="4" style="fill:var(--ink)"></circle>
+            <text x="193" y="378" aria-hidden="true">no-op</text>
+            <path id="edit-vector" class="edit-line" d="M180 355L280 255" marker-end="url(#edit-arrow)"></path>
+            <circle id="edit-point" class="edit-dot" cx="280" cy="255" r="7"></circle>
+            <text id="point-label" x="294" y="240" style="fill:var(--edit);font-weight:650" aria-hidden="true">Δ = (0.5, 0.5)</text>
+          </svg>
+          <div class="legend" aria-hidden="true"><span><i class="swatch"></i>Target increase +1</span><span><i class="swatch protect"></i>Zero protected change</span><span><i class="swatch point"></i>Selected edit</span></div>
+          <figcaption id="geometry-caption">The target requires Δ₁ + Δ₂ = 1. Protection requires Δ₁ = 0.
+            Both hold only at Δ = (0, 1), marked by the open circle.</figcaption>
+        </figure>
+        <div class="outcome">
+          <p id="status" role="status" aria-live="polite" aria-atomic="true">The target is met. The protected output moves by +0.5.</p>
+          <p class="hint" id="mechanism">Both inputs use the first weight. Changing it affects both outputs.</p>
+        </div>
+      </div>
+      <div class="result-section">
+        <h2>Check the outputs</h2>
+        <p class="hint" id="candidate-weights">Parent weights (1, 1) → candidate weights (1.5, 1.5).</p>
+        <div class="table-wrap"><table id="outputs">
+          <caption>Exact values in this illustrative model. Target success and protection are separate conditions.</caption>
+          <thead><tr><th scope="col">Input and condition</th><th scope="col">Parent</th><th scope="col">Candidate</th><th scope="col">Change</th><th scope="col">Condition</th></tr></thead>
+          <tbody id="output-rows">
+            <tr><th scope="row">Target (1, 1): output 3</th><td class="num">2</td><td class="num">3</td><td class="num">+1</td><td class="ok">Met</td></tr>
+            <tr><th scope="row">Protect (1, 0): no change</th><td class="num">1</td><td class="num">1.5</td><td class="num">+0.5</td><td class="miss">Violated</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+    <section class="explanation" aria-labelledby="what-title">
+      <p class="kicker">Follow the mechanism</p>
+      <h2 id="what-title">One coefficient is shared. One is free.</h2>
+      <p>At the target, either coefficient can supply the requested increase. At the protected input
+        <span class="math">(1, 0)</span>, only the first coefficient contributes. Holding that coefficient
+        fixed leaves the second available to satisfy the request.</p>
+      <div class="reading-grid">
+        <article><h3>Fit the target alone</h3><p>The minimum Euclidean-norm exact update splits the increase equally:
+          <strong class="math">(0.5, 0.5)</strong>. It reaches 3 at the target and shifts the protected output to 1.5.</p></article>
+        <article><h3>Constrain what must stay</h3><p>Set the first change to zero. The update
+          <strong class="math">(0, 1)</strong> reaches 3 and preserves the protected output. With no bias change,
+          it also preserves every input on <span class="math">x₂ = 0</span>.</p></article>
+        <article><h3>Notice impossible requests</h3><p>Protecting the target requires its change to be zero;
+          the request requires +1. Protecting both coordinate directions also forces a no-op.
+          <strong>Neither can satisfy the target request.</strong></p></article>
+      </div>
+      <div class="table-wrap static-table"><table>
+        <caption>Static comparison with the original protected input (1, 0); readable without the controls.</caption>
+        <thead><tr><th scope="col">Choice</th><th scope="col">New weights</th><th scope="col">Target output</th><th scope="col">Protected output</th></tr></thead>
+        <tbody><tr><th scope="row">No-op</th><td class="num">(1, 1)</td><td class="num">2</td><td class="num">1</td></tr>
+          <tr><th scope="row">Exact target-only</th><td class="num">(1.5, 1.5)</td><td class="num">3</td><td class="num">1.5</td></tr>
+          <tr><th scope="row">Exact protected</th><td class="num">(1, 2)</td><td class="num">3</td><td class="num">1</td></tr></tbody>
+      </table></div>
+      <h2>What carries over to the framework?</h2>
+      <p>For a fixed feature map and a linear head, the output change is the dot product of the actual
+        update and the feature vector. Zero change on protected feature directions extends to their span.
+        More independent protection can leave fewer directions available for an edit.</p>
+      <p>The real implementation must also check the stored endpoint. Numerical fitting, dtype projection,
+        or a changing feature extractor can invalidate an argument made only about the intended update.
+        A small residual is a measured quantity with a scope; it is not exact preservation.</p>
+      <div class="boundary"><p><strong>This is an illustration, not an experiment.</strong> The model and
+        solution are supplied. There is no learned representation, live LLM, sampled population, or native
+        floating-point certificate here.</p><p>The saved synthetic study supports a target–retention tradeoff
+        for its declared methods and population. This geometry does not strengthen that empirical claim.</p></div>
+    </section>
+  </main>
+  <footer class="references">
+    <p><a href="../../../docs/weight-space/v2/worked-example.md">Derivation and runnable API example</a> ·
+      <a href="../../../examples/edit_retention.py">Edit example</a> ·
+      <a href="../../../examples/session_edit.py">Selection example</a> ·
+      <a href="../../../docs/weight-space/v2/formal.md">Formal assumptions</a> ·
+      <a href="../../../docs/weight-space/v2/results.md">Study results</a></p>
+    <p><a href="source.json">Illustrative model and source record</a> ·
+      <a href="../../../provenance/documentation-revision.json">Documentation revision record</a>.
+      Original figure and implementation; explanatory guidance from STE-Pro-Max, pinned in that record.
+      All controls run locally. No external runtime or network request is required.</p>
+  </footer>
+</div>
+<script>
+"use strict";
+(() => {
+  const byId = id => document.getElementById(id);
+  // Every coefficient is an integer multiple of 1/20. Equality decisions use
+  // integer numerators, never a rounded display value or a numerical tolerance.
+  const denominator = 20;
+  let first = 10, second = 10, protection = "first";
+  const value = n => (n / denominator).toFixed(2).replace(/\.?0+$/, "") || "0";
+  const signed = n => n > 0 ? "+" + value(n) : value(n);
+  const coordinates = () => "(" + value(first) + ", " + value(second) + ")";
+  const x = n => 180 + 10 * n, y = n => 355 - 10 * n;
+  const set = (id, name, val) => byId(id).setAttribute(name, String(val));
+  function row(label, parent, change, desired, target) {
+    const tr = document.createElement("tr"), heading = document.createElement("th");
+    heading.scope = "row"; heading.textContent = label; tr.appendChild(heading);
+    for (const text of [value(parent), value(parent + change), signed(change)]) {
+      const cell = document.createElement("td"); cell.className = "num"; cell.textContent = text; tr.appendChild(cell);
+    }
+    const status = document.createElement("td"), met = change === desired;
+    status.className = met ? "ok" : "miss";
+    status.textContent = met ? "Met" : target ? "Missed" : "Violated";
+    tr.appendChild(status); return tr;
+  }
+  function render() {
+    const total = first + second, noop = first === 0 && second === 0;
+    const targetMet = total === denominator;
+    const protectedChanges = protection === "first" ? [first] : protection === "target" ? [total] : [first, second];
+    const preserved = protectedChanges.every(n => n === 0);
+    byId("edit-values").textContent = "Δ = " + coordinates();
+    byId("candidate-weights").textContent = "Parent weights (1, 1) → candidate weights (" + value(20 + first) + ", " + value(20 + second) + ").";
+    byId("delta-one").value = String(first);
+    byId("delta-one").setAttribute("aria-valuetext", noop ? "No-op selected. Move to choose an exact-target edit." : "Delta one " + value(first) + "; delta two " + value(second));
+    set("target-preset", "aria-pressed", first === 10 && second === 10);
+    set("protected-preset", "aria-pressed", first === 0 && second === 20);
+    set("noop-preset", "aria-pressed", noop);
+    set("edit-vector", "d", "M180 355L" + x(first) + " " + y(second));
+    set("edit-vector", "visibility", noop ? "hidden" : "visible");
+    set("edit-point", "cx", x(first)); set("edit-point", "cy", y(second));
+    set("point-label", "x", x(first) + (first > 21 ? -14 : 14));
+    set("point-label", "y", y(second) + (second > 25 ? 28 : -15));
+    set("point-label", "text-anchor", first > 21 ? "end" : "start");
+    byId("point-label").textContent = "Δ = " + coordinates();
+    set("protection-second", "visibility", protection === "both" ? "visible" : "hidden");
+    set("feasible-point", "visibility", protection === "first" || protection === "both" ? "visible" : "hidden");
+    set("feasible-point", "cy", protection === "both" ? 355 : 155);
+    const rows = [row("Target (1, 1): output 3", 40, total, 20, true)];
+    let rule, caption, mechanism, protectionStatus;
+    if (protection === "first") {
+      set("protection-line", "d", "M180 55V455");
+      rule = "Protection requires Δ₁ = 0.";
+      caption = "The target requires Δ₁ + Δ₂ = 1. Protection requires Δ₁ = 0. Both hold only at Δ = (0, 1), marked by the open circle.";
+      rows.push(row("Protect (1, 0): no change", 20, first, 0, false));
+      mechanism = first === 0 ? "The first weight stays fixed. Only the second weight can supply the target change." : "Both inputs use the first weight. Changing it affects both outputs.";
+      protectionStatus = preserved ? "The protected output stays fixed." : "The protected output moves by " + signed(first) + ".";
+    } else if (protection === "target") {
+      set("protection-line", "d", "M80 255L280 455");
+      rule = "Protection requires Δ₁ + Δ₂ = 0.";
+      caption = "The target requires Δ₁ + Δ₂ = 1; protecting that same input requires Δ₁ + Δ₂ = 0. The parallel lines never meet. No edit satisfies both.";
+      rows.push(row("Protect (1, 1): no change", 40, total, 0, false));
+      mechanism = "The same output is required to change by +1 and to remain unchanged. Those conditions are incompatible.";
+      protectionStatus = preserved ? "The protected target stays fixed." : "The protected target moves by " + signed(total) + ".";
+    } else {
+      set("protection-line", "d", "M180 55V455");
+      rule = "Protection requires Δ₁ = 0 and Δ₂ = 0.";
+      caption = "The two dashed conditions must both hold. Their intersection is the no-op at the origin (open circle). It misses the target line, so no edit satisfies the full request.";
+      rows.push(row("Protect (1, 0): no change", 20, first, 0, false), row("Protect (0, 1): no change", 20, second, 0, false));
+      mechanism = "The two protected directions constrain both coefficients. Full protection permits only the unchanged model.";
+      protectionStatus = preserved ? "Both protected outputs stay fixed." : "At least one protected output moves.";
+    }
+    byId("output-rows").replaceChildren(...rows);
+    byId("protection-equation").textContent = rule;
+    byId("geometry-caption").textContent = caption;
+    byId("status").textContent = (targetMet ? "The target is met. " : "The target is missed. ") + protectionStatus;
+    byId("mechanism").textContent = mechanism;
+    byId("plot-desc").textContent = caption + " Selected edit Δ = " + coordinates() + ". " + byId("status").textContent;
+  }
+  byId("target-preset").addEventListener("click", () => { first = 10; second = 10; render(); });
+  byId("protected-preset").addEventListener("click", () => { first = 0; second = 20; render(); });
+  byId("noop-preset").addEventListener("click", () => { first = 0; second = 0; render(); });
+  byId("delta-one").addEventListener("input", event => { first = Number(event.target.value); second = 20 - first; render(); });
+  byId("protection").addEventListener("change", event => { protection = event.target.value; render(); });
+  byId("theme").addEventListener("change", event => { document.documentElement.dataset.theme = event.target.value; });
+  byId("reset").addEventListener("click", () => {
+    first = 10; second = 10; protection = "first"; byId("protection").value = "first";
+    byId("theme").value = "system"; document.documentElement.dataset.theme = "system"; render();
+  });
+  render(); byId("controls").hidden = false;
+})();
+</script>
+</body>
+</html>

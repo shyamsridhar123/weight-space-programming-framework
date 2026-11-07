@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#18251f" />
+  <meta name="description" content="Watch a neural policy play a strategy battle. Astra observes its performance, writes new policy weights, and you watch the next decisions and game outcomes." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2318251f'/%3E%3Cpath d='M13 18l9 9 10-16 10 16 9-9-5 29H18z' fill='%23e4c780'/%3E%3C/svg%3E" />
+  <title>Crown &amp; Charter · Weight-space lab</title>
+  <script type="module" crossorigin src="/assets/empires-Dk6XSqPi.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/three.module-C-3sAJl9.js">
+  <link rel="modulepreload" crossorigin href="/assets/laya-BNW2gVc9.js">
+  <link rel="modulepreload" crossorigin href="/assets/weight-coach-BCWSJP6K.js">
+  <link rel="stylesheet" crossorigin href="/assets/empires-Cs5L_NlA.css">
+</head>
+<body class="astra-mode">
+  <div id="game-shell">
+    <header class="topbar">
+      <a class="brand" href="/empires.html" aria-label="Crown and Charter home"><span class="brand-mark" aria-hidden="true">♜</span><span><b>Crown &amp; Charter</b><small>PLAY &amp; PROGRAM</small></span></a>
+      <div class="stockpile" aria-label="Your resources">
+        <div class="resource food" title="Villagers collect food and return it to your Town Center. Food trains units."><span class="resource-icon" aria-hidden="true">●</span><span><b id="food-count">500</b><small>FOOD</small></span><i id="food-workers">0 working</i></div>
+        <div class="resource wood" title="Villagers chop trees and bring wood home. Wood pays for buildings and soldiers."><span class="resource-icon" aria-hidden="true">♠</span><span><b id="wood-count">300</b><small>WOOD</small></span><i id="wood-workers">0 working</i></div>
+        <div class="resource population" title="Population includes units in training. Each completed house adds 5 spaces."><span class="resource-icon" aria-hidden="true">♟</span><span><b id="population-count">8 / 15</b><small>POPULATION</small></span></div>
+      </div>
+      <nav class="match-controls" aria-label="Match controls">
+        <span id="match-clock" class="clock">00:00</span>
+        <button id="speed" title="Cycle normal or double speed" aria-label="Game speed, 1 times">1×</button>
+        <button id="pause" aria-label="Pause game">Pause</button>
+        <button id="help" title="How to play" aria-label="How to play">?</button>
+        <button id="brain-toggle" class="brain-toggle" aria-expanded="true" aria-controls="brain-panel">Weight-space lab <span aria-hidden="true">↗</span></button>
+      </nav>
+    </header>
+
+    <main id="workspace" class="brain-open">
+      <section id="field" class="field" aria-label="Battlefield">
+        <canvas id="battlefield" tabindex="0" aria-label="Battlefield. Click blue units to select; right-click resources to gather, open ground to move, or red enemies to attack. Drag to select several units. Use arrow keys to pan and the mouse wheel to zoom."></canvas>
+        <div id="map-labels" aria-label="Places on the battlefield"></div>
+        <section id="wsp-field-guide" class="wsp-field-guide" aria-labelledby="wsp-field-step" hidden>
+          <div class="wsp-guide-heading"><span>AI PLAYS · ASTRA PROGRAMS</span><strong id="wsp-sim-status" role="status">Ready to start</strong></div>
+          <h1 id="wsp-field-step">Watch blue’s strategy change.</h1>
+          <p id="wsp-field-copy">Blue’s policy plays. Astra reviews measured shortfalls and writes new weights. Follow the next orders on the map.</p>
+          <div class="wsp-guide-actions"><button id="wsp-battle" type="button">Take command</button><button id="wsp-restart" type="button">Restart experiment</button></div>
+        </section>
+        <section class="mission-card" aria-label="Current objective">
+          <div class="mission-heading"><span class="blue-dot"></span><b>YOU COMMAND BLUE</b><span id="objective-step">1 / 4</span></div>
+          <h1 id="objective-title">Gather food and wood</h1>
+          <p id="objective-copy">Send three villagers to berries and three to trees.</p>
+          <div class="objective-meter"><i id="objective-fill"></i></div>
+          <div class="objective-bottom"><span id="objective-progress">0 / 50 food · 0 / 30 wood</span><button id="objective-action">Select villagers <span aria-hidden="true">→</span></button></div>
+          <div class="mission-steps" aria-label="Mission progress"><span data-step="gather">Gather</span><span data-step="house">Build</span><span data-step="army">Recruit</span><span data-step="victory">Conquer</span></div>
+        </section>
+        <div class="enemy-status"><span class="red-dot"></span><span id="rival-status">Red prepares · 05:30</span><button id="find-enemy">View enemy ↗</button></div>
+        <div id="paused-banner" hidden><b>Paused</b><span>Inspect, select, or plan your next order.</span><button id="resume">Resume game</button></div>
+        <div id="command-hint" hidden><span id="command-hint-text"></span><button id="cancel-command">Cancel <kbd>Esc</kbd></button></div>
+        <div id="toast" role="status" aria-live="polite" hidden></div>
+        <div id="selection-box" hidden></div>
+        <div class="map-tools"><span class="map-note">2-civilization battle sandbox</span><button id="pan-map" type="button" aria-pressed="false" title="Enable Pan map, then drag the battlefield to move the camera.">Pan map</button><button id="home" title="Return to your settlement (H)">⌂ Home</button><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out">−</button></div>
+      </section>
+
+      <aside id="brain-panel" aria-labelledby="brain-title">
+        <div class="program-header">
+          <div class="program-heading"><div><span class="eyebrow">LIVE GAME · DIRECT WEIGHT EDITS</span><h2 id="brain-title">Weight-space programming</h2></div><button id="brain-close" type="button" aria-label="Close weight-space lab" title="Close the panel to see more of the battlefield">×</button></div>
+          <p class="program-scope">AI plays. Astra writes its policy weights.</p>
+          <p class="program-network-summary">Performance → numerical edits → game effects</p>
+          <div class="program-tabs" role="tablist" aria-label="Programming tools">
+            <button id="program-tab-astra" type="button" role="tab" data-program-tab="astra" aria-selected="true" aria-controls="program-astra">AI + Astra</button>
+            <button id="program-tab-learn" type="button" role="tab" data-program-tab="learn" aria-selected="false" aria-controls="program-learn">Manual lab</button>
+            <button id="program-tab-weights" type="button" role="tab" data-program-tab="weights" aria-selected="false" aria-controls="program-weights">All weights</button>
+            <button id="program-tab-laya" type="button" role="tab" data-program-tab="laya" aria-selected="false" aria-controls="program-laya">Laya chooser</button>
+          </div>
+        </div>
+
+        <div class="program-body">
+          <section class="program-target program-target-compact" aria-label="Policy and command control">
+            <div class="program-control-label">Who gives its orders?</div>
+            <div id="program-control" class="program-segmented" role="group" aria-label="Command control"><button type="button" data-control="manual" aria-pressed="true">You · manual</button><button type="button" data-control="policy" aria-pressed="false">Neural policy</button></div>
+          </section>
+
+          <section id="program-astra" class="program-tabpanel" role="tabpanel" aria-labelledby="program-tab-astra">
+            <p class="astra-intro">The neural policy plays blue. When progress falls short, Astra generates numerical weight edits. The policy’s next decisions use those weights.</p>
+            <div class="astra-connection-row"><span id="astra-connection" role="status">Astra connection not checked</span><button id="astra-connect" type="button">Check connection</button></div>
+
+            <section class="astra-section astra-play" aria-labelledby="astra-play-title">
+              <div class="program-section-title"><span class="program-step-number">1</span><h3 id="astra-play-title">AI plays</h3></div>
+              <label class="astra-goal-label" for="astra-goal">What should blue improve?<select id="astra-goal"><option value="grow-army" selected>Recruit an army</option><option value="grow-economy">Grow the economy</option><option value="defend">Defend the settlement</option><option value="attack">Attack the rival</option></select></label>
+              <div class="astra-actions"><button id="astra-start" type="button" class="program-primary">Start AI + Astra <span aria-hidden="true">▶</span></button><button id="astra-stop" type="button" disabled>Stop Astra</button></div>
+              <p id="astra-status" class="astra-status" role="status" aria-live="polite">Ready to start autonomous play.</p>
+              <ol id="astra-phases" class="astra-phases" aria-label="Automatic feedback loop"><li data-astra-phase="observe"><span>1</span><b>Observe</b></li><li data-astra-phase="request"><span>2</span><b>Astra writes</b></li><li data-astra-phase="apply"><span>3</span><b>Apply weights</b></li><li data-astra-phase="measure"><span>4</span><b>Measure</b></li></ol>
+              <p id="astra-window" class="astra-window">Astra reviews a measured window of gameplay.</p>
+              <div id="astra-metrics" class="astra-metrics"><p class="program-empty">Actual resource returns, recruiting, and damage will appear as the AI plays.</p></div>
+              <p id="astra-observation" class="astra-observation">No performance shortfall measured yet.</p>
+            </section>
+
+            <section class="astra-section" aria-labelledby="astra-change-title">
+              <div class="program-section-title"><span class="program-step-number">2</span><h3 id="astra-change-title">Astra changes weights</h3></div>
+              <p id="astra-edit-summary" class="astra-edit-summary">Astra reviews measured performance before writing a numerical edit.</p>
+              <p id="astra-latest-review" class="astra-review-note" hidden></p>
+              <p id="astra-decision-change" class="astra-decision-change">No Astra edit applied yet.</p>
+              <div id="astra-patches" class="astra-evidence astra-patches"><p class="program-empty">The exact weight edits will appear here: coordinate · old value → new value.</p></div>
+              <details id="astra-reasoning" class="astra-details astra-reasoning" hidden><summary id="astra-reasoning-title">Why Astra wrote this edit</summary><p id="astra-explanation" class="astra-explanation"></p><p id="astra-prediction" class="program-note"></p></details>
+              <details id="astra-keep-review" class="astra-details astra-reasoning" hidden><summary>Why the newest review kept the weights</summary><div id="astra-keep-explanation" class="astra-evidence"></div></details>
+            </section>
+
+            <section class="astra-section" aria-labelledby="astra-effect-title">
+              <div class="program-section-title"><span class="program-step-number">3</span><h3 id="astra-effect-title">Watch the effect</h3></div>
+              <div id="astra-after" class="astra-after"><p class="program-empty">Subsequent gameplay will show whether the edit helped the chosen goal.</p></div>
+              <details class="astra-details"><summary>Compare two futures from the same state</summary><p class="program-note">A separate 60-second comparison measures baseline and edited policies. These results are distinct from the live battle above.</p><div id="astra-comparison" class="astra-evidence"><p class="program-empty">No paired comparison yet.</p></div></details>
+            </section>
+
+            <details class="astra-details astra-audit"><summary>Model requests, history &amp; scope</summary><div id="astra-request-info" class="astra-evidence"><p class="program-empty">Model identity and response evidence appear after a request.</p></div><div id="astra-history" class="astra-evidence astra-history"><p class="program-empty">No feedback events yet.</p></div><button id="astra-review" type="button" class="astra-review">Review now</button><p class="program-model-scope">The game uses an authored, untrained <strong>32 → 38 → 1</strong> scoring network with <strong>1,293 scalar parameters</strong>. Astra generates direct edits to this game policy’s weights; it does not change its own model parameters. There is no fine-tuning step. Improvement is measured, not guaranteed. The optional Laya tab chooses among preset edits.</p></details>
+          </section>
+
+          <section id="program-learn" class="program-tabpanel" role="tabpanel" aria-labelledby="program-tab-learn" hidden>
+            <section class="program-flow-step program-focus" aria-labelledby="program-focus-title">
+              <div class="program-section-title"><span class="program-step-number">1</span><h3 id="program-focus-title">Edit a weight</h3><code class="program-weight-address">W2[19]</code></div>
+              <div class="program-focus-row"><label for="program-focus-value">Recruitment preference<small id="program-focus-baseline">Baseline: —</small></label><input id="program-focus-value" type="number" min="-64" max="64" step="0.1" value="0" inputmode="decimal" aria-describedby="program-focus-baseline program-causal-math" /></div>
+              <input id="program-focus-slider" type="range" min="-12" max="24" step="0.1" value="0" aria-label="Recruitment preference" aria-describedby="program-focus-baseline" />
+              <div class="program-focus-actions"><button id="program-demo" type="button" class="program-demo" title="Set the recruitment preference to 24 and compare the decision">Example: set to 24</button><button id="program-undo" type="button" disabled>Undo edit</button></div>
+            </section>
+
+            <section class="program-flow-step" aria-labelledby="program-choice-title">
+              <div class="program-section-title"><span class="program-step-number">2</span><h3 id="program-choice-title">See the decision change</h3></div>
+              <div class="program-choice-comparison"><div class="program-choice-card"><span>BASELINE CHOOSES</span><strong id="program-baseline-choice">Waiting for the policy.</strong></div><div class="program-choice-card program-choice-edited"><span>EDITED CHOOSES</span><strong id="program-edited-choice">Waiting for your edit.</strong></div></div>
+              <p id="program-causal-math" class="program-causal-math">Recruit score = other terms + weight × activation.</p>
+              <p id="program-cause-status" class="program-cause-status" role="status">Both choices use the same live game state.</p>
+            </section>
+
+            <section class="program-flow-step program-impact" aria-labelledby="program-impact-title">
+              <div class="program-section-title"><span class="program-step-number">3</span><h3 id="program-impact-title">Watch the real result</h3></div>
+              <strong id="program-impact-label">No order executed yet.</strong>
+              <p id="program-impact-detail">Execute the edited decision to see its effect on the battlefield.</p>
+              <progress id="program-impact-progress" max="1" value="0" aria-label="Executed order progress">0%</progress>
+              <p id="program-impact-counts">The live army and training queue appear here.</p>
+            </section>
+
+            <details class="program-advanced">
+              <summary>More controls, evidence &amp; scope</summary>
+              <div class="program-civilization-picker"><label for="program-team">Civilization to program</label><select id="program-team"><option value="0" selected>Your civilization · blue</option><option value="1">Rival civilization · red</option></select></div>
+              <p class="program-model-scope">This authored, untrained <strong>32 → 38 → 1</strong> scoring network has <strong>1,293 scalar parameters</strong>. This tab lets you edit the policy yourself. AI + Astra generates edits from measured gameplay without fine-tuning. The optional Laya chooser selects fixed presets; it does not generate arbitrary weights.</p>
+              <div class="program-version"><span class="program-live-dot" aria-hidden="true"></span><strong id="program-revision">Loading policy</strong><code id="program-fingerprint" title="Fingerprint of the active policy weights">—</code></div>
+              <p id="program-mode-status" class="program-note" role="status">Manual control. Your blue units wait for your orders.</p>
+              <div class="program-decision-pair">
+                <section class="program-decision program-preview"><div class="program-section-heading"><span class="program-badge">PREVIEW</span><span>What the policy would choose now</span></div><strong id="program-choice">Waiting for a decision preview.</strong><p id="program-effect" class="program-effect" aria-live="polite">Choose a weight to inspect its effect.</p></section>
+                <section class="program-decision program-executed"><div class="program-section-heading"><span class="program-badge">EXECUTED</span><span>What actually ran in this game</span></div><p id="program-executed">No policy order has run yet.</p></section>
+              </div>
+              <section class="program-section" aria-labelledby="program-edit-title">
+                <div class="program-section-title"><h3 id="program-edit-title">Four policy preferences</h3></div>
+                <p class="program-note">Each control edits a real output weight used to score available orders.</p>
+                <div id="program-controls"></div>
+                <div class="program-baseline-actions"><button id="program-pin" type="button" title="Save the current weights as the baseline for comparisons">Capture baseline</button><button id="program-reset" type="button">Restore baseline</button></div>
+              </section>
+              <section class="program-section" aria-labelledby="program-scores-title">
+                <div class="program-section-title"><h3 id="program-scores-title">All decision scores</h3></div>
+                <p class="program-note">The same game state, scored with baseline and edited weights. These are preference scores.</p>
+                <div class="program-table-wrap"><table class="program-score-table" aria-label="Action scores for baseline and edited policy weights"><thead><tr><th scope="col">Available order</th><th scope="col">Baseline</th><th scope="col">Edited</th></tr></thead><tbody id="program-scores"><tr><td colspan="3" class="program-empty">Waiting for available orders.</td></tr></tbody></table></div>
+                <p id="program-constraints" class="program-note program-constraints">Resource costs, available units, and the opening preparation period still apply.</p>
+              </section>
+              <section class="program-section program-experiment" aria-labelledby="program-compare-title">
+                <div class="program-section-title"><h3 id="program-compare-title">Compare two futures</h3></div>
+                <p class="program-note">Baseline and edited weights. The same starting state. Sixty game seconds to see what changes.</p>
+                <div class="program-compare-actions"><button id="program-compare" type="button" class="program-primary">Compare 60 seconds <span aria-hidden="true">↗</span></button><button id="program-compare-cancel" type="button" disabled>Cancel</button></div>
+                <p id="program-compare-status" class="program-note" role="status">Ready when you are.</p>
+                <div id="program-results" class="program-results" aria-live="polite"><p class="program-empty">Your comparison results will appear here.</p></div>
+              </section>
+            </details>
+          </section>
+
+          <section id="program-weights" class="program-tabpanel" role="tabpanel" aria-labelledby="program-tab-weights" hidden>
+            <div class="program-section-title"><h3>Edit the network directly</h3><span class="program-level">EXPLORER</span></div>
+            <p class="program-note">Choose a weight or bias, set its value, then inspect the decision trace. Every applied edit changes the active policy.</p>
+            <div class="program-editor-fields">
+              <label class="program-field program-field-wide" for="program-tensor"><span>Parameter</span><select id="program-tensor"><option value="w2">Output weights · W₂</option><option value="w1">Input weights · W₁</option><option value="b1">Hidden biases · b₁</option><option value="b2">Output bias · b₂</option></select></label>
+              <label class="program-field" for="program-neuron"><span>Hidden neuron</span><select id="program-neuron"><option value="0">Neuron 0</option></select></label>
+              <label class="program-field" for="program-feature"><span>Input feature</span><select id="program-feature"><option value="0">Feature 0</option></select></label>
+              <label class="program-field" for="program-value"><span>Weight value</span><input id="program-value" type="number" min="-64" max="64" step="0.1" value="0" inputmode="decimal" aria-describedby="program-tensor-detail" /></label>
+              <button id="program-apply" type="button" class="program-primary">Apply weight</button>
+            </div>
+            <p id="program-tensor-detail" class="program-note">Choose a matrix cell or use the selectors above.</p>
+            <div id="program-matrix" class="program-matrix" aria-label="Editable neural policy weights"><p class="program-empty">Loading the policy matrix.</p></div>
+            <section class="program-section"><div class="program-section-title"><h3>Follow the calculation</h3><span class="program-level">DECISION TRACE</span></div><p class="program-note">See how an order’s inputs and weights contribute to its score.</p><div id="program-trace" class="program-trace"><p class="program-empty">The decision trace will appear here.</p></div></section>
+            <section class="program-section"><div class="program-section-title"><h3>Edit history</h3></div><div id="program-history" class="program-history"><p class="program-empty">No weight edits yet.</p></div></section>
+            <div class="program-file-actions"><button id="program-export" type="button">Export weights ↓</button><button id="program-import-trigger" type="button">Import weights ↑</button><input id="program-import" type="file" accept="application/json,.json" hidden /></div>
+          </section>
+
+          <section id="program-laya" class="program-tabpanel" role="tabpanel" aria-labelledby="program-tab-laya" hidden>
+            <div class="program-section-title"><h3>Let Laya choose a preset</h3><span class="program-level">LOCAL MODEL</span></div>
+            <p class="program-note">The menu contains four preset +1 weight edits and “Keep unchanged.” Laya selects an option; you review the numbers before applying it.</p>
+            <p class="program-model-scope">Preset values and explanations are authored in this app. Laya supplies a selection. Its own checkpoint stays unchanged.</p>
+            <section class="program-connection" aria-label="Laya connection"><div class="program-section-heading"><span class="eyebrow">CONNECTION</span><button id="program-laya-refresh" type="button">Check connection</button></div><strong id="program-laya-status" role="status">Not checked</strong><p id="program-laya-detail" class="program-note">Connect your local Laya service to let it choose a preset.</p></section>
+            <button id="program-laya-request" type="button" class="program-primary program-wide-button">Choose a preset with Laya <span aria-hidden="true">↗</span></button>
+            <section class="program-section"><div class="program-section-title"><h3>Selected preset</h3><span class="program-level">REVIEW FIRST</span></div><div id="program-laya-proposal" class="program-proposal" aria-live="polite"><p class="program-empty">The chosen preset and its exact values will appear here.</p></div><div class="program-proposal-actions"><button id="program-laya-apply" type="button" class="program-primary" disabled>Apply selected edit</button><button id="program-laya-reject" type="button" disabled>Discard</button></div></section>
+          </section>
+        </div>
+
+        <div class="program-run-bar"><button id="program-step" type="button" class="program-primary" title="Execute the policy’s next legal decision and watch it run">Execute &amp; watch <span aria-hidden="true">▶</span></button><button id="program-pause" type="button">Pause &amp; inspect</button></div>
+      </aside>
+    </main>
+
+    <footer class="command-dock">
+      <div class="command-area">
+        <nav class="selection-shortcuts" aria-label="Select your units and buildings"><button id="select-villagers"><span aria-hidden="true">♙</span> <span id="villager-shortcut">Villagers · 6</span><kbd>1</kbd></button><button id="select-army"><span aria-hidden="true">⚔</span> <span id="army-shortcut">Army · 2</span><kbd>2</kbd></button><button id="select-town">Town Center<kbd>H</kbd></button><button id="select-barracks">Barracks<kbd>B</kbd></button><span id="last-order">Your units are waiting for your orders.</span></nav>
+        <div class="command-content">
+          <section class="selection-info" aria-label="Selected units"><span class="eyebrow" id="selection-owner">YOUR SELECTION</span><h2 id="selection-title">3 villagers</h2><p id="selection-description">Idle · waiting for your orders</p><div class="health-track"><i id="selection-health"></i></div><small id="selection-detail">Select a job to begin.</small></section>
+          <section class="action-area" aria-label="Available commands"><div id="actions"></div><div id="production" hidden><div id="production-label"></div><div class="production-track"><i id="production-fill"></i></div></div><p id="controls-hint">Click to select · Right-click to order · Drag to select a group · Scroll to zoom</p></section>
+        </div>
+      </div>
+      <div class="minimap-area"><canvas id="minimap" width="180" height="180" aria-label="Battlefield minimap. Click to move the camera." tabindex="0"></canvas><span><i class="blue-dot"></i>You <i class="red-dot"></i>Opponent</span></div>
+    </footer>
+  </div>
+
+  <div id="welcome" class="modal" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+    <section class="modal-card welcome-card">
+      <span class="eyebrow">CROWN &amp; CHARTER · WEIGHT-SPACE LAB</span><span class="welcome-mark" aria-hidden="true">♜</span>
+      <h2 id="welcome-title">AI plays.<br>Astra changes its weights.</h2>
+      <p>Watch a neural policy play blue in a strategy battle. When it falls short, Astra writes new weights for the policy—then you see what changes in the game.</p>
+      <ol class="opening-steps"><li><span>1</span><div><b>Measure the gameplay</b><small>Follow resources, recruiting, and battle performance.</small></div></li><li><span>2</span><div><b>Astra writes new weights</b><small>Real observations become numerical policy edits.</small></div></li><li><span>3</span><div><b>Watch the next decisions</b><small>Orders and measured outcomes reveal the effect.</small></div></li></ol>
+      <button id="start" class="primary">Start AI + Astra <span aria-hidden="true">→</span></button>
+      <button id="start-battle" class="welcome-secondary" type="button">Play the battle</button>
+      <p class="modal-note">A two-civilization battle sandbox. Direct policy edits, no fine-tuning.<br>The rival can start raiding at <span id="welcome-grace">05:30</span> on the game clock.</p>
+    </section>
+  </div>
+
+  <div id="help-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="help-title" hidden><section class="modal-card help-card"><span class="eyebrow">PLAY &amp; PROGRAM</span><h2 id="help-title">Watch the policy change.</h2><ol class="help-list"><li><b>Let the AI play</b><p>Choose a goal in AI + Astra and press Start AI + Astra. Blue’s neural policy issues real orders. The panel measures its progress and shows which performance target needs attention.</p></li><li><b>Follow Astra’s weight edits</b><p>When progress falls short, Astra receives observations and current policy weights. It generates numerical edits to the game policy. The panel shows the exact old and new values, the changed decision, and what happens afterward. This changes the game policy without a fine-tuning step.</p></li><li><b>Stop or take command</b><p>Stop Astra ends automatic weight reviews. Use Pause to hold the game. Take command opens manual play; issuing a manual blue order stops its automatic policy. Click blue units or use the selection shortcuts, then right-click resources to gather, open ground to move, or red enemies to attack.</p></li><li><b>Build, recruit, conquer</b><p>In manual play, select a villager → Build house → click open ground. Select Barracks → Train spearman. Train <span id="help-recruits">8</span> more to join your two guards, then select Army → Attack enemy town. Destroy red’s Town Center and protect yours.</p></li><li><b>Explore the evidence</b><p>The paired comparison runs baseline and edited weights from the same game state. Model requests, history &amp; scope records the provider evidence. Manual lab lets you edit one weight yourself; All weights exposes the full policy. The optional Laya chooser selects developer-authored presets.</p></li></ol><div class="help-keys"><span><kbd>1</kbd> Villagers</span><span><kbd>2</kbd> Army</span><span><kbd>H</kbd> Home</span><span><kbd>B</kbd> Barracks</span><span><kbd>Space</kbd> Pause</span><span><kbd>↑↓←→</kbd> Pan</span></div><p class="quiet">On touch screens, enable Pan map and drag to move the camera. Turn it off to select units. Close the programming panel any time for more battlefield space.</p><div class="modal-actions"><button id="restart" class="danger" title="Restart the battle with your current policy weights">Restart battle</button><button id="close-help" class="primary">Back to game</button></div></section></div>
+
+  <div id="outcome" class="modal" role="dialog" aria-modal="true" aria-labelledby="outcome-title" hidden><section class="modal-card outcome-card"><span class="eyebrow" id="outcome-eyebrow">BATTLE COMPLETE</span><span class="welcome-mark" aria-hidden="true">⚑</span><h2 id="outcome-title">Victory.</h2><p id="outcome-copy"></p><div id="outcome-stats"></div><button id="play-again" class="primary">Play again →</button></section></div>
+  <div id="render-error" class="modal" role="alertdialog" aria-modal="true" aria-labelledby="error-title" hidden><section class="modal-card"><h2 id="error-title">The battlefield could not load.</h2><p id="render-error-detail"></p><button id="reload" class="primary">Reload game</button></section></div>
+</body>
+</html>

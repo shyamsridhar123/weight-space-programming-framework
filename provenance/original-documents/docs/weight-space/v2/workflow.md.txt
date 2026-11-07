@@ -1,0 +1,277 @@
+# Generic task and evaluation workflow
+
+`rlcd.weight_space.workflow` connects a declared task, a budgeted programmer
+session, immutable candidate outputs, and one held-out evaluation receipt. It
+supports interpretation and diagnosis as well as editing and creation. Execution
+semantics belong to caller-supplied adapters, so a tensor artifact does not need
+to be a particular network family or a game policy.
+
+This is a cooperative Python interface. It records what crosses its methods; it
+does not sandbox Python, observe computation inside callbacks, attest an
+evaluator, or prove a behavioral claim. The [source review](source-review.md)
+explains why access conditions, supplied hints, failures, and evaluation units
+need separate records.
+
+The following example runs from the repository root with its NumPy environment
+(`.venv/Scripts/python.exe` on Windows). The supplied two-parameter linear model
+has a slope of one; the declared task is to change the slope to two while keeping
+the bias. The edit is written explicitly. It is a protocol example, not a
+measurement of a language model's ability.
+
+```python
+import json
+
+import numpy as np
+
+from rlcd.weight_space import Edit, Program, TensorArtifact
+from rlcd.weight_space.workflow import (
+    AccessPolicy, BudgetLimits, ProgrammerSession, SplitSpec, TaskSpec,
+    verify_trace,
+)
+
+
+def predict(artifact, examples):
+    tensors = artifact.tensors
+    return np.asarray(examples) @ tensors["weight"] + tensors["bias"]
+
+
+def public_feedback(candidate, examples):
+    x = np.asarray(examples)
+    return {"mse": float(np.mean((predict(candidate.artifact, x) - 2 * x) ** 2))}
+
+
+base = TensorArtifact(
+    "linear/1",
+    {"weight": [[1.0]], "bias": [0.0]},
+    {"semantic_names": {"input": ["x"], "output": ["y"]}},
+)
+task = TaskSpec(
+    "double-slope", "edit", "Implement y = 2*x and preserve the bias",
+    base.architecture, base.sha256,
+    constraints={
+        "privileged_hints": ["The requested formula is y = 2*x"],
+        "semantic_names": "Supplied in artifact metadata",
+        "preserve_bias": True,
+    },
+)
+session = ProgrammerSession(
+    task, base=base,
+    access=AccessPolicy(feedback=True, forward=True),
+    limits=BudgetLimits(
+        tool_calls=8, weight_values=5, proposals=2,
+        feedback_calls=2, feedback_examples=4,
+        execution_calls=1, execution_examples=2,
+    ),
+    public_feedback=public_feedback,
+    forward=predict,
+    splits=(
+        SplitSpec("validation", ("validation-1", "validation-2")),
+        SplitSpec("test", ("test-1", "test-2")),
+    ),
+)
+
+session.metadata()
+before = session.weights("weight", [(0, 0)])[0]
+baseline = session.propose_program(Program(base.sha256, (), "Keep the baseline eligible"))
+edited = session.propose_program(Program(
+    base.sha256, (Edit("weight", (0, 0), before, 2.0),), "Double the slope",
+))
+validation = [[-1.0], [1.0]]
+scores = [(session.feedback(candidate, validation)["mse"], candidate)
+          for candidate in (baseline, edited)]
+selected = min(scores, key=lambda pair: pair[0])[1]
+assert session.forward(validation, candidate=selected) == [[-2.0], [2.0]]
+session.seal(selected)
+
+# Only the evaluator owner receives these samples. The programmer is sealed.
+heldout_x = np.array([[-3.0], [4.0]])
+
+
+def evaluate(candidate):
+    return {
+        "mse": float(np.mean((predict(candidate.artifact, heldout_x) - 2 * heldout_x) ** 2)),
+        "bias_preserved": bool(np.array_equal(
+            candidate.artifact.tensors["bias"], base.tensors["bias"])),
+    }
+
+
+receipt = session.evaluate_heldout(evaluate, evaluator_id="linear-mse/1")
+exported = receipt.to_dict()
+assert receipt.status == "succeeded"
+assert exported["result"] == {"mse": 0.0, "bias_preserved": True}
+assert exported["usage"]["weight_values"] == 5
+assert verify_trace(exported["trace"], expected_head=exported["trace_head_sha256"])
+print(json.dumps({"status": receipt.status, "result": exported["result"]}, indent=2))
+```
+
+`TaskSpec` binds the objective, architecture/interface identifier, optional
+constraints, and exact parent hash. All modes except `create` require a parent;
+`create` forbids one. The session checks that the supplied immutable `Network`
+or `TensorArtifact` matches the task. The built-in `Network` interface identifier
+is `dense-relu-dense/1`; named tensor artifacts use the caller's identifier.
+
+| Mode | Output submission | Meaning supplied by the caller |
+| --- | --- | --- |
+| `read` | `submit_answer(finite_json)` | Identification, description, or another interpretation rubric. |
+| `diagnose` | `submit_answer(finite_json)` | A mechanism or failure hypothesis and its scoring rubric. |
+| `edit` | `propose_program(program)` or `propose_artifact(artifact)` | A changed artifact with the parent's architecture, tensor shapes, and semantic metadata. |
+| `create` | `propose_artifact(artifact)` | A new artifact with the declared architecture and no parent. |
+
+The mode routes outputs; it does not supply a correctness rubric. Constraints
+such as `preserve_bias`, forbidden fitting, writable tensors, or an accuracy
+threshold remain declared context unless the caller adds checks. In the example,
+the evaluator explicitly measures bias preservation. Metadata, shape, and hash
+checks alone do not establish that behavior is preserved.
+
+Every successful submission returns a `Candidate`, including a valid no-op. Its
+`sha256` commits the task, session configuration, parent, proposal index, proposal
+kind, and realized output. `candidate.artifact.sha256` identifies the realized
+artifact and is a different identity. Answer candidates have `artifact=None`
+and a detached finite-JSON `answer`. `feedback`, candidate execution, and `seal`
+accept only the exact candidate object produced by that session; reconstructing
+or copying an equal-hash candidate does not grant selection rights. A session's
+`sha256` identifies its configuration, not a globally unique execution. Identical
+deterministic runs can produce identical hashes.
+
+`AccessPolicy` independently permits metadata, weight reads, public feedback,
+forward execution, and activation inspection. Metadata includes task constraints
+and artifact semantic names. Record supplied labels, training information,
+privileged hints, and semantic names explicitly in the task and experiment
+configuration. Public accounting commits hidden constraint contents and split
+identifiers by hash; an authorized `metadata()` call intentionally reveals the
+constraints. Other configuration fields, such as the objective and architecture,
+are public.
+
+`weights(name, indices=None)` reads a whole parent tensor or explicit coordinates.
+It counts returned scalar entries, including repeated coordinates. Setting
+`weight_decimals` to an integer from 0 through 15 rounds only these read results;
+the immutable parent retains its original values. Exact access uses `None`.
+Python's numeric rounding is used, not a promise of fixed-width decimal text.
+
+Program proposals return the entire realized artifact through
+`Candidate.artifact`. They therefore require both metadata and exact weight
+access, charge the full artifact scalar count on every attempted program, and
+reject rounded-only access. This includes no-ops and failed program attempts.
+`propose_artifact` returns data the caller already supplied, so it does not
+require parent-disclosure capabilities or charge a weight read. It still checks
+the declared architecture and, for edits, compatibility with the parent. Neither
+route makes an untrusted callback safe to expose private information.
+
+| Callback | Arguments | Required output |
+| --- | --- | --- |
+| `public_feedback` | `(candidate, examples)` | Finite JSON with public validation observations or scores. |
+| `forward` | `(artifact, examples)` | Finite JSON containing the permitted execution result. |
+| `activations` | `(artifact, examples)` | Finite JSON containing the permitted intermediate observations. |
+| Held-out evaluator | `(selected_candidate)` | Finite JSON for the final receipt. |
+
+Tool example batches must be nonempty lists, tuples, or NumPy arrays. NumPy
+scalars and arrays are normalized to finite JSON, and input/output snapshots are
+detached from caller mutations. A callback returning a Python object, a
+`Candidate`, NaN, or infinity fails output validation. Public callbacks cannot
+reenter an active session. Adapters are actual caller-owned callables; this
+interface does not import callback names or execute serialized source code.
+
+`BudgetLimits` and `BudgetUsage` track the following independently:
+
+| Counter | Unit charged by the interface |
+| --- | --- |
+| `tool_calls` | Metadata, weights, proposal, feedback, forward, or activation attempts admitted for execution. |
+| `weight_values` | Scalars disclosed by weight reads or the full realized-artifact size reserved by a program attempt. |
+| `proposals` | Program, full-artifact, or answer submission attempts. |
+| `feedback_calls`, `feedback_examples` | Admitted public feedback attempts and the number of submitted rows. |
+| `execution_calls`, `execution_examples` | Admitted forward and activation attempts, sharing counters, and their submitted rows. |
+| `input_tokens`, `output_tokens` | Counts explicitly supplied through `record_provider_usage`. |
+
+All limits are nonnegative integers; booleans are rejected. Budget additions are
+atomic: an attempt exceeding any applicable limit changes no counters. Denied
+capabilities, invalid modes, malformed coordinates/batch containers, and foreign
+candidate references are recorded as rejected actions without execution charges.
+Once an operation is admitted, its full planned charge is applied before
+execution, including adapter failures, nonfinite results, stale edit parents,
+precondition failures, and proposal parser failures. Malformed proposals that
+are finite JSON retain the submitted data and digest in the trace. Failed submissions
+do not become candidates. Token telemetry is provider-reported and does not add
+a tool call; it is not a locally measured tokenizer count.
+
+The example's five charged weight values are one explicitly read slope and two
+scalars for each of two program proposals. Its two validation callbacks account
+for four submitted examples. These counters do not observe how many model calls,
+optimizer steps, samples, or tokens a callback uses internally. Human selection,
+external editor attempts, provider requests, wall time, and work outside the
+interface require separate experiment records. These budgets do not implement a
+no-fitting or no-network regime.
+
+`seal(candidate)` fixes selection and closes every proposer operation. Later
+proposer attempts raise `SessionSealed` without changing the sealed history.
+`seal()` or `seal(None)` records abstention. Held-out data stay in a caller-owned
+closure and are not passed to proposer tools by this interface. The evaluator
+owner calls `evaluate_heldout` only after selection is sealed. A valid invocation
+runs the evaluator at most once, including a failed evaluation; abstention
+returns an `abstained` receipt without calling it. Evaluator exceptions produce a
+`failed` receipt, with their messages redacted to avoid copying private samples.
+System interrupts also produce a receipt, then propagate the interrupt.
+
+The receipt retains the selected candidate, all successful candidates, failures
+in the trace, configuration, final usage, evaluator ID, split name, and finite
+result. Held-out invocation count is separate from the proposer budget; held-out
+example count and internal evaluator work are unobserved. The evaluator ID is a
+caller-supplied label, not a verified code digest. The evaluator's returned JSON
+is not checked for data leakage. Keep its outputs scoped to intended metrics and
+retain the scorer's version, data manifest, randomness, and actual execution
+counts in the surrounding experiment record. A finite score or successful
+receipt is neither a formal certificate nor evidence of useful improvement by
+itself.
+
+`SplitSpec` records sample IDs and optional lineage IDs. `validate_splits` rejects
+duplicate IDs within a split, repeated split names, sample overlap across splits,
+and overlap among declared lineage sets. A lineage list is the set of lineage
+identifiers represented in that split, not necessarily one entry per sample.
+Validation commits each manifest and reports counts without exposing its IDs.
+It does not infer ancestry, inspect actual data, detect undeclared duplicates,
+or establish independence. When splits are supplied, the held-out split name
+must be declared. Callers remain responsible for keeping public validation and
+private evaluation contents separate.
+
+`ReplayProvider` is a deterministic data script useful for exercising the
+interface or replaying already recorded actions. It accepts a list or tuple of
+at most 10,000 finite-JSON action objects. It uses a fixed whitelist, with no
+dynamic imports, network requests, or live provider calls. Registered session
+callbacks can still perform caller-owned work. For example, given the `base`
+and `task` above:
+
+```python
+from rlcd.weight_space.workflow import ReplayProvider
+
+replay_session = ProgrammerSession(task, base=base)
+actions = [
+    {"op": "metadata"},
+    {"op": "weights", "tensor": "weight", "indices": [[0, 0]]},
+    {"op": "propose_program",
+     "program": Program(base.sha256, (), "Retain the baseline").to_dict()},
+    {"op": "seal", "candidate": 0},
+]
+outcomes = ReplayProvider(actions).run(replay_session)
+assert replay_session.is_sealed
+assert all(outcome["status"] == "succeeded" for outcome in outcomes)
+```
+
+The remaining action forms are `propose_artifact` with `artifact`, `submit_answer`
+with `answer`, `feedback` with `candidate` and `examples`, `forward` or
+`activations` with `examples` and an optional `candidate`, and `provider_usage`
+with `input_tokens` and `output_tokens`. Candidate indexes are zero-based among
+successful replay proposals; a failed parse does not occupy an index. Omitting
+the candidate for execution uses the parent, and omitting it for `seal` abstains.
+Replay records failed actions and continues until it seals or runs out of
+actions. The caller must seal explicitly if the script ends without selection.
+Held-out evaluation is deliberately outside the replay action set. The trace
+labels replay as `scripted_replay` and `model_ability_measured=False`.
+
+Trace events contain a sequence number, previous-event hash, request, result or
+error, action charges, and cumulative usage. `verify_trace` checks the hash links
+and cumulative accounting. Preserve `receipt.to_dict()` together with its
+`receipt.sha256` or a trusted `trace_head_sha256` outside the mutable experiment
+directory. A hash chain can reveal edits or truncation relative to that trusted
+commitment; it cannot detect wholesale replacement if the attacker also replaces
+the claimed head. Successful verification does not establish that callbacks did
+what their labels claim, that no work occurred outside the interface, or that a
+proposer could not access private attributes in the same Python process.
