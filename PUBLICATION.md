@@ -114,6 +114,6 @@ draft.4 release remains unpublished.
 Earlier release-asset links and commit identifiers refer to the private
 repository's historical record and may be unavailable to a public reader.
 Their presence is not evidence that corresponding assets exist in the new
-repository. No project-wide license grant or stable API commitment is added
-by preparing this snapshot; [RIGHTS.md](RIGHTS.md) retains the attribution and
-rights boundaries.
+repository. The project's original material is now licensed under [MIT](LICENSE).
+No stable API commitment is added by preparing this snapshot;
+[RIGHTS.md](RIGHTS.md) describes attribution and third-party license boundaries.

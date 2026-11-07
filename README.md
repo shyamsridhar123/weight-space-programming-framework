@@ -131,6 +131,9 @@ The image flowcharts cover the [task lifecycle](docs/images/task-lifecycle.png),
 ## Project record
 
 **Public research draft · `v0.2.0-draft.4`.** The draft release remains unpublished.
+Project-authored code, documentation, and diagrams use the [MIT license](LICENSE).
+Retained third-party material keeps its own licenses and notices; see [RIGHTS.md](RIGHTS.md).
+
 The [changelog](CHANGELOG.md) records subsequent changes; the
 [draft notes](releases/v0.2.0-draft.4.md) describe the prepared snapshot.
 
@@ -155,7 +158,6 @@ sanitized. [VERIFICATION.md](VERIFICATION.md) explains what was checked; no new
 hosted-CI success is claimed here.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for changes and [RIGHTS.md](RIGHTS.md) for
-attribution and rights. No project-wide license grant has been selected for
-this draft.
+attribution and rights.
 
 </details>

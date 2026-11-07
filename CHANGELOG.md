@@ -7,6 +7,10 @@ research draft.
 
 ## Unreleased
 
+- Adopted the MIT license for project-authored code, documentation, and diagrams;
+  added package license metadata and updated the current rights statements.
+  Retained third-party licenses and notices remain applicable.
+
 - Refined the README using STE-Pro-Max's writing and visual guidance. The opening
   now leads with the generic framework and a small edit; an original image shows
   the intersecting target and protection conditions. A comparison table preserves
