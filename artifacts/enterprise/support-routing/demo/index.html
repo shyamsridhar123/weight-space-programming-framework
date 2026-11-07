@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weight Space Programming · Enterprise demo</title>
+  <style>
+    :root { color-scheme: light; font-family: "Segoe UI", system-ui, sans-serif; color: #1d302d; background: #f7f8f5; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { max-width: 1120px; margin: 0 auto; padding: 40px 24px; }
+    .brand { font-size: 15px; margin: 0 0 28px; }
+    h1 { font: 400 clamp(30px, 4vw, 43px)/1.16 Georgia, serif; letter-spacing: -.025em; margin: 0 0 16px; }
+    p { font-size: 17px; line-height: 1.5; max-width: 78ch; }
+    .muted { color: #52635f; }
+    video { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; background: #ffffff; border: 1px solid #d9e1dc; border-radius: 12px; }
+    nav { display: flex; flex-wrap: wrap; gap: 12px 24px; margin: 24px 0; }
+    a { color: #17634f; text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #2e7c64; outline-offset: 4px; }
+    h2 { font-size: 19px; margin: 32px 0 12px; }
+    ol { padding: 0; list-style: none; display: grid; gap: 4px; }
+    button { background: transparent; color: #17634f; border: 0; padding: 9px 0; font: inherit; cursor: pointer; text-align: left; line-height: 1.4; }
+    button:hover { text-decoration: underline; text-underline-offset: 3px; }
+    time { display: inline-block; min-width: 4em; font-variant-numeric: tabular-nums; }
+    footer { border-top: 1px solid #d9e1dc; margin-top: 32px; padding-top: 16px; }
+    @media (max-width: 700px) { main { padding: 24px 16px; } }
+  </style>
+</head>
+<body>
+<main>
+  <p class="brand">Weight Space <strong>Programming</strong></p>
+  <h1>One policy change.<br>Every obligation visible.</h1>
+  <p class="muted">A real browser walkthrough of the generic framework applied to enterprise support routing. Follow the contract, compare edits, inspect protection, evaluate the sealed candidate, and restore the parent model.</p>
+  <video id="walkthrough" controls playsinline preload="metadata" poster="poster.jpg" aria-label="Silent enterprise support-routing walkthrough with on-screen explanations">
+    <source src="walkthrough.mp4" type="video/mp4">
+    Your browser cannot play this video. <a href="walkthrough.mp4">Download the recording.</a>
+  </video>
+  <p class="muted">3 minutes 15 seconds · Silent, with explanations on screen · Captured November 7, 2026</p>
+  <nav aria-label="Demo resources">
+    <a href="walkthrough.mp4" download>Download video</a>
+    <a href="../../../../demos/enterprise-routing/README.md">Run the interactive demo</a>
+    <a href="recording.json">Recording provenance</a>
+    <a href="../../../../docs/use-cases/enterprise-support-routing.md">Use case and evidence</a>
+  </nav>
+  <h2>Explore the walkthrough</h2>
+  <ol aria-label="Video chapters">
+    <li><button type="button" data-seconds="1.048135"><time>0:01</time>Define the task contract</button></li>
+    <li><button type="button" data-seconds="24.880135"><time>0:24</time>Compare candidate edits</button></li>
+    <li><button type="button" data-seconds="52.280135"><time>0:52</time>Inspect the literal edit and protection scope</button></li>
+    <li><button type="button" data-seconds="72.591135"><time>1:12</time>Evaluate the sealed candidate</button></li>
+    <li><button type="button" data-seconds="88.978135"><time>1:28</time>Understand the observed impact</button></li>
+    <li><button type="button" data-seconds="103.321135"><time>1:43</time>Restore the exact parent model</button></li>
+    <li><button type="button" data-seconds="126.441135"><time>2:06</time>Abstain when protection conflicts</button></li>
+    <li><button type="button" data-seconds="157.498135"><time>2:37</time>Reject a feature-coverage failure</button></li>
+    <li><button type="button" data-seconds="183.314135"><time>3:03</time>See the generic pattern and scoped impact</button></li>
+  </ol>
+  <footer>
+    <p class="muted">This demonstration uses synthetic structured fields and a supplied linear head. It shows a measured routing change and sampled protection results; customer deployment, financial savings, and production performance have not been measured.</p>
+  </footer>
+</main>
+<script>
+  const video = document.querySelector('#walkthrough');
+  document.querySelectorAll('[data-seconds]').forEach(button => {
+    button.addEventListener('click', () => {
+      video.currentTime = Number(button.dataset.seconds);
+      video.focus();
+      video.play().catch(() => {});
+    });
+  });
+</script>
+</body>
+</html>

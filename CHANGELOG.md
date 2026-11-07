@@ -7,6 +7,14 @@ research draft.
 
 ## Unreleased
 
+- Added a simple local enterprise-routing interface backed by actual Python
+  execution and a silent browser screen recording. The walkthrough explains the
+  task contract, candidate tradeoff, literal protected edit, sealed final gate,
+  measured routing impact, and exact-parent restoration. It also shows
+  infeasible protection and feature-coverage rejection. Published the video,
+  captured poster, recording provenance, local launch instructions, and scoped
+  visual design guidance.
+
 - Added a runnable enterprise support-routing use case using the generic
   frozen-feature compiler, structural and behavioral admission, exact retention
   receipts, cooperative sessions, sealed evaluation, and rollback. Synthetic

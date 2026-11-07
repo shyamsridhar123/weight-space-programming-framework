@@ -85,6 +85,14 @@ unseen symptom exposes a feature-coverage gap.
 and image flowchart. The records and baseline are synthetic; this example
 establishes an integration pattern, not enterprise deployment performance.
 
+[Watch the browser walkthrough](artifacts/enterprise/support-routing/demo/walkthrough.mp4)
+or [run the guided interface](demos/enterprise-routing/README.md). It follows the
+task contract, candidate tradeoff, protected coefficient, sealed evaluation,
+measured impact, and actual parent restoration. The silent recording also shows
+abstention and a final-gate rejection, with explanations on screen.
+
+[![The demo interface showing routing impact and preserved behavior.](artifacts/enterprise/support-routing/demo/poster.jpg)](artifacts/enterprise/support-routing/demo/walkthrough.mp4)
+
 ## What the evidence shows
 
 The synthetic study found a **target–retention tradeoff**. Soft retention reduced

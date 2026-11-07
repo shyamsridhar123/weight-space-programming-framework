@@ -21,6 +21,13 @@ model, text understanding, provider ability, or production readiness.
 · [Runnable implementation](../../examples/enterprise_support_routing.py)
 · [Recorded business reports](../../artifacts/enterprise/support-routing/README.md)
 
+The [guided browser interface](../../demos/enterprise-routing/README.md) runs the
+same example locally and reveals its receipts step by step. The
+[silent screen recording](../../artifacts/enterprise/support-routing/demo/walkthrough.mp4)
+shows the successful edit, scoped impact, real inverse restoration, abstention,
+and the unseen-symptom failure. Its on-screen concepts connect this domain
+adapter to the generic framework lifecycle.
+
 ## Run and inspect the decision
 
 From the repository root, using Python 3.11 or newer:
