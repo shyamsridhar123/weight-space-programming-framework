@@ -7,6 +7,18 @@ research draft.
 
 ## Unreleased
 
+- Rebuilt the enterprise explanation around one outage ticket using STE-Pro-Max
+  storytelling and original SVG mathematical animations. The 90-second story
+  explains queue scores, feature contributions, the target/protection tradeoff,
+  a permitted weight-space direction, the literal edit, potential operational
+  value, abstention, rejection, and restoration. The local page recomputes actual
+  framework outcomes before playback and offers pause, scrub, chapter navigation,
+  reset, light/dark themes, a static reading path, and an understanding check.
+  Replaced the earlier recording with a full, uninterrupted browser capture;
+  added continuous visible subtitles, VTT/SRT sidecars, an embedded subtitle
+  track, source/claim registers, and matching player chapters. Retained the
+  credited quiet music. Synthetic and fixed-feature limits remain explicit.
+
 - Cut the real browser demo to 90 seconds at normal speed, retaining the contract,
   candidate comparison, protected edit, final gate, impact, rollback, abstention,
   and rejection. Added a restrained excerpt of Scott Buckley's “Aphelion” under

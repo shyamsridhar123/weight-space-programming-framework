@@ -21,14 +21,19 @@ model, text understanding, provider ability, or production readiness.
 · [Runnable implementation](../../examples/enterprise_support_routing.py)
 · [Recorded business reports](../../artifacts/enterprise/support-routing/README.md)
 
-The [guided browser interface](../../demos/enterprise-routing/README.md) runs the
-same example locally and reveals its receipts step by step. The
-[90-second screen recording](../../artifacts/enterprise/support-routing/demo/walkthrough.mp4)
-shows the successful edit, scoped impact, real inverse restoration, abstention,
-and the unseen-symptom failure. Its on-screen concepts connect this domain
-adapter to the generic framework lifecycle. A quiet cinematic music bed accompanies
-the footage; [music credit and license](../../artifacts/enterprise/support-routing/demo/MUSIC.md)
-are included.
+Start with the [90-second visual explanation](../../artifacts/enterprise/support-routing/demo/walkthrough.mp4)
+or [interactive story](../../demos/enterprise-routing/README.md). One outage ticket
+stays in view as its scores explain the wrong route, feature contributions explain
+the weight, and a protected edit sends it to Platform Operations. The story shows
+the possible avoided transfer, conflicting protection, missing symptom coverage,
+and restoration of the original model. It uses original SVG figures authored
+with STE-Pro-Max storytelling guidance and a real browser capture, with visible
+subtitles and quiet cinematic music.
+
+[Timed transcript](../../artifacts/explanations/enterprise-story/story.md)
+· [Source and claim register](../../artifacts/explanations/enterprise-story/source.json)
+· [English subtitles](../../artifacts/enterprise/support-routing/demo/subtitles.srt)
+· [Music credit and license](../../artifacts/enterprise/support-routing/demo/MUSIC.md).
 
 ## Run and inspect the decision
 

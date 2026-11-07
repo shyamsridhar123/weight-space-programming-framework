@@ -1,0 +1,243 @@
+{
+  "schema": "enterprise-story-source/1",
+  "audience": "A non-specialist evaluating the framework's purpose",
+  "question": "How can a weight edit route outages to the right team without disturbing protected support behavior?",
+  "sources": [
+    {
+      "id": "S1",
+      "path": "examples/enterprise_support_routing.py",
+      "sha256": "3a73cdb44849c7cf3984ca6c3ab3fa437cbea6a189411b2c99748e29cb814523"
+    },
+    {
+      "id": "S2",
+      "path": "examples/data/enterprise_support_tickets.json",
+      "sha256": "4919cc8dc8ca6d64ddace2d2f8fbf06e00e96e497ee41cd57c54c2072013572f"
+    },
+    {
+      "id": "S3",
+      "path": "artifacts/enterprise/support-routing/policy-change/bundle.json",
+      "sha256": "b7ca6ec2258cee534ec6819f1cfa806e622f1d22565c66531156eebec3e94669"
+    },
+    {
+      "id": "S4",
+      "path": "artifacts/enterprise/support-routing/conflict/bundle.json",
+      "sha256": "b062505b48ec66c91cf2cc88022020b7bc66a83ad98d21e776705bdecc211262"
+    },
+    {
+      "id": "S5",
+      "path": "artifacts/enterprise/support-routing/coverage-gap/bundle.json",
+      "sha256": "68e2f091bf49df0593dcd8284cef369532eb18f3aeb758a1a991dac7d739eff6"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "kind": "observation",
+      "text": "The public standard outage routes to General Support before the edit and Platform afterwards.",
+      "sources": [
+        "S3"
+      ],
+      "locator": "candidates[label=protected-edit].admission.metrics.tickets[ticket_id=public-outage-standard]",
+      "beats": [
+        1,
+        2,
+        6
+      ]
+    },
+    {
+      "id": "C2",
+      "kind": "observation",
+      "text": "The recognized outage feature is zero on supplied protection anchors.",
+      "sources": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "locator": "featurize; anchors; public records with role=protected",
+      "beats": [
+        3,
+        5
+      ]
+    },
+    {
+      "id": "C3",
+      "kind": "observation",
+      "text": "Target-only fitting changes the ordinary-support Platform score, while its route stays General Support.",
+      "sources": [
+        "S3"
+      ],
+      "locator": "candidates[label=target-only].admission.metrics.tickets[ticket_id=public-general]",
+      "beats": [
+        4
+      ]
+    },
+    {
+      "id": "C4",
+      "kind": "inference",
+      "text": "The 2D weight slice shows a permitted zero-shared-coefficient direction; the complete compiler enforces additional feature and bias constraints.",
+      "sources": [
+        "S1",
+        "S3"
+      ],
+      "locator": "compile_feature_edit retention=nullspace; protected-edit artifact and retention_certificate",
+      "beats": [
+        5
+      ]
+    },
+    {
+      "id": "C5",
+      "kind": "observation",
+      "text": "The selected program changes only head.weight [3,6], from 0.25 to 3.22029702970297.",
+      "sources": [
+        "S3"
+      ],
+      "locator": "candidates[label=protected-edit].program.edits",
+      "beats": [
+        6
+      ]
+    },
+    {
+      "id": "C6",
+      "kind": "observation",
+      "text": "Recognized final targets route to Platform; maximum sampled protected drift is zero.",
+      "sources": [
+        "S3"
+      ],
+      "locator": "session.result; final_admission",
+      "beats": [
+        7
+      ]
+    },
+    {
+      "id": "C7",
+      "kind": "proposal",
+      "text": "A direct route could avoid a transfer. Handling time and savings are not measured.",
+      "sources": [
+        "S1",
+        "S2"
+      ],
+      "locator": "contract.objective; synthetic scope",
+      "beats": [
+        1,
+        7
+      ]
+    },
+    {
+      "id": "C8",
+      "kind": "observation",
+      "text": "The conflict scenario abstains and the coverage-gap scenario rejects after final evaluation.",
+      "sources": [
+        "S4",
+        "S5"
+      ],
+      "locator": "final_admission.decision; inputs; featurize",
+      "beats": [
+        8
+      ]
+    },
+    {
+      "id": "C9",
+      "kind": "observation",
+      "text": "Applying the bound inverse restores the exact parent artifact; external ticket assignments are outside scope.",
+      "sources": [
+        "S3"
+      ],
+      "locator": "rollback.program; rollback.restored_parent_sha256; rollback.scope",
+      "beats": [
+        9
+      ]
+    },
+    {
+      "id": "C10",
+      "kind": "observation",
+      "text": "The example uses synthetic structured fields and a hand-constructed linear head, with exact retention scoped to fixed-feature real-valued semantics.",
+      "sources": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "locator": "module docstring; model_metadata; retention_certificate; contract.execution",
+      "beats": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    }
+  ],
+  "model": {
+    "target": {
+      "after_margin": 1.2202970297029698,
+      "after_queue": "platform",
+      "after_scores": [
+        2.0,
+        0.0,
+        0.0,
+        3.22029702970297
+      ],
+      "before_queue": "general",
+      "before_scores": [
+        2.0,
+        0.0,
+        0.0,
+        0.25
+      ],
+      "expected_queue": "platform",
+      "role": "target",
+      "ticket_id": "public-outage-standard"
+    },
+    "ordinaryNaive": {
+      "after_margin": 0.5213922255069301,
+      "after_queue": "general",
+      "after_scores": [
+        2.0,
+        0.0,
+        0.0,
+        1.47860777449307
+      ],
+      "before_queue": "general",
+      "before_scores": [
+        2.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_queue": "general",
+      "role": "protected",
+      "ticket_id": "public-general"
+    },
+    "weightBefore": 0.25,
+    "weightAfter": 3.22029702970297,
+    "naiveShared": 1.47860777449307,
+    "naiveOutage": 1.4786077744930695,
+    "protectedDrift": 0.0,
+    "decision": "admitted_for_synthetic_trial",
+    "conflictDecision": "abstained",
+    "gapDecision": "rejected_after_holdout",
+    "restored": true,
+    "parent": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+    "finalReceipt": "a6558e1a41d0ba70da348a6e113cb68d22ec1d2ec0c78b99838dcd3c083da82e"
+  },
+  "visual_mapping": {
+    "bar_length": "queue score in raw units, common scale 0 to 4",
+    "dots": "presentation of a contribution or an edit, not measured latency",
+    "weight_plane": "schematic two-coefficient slice, not the entire feasible space",
+    "transfer_arrow": "possible handoff that the proposed direct route could avoid"
+  },
+  "style_reference": {
+    "repository": "shyamsridhar123/STE-Pro-Max",
+    "commit": "a7da74e83e5fcf8ea23dce075e64b463e5e24584",
+    "skills": [
+      "ste-promax",
+      "ste-storytelling",
+      "ste-line-studio"
+    ],
+    "method": "Host-authored original SVG/HTML; optional STE engine validators were not run"
+  },
+  "scope": "Synthetic structured data and supplied linear head. No customer deployment, measured savings, trained text understanding, floating-point proof, process isolation proof or independent attestation."
+}

@@ -5,10 +5,18 @@ through a synthetic support-routing policy change. Its audience is an enterprise
 technical decision maker exploring how a targeted weight edit is specified,
 checked, selected, evaluated, and reversed.
 
-The user requested a nice, simple interface and a real screen recording that
-highlights the framework's core concepts, this enterprise use case, and impact.
-Use a quiet, light interface with a guided, readable walkthrough. Keep the
-business decision first and make the underlying evidence inspectable.
+The primary experience is a 90-second concrete-example-first explanation for
+non-specialists. Begin with one outage ticket reaching the wrong team. Explain
+its queue scores, feature contributions, the protection tradeoff and a permitted
+weight-space direction before showing the actual edit. Use original SVG
+mathematical animation guided by STE-Pro-Max. Keep the captions visible and the
+business consequence concrete: a direct route could avoid a transfer.
+
+The story starts paused and offers pause, scrub, chapters, reset, light/dark
+themes, reduced motion and static prose. Real Python results are computed before
+playback on the default local server. The technical inspector remains available
+at /technical for deeper evidence review. The video is a full real browser
+capture with English subtitles and a quiet, credited instrumental bed.
 
 The supplied structured-field extractor and hand-constructed linear head are
 synthetic. They are not a trained text classifier. The observed outcome is a

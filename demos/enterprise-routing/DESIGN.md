@@ -1,6 +1,6 @@
 ---
 name: "Enterprise Routing Demo"
-description: "A quiet change-review sheet for the local Weight Space Programming enterprise demonstration."
+description: "Technical inspector tokens; the primary explanation uses the original SVG story palette described below."
 colors:
   paper: "#f7f8f5"
   surface: "#ffffff"
@@ -158,7 +158,18 @@ components:
 
 **Creative North Star: "The Quiet Change-Review Sheet"**
 
-This design system applies to the enterprise routing demo. Its confirmed direction is quiet, light, simple, and readable: paper surrounds a white reading surface, dark green ink anchors the content, and modest green or amber signals make decisions easy to scan. The interface keeps a steady review cadence rather than asking the reader to interpret decorative chrome.
+The primary interface at `/` is now the visual story in
+`artifacts/explanations/enterprise-story/`. Its dark navy canvas keeps one
+mechanism in view at a time. Gold identifies the target route, cyan identifies
+feature contributions, green identifies protection, and warm red identifies
+failure. Georgia headings and system sans-serif labels keep the composition
+readable without downloaded fonts. The light theme preserves the same meanings.
+Visible captions carry the explanation; pause, scrub, chapters and static prose
+let the viewer control its pace. The figures are original SVG guided by STE-Pro-Max.
+
+The tokens above and the component details below apply to the retained technical
+inspector at `/technical`. Its quiet, light review sheet surrounds a white reading
+surface with paper, dark green ink, and modest green or amber decision signals.
 
 Serif headings introduce the decision; familiar system sans-serif text carries the explanation and controls. Tables, rules, and restrained tonal changes make the evidence inspectable. The rollback receipt is the sole animated result treatment. Detailed page sequencing remains in `direction.md`.
 

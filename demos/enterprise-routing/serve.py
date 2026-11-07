@@ -45,6 +45,13 @@ def restore_model(scenario: str) -> dict:
 
 
 class Handler(SimpleHTTPRequestHandler):
+    STORY = ROOT / "artifacts/explanations/enterprise-story"
+    STORY_PATHS = {"/": "index.html", "/index.html": "index.html",
+                   "/story.css": "story.css", "/story.js": "story.js",
+                   "/story-data.js": "story-data.js", "/source.json": "source.json",
+                   "/story.md": "story.md", "/subtitles.vtt": "subtitles.vtt",
+                   "/subtitles.srt": "subtitles.srt"}
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(Path(__file__).parent), **kwargs)
 
@@ -54,16 +61,34 @@ class Handler(SimpleHTTPRequestHandler):
         super().end_headers()
 
     def do_GET(self):
-        if self.path.split("?", 1)[0] not in ("/", "/index.html", "/style.css", "/app.js"):
-            self.send_error(404)
-            return
-        super().do_GET()
+        self._static(head=False)
 
     def do_HEAD(self):
-        if self.path.split("?", 1)[0] not in ("/", "/index.html", "/style.css", "/app.js"):
+        self._static(head=True)
+
+    def _static(self, *, head: bool):
+        path = self.path.split("?", 1)[0]
+        if path in self.STORY_PATHS:
+            target = self.STORY / self.STORY_PATHS[path]
+        elif path in ("/technical", "/style.css", "/app.js"):
+            target = Path(__file__).parent / ("index.html" if path == "/technical" else path[1:])
+        else:
             self.send_error(404)
             return
-        super().do_HEAD()
+        try:
+            content = target.read_bytes()
+        except FileNotFoundError:
+            self.send_error(404)
+            return
+        self.send_response(200)
+        content_type = {".js": "text/javascript", ".css": "text/css", ".html": "text/html",
+                        ".json": "application/json", ".vtt": "text/vtt",
+                        ".md": "text/plain", ".srt": "text/plain"}.get(target.suffix, "application/octet-stream")
+        self.send_header("Content-Type", content_type + "; charset=utf-8")
+        self.send_header("Content-Length", str(len(content)))
+        self.end_headers()
+        if not head:
+            self.wfile.write(content)
 
     def do_POST(self):
         if self.path not in ("/api/run", "/api/rollback"):

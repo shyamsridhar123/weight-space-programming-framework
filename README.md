@@ -85,14 +85,20 @@ unseen symptom exposes a feature-coverage gap.
 and image flowchart. The records and baseline are synthetic; this example
 establishes an integration pattern, not enterprise deployment performance.
 
-[Watch the browser walkthrough](artifacts/enterprise/support-routing/demo/walkthrough.mp4)
-or [run the guided interface](demos/enterprise-routing/README.md). It follows the
-task contract, candidate tradeoff, protected coefficient, sealed evaluation,
-measured impact, and actual parent restoration. The 90-second recording also shows
-abstention and a final-gate rejection, with explanations on screen and a quiet
-cinematic music bed. [Music credit](artifacts/enterprise/support-routing/demo/MUSIC.md).
+[Watch the 90-second explanation](artifacts/enterprise/support-routing/demo/walkthrough.mp4)
+or [run the interactive story](demos/enterprise-routing/README.md). Start with one
+outage ticket that reaches the wrong team. Follow its queue scores, see what a
+weight contributes, and watch the framework choose an edit that leaves protected
+scores unchanged. The story ends with the operational opportunity, reasons to
+stop, and restoration of the original model.
 
-[![The demo interface showing routing impact and preserved behavior.](artifacts/enterprise/support-routing/demo/poster.jpg)](artifacts/enterprise/support-routing/demo/walkthrough.mp4)
+Original mathematical animations follow STE-Pro-Max's concrete-example-first
+guidance. The real browser recording includes visible English subtitles and
+quiet cinematic music. [Read the timed transcript](artifacts/explanations/enterprise-story/story.md)
+· [Download subtitles](artifacts/enterprise/support-routing/demo/subtitles.srt)
+· [Music credit](artifacts/enterprise/support-routing/demo/MUSIC.md).
+
+[![The visual explanation: outages reach Platform Operations while sampled protected scores stay unchanged. Avoiding a transfer is potential value, not measured savings.](artifacts/enterprise/support-routing/demo/poster.jpg)](artifacts/enterprise/support-routing/demo/walkthrough.mp4)
 
 ## What the evidence shows
 

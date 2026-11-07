@@ -17,6 +17,12 @@ SOURCE_NAMES = ("demos/enterprise-routing/index.html", "demos/enterprise-routing
                 "demos/enterprise-routing/encode_recording.py",
                 "examples/enterprise_support_routing.py",
                 "examples/data/enterprise_support_tickets.json")
+STORY_SOURCE_NAMES = tuple("artifacts/explanations/enterprise-story/" + name for name in
+                           ("index.html", "story.css", "story.js", "story-data.js", "source.json",
+                            "story.md", "subtitles.vtt", "subtitles.srt")) + (
+    "demos/enterprise-routing/serve.py", "demos/enterprise-routing/build_story_source.py",
+    "demos/enterprise-routing/encode_recording.py", "examples/enterprise_support_routing.py",
+    "examples/data/enterprise_support_tickets.json")
 
 
 def ffconcat_path(path: Path) -> str:
@@ -27,6 +33,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("capture", type=Path, help="local JSON frame/timing receipt")
     parser.add_argument("--out", type=Path, default=ROOT / "artifacts/enterprise/support-routing/demo")
+    parser.add_argument("--source-set", choices=("technical", "story"), default="technical")
     args = parser.parse_args()
     capture = json.loads(args.capture.read_text(encoding="utf-8"))
     frames = capture["frames"]
@@ -63,7 +70,7 @@ def main():
                 "chapters": capture["chapters"],
                 "video_sha256": hashlib.sha256(video.read_bytes()).hexdigest(),
                 "source_sha256": {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
-                                  for name in SOURCE_NAMES},
+                                  for name in (STORY_SOURCE_NAMES if args.source_set == "story" else SOURCE_NAMES)},
                 "scope": "Synthetic structured-field routing example. No trained text classifier, customer deployment, or measured financial impact."}
     (args.out / "recording.json").write_bytes((json.dumps(metadata, indent=2) + "\n").encode("utf-8"))
     print(f"Encoded {video.name}: {capture['duration_seconds']:.1f}s, {video.stat().st_size / 1_000_000:.1f} MB")
