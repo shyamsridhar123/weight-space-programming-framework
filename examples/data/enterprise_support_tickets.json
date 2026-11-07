@@ -1,0 +1,30 @@
+{
+  "schema": "synthetic-support-fixture/1",
+  "origin": "Invented structured support records and supplied routing labels; no customer data",
+  "split_scope": "Disjoint declared synthetic case identifiers; not statistical independence or untouched confirmation",
+  "public": [
+    {"ticket_id": "public-outage-standard", "case_id": "public-case-01", "topic": "general", "product": "telemetry", "symptom": "outage", "tier": "standard", "urgency": 0, "role": "target", "expected_queue": "platform"},
+    {"ticket_id": "public-outage-enterprise", "case_id": "public-case-02", "topic": "general", "product": "telemetry", "symptom": "outage", "tier": "enterprise", "urgency": 0.5, "role": "target", "expected_queue": "platform"},
+    {"ticket_id": "public-outage-urgent", "case_id": "public-case-03", "topic": "general", "product": "telemetry", "symptom": "outage", "tier": "standard", "urgency": 1, "role": "target", "expected_queue": "platform"},
+    {"ticket_id": "public-general", "case_id": "public-case-04", "topic": "general", "product": "core", "symptom": "help", "tier": "standard", "urgency": 0, "role": "protected", "expected_queue": "general"},
+    {"ticket_id": "public-billing", "case_id": "public-case-05", "topic": "billing", "product": "core", "symptom": "payment", "tier": "standard", "urgency": 0, "role": "protected", "expected_queue": "billing"},
+    {"ticket_id": "public-security", "case_id": "public-case-06", "topic": "security", "product": "core", "symptom": "access", "tier": "standard", "urgency": 0, "role": "protected", "expected_queue": "security"},
+    {"ticket_id": "public-platform", "case_id": "public-case-07", "topic": "platform", "product": "core", "symptom": "outage", "tier": "standard", "urgency": 0, "role": "protected", "expected_queue": "platform"},
+    {"ticket_id": "public-enterprise-general", "case_id": "public-case-08", "topic": "general", "product": "core", "symptom": "help", "tier": "enterprise", "urgency": 0, "role": "protected", "expected_queue": "general"},
+    {"ticket_id": "public-urgent-general", "case_id": "public-case-09", "topic": "general", "product": "core", "symptom": "help", "tier": "standard", "urgency": 1, "role": "protected", "expected_queue": "general"},
+    {"ticket_id": "public-telemetry-latency", "case_id": "public-case-10", "topic": "general", "product": "telemetry", "symptom": "latency", "tier": "enterprise", "urgency": 1, "role": "protected", "expected_queue": "general"},
+    {"ticket_id": "public-telemetry-security", "case_id": "public-case-11", "topic": "security", "product": "telemetry", "symptom": "outage", "tier": "enterprise", "urgency": 1, "role": "protected", "expected_queue": "security"},
+    {"ticket_id": "public-telemetry-billing", "case_id": "public-case-12", "topic": "billing", "product": "telemetry", "symptom": "outage", "tier": "enterprise", "urgency": 0.5, "role": "protected", "expected_queue": "billing"},
+    {"ticket_id": "public-existing-platform", "case_id": "public-case-13", "topic": "platform", "product": "telemetry", "symptom": "outage", "tier": "enterprise", "urgency": 1, "role": "protected", "expected_queue": "platform"}
+  ],
+  "heldout": [
+    {"ticket_id": "final-outage-enterprise", "case_id": "final-case-01", "topic": "general", "product": "telemetry", "symptom": "outage", "tier": "enterprise", "urgency": 0.75, "role": "target", "expected_queue": "platform"},
+    {"ticket_id": "final-outage-standard", "case_id": "final-case-02", "topic": "general", "product": "telemetry", "symptom": "outage", "tier": "standard", "urgency": 0.25, "role": "target", "expected_queue": "platform"},
+    {"ticket_id": "final-general-enterprise", "case_id": "final-case-03", "topic": "general", "product": "core", "symptom": "help", "tier": "enterprise", "urgency": 0.25, "role": "protected", "expected_queue": "general"},
+    {"ticket_id": "final-core-outage", "case_id": "final-case-04", "topic": "general", "product": "core", "symptom": "outage", "tier": "standard", "urgency": 0.75, "role": "protected", "expected_queue": "general"},
+    {"ticket_id": "final-billing-telemetry", "case_id": "final-case-05", "topic": "billing", "product": "telemetry", "symptom": "outage", "tier": "enterprise", "urgency": 0.75, "role": "protected", "expected_queue": "billing"},
+    {"ticket_id": "final-security-telemetry", "case_id": "final-case-06", "topic": "security", "product": "telemetry", "symptom": "outage", "tier": "standard", "urgency": 0.25, "role": "protected", "expected_queue": "security"},
+    {"ticket_id": "final-existing-platform", "case_id": "final-case-07", "topic": "platform", "product": "core", "symptom": "latency", "tier": "enterprise", "urgency": 0.75, "role": "protected", "expected_queue": "platform"},
+    {"ticket_id": "final-telemetry-help", "case_id": "final-case-08", "topic": "general", "product": "telemetry", "symptom": "help", "tier": "enterprise", "urgency": 1, "role": "protected", "expected_queue": "general"}
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "architecture": "enterprise-support-linear-head/1",
+  "dtype": "float64",
+  "metadata": {
+    "extractor_source_sha256": "96d4f6c640d88811e02394feed3dea448450b16240312a2ed7c2235ff75931ea",
+    "feature_id": "structured-support-fields/1",
+    "feature_names": [
+      "general_topic",
+      "billing_topic",
+      "security_topic",
+      "platform_topic",
+      "enterprise_tier",
+      "urgency",
+      "telemetry_outage"
+    ],
+    "origin": "Hand-constructed synthetic baseline; no training or customer data",
+    "queue_names": [
+      "general",
+      "billing",
+      "security",
+      "platform"
+    ],
+    "score_rule": "features @ head.weight.T + head.bias"
+  },
+  "schema": "wsp-tensors/1",
+  "tensors": {
+    "head.bias": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "head.weight": [
+      [
+        2.0,
+        0.0,
+        0.0,
+        0.0,
+        0.25,
+        0.25,
+        0.0
+      ],
+      [
+        0.0,
+        3.0,
+        0.0,
+        0.0,
+        0.25,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        4.0,
+        0.0,
+        0.25,
+        0.5,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        3.0,
+        0.25,
+        0.25,
+        3.22029702970297
+      ]
+    ]
+  }
+}

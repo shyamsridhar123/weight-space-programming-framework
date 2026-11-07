@@ -10,7 +10,7 @@ The framework is generic. Common interfaces describe artifacts, proposals, acces
 conditions, and evaluation records. Explicit adapters define execution semantics
 and the conditions for behavioral guarantees. RTS is one historical application.
 
-[Worked example](#one-edit-two-obligations) · [Quick start](#try-the-example) ·
+[Worked example](#one-edit-two-obligations) · [Enterprise use case](#an-enterprise-policy-change) · [Quick start](#try-the-example) ·
 [Evidence](#what-the-evidence-shows) · [Documentation](#explore-the-framework)
 
 ## One edit, two obligations
@@ -63,6 +63,27 @@ replay, and proof builds, see [Reproducing the work](REPRODUCING.md).
 
 The standalone installation uses `pyproject.toml` through the command above.
 The retained `requirements*.txt` files describe the original RLCD environment.
+
+## An enterprise policy change
+
+Route telemetry outage tickets to Platform Operations while preserving billing,
+security, and ordinary support behavior. The
+[enterprise walkthrough](docs/use-cases/enterprise-support-routing.md) uses the
+generic compiler, structural policy, retention certificates, cooperative session,
+sealed evaluation, and exact rollback:
+
+```bash
+python examples/enterprise_support_routing.py
+```
+
+The runnable example compares the unchanged parent, target-only fitting, soft
+retention, and nullspace protection. It records a successful routing change,
+abstention when protection makes the request impossible, and rejection when an
+unseen symptom exposes a feature-coverage gap.
+
+[Inspect the business reports](artifacts/enterprise/support-routing/README.md)
+and image flowchart. The records and baseline are synthetic; this example
+establishes an integration pattern, not enterprise deployment performance.
 
 ## What the evidence shows
 

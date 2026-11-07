@@ -7,6 +7,15 @@ research draft.
 
 ## Unreleased
 
+- Added a runnable enterprise support-routing use case using the generic
+  frozen-feature compiler, structural and behavioral admission, exact retention
+  receipts, cooperative sessions, sealed evaluation, and rollback. Synthetic
+  records cover a successful policy change, infeasible protection, and rejection
+  on unseen symptom coverage. Added reproducible evidence bundles, business
+  reports, image flowcharts, a measured score plot, and integration checks.
+  The walkthrough connects the example to the original source review and current
+  research gaps without claiming enterprise deployment or live-provider results.
+
 - Adopted the MIT license for project-authored code, documentation, and diagrams;
   added package license metadata and updated the current rights statements.
   Retained third-party licenses and notices remain applicable.

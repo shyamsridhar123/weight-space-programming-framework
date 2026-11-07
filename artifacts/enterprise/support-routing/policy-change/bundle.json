@@ -1,0 +1,6289 @@
+{
+  "anchors": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      1.0,
+      0.5,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.0
+    ]
+  ],
+  "candidates": [
+    {
+      "admission": {
+        "artifact_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "certificate_sha256": "0e90273b656371eda47f0afadf0d29d740d783a95e20f56f82940943aedf5747",
+        "certificate_verified": true,
+        "contract_sha256": "0f18734f5131cf7fbe79677ef22b6a3e10dd622570211e2e1b5e5653d112ce23",
+        "eligible": false,
+        "failures": [
+          "target_score_shift",
+          "target_routing"
+        ],
+        "metrics": {
+          "maximum_protected_score_drift": 0.0,
+          "maximum_target_shift_error": 3.0,
+          "minimum_target_margin": 1.75,
+          "protected_routes_unchanged": true,
+          "target_routes_correct": false,
+          "tickets": [
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.25
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.25
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-standard"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.375,
+                0.25,
+                0.5,
+                0.625
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.375,
+                0.25,
+                0.5,
+                0.625
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-enterprise"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.5
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.5
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-urgent"
+            },
+            {
+              "after_margin": 2.0,
+              "after_queue": "general",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-general"
+            },
+            {
+              "after_margin": 3.0,
+              "after_queue": "billing",
+              "after_scores": [
+                0.0,
+                3.0,
+                0.0,
+                0.0
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.0,
+                3.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-billing"
+            },
+            {
+              "after_margin": 4.0,
+              "after_queue": "security",
+              "after_scores": [
+                0.0,
+                0.0,
+                4.0,
+                0.0
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.0,
+                0.0,
+                4.0,
+                0.0
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-security"
+            },
+            {
+              "after_margin": 3.0,
+              "after_queue": "platform",
+              "after_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-platform"
+            },
+            {
+              "after_margin": 2.0,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-enterprise-general"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.25
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-urgent-general"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-telemetry-latency"
+            },
+            {
+              "after_margin": 4.25,
+              "after_queue": "security",
+              "after_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.5
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.5
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-telemetry-security"
+            },
+            {
+              "after_margin": 2.75,
+              "after_queue": "billing",
+              "after_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.375
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.375
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-telemetry-billing"
+            },
+            {
+              "after_margin": 2.75,
+              "after_queue": "platform",
+              "after_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.5
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.5
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-existing-platform"
+            }
+          ]
+        },
+        "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "program_sha256": "8c2f73d3561b0693f2b71413cb9c780edf399b42d7211cc9be0a7de5b80cc9da",
+        "schema": "enterprise-routing-public-admission/1",
+        "sha256": "3557504a5800a5397563ad79106465c9f54c1c0e76523f005348c646f84fe182",
+        "structural": {
+          "behavioral_status": "not_checked",
+          "candidate_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+          "formal_certificate": null,
+          "issues": [],
+          "policy": {
+            "max_change_abs": 3.0,
+            "max_edits": 7,
+            "max_parameter_abs": 4.0,
+            "writable": [
+              "head.weight"
+            ]
+          },
+          "program_sha256": "8c2f73d3561b0693f2b71413cb9c780edf399b42d7211cc9be0a7de5b80cc9da",
+          "schema": "wsp-structural-admission/1",
+          "sha256": "d0dfcc68e7a2c855cbb9f42f06864e29f846240affd5fd400786593df0712d64",
+          "structural_accepted": true
+        }
+      },
+      "candidate": {
+        "answer": null,
+        "artifact": {
+          "architecture": "enterprise-support-linear-head/1",
+          "dtype": "float64",
+          "metadata": {
+            "extractor_source_sha256": "96d4f6c640d88811e02394feed3dea448450b16240312a2ed7c2235ff75931ea",
+            "feature_id": "structured-support-fields/1",
+            "feature_names": [
+              "general_topic",
+              "billing_topic",
+              "security_topic",
+              "platform_topic",
+              "enterprise_tier",
+              "urgency",
+              "telemetry_outage"
+            ],
+            "origin": "Hand-constructed synthetic baseline; no training or customer data",
+            "queue_names": [
+              "general",
+              "billing",
+              "security",
+              "platform"
+            ],
+            "score_rule": "features @ head.weight.T + head.bias"
+          },
+          "schema": "wsp-tensors/1",
+          "tensors": {
+            "head.bias": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "head.weight": [
+              [
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+                0.25,
+                0.25,
+                0.0
+              ],
+              [
+                0.0,
+                3.0,
+                0.0,
+                0.0,
+                0.25,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                4.0,
+                0.0,
+                0.25,
+                0.5,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                3.0,
+                0.25,
+                0.25,
+                0.25
+              ]
+            ]
+          }
+        },
+        "artifact_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "kind": "program",
+        "no_op": true,
+        "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "program_sha256": "8c2f73d3561b0693f2b71413cb9c780edf399b42d7211cc9be0a7de5b80cc9da",
+        "proposal_index": 1,
+        "schema": "wsp-candidate/1",
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "9c0431231ced92406eb6f086ffe1b968b0c2d0bfe131f0a621d3663873128041",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069"
+      },
+      "compilation": null,
+      "label": "keep-parent",
+      "program": {
+        "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "edits": [],
+        "intent": "Enterprise routing: keep parent",
+        "schema": "wsp-program/1"
+      },
+      "retention_certificate": {
+        "absolute_residuals_exact": [
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "anchor_count": 10,
+        "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "candidate_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "exactly_zero_on_supplied_features": true,
+        "feature_extractor_verified": false,
+        "feature_sha256": "a9e5320ed2bb6e23c8a6318459af9332691a8cdd5112e5fc4c65a21b63b37415",
+        "floating_execution_verified": false,
+        "head": {
+          "bias": "head.bias",
+          "feature_id": "structured-support-fields/1",
+          "weight": "head.weight"
+        },
+        "maximum_residuals_exact": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "schema": "wsp-feature-retention/1",
+        "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+        "sha256": "0e90273b656371eda47f0afadf0d29d740d783a95e20f56f82940943aedf5747",
+        "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])"
+      }
+    },
+    {
+      "admission": {
+        "artifact_sha256": "04f1ff8375086125e6303a4dc53c1183551e1b756e9deaa1efd1b5237716f5b9",
+        "certificate_sha256": "b23a3dfc663fd805cbb58ecb09cac1fc3b1dc46bb1b3db914bb5180159da7454",
+        "certificate_verified": true,
+        "contract_sha256": "0f18734f5131cf7fbe79677ef22b6a3e10dd622570211e2e1b5e5653d112ce23",
+        "eligible": false,
+        "failures": [
+          "protected_runtime_scores",
+          "protected_routes",
+          "protected_exact_retention"
+        ],
+        "metrics": {
+          "maximum_protected_score_drift": 1.541679199377783,
+          "maximum_target_shift_error": 0.042784451013860636,
+          "minimum_target_margin": 1.2072155489861394,
+          "protected_routes_unchanged": false,
+          "target_routes_correct": true,
+          "tickets": [
+            {
+              "after_margin": 1.2072155489861394,
+              "after_queue": "platform",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                3.2072155489861394
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.25
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-standard"
+            },
+            {
+              "after_margin": 1.2493632789487807,
+              "after_queue": "platform",
+              "after_scores": [
+                2.375,
+                0.25,
+                0.5,
+                3.6243632789487807
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.375,
+                0.25,
+                0.5,
+                0.625
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-enterprise"
+            },
+            {
+              "after_margin": 1.2490629388302823,
+              "after_queue": "platform",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                3.4990629388302823
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.5
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-urgent"
+            },
+            {
+              "after_margin": 0.5213922255069301,
+              "after_queue": "general",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                1.47860777449307
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-general"
+            },
+            {
+              "after_margin": 3.0,
+              "after_queue": "billing",
+              "after_scores": [
+                0.0,
+                3.0,
+                0.0,
+                2.220446049250313e-16
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.0,
+                3.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-billing"
+            },
+            {
+              "after_margin": 3.9999999999999996,
+              "after_queue": "security",
+              "after_scores": [
+                0.0,
+                0.0,
+                4.0,
+                4.440892098500626e-16
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.0,
+                0.0,
+                4.0,
+                0.0
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-security"
+            },
+            {
+              "after_margin": 3.0,
+              "after_queue": "platform",
+              "after_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-platform"
+            },
+            {
+              "after_margin": 0.5001681904663602,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.25,
+                0.25,
+                1.7498318095336398
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-enterprise-general"
+            },
+            {
+              "after_margin": 0.47954483566278716,
+              "after_queue": "manual_review",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                1.7704551643372128
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-urgent-general"
+            },
+            {
+              "after_margin": 0.45832080062221703,
+              "after_queue": "manual_review",
+              "after_scores": [
+                2.5,
+                0.25,
+                0.75,
+                2.041679199377783
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-telemetry-latency"
+            },
+            {
+              "after_margin": 4.186928575115287,
+              "after_queue": "security",
+              "after_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.5630714248847133
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.5
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-telemetry-security"
+            },
+            {
+              "after_margin": 2.75,
+              "after_queue": "billing",
+              "after_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.41714772996264154
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.375
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-telemetry-billing"
+            },
+            {
+              "after_margin": 2.8130714248847126,
+              "after_queue": "platform",
+              "after_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.5630714248847126
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.5
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-existing-platform"
+            }
+          ]
+        },
+        "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "program_sha256": "7f57a095657b54cef39e444bf9c0d7f10cc5ea8b8d56ad96dcd2b00030732fb7",
+        "schema": "enterprise-routing-public-admission/1",
+        "sha256": "e2410b7c2fc1fd6ed010a4918886a9b2aa611d256e48128a022256ebeb8134de",
+        "structural": {
+          "behavioral_status": "not_checked",
+          "candidate_sha256": "04f1ff8375086125e6303a4dc53c1183551e1b756e9deaa1efd1b5237716f5b9",
+          "formal_certificate": null,
+          "issues": [],
+          "policy": {
+            "max_change_abs": 3.0,
+            "max_edits": 7,
+            "max_parameter_abs": 4.0,
+            "writable": [
+              "head.weight"
+            ]
+          },
+          "program_sha256": "7f57a095657b54cef39e444bf9c0d7f10cc5ea8b8d56ad96dcd2b00030732fb7",
+          "schema": "wsp-structural-admission/1",
+          "sha256": "3c8d8c950be53fe88ae1bfbb1d3a7abc7c7ff9bb727046cefb7fdda2901892ec",
+          "structural_accepted": true
+        }
+      },
+      "candidate": {
+        "answer": null,
+        "artifact": {
+          "architecture": "enterprise-support-linear-head/1",
+          "dtype": "float64",
+          "metadata": {
+            "extractor_source_sha256": "96d4f6c640d88811e02394feed3dea448450b16240312a2ed7c2235ff75931ea",
+            "feature_id": "structured-support-fields/1",
+            "feature_names": [
+              "general_topic",
+              "billing_topic",
+              "security_topic",
+              "platform_topic",
+              "enterprise_tier",
+              "urgency",
+              "telemetry_outage"
+            ],
+            "origin": "Hand-constructed synthetic baseline; no training or customer data",
+            "queue_names": [
+              "general",
+              "billing",
+              "security",
+              "platform"
+            ],
+            "score_rule": "features @ head.weight.T + head.bias"
+          },
+          "schema": "wsp-tensors/1",
+          "tensors": {
+            "head.bias": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "head.weight": [
+              [
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+                0.25,
+                0.25,
+                0.0
+              ],
+              [
+                0.0,
+                3.0,
+                0.0,
+                0.0,
+                0.25,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                4.0,
+                0.0,
+                0.25,
+                0.5,
+                0.0
+              ],
+              [
+                1.47860777449307,
+                2.220446049250313e-16,
+                4.440892098500626e-16,
+                3.0,
+                0.27122403504056986,
+                0.29184738984414293,
+                1.7286077744930695
+              ]
+            ]
+          }
+        },
+        "artifact_sha256": "04f1ff8375086125e6303a4dc53c1183551e1b756e9deaa1efd1b5237716f5b9",
+        "kind": "program",
+        "no_op": false,
+        "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "program_sha256": "7f57a095657b54cef39e444bf9c0d7f10cc5ea8b8d56ad96dcd2b00030732fb7",
+        "proposal_index": 2,
+        "schema": "wsp-candidate/1",
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "93c6c92946fb02ea2439156375063776683987b59cce6f7342fd1f91733b3cbf",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069"
+      },
+      "compilation": {
+        "diagnostics": {
+          "behavioral_status": "supplied_features_only",
+          "compiler": "generic-frozen-feature-readout/1",
+          "condition_number": 15.495887054734652,
+          "desired_delta_sha256": "c269a71b1930fb1da8aa36d1b322fe2f3e6f53cbe0097ecd309b1e55229161e7",
+          "edit_cells": 6,
+          "feature_extractor_verified": false,
+          "fit_rank": 7,
+          "head": {
+            "bias": "head.bias",
+            "feature_id": "structured-support-fields/1",
+            "weight": "head.weight"
+          },
+          "lowering": {
+            "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+            "behavioral_status": "not_checked",
+            "candidate_sha256": "04f1ff8375086125e6303a4dc53c1183551e1b756e9deaa1efd1b5237716f5b9",
+            "cast": "reject",
+            "command_count": 1,
+            "effective_edits": 6,
+            "native_dtypes": {
+              "head.bias": "float64",
+              "head.weight": "float64"
+            },
+            "numerics": "NumPy binary64 operations; explicit native endpoint projection",
+            "numpy_version": "2.5.3",
+            "program_sha256": "7f57a095657b54cef39e444bf9c0d7f10cc5ea8b8d56ad96dcd2b00030732fb7",
+            "projections": {
+              "head.bias": {
+                "dtype": "float64",
+                "effective_changed_cells": 0,
+                "maximum_rounding_error_exact": "0",
+                "requested_changed_cells": 0,
+                "rounded_cells": 0,
+                "touched_cells": 0
+              },
+              "head.weight": {
+                "dtype": "float64",
+                "effective_changed_cells": 6,
+                "maximum_rounding_error_exact": "0",
+                "requested_changed_cells": 6,
+                "rounded_cells": 0,
+                "touched_cells": 28
+              }
+            },
+            "proposal_sha256": "0a48071a1507bb2b93d82124f764846d8ffe64c4a86bd8f193a6e9db5171cac0",
+            "requested_candidate_sha256": "04f1ff8375086125e6303a4dc53c1183551e1b756e9deaa1efd1b5237716f5b9",
+            "schema": "wsp-lowering/1",
+            "sha256": "c45874a24c34e4499473f6550d5d1f9fe0197ed963d52c358e12700832f5a8a7"
+          },
+          "no_op": false,
+          "nullspace_dimension": null,
+          "nullspace_rtol": 1e-12,
+          "optimizer_verified": false,
+          "retention": "none",
+          "retention_feature_sha256": "a9e5320ed2bb6e23c8a6318459af9332691a8cdd5112e5fc4c65a21b63b37415",
+          "retention_rank": null,
+          "retention_rmse_after_projection": 0.47786157798700196,
+          "retention_rows": 10,
+          "retention_weight": 8.0,
+          "ridge": 0.01,
+          "singular_cutoff": null,
+          "target_feature_sha256": "5e712d5161f020ade32f453c240c652d82642cbc5cd48f35ec4c0892088d5ad0",
+          "target_rmse_after_projection": 0.012355136401143383,
+          "target_rows": 3
+        },
+        "proposal": {
+          "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+          "commands": [
+            {
+              "op": "add",
+              "tensor": "head.weight",
+              "values": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  1.47860777449307,
+                  2.220446049250313e-16,
+                  4.440892098500626e-16,
+                  -1.8041124150158794e-16,
+                  0.021224035040569855,
+                  0.041847389844142935,
+                  1.4786077744930695
+                ]
+              ]
+            }
+          ],
+          "intent": "Enterprise routing: none",
+          "schema": "wsp-structured-program/1"
+        }
+      },
+      "label": "target-only",
+      "program": {
+        "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "edits": [
+          {
+            "after": 1.47860777449307,
+            "before": 0.0,
+            "index": [
+              3,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 2.220446049250313e-16,
+            "before": 0.0,
+            "index": [
+              3,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 4.440892098500626e-16,
+            "before": 0.0,
+            "index": [
+              3,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.27122403504056986,
+            "before": 0.25,
+            "index": [
+              3,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.29184738984414293,
+            "before": 0.25,
+            "index": [
+              3,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.7286077744930695,
+            "before": 0.25,
+            "index": [
+              3,
+              6
+            ],
+            "tensor": "head.weight"
+          }
+        ],
+        "intent": "Enterprise routing: none",
+        "schema": "wsp-program/1"
+      },
+      "retention_certificate": {
+        "absolute_residuals_exact": [
+          [
+            "0",
+            "0",
+            "0",
+            "1664764355558527/1125899906842624"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "1/4503599627370496"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "1/2251799813685248"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "27018567914136467/18014398509481984"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "3423760655771309/2251799813685248"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "27772423471370507/18014398509481984"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "1136193782434083/18014398509481984"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "759266003817059/18014398509481984"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "1136193782434075/18014398509481984"
+          ]
+        ],
+        "anchor_count": 10,
+        "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "candidate_sha256": "04f1ff8375086125e6303a4dc53c1183551e1b756e9deaa1efd1b5237716f5b9",
+        "exactly_zero_on_supplied_features": false,
+        "feature_extractor_verified": false,
+        "feature_sha256": "a9e5320ed2bb6e23c8a6318459af9332691a8cdd5112e5fc4c65a21b63b37415",
+        "floating_execution_verified": false,
+        "head": {
+          "bias": "head.bias",
+          "feature_id": "structured-support-fields/1",
+          "weight": "head.weight"
+        },
+        "maximum_residuals_exact": [
+          "0",
+          "0",
+          "0",
+          "27772423471370507/18014398509481984"
+        ],
+        "schema": "wsp-feature-retention/1",
+        "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+        "sha256": "b23a3dfc663fd805cbb58ecb09cac1fc3b1dc46bb1b3db914bb5180159da7454",
+        "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])"
+      }
+    },
+    {
+      "admission": {
+        "artifact_sha256": "9dae4aa3a8242a29aba784e2ae79e7b7aac576f5543f5efe189d9d3e8d247873",
+        "certificate_sha256": "4e6450cc742a86bd2f74c33ee3bc724b30d546564b79700f07e2cb685711cf0d",
+        "certificate_verified": true,
+        "contract_sha256": "0f18734f5131cf7fbe79677ef22b6a3e10dd622570211e2e1b5e5653d112ce23",
+        "eligible": false,
+        "failures": [
+          "protected_runtime_scores",
+          "protected_exact_retention"
+        ],
+        "metrics": {
+          "maximum_protected_score_drift": 0.01144887394034061,
+          "maximum_target_shift_error": 0.031530971051995316,
+          "minimum_target_margin": 1.2184690289480047,
+          "protected_routes_unchanged": true,
+          "target_routes_correct": true,
+          "tickets": [
+            {
+              "after_margin": 1.2205705814390364,
+              "after_queue": "platform",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                3.2205705814390364
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.25
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-standard"
+            },
+            {
+              "after_margin": 1.2184690289480047,
+              "after_queue": "platform",
+              "after_scores": [
+                2.375,
+                0.25,
+                0.5,
+                3.5934690289480047
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.375,
+                0.25,
+                0.5,
+                0.625
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-enterprise"
+            },
+            {
+              "after_margin": 1.2221396658555062,
+              "after_queue": "platform",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                3.472139665855506
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.5
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-urgent"
+            },
+            {
+              "after_margin": 1.9901202104761289,
+              "after_queue": "general",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.009879789523871077
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-general"
+            },
+            {
+              "after_margin": 2.998955750315014,
+              "after_queue": "billing",
+              "after_scores": [
+                0.0,
+                3.0,
+                0.0,
+                0.001044249684985843
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.0,
+                3.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-billing"
+            },
+            {
+              "after_margin": 3.9993455849526467,
+              "after_queue": "security",
+              "after_scores": [
+                0.0,
+                0.0,
+                4.0,
+                0.0006544150473533072
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.0,
+                0.0,
+                4.0,
+                0.0
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-security"
+            },
+            {
+              "after_margin": 3.0006544150473533,
+              "after_queue": "platform",
+              "after_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0006544150473533
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-platform"
+            },
+            {
+              "after_margin": 1.9930063051753955,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.25,
+                0.25,
+                0.2569936948246045
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-enterprise-general"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.2614488739403406
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-urgent-general"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5085627792410741
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-telemetry-latency"
+            },
+            {
+              "after_margin": 4.25,
+              "after_queue": "security",
+              "after_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.49933740476455624
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.5
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-telemetry-security"
+            },
+            {
+              "after_margin": 2.75,
+              "after_queue": "billing",
+              "after_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.373942697193954
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.375
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-telemetry-billing"
+            },
+            {
+              "after_margin": 2.749337404764556,
+              "after_queue": "platform",
+              "after_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.499337404764556
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.5
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-existing-platform"
+            }
+          ]
+        },
+        "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "program_sha256": "0ac2b4d7491251df9a06df079567c25941133ffdc662d76da0373e7bf7104051",
+        "schema": "enterprise-routing-public-admission/1",
+        "sha256": "291201452d2c5c796d0a76056a7c78f81ff39b5ac708f531f1c0f3870c24ad22",
+        "structural": {
+          "behavioral_status": "not_checked",
+          "candidate_sha256": "9dae4aa3a8242a29aba784e2ae79e7b7aac576f5543f5efe189d9d3e8d247873",
+          "formal_certificate": null,
+          "issues": [],
+          "policy": {
+            "max_change_abs": 3.0,
+            "max_edits": 7,
+            "max_parameter_abs": 4.0,
+            "writable": [
+              "head.weight"
+            ]
+          },
+          "program_sha256": "0ac2b4d7491251df9a06df079567c25941133ffdc662d76da0373e7bf7104051",
+          "schema": "wsp-structural-admission/1",
+          "sha256": "b96979fc944252d0fc34f07abe3787583b6b4362026eec52e3847e9503485e42",
+          "structural_accepted": true
+        }
+      },
+      "candidate": {
+        "answer": null,
+        "artifact": {
+          "architecture": "enterprise-support-linear-head/1",
+          "dtype": "float64",
+          "metadata": {
+            "extractor_source_sha256": "96d4f6c640d88811e02394feed3dea448450b16240312a2ed7c2235ff75931ea",
+            "feature_id": "structured-support-fields/1",
+            "feature_names": [
+              "general_topic",
+              "billing_topic",
+              "security_topic",
+              "platform_topic",
+              "enterprise_tier",
+              "urgency",
+              "telemetry_outage"
+            ],
+            "origin": "Hand-constructed synthetic baseline; no training or customer data",
+            "queue_names": [
+              "general",
+              "billing",
+              "security",
+              "platform"
+            ],
+            "score_rule": "features @ head.weight.T + head.bias"
+          },
+          "schema": "wsp-tensors/1",
+          "tensors": {
+            "head.bias": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "head.weight": [
+              [
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+                0.25,
+                0.25,
+                0.0
+              ],
+              [
+                0.0,
+                3.0,
+                0.0,
+                0.0,
+                0.25,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                4.0,
+                0.0,
+                0.25,
+                0.5,
+                0.0
+              ],
+              [
+                0.009879789523871077,
+                0.001044249684985843,
+                0.0006544150473533072,
+                3.0006544150473533,
+                0.2471139053007334,
+                0.2515690844164695,
+                3.2106907919151655
+              ]
+            ]
+          }
+        },
+        "artifact_sha256": "9dae4aa3a8242a29aba784e2ae79e7b7aac576f5543f5efe189d9d3e8d247873",
+        "kind": "program",
+        "no_op": false,
+        "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "program_sha256": "0ac2b4d7491251df9a06df079567c25941133ffdc662d76da0373e7bf7104051",
+        "proposal_index": 3,
+        "schema": "wsp-candidate/1",
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "2c4883e701ac3dcdd93cc5bbfcd19d091b96afaba6ead826b61bcbe5930310d9",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069"
+      },
+      "compilation": {
+        "diagnostics": {
+          "behavioral_status": "supplied_features_only",
+          "compiler": "generic-frozen-feature-readout/1",
+          "condition_number": 3.762345099471446,
+          "desired_delta_sha256": "c269a71b1930fb1da8aa36d1b322fe2f3e6f53cbe0097ecd309b1e55229161e7",
+          "edit_cells": 7,
+          "feature_extractor_verified": false,
+          "fit_rank": 7,
+          "head": {
+            "bias": "head.bias",
+            "feature_id": "structured-support-fields/1",
+            "weight": "head.weight"
+          },
+          "lowering": {
+            "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+            "behavioral_status": "not_checked",
+            "candidate_sha256": "9dae4aa3a8242a29aba784e2ae79e7b7aac576f5543f5efe189d9d3e8d247873",
+            "cast": "reject",
+            "command_count": 1,
+            "effective_edits": 7,
+            "native_dtypes": {
+              "head.bias": "float64",
+              "head.weight": "float64"
+            },
+            "numerics": "NumPy binary64 operations; explicit native endpoint projection",
+            "numpy_version": "2.5.3",
+            "program_sha256": "0ac2b4d7491251df9a06df079567c25941133ffdc662d76da0373e7bf7104051",
+            "projections": {
+              "head.bias": {
+                "dtype": "float64",
+                "effective_changed_cells": 0,
+                "maximum_rounding_error_exact": "0",
+                "requested_changed_cells": 0,
+                "rounded_cells": 0,
+                "touched_cells": 0
+              },
+              "head.weight": {
+                "dtype": "float64",
+                "effective_changed_cells": 7,
+                "maximum_rounding_error_exact": "0",
+                "requested_changed_cells": 7,
+                "rounded_cells": 0,
+                "touched_cells": 28
+              }
+            },
+            "proposal_sha256": "f1bf59eaa7eaa3897dc43079cfec1de925e7c955b2ccfeafb6d82a6ebe66255a",
+            "requested_candidate_sha256": "9dae4aa3a8242a29aba784e2ae79e7b7aac576f5543f5efe189d9d3e8d247873",
+            "schema": "wsp-lowering/1",
+            "sha256": "5b6953b40f94069d63393340f33fbae4e7ec367b866f785ccc06e7c7929a0fb4"
+          },
+          "no_op": false,
+          "nullspace_dimension": null,
+          "nullspace_rtol": 1e-12,
+          "optimizer_verified": false,
+          "retention": "soft",
+          "retention_feature_sha256": "a9e5320ed2bb6e23c8a6318459af9332691a8cdd5112e5fc4c65a21b63b37415",
+          "retention_rank": null,
+          "retention_rmse_after_projection": 0.002978518259124855,
+          "retention_rows": 10,
+          "retention_weight": 8.0,
+          "ridge": 0.01,
+          "singular_cutoff": null,
+          "target_feature_sha256": "5e712d5161f020ade32f453c240c652d82642cbc5cd48f35ec4c0892088d5ad0",
+          "target_rmse_after_projection": 0.014822536419702841,
+          "target_rows": 3
+        },
+        "proposal": {
+          "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+          "commands": [
+            {
+              "op": "add",
+              "tensor": "head.weight",
+              "values": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.009879789523871077,
+                  0.001044249684985843,
+                  0.0006544150473533072,
+                  0.0006544150473531962,
+                  -0.002886094699266595,
+                  0.001569084416469524,
+                  2.9606907919151655
+                ]
+              ]
+            }
+          ],
+          "intent": "Enterprise routing: soft",
+          "schema": "wsp-structured-program/1"
+        }
+      },
+      "label": "soft-retention",
+      "program": {
+        "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "edits": [
+          {
+            "after": 0.009879789523871077,
+            "before": 0.0,
+            "index": [
+              3,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.001044249684985843,
+            "before": 0.0,
+            "index": [
+              3,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.0006544150473533072,
+            "before": 0.0,
+            "index": [
+              3,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 3.0006544150473533,
+            "before": 3.0,
+            "index": [
+              3,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.2471139053007334,
+            "before": 0.25,
+            "index": [
+              3,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.2515690844164695,
+            "before": 0.25,
+            "index": [
+              3,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 3.2106907919151655,
+            "before": 0.25,
+            "index": [
+              3,
+              6
+            ],
+            "tensor": "head.weight"
+          }
+        ],
+        "intent": "Enterprise routing: soft",
+        "schema": "wsp-program/1"
+      },
+      "retention_certificate": {
+        "absolute_residuals_exact": [
+          [
+            "0",
+            "0",
+            "0",
+            "5695310901530203/576460752303423488"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "587860311523/562949953421312"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "1473611681703/2251799813685248"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "1473611681703/2251799813685248"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "4031590579972059/576460752303423488"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "6599826484675803/576460752303423488"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "4936106163117659/576460752303423488"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "1492031827721/2251799813685248"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "9523337046653/9007199254740992"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "1492031827721/2251799813685248"
+          ]
+        ],
+        "anchor_count": 10,
+        "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "candidate_sha256": "9dae4aa3a8242a29aba784e2ae79e7b7aac576f5543f5efe189d9d3e8d247873",
+        "exactly_zero_on_supplied_features": false,
+        "feature_extractor_verified": false,
+        "feature_sha256": "a9e5320ed2bb6e23c8a6318459af9332691a8cdd5112e5fc4c65a21b63b37415",
+        "floating_execution_verified": false,
+        "head": {
+          "bias": "head.bias",
+          "feature_id": "structured-support-fields/1",
+          "weight": "head.weight"
+        },
+        "maximum_residuals_exact": [
+          "0",
+          "0",
+          "0",
+          "6599826484675803/576460752303423488"
+        ],
+        "schema": "wsp-feature-retention/1",
+        "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+        "sha256": "4e6450cc742a86bd2f74c33ee3bc724b30d546564b79700f07e2cb685711cf0d",
+        "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])"
+      }
+    },
+    {
+      "admission": {
+        "artifact_sha256": "1836e50c3e76fbeca43e5f1b64113630a7a6d9532737418d7ffecb87fa0a8d37",
+        "certificate_sha256": "09cec02daae8fdd47651247b883544aaf8cd840b1b34b0f467c821a6c5532393",
+        "certificate_verified": true,
+        "contract_sha256": "0f18734f5131cf7fbe79677ef22b6a3e10dd622570211e2e1b5e5653d112ce23",
+        "eligible": true,
+        "failures": [],
+        "metrics": {
+          "maximum_protected_score_drift": 0.0,
+          "maximum_target_shift_error": 0.029702970297030173,
+          "minimum_target_margin": 1.2202970297029698,
+          "protected_routes_unchanged": true,
+          "target_routes_correct": true,
+          "tickets": [
+            {
+              "after_margin": 1.2202970297029698,
+              "after_queue": "platform",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                3.22029702970297
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.25
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-standard"
+            },
+            {
+              "after_margin": 1.2202970297029698,
+              "after_queue": "platform",
+              "after_scores": [
+                2.375,
+                0.25,
+                0.5,
+                3.59529702970297
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.375,
+                0.25,
+                0.5,
+                0.625
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-enterprise"
+            },
+            {
+              "after_margin": 1.2202970297029698,
+              "after_queue": "platform",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                3.47029702970297
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.5
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-urgent"
+            },
+            {
+              "after_margin": 2.0,
+              "after_queue": "general",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-general"
+            },
+            {
+              "after_margin": 3.0,
+              "after_queue": "billing",
+              "after_scores": [
+                0.0,
+                3.0,
+                0.0,
+                0.0
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.0,
+                3.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-billing"
+            },
+            {
+              "after_margin": 4.0,
+              "after_queue": "security",
+              "after_scores": [
+                0.0,
+                0.0,
+                4.0,
+                0.0
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.0,
+                0.0,
+                4.0,
+                0.0
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-security"
+            },
+            {
+              "after_margin": 3.0,
+              "after_queue": "platform",
+              "after_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-platform"
+            },
+            {
+              "after_margin": 2.0,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-enterprise-general"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.25
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-urgent-general"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-telemetry-latency"
+            },
+            {
+              "after_margin": 4.25,
+              "after_queue": "security",
+              "after_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.5
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.5
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-telemetry-security"
+            },
+            {
+              "after_margin": 2.75,
+              "after_queue": "billing",
+              "after_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.375
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.375
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-telemetry-billing"
+            },
+            {
+              "after_margin": 2.75,
+              "after_queue": "platform",
+              "after_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.5
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.5
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-existing-platform"
+            }
+          ]
+        },
+        "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "program_sha256": "1cc6c8eed72367a93de96b9c9cdc2cfc400d13e64262717a0f35aa4d564fe0cd",
+        "schema": "enterprise-routing-public-admission/1",
+        "sha256": "bddd1e84cfd38f400f82f8922d6d17a53c9a1bf8e71ce5806ec71a0efcfa8c6f",
+        "structural": {
+          "behavioral_status": "not_checked",
+          "candidate_sha256": "1836e50c3e76fbeca43e5f1b64113630a7a6d9532737418d7ffecb87fa0a8d37",
+          "formal_certificate": null,
+          "issues": [],
+          "policy": {
+            "max_change_abs": 3.0,
+            "max_edits": 7,
+            "max_parameter_abs": 4.0,
+            "writable": [
+              "head.weight"
+            ]
+          },
+          "program_sha256": "1cc6c8eed72367a93de96b9c9cdc2cfc400d13e64262717a0f35aa4d564fe0cd",
+          "schema": "wsp-structural-admission/1",
+          "sha256": "a2c6a8fe60628be686a20c03cc0113ec0a66ff4a3980cbd4710b6d3a19551711",
+          "structural_accepted": true
+        }
+      },
+      "candidate": {
+        "answer": null,
+        "artifact": {
+          "architecture": "enterprise-support-linear-head/1",
+          "dtype": "float64",
+          "metadata": {
+            "extractor_source_sha256": "96d4f6c640d88811e02394feed3dea448450b16240312a2ed7c2235ff75931ea",
+            "feature_id": "structured-support-fields/1",
+            "feature_names": [
+              "general_topic",
+              "billing_topic",
+              "security_topic",
+              "platform_topic",
+              "enterprise_tier",
+              "urgency",
+              "telemetry_outage"
+            ],
+            "origin": "Hand-constructed synthetic baseline; no training or customer data",
+            "queue_names": [
+              "general",
+              "billing",
+              "security",
+              "platform"
+            ],
+            "score_rule": "features @ head.weight.T + head.bias"
+          },
+          "schema": "wsp-tensors/1",
+          "tensors": {
+            "head.bias": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "head.weight": [
+              [
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+                0.25,
+                0.25,
+                0.0
+              ],
+              [
+                0.0,
+                3.0,
+                0.0,
+                0.0,
+                0.25,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                4.0,
+                0.0,
+                0.25,
+                0.5,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                3.0,
+                0.25,
+                0.25,
+                3.22029702970297
+              ]
+            ]
+          }
+        },
+        "artifact_sha256": "1836e50c3e76fbeca43e5f1b64113630a7a6d9532737418d7ffecb87fa0a8d37",
+        "kind": "program",
+        "no_op": false,
+        "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "program_sha256": "1cc6c8eed72367a93de96b9c9cdc2cfc400d13e64262717a0f35aa4d564fe0cd",
+        "proposal_index": 4,
+        "schema": "wsp-candidate/1",
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "be0cfce8438ab33c37e8017a46e2bd6c1b5cda1cb67e3721f8d4e8f2b5594f03",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069"
+      },
+      "compilation": {
+        "diagnostics": {
+          "behavioral_status": "supplied_features_only",
+          "compiler": "generic-frozen-feature-readout/1",
+          "condition_number": 1.0,
+          "desired_delta_sha256": "c269a71b1930fb1da8aa36d1b322fe2f3e6f53cbe0097ecd309b1e55229161e7",
+          "edit_cells": 1,
+          "feature_extractor_verified": false,
+          "fit_rank": 1,
+          "head": {
+            "bias": "head.bias",
+            "feature_id": "structured-support-fields/1",
+            "weight": "head.weight"
+          },
+          "lowering": {
+            "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+            "behavioral_status": "not_checked",
+            "candidate_sha256": "1836e50c3e76fbeca43e5f1b64113630a7a6d9532737418d7ffecb87fa0a8d37",
+            "cast": "reject",
+            "command_count": 1,
+            "effective_edits": 1,
+            "native_dtypes": {
+              "head.bias": "float64",
+              "head.weight": "float64"
+            },
+            "numerics": "NumPy binary64 operations; explicit native endpoint projection",
+            "numpy_version": "2.5.3",
+            "program_sha256": "1cc6c8eed72367a93de96b9c9cdc2cfc400d13e64262717a0f35aa4d564fe0cd",
+            "projections": {
+              "head.bias": {
+                "dtype": "float64",
+                "effective_changed_cells": 0,
+                "maximum_rounding_error_exact": "0",
+                "requested_changed_cells": 0,
+                "rounded_cells": 0,
+                "touched_cells": 0
+              },
+              "head.weight": {
+                "dtype": "float64",
+                "effective_changed_cells": 1,
+                "maximum_rounding_error_exact": "0",
+                "requested_changed_cells": 1,
+                "rounded_cells": 0,
+                "touched_cells": 28
+              }
+            },
+            "proposal_sha256": "04907b3502906f65771d7e1f11e95026bfe5690cc2d3ee394d9bd407c9f2a2ef",
+            "requested_candidate_sha256": "1836e50c3e76fbeca43e5f1b64113630a7a6d9532737418d7ffecb87fa0a8d37",
+            "schema": "wsp-lowering/1",
+            "sha256": "27b95b694728fd574465b22faef9e1394984149036597b5e1dc7ad9c23bf11cb"
+          },
+          "no_op": false,
+          "nullspace_dimension": 1,
+          "nullspace_rtol": 1e-12,
+          "optimizer_verified": false,
+          "retention": "nullspace",
+          "retention_feature_sha256": "a9e5320ed2bb6e23c8a6318459af9332691a8cdd5112e5fc4c65a21b63b37415",
+          "retention_rank": 6,
+          "retention_rmse_after_projection": 0.0,
+          "retention_rows": 10,
+          "retention_weight": 8.0,
+          "ridge": 0.01,
+          "singular_cutoff": 3.176714531830254e-12,
+          "target_feature_sha256": "5e712d5161f020ade32f453c240c652d82642cbc5cd48f35ec4c0892088d5ad0",
+          "target_rmse_after_projection": 0.014851485148515087,
+          "target_rows": 3
+        },
+        "proposal": {
+          "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+          "commands": [
+            {
+              "op": "add",
+              "tensor": "head.weight",
+              "values": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0,
+                  2.97029702970297
+                ]
+              ]
+            }
+          ],
+          "intent": "Enterprise routing: nullspace",
+          "schema": "wsp-structured-program/1"
+        }
+      },
+      "label": "protected-edit",
+      "program": {
+        "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "edits": [
+          {
+            "after": 3.22029702970297,
+            "before": 0.25,
+            "index": [
+              3,
+              6
+            ],
+            "tensor": "head.weight"
+          }
+        ],
+        "intent": "Enterprise routing: nullspace",
+        "schema": "wsp-program/1"
+      },
+      "retention_certificate": {
+        "absolute_residuals_exact": [
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "anchor_count": 10,
+        "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "candidate_sha256": "1836e50c3e76fbeca43e5f1b64113630a7a6d9532737418d7ffecb87fa0a8d37",
+        "exactly_zero_on_supplied_features": true,
+        "feature_extractor_verified": false,
+        "feature_sha256": "a9e5320ed2bb6e23c8a6318459af9332691a8cdd5112e5fc4c65a21b63b37415",
+        "floating_execution_verified": false,
+        "head": {
+          "bias": "head.bias",
+          "feature_id": "structured-support-fields/1",
+          "weight": "head.weight"
+        },
+        "maximum_residuals_exact": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "schema": "wsp-feature-retention/1",
+        "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+        "sha256": "09cec02daae8fdd47651247b883544aaf8cd840b1b34b0f467c821a6c5532393",
+        "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])"
+      }
+    }
+  ],
+  "contract": {
+    "desired_score_shift": [
+      0,
+      0,
+      0,
+      3
+    ],
+    "execution": "NumPy float64 matmul and addition; sampled observations, no floating-point proof",
+    "final_gate": "The sealed edit must also pass the same behavioral rubric on the declared final split",
+    "maximum_protected_runtime_drift": 1e-12,
+    "maximum_target_shift_error": 0.05,
+    "minimum_route_margin": 0.5,
+    "objective": "Route telemetry outage tickets to Platform Operations",
+    "production_authorized": false,
+    "require_exact_anchor_retention": true,
+    "scenario": "policy-change",
+    "schema": "enterprise-routing-contract/1",
+    "selection_rule": "Among publicly eligible edits, minimize changed cells then program SHA-256; otherwise abstain"
+  },
+  "final_admission": {
+    "artifact_sha256": "1836e50c3e76fbeca43e5f1b64113630a7a6d9532737418d7ffecb87fa0a8d37",
+    "candidate_sha256": "be0cfce8438ab33c37e8017a46e2bd6c1b5cda1cb67e3721f8d4e8f2b5594f03",
+    "contract_sha256": "0f18734f5131cf7fbe79677ef22b6a3e10dd622570211e2e1b5e5653d112ce23",
+    "decision": "admitted_for_synthetic_trial",
+    "evaluation_receipt_sha256": "54a052e1aafde227592830cfb13c221faef0850de7c8360816a094210dd74403",
+    "heldout_failures": [],
+    "inputs_sha256": "0741d5740c4a04ff033531e9b0f595d45f5f1dd1d74000634a970670d4c03324",
+    "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+    "production_authorized": false,
+    "public_admission_sha256": "bddd1e84cfd38f400f82f8922d6d17a53c9a1bf8e71ce5806ec71a0efcfa8c6f",
+    "schema": "enterprise-routing-final-admission/1",
+    "scope": "Constructed synthetic integration example, not independent enterprise deployment evidence",
+    "selected_label": "protected-edit",
+    "sha256": "a6558e1a41d0ba70da348a6e113cb68d22ec1d2ec0c78b99838dcd3c083da82e",
+    "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+    "trace_head_sha256": "15dfb740c7a1611007bfeea13cd687ef6bc5326c4999efae4259bf14e3ce8b9b"
+  },
+  "fixture_sha256": "4919cc8dc8ca6d64ddace2d2f8fbf06e00e96e497ee41cd57c54c2072013572f",
+  "inputs": {
+    "heldout": [
+      {
+        "case_id": "final-case-01",
+        "expected_queue": "platform",
+        "product": "telemetry",
+        "role": "target",
+        "symptom": "outage",
+        "ticket_id": "final-outage-enterprise",
+        "tier": "enterprise",
+        "topic": "general",
+        "urgency": 0.75
+      },
+      {
+        "case_id": "final-case-02",
+        "expected_queue": "platform",
+        "product": "telemetry",
+        "role": "target",
+        "symptom": "outage",
+        "ticket_id": "final-outage-standard",
+        "tier": "standard",
+        "topic": "general",
+        "urgency": 0.25
+      },
+      {
+        "case_id": "final-case-03",
+        "expected_queue": "general",
+        "product": "core",
+        "role": "protected",
+        "symptom": "help",
+        "ticket_id": "final-general-enterprise",
+        "tier": "enterprise",
+        "topic": "general",
+        "urgency": 0.25
+      },
+      {
+        "case_id": "final-case-04",
+        "expected_queue": "general",
+        "product": "core",
+        "role": "protected",
+        "symptom": "outage",
+        "ticket_id": "final-core-outage",
+        "tier": "standard",
+        "topic": "general",
+        "urgency": 0.75
+      },
+      {
+        "case_id": "final-case-05",
+        "expected_queue": "billing",
+        "product": "telemetry",
+        "role": "protected",
+        "symptom": "outage",
+        "ticket_id": "final-billing-telemetry",
+        "tier": "enterprise",
+        "topic": "billing",
+        "urgency": 0.75
+      },
+      {
+        "case_id": "final-case-06",
+        "expected_queue": "security",
+        "product": "telemetry",
+        "role": "protected",
+        "symptom": "outage",
+        "ticket_id": "final-security-telemetry",
+        "tier": "standard",
+        "topic": "security",
+        "urgency": 0.25
+      },
+      {
+        "case_id": "final-case-07",
+        "expected_queue": "platform",
+        "product": "core",
+        "role": "protected",
+        "symptom": "latency",
+        "ticket_id": "final-existing-platform",
+        "tier": "enterprise",
+        "topic": "platform",
+        "urgency": 0.75
+      },
+      {
+        "case_id": "final-case-08",
+        "expected_queue": "general",
+        "product": "telemetry",
+        "role": "protected",
+        "symptom": "help",
+        "ticket_id": "final-telemetry-help",
+        "tier": "enterprise",
+        "topic": "general",
+        "urgency": 1
+      }
+    ],
+    "origin": "Invented structured support records and supplied routing labels; no customer data",
+    "public": [
+      {
+        "case_id": "public-case-01",
+        "expected_queue": "platform",
+        "product": "telemetry",
+        "role": "target",
+        "symptom": "outage",
+        "ticket_id": "public-outage-standard",
+        "tier": "standard",
+        "topic": "general",
+        "urgency": 0
+      },
+      {
+        "case_id": "public-case-02",
+        "expected_queue": "platform",
+        "product": "telemetry",
+        "role": "target",
+        "symptom": "outage",
+        "ticket_id": "public-outage-enterprise",
+        "tier": "enterprise",
+        "topic": "general",
+        "urgency": 0.5
+      },
+      {
+        "case_id": "public-case-03",
+        "expected_queue": "platform",
+        "product": "telemetry",
+        "role": "target",
+        "symptom": "outage",
+        "ticket_id": "public-outage-urgent",
+        "tier": "standard",
+        "topic": "general",
+        "urgency": 1
+      },
+      {
+        "case_id": "public-case-04",
+        "expected_queue": "general",
+        "product": "core",
+        "role": "protected",
+        "symptom": "help",
+        "ticket_id": "public-general",
+        "tier": "standard",
+        "topic": "general",
+        "urgency": 0
+      },
+      {
+        "case_id": "public-case-05",
+        "expected_queue": "billing",
+        "product": "core",
+        "role": "protected",
+        "symptom": "payment",
+        "ticket_id": "public-billing",
+        "tier": "standard",
+        "topic": "billing",
+        "urgency": 0
+      },
+      {
+        "case_id": "public-case-06",
+        "expected_queue": "security",
+        "product": "core",
+        "role": "protected",
+        "symptom": "access",
+        "ticket_id": "public-security",
+        "tier": "standard",
+        "topic": "security",
+        "urgency": 0
+      },
+      {
+        "case_id": "public-case-07",
+        "expected_queue": "platform",
+        "product": "core",
+        "role": "protected",
+        "symptom": "outage",
+        "ticket_id": "public-platform",
+        "tier": "standard",
+        "topic": "platform",
+        "urgency": 0
+      },
+      {
+        "case_id": "public-case-08",
+        "expected_queue": "general",
+        "product": "core",
+        "role": "protected",
+        "symptom": "help",
+        "ticket_id": "public-enterprise-general",
+        "tier": "enterprise",
+        "topic": "general",
+        "urgency": 0
+      },
+      {
+        "case_id": "public-case-09",
+        "expected_queue": "general",
+        "product": "core",
+        "role": "protected",
+        "symptom": "help",
+        "ticket_id": "public-urgent-general",
+        "tier": "standard",
+        "topic": "general",
+        "urgency": 1
+      },
+      {
+        "case_id": "public-case-10",
+        "expected_queue": "general",
+        "product": "telemetry",
+        "role": "protected",
+        "symptom": "latency",
+        "ticket_id": "public-telemetry-latency",
+        "tier": "enterprise",
+        "topic": "general",
+        "urgency": 1
+      },
+      {
+        "case_id": "public-case-11",
+        "expected_queue": "security",
+        "product": "telemetry",
+        "role": "protected",
+        "symptom": "outage",
+        "ticket_id": "public-telemetry-security",
+        "tier": "enterprise",
+        "topic": "security",
+        "urgency": 1
+      },
+      {
+        "case_id": "public-case-12",
+        "expected_queue": "billing",
+        "product": "telemetry",
+        "role": "protected",
+        "symptom": "outage",
+        "ticket_id": "public-telemetry-billing",
+        "tier": "enterprise",
+        "topic": "billing",
+        "urgency": 0.5
+      },
+      {
+        "case_id": "public-case-13",
+        "expected_queue": "platform",
+        "product": "telemetry",
+        "role": "protected",
+        "symptom": "outage",
+        "ticket_id": "public-existing-platform",
+        "tier": "enterprise",
+        "topic": "platform",
+        "urgency": 1
+      }
+    ],
+    "schema": "synthetic-support-fixture/1",
+    "split_scope": "Disjoint declared synthetic case identifiers; not statistical independence or untouched confirmation"
+  },
+  "parent": {
+    "architecture": "enterprise-support-linear-head/1",
+    "dtype": "float64",
+    "metadata": {
+      "extractor_source_sha256": "96d4f6c640d88811e02394feed3dea448450b16240312a2ed7c2235ff75931ea",
+      "feature_id": "structured-support-fields/1",
+      "feature_names": [
+        "general_topic",
+        "billing_topic",
+        "security_topic",
+        "platform_topic",
+        "enterprise_tier",
+        "urgency",
+        "telemetry_outage"
+      ],
+      "origin": "Hand-constructed synthetic baseline; no training or customer data",
+      "queue_names": [
+        "general",
+        "billing",
+        "security",
+        "platform"
+      ],
+      "score_rule": "features @ head.weight.T + head.bias"
+    },
+    "schema": "wsp-tensors/1",
+    "tensors": {
+      "head.bias": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "head.weight": [
+        [
+          2.0,
+          0.0,
+          0.0,
+          0.0,
+          0.25,
+          0.25,
+          0.0
+        ],
+        [
+          0.0,
+          3.0,
+          0.0,
+          0.0,
+          0.25,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          4.0,
+          0.0,
+          0.25,
+          0.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          3.0,
+          0.25,
+          0.25,
+          0.25
+        ]
+      ]
+    }
+  },
+  "rollback": {
+    "program": {
+      "base_sha256": "1836e50c3e76fbeca43e5f1b64113630a7a6d9532737418d7ffecb87fa0a8d37",
+      "edits": [
+        {
+          "after": 0.25,
+          "before": 3.22029702970297,
+          "index": [
+            3,
+            6
+          ],
+          "tensor": "head.weight"
+        }
+      ],
+      "intent": "Rollback: Enterprise routing: nullspace",
+      "schema": "wsp-program/1"
+    },
+    "restored_parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+    "scope": "Restores model tensors and metadata; does not undo already routed tickets"
+  },
+  "scenario": "policy-change",
+  "schema": "enterprise-routing-bundle/1",
+  "session": {
+    "behavioral_certificate": null,
+    "candidate": {
+      "answer": null,
+      "artifact": {
+        "architecture": "enterprise-support-linear-head/1",
+        "dtype": "float64",
+        "metadata": {
+          "extractor_source_sha256": "96d4f6c640d88811e02394feed3dea448450b16240312a2ed7c2235ff75931ea",
+          "feature_id": "structured-support-fields/1",
+          "feature_names": [
+            "general_topic",
+            "billing_topic",
+            "security_topic",
+            "platform_topic",
+            "enterprise_tier",
+            "urgency",
+            "telemetry_outage"
+          ],
+          "origin": "Hand-constructed synthetic baseline; no training or customer data",
+          "queue_names": [
+            "general",
+            "billing",
+            "security",
+            "platform"
+          ],
+          "score_rule": "features @ head.weight.T + head.bias"
+        },
+        "schema": "wsp-tensors/1",
+        "tensors": {
+          "head.bias": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "head.weight": [
+            [
+              2.0,
+              0.0,
+              0.0,
+              0.0,
+              0.25,
+              0.25,
+              0.0
+            ],
+            [
+              0.0,
+              3.0,
+              0.0,
+              0.0,
+              0.25,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              4.0,
+              0.0,
+              0.25,
+              0.5,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              3.0,
+              0.25,
+              0.25,
+              3.22029702970297
+            ]
+          ]
+        }
+      },
+      "artifact_sha256": "1836e50c3e76fbeca43e5f1b64113630a7a6d9532737418d7ffecb87fa0a8d37",
+      "kind": "program",
+      "no_op": false,
+      "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+      "program_sha256": "1cc6c8eed72367a93de96b9c9cdc2cfc400d13e64262717a0f35aa4d564fe0cd",
+      "proposal_index": 4,
+      "schema": "wsp-candidate/1",
+      "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+      "sha256": "be0cfce8438ab33c37e8017a46e2bd6c1b5cda1cb67e3721f8d4e8f2b5594f03",
+      "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069"
+    },
+    "candidate_sha256": "be0cfce8438ab33c37e8017a46e2bd6c1b5cda1cb67e3721f8d4e8f2b5594f03",
+    "candidates": [
+      {
+        "answer": null,
+        "artifact": {
+          "architecture": "enterprise-support-linear-head/1",
+          "dtype": "float64",
+          "metadata": {
+            "extractor_source_sha256": "96d4f6c640d88811e02394feed3dea448450b16240312a2ed7c2235ff75931ea",
+            "feature_id": "structured-support-fields/1",
+            "feature_names": [
+              "general_topic",
+              "billing_topic",
+              "security_topic",
+              "platform_topic",
+              "enterprise_tier",
+              "urgency",
+              "telemetry_outage"
+            ],
+            "origin": "Hand-constructed synthetic baseline; no training or customer data",
+            "queue_names": [
+              "general",
+              "billing",
+              "security",
+              "platform"
+            ],
+            "score_rule": "features @ head.weight.T + head.bias"
+          },
+          "schema": "wsp-tensors/1",
+          "tensors": {
+            "head.bias": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "head.weight": [
+              [
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+                0.25,
+                0.25,
+                0.0
+              ],
+              [
+                0.0,
+                3.0,
+                0.0,
+                0.0,
+                0.25,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                4.0,
+                0.0,
+                0.25,
+                0.5,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                3.0,
+                0.25,
+                0.25,
+                0.25
+              ]
+            ]
+          }
+        },
+        "artifact_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "kind": "program",
+        "no_op": true,
+        "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "program_sha256": "8c2f73d3561b0693f2b71413cb9c780edf399b42d7211cc9be0a7de5b80cc9da",
+        "proposal_index": 1,
+        "schema": "wsp-candidate/1",
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "9c0431231ced92406eb6f086ffe1b968b0c2d0bfe131f0a621d3663873128041",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069"
+      },
+      {
+        "answer": null,
+        "artifact": {
+          "architecture": "enterprise-support-linear-head/1",
+          "dtype": "float64",
+          "metadata": {
+            "extractor_source_sha256": "96d4f6c640d88811e02394feed3dea448450b16240312a2ed7c2235ff75931ea",
+            "feature_id": "structured-support-fields/1",
+            "feature_names": [
+              "general_topic",
+              "billing_topic",
+              "security_topic",
+              "platform_topic",
+              "enterprise_tier",
+              "urgency",
+              "telemetry_outage"
+            ],
+            "origin": "Hand-constructed synthetic baseline; no training or customer data",
+            "queue_names": [
+              "general",
+              "billing",
+              "security",
+              "platform"
+            ],
+            "score_rule": "features @ head.weight.T + head.bias"
+          },
+          "schema": "wsp-tensors/1",
+          "tensors": {
+            "head.bias": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "head.weight": [
+              [
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+                0.25,
+                0.25,
+                0.0
+              ],
+              [
+                0.0,
+                3.0,
+                0.0,
+                0.0,
+                0.25,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                4.0,
+                0.0,
+                0.25,
+                0.5,
+                0.0
+              ],
+              [
+                1.47860777449307,
+                2.220446049250313e-16,
+                4.440892098500626e-16,
+                3.0,
+                0.27122403504056986,
+                0.29184738984414293,
+                1.7286077744930695
+              ]
+            ]
+          }
+        },
+        "artifact_sha256": "04f1ff8375086125e6303a4dc53c1183551e1b756e9deaa1efd1b5237716f5b9",
+        "kind": "program",
+        "no_op": false,
+        "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "program_sha256": "7f57a095657b54cef39e444bf9c0d7f10cc5ea8b8d56ad96dcd2b00030732fb7",
+        "proposal_index": 2,
+        "schema": "wsp-candidate/1",
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "93c6c92946fb02ea2439156375063776683987b59cce6f7342fd1f91733b3cbf",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069"
+      },
+      {
+        "answer": null,
+        "artifact": {
+          "architecture": "enterprise-support-linear-head/1",
+          "dtype": "float64",
+          "metadata": {
+            "extractor_source_sha256": "96d4f6c640d88811e02394feed3dea448450b16240312a2ed7c2235ff75931ea",
+            "feature_id": "structured-support-fields/1",
+            "feature_names": [
+              "general_topic",
+              "billing_topic",
+              "security_topic",
+              "platform_topic",
+              "enterprise_tier",
+              "urgency",
+              "telemetry_outage"
+            ],
+            "origin": "Hand-constructed synthetic baseline; no training or customer data",
+            "queue_names": [
+              "general",
+              "billing",
+              "security",
+              "platform"
+            ],
+            "score_rule": "features @ head.weight.T + head.bias"
+          },
+          "schema": "wsp-tensors/1",
+          "tensors": {
+            "head.bias": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "head.weight": [
+              [
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+                0.25,
+                0.25,
+                0.0
+              ],
+              [
+                0.0,
+                3.0,
+                0.0,
+                0.0,
+                0.25,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                4.0,
+                0.0,
+                0.25,
+                0.5,
+                0.0
+              ],
+              [
+                0.009879789523871077,
+                0.001044249684985843,
+                0.0006544150473533072,
+                3.0006544150473533,
+                0.2471139053007334,
+                0.2515690844164695,
+                3.2106907919151655
+              ]
+            ]
+          }
+        },
+        "artifact_sha256": "9dae4aa3a8242a29aba784e2ae79e7b7aac576f5543f5efe189d9d3e8d247873",
+        "kind": "program",
+        "no_op": false,
+        "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "program_sha256": "0ac2b4d7491251df9a06df079567c25941133ffdc662d76da0373e7bf7104051",
+        "proposal_index": 3,
+        "schema": "wsp-candidate/1",
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "2c4883e701ac3dcdd93cc5bbfcd19d091b96afaba6ead826b61bcbe5930310d9",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069"
+      },
+      {
+        "answer": null,
+        "artifact": {
+          "architecture": "enterprise-support-linear-head/1",
+          "dtype": "float64",
+          "metadata": {
+            "extractor_source_sha256": "96d4f6c640d88811e02394feed3dea448450b16240312a2ed7c2235ff75931ea",
+            "feature_id": "structured-support-fields/1",
+            "feature_names": [
+              "general_topic",
+              "billing_topic",
+              "security_topic",
+              "platform_topic",
+              "enterprise_tier",
+              "urgency",
+              "telemetry_outage"
+            ],
+            "origin": "Hand-constructed synthetic baseline; no training or customer data",
+            "queue_names": [
+              "general",
+              "billing",
+              "security",
+              "platform"
+            ],
+            "score_rule": "features @ head.weight.T + head.bias"
+          },
+          "schema": "wsp-tensors/1",
+          "tensors": {
+            "head.bias": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "head.weight": [
+              [
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+                0.25,
+                0.25,
+                0.0
+              ],
+              [
+                0.0,
+                3.0,
+                0.0,
+                0.0,
+                0.25,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                4.0,
+                0.0,
+                0.25,
+                0.5,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                3.0,
+                0.25,
+                0.25,
+                3.22029702970297
+              ]
+            ]
+          }
+        },
+        "artifact_sha256": "1836e50c3e76fbeca43e5f1b64113630a7a6d9532737418d7ffecb87fa0a8d37",
+        "kind": "program",
+        "no_op": false,
+        "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+        "program_sha256": "1cc6c8eed72367a93de96b9c9cdc2cfc400d13e64262717a0f35aa4d564fe0cd",
+        "proposal_index": 4,
+        "schema": "wsp-candidate/1",
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "be0cfce8438ab33c37e8017a46e2bd6c1b5cda1cb67e3721f8d4e8f2b5594f03",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069"
+      }
+    ],
+    "configuration": {
+      "access": {
+        "activations": false,
+        "feedback": true,
+        "forward": false,
+        "metadata": true,
+        "weight_decimals": null,
+        "weights": true
+      },
+      "architecture": "enterprise-support-linear-head/1",
+      "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+      "callbacks_registered": {
+        "activations": false,
+        "feedback": true,
+        "forward": false
+      },
+      "constraints_sha256": "0453ee97e98e5ba6460eaa1b93217f6e8d54eaecf012878d599c9718c2b27705",
+      "declared_constraints_automatically_enforced": false,
+      "enforcement": "cooperative_same_process_interface",
+      "execution_accounting": "interface_calls_and_submitted_examples; callback_internal_work_not_observed",
+      "limits": {
+        "execution_calls": 0,
+        "execution_examples": 0,
+        "feedback_calls": 4,
+        "feedback_examples": 52,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "proposals": 4,
+        "tool_calls": 11,
+        "weight_values": 160
+      },
+      "mode": "edit",
+      "objective": "Route telemetry outage tickets to Platform Operations",
+      "schema": "wsp-session-config/1",
+      "splits": {
+        "declared_lineage_overlap": false,
+        "lineage_independence_verified": false,
+        "lineage_scope": "caller_declared_only",
+        "sample_overlap": false,
+        "schema": "wsp-split-validation/1",
+        "sha256": "cbe5ee69725522ad975565bd3394afafe17449e73fe6bd68b8fae5f479082367",
+        "splits": [
+          {
+            "lineage_count": 13,
+            "manifest_sha256": "602eaeba2bf0177c78427176956245f41b6b5de5566d2da97de81719c61fc2d0",
+            "name": "validation",
+            "sample_count": 13
+          },
+          {
+            "lineage_count": 8,
+            "manifest_sha256": "5969b5b40f7e1e04fae8f708635ba72a08126b28519fbd818529ce4b25acd358",
+            "name": "test",
+            "sample_count": 8
+          }
+        ]
+      },
+      "task_id": "enterprise-routing-policy-change",
+      "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+      "token_accounting": "provider_supplied_not_locally_measured"
+    },
+    "error": null,
+    "evaluator_attested": false,
+    "evaluator_id": "enterprise-routing-rubric/1",
+    "evaluator_output_leakage_checked": false,
+    "heldout_accounting": {
+      "evaluated_examples": null,
+      "evaluator_calls": 1,
+      "scope": "outside_proposer_budget"
+    },
+    "heldout_input_handling": "caller_owned_closure_not_passed_to_proposer_tools",
+    "parent_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+    "result": {
+      "maximum_protected_score_drift": 0.0,
+      "maximum_target_shift_error": 0.029702970297030173,
+      "minimum_target_margin": 1.2202970297029698,
+      "protected_routes_unchanged": true,
+      "target_routes_correct": true,
+      "tickets": [
+        {
+          "after_margin": 1.2202970297029698,
+          "after_queue": "platform",
+          "after_scores": [
+            2.4375,
+            0.25,
+            0.625,
+            3.65779702970297
+          ],
+          "before_queue": "general",
+          "before_scores": [
+            2.4375,
+            0.25,
+            0.625,
+            0.6875
+          ],
+          "expected_queue": "platform",
+          "role": "target",
+          "ticket_id": "final-outage-enterprise"
+        },
+        {
+          "after_margin": 1.2202970297029698,
+          "after_queue": "platform",
+          "after_scores": [
+            2.0625,
+            0.0,
+            0.125,
+            3.28279702970297
+          ],
+          "before_queue": "general",
+          "before_scores": [
+            2.0625,
+            0.0,
+            0.125,
+            0.3125
+          ],
+          "expected_queue": "platform",
+          "role": "target",
+          "ticket_id": "final-outage-standard"
+        },
+        {
+          "after_margin": 1.9375,
+          "after_queue": "general",
+          "after_scores": [
+            2.3125,
+            0.25,
+            0.375,
+            0.3125
+          ],
+          "before_queue": "general",
+          "before_scores": [
+            2.3125,
+            0.25,
+            0.375,
+            0.3125
+          ],
+          "expected_queue": "general",
+          "role": "protected",
+          "ticket_id": "final-general-enterprise"
+        },
+        {
+          "after_margin": 1.8125,
+          "after_queue": "general",
+          "after_scores": [
+            2.1875,
+            0.0,
+            0.375,
+            0.1875
+          ],
+          "before_queue": "general",
+          "before_scores": [
+            2.1875,
+            0.0,
+            0.375,
+            0.1875
+          ],
+          "expected_queue": "general",
+          "role": "protected",
+          "ticket_id": "final-core-outage"
+        },
+        {
+          "after_margin": 2.625,
+          "after_queue": "billing",
+          "after_scores": [
+            0.4375,
+            3.25,
+            0.625,
+            0.4375
+          ],
+          "before_queue": "billing",
+          "before_scores": [
+            0.4375,
+            3.25,
+            0.625,
+            0.4375
+          ],
+          "expected_queue": "billing",
+          "role": "protected",
+          "ticket_id": "final-billing-telemetry"
+        },
+        {
+          "after_margin": 4.0625,
+          "after_queue": "security",
+          "after_scores": [
+            0.0625,
+            0.0,
+            4.125,
+            0.0625
+          ],
+          "before_queue": "security",
+          "before_scores": [
+            0.0625,
+            0.0,
+            4.125,
+            0.0625
+          ],
+          "expected_queue": "security",
+          "role": "protected",
+          "ticket_id": "final-security-telemetry"
+        },
+        {
+          "after_margin": 2.8125,
+          "after_queue": "platform",
+          "after_scores": [
+            0.4375,
+            0.25,
+            0.625,
+            3.4375
+          ],
+          "before_queue": "platform",
+          "before_scores": [
+            0.4375,
+            0.25,
+            0.625,
+            3.4375
+          ],
+          "expected_queue": "platform",
+          "role": "protected",
+          "ticket_id": "final-existing-platform"
+        },
+        {
+          "after_margin": 1.75,
+          "after_queue": "general",
+          "after_scores": [
+            2.5,
+            0.25,
+            0.75,
+            0.5
+          ],
+          "before_queue": "general",
+          "before_scores": [
+            2.5,
+            0.25,
+            0.75,
+            0.5
+          ],
+          "expected_queue": "general",
+          "role": "protected",
+          "ticket_id": "final-telemetry-help"
+        }
+      ]
+    },
+    "schema": "wsp-evaluation-receipt/1",
+    "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+    "sha256": "54a052e1aafde227592830cfb13c221faef0850de7c8360816a094210dd74403",
+    "split_name": "test",
+    "status": "succeeded",
+    "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+    "trace": [
+      {
+        "action": "session_created",
+        "charges": {},
+        "error": null,
+        "previous_sha256": null,
+        "request": {
+          "access": {
+            "activations": false,
+            "feedback": true,
+            "forward": false,
+            "metadata": true,
+            "weight_decimals": null,
+            "weights": true
+          },
+          "architecture": "enterprise-support-linear-head/1",
+          "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+          "callbacks_registered": {
+            "activations": false,
+            "feedback": true,
+            "forward": false
+          },
+          "constraints_sha256": "0453ee97e98e5ba6460eaa1b93217f6e8d54eaecf012878d599c9718c2b27705",
+          "declared_constraints_automatically_enforced": false,
+          "enforcement": "cooperative_same_process_interface",
+          "execution_accounting": "interface_calls_and_submitted_examples; callback_internal_work_not_observed",
+          "limits": {
+            "execution_calls": 0,
+            "execution_examples": 0,
+            "feedback_calls": 4,
+            "feedback_examples": 52,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "proposals": 4,
+            "tool_calls": 11,
+            "weight_values": 160
+          },
+          "mode": "edit",
+          "objective": "Route telemetry outage tickets to Platform Operations",
+          "schema": "wsp-session-config/1",
+          "splits": {
+            "declared_lineage_overlap": false,
+            "lineage_independence_verified": false,
+            "lineage_scope": "caller_declared_only",
+            "sample_overlap": false,
+            "schema": "wsp-split-validation/1",
+            "sha256": "cbe5ee69725522ad975565bd3394afafe17449e73fe6bd68b8fae5f479082367",
+            "splits": [
+              {
+                "lineage_count": 13,
+                "manifest_sha256": "602eaeba2bf0177c78427176956245f41b6b5de5566d2da97de81719c61fc2d0",
+                "name": "validation",
+                "sample_count": 13
+              },
+              {
+                "lineage_count": 8,
+                "manifest_sha256": "5969b5b40f7e1e04fae8f708635ba72a08126b28519fbd818529ce4b25acd358",
+                "name": "test",
+                "sample_count": 8
+              }
+            ]
+          },
+          "task_id": "enterprise-routing-policy-change",
+          "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+          "token_accounting": "provider_supplied_not_locally_measured"
+        },
+        "requested_charges": {},
+        "result": {},
+        "schema": "wsp-trace-event/1",
+        "sequence": 0,
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "edccb19cd79d89d85267978f0e674d2e1f166cce53449f97686cd743e4208ab7",
+        "status": "succeeded",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+        "usage": {
+          "execution_calls": 0,
+          "execution_examples": 0,
+          "feedback_calls": 0,
+          "feedback_examples": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "proposals": 0,
+          "tool_calls": 0,
+          "weight_values": 0
+        }
+      },
+      {
+        "action": "metadata",
+        "charges": {
+          "tool_calls": 1
+        },
+        "error": null,
+        "previous_sha256": "edccb19cd79d89d85267978f0e674d2e1f166cce53449f97686cd743e4208ab7",
+        "request": {},
+        "requested_charges": {
+          "tool_calls": 1
+        },
+        "result": {
+          "artifact": {
+            "architecture": "enterprise-support-linear-head/1",
+            "metadata": {
+              "extractor_source_sha256": "96d4f6c640d88811e02394feed3dea448450b16240312a2ed7c2235ff75931ea",
+              "feature_id": "structured-support-fields/1",
+              "feature_names": [
+                "general_topic",
+                "billing_topic",
+                "security_topic",
+                "platform_topic",
+                "enterprise_tier",
+                "urgency",
+                "telemetry_outage"
+              ],
+              "origin": "Hand-constructed synthetic baseline; no training or customer data",
+              "queue_names": [
+                "general",
+                "billing",
+                "security",
+                "platform"
+              ],
+              "score_rule": "features @ head.weight.T + head.bias"
+            },
+            "sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+            "tensors": {
+              "head.bias": {
+                "dtype": "float64",
+                "shape": [
+                  4
+                ]
+              },
+              "head.weight": {
+                "dtype": "float64",
+                "shape": [
+                  4,
+                  7
+                ]
+              }
+            }
+          },
+          "constraints_status": "declared_context_not_automatically_enforced",
+          "task": {
+            "architecture": "enterprise-support-linear-head/1",
+            "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+            "constraints": {
+              "contract": {
+                "desired_score_shift": [
+                  0,
+                  0,
+                  0,
+                  3
+                ],
+                "execution": "NumPy float64 matmul and addition; sampled observations, no floating-point proof",
+                "final_gate": "The sealed edit must also pass the same behavioral rubric on the declared final split",
+                "maximum_protected_runtime_drift": 1e-12,
+                "maximum_target_shift_error": 0.05,
+                "minimum_route_margin": 0.5,
+                "objective": "Route telemetry outage tickets to Platform Operations",
+                "production_authorized": false,
+                "require_exact_anchor_retention": true,
+                "scenario": "policy-change",
+                "schema": "enterprise-routing-contract/1",
+                "selection_rule": "Among publicly eligible edits, minimize changed cells then program SHA-256; otherwise abstain"
+              },
+              "feature_schema": {
+                "extractor_source_sha256": "96d4f6c640d88811e02394feed3dea448450b16240312a2ed7c2235ff75931ea",
+                "feature_id": "structured-support-fields/1",
+                "feature_names": [
+                  "general_topic",
+                  "billing_topic",
+                  "security_topic",
+                  "platform_topic",
+                  "enterprise_tier",
+                  "urgency",
+                  "telemetry_outage"
+                ],
+                "origin": "Hand-constructed synthetic baseline; no training or customer data",
+                "queue_names": [
+                  "general",
+                  "billing",
+                  "security",
+                  "platform"
+                ],
+                "score_rule": "features @ head.weight.T + head.bias"
+              },
+              "fitting": "Numerical ridge fitting on supplied public targets and anchors; outside session charges"
+            },
+            "mode": "edit",
+            "objective": "Route telemetry outage tickets to Platform Operations",
+            "schema": "wsp-task/1",
+            "task_id": "enterprise-routing-policy-change"
+          }
+        },
+        "schema": "wsp-trace-event/1",
+        "sequence": 1,
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "9c7e8e3cd2c27ee3884b15d102a57d2ca3719730694fa0b877ac019ebbc720ae",
+        "status": "succeeded",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+        "usage": {
+          "execution_calls": 0,
+          "execution_examples": 0,
+          "feedback_calls": 0,
+          "feedback_examples": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "proposals": 0,
+          "tool_calls": 1,
+          "weight_values": 0
+        }
+      },
+      {
+        "action": "weights",
+        "charges": {
+          "tool_calls": 1,
+          "weight_values": 28
+        },
+        "error": null,
+        "previous_sha256": "9c7e8e3cd2c27ee3884b15d102a57d2ca3719730694fa0b877ac019ebbc720ae",
+        "request": {
+          "indices": null,
+          "tensor": "head.weight",
+          "weight_decimals": null
+        },
+        "requested_charges": {
+          "tool_calls": 1,
+          "weight_values": 28
+        },
+        "result": [
+          [
+            2.0,
+            0.0,
+            0.0,
+            0.0,
+            0.25,
+            0.25,
+            0.0
+          ],
+          [
+            0.0,
+            3.0,
+            0.0,
+            0.0,
+            0.25,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            4.0,
+            0.0,
+            0.25,
+            0.5,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            3.0,
+            0.25,
+            0.25,
+            0.25
+          ]
+        ],
+        "schema": "wsp-trace-event/1",
+        "sequence": 2,
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "4c70a5a64312900f0e3883d3a2edcb763a2bcbbd0b9686be2aa132588ef20090",
+        "status": "succeeded",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+        "usage": {
+          "execution_calls": 0,
+          "execution_examples": 0,
+          "feedback_calls": 0,
+          "feedback_examples": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "proposals": 0,
+          "tool_calls": 2,
+          "weight_values": 28
+        }
+      },
+      {
+        "action": "weights",
+        "charges": {
+          "tool_calls": 1,
+          "weight_values": 4
+        },
+        "error": null,
+        "previous_sha256": "4c70a5a64312900f0e3883d3a2edcb763a2bcbbd0b9686be2aa132588ef20090",
+        "request": {
+          "indices": null,
+          "tensor": "head.bias",
+          "weight_decimals": null
+        },
+        "requested_charges": {
+          "tool_calls": 1,
+          "weight_values": 4
+        },
+        "result": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "schema": "wsp-trace-event/1",
+        "sequence": 3,
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "76cc574c1de9f03f047fe33ba9cd54aadde8215c78285cfff6cec263629bc220",
+        "status": "succeeded",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+        "usage": {
+          "execution_calls": 0,
+          "execution_examples": 0,
+          "feedback_calls": 0,
+          "feedback_examples": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "proposals": 0,
+          "tool_calls": 3,
+          "weight_values": 32
+        }
+      },
+      {
+        "action": "propose_program",
+        "charges": {
+          "proposals": 1,
+          "tool_calls": 1,
+          "weight_values": 32
+        },
+        "error": null,
+        "previous_sha256": "76cc574c1de9f03f047fe33ba9cd54aadde8215c78285cfff6cec263629bc220",
+        "request": {
+          "parser": "typed_program_or_wsp-program/1",
+          "program": {
+            "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+            "edits": [],
+            "intent": "Enterprise routing: keep parent",
+            "schema": "wsp-program/1"
+          },
+          "program_sha256": "8c2f73d3561b0693f2b71413cb9c780edf399b42d7211cc9be0a7de5b80cc9da",
+          "proposal_type": "Program"
+        },
+        "requested_charges": {
+          "proposals": 1,
+          "tool_calls": 1,
+          "weight_values": 32
+        },
+        "result": {
+          "artifact_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+          "candidate_sha256": "9c0431231ced92406eb6f086ffe1b968b0c2d0bfe131f0a621d3663873128041",
+          "no_op": true
+        },
+        "schema": "wsp-trace-event/1",
+        "sequence": 4,
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "aec708b751035b197acdeda11709bf1620893f7172056374e61fd609585016e0",
+        "status": "succeeded",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+        "usage": {
+          "execution_calls": 0,
+          "execution_examples": 0,
+          "feedback_calls": 0,
+          "feedback_examples": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "proposals": 1,
+          "tool_calls": 4,
+          "weight_values": 64
+        }
+      },
+      {
+        "action": "feedback",
+        "charges": {
+          "feedback_calls": 1,
+          "feedback_examples": 13,
+          "tool_calls": 1
+        },
+        "error": null,
+        "previous_sha256": "aec708b751035b197acdeda11709bf1620893f7172056374e61fd609585016e0",
+        "request": {
+          "candidate_sha256": "9c0431231ced92406eb6f086ffe1b968b0c2d0bfe131f0a621d3663873128041",
+          "example_count": 13,
+          "examples": [
+            {
+              "case_id": "public-case-01",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "target",
+              "symptom": "outage",
+              "ticket_id": "public-outage-standard",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-02",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "target",
+              "symptom": "outage",
+              "ticket_id": "public-outage-enterprise",
+              "tier": "enterprise",
+              "topic": "general",
+              "urgency": 0.5
+            },
+            {
+              "case_id": "public-case-03",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "target",
+              "symptom": "outage",
+              "ticket_id": "public-outage-urgent",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-04",
+              "expected_queue": "general",
+              "product": "core",
+              "role": "protected",
+              "symptom": "help",
+              "ticket_id": "public-general",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-05",
+              "expected_queue": "billing",
+              "product": "core",
+              "role": "protected",
+              "symptom": "payment",
+              "ticket_id": "public-billing",
+              "tier": "standard",
+              "topic": "billing",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-06",
+              "expected_queue": "security",
+              "product": "core",
+              "role": "protected",
+              "symptom": "access",
+              "ticket_id": "public-security",
+              "tier": "standard",
+              "topic": "security",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-07",
+              "expected_queue": "platform",
+              "product": "core",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-platform",
+              "tier": "standard",
+              "topic": "platform",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-08",
+              "expected_queue": "general",
+              "product": "core",
+              "role": "protected",
+              "symptom": "help",
+              "ticket_id": "public-enterprise-general",
+              "tier": "enterprise",
+              "topic": "general",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-09",
+              "expected_queue": "general",
+              "product": "core",
+              "role": "protected",
+              "symptom": "help",
+              "ticket_id": "public-urgent-general",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-10",
+              "expected_queue": "general",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "latency",
+              "ticket_id": "public-telemetry-latency",
+              "tier": "enterprise",
+              "topic": "general",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-11",
+              "expected_queue": "security",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-telemetry-security",
+              "tier": "enterprise",
+              "topic": "security",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-12",
+              "expected_queue": "billing",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-telemetry-billing",
+              "tier": "enterprise",
+              "topic": "billing",
+              "urgency": 0.5
+            },
+            {
+              "case_id": "public-case-13",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-existing-platform",
+              "tier": "enterprise",
+              "topic": "platform",
+              "urgency": 1
+            }
+          ]
+        },
+        "requested_charges": {
+          "feedback_calls": 1,
+          "feedback_examples": 13,
+          "tool_calls": 1
+        },
+        "result": {
+          "maximum_protected_score_drift": 0.0,
+          "maximum_target_shift_error": 3.0,
+          "minimum_target_margin": 1.75,
+          "protected_routes_unchanged": true,
+          "target_routes_correct": false,
+          "tickets": [
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.25
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.25
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-standard"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.375,
+                0.25,
+                0.5,
+                0.625
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.375,
+                0.25,
+                0.5,
+                0.625
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-enterprise"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.5
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.5
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-urgent"
+            },
+            {
+              "after_margin": 2.0,
+              "after_queue": "general",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-general"
+            },
+            {
+              "after_margin": 3.0,
+              "after_queue": "billing",
+              "after_scores": [
+                0.0,
+                3.0,
+                0.0,
+                0.0
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.0,
+                3.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-billing"
+            },
+            {
+              "after_margin": 4.0,
+              "after_queue": "security",
+              "after_scores": [
+                0.0,
+                0.0,
+                4.0,
+                0.0
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.0,
+                0.0,
+                4.0,
+                0.0
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-security"
+            },
+            {
+              "after_margin": 3.0,
+              "after_queue": "platform",
+              "after_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-platform"
+            },
+            {
+              "after_margin": 2.0,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-enterprise-general"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.25
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-urgent-general"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-telemetry-latency"
+            },
+            {
+              "after_margin": 4.25,
+              "after_queue": "security",
+              "after_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.5
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.5
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-telemetry-security"
+            },
+            {
+              "after_margin": 2.75,
+              "after_queue": "billing",
+              "after_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.375
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.375
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-telemetry-billing"
+            },
+            {
+              "after_margin": 2.75,
+              "after_queue": "platform",
+              "after_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.5
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.5
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-existing-platform"
+            }
+          ]
+        },
+        "schema": "wsp-trace-event/1",
+        "sequence": 5,
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "91115f7012b9084331392b7149a7fdc710a40e750029a0095d49b7d4dd251ce0",
+        "status": "succeeded",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+        "usage": {
+          "execution_calls": 0,
+          "execution_examples": 0,
+          "feedback_calls": 1,
+          "feedback_examples": 13,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "proposals": 1,
+          "tool_calls": 5,
+          "weight_values": 64
+        }
+      },
+      {
+        "action": "propose_program",
+        "charges": {
+          "proposals": 1,
+          "tool_calls": 1,
+          "weight_values": 32
+        },
+        "error": null,
+        "previous_sha256": "91115f7012b9084331392b7149a7fdc710a40e750029a0095d49b7d4dd251ce0",
+        "request": {
+          "parser": "typed_program_or_wsp-program/1",
+          "program": {
+            "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+            "edits": [
+              {
+                "after": 1.47860777449307,
+                "before": 0.0,
+                "index": [
+                  3,
+                  0
+                ],
+                "tensor": "head.weight"
+              },
+              {
+                "after": 2.220446049250313e-16,
+                "before": 0.0,
+                "index": [
+                  3,
+                  1
+                ],
+                "tensor": "head.weight"
+              },
+              {
+                "after": 4.440892098500626e-16,
+                "before": 0.0,
+                "index": [
+                  3,
+                  2
+                ],
+                "tensor": "head.weight"
+              },
+              {
+                "after": 0.27122403504056986,
+                "before": 0.25,
+                "index": [
+                  3,
+                  4
+                ],
+                "tensor": "head.weight"
+              },
+              {
+                "after": 0.29184738984414293,
+                "before": 0.25,
+                "index": [
+                  3,
+                  5
+                ],
+                "tensor": "head.weight"
+              },
+              {
+                "after": 1.7286077744930695,
+                "before": 0.25,
+                "index": [
+                  3,
+                  6
+                ],
+                "tensor": "head.weight"
+              }
+            ],
+            "intent": "Enterprise routing: none",
+            "schema": "wsp-program/1"
+          },
+          "program_sha256": "7f57a095657b54cef39e444bf9c0d7f10cc5ea8b8d56ad96dcd2b00030732fb7",
+          "proposal_type": "Program"
+        },
+        "requested_charges": {
+          "proposals": 1,
+          "tool_calls": 1,
+          "weight_values": 32
+        },
+        "result": {
+          "artifact_sha256": "04f1ff8375086125e6303a4dc53c1183551e1b756e9deaa1efd1b5237716f5b9",
+          "candidate_sha256": "93c6c92946fb02ea2439156375063776683987b59cce6f7342fd1f91733b3cbf",
+          "no_op": false
+        },
+        "schema": "wsp-trace-event/1",
+        "sequence": 6,
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "5959d4c823cd208c387db06bf9ad7d557c9f6dc45974911163a6d06eb5c55666",
+        "status": "succeeded",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+        "usage": {
+          "execution_calls": 0,
+          "execution_examples": 0,
+          "feedback_calls": 1,
+          "feedback_examples": 13,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "proposals": 2,
+          "tool_calls": 6,
+          "weight_values": 96
+        }
+      },
+      {
+        "action": "feedback",
+        "charges": {
+          "feedback_calls": 1,
+          "feedback_examples": 13,
+          "tool_calls": 1
+        },
+        "error": null,
+        "previous_sha256": "5959d4c823cd208c387db06bf9ad7d557c9f6dc45974911163a6d06eb5c55666",
+        "request": {
+          "candidate_sha256": "93c6c92946fb02ea2439156375063776683987b59cce6f7342fd1f91733b3cbf",
+          "example_count": 13,
+          "examples": [
+            {
+              "case_id": "public-case-01",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "target",
+              "symptom": "outage",
+              "ticket_id": "public-outage-standard",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-02",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "target",
+              "symptom": "outage",
+              "ticket_id": "public-outage-enterprise",
+              "tier": "enterprise",
+              "topic": "general",
+              "urgency": 0.5
+            },
+            {
+              "case_id": "public-case-03",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "target",
+              "symptom": "outage",
+              "ticket_id": "public-outage-urgent",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-04",
+              "expected_queue": "general",
+              "product": "core",
+              "role": "protected",
+              "symptom": "help",
+              "ticket_id": "public-general",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-05",
+              "expected_queue": "billing",
+              "product": "core",
+              "role": "protected",
+              "symptom": "payment",
+              "ticket_id": "public-billing",
+              "tier": "standard",
+              "topic": "billing",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-06",
+              "expected_queue": "security",
+              "product": "core",
+              "role": "protected",
+              "symptom": "access",
+              "ticket_id": "public-security",
+              "tier": "standard",
+              "topic": "security",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-07",
+              "expected_queue": "platform",
+              "product": "core",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-platform",
+              "tier": "standard",
+              "topic": "platform",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-08",
+              "expected_queue": "general",
+              "product": "core",
+              "role": "protected",
+              "symptom": "help",
+              "ticket_id": "public-enterprise-general",
+              "tier": "enterprise",
+              "topic": "general",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-09",
+              "expected_queue": "general",
+              "product": "core",
+              "role": "protected",
+              "symptom": "help",
+              "ticket_id": "public-urgent-general",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-10",
+              "expected_queue": "general",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "latency",
+              "ticket_id": "public-telemetry-latency",
+              "tier": "enterprise",
+              "topic": "general",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-11",
+              "expected_queue": "security",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-telemetry-security",
+              "tier": "enterprise",
+              "topic": "security",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-12",
+              "expected_queue": "billing",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-telemetry-billing",
+              "tier": "enterprise",
+              "topic": "billing",
+              "urgency": 0.5
+            },
+            {
+              "case_id": "public-case-13",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-existing-platform",
+              "tier": "enterprise",
+              "topic": "platform",
+              "urgency": 1
+            }
+          ]
+        },
+        "requested_charges": {
+          "feedback_calls": 1,
+          "feedback_examples": 13,
+          "tool_calls": 1
+        },
+        "result": {
+          "maximum_protected_score_drift": 1.541679199377783,
+          "maximum_target_shift_error": 0.042784451013860636,
+          "minimum_target_margin": 1.2072155489861394,
+          "protected_routes_unchanged": false,
+          "target_routes_correct": true,
+          "tickets": [
+            {
+              "after_margin": 1.2072155489861394,
+              "after_queue": "platform",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                3.2072155489861394
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.25
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-standard"
+            },
+            {
+              "after_margin": 1.2493632789487807,
+              "after_queue": "platform",
+              "after_scores": [
+                2.375,
+                0.25,
+                0.5,
+                3.6243632789487807
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.375,
+                0.25,
+                0.5,
+                0.625
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-enterprise"
+            },
+            {
+              "after_margin": 1.2490629388302823,
+              "after_queue": "platform",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                3.4990629388302823
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.5
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-urgent"
+            },
+            {
+              "after_margin": 0.5213922255069301,
+              "after_queue": "general",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                1.47860777449307
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-general"
+            },
+            {
+              "after_margin": 3.0,
+              "after_queue": "billing",
+              "after_scores": [
+                0.0,
+                3.0,
+                0.0,
+                2.220446049250313e-16
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.0,
+                3.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-billing"
+            },
+            {
+              "after_margin": 3.9999999999999996,
+              "after_queue": "security",
+              "after_scores": [
+                0.0,
+                0.0,
+                4.0,
+                4.440892098500626e-16
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.0,
+                0.0,
+                4.0,
+                0.0
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-security"
+            },
+            {
+              "after_margin": 3.0,
+              "after_queue": "platform",
+              "after_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-platform"
+            },
+            {
+              "after_margin": 0.5001681904663602,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.25,
+                0.25,
+                1.7498318095336398
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-enterprise-general"
+            },
+            {
+              "after_margin": 0.47954483566278716,
+              "after_queue": "manual_review",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                1.7704551643372128
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-urgent-general"
+            },
+            {
+              "after_margin": 0.45832080062221703,
+              "after_queue": "manual_review",
+              "after_scores": [
+                2.5,
+                0.25,
+                0.75,
+                2.041679199377783
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-telemetry-latency"
+            },
+            {
+              "after_margin": 4.186928575115287,
+              "after_queue": "security",
+              "after_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.5630714248847133
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.5
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-telemetry-security"
+            },
+            {
+              "after_margin": 2.75,
+              "after_queue": "billing",
+              "after_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.41714772996264154
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.375
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-telemetry-billing"
+            },
+            {
+              "after_margin": 2.8130714248847126,
+              "after_queue": "platform",
+              "after_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.5630714248847126
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.5
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-existing-platform"
+            }
+          ]
+        },
+        "schema": "wsp-trace-event/1",
+        "sequence": 7,
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "58d29a5762bec99228037a21d2d4a18945a3ac41687ca457e3b4ba525dc3ac58",
+        "status": "succeeded",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+        "usage": {
+          "execution_calls": 0,
+          "execution_examples": 0,
+          "feedback_calls": 2,
+          "feedback_examples": 26,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "proposals": 2,
+          "tool_calls": 7,
+          "weight_values": 96
+        }
+      },
+      {
+        "action": "propose_program",
+        "charges": {
+          "proposals": 1,
+          "tool_calls": 1,
+          "weight_values": 32
+        },
+        "error": null,
+        "previous_sha256": "58d29a5762bec99228037a21d2d4a18945a3ac41687ca457e3b4ba525dc3ac58",
+        "request": {
+          "parser": "typed_program_or_wsp-program/1",
+          "program": {
+            "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+            "edits": [
+              {
+                "after": 0.009879789523871077,
+                "before": 0.0,
+                "index": [
+                  3,
+                  0
+                ],
+                "tensor": "head.weight"
+              },
+              {
+                "after": 0.001044249684985843,
+                "before": 0.0,
+                "index": [
+                  3,
+                  1
+                ],
+                "tensor": "head.weight"
+              },
+              {
+                "after": 0.0006544150473533072,
+                "before": 0.0,
+                "index": [
+                  3,
+                  2
+                ],
+                "tensor": "head.weight"
+              },
+              {
+                "after": 3.0006544150473533,
+                "before": 3.0,
+                "index": [
+                  3,
+                  3
+                ],
+                "tensor": "head.weight"
+              },
+              {
+                "after": 0.2471139053007334,
+                "before": 0.25,
+                "index": [
+                  3,
+                  4
+                ],
+                "tensor": "head.weight"
+              },
+              {
+                "after": 0.2515690844164695,
+                "before": 0.25,
+                "index": [
+                  3,
+                  5
+                ],
+                "tensor": "head.weight"
+              },
+              {
+                "after": 3.2106907919151655,
+                "before": 0.25,
+                "index": [
+                  3,
+                  6
+                ],
+                "tensor": "head.weight"
+              }
+            ],
+            "intent": "Enterprise routing: soft",
+            "schema": "wsp-program/1"
+          },
+          "program_sha256": "0ac2b4d7491251df9a06df079567c25941133ffdc662d76da0373e7bf7104051",
+          "proposal_type": "Program"
+        },
+        "requested_charges": {
+          "proposals": 1,
+          "tool_calls": 1,
+          "weight_values": 32
+        },
+        "result": {
+          "artifact_sha256": "9dae4aa3a8242a29aba784e2ae79e7b7aac576f5543f5efe189d9d3e8d247873",
+          "candidate_sha256": "2c4883e701ac3dcdd93cc5bbfcd19d091b96afaba6ead826b61bcbe5930310d9",
+          "no_op": false
+        },
+        "schema": "wsp-trace-event/1",
+        "sequence": 8,
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "85e33ac4a4f8d9cd5e520295c208716fa60e03ae1f07e8a9a57fbe0573d6fd08",
+        "status": "succeeded",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+        "usage": {
+          "execution_calls": 0,
+          "execution_examples": 0,
+          "feedback_calls": 2,
+          "feedback_examples": 26,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "proposals": 3,
+          "tool_calls": 8,
+          "weight_values": 128
+        }
+      },
+      {
+        "action": "feedback",
+        "charges": {
+          "feedback_calls": 1,
+          "feedback_examples": 13,
+          "tool_calls": 1
+        },
+        "error": null,
+        "previous_sha256": "85e33ac4a4f8d9cd5e520295c208716fa60e03ae1f07e8a9a57fbe0573d6fd08",
+        "request": {
+          "candidate_sha256": "2c4883e701ac3dcdd93cc5bbfcd19d091b96afaba6ead826b61bcbe5930310d9",
+          "example_count": 13,
+          "examples": [
+            {
+              "case_id": "public-case-01",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "target",
+              "symptom": "outage",
+              "ticket_id": "public-outage-standard",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-02",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "target",
+              "symptom": "outage",
+              "ticket_id": "public-outage-enterprise",
+              "tier": "enterprise",
+              "topic": "general",
+              "urgency": 0.5
+            },
+            {
+              "case_id": "public-case-03",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "target",
+              "symptom": "outage",
+              "ticket_id": "public-outage-urgent",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-04",
+              "expected_queue": "general",
+              "product": "core",
+              "role": "protected",
+              "symptom": "help",
+              "ticket_id": "public-general",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-05",
+              "expected_queue": "billing",
+              "product": "core",
+              "role": "protected",
+              "symptom": "payment",
+              "ticket_id": "public-billing",
+              "tier": "standard",
+              "topic": "billing",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-06",
+              "expected_queue": "security",
+              "product": "core",
+              "role": "protected",
+              "symptom": "access",
+              "ticket_id": "public-security",
+              "tier": "standard",
+              "topic": "security",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-07",
+              "expected_queue": "platform",
+              "product": "core",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-platform",
+              "tier": "standard",
+              "topic": "platform",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-08",
+              "expected_queue": "general",
+              "product": "core",
+              "role": "protected",
+              "symptom": "help",
+              "ticket_id": "public-enterprise-general",
+              "tier": "enterprise",
+              "topic": "general",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-09",
+              "expected_queue": "general",
+              "product": "core",
+              "role": "protected",
+              "symptom": "help",
+              "ticket_id": "public-urgent-general",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-10",
+              "expected_queue": "general",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "latency",
+              "ticket_id": "public-telemetry-latency",
+              "tier": "enterprise",
+              "topic": "general",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-11",
+              "expected_queue": "security",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-telemetry-security",
+              "tier": "enterprise",
+              "topic": "security",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-12",
+              "expected_queue": "billing",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-telemetry-billing",
+              "tier": "enterprise",
+              "topic": "billing",
+              "urgency": 0.5
+            },
+            {
+              "case_id": "public-case-13",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-existing-platform",
+              "tier": "enterprise",
+              "topic": "platform",
+              "urgency": 1
+            }
+          ]
+        },
+        "requested_charges": {
+          "feedback_calls": 1,
+          "feedback_examples": 13,
+          "tool_calls": 1
+        },
+        "result": {
+          "maximum_protected_score_drift": 0.01144887394034061,
+          "maximum_target_shift_error": 0.031530971051995316,
+          "minimum_target_margin": 1.2184690289480047,
+          "protected_routes_unchanged": true,
+          "target_routes_correct": true,
+          "tickets": [
+            {
+              "after_margin": 1.2205705814390364,
+              "after_queue": "platform",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                3.2205705814390364
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.25
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-standard"
+            },
+            {
+              "after_margin": 1.2184690289480047,
+              "after_queue": "platform",
+              "after_scores": [
+                2.375,
+                0.25,
+                0.5,
+                3.5934690289480047
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.375,
+                0.25,
+                0.5,
+                0.625
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-enterprise"
+            },
+            {
+              "after_margin": 1.2221396658555062,
+              "after_queue": "platform",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                3.472139665855506
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.5
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-urgent"
+            },
+            {
+              "after_margin": 1.9901202104761289,
+              "after_queue": "general",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.009879789523871077
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-general"
+            },
+            {
+              "after_margin": 2.998955750315014,
+              "after_queue": "billing",
+              "after_scores": [
+                0.0,
+                3.0,
+                0.0,
+                0.001044249684985843
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.0,
+                3.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-billing"
+            },
+            {
+              "after_margin": 3.9993455849526467,
+              "after_queue": "security",
+              "after_scores": [
+                0.0,
+                0.0,
+                4.0,
+                0.0006544150473533072
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.0,
+                0.0,
+                4.0,
+                0.0
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-security"
+            },
+            {
+              "after_margin": 3.0006544150473533,
+              "after_queue": "platform",
+              "after_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0006544150473533
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-platform"
+            },
+            {
+              "after_margin": 1.9930063051753955,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.25,
+                0.25,
+                0.2569936948246045
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-enterprise-general"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.2614488739403406
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-urgent-general"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5085627792410741
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-telemetry-latency"
+            },
+            {
+              "after_margin": 4.25,
+              "after_queue": "security",
+              "after_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.49933740476455624
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.5
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-telemetry-security"
+            },
+            {
+              "after_margin": 2.75,
+              "after_queue": "billing",
+              "after_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.373942697193954
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.375
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-telemetry-billing"
+            },
+            {
+              "after_margin": 2.749337404764556,
+              "after_queue": "platform",
+              "after_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.499337404764556
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.5
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-existing-platform"
+            }
+          ]
+        },
+        "schema": "wsp-trace-event/1",
+        "sequence": 9,
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "ac03576741a7732de4862dfa44bc13e91aa630109971a793afa215e3cf7b9663",
+        "status": "succeeded",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+        "usage": {
+          "execution_calls": 0,
+          "execution_examples": 0,
+          "feedback_calls": 3,
+          "feedback_examples": 39,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "proposals": 3,
+          "tool_calls": 9,
+          "weight_values": 128
+        }
+      },
+      {
+        "action": "propose_program",
+        "charges": {
+          "proposals": 1,
+          "tool_calls": 1,
+          "weight_values": 32
+        },
+        "error": null,
+        "previous_sha256": "ac03576741a7732de4862dfa44bc13e91aa630109971a793afa215e3cf7b9663",
+        "request": {
+          "parser": "typed_program_or_wsp-program/1",
+          "program": {
+            "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+            "edits": [
+              {
+                "after": 3.22029702970297,
+                "before": 0.25,
+                "index": [
+                  3,
+                  6
+                ],
+                "tensor": "head.weight"
+              }
+            ],
+            "intent": "Enterprise routing: nullspace",
+            "schema": "wsp-program/1"
+          },
+          "program_sha256": "1cc6c8eed72367a93de96b9c9cdc2cfc400d13e64262717a0f35aa4d564fe0cd",
+          "proposal_type": "Program"
+        },
+        "requested_charges": {
+          "proposals": 1,
+          "tool_calls": 1,
+          "weight_values": 32
+        },
+        "result": {
+          "artifact_sha256": "1836e50c3e76fbeca43e5f1b64113630a7a6d9532737418d7ffecb87fa0a8d37",
+          "candidate_sha256": "be0cfce8438ab33c37e8017a46e2bd6c1b5cda1cb67e3721f8d4e8f2b5594f03",
+          "no_op": false
+        },
+        "schema": "wsp-trace-event/1",
+        "sequence": 10,
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "be84868554fb432de8464aa6566f0ea6b2ff8cce3dd47d55d1f7918848ad73c2",
+        "status": "succeeded",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+        "usage": {
+          "execution_calls": 0,
+          "execution_examples": 0,
+          "feedback_calls": 3,
+          "feedback_examples": 39,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "proposals": 4,
+          "tool_calls": 10,
+          "weight_values": 160
+        }
+      },
+      {
+        "action": "feedback",
+        "charges": {
+          "feedback_calls": 1,
+          "feedback_examples": 13,
+          "tool_calls": 1
+        },
+        "error": null,
+        "previous_sha256": "be84868554fb432de8464aa6566f0ea6b2ff8cce3dd47d55d1f7918848ad73c2",
+        "request": {
+          "candidate_sha256": "be0cfce8438ab33c37e8017a46e2bd6c1b5cda1cb67e3721f8d4e8f2b5594f03",
+          "example_count": 13,
+          "examples": [
+            {
+              "case_id": "public-case-01",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "target",
+              "symptom": "outage",
+              "ticket_id": "public-outage-standard",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-02",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "target",
+              "symptom": "outage",
+              "ticket_id": "public-outage-enterprise",
+              "tier": "enterprise",
+              "topic": "general",
+              "urgency": 0.5
+            },
+            {
+              "case_id": "public-case-03",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "target",
+              "symptom": "outage",
+              "ticket_id": "public-outage-urgent",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-04",
+              "expected_queue": "general",
+              "product": "core",
+              "role": "protected",
+              "symptom": "help",
+              "ticket_id": "public-general",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-05",
+              "expected_queue": "billing",
+              "product": "core",
+              "role": "protected",
+              "symptom": "payment",
+              "ticket_id": "public-billing",
+              "tier": "standard",
+              "topic": "billing",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-06",
+              "expected_queue": "security",
+              "product": "core",
+              "role": "protected",
+              "symptom": "access",
+              "ticket_id": "public-security",
+              "tier": "standard",
+              "topic": "security",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-07",
+              "expected_queue": "platform",
+              "product": "core",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-platform",
+              "tier": "standard",
+              "topic": "platform",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-08",
+              "expected_queue": "general",
+              "product": "core",
+              "role": "protected",
+              "symptom": "help",
+              "ticket_id": "public-enterprise-general",
+              "tier": "enterprise",
+              "topic": "general",
+              "urgency": 0
+            },
+            {
+              "case_id": "public-case-09",
+              "expected_queue": "general",
+              "product": "core",
+              "role": "protected",
+              "symptom": "help",
+              "ticket_id": "public-urgent-general",
+              "tier": "standard",
+              "topic": "general",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-10",
+              "expected_queue": "general",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "latency",
+              "ticket_id": "public-telemetry-latency",
+              "tier": "enterprise",
+              "topic": "general",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-11",
+              "expected_queue": "security",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-telemetry-security",
+              "tier": "enterprise",
+              "topic": "security",
+              "urgency": 1
+            },
+            {
+              "case_id": "public-case-12",
+              "expected_queue": "billing",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-telemetry-billing",
+              "tier": "enterprise",
+              "topic": "billing",
+              "urgency": 0.5
+            },
+            {
+              "case_id": "public-case-13",
+              "expected_queue": "platform",
+              "product": "telemetry",
+              "role": "protected",
+              "symptom": "outage",
+              "ticket_id": "public-existing-platform",
+              "tier": "enterprise",
+              "topic": "platform",
+              "urgency": 1
+            }
+          ]
+        },
+        "requested_charges": {
+          "feedback_calls": 1,
+          "feedback_examples": 13,
+          "tool_calls": 1
+        },
+        "result": {
+          "maximum_protected_score_drift": 0.0,
+          "maximum_target_shift_error": 0.029702970297030173,
+          "minimum_target_margin": 1.2202970297029698,
+          "protected_routes_unchanged": true,
+          "target_routes_correct": true,
+          "tickets": [
+            {
+              "after_margin": 1.2202970297029698,
+              "after_queue": "platform",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                3.22029702970297
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.25
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-standard"
+            },
+            {
+              "after_margin": 1.2202970297029698,
+              "after_queue": "platform",
+              "after_scores": [
+                2.375,
+                0.25,
+                0.5,
+                3.59529702970297
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.375,
+                0.25,
+                0.5,
+                0.625
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-enterprise"
+            },
+            {
+              "after_margin": 1.2202970297029698,
+              "after_queue": "platform",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                3.47029702970297
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.5
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "public-outage-urgent"
+            },
+            {
+              "after_margin": 2.0,
+              "after_queue": "general",
+              "after_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-general"
+            },
+            {
+              "after_margin": 3.0,
+              "after_queue": "billing",
+              "after_scores": [
+                0.0,
+                3.0,
+                0.0,
+                0.0
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.0,
+                3.0,
+                0.0,
+                0.0
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-billing"
+            },
+            {
+              "after_margin": 4.0,
+              "after_queue": "security",
+              "after_scores": [
+                0.0,
+                0.0,
+                4.0,
+                0.0
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.0,
+                0.0,
+                4.0,
+                0.0
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-security"
+            },
+            {
+              "after_margin": 3.0,
+              "after_queue": "platform",
+              "after_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.0,
+                0.0,
+                0.0,
+                3.0
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-platform"
+            },
+            {
+              "after_margin": 2.0,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-enterprise-general"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.25
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.25,
+                0.0,
+                0.5,
+                0.25
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-urgent-general"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "public-telemetry-latency"
+            },
+            {
+              "after_margin": 4.25,
+              "after_queue": "security",
+              "after_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.5
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.5,
+                0.25,
+                4.75,
+                0.5
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "public-telemetry-security"
+            },
+            {
+              "after_margin": 2.75,
+              "after_queue": "billing",
+              "after_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.375
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.375,
+                3.25,
+                0.5,
+                0.375
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "public-telemetry-billing"
+            },
+            {
+              "after_margin": 2.75,
+              "after_queue": "platform",
+              "after_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.5
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.5,
+                0.25,
+                0.75,
+                3.5
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "public-existing-platform"
+            }
+          ]
+        },
+        "schema": "wsp-trace-event/1",
+        "sequence": 11,
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "2fd5360a23da4e5a3388dae6430fcda4c607976547055ca7f104342d2b7cb590",
+        "status": "succeeded",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+        "usage": {
+          "execution_calls": 0,
+          "execution_examples": 0,
+          "feedback_calls": 4,
+          "feedback_examples": 52,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "proposals": 4,
+          "tool_calls": 11,
+          "weight_values": 160
+        }
+      },
+      {
+        "action": "seal",
+        "charges": {},
+        "error": null,
+        "previous_sha256": "2fd5360a23da4e5a3388dae6430fcda4c607976547055ca7f104342d2b7cb590",
+        "request": {
+          "candidate_sha256": "be0cfce8438ab33c37e8017a46e2bd6c1b5cda1cb67e3721f8d4e8f2b5594f03"
+        },
+        "requested_charges": {},
+        "result": {
+          "selection": "candidate"
+        },
+        "schema": "wsp-trace-event/1",
+        "sequence": 12,
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "64b64b2350d08896d5881bbb18be71069b1e14164bba882e06c766d694d7c5bc",
+        "status": "succeeded",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+        "usage": {
+          "execution_calls": 0,
+          "execution_examples": 0,
+          "feedback_calls": 4,
+          "feedback_examples": 52,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "proposals": 4,
+          "tool_calls": 11,
+          "weight_values": 160
+        }
+      },
+      {
+        "action": "heldout_evaluation",
+        "charges": {},
+        "error": null,
+        "previous_sha256": "64b64b2350d08896d5881bbb18be71069b1e14164bba882e06c766d694d7c5bc",
+        "request": {
+          "candidate_sha256": "be0cfce8438ab33c37e8017a46e2bd6c1b5cda1cb67e3721f8d4e8f2b5594f03",
+          "evaluator_id": "enterprise-routing-rubric/1",
+          "split_name": "test"
+        },
+        "requested_charges": {},
+        "result": {
+          "maximum_protected_score_drift": 0.0,
+          "maximum_target_shift_error": 0.029702970297030173,
+          "minimum_target_margin": 1.2202970297029698,
+          "protected_routes_unchanged": true,
+          "target_routes_correct": true,
+          "tickets": [
+            {
+              "after_margin": 1.2202970297029698,
+              "after_queue": "platform",
+              "after_scores": [
+                2.4375,
+                0.25,
+                0.625,
+                3.65779702970297
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.4375,
+                0.25,
+                0.625,
+                0.6875
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "final-outage-enterprise"
+            },
+            {
+              "after_margin": 1.2202970297029698,
+              "after_queue": "platform",
+              "after_scores": [
+                2.0625,
+                0.0,
+                0.125,
+                3.28279702970297
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.0625,
+                0.0,
+                0.125,
+                0.3125
+              ],
+              "expected_queue": "platform",
+              "role": "target",
+              "ticket_id": "final-outage-standard"
+            },
+            {
+              "after_margin": 1.9375,
+              "after_queue": "general",
+              "after_scores": [
+                2.3125,
+                0.25,
+                0.375,
+                0.3125
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.3125,
+                0.25,
+                0.375,
+                0.3125
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "final-general-enterprise"
+            },
+            {
+              "after_margin": 1.8125,
+              "after_queue": "general",
+              "after_scores": [
+                2.1875,
+                0.0,
+                0.375,
+                0.1875
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.1875,
+                0.0,
+                0.375,
+                0.1875
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "final-core-outage"
+            },
+            {
+              "after_margin": 2.625,
+              "after_queue": "billing",
+              "after_scores": [
+                0.4375,
+                3.25,
+                0.625,
+                0.4375
+              ],
+              "before_queue": "billing",
+              "before_scores": [
+                0.4375,
+                3.25,
+                0.625,
+                0.4375
+              ],
+              "expected_queue": "billing",
+              "role": "protected",
+              "ticket_id": "final-billing-telemetry"
+            },
+            {
+              "after_margin": 4.0625,
+              "after_queue": "security",
+              "after_scores": [
+                0.0625,
+                0.0,
+                4.125,
+                0.0625
+              ],
+              "before_queue": "security",
+              "before_scores": [
+                0.0625,
+                0.0,
+                4.125,
+                0.0625
+              ],
+              "expected_queue": "security",
+              "role": "protected",
+              "ticket_id": "final-security-telemetry"
+            },
+            {
+              "after_margin": 2.8125,
+              "after_queue": "platform",
+              "after_scores": [
+                0.4375,
+                0.25,
+                0.625,
+                3.4375
+              ],
+              "before_queue": "platform",
+              "before_scores": [
+                0.4375,
+                0.25,
+                0.625,
+                3.4375
+              ],
+              "expected_queue": "platform",
+              "role": "protected",
+              "ticket_id": "final-existing-platform"
+            },
+            {
+              "after_margin": 1.75,
+              "after_queue": "general",
+              "after_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5
+              ],
+              "before_queue": "general",
+              "before_scores": [
+                2.5,
+                0.25,
+                0.75,
+                0.5
+              ],
+              "expected_queue": "general",
+              "role": "protected",
+              "ticket_id": "final-telemetry-help"
+            }
+          ]
+        },
+        "schema": "wsp-trace-event/1",
+        "sequence": 13,
+        "session_sha256": "332818e52fc34e98721567fc05052c2800a5ad1818d910f3368c729463c32937",
+        "sha256": "15dfb740c7a1611007bfeea13cd687ef6bc5326c4999efae4259bf14e3ce8b9b",
+        "status": "succeeded",
+        "task_sha256": "49b0e7ead921c9e3dea1e7bccce3a0c041a977ad75e58f411c50881e1220a069",
+        "usage": {
+          "execution_calls": 0,
+          "execution_examples": 0,
+          "feedback_calls": 4,
+          "feedback_examples": 52,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "proposals": 4,
+          "tool_calls": 11,
+          "weight_values": 160
+        }
+      }
+    ],
+    "trace_head_sha256": "15dfb740c7a1611007bfeea13cd687ef6bc5326c4999efae4259bf14e3ce8b9b",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 4,
+      "feedback_examples": 52,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 4,
+      "tool_calls": 11,
+      "weight_values": 160
+    }
+  },
+  "source_sha256": "3a73cdb44849c7cf3984ca6c3ab3fa437cbea6a189411b2c99748e29cb814523",
+  "task": {
+    "architecture": "enterprise-support-linear-head/1",
+    "base_sha256": "2771b2160c858b58db7e82dafcd3e68608106eb2a6445d0999738c4568586711",
+    "constraints": {
+      "contract": {
+        "desired_score_shift": [
+          0,
+          0,
+          0,
+          3
+        ],
+        "execution": "NumPy float64 matmul and addition; sampled observations, no floating-point proof",
+        "final_gate": "The sealed edit must also pass the same behavioral rubric on the declared final split",
+        "maximum_protected_runtime_drift": 1e-12,
+        "maximum_target_shift_error": 0.05,
+        "minimum_route_margin": 0.5,
+        "objective": "Route telemetry outage tickets to Platform Operations",
+        "production_authorized": false,
+        "require_exact_anchor_retention": true,
+        "scenario": "policy-change",
+        "schema": "enterprise-routing-contract/1",
+        "selection_rule": "Among publicly eligible edits, minimize changed cells then program SHA-256; otherwise abstain"
+      },
+      "feature_schema": {
+        "extractor_source_sha256": "96d4f6c640d88811e02394feed3dea448450b16240312a2ed7c2235ff75931ea",
+        "feature_id": "structured-support-fields/1",
+        "feature_names": [
+          "general_topic",
+          "billing_topic",
+          "security_topic",
+          "platform_topic",
+          "enterprise_tier",
+          "urgency",
+          "telemetry_outage"
+        ],
+        "origin": "Hand-constructed synthetic baseline; no training or customer data",
+        "queue_names": [
+          "general",
+          "billing",
+          "security",
+          "platform"
+        ],
+        "score_rule": "features @ head.weight.T + head.bias"
+      },
+      "fitting": "Numerical ridge fitting on supplied public targets and anchors; outside session charges"
+    },
+    "mode": "edit",
+    "objective": "Route telemetry outage tickets to Platform Operations",
+    "schema": "wsp-task/1",
+    "task_id": "enterprise-routing-policy-change"
+  }
+}

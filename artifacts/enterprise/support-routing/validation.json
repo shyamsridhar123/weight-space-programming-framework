@@ -1,0 +1,48 @@
+{
+  "checks": {
+    "business_outcomes": "PASS",
+    "exact_endpoint_retention": "PASS",
+    "exact_parent_rollback": "PASS",
+    "framework_api_regression": "PASS",
+    "recorded_evidence_recomputation": "PASS",
+    "schema_and_margin_rejection": "PASS",
+    "tampered_evidence_rejection": "PASS"
+  },
+  "date": "2026-11-07",
+  "environment": {
+    "numpy": "2.5.3",
+    "python": "3.12.10"
+  },
+  "limitations": [
+    "No new enterprise deployment evidence",
+    "No live provider execution",
+    "No candidate-specific Lean proof",
+    "No independent evaluator attestation",
+    "No proof of native floating-point execution"
+  ],
+  "scenario_evidence": {
+    "conflict": {
+      "decision": "abstained",
+      "scope": "Local evidence consistency; no independent attestation",
+      "verified": true
+    },
+    "coverage-gap": {
+      "decision": "rejected_after_holdout",
+      "scope": "Local evidence consistency; no independent attestation",
+      "verified": true
+    },
+    "policy-change": {
+      "decision": "admitted_for_synthetic_trial",
+      "scope": "Local evidence consistency; no independent attestation",
+      "verified": true
+    }
+  },
+  "schema": "enterprise-routing-validation/1",
+  "scope": "Local integration outcomes and framework APIs used by the example",
+  "test_sources": [
+    "tests/test_weight_space_generic.py",
+    "tests/test_weight_space_workflow.py",
+    "tests/test_weight_space_boundaries.py",
+    "tests/test_enterprise_support_routing.py"
+  ]
+}
