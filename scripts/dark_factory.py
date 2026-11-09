@@ -105,33 +105,52 @@ def eligible(issues):
     return sorted(result, key=lambda i: (int(re.search(r"\[P(\d)", i["title"])[1]) if re.search(r"\[P(\d)", i["title"]) else 9, i["number"]))
 
 
-def assessment_ready(response, criteria, root):
-    """Omissions, duplicates and references outside the publication fail closed."""
-    if not isinstance(response, dict) or response.get("outcome") != "ready":
-        return False
+def assessment_diagnostics(response, criteria, root):
+    """First rejection only; retain no assessment prose or evidence paths."""
+    diagnostics = {"outcome": None, "reason_codes": [], "rejected_criterion_ids": []}
+    def reject(code, criterion_id=None):
+        diagnostics["reason_codes"].append(code)
+        if criterion_id is not None:
+            diagnostics["rejected_criterion_ids"].append(criterion_id)
+        return diagnostics
+    if not isinstance(response, dict):
+        return reject("response_not_object")
+    outcome = response.get("outcome")
+    diagnostics["outcome"] = outcome if isinstance(outcome, str) and outcome in ("ready", "partial", "blocked") else None
+    if outcome != "ready":
+        return reject("outcome_not_ready")
     if any(not isinstance(response.get(key), str) or not response[key].strip()
            for key in ("summary", "claim_scope", "attempt_accounting")):
-        return False
+        return reject("required_text_missing")
     entries = response.get("criteria", [])
     if (not isinstance(entries, list) or len(entries) != len(criteria)
             or any(not isinstance(e, dict) or type(e.get("id")) is not int for e in entries)
             or {e["id"] for e in entries} != set(range(len(criteria)))):
-        return False
+        return reject("criteria_invalid")
     published = set(publication_files(root))
     for entry in entries:
-        if (entry.get("met") is not True or not isinstance(entry.get("evidence"), list)
-                or not entry["evidence"] or not isinstance(entry.get("explanation"), str)
-                or not entry["explanation"].strip()):
-            return False
+        if entry.get("met") is not True:
+            return reject("criterion_not_met", entry["id"])
+        if not isinstance(entry.get("evidence"), list) or not entry["evidence"]:
+            return reject("criterion_evidence_missing", entry["id"])
+        if not isinstance(entry.get("explanation"), str) or not entry["explanation"].strip():
+            return reject("criterion_explanation_missing", entry["id"])
         for value in entry["evidence"]:
             if not isinstance(value, str) or "\\" in value or ":" in value or value.startswith("/"):
-                return False
-            if str(PurePosixPath(value)) != value or ".." in PurePosixPath(value).parts or value not in published:
-                return False
+                return reject("evidence_path_invalid", entry["id"])
+            if str(PurePosixPath(value)) != value or ".." in PurePosixPath(value).parts:
+                return reject("evidence_path_invalid", entry["id"])
+            if value not in published:
+                return reject("evidence_not_published", entry["id"])
             path = (root / value).resolve()
             if not path.is_relative_to(root.resolve()) or not path.is_file() or path.is_symlink():
-                return False
-    return True
+                return reject("evidence_file_invalid", entry["id"])
+    return diagnostics
+
+
+def assessment_ready(response, criteria, root):
+    """Omissions, duplicates and references outside the publication fail closed."""
+    return not assessment_diagnostics(response, criteria, root)["reason_codes"]
 
 
 def public_tree(root):
@@ -636,7 +655,10 @@ def cycle(issue, *, state, publish, worker_seconds):
         entry.update(status=receipt["status"], receipt_sha256=receipt["sha256"],
                      elapsed_seconds=receipt["elapsed_seconds"], usage=receipt["usage"], cost=receipt["cost"])
         checkpoint(run, result)
-        if receipt["status"] != "completed" or not assessment_ready(receipt["response"], criteria, worktree):
+        if receipt["status"] == "completed":
+            entry["assessment"] = assessment_diagnostics(receipt["response"], criteria, worktree)
+            checkpoint(run, result)
+        if receipt["status"] != "completed" or entry["assessment"]["reason_codes"]:
             raise RuntimeError(role + "_did_not_fulfill_requirements")
         return receipt
     try:
