@@ -23,6 +23,15 @@ research draft.
   Control matching, final study sealing and scientific usefulness remain pending;
   Issue #9 c1 remains partial and open.
 
+- Retain allowlisted [factory acceptance diagnostics](docs/research/dark-factory.md)
+  for completed provider attempts: known outcome, first rejection code and only
+  validated criterion IDs. Acceptance, short-circuit and exception behavior stay
+  unchanged; legacy receipts are not backfilled. The separate
+  [engineering receipt](provenance/verification/factory-assessment-diagnostics-20261109.json)
+  records one passing focused offline invocation without retry or timeout.
+  Mocked worker checkpoint and validator checks establish no live provider,
+  scheduler, recovery or research outcome.
+
 - Add [selection-only admission for fixed diagnosis policies](docs/research/staged-diagnosis.md#selection-only-admission-for-fixed-diagnosis-policies)
   through the study-specific `SelectionAdmission` consumer of public cohort
   phases. It retains three successful normal returns, exact receipt bytes and

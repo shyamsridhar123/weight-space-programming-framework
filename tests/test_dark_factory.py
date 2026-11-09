@@ -41,6 +41,110 @@ def test_requirements_dependencies_and_public_evidence_fail_closed(tmp_path):
                                      {"artifacts/old.json"}) == [".github/new.yml", "artifacts/old.json", "pytest-engineering.ini"]
 
 
+def test_assessment_diagnostics_preserve_short_circuit_and_safe_fields(tmp_path, monkeypatch):
+    (tmp_path / "README.md").write_text("evidence")
+    scans = []
+    def published(root):
+        scans.append(root)
+        return ["README.md", "missing.md"]
+    monkeypatch.setattr(factory, "publication_files", published)
+    def diagnose(response):
+        return factory.assessment_diagnostics(response, ["execute"], tmp_path)
+    ready = {"outcome": "ready", "reason_codes": [], "rejected_criterion_ids": []}
+    assert diagnose(assessment()) == ready
+    assert factory.assessment_ready(assessment(), ["execute"], tmp_path)
+    assert scans == [tmp_path, tmp_path]
+    scans.clear()
+    assert diagnose(None) == ready | {"outcome": None, "reason_codes": ["response_not_object"]}
+    for outcome, known in (("partial", "partial"), ("blocked", "blocked"),
+                           ("private outcome", None), ({"private": "outcome"}, None)):
+        assert diagnose(assessment() | {"outcome": outcome}) == ready | {
+            "outcome": known, "reason_codes": ["outcome_not_ready"]}
+    assert not factory.assessment_ready(assessment() | {"outcome": "partial"}, ["execute"], tmp_path)
+    assert diagnose(assessment() | {"summary": " "}) == ready | {"reason_codes": ["required_text_missing"]}
+    assert diagnose(assessment() | {"criteria": None}) == ready | {"reason_codes": ["criteria_invalid"]}
+    for criterion_id in (False, 99, "private criterion"):
+        response = assessment()
+        response["criteria"][0]["id"] = criterion_id
+        assert diagnose(response) == ready | {"reason_codes": ["criteria_invalid"]}
+    assert scans == []
+    for changes, reason in (
+            ({"met": False, "evidence": None, "explanation": None}, "criterion_not_met"),
+            ({"evidence": [], "explanation": None}, "criterion_evidence_missing"),
+            ({"explanation": " "}, "criterion_explanation_missing"),
+            ({"evidence": ["../private-evidence.txt"]}, "evidence_path_invalid"),
+            ({"evidence": ["private-evidence.txt"]}, "evidence_not_published"),
+            ({"evidence": ["missing.md"]}, "evidence_file_invalid")):
+        response = assessment()
+        response["summary"] = "private assessment prose"
+        response["criteria"][0].update(changes)
+        assert diagnose(response) == ready | {"reason_codes": [reason], "rejected_criterion_ids": [0]}
+    assert scans == [tmp_path] * 6
+    def unavailable(root):
+        raise OSError("publication scanner unavailable")
+    monkeypatch.setattr(factory, "publication_files", unavailable)
+    with pytest.raises(OSError, match="publication scanner unavailable"):
+        diagnose(assessment())
+
+
+@pytest.mark.parametrize("provider_status", ["completed", "timeout"])
+def test_assessment_diagnostics_checkpoint_completed_attempt_once(tmp_path, monkeypatch, provider_status):
+    root, state = tmp_path / "project", tmp_path / "state"
+    root.mkdir()
+    state.mkdir()
+    commands, provider_calls, validations = [], [], []
+    outputs = {"working_tree": "", "branch": "main", "base": "a" * 40,
+               "remote_base": "a" * 40 + "\trefs/heads/main", "historical_paths": "README.md", "worktree_add": ""}
+    def command(name, argv, **kwargs):
+        commands.append(name)
+        if name == "worktree_add":
+            worktree = Path(argv[-2])
+            worktree.mkdir()
+            (worktree / "README.md").write_text("evidence")
+        return outputs[name]
+    response = assessment("private-evidence.txt")
+    response["summary"] = "private assessment prose"
+    class Provider:
+        def __init__(self, **options):
+            pass
+        def call(self, prompt, *, directory, cwd, schema):
+            provider_calls.append(directory.name)
+            return {"status": provider_status, "sha256": "0" * 64, "elapsed_seconds": 0.01,
+                    "usage": {}, "cost": {"amount": None, "currency": "USD"}, "response": response}
+    original = factory.assessment_diagnostics
+    def diagnose(response, criteria, worktree):
+        validations.append(True)
+        retained = json.loads((worktree.parent / "result.json").read_text())
+        assert retained["attempts"][0]["status"] == "completed"
+        assert "assessment" not in retained["attempts"][0]
+        return original(response, criteria, worktree)
+    monkeypatch.setattr(factory, "ROOT", root)
+    monkeypatch.setattr(factory, "command", command)
+    monkeypatch.setattr(factory, "CodexProvider", Provider)
+    monkeypatch.setattr(factory, "assessment_diagnostics", diagnose)
+    monkeypatch.setattr(factory, "publication_files", lambda root: ["README.md"])
+    monkeypatch.setattr(factory, "account_failure", lambda *args: None)
+    issue = {"number": 2, "title": "offline diagnostics fixture", "state": "open",
+             "body": "- [ ] execute\nDependencies for the final claim: None; independent."}
+    result = factory.cycle(issue, state=state, publish=False, worker_seconds=1)
+    assert result["status"] == "failed" and result["error"] == "worker_did_not_fulfill_requirements"
+    assert commands == list(outputs) and provider_calls == ["worker"]
+    assert len(validations) == (1 if provider_status == "completed" else 0)
+    entry = result["attempts"][0]
+    assert entry["status"] == provider_status
+    if provider_status == "completed":
+        assert entry["assessment"] == {"outcome": "ready", "reason_codes": ["evidence_not_published"],
+                                       "rejected_criterion_ids": [0]}
+    else:
+        assert "assessment" not in entry
+    retained = json.loads((state / result["run_id"] / "result.json").read_text())
+    assert retained["attempts"] == [entry]
+    summary = factory.failure_summary(result)
+    assert summary["attempts"] == [entry]
+    for private in (response["summary"], response["criteria"][0]["evidence"][0], response["criteria"][0]["explanation"]):
+        assert private not in json.dumps(summary)
+
+
 def test_failed_native_startup_and_deadline_leave_receipts(tmp_path):
     ledger = []
     with pytest.raises(RuntimeError, match="startup_failed"):
