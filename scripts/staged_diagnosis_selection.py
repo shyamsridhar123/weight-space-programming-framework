@@ -171,6 +171,35 @@ def _repair(answer: dict[str, Any]) -> dict[str, Any]:
             "intent": "common-repair-v1"}
 
 
+def _repair_structure(parent: TensorArtifact, endpoint: TensorArtifact, row: Any, mechanism: Any) -> dict[str, Any]:
+    """Numerical criteria for a prepared head; the caller establishes provenance."""
+    result = {"status": "unusable", "reason": "invalid_diagnosis",
+              "realized_native_delta": None, "realized_native_norm": None}
+    if type(row) is not int or not 0 <= row < 8 or mechanism not in ("bias_up", "bias_down"):
+        return result
+    if not parent.compatible(endpoint):
+        return result | {"reason": "interface_changed"}
+    tensors = [artifact.to_dict()["tensors"] for artifact in (parent, endpoint)]
+    try:
+        before_weight, after_weight = [[_float32(value) for values in data["head.weight"] for value in values]
+                                       for data in tensors]
+        before_bias, after_bias = [[_float32(value) for value in data["head.bias"]] for data in tensors]
+    except (ValueError, OverflowError):
+        return result | {"reason": "not_native_float32"}
+    delta = after_bias[row] - before_bias[row]  # Native values are promoted before subtraction.
+    result["realized_native_delta"] = delta if delta != 0 else 0.0
+    outside = list(zip(before_weight, after_weight)) + [
+        (before, after) for index, (before, after) in enumerate(zip(before_bias, after_bias)) if index != row]
+    if any(struct.pack("!f", before) != struct.pack("!f", after) for before, after in outside):
+        return result | {"reason": "outside_intended_support"}
+    result["realized_native_norm"] = abs(delta)
+    if delta == 0:
+        return result | {"reason": "no_op"}
+    if (mechanism == "bias_up" and delta > 0) or (mechanism == "bias_down" and delta < 0):
+        return result | {"reason": "wrong_direction"}
+    return result | {"status": "usable", "reason": "common_repair_structure"}
+
+
 def _broker_trace(pairs: list[tuple[dict[str, Any], dict[str, Any]]]) -> list[dict[str, Any]]:
     events = []
     for request, response in pairs:
@@ -807,6 +836,63 @@ class SelectionAdmission:
                      "All three normal public returns must survive in this originating live object")
             self._layout()
             return _parse(self._evidence)
+        except BaseException:
+            self._invalidated = True
+            raise
+
+    def check_repair_usability(self) -> dict[str, Any]:
+        """Check selected common repairs structurally, without writing evidence.
+
+        This supplies no fallback, control matching, final study seal, trained
+        ancestry or behavioral result. Integrity failures still close admission.
+        """
+        try:
+            before = self.admit()
+            _same([{key: member[key] for key in ("member_index", "member_id")} for member in before["members"]], self._rows)
+            members = []
+            for member in before["members"]:
+                index = member["member_index"]
+                parent = self._bases.get(index)
+                _require(parent is None or type(parent) is TensorArtifact, "A retained parent changed representation")
+                _same(member["parent"], parent.to_dict() if parent is not None else None)
+                candidate = member["repair_candidate"]
+                _require((candidate is not None) == (member["repair_outcome"] == "selected"),
+                         "Selected repair evidence disagrees with its terminal outcome")
+                result = {key: member[key] for key in (
+                    "member_index", "member_id", "policy", "diagnosis_outcome", "repair_outcome",
+                    "diagnosis_receipt_sha256", "repair_receipt_sha256")}
+                result.update(parent_sha256=parent.sha256 if parent is not None else None,
+                              selected_repair_candidate_sha256=None, selected_repair_artifact_sha256=None,
+                              intended_row=None, diagnosed_direction=None, prescribed_delta=None,
+                              realized_native_delta=None, realized_native_norm=None,
+                              status="unavailable", reason="no_selected_repair")
+                if candidate is not None:
+                    endpoint = self._artifacts.get(index)
+                    _require(type(parent) is TensorArtifact and type(endpoint) is TensorArtifact
+                             and member["diagnosis_outcome"] == "selected", "A selected repair lacks its owned endpoints or diagnosis")
+                    diagnosis = member["diagnosis_candidate"]
+                    _same(diagnosis, self._diagnoses[index]["candidate"])
+                    answer = _diagnosis(diagnosis["answer"])
+                    _require(not answer["abstain"], "A selected repair cannot follow abstention")
+                    _same(candidate["parent_sha256"], parent.sha256)
+                    _same(candidate["artifact_sha256"], endpoint.sha256)
+                    _same(candidate["artifact"], endpoint.to_dict())
+                    _same(candidate["sha256"], digest({key: value for key, value in candidate.items() if key != "sha256"}))
+                    _require(candidate["kind"] == "artifact" and candidate["no_op"] is (parent.sha256 == endpoint.sha256),
+                             "Selected Candidate identity or no-op binding changed")
+                    row, mechanism = answer["location"]["index_prefix"][0], answer["mechanism"]
+                    result.update(selected_repair_candidate_sha256=candidate["sha256"],
+                                  selected_repair_artifact_sha256=endpoint.sha256,
+                                  intended_row=row, diagnosed_direction=mechanism,
+                                  prescribed_delta=-2.0 if mechanism == "bias_up" else 2.0)
+                    result.update(_repair_structure(parent, endpoint, row, mechanism))
+                members.append(result)
+            body = {"schema": "wsp-common-repair-structure/1", "selection_admission_sha256": digest(before),
+                    **{key: before[key] for key in ("attempt_id", "registry_id", "evaluator_id", "roster_sha256", "cohort_protocol_sha256")},
+                    "members": members}
+            report = body | {"sha256": digest(body)}
+            _same(self.admit(), before)
+            return _parse(_json_bytes(report))
         except BaseException:
             self._invalidated = True
             raise

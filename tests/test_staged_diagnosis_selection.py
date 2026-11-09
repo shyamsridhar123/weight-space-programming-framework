@@ -1,4 +1,4 @@
-"""One genuine-receipt engineering check; no data registration or study execution."""
+"""Genuine-receipt engineering checks; no data registration or study execution."""
 import hashlib
 import json
 from pathlib import Path
@@ -8,6 +8,7 @@ from unittest.mock import patch
 from rlcd.weight_space.artifact import TensorArtifact
 from rlcd.weight_space.broker import ProposerBroker
 from rlcd.weight_space.data_roles import DataRoleRegistry
+from rlcd.weight_space.model import digest
 from rlcd.weight_space.staged_cohort import PreparedMember, StagedCohort
 from scripts import staged_diagnosis_selection as selection
 
@@ -172,3 +173,180 @@ def test_staged_selection_admits_only_live_normal_phase_returns():
                     rejected(lambda: interrupted.run(prepare), error_type)
                 assert (directory / receipt).is_file()
                 rejected(interrupted.admit)
+
+
+def test_staged_repair_usability_native_structure_and_live_binding():
+    def rejected(action):
+        try:
+            action()
+        except ValueError:
+            return
+        raise AssertionError("Expected permanent admission rejection")
+
+    metadata = {"encoder_sha256": "1" * 64, "preprocessing_sha256": "2" * 64, "feature_id": "3" * 64}
+
+    def head(row=0, value=4.0):
+        bias = [0.0] * 8 + [-64.0]
+        bias[row] = value
+        return TensorArtifact("trained-frozen-readout/1", {"head.weight": [[0.0] * 32 for _ in range(9)],
+                                                          "head.bias": bias}, metadata)
+
+    # Literal private-helper checks only: these altered endpoints are not admitted selections.
+    parent, good = head(), head(value=2.0)
+    usable = {"status": "usable", "reason": "common_repair_structure",
+              "realized_native_delta": -2.0, "realized_native_norm": 2.0}
+    assert selection._repair_structure(parent, good, 0, "bias_up") == usable
+    for row in (True, -1, 8, 1.0):
+        assert selection._repair_structure(parent, good, row, "bias_up") == {
+            "status": "unusable", "reason": "invalid_diagnosis", "realized_native_delta": None, "realized_native_norm": None}
+    assert selection._repair_structure(parent, good, 0, "undetermined")["reason"] == "invalid_diagnosis"
+    assert selection._repair_structure(parent, parent, 0, "bias_up") == {
+        "status": "unusable", "reason": "no_op", "realized_native_delta": 0.0, "realized_native_norm": 0.0}
+    assert selection._repair_structure(parent, head(value=6.0), 0, "bias_up") == {
+        "status": "unusable", "reason": "wrong_direction", "realized_native_delta": 2.0, "realized_native_norm": 2.0}
+    for tensor, index, value in (("head.bias", 1, 1.0), ("head.bias", 8, -63.0),
+                                 ("head.weight", 0, 1.0), ("head.weight", 8, 1.0)):
+        data = good.to_dict()
+        if tensor == "head.weight":
+            data["tensors"][tensor][index][0] = value
+        else:
+            data["tensors"][tensor][index] = value
+        assert selection._repair_structure(parent, TensorArtifact.from_dict(data), 0, "bias_up") == {
+            "status": "unusable", "reason": "outside_intended_support", "realized_native_delta": -2.0, "realized_native_norm": None}
+    # Artifact capture canonicalizes signed zeros before the helper receives the retained endpoint.
+    for tensor, index in (("head.bias", 1), ("head.weight", 0), ("head.weight", 8)):
+        data = good.to_dict()
+        if tensor == "head.weight":
+            data["tensors"][tensor][index][0] = -0.0
+        else:
+            data["tensors"][tensor][index] = -0.0
+        assert digest(data) != good.sha256
+        canonical = TensorArtifact.from_dict(data)
+        assert canonical.sha256 == good.sha256
+        assert selection._repair_structure(parent, canonical, 0, "bias_up") == usable
+    for change in ("architecture", "metadata", "tensor_names", "tensor_shape"):
+        data = good.to_dict()
+        if change == "architecture":
+            data["architecture"] = "other-interface/1"
+        elif change == "metadata":
+            data["metadata"]["encoder_sha256"] = "4" * 64
+        elif change == "tensor_names":
+            data["tensors"]["other.bias"] = data["tensors"].pop("head.bias")
+        else:
+            data["tensors"]["head.bias"].pop()
+        assert selection._repair_structure(parent, TensorArtifact.from_dict(data), 0, "bias_up") == {
+            "status": "unusable", "reason": "interface_changed", "realized_native_delta": None, "realized_native_norm": None}
+    for value in (0.1, float(2 ** 128)):
+        data = good.to_dict()
+        data["tensors"]["head.bias"][1] = value
+        assert selection._repair_structure(parent, TensorArtifact.from_dict(data), 0, "bias_up") == {
+            "status": "unusable", "reason": "not_native_float32", "realized_native_delta": None, "realized_native_norm": None}
+
+    # Genuine admitted endpoints below use the public cohort, receipts and native lowering.
+    choices = [("lower-up", 0, "bias_up", 4.0), ("upper-down", 7, "bias_down", -4.0),
+               ("rounded-increase", 0, "bias_down", 33554436.0), ("rounded-decrease", 7, "bias_up", 33554436.0),
+               ("native-no-op", 0, "bias_down", 33554432.0), ("denied-repair", 2, "bias_up", 4.0)]
+    assignments = [{"member_id": name, "policy": "metadata-uniform", "metadata_choice": {"row": row, "direction": direction}}
+                   for name, row, direction, _ in choices] + [
+        {"member_id": "abstained", "policy": "bias-outlier", "metadata_choice": None},
+        {"member_id": "unavailable", "policy": "bias-outlier", "metadata_choice": None}]
+    parents = {name: head(row, value) for name, row, _, value in choices} | {"abstained": head(value=0.0)}
+    driver_hash = hashlib.sha256(Path(selection.__file__).read_bytes()).hexdigest()
+
+    def prepare(row):
+        name = row["member_id"]
+        if name == "unavailable":
+            raise RuntimeError("Literal unavailable member")
+        return PreparedMember(parents[name], name, "Check native repair structure", {"fixture": name})
+
+    broker_init = ProposerBroker.__init__
+
+    def denied_seal(owner, task, **kwargs):
+        if task.mode == "edit" and task.task_id == "denied-repair/diagnosis/repair":
+            kwargs["max_requests"] = 1
+        broker_init(owner, task, **kwargs)
+
+    with TemporaryDirectory(prefix="wsp-repair-structure-") as temporary:
+        root = Path(temporary)
+        registry = DataRoleRegistry(root / "roles.sqlite")  # Deliberately register no batches.
+        protocol = {"purpose": "literal structural engineering check; no ancestry or scoring"}
+
+        def fresh(name):
+            directory = root / name
+            cohort = StagedCohort(directory, member_ids=[item["member_id"] for item in assignments], protocol=protocol,
+                                  controls={}, evaluator_id="literal-evaluator", registry=registry, attempt_id=name)
+            owner = selection.SelectionAdmission(cohort, directory, assignments=assignments, protocol=protocol,
+                                                 registry_id=registry.registry_id, evaluator_id="literal-evaluator",
+                                                 attempt_id=name, driver_sha256=driver_hash)
+            with patch.object(ProposerBroker, "__init__", denied_seal):
+                return directory, owner, owner.run(prepare)
+
+        directory, admission, evidence = fresh("native-structure")
+        files = {path.relative_to(directory): path.read_bytes() for path in directory.rglob("*") if path.is_file()}
+        report = admission.check_repair_usability()
+        assert set(report) == {"schema", "selection_admission_sha256", "attempt_id", "registry_id", "evaluator_id",
+                               "roster_sha256", "cohort_protocol_sha256", "members", "sha256"}
+        assert report["schema"] == "wsp-common-repair-structure/1"
+        assert report["selection_admission_sha256"] == digest(evidence)
+        assert report["sha256"] == digest({key: value for key, value in report.items() if key != "sha256"})
+        for key in ("attempt_id", "registry_id", "evaluator_id", "roster_sha256", "cohort_protocol_sha256"):
+            assert report[key] == evidence[key]
+        assert [row["member_id"] for row in report["members"]] == [item["member_id"] for item in assignments]
+        assert [row["member_index"] for row in report["members"]] == list(range(len(assignments)))
+        assert [row["status"] for row in report["members"]] == ["usable"] * 4 + ["unusable"] + ["unavailable"] * 3
+        shared = ("member_index", "member_id", "policy", "diagnosis_outcome", "repair_outcome",
+                  "diagnosis_receipt_sha256", "repair_receipt_sha256")
+        numerical = ("intended_row", "prescribed_delta", "realized_native_delta", "realized_native_norm")
+        selected_hashes = ("selected_repair_candidate_sha256", "selected_repair_artifact_sha256")
+        for index, (checked, member) in enumerate(zip(report["members"], evidence["members"])):
+            assert set(checked) == set(shared + numerical + selected_hashes + (
+                "parent_sha256", "diagnosed_direction", "status", "reason"))
+            assert {key: checked[key] for key in shared} == {key: member[key] for key in shared}
+            assert checked["parent_sha256"] == (digest(member["parent"]) if member["parent"] is not None else None)
+            candidate = member["repair_candidate"]
+            if candidate is None:
+                assert checked["status"] == "unavailable" and checked["reason"] == "no_selected_repair"
+                assert all(checked[key] is None for key in numerical + selected_hashes + ("diagnosed_direction",))
+                continue
+            assert checked["selected_repair_candidate_sha256"] == candidate["sha256"] != candidate["artifact_sha256"]
+            assert checked["selected_repair_artifact_sha256"] == candidate["artifact_sha256"]
+            assert checked["parent_sha256"] == candidate["parent_sha256"]
+            assert checked["intended_row"] == choices[index][1] and checked["diagnosed_direction"] == choices[index][2]
+            assert checked["prescribed_delta"] == (-2.0 if choices[index][2] == "bias_up" else 2.0)
+            delta = (-2.0, 2.0, 4.0, -4.0, 0.0)[index]
+            assert checked["realized_native_delta"] == delta and checked["realized_native_norm"] == abs(delta)
+            assert checked["reason"] == ("no_op" if delta == 0 else "common_repair_structure")
+            assert member["repair_usable"] is (delta != 0)  # Existing admission schema stays preliminary and unchanged.
+        denied = report["members"][5]
+        assert denied["repair_outcome"] == "invalid_submission" and 5 in admission._artifacts
+        denied_receipt = json.loads((directory / "member-000005" / "repair.json").read_bytes())
+        assert denied_receipt["candidate"] is None and len(denied_receipt["candidates"]) == 1
+        assert report["members"][6]["diagnosis_outcome"] == "abstained"
+        assert report["members"][7]["diagnosis_outcome"] == "unavailable"
+        frozen_report = json.loads(json.dumps(report, allow_nan=False))
+        report["members"][0]["status"] = "changed caller copy"
+        assert admission.check_repair_usability() == frozen_report and admission.admit() == evidence
+        assert {path.relative_to(directory): path.read_bytes() for path in directory.rglob("*") if path.is_file()} == files
+
+        original_artifact = admission._artifacts[0]
+        admission._artifacts[0] = parent
+        rejected(admission.check_repair_usability)
+        admission._artifacts[0] = original_artifact
+        rejected(admission.admit)
+        rejected(admission.check_repair_usability)
+
+        directory, receipt_owner, _ = fresh("changed-during-check")
+        path = directory / "repair-barrier.json"
+        raw = path.read_bytes()
+        structure = selection._repair_structure
+
+        def mutate_after_structure(*args):
+            result = structure(*args)
+            path.write_bytes(raw + b" ")
+            return result
+
+        with patch.object(selection, "_repair_structure", mutate_after_structure):
+            rejected(receipt_owner.check_repair_usability)  # The final admit catches mutation during the calculation.
+        path.write_bytes(raw)
+        rejected(receipt_owner.admit)
+        rejected(receipt_owner.check_repair_usability)

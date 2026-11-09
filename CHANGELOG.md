@@ -7,6 +7,22 @@ research draft.
 
 ## Unreleased
 
+- Add `SelectionAdmission.check_repair_usability()` as a separate, digest-bound
+  [common-repair structural report](docs/research/staged-diagnosis.md#selection-only-admission-for-fixed-diagnosis-policies).
+  It checks retained endpoints around unchanged live admission, preserves the
+  complete roster and selected Candidate/artifact identities, and writes no
+  evidence files. Native float32 support, direction, metadata and byte checks on
+  retained canonical artifacts distinguish usable repairs, authentic unusable
+  repairs and unavailable selections, including rounded no-ops and stranded
+  attempted artifacts. Signed zeros are canonicalized at artifact capture;
+  original checkpoint signed-zero preservation is not established. Realized
+  magnitude may differ from the prescribed 2. The existing admission schema and
+  preliminary `repair_usable` flag retain their meanings. Add one focused offline
+  regression separating literal helper failures from genuine admitted endpoints;
+  the earlier selection-admission receipt keeps its original source-snapshot scope.
+  Control matching, final study sealing and scientific usefulness remain pending;
+  Issue #9 c1 remains partial and open.
+
 - Add [selection-only admission for fixed diagnosis policies](docs/research/staged-diagnosis.md#selection-only-admission-for-fixed-diagnosis-policies)
   through the study-specific `SelectionAdmission` consumer of public cohort
   phases. It retains three successful normal returns, exact receipt bytes and
