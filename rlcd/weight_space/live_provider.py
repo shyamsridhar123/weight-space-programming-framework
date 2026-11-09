@@ -129,6 +129,14 @@ def parse_events(output: str) -> tuple[Any, dict[str, Any], list[str], list[str]
     return response, usage, unapproved, errors, diagnostics
 
 
+def _usage_counts(usage: Any) -> tuple[int, int]:
+    """Require both provider counters without converting unknown usage to zero."""
+    if type(usage) is not dict or any(type(usage.get(key)) is not int or usage[key] < 0
+                                    for key in ("input_tokens", "output_tokens")):
+        raise ValueError("Provider usage requires nonnegative integer input_tokens and output_tokens")
+    return usage["input_tokens"], usage["output_tokens"]
+
+
 @dataclass(frozen=True)
 class CodexProvider:
     model: str = "gpt-6.1-sol"
@@ -224,10 +232,15 @@ class CodexProvider:
         if status != "timeout" and error is None:
             if self.tool_free and unapproved:
                 error = "unapproved_tool_event"
-            elif returncode != 0 or response is None or event_errors or not usage:
+            elif returncode != 0 or response is None or event_errors:
                 error = "transport_or_response_failed"
             else:
-                status = "completed"
+                try:
+                    _usage_counts(usage)
+                except ValueError:
+                    error = "invalid_provider_usage"
+                else:
+                    status = "completed"
         invocation = {"executable_sha256": executable_sha256,
                       "cli_version": version, "configuration": self.configuration(),
                       "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest(),
@@ -282,8 +295,7 @@ def run_brokered(provider: CodexProvider, broker: Any, *, prompt: str,
             status = attempt["status"]
             break
         try:
-            usage = attempt["usage"]
-            broker.record_usage(usage.get("input_tokens", 0), usage.get("output_tokens", 0))
+            broker.record_usage(*_usage_counts(attempt["usage"]))
             actions = attempt["response"]["actions"]
             if not isinstance(actions, list) or not actions or len(actions) > 8:
                 raise ValueError("Invalid action batch")

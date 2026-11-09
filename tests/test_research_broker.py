@@ -109,6 +109,75 @@ def test_provider_failure_accounting_and_started_tool_detection(tmp_path, monkey
     assert json.loads((tmp_path / "attempt" / "receipt.json").read_text())["sha256"] == receipt["sha256"]
 
 
+def test_provider_usage_is_complete_before_broker_actions(tmp_path, monkeypatch):
+    import hashlib
+    from types import SimpleNamespace
+    from rlcd.weight_space.live_provider import CodexProvider, run_brokered
+
+    cli = tmp_path / "fake-codex"
+    cli.write_bytes(b"offline transport placeholder; never executed")
+    monkeypatch.setattr("rlcd.weight_space.live_provider.shutil.which", lambda _: str(cli))
+    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.run",
+                        lambda *args, **kwargs: SimpleNamespace(stdout="offline-test\n"))
+    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.Popen",
+                        lambda *args, **kwargs: SimpleNamespace(returncode=0,
+                            communicate=lambda *args, **kwargs: (raw, "")))
+    base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
+    task = TaskSpec("usage-admission", "edit", "Freeze the synthetic baseline", base.architecture, base.sha256)
+    response = {"actions": [json.dumps({"op": "submit", "commands": [], "intent": "Freeze baseline"}),
+                            json.dumps({"op": "seal", "candidate_handle": None})], "reason": "offline fixture"}
+    cases = [
+        ({"cached_input_tokens": 12}, False),
+        ({}, False),
+        ({"input_tokens": 12}, False),
+        ({"output_tokens": 3}, False),
+        (None, False),
+        ([], False),
+        ({"input_tokens": "12", "output_tokens": 3}, False),
+        ({"input_tokens": 12, "output_tokens": 3.5}, False),
+        ({"input_tokens": True, "output_tokens": 3}, False),
+        ({"input_tokens": 12, "output_tokens": False}, False),
+        ({"input_tokens": -1, "output_tokens": 3}, False),
+        ({"input_tokens": 12, "output_tokens": -1}, False),
+        ({"input_tokens": 12, "output_tokens": 3, "cached_input_tokens": 9}, True),
+        ({"input_tokens": 0, "output_tokens": 0}, True),
+    ]
+    for index, (usage, valid) in enumerate(cases):
+        raw = "\n".join(json.dumps(event) for event in [
+            {"type": "item.completed", "item": {"type": "agent_message", "text": json.dumps(response)}},
+            {"type": "turn.completed", "usage": usage},
+        ]) + "\n"
+        # A synthetic completed receipt independently exercises the common guard.
+        for route in ("transport", "completed-receipt"):
+            provider = CodexProvider() if route == "transport" else SimpleNamespace(tool_free=True,
+                call=lambda *args, **kwargs: {"status": "completed", "usage": usage, "response": response})
+            broker = ProposerBroker(task, base=base)
+            directory = tmp_path / f"{index}-{route}"
+            trial = run_brokered(provider, broker, prompt="Return the fixed offline actions",
+                                 directory=directory, max_rounds=1)
+            attempt = trial["attempts"][0]
+            assert json.loads((directory / "trial.json").read_text()) == trial
+            assert broker.is_sealed and attempt["usage"] == usage
+            assert trial["status"] == ("sealed" if valid else "failed" if route == "transport" else "invalid")
+            assert [event["request"]["op"] for event in broker.public_trace] == (
+                ["metadata", "submit", "seal"] if valid else ["metadata", "harness_deadline_seal"])
+            charges = [event.to_dict() for event in broker._session.trace
+                       if event.to_dict()["action"] == "provider_usage"]
+            assert len(charges) == int(valid)
+            expected = {key: usage[key] if valid else 0 for key in ("input_tokens", "output_tokens")}
+            assert {key: getattr(broker._session.usage, key) for key in expected} == expected
+            assert broker._session.usage.proposals == int(valid)
+            if valid:
+                assert charges[0]["status"] == "succeeded" and charges[0]["charges"] == expected
+            if route == "transport":
+                folder = directory / "provider-0"
+                assert json.loads((folder / "receipt.json").read_text()) == attempt
+                assert (folder / "events.jsonl").read_bytes() == raw.encode("utf-8")
+                assert attempt["events_sha256"] == hashlib.sha256(raw.encode("utf-8")).hexdigest()
+                assert attempt["response"] == response and attempt["cost"]["amount"] is None
+                assert attempt["error"] == (None if valid else "invalid_provider_usage")
+
+
 def test_public_event_derivative_retains_raw_identity_without_private_path(tmp_path):
     import hashlib
     from rlcd.weight_space.live_provider import publish_attempt
