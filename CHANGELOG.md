@@ -16,6 +16,12 @@ research draft.
   keep historical unknown usage and costs explicit, with Issue #5 c2 and #8 c6
   still partial.
 
+- Deny recursively nested broker requests through the shared malformed-request
+  accounting path, preserving trusted sealing after the request allowance is used.
+  The [single synthetic engineering receipt](provenance/verification/broker-ingress-accounting-20261109.json)
+  records one local passing test at its captured source snapshot. Issue #5 c1/c3
+  remain partial; general host/network containment is not established.
+
 - Added a cooperative [registered session evidence verifier](docs/research/evaluation-data-roles.md#registered-session-evidence-verifier-supplement-november-9-2026)
   over a caller-owned registry, exact selected artifact and trusted expected
   binding, attempt, manifest and result identities. It reads only the durable

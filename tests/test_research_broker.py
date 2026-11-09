@@ -1,5 +1,6 @@
 """The returned JSON surface must not be an endpoint/hidden-evaluation oracle."""
 import json
+import sys
 
 import pytest
 
@@ -66,6 +67,38 @@ def test_opaque_submission_and_all_denied_routes_are_recorded():
     assert len(audit["public_trace"]) == len(public) + 3
     with pytest.raises(ValueError):
         broker.evaluate(lambda c: {}, evaluator_id="again")
+
+
+def test_recursive_request_is_denied_and_counted_before_trusted_sealing():
+    base = TensorArtifact("affine/1", {"W": [[1.]]})
+    task = TaskSpec("recursive-ingress", "edit", "Check ingress accounting", base.architecture, base.sha256)
+    broker = ProposerBroker(task, base=base, max_requests=1)
+    usage, handles = broker._session.usage, broker._handles.copy()
+    nested = None
+    for _ in range(sys.getrecursionlimit()):
+        nested = [nested]
+
+    assert broker.request({"op": "submit", "commands": nested, "intent": "nested"}) == {"status": "denied"}
+    trace = broker.public_trace
+    assert len(trace) == 1
+    assert trace[0]["request"] == {"op": "malformed"}
+    assert trace[0]["response"] == {"status": "denied"}
+    assert broker._session.usage == usage and broker._handles == handles
+
+    ordinary = {"op": "submit", "commands": [], "intent": "Request cap must deny this"}
+    assert broker.request(ordinary) == {"status": "denied"}
+    assert broker._session.usage == usage and broker._handles == handles
+    assert not broker.is_sealed
+
+    broker.abstain()
+    assert broker.is_sealed and broker._session.is_sealed
+    trace = broker.public_trace
+    assert [event["request"] for event in trace] == [
+        {"op": "malformed"}, ordinary, {"op": "harness_deadline_seal"}]
+    assert trace[-1]["response"] == {"status": "sealed"}
+    assert broker._session.usage == usage and broker._handles == handles
+    broker.abstain()
+    assert broker.public_trace == trace
 
 
 def test_subset_and_invalid_selection_do_not_release_endpoint_state():

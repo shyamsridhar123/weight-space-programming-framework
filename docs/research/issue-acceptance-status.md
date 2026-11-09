@@ -768,6 +768,14 @@ See the [verifier supplement](evaluation-data-roles.md#registered-session-eviden
 
 **Issue-level gaps and limits:** Executed focused broker denial evidence is attached. General host/network containment and broad off-ledger/reconstructed-computation adversarial evidence remain incomplete, as do actual deployment revision, monetary charges and 90 failed-request usage fields.
 
+**Broker ingress supplement, November 9:** The [single local synthetic engineering receipt](../../provenance/verification/broker-ingress-accounting-20261109.json)
+adds recursive-normalization denial accounting, unchanged proposal usage/handles
+and trusted idempotent sealing at its captured source snapshot. It records actual
+local imports and unchanged before/after sources and diff. This is bounded
+engineering evidence; general host/network, off-ledger and reconstructed-computation
+coverage remain incomplete. **#5 c1 and c3 remain partial; keep Issue #5 open.**
+Historical records and criterion statuses are unchanged.
+
 **Closure recommendation:** keep open; at least one original criterion is partial or open.
 
 #### #5 c0

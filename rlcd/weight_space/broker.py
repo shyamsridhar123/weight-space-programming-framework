@@ -152,7 +152,7 @@ class ProposerBroker:
             if (type(request) is not dict or type(request.get("op")) is not str
                     or len(canonical_bytes(request)) > self._max_request_bytes):
                 raise ValueError("Malformed or oversized request")
-        except (ValueError, TypeError):
+        except (ValueError, TypeError, RecursionError):
             return self._record({"op": "malformed"}, {"status": "denied"})
         if self._sealed or len(self._events) >= self._max_requests:
             return self._record(request, {"status": "denied"})
