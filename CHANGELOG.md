@@ -7,6 +7,14 @@ research draft.
 
 ## Unreleased
 
+- Reject non-finite decoded provider events and final responses before receipt
+  hashing, using the existing canonical serializer and parse-failure paths.
+  The [scoped offline engineering receipt](provenance/verification/provider-finite-json-20261109.json)
+  records retained failed attempts, raw-event commitments and broker abstention.
+  Earlier serialization-limit observations retain their original source scope;
+  historical results, unknown usage/costs and provider-attestation limits remain
+  unchanged. Issue #5 c2 and #8 c6 remain partial.
+
 - Add an optional endpoint-only plan to the study-specific `SelectionAdmission`,
   bound with native-control recipes before preparation. The one-shot
   `seal_study_endpoints()` retains all assigned members and seven ordered logical

@@ -104,6 +104,7 @@ def parse_events(output: str) -> tuple[Any, dict[str, Any], list[str], list[str]
             event = json.loads(line)
             if type(event) is not dict:
                 raise ValueError("Event must be an object")
+            canonical_bytes(event)
             item = event.get("item")
             if isinstance(item, dict) and event.get("type", "").startswith("item."):
                 kind = item.get("type", "unknown")
@@ -123,6 +124,7 @@ def parse_events(output: str) -> tuple[Any, dict[str, Any], list[str], list[str]
             errors.append("invalid_event")
     try:
         response = json.loads(final) if isinstance(final, str) else None
+        canonical_bytes(response)
     except ValueError:
         response = None
         errors.append("invalid_final_response")

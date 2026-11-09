@@ -158,7 +158,8 @@ def test_provider_usage_is_complete_before_broker_actions(tmp_path, monkeypatch)
     base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
     task = TaskSpec("usage-admission", "edit", "Freeze the synthetic baseline", base.architecture, base.sha256)
     response = {"actions": [json.dumps({"op": "submit", "commands": [], "intent": "Freeze baseline"}),
-                            json.dumps({"op": "seal", "candidate_handle": None})], "reason": "offline fixture"}
+                            json.dumps({"op": "seal", "candidate_handle": None})],
+                "reason": "NaN Infinity -Infinity 1e400 are ordinary strings"}
     cases = [
         ({"cached_input_tokens": 12}, False),
         ({}, False),
@@ -209,6 +210,61 @@ def test_provider_usage_is_complete_before_broker_actions(tmp_path, monkeypatch)
                 assert attempt["events_sha256"] == hashlib.sha256(raw.encode("utf-8")).hexdigest()
                 assert attempt["response"] == response and attempt["cost"]["amount"] is None
                 assert attempt["error"] == (None if valid else "invalid_provider_usage")
+
+
+def test_nonfinite_provider_json_retains_failed_attempt_and_trial(tmp_path, monkeypatch):
+    import hashlib
+    from types import SimpleNamespace
+    from unittest.mock import Mock
+    from rlcd.weight_space.live_provider import CodexProvider, run_brokered
+
+    cli = tmp_path / "fake-codex"
+    cli.write_bytes(b"offline transport placeholder; never executed")
+    monkeypatch.setattr("rlcd.weight_space.live_provider.shutil.which", lambda _: str(cli))
+    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.run",
+                        lambda *args, **kwargs: SimpleNamespace(stdout="offline-test\n"))
+    transport = Mock(side_effect=lambda *args, **kwargs: SimpleNamespace(returncode=0,
+        communicate=lambda *args, **kwargs: (raw, "")))
+    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.Popen", transport)
+    base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
+    task = TaskSpec("finite-json", "edit", "Retain a malformed offline attempt", base.architecture, base.sha256)
+    response = {"actions": [json.dumps({"op": "submit", "commands": [], "intent": "Freeze baseline"})],
+                "reason": "offline fixture"}
+    valid_usage = {"input_tokens": 12, "output_tokens": 3}
+    for token in ("NaN", "Infinity", "-Infinity", "1e400", "-1e400"):
+        for field in ("usage", "final"):
+            final = json.dumps(response)
+            usage = json.dumps(valid_usage)
+            if field == "usage":
+                usage = '{"input_tokens": ' + token + ', "output_tokens": 3}'
+            else:
+                final = final[:-1] + ', "nested": [{"value": ' + token + '}]}'
+            raw = (json.dumps({"type": "item.completed", "item": {
+                "type": "agent_message", "text": final}}) + "\n"
+                + '{"type": "turn.completed", "usage": ' + usage + '}\n')
+            transport.reset_mock()
+            broker = ProposerBroker(task, base=base)
+            directory = tmp_path / f"{token}-{field}"
+            trial = run_brokered(CodexProvider(), broker, prompt="Return the fixed offline actions",
+                                 directory=directory, max_rounds=3)
+            assert transport.call_count == 1 and len(trial["attempts"]) == 1
+            attempt = trial["attempts"][0]
+            assert trial["status"] == attempt["status"] == "failed"
+            assert attempt["error"] == "transport_or_response_failed"
+            assert attempt["event_errors"] == ["invalid_event" if field == "usage" else "invalid_final_response"]
+            assert attempt["usage"] == ({} if field == "usage" else valid_usage)
+            assert attempt["response"] == (response if field == "usage" else None)
+            assert attempt["cost"]["amount"] is None
+            folder = directory / "provider-0"
+            assert json.loads((folder / "receipt.json").read_text()) == attempt
+            assert json.loads((directory / "trial.json").read_text()) == trial
+            assert (folder / "events.jsonl").read_bytes() == raw.encode("utf-8")
+            assert attempt["events_sha256"] == hashlib.sha256(raw.encode("utf-8")).hexdigest()
+            assert broker.is_sealed and [event["request"]["op"] for event in broker.public_trace] == [
+                "metadata", "harness_deadline_seal"]
+            assert not any(event.to_dict()["action"] == "provider_usage" for event in broker._session.trace)
+            assert broker._session.usage.input_tokens == broker._session.usage.output_tokens == 0
+            assert broker._session.usage.proposals == 0
 
 
 def test_public_event_derivative_retains_raw_identity_without_private_path(tmp_path):

@@ -810,6 +810,8 @@ Historical records and criterion statuses are unchanged.
 
 **Later prospective engineering evidence:** The [provider-usage admission receipt](../../provenance/verification/provider-usage-admission-20261109.json) records one passing offline regression for complete nonnegative integer counters before completion or broker actions. It preserves the earlier interpreter startup failure and subsequent bookkeeping correction separately. This prevents new missing counters from defaulting to zero; it does not recover historical usage, establish provider provenance or change this partial status. Non-finite numeric JSON receipt serialization remains limited.
 
+**Later finite-JSON supplement, November 9, 2026:** The serialization limitation above applies to the earlier usage-admission snapshot. The [finite-JSON engineering receipt](../../provenance/verification/provider-finite-json-20261109.json) records prospective rejection of non-finite decoded events and final responses before receipt hashing. Saved event commitments remain separate from rejected parsed content. This does not recover historical usage, expose charges or deployment revision, establish provider provenance, or validate arbitrary third-party broker receipts. #5 c2 and #8 c6 remain partial.
+
 #### #5 c3
 
 - [ ] Add leak/adversarial cases for hidden exact-parent extraction, private evaluator access, unauthorized network/files, reconstructed forward calls through allowed tools, and off-ledger attempts.
