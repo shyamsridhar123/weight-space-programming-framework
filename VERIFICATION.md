@@ -124,12 +124,17 @@ The first attempts remain part of this record:
   subsequent assertion failure. Its first built wheel was retained separately
   from the successful retry.
 
-The existing repository was observed public on November 9 at `main` commit
-`6a2f99815332b3497333636c509c9a31ed0db6e2`. These research updates remain
-unpublished at this guide revision. The completed publication tree,
-source archive, confidentiality review, and any hosted result require separate
-receipts bound to the actual update commit. No fresh hosted success is inferred
-from these local checks, and the draft.4 release remains unpublished.
+The first research update was observed on public `main` at commit
+`bc32d57b4013fd6f3deaaa2ddc319fb9479726ae` on November 9, 2026 at
+08:07:37 UTC (02:07:37 in America/Chicago). Its indexed tree is
+`e28b14b593ae90d3cd2ed2b6b9a2e20a6beb7a78`; the clean local checkout,
+fetched remote tracking branch, and live public branch matched. The
+[publication observation](artifacts/research/publication/2026-11-09/research-publication.sanitized.json)
+identifies the staged-byte verification, selected source/privacy review, and
+independent immutable-public-byte check for the issue evidence. This guide
+revision records that completed source publication. It supplies no new hosted
+workflow result or wider scientific/privacy guarantee, and the draft.4 release
+remains unpublished.
 
 ## Recorded November 7 draft.4 candidate checks
 

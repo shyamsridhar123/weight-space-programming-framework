@@ -10,7 +10,7 @@ A **supported** criterion has evidence for the literal requested deliverable or 
 
 Evidence identity, repeatability and scientific independence are separate. Saved byte/seal authentication proves correspondence of identified files. A separate-process replay using the frozen implementation proves repeatability within its declared environment. Separate byte/accounting, exact-dyadic geometry and outcome aggregation code establishes only its explicitly reviewed independent computations. Actual live trials, training, native cases and Lean execution require their own saved receipts; scripts, source definitions and packaging are not those outcomes.
 
-**Reconciled #17/#18 evidence:** construction selection, offline evaluation and one replay completed, with twelve failed provider attempts and no live artifact. Unlearning training, attack evaluation and independent checking each completed once. Root authenticated the final retained evidence and the intended public copies. Publication-dependent criteria remain partial until a separately observed hosted commit establishes publication. All original issues were open in the authenticated November 9 pre-publication lookup; the private lookup is a hash-only commitment with SHA-256 `33ddf260504b4faddd1e301aa81d579319660fcd13e6e46fb253dd70cf02e161`.
+**Reconciled #17/#18 evidence:** construction selection, offline evaluation and one replay completed, with twelve failed provider attempts and no live artifact. Unlearning training, attack evaluation and independent checking each completed once. Root authenticated the final retained evidence and public copies. The first research publication was observed at immutable public commit `bc32d57b4013fd6f3deaaa2ddc319fb9479726ae` on November 9 at 08:07:37 UTC; an independent public-byte check then matched every evidence path in the reconciliation plan. The [publication observation](../../artifacts/research/publication/2026-11-09/research-publication.sanitized.json) binds these separately observed outcomes. Only #1 c13, #15 c7 and #17 c7 change from partial to supported because of that publication. The pre-publication assessment remains in that commit's history. All original issues were open in the authenticated November 9 pre-publication lookup; the private lookup is a hash-only commitment with SHA-256 `33ddf260504b4faddd1e301aa81d579319660fcd13e6e46fb253dd70cf02e161`. This map does not claim a later GitHub mutation.
 
 The #3 canonical admission-runtime replay is successful for its dedicated frozen record set. The distinct #16 original native replay failed with `ValueError: Expected finite JSON data, received str_`; its once-run normalized derivative then failed `Fresh-process admission differs` on `banking77-pair-01/none`. The latter cap was increased from 300 to 1800 seconds before launch, with no 300-second launch. Four load-identity assertions and one derivative admission recomputation do not establish replay success; recomputed differing fields were not retained, so the exact cause is unknown. Both failures remain evidence of the #16 limitation.
 
@@ -18,7 +18,7 @@ The #3 canonical admission-runtime replay is successful for its dedicated frozen
 
 | Issue | Supported | Partial | Open | Closure recommendation |
 | --- | ---: | ---: | ---: | --- |
-| [#1](#issue-1) | 8 | 13 | 0 | Keep open |
+| [#1](#issue-1) | 9 | 12 | 0 | Keep open |
 | [#2](#issue-2) | 5 | 3 | 0 | Keep open |
 | [#3](#issue-3) | 6 | 0 | 0 | Eligible in stated scope |
 | [#4](#issue-4) | 6 | 0 | 0 | Eligible in stated scope |
@@ -32,11 +32,11 @@ The #3 canonical admission-runtime replay is successful for its dedicated frozen
 | [#12](#issue-12) | 6 | 0 | 0 | Eligible in stated scope |
 | [#13](#issue-13) | 8 | 0 | 0 | Eligible in stated scope |
 | [#14](#issue-14) | 3 | 5 | 0 | Keep open |
-| [#15](#issue-15) | 7 | 1 | 0 | Keep open |
+| [#15](#issue-15) | 8 | 0 | 0 | Eligible in stated scope |
 | [#16](#issue-16) | 5 | 2 | 1 | Keep open |
-| [#17](#issue-17) | 5 | 3 | 0 | Keep open |
+| [#17](#issue-17) | 6 | 2 | 0 | Keep open |
 | [#18](#issue-18) | 8 | 0 | 0 | Eligible in stated scope |
-| **Total: 150** | **110** | **39** | **1** | No blanket closure |
+| **Total: 150** | **113** | **36** | **1** | No blanket closure |
 
 Eligibility is a local closure recommendation only when every original criterion is supported. It does not change GitHub state and does not extend a scoped empirical/theorem result to omitted architectures, data, costs, attacks or deployment behavior.
 
@@ -397,11 +397,11 @@ Each criterion links to one or more entries below. Public links resolve to sourc
 
 - [ ] #15 — [P2] Independently repeat a selected original-source task with explicit reproduction tiers
 
-**Status: partial.** Historical source disposition: `DEPENDENCY` ([E00](#e00)).
+**Status: supported.** Historical source disposition: `DEPENDENCY` ([E00](#e00)).
 
 **Evidence:** [E01](#e01) · [E19](#e19). This checklist entry inherits the full original #15 assessment, including the publication-dependent c7.
 
-**Remaining requirement / scope limit:** The selected adapted exp1 tiers and four-failure report are evidence-ready. All eight criteria can be supported only after actual repository publication is observed. Original training/game trajectories, provider origin and unknown failed-call usage remain outside scope.
+**Remaining requirement / scope limit:** All eight #15 criteria are supported within the selected adapted exp1 negative-result scope after observed publication. Original training/game trajectories, provider origin and unknown failed-call usage remain outside scope. This does not complete the other roadmap dependencies.
 
 #### #1 c14
 
@@ -421,7 +421,7 @@ Each criterion links to one or more entries below. Public links resolve to sourc
 
 **Evidence:** [E01](#e01) · [E21](#e21). This checklist entry inherits the full original #17 assessment after completed selection, offline controls, evaluator accounting and one replay.
 
-**Remaining requirement / scope limit:** Unseen held-out task families, independently trained lineages and complete hidden-work accounting remain absent. Live validity/behavior/retention remain unmeasured, all usage/cost amounts are unknown, and literal publication remains pending.
+**Remaining requirement / scope limit:** Unseen held-out task families, independently trained lineages and complete hidden-work accounting remain absent. Live validity/behavior/retention remain unmeasured and all usage/cost amounts are unknown. Publication now supports #17 c7, but c2/c3 remain partial, so this #1 dependency remains partial.
 
 #### #1 c16
 
@@ -1537,9 +1537,9 @@ Each criterion links to one or more entries below. Public links resolve to sourc
 <a id="issue-15"></a>
 ### #15 — [P2] Independently repeat a selected original-source task with explicit reproduction tiers
 
-**Issue-level gaps and limits:** The selected adapted exp1 tiers and four-failure report are evidence-ready, but literal c7 remains publication-dependent until the hosted commit is observed. Original training/game trajectories, complete import closure/provider origin and unknown failure usage/causes remain outside scope.
+**Issue-level gaps and limits:** The selected adapted exp1 tiers and four-failure report are published at the observed immutable commit. Original training/game trajectories, complete import closure/provider origin and unknown failure usage/causes remain outside scope.
 
-**Closure recommendation:** keep open until publication is observed; c7 remains partial.
+**Closure recommendation:** eligible for scoped negative-result closure; all eight original criteria are supported. Final-claim dependencies remain incomplete beyond this adapted attempt scope.
 
 #### #15 c0
 
@@ -1615,11 +1615,11 @@ Each criterion links to one or more entries below. Public links resolve to sourc
 
 - [ ] A failed or divergent repeat is published and does not alter historical recorded evidence.
 
-**Status: partial.** Historical source disposition: `E` ([E00](#e00)).
+**Status: supported.** Historical source disposition: `E` ([E00](#e00)).
 
-**Evidence:** [E18](#e18) · [E19](#e19). The retained report and sanitized verification records document all four failed live attempts, tier divergences, one passing saved replay/audit and preserved prelaunch blocks without changing historical evidence.
+**Evidence:** [E18](#e18) · [E19](#e19). The retained report and sanitized verification records document all four failed live attempts, tier divergences, one passing saved replay/audit and preserved prelaunch blocks without changing historical evidence. The [publication observation](../../artifacts/research/publication/2026-11-09/research-publication.sanitized.json) records the hosted source publication; the independently read public report and required evidence matched their reviewed byte identities.
 
-**Remaining requirement / scope limit:** The literal publication requirement is pending an observed hosted commit. This is an attempt outcome, not measured model capability accuracy. Unknown causes and usage remain unknown; earlier failed prelaunch records remain preserved.
+**Remaining requirement / scope limit:** The literal publication requirement is satisfied for the adapted negative attempt result. This is an attempt outcome, not measured model capability accuracy. Unknown causes and usage remain unknown; earlier failed prelaunch records remain preserved.
 
 <a id="issue-16"></a>
 ### #16 — [P2 research] Test symmetry-aware edit transfer before cross-architecture circuit grafting
@@ -1711,7 +1711,7 @@ Each criterion links to one or more entries below. Public links resolve to sourc
 <a id="issue-17"></a>
 ### #17 — [P2 research] Separate no-fitting construction and zero-data steering from fitted editing
 
-**Issue-level gaps and limits:** Selection, offline evaluation and replay completed with twelve provider failures and no live artifacts. Unseen task families, independently trained lineages and complete hidden-work accounting remain absent. Live artifact validity/behavior/retention are unmeasured and publication-dependent c7 is pending.
+**Issue-level gaps and limits:** Selection, offline evaluation and replay completed with twelve provider failures and no live artifacts. Unseen task families, independently trained lineages and complete hidden-work accounting remain absent. Live artifact validity/behavior/retention are unmeasured. Observed publication supports c7; c2/c3 remain partial.
 
 **Closure recommendation:** keep open; at least one original criterion is partial or open.
 
@@ -1789,11 +1789,11 @@ Each criterion links to one or more entries below. Public links resolve to sourc
 
 - [ ] Held-out behavior and complete attempts meet frozen criteria or yield a published negative result.
 
-**Status: partial.** Historical source disposition: `DEFER` ([E00](#e00)).
+**Status: supported.** Historical source disposition: `DEFER` ([E00](#e00)).
 
-**Evidence:** [E21](#e21). Complete attempts, twelve missing live candidates, zero pipeline successes, separate control outcomes and the one passing replay establish a documented, root-authenticated negative pipeline result. The report and seven sanitized verification files exist in the intended public checkout.
+**Evidence:** [E21](#e21). Complete attempts, twelve missing live candidates, zero pipeline successes, separate control outcomes and the one passing replay establish a documented, root-authenticated negative pipeline result. The report and required evidence matched their reviewed identities at the observed immutable public commit; the [publication observation](../../artifacts/research/publication/2026-11-09/research-publication.sanitized.json) records the separate hosted event and public-byte check.
 
-**Remaining requirement / scope limit:** The original criterion expressly requires a published result. Authenticated local copying is publication readiness, not repository publication. A separately observed hosted commit is still required; matching absent outcomes does not establish equivalence or zero live capability accuracy.
+**Remaining requirement / scope limit:** The original publication requirement is satisfied for the negative pipeline result. Independent unseen families, trained lineages and complete costs remain missing under c2/c3. Matching absent outcomes does not establish equivalence or zero live capability accuracy.
 
 <a id="issue-18"></a>
 ### #18 — [P2 gated research] Evaluate synthetic unlearning against extraction and recovery attacks

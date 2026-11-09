@@ -137,13 +137,20 @@ installed cached requirements and `--no-build-isolation`, followed by a
 separate core-only smoke installation with Torch absent. It is not the
 November 7 wheel, despite sharing version `0.2.0.dev4`.
 
-The November 9 repository review observed the existing repository as public at
-`main` commit `6a2f99815332b3497333636c509c9a31ed0db6e2`. That observation
-predates publication of these research updates, which remain pending at this
-guide revision. Publication, source-archive, confidentiality, and hosted
-receipts must separately bind the completed update tree and commit; the local
-checks do not supply those outcomes. No fresh hosted workflow success is
-claimed. The public npm attempt remains blocked by TLS, with no metadata or
+The first research publication completed on November 9, 2026 at 08:07:37 UTC
+(02:07:37 in America/Chicago). Public `main`, the fetched remote tracking branch,
+and the clean local checkout matched commit
+`bc32d57b4013fd6f3deaaa2ddc319fb9479726ae`, with tree
+`e28b14b593ae90d3cd2ed2b6b9a2e20a6beb7a78`. Its parent is the earlier observed
+public commit `6a2f99815332b3497333636c509c9a31ed0db6e2`.
+The [publication observation](artifacts/research/publication/2026-11-09/research-publication.sanitized.json)
+binds the exact indexed publication, selected source/privacy review, and the
+independent check of the reconciliation plan's evidence against immutable
+public bytes. These are publication and byte-identity observations; they do
+not expand the scientific or confidentiality review's stated scope. This guide
+update records that first publication rather than claiming its own future
+commit identity. No fresh hosted workflow success is claimed.
+The public npm attempt remains blocked by TLS, with no metadata or
 tarball verified. The package version remains `0.2.0.dev4`, and the draft.4
 release remains unpublished.
 
