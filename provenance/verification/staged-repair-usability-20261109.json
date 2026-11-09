@@ -1,0 +1,694 @@
+{
+  "assembly": {
+    "all_four_raw_source_snapshots_match_each_attempt_guarded_inventory": true,
+    "all_recorded_imported_sources_match_each_attempt_guarded_inventory": true,
+    "assembled_utc": "2026-11-09T19:52:06.500822+00:00",
+    "assembler_commitment": {
+      "bytes": 26121,
+      "name": "assemble_receipt.py",
+      "sha256": "9a633ecfa9759e819be39a7ad25ac398a51418ec7f932ee6a15f0428d2e402c2"
+    },
+    "evidence_source": "Saved evidence from the two recorded attempts only; standard-library JSON/XML parsing, source AST parsing, byte comparisons and SHA-256 hashing.",
+    "execution_limit": "No project imports, tests, studies, gates, providers, scoring, arrays, retention artifacts or cohort/receipt reconstructions were invoked by receipt assembly.",
+    "framework_format_pins": {
+      "rlcd/weight_space/artifact.py": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500",
+      "rlcd/weight_space/broker.py": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c",
+      "rlcd/weight_space/data_roles.py": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851",
+      "rlcd/weight_space/model.py": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af",
+      "rlcd/weight_space/program.py": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd",
+      "rlcd/weight_space/staged_cohort.py": "2501fc968878cd3894646745dd6ce5986f4ffc808e8e6bf5567ca5688cd36687",
+      "rlcd/weight_space/staged_diagnosis.py": "ff3449c6392d8fca2af2114ff36c3760a207eff5b7bd667f0939bdaf1ef74dd5",
+      "rlcd/weight_space/structured.py": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab",
+      "rlcd/weight_space/workflow.py": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+    },
+    "guarded_inventory_count_per_attempt": 69,
+    "imported_project_source_count_per_attempt": 19,
+    "later_changes": "Source commits and any later documentation, manifest, publication or integration changes occur after the captured local execution and are outside its result. The public receipt itself was assembled afterward.",
+    "nine_framework_format_pins_match_each_attempt_guarded_inventory": true,
+    "private_content_excluded": [
+      "workstation paths",
+      "hostname",
+      "process IDs",
+      "raw logs",
+      "raw JUnit XML",
+      "SQLite",
+      "study rows",
+      "credentials"
+    ],
+    "source_identity_limit": "Inventories hash on-disk files before and after each check; the import index records module paths and hashes their on-disk bytes at collection time. These records do not establish loaded-code identity, an absence of transient races, sandboxing or independent process tracing."
+  },
+  "attempts": [
+    {
+      "automatic_retry_performed": false,
+      "before_after_comparison": {
+        "after_captured_utc": "2026-11-09T19:41:01.259865+00:00",
+        "all_four_raw_source_snapshots_match_guarded_inventory": true,
+        "all_imported_sources_match_guarded_inventory": true,
+        "before_captured_utc": "2026-11-09T19:40:57.470134+00:00",
+        "nine_framework_format_pins_match_guarded_inventory": true,
+        "saved_diff_check_exit_code": 0,
+        "source_inventory_bytes_equal": true,
+        "source_inventory_equal": true,
+        "state_equal_excluding_capture_time_and_phase": true,
+        "tracked_diff_bytes_equal": true,
+        "tracked_diff_sha256": "51ce373cd5df1f0b7c9d0816a7bfe2684623f99743bedb30f9af261d44576ca6"
+      },
+      "captured_source_identities": [
+        {
+          "bytes": 21967,
+          "path": "tests/test_staged_diagnosis_selection.py",
+          "sha256": "2a56a6f613d88e65b28bb8921bc3b38f84a07aac3a13dec91ebb422c8a9ce8f5"
+        },
+        {
+          "bytes": 57455,
+          "path": "scripts/staged_diagnosis_selection.py",
+          "sha256": "8c336f18c0ae35f9a57b28223a718ee173c49f79e672c3dc261258ed3aab4a17"
+        },
+        {
+          "bytes": 1295,
+          "path": "pytest-engineering.ini",
+          "sha256": "d417cae6977081655172f7a2ac94b5c9d9f654bc797649294c99baf4cee47880"
+        },
+        {
+          "bytes": 1136,
+          "path": "pyproject.toml",
+          "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+        },
+        {
+          "bytes": 2483503,
+          "path": "provenance/source-files.json",
+          "sha256": "45169cd9aa2422e9ac7b624b0e4c15e364beb5a4a2e257ff43f15f6e1109e3f3"
+        },
+        {
+          "bytes": 47358,
+          "path": "docs/research/staged-diagnosis.md",
+          "sha256": "3c09514c45e40718a29271ecff393fe128c871fe6cc09edafd97bdea9e980f1a"
+        },
+        {
+          "bytes": 32783,
+          "path": "CHANGELOG.md",
+          "sha256": "8c4fda0cd0b718d91fbc8936ef051150c995d22e7382467d34fe56b24de2801f"
+        }
+      ],
+      "classification": "failed_fixture_expectation",
+      "completed_utc": "2026-11-09T19:41:02.9301610Z",
+      "deselected_tests": 1,
+      "execution_count": 1,
+      "execution_id": "staged-repair-usability-check-20261109",
+      "exit_code": 1,
+      "failure_scope": "The assertion at tests/test_staged_diagnosis_selection.py:214 expected outside_intended_support for a literal signed-zero edit after TensorArtifact capture had already canonicalized it. It failed before the genuine public cohort/receipt fixtures. This attempt does not establish their coverage.",
+      "guarded_inventory_count": 69,
+      "imported_project_source_count": 19,
+      "imported_sources": [
+        {
+          "bytes": 71,
+          "path": "rlcd/__init__.py",
+          "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+        },
+        {
+          "bytes": 2969,
+          "path": "rlcd/weight_space/__init__.py",
+          "sha256": "9d8cf6bd79b66b9946e50428af4b091f99f870bf68403126682f600b0715ea27"
+        },
+        {
+          "bytes": 7735,
+          "path": "rlcd/weight_space/artifact.py",
+          "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+        },
+        {
+          "bytes": 15038,
+          "path": "rlcd/weight_space/broker.py",
+          "sha256": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+        },
+        {
+          "bytes": 3928,
+          "path": "rlcd/weight_space/compiler.py",
+          "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+        },
+        {
+          "bytes": 43906,
+          "path": "rlcd/weight_space/contracts.py",
+          "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+        },
+        {
+          "bytes": 29559,
+          "path": "rlcd/weight_space/data_roles.py",
+          "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+        },
+        {
+          "bytes": 34083,
+          "path": "rlcd/weight_space/features.py",
+          "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+        },
+        {
+          "bytes": 9944,
+          "path": "rlcd/weight_space/model.py",
+          "sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+        },
+        {
+          "bytes": 6317,
+          "path": "rlcd/weight_space/program.py",
+          "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+        },
+        {
+          "bytes": 6727,
+          "path": "rlcd/weight_space/semantics.py",
+          "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+        },
+        {
+          "bytes": 9106,
+          "path": "rlcd/weight_space/sequential.py",
+          "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+        },
+        {
+          "bytes": 58359,
+          "path": "rlcd/weight_space/staged_cohort.py",
+          "sha256": "2501fc968878cd3894646745dd6ce5986f4ffc808e8e6bf5567ca5688cd36687"
+        },
+        {
+          "bytes": 28539,
+          "path": "rlcd/weight_space/staged_diagnosis.py",
+          "sha256": "ff3449c6392d8fca2af2114ff36c3760a207eff5b7bd667f0939bdaf1ef74dd5"
+        },
+        {
+          "bytes": 26202,
+          "path": "rlcd/weight_space/structured.py",
+          "sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+        },
+        {
+          "bytes": 6034,
+          "path": "rlcd/weight_space/symmetry.py",
+          "sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+        },
+        {
+          "bytes": 54271,
+          "path": "rlcd/weight_space/workflow.py",
+          "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+        },
+        {
+          "bytes": 57455,
+          "path": "scripts/staged_diagnosis_selection.py",
+          "sha256": "8c336f18c0ae35f9a57b28223a718ee173c49f79e672c3dc261258ed3aab4a17"
+        },
+        {
+          "bytes": 21967,
+          "path": "tests/test_staged_diagnosis_selection.py",
+          "sha256": "2a56a6f613d88e65b28bb8921bc3b38f84a07aac3a13dec91ebb422c8a9ce8f5"
+        }
+      ],
+      "junit_accounting": {
+        "duration_seconds": "0.969",
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "testcase_duration_seconds": "0.005",
+        "tests": 1
+      },
+      "raw_input_source_snapshots": [
+        {
+          "bytes": 21967,
+          "path": "tests/test_staged_diagnosis_selection.py",
+          "sha256": "2a56a6f613d88e65b28bb8921bc3b38f84a07aac3a13dec91ebb422c8a9ce8f5"
+        },
+        {
+          "bytes": 57455,
+          "path": "scripts/staged_diagnosis_selection.py",
+          "sha256": "8c336f18c0ae35f9a57b28223a718ee173c49f79e672c3dc261258ed3aab4a17"
+        },
+        {
+          "bytes": 2593,
+          "path": "scripts/audit_public_content.py",
+          "sha256": "b5d4bfed042eaeffd040657ea23ab60b95e0826d89a1de15bc26e278ae4e3b3d"
+        },
+        {
+          "bytes": 37714,
+          "path": "scripts/verify_publication.py",
+          "sha256": "e8658f9880310431dfc7ea9b7a57ac738f5615d73d6e8cbb2389b8afeda95f66"
+        }
+      ],
+      "recorded_pytest_result": "1 failed, 1 deselected in 1.05s",
+      "saved_checkout": {
+        "branch": "research/staged-repair-usability-20261109",
+        "head": "055d250cdf6f7634a87f7356c06087350a1fa221",
+        "status_lines": [
+          "M CHANGELOG.md",
+          " M docs/research/staged-diagnosis.md",
+          " M scripts/staged_diagnosis_selection.py",
+          " M tests/test_staged_diagnosis_selection.py"
+        ]
+      },
+      "saved_raw_artifact_commitments": [
+        {
+          "bytes": 1144,
+          "name": "execution-launch.json",
+          "sha256": "a36de044e39e1cc80cfe32fadcf57e70da1bf3cd49cdfe3b54890b6fcb45cde6"
+        },
+        {
+          "bytes": 212,
+          "name": "execution-result.json",
+          "sha256": "28f678a7a8d246b24cf014cb6b7a9bb82a385bf32c22d3395b464ce2186e6a9d"
+        },
+        {
+          "bytes": 466,
+          "name": "before-state.json",
+          "sha256": "1d80fd464d678c1ea2bb71786c88a66fd8c734cd25d01cf67d540d8958dfd2b0"
+        },
+        {
+          "bytes": 465,
+          "name": "after-state.json",
+          "sha256": "553ec6ae5926f37010a9139a6295a8de727a63c18bd1e57eac7ad22585e15902"
+        },
+        {
+          "bytes": 10907,
+          "name": "before-source-hashes.json",
+          "sha256": "13b58e58c994e33fdde2b876c11fa2904e19e5645cd45a086472811c29037530"
+        },
+        {
+          "bytes": 10907,
+          "name": "after-source-hashes.json",
+          "sha256": "13b58e58c994e33fdde2b876c11fa2904e19e5645cd45a086472811c29037530"
+        },
+        {
+          "bytes": 29141,
+          "name": "before-diff.patch",
+          "sha256": "51ce373cd5df1f0b7c9d0816a7bfe2684623f99743bedb30f9af261d44576ca6"
+        },
+        {
+          "bytes": 29141,
+          "name": "after-diff.patch",
+          "sha256": "51ce373cd5df1f0b7c9d0816a7bfe2684623f99743bedb30f9af261d44576ca6"
+        },
+        {
+          "bytes": 4862,
+          "name": "execution-source-index.json",
+          "sha256": "bb90a55d5f91643b6ab4cb53750329e0e8cf310d81a0e206edcd4058323c91da"
+        },
+        {
+          "bytes": 3936,
+          "name": "pytest.xml",
+          "sha256": "1a24523c1dfc4a96b311a3dd58ac8f21b7c3cbf33dc13339aa192dd929683bff"
+        },
+        {
+          "bytes": 3570,
+          "name": "stdout.log",
+          "sha256": "c714a355e352ef09d4478ff0a47827a0ab91fc5724b9b3b2e584c92e2ff6adbd"
+        },
+        {
+          "bytes": 0,
+          "name": "stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 0,
+          "name": "launcher.stdout.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 0,
+          "name": "launcher.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 3951,
+          "name": "run_check.py",
+          "sha256": "12882d9b742f786c87d9a0b502f222fdc47f91bdf5c7d66cade411d000776318"
+        },
+        {
+          "bytes": 2717,
+          "name": "launch_once.ps1",
+          "sha256": "91695e6b065dc3e5c624658ccccb278d42c5f12e1c0f8941faeb771ca819458d"
+        }
+      ],
+      "started_utc": "2026-11-09T19:40:56.1630342Z",
+      "timed_out": false
+    },
+    {
+      "automatic_retry_performed": false,
+      "before_after_comparison": {
+        "after_captured_utc": "2026-11-09T19:45:13.213359+00:00",
+        "all_four_raw_source_snapshots_match_guarded_inventory": true,
+        "all_imported_sources_match_guarded_inventory": true,
+        "before_captured_utc": "2026-11-09T19:45:01.287689+00:00",
+        "nine_framework_format_pins_match_guarded_inventory": true,
+        "saved_diff_check_exit_code": 0,
+        "source_inventory_bytes_equal": true,
+        "source_inventory_equal": true,
+        "state_equal_excluding_capture_time_and_phase": true,
+        "tracked_diff_bytes_equal": true,
+        "tracked_diff_sha256": "e356475269c557a51f31938784571ffba6aaf2b8b22813a00e889d1e902551d8"
+      },
+      "captured_source_identities": [
+        {
+          "bytes": 22512,
+          "path": "tests/test_staged_diagnosis_selection.py",
+          "sha256": "94364d4b605dd83136cd640394f7ae7bb125dc69a0c056c2e77486c1867c5640"
+        },
+        {
+          "bytes": 57455,
+          "path": "scripts/staged_diagnosis_selection.py",
+          "sha256": "8c336f18c0ae35f9a57b28223a718ee173c49f79e672c3dc261258ed3aab4a17"
+        },
+        {
+          "bytes": 1295,
+          "path": "pytest-engineering.ini",
+          "sha256": "d417cae6977081655172f7a2ac94b5c9d9f654bc797649294c99baf4cee47880"
+        },
+        {
+          "bytes": 1136,
+          "path": "pyproject.toml",
+          "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+        },
+        {
+          "bytes": 2483503,
+          "path": "provenance/source-files.json",
+          "sha256": "45169cd9aa2422e9ac7b624b0e4c15e364beb5a4a2e257ff43f15f6e1109e3f3"
+        },
+        {
+          "bytes": 47540,
+          "path": "docs/research/staged-diagnosis.md",
+          "sha256": "9fd76138fc281003e3275bda91bcb765722ac8ec3cdde35913d8f49688d64eea"
+        },
+        {
+          "bytes": 32936,
+          "path": "CHANGELOG.md",
+          "sha256": "7cf28f31c6290f8449d2208e36ef28e2b13e1efd4f5ea5459faa9e189c256f2d"
+        }
+      ],
+      "classification": "passed",
+      "completed_utc": "2026-11-09T19:45:15.2548986Z",
+      "deselected_tests": 1,
+      "execution_count": 1,
+      "execution_id": "staged-repair-usability-corrected-check-20261109",
+      "exit_code": 0,
+      "guarded_inventory_count": 69,
+      "imported_project_source_count": 19,
+      "imported_sources": [
+        {
+          "bytes": 71,
+          "path": "rlcd/__init__.py",
+          "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+        },
+        {
+          "bytes": 2969,
+          "path": "rlcd/weight_space/__init__.py",
+          "sha256": "9d8cf6bd79b66b9946e50428af4b091f99f870bf68403126682f600b0715ea27"
+        },
+        {
+          "bytes": 7735,
+          "path": "rlcd/weight_space/artifact.py",
+          "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+        },
+        {
+          "bytes": 15038,
+          "path": "rlcd/weight_space/broker.py",
+          "sha256": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+        },
+        {
+          "bytes": 3928,
+          "path": "rlcd/weight_space/compiler.py",
+          "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+        },
+        {
+          "bytes": 43906,
+          "path": "rlcd/weight_space/contracts.py",
+          "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+        },
+        {
+          "bytes": 29559,
+          "path": "rlcd/weight_space/data_roles.py",
+          "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+        },
+        {
+          "bytes": 34083,
+          "path": "rlcd/weight_space/features.py",
+          "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+        },
+        {
+          "bytes": 9944,
+          "path": "rlcd/weight_space/model.py",
+          "sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+        },
+        {
+          "bytes": 6317,
+          "path": "rlcd/weight_space/program.py",
+          "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+        },
+        {
+          "bytes": 6727,
+          "path": "rlcd/weight_space/semantics.py",
+          "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+        },
+        {
+          "bytes": 9106,
+          "path": "rlcd/weight_space/sequential.py",
+          "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+        },
+        {
+          "bytes": 58359,
+          "path": "rlcd/weight_space/staged_cohort.py",
+          "sha256": "2501fc968878cd3894646745dd6ce5986f4ffc808e8e6bf5567ca5688cd36687"
+        },
+        {
+          "bytes": 28539,
+          "path": "rlcd/weight_space/staged_diagnosis.py",
+          "sha256": "ff3449c6392d8fca2af2114ff36c3760a207eff5b7bd667f0939bdaf1ef74dd5"
+        },
+        {
+          "bytes": 26202,
+          "path": "rlcd/weight_space/structured.py",
+          "sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+        },
+        {
+          "bytes": 6034,
+          "path": "rlcd/weight_space/symmetry.py",
+          "sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+        },
+        {
+          "bytes": 54271,
+          "path": "rlcd/weight_space/workflow.py",
+          "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+        },
+        {
+          "bytes": 57455,
+          "path": "scripts/staged_diagnosis_selection.py",
+          "sha256": "8c336f18c0ae35f9a57b28223a718ee173c49f79e672c3dc261258ed3aab4a17"
+        },
+        {
+          "bytes": 22512,
+          "path": "tests/test_staged_diagnosis_selection.py",
+          "sha256": "94364d4b605dd83136cd640394f7ae7bb125dc69a0c056c2e77486c1867c5640"
+        }
+      ],
+      "junit_accounting": {
+        "duration_seconds": "8.936",
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "testcase_duration_seconds": "8.167",
+        "tests": 1
+      },
+      "raw_input_source_snapshots": [
+        {
+          "bytes": 22512,
+          "path": "tests/test_staged_diagnosis_selection.py",
+          "sha256": "94364d4b605dd83136cd640394f7ae7bb125dc69a0c056c2e77486c1867c5640"
+        },
+        {
+          "bytes": 57455,
+          "path": "scripts/staged_diagnosis_selection.py",
+          "sha256": "8c336f18c0ae35f9a57b28223a718ee173c49f79e672c3dc261258ed3aab4a17"
+        },
+        {
+          "bytes": 2593,
+          "path": "scripts/audit_public_content.py",
+          "sha256": "b5d4bfed042eaeffd040657ea23ab60b95e0826d89a1de15bc26e278ae4e3b3d"
+        },
+        {
+          "bytes": 37714,
+          "path": "scripts/verify_publication.py",
+          "sha256": "e8658f9880310431dfc7ea9b7a57ac738f5615d73d6e8cbb2389b8afeda95f66"
+        }
+      ],
+      "recorded_pytest_result": "1 passed, 1 deselected in 9.03s",
+      "saved_checkout": {
+        "branch": "research/staged-repair-usability-20261109",
+        "head": "055d250cdf6f7634a87f7356c06087350a1fa221",
+        "status_lines": [
+          "M CHANGELOG.md",
+          " M docs/research/staged-diagnosis.md",
+          " M scripts/staged_diagnosis_selection.py",
+          " M tests/test_staged_diagnosis_selection.py"
+        ]
+      },
+      "saved_raw_artifact_commitments": [
+        {
+          "bytes": 1174,
+          "name": "execution-launch.json",
+          "sha256": "1fdec975dc2f90068843b902688136c70ea4298cec4cf05f15f5a767888aae42"
+        },
+        {
+          "bytes": 212,
+          "name": "execution-result.json",
+          "sha256": "4182d54b4094b54bfee43992be90f490b1a3c63cf635ec9642085eeea9add47f"
+        },
+        {
+          "bytes": 466,
+          "name": "before-state.json",
+          "sha256": "db13055c0b90db10582d5ace3aea01f003ff2900fba49e61ef21535ebbf206b2"
+        },
+        {
+          "bytes": 465,
+          "name": "after-state.json",
+          "sha256": "9e669da35e0a5bb4a10033268972a7eb42883547a3e882e9191d75f2f5d4fdf2"
+        },
+        {
+          "bytes": 10907,
+          "name": "before-source-hashes.json",
+          "sha256": "77acadeef97afdaec7ed145ef1bbbc127754f212c56e04707695276a6f127da1"
+        },
+        {
+          "bytes": 10907,
+          "name": "after-source-hashes.json",
+          "sha256": "77acadeef97afdaec7ed145ef1bbbc127754f212c56e04707695276a6f127da1"
+        },
+        {
+          "bytes": 30034,
+          "name": "before-diff.patch",
+          "sha256": "e356475269c557a51f31938784571ffba6aaf2b8b22813a00e889d1e902551d8"
+        },
+        {
+          "bytes": 30034,
+          "name": "after-diff.patch",
+          "sha256": "e356475269c557a51f31938784571ffba6aaf2b8b22813a00e889d1e902551d8"
+        },
+        {
+          "bytes": 4862,
+          "name": "execution-source-index.json",
+          "sha256": "6adf832361fac3f30bf0bb98aa19b5f5d748cec4cc6362b4e5ee552cc496f200"
+        },
+        {
+          "bytes": 396,
+          "name": "pytest.xml",
+          "sha256": "e18d4c8e9719056ba250769eaf9280609c22ae412c209a5745a820161771dc3d"
+        },
+        {
+          "bytes": 114,
+          "name": "stdout.log",
+          "sha256": "34155f70e5594eb75c17515fce8c815f674f432dc4863534e57f5691391e777d"
+        },
+        {
+          "bytes": 0,
+          "name": "stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 0,
+          "name": "launcher.stdout.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 0,
+          "name": "launcher.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 3951,
+          "name": "run_check.py",
+          "sha256": "12882d9b742f786c87d9a0b502f222fdc47f91bdf5c7d66cade411d000776318"
+        },
+        {
+          "bytes": 2717,
+          "name": "launch_once.ps1",
+          "sha256": "91695e6b065dc3e5c624658ccccb278d42c5f12e1c0f8941faeb771ca819458d"
+        }
+      ],
+      "started_utc": "2026-11-09T19:45:00.8597090Z",
+      "timed_out": false
+    }
+  ],
+  "automatic_retry_performed": false,
+  "causal_usefulness_established": false,
+  "control_matching_established": false,
+  "correction": {
+    "cause": "The first test expected a signed-zero input edit outside the intended support to survive TensorArtifact capture. TensorArtifact.from_dict canonicalizes zero values, so the retained endpoint was identical to the usable endpoint before the structural helper received it.",
+    "change": "The test now checks signed-zero canonicalization separately for an ordinary bias, ordinary weight and reserved weight row 8. Actual nonzero changes outside the intended support remain rejection cases. Documentation and changelog now limit native byte preservation to retained canonical artifacts.",
+    "changed_guarded_paths_between_attempts": [
+      "CHANGELOG.md",
+      "docs/research/staged-diagnosis.md",
+      "tests/test_staged_diagnosis_selection.py"
+    ],
+    "corrected_execution_was_explicit_followup_after_source_correction": true,
+    "framework_source_count_compared": 32,
+    "framework_unchanged_between_attempts": true,
+    "helper_unchanged_between_attempts": true,
+    "original_checkpoint_signed_zero_preservation_established": false,
+    "runner_and_launcher_unchanged_between_attempts": true
+  },
+  "covered_behaviors": {
+    "basis": "The following coverage describes assertions in the saved source of the corrected passing test. It does not reconstruct cohort receipts or publish study rows.",
+    "distinction": "Altered literal endpoints test the private numerical helper only; they are not admitted selections. The public cases use genuine live cohort phases and receipts with an empty registered-batch registry.",
+    "genuine_public_cohort_and_receipt_cases": [
+      "Public cohort preparation, diagnosis, repair, genuine receipts and native lowering produce ordinary deltas -2 and +2 at rows 0 and 7, rounded realized deltas +4 and -4 from 33554436, and a native no-op from 33554432.",
+      "A genuine repair seal denial retains an attempted Candidate and a stranded endpoint while the repair receipt has no selected candidate; the report marks that roster member unavailable.",
+      "Diagnosis abstention and genuine preparation callback unavailability remain in the full roster with null selected and numerical fields.",
+      "The report contains four usable, one unusable and three unavailable members in roster order; selected Candidate SHA and artifact SHA remain distinct and bound to the admitted parent and receipt identities.",
+      "Report schema, admission digest, own body digest and run/registry/evaluator/roster/protocol identities are checked; a returned report is a fresh finite JSON copy; admission evidence and evidence files remain unchanged.",
+      "Changing a retained endpoint permanently invalidates the owner even after restoration; changing the repair barrier during the helper call is caught by final admission and remains rejected after restoration."
+    ],
+    "literal_private_helper_cases": [
+      "A valid intended native bias delta; invalid row types/range and unknown diagnosis direction; no-op and wrong-direction rejection.",
+      "Nonzero changes to ordinary/reserved bias and weight coordinates outside the intended support are rejected; unsupported norm is null.",
+      "Signed-zero inputs in ordinary bias/weight and reserved weight row 8 canonicalize to the same retained artifact and remain usable.",
+      "Architecture, metadata, tensor-name and shape mismatches are rejected; non-native float32 and float32-overflow values are rejected with null numerical fields."
+    ]
+  },
+  "execution_count_total": 2,
+  "execution_policy": {
+    "execution_accounting_limit": "Each saved launcher record reports one invocation and no automatic retry; these records are not independent operating-system process tracing.",
+    "full_test_module_execution_performed": false,
+    "offline_environment_flags_recorded": [
+      "HF_HUB_OFFLINE",
+      "TRANSFORMERS_OFFLINE",
+      "HF_DATASETS_OFFLINE",
+      "WANDB_MODE"
+    ],
+    "prior_selection_admission_test_deselected_in_both_attempts": true,
+    "pytest_addopts_override": "",
+    "pytest_arguments_sanitized": [
+      "-c",
+      "pytest-engineering.ini",
+      "-o",
+      "addopts=",
+      "-p",
+      "no:cacheprovider",
+      "--noconftest",
+      "-q",
+      "--basetemp",
+      "<private-temporary-directory>",
+      "--junitxml",
+      "<private-junit-path>",
+      "tests/test_staged_diagnosis_selection.py",
+      "-k",
+      "staged_repair_usability_native_structure_and_live_binding"
+    ],
+    "pytest_automatic_plugins_disabled": true,
+    "pytest_cache_provider_disabled": true,
+    "pytest_configuration": "pytest-engineering.ini",
+    "pytest_conftest_loading_disabled": true,
+    "python_flags": [
+      "-B",
+      "-s"
+    ],
+    "python_version": "3.12.10",
+    "temporary_paths_private": true,
+    "timeout_seconds_per_execution": 600
+  },
+  "final_study_seal": false,
+  "interpretation_limit": "The corrected pass covers captured engineering source and the stated literal/public-cohort fixtures. Structural support and native-byte comparisons apply to retained canonical TensorArtifacts, not original checkpoint signed-zero bits. This result does not establish scientific success, trained ancestry, causal usefulness, control matching, final study sealing or enterprise impact. Offline flags are configuration records, not a network sandbox guarantee.",
+  "registered_batches_used": false,
+  "research_evaluation_performed": false,
+  "schema": "wsp-local-engineering-verification/1",
+  "scope": "Two focused local engineering executions of the structural repair-usability check: one failed literal expectation and one explicitly authorized corrected execution.",
+  "test_node": "tests/test_staged_diagnosis_selection.py::test_staged_repair_usability_native_structure_and_live_binding",
+  "trained_ancestry_established": false
+}
