@@ -7,6 +7,15 @@ research draft.
 
 ## Unreleased
 
+- Require complete, nonnegative exact-integer input/output token usage before
+  provider completion and common broker action admission. Serializable rejected
+  usage and event identity are retained in failed receipts; missing counts are
+  never defaulted to zero. Non-finite JSON receipt serialization remains limited.
+  The [prospective boundary note](docs/research/live-studies.md) and
+  [sanitized execution receipt](provenance/verification/provider-usage-admission-20261109.json)
+  keep historical unknown usage and costs explicit, with Issue #5 c2 and #8 c6
+  still partial.
+
 - Added a cooperative [registered session evidence verifier](docs/research/evaluation-data-roles.md#registered-session-evidence-verifier-supplement-november-9-2026)
   over a caller-owned registry, exact selected artifact and trusted expected
   binding, attempt, manifest and result identities. It reads only the durable

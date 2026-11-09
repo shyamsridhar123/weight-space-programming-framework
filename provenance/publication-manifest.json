@@ -578,8 +578,8 @@
   },
   "verification_archive": {
     "path": "provenance/verification/index.json",
-    "bytes": 143811,
-    "sha256": "0df27f33e9aa46d3f831c0755ebdc5d848903198053455a595745d4aba5f4c2a"
+    "bytes": 145075,
+    "sha256": "350fcd96274d9c2284e993df92487e6e3695e4fdaaec550e85648661d3790ef9"
   },
   "public_npm_lock_review": {
     "path": "provenance/public-npm-lock.json",
@@ -1140,5 +1140,107 @@
     "current_source_inventory_matches_captured_bytes": true,
     "publication_scope": "Current file identities identify later publication bytes; the saved synthetic test covers its captured source snapshot only. Historical documentation inventories and prior receipts retain their original scope.",
     "raw_artifact_commitments_preserved": true
+  },
+  "provider_usage_admission_update_20261109": {
+    "review_date": "2026-11-09",
+    "integration_base_main_commit": "b041deed6f6703ceedafde32d9a487a69ab9ee20",
+    "verification": {
+      "path": "provenance/verification/provider-usage-admission-20261109.json",
+      "bytes": 13883,
+      "sha256": "48c0bffefbafd765cdebb598b452a303a736e4f08dd0d97a139c3e3d6de57440"
+    },
+    "current_files": [
+      {
+        "path": "rlcd/weight_space/live_provider.py",
+        "bytes": 18782,
+        "sha256": "c4723b35471916d677f020a1e51964918ee1a062b22fd25f3514a51d93cc5ac5"
+      },
+      {
+        "path": "tests/test_research_broker.py",
+        "bytes": 14986,
+        "sha256": "6304cdcbc1394d96ac3149e44745cd635844a9f2d9a6d91b083d74f42235f067"
+      },
+      {
+        "path": "docs/research/live-studies.md",
+        "bytes": 29911,
+        "sha256": "192a7025a16356b1068e89537f06439b5230136752f67b2cfe7e738dbc239e8b"
+      },
+      {
+        "path": "docs/research/issue-acceptance-status.md",
+        "bytes": 149581,
+        "sha256": "de5f21cf83ff1b99e5607df78ff60b5e2a5f4418079ec532a482e5f9a4f07618"
+      },
+      {
+        "path": "CHANGELOG.md",
+        "bytes": 23318,
+        "sha256": "3edbb2ae7bccdd4cee342b1985e961427b136c9a7c77fd3ec20629e31c6f442a"
+      }
+    ],
+    "scope": "One fresh offline synthetic engineering test of provider token-usage admission",
+    "recorded_execution_status": "passed",
+    "execution_completed_utc": "2026-11-09T14:51:18.7897881Z",
+    "test_node": "tests/test_research_broker.py::test_provider_usage_is_complete_before_broker_actions",
+    "tested_source_base_commit": "dd3248dbbd6974c561758d6ad5e803f54dcd47ee",
+    "tested_changes_were_uncommitted": true,
+    "captured_source_before_after_equal": true,
+    "receipt_added_after_execution": true,
+    "earlier_interpreter_startup_failure_preserved": true,
+    "original_comparison_flags_and_correction_preserved": true,
+    "later_integration_verified_by_recorded_test": false,
+    "issue5_c2_status": "partial",
+    "issue8_c6_status": "partial",
+    "issues_kept_open": true,
+    "historical_outcomes_superseded": false,
+    "publication_bookkeeping_reran_test": false,
+    "new_scientific_study": false,
+    "new_provider_calls": 0,
+    "hosted_success_inferred": false,
+    "historical_inventory_changed": false,
+    "provider_and_regression_bytes_match_captured_execution": true,
+    "current_source_inventory_matches_captured_bytes": false,
+    "captured_inventory_differences_after_integration": [
+      {
+        "path": "rlcd/weight_space/workflow.py",
+        "captured": {
+          "path": "rlcd/weight_space/workflow.py",
+          "sha256": "1483c10339919a3c5e117c8ef3e2ee6848221a5fa13deda8356c313ac1a424f2",
+          "bytes": 44385
+        },
+        "current": {
+          "path": "rlcd/weight_space/workflow.py",
+          "bytes": 54271,
+          "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+        }
+      },
+      {
+        "path": "docs/research/live-studies.md",
+        "captured": {
+          "path": "docs/research/live-studies.md",
+          "sha256": "a66ea5d602464aaf698f5e5720198f141666771b72cc587cb222364ef1786fbd",
+          "bytes": 29656
+        },
+        "current": {
+          "path": "docs/research/live-studies.md",
+          "bytes": 29911,
+          "sha256": "192a7025a16356b1068e89537f06439b5230136752f67b2cfe7e738dbc239e8b"
+        }
+      },
+      {
+        "path": "CHANGELOG.md",
+        "captured": {
+          "path": "CHANGELOG.md",
+          "sha256": "4340096446292ab1fb81ce5ad10bd9858733e90ab7b61767dbe8ecdb4701201b",
+          "bytes": 22384
+        },
+        "current": {
+          "path": "CHANGELOG.md",
+          "bytes": 23318,
+          "sha256": "3edbb2ae7bccdd4cee342b1985e961427b136c9a7c77fd3ec20629e31c6f442a"
+        }
+      }
+    ],
+    "publication_scope": "Current file identities identify later integration and publication bytes. The local pass covers only the saved uncommitted source snapshot; the merged verifier changed workflow.py afterward. Earlier publication records remain historical snapshots.",
+    "raw_artifact_commitments_preserved": true,
+    "source_index_sha256": "45169cd9aa2422e9ac7b624b0e4c15e364beb5a4a2e257ff43f15f6e1109e3f3"
   }
 }

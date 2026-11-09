@@ -800,6 +800,8 @@ See the [verifier supplement](evaluation-data-roles.md#registered-session-eviden
 
 **Remaining requirement / scope limit:** Actual deployment revision and monetary charges are unknown; 90 failed attempts have unknown usage. Hash linkage is not independent provider-origin attestation, and no finite usage/cost upper bound is available.
 
+**Later prospective engineering evidence:** The [provider-usage admission receipt](../../provenance/verification/provider-usage-admission-20261109.json) records one passing offline regression for complete nonnegative integer counters before completion or broker actions. It preserves the earlier interpreter startup failure and subsequent bookkeeping correction separately. This prevents new missing counters from defaulting to zero; it does not recover historical usage, establish provider provenance or change this partial status. Non-finite numeric JSON receipt serialization remains limited.
+
 #### #5 c3
 
 - [ ] Add leak/adversarial cases for hidden exact-parent extraction, private evaluator access, unauthorized network/files, reconstructed forward calls through allowed tools, and off-ledger attempts.
@@ -1090,6 +1092,8 @@ See the [verifier supplement](evaluation-data-roles.md#registered-session-eviden
 **Evidence:** [E09](#e09) · [E10](#e10). Public-safe requests, responses or explicit failure/null records, source linkage and deterministic outcome replay exist. All 224 payloads match with zero mismatches.
 
 **Remaining requirement / scope limit:** Usage is unknown for 90 failures, so the literal usage requirement is incomplete. Replays are verification only, not independent live editors; no finite total usage/cost upper bound is inferred.
+
+**Later prospective engineering evidence:** The [same offline usage-admission receipt](../../provenance/verification/provider-usage-admission-20261109.json) covers a new guard against incomplete input/output counters. Its fake transport and synthetic completed receipts are engineering fixtures, not independent live editors. Historical unknown usage and this partial status remain unchanged.
 
 #### #8 c7
 
