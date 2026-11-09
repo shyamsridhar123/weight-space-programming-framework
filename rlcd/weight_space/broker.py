@@ -72,19 +72,9 @@ class ProposerBroker:
             raise ValueError("Use an immutable WeightView")
         if any(type(n) is not int or n <= 0 for n in (max_requests, max_request_bytes)):
             raise ValueError("Broker request bounds must be positive integers")
-        if base is not None:
-            for tensor, index in view.coordinates:
-                a = base.tensors.get(tensor)
-                if a is None or len(index) != a.ndim or any(i >= s for i, s in zip(index, a.shape)):
-                    raise ValueError("Declared subset is outside the parent")
-        elif view.mode != "none":
-            raise ValueError("Creation has no parent parameter view")
+        native_dtypes_copy = self._validate_parent(base, view, native_dtypes)
         self._base, self._view = base, view
-        self._native_dtypes = dict(native_dtypes) if native_dtypes is not None else None
-        # Validate baseline representability once; proposal success cannot expose it.
-        if base is not None and native_dtypes is not None:
-            lower_structured(base, StructuredProgram(base.sha256, [], "Validate baseline"),
-                             native_dtypes=native_dtypes, cast="round")
+        self._native_dtypes = native_dtypes_copy
         self._session = ProgrammerSession(task, base=base,
             access=AccessPolicy(weights=view.mode != "none",
                 weight_decimals=view.decimals if view.mode == "rounded" else None),
@@ -98,6 +88,26 @@ class ProposerBroker:
         self._sealed = False
         self._selected: str | None = None
         self._evaluated = False
+
+    @staticmethod
+    def _validate_parent(base: Network | TensorArtifact | None, view: WeightView,
+                         native_dtypes: dict[str, str] | None) -> dict[str, str] | None:
+        """Check parent/view/native configuration without creating a broker or session."""
+        if type(view) is not WeightView:
+            raise ValueError("Use an immutable WeightView")
+        if base is not None:
+            for tensor, index in view.coordinates:
+                a = base.tensors.get(tensor)
+                if a is None or len(index) != a.ndim or any(i >= s for i, s in zip(index, a.shape)):
+                    raise ValueError("Declared subset is outside the parent")
+        elif view.mode != "none":
+            raise ValueError("Creation has no parent parameter view")
+        captured = dict(native_dtypes) if native_dtypes is not None else None
+        # Validate baseline representability; proposal success cannot expose it.
+        if base is not None and native_dtypes is not None:
+            lower_structured(base, StructuredProgram(base.sha256, [], "Validate baseline"),
+                             native_dtypes=native_dtypes, cast="round")
+        return captured
 
     @property
     def is_sealed(self) -> bool:

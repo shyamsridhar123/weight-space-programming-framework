@@ -22,7 +22,7 @@ from .broker import ProposerBroker, WeightView
 from .data_roles import DataRoleRegistry, RegisteredBatch
 from .model import canonical_bytes, digest, finite_binary64
 from .workflow import (Artifact, BudgetLimits, Candidate, ProgrammerSession,
-                       TaskSpec, WorkflowError, _architecture, _json, verify_trace)
+                       TaskSpec, WorkflowError, _architecture, _hash, _json, verify_trace)
 
 
 class StagedDiagnosisRepair:
@@ -47,16 +47,29 @@ class StagedDiagnosisRepair:
     def __init__(self, run_dir: str | Path, *, task_id: str, objective: str,
                  base: Artifact, registry: DataRoleRegistry,
                  view: WeightView = WeightView(), limits: BudgetLimits | None = None,
-                 native_dtypes: dict[str, str] | None = None):
-        if type(registry) is not DataRoleRegistry or type(view) is not WeightView:
-            raise ValueError("Use a trusted DataRoleRegistry and immutable WeightView")
-        limits = BudgetLimits(proposals=1) if limits is None else limits
-        if type(limits) is not BudgetLimits:
-            raise ValueError("Use immutable BudgetLimits")
-        architecture = _architecture(base)
-        TaskSpec(task_id, "diagnose", objective, architecture, base.sha256)
+                 native_dtypes: dict[str, str] | None = None,
+                 _owner: object | None = None,
+                 _cohort_binding: dict[str, Any] | None = None):
+        architecture, limits, native_dtypes = self._configuration(
+            task_id, objective, base, registry, view, limits, native_dtypes)
+        cohort_binding = _json(_cohort_binding)
+        if _owner is None:
+            if cohort_binding is not None:
+                raise ValueError("Cohort identity requires a trusted owner")
+        else:
+            if (type(cohort_binding) is not dict or set(cohort_binding) != {
+                    "cohort_protocol_sha256", "cohort_roster_sha256",
+                    "cohort_member_index", "cohort_member_id"}
+                    or type(cohort_binding["cohort_member_index"]) is not int
+                    or cohort_binding["cohort_member_index"] < 0
+                    or type(cohort_binding["cohort_member_id"]) is not str
+                    or not cohort_binding["cohort_member_id"].strip()):
+                raise ValueError("Owned lanes require an exact frozen cohort/member identity")
+            for key in ("cohort_protocol_sha256", "cohort_roster_sha256"):
+                _hash(cohort_binding[key], key)
         self._base, self._registry, self._view, self._limits = base, registry, view, limits
-        self._native_dtypes = _json(native_dtypes) if native_dtypes is not None else None
+        self._owner = _owner
+        self._native_dtypes = native_dtypes
         self._directory = Path(run_dir).resolve()
         self._directory.mkdir(parents=True, exist_ok=False)
         # ponytail: one lock serializes this single run; parallelize separate runs.
@@ -71,6 +84,7 @@ class StagedDiagnosisRepair:
             "parent_sha256": base.sha256, "registry_id": registry.registry_id,
             "parameter_view": view.to_dict(), "limits": limits.to_dict(),
             "native_dtypes": self._native_dtypes,
+            **({"cohort_binding": cohort_binding} if _owner is not None else {}),
             "diagnosis_fields": ["location", "mechanism", "predicted_effect", "confidence", "uncertainty", "abstain"],
             "repair_fields": ["commands", "intent"],
             "selection_rule": "sealed_durable_diagnosis_before_separate_repair_session",
@@ -85,6 +99,26 @@ class StagedDiagnosisRepair:
                                       "selection_rule": "diagnosis_only"})
         self._tasks = {"diagnosis": task}
         self._brokers = {"diagnosis": self._broker(task, {"stage": "diagnosis"})}
+
+    @staticmethod
+    def _configuration(task_id: str, objective: str, base: Artifact,
+                       registry: DataRoleRegistry, view: WeightView,
+                       limits: BudgetLimits | None,
+                       native_dtypes: dict[str, str] | None
+                       ) -> tuple[str, BudgetLimits, dict[str, str] | None]:
+        """Validate supplied configuration before exclusive directory/broker setup."""
+        if type(registry) is not DataRoleRegistry or type(view) is not WeightView:
+            raise ValueError("Use a trusted DataRoleRegistry and immutable WeightView")
+        limits = BudgetLimits(proposals=1) if limits is None else limits
+        if type(limits) is not BudgetLimits:
+            raise ValueError("Use immutable BudgetLimits")
+        architecture = _architecture(base)
+        TaskSpec(task_id, "diagnose", objective, architecture, base.sha256)
+        native_dtypes = _json(native_dtypes)
+        if native_dtypes is not None and type(native_dtypes) is not dict:
+            raise ValueError("Native dtypes must be a finite JSON object or None")
+        ProposerBroker._validate_parent(base, view, native_dtypes)
+        return architecture, limits, native_dtypes
 
     def _broker(self, task: TaskSpec, context: dict[str, Any]) -> ProposerBroker:
         return ProposerBroker(task, base=self._base, view=self._view, limits=self._limits,
@@ -209,8 +243,17 @@ class StagedDiagnosisRepair:
             raise admission_error
         return result
 
+    def _require_owner(self, owner: object | None) -> None:
+        if self._owner is not owner or self._invalidated:
+            raise WorkflowError("Selection requires the active trusted owner")
+
     def select_diagnosis(self, selector: Callable[[Callable[..., Any]], Any]) -> dict[str, Any]:
+        return self._select_diagnosis(selector, None)
+
+    def _select_diagnosis(self, selector: Callable[[Callable[..., Any]], Any],
+                          owner: object | None) -> dict[str, Any]:
         with self._lock:
+            self._require_owner(owner)
             if self._started["diagnosis"] or not callable(selector):
                 raise WorkflowError("Diagnosis selection is available once")
             self._started["diagnosis"] = True
@@ -230,7 +273,13 @@ class StagedDiagnosisRepair:
                                 outcome="abstained" if answer["abstain"] else "selected")
 
     def select_repair(self, selector: Callable[[dict[str, Any], Callable[..., Any]], Any]) -> dict[str, Any]:
+        return self._select_repair(selector, None)
+
+    def _select_repair(self, selector: Callable[[dict[str, Any], Callable[..., Any]], Any],
+                       owner: object | None,
+                       cohort_binding: dict[str, Any] | None = None) -> dict[str, Any]:
         with self._lock:
+            self._require_owner(owner)
             if self._started["repair"] or not callable(selector):
                 raise WorkflowError("Repair selection is available once")
             diagnosis = self._verify("diagnosis")
@@ -247,6 +296,18 @@ class StagedDiagnosisRepair:
                            "diagnosis_session_sha256": diagnosis["session_sha256"],
                            "diagnosis_seal_sha256": diagnosis["trace_head_sha256"],
                            "selection_rule": "separate_repair_after_verified_durable_diagnosis"}
+                if self._owner is not None:
+                    extra = _json(cohort_binding)
+                    identity = json.loads(self._protocol)["cohort_binding"]
+                    evidence = {"cohort_diagnosis_barrier_sha256", "cohort_preparation_receipt_sha256",
+                                "cohort_diagnosis_disposition_sha256"}
+                    if (type(extra) is not dict or set(extra) != set(identity) | evidence
+                            or any(extra[key] != value for key, value in identity.items())
+                            or set(extra).intersection(binding)):
+                        raise WorkflowError("Owned repair requires separate cohort bindings")
+                    for key in evidence:
+                        _hash(extra[key], key)
+                    binding.update(extra)
                 task = TaskSpec(self._tasks["diagnosis"].task_id + "/repair", "edit",
                                 self._tasks["diagnosis"].objective, _architecture(self._base),
                                 self._base.sha256, binding)
@@ -277,6 +338,8 @@ class StagedDiagnosisRepair:
                             evaluator: Callable[[dict[str, Any], Candidate, list[Any]], Any], *,
                             evaluator_id: str, split_name: str = "test") -> dict[str, Any]:
         with self._lock:
+            if self._owner is not None:
+                raise WorkflowError("Cohort-owned lane evaluation is unavailable")
             if self._started["evaluation"]:
                 raise WorkflowError("Evaluation was already attempted")
             diagnosis, repair = self._verify("diagnosis"), self._verify("repair")
