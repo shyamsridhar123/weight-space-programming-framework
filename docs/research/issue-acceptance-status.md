@@ -812,6 +812,8 @@ Historical records and criterion statuses are unchanged.
 
 **Later finite-JSON supplement, November 9, 2026:** The serialization limitation above applies to the earlier usage-admission snapshot. The [finite-JSON engineering receipt](../../provenance/verification/provider-finite-json-20261109.json) records prospective rejection of non-finite decoded events and final responses before receipt hashing. Saved event commitments remain separate from rejected parsed content. This does not recover historical usage, expose charges or deployment revision, establish provider provenance, or validate arbitrary third-party broker receipts. #5 c2 and #8 c6 remain partial.
 
+**Later event-type supplement, November 9, 2026:** The [event-type engineering receipt](../../provenance/verification/provider-event-type-20261109.json) records prospective rejection of present nonstring event types with failed-attempt/trial accounting and broker abstention. Missing types and unknown string types retain their prior behavior. This mocked-transport regression supplies no live-study evidence and does not broaden earlier receipts' captured source scope or resolve historical usage, charges, deployment revision or provider-origin attestation. #5 c2 and #8 c6 remain partial.
+
 #### #5 c3
 
 - [ ] Add leak/adversarial cases for hidden exact-parent extraction, private evaluator access, unauthorized network/files, reconstructed forward calls through allowed tools, and off-ledger attempts.

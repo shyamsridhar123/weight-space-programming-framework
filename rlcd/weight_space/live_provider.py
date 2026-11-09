@@ -105,6 +105,8 @@ def parse_events(output: str) -> tuple[Any, dict[str, Any], list[str], list[str]
             if type(event) is not dict:
                 raise ValueError("Event must be an object")
             canonical_bytes(event)
+            if not isinstance(event.get("type", ""), str):
+                raise ValueError("Event type must be a string")
             item = event.get("item")
             if isinstance(item, dict) and event.get("type", "").startswith("item."):
                 kind = item.get("type", "unknown")

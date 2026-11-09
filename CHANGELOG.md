@@ -7,6 +7,15 @@ research draft.
 
 ## Unreleased
 
+- Reject a present nonstring provider event `type` through the existing
+  parse-failure path, preserving failed-attempt/trial accounting, saved event
+  commitments and broker abstention. Missing types and unknown string types
+  retain their prior behavior. The
+  [scoped engineering receipt](provenance/verification/provider-event-type-20261109.json)
+  records the mocked-transport regression. Earlier receipts retain their
+  captured source scope. Historical unknown usage/costs and provider-attestation
+  limits remain unchanged; Issue #5 c2 and #8 c6 remain partial.
+
 - Reject non-finite decoded provider events and final responses before receipt
   hashing, using the existing canonical serializer and parse-failure paths.
   The [scoped offline engineering receipt](provenance/verification/provider-finite-json-20261109.json)
