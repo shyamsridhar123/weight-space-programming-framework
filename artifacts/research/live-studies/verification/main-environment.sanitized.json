@@ -1,0 +1,194 @@
+{
+  "schema": "wsp-public-main-environment-derivative/1",
+  "created_utc": "2026-11-09T04:46:52.962320+00:00",
+  "sources": [
+    {
+      "role": "preparation_lock",
+      "bytes": 417186,
+      "raw_sha256": "357637e9bb363ce0e27ef4dba584a3a89586cf56707ed29f52b674d7e4e1f6c8",
+      "repository_relative_path": "experiments/research/live-studies/preparation-lock.json",
+      "canonical_json_sha256": "ec16e067f59ef942b32880aa7c46aeaacbf14b2928a0ddef1511ff31870191dc",
+      "source_schema": "wsp-live-preparation-lock/1",
+      "canonical_payload_sha256": "fb465aeac240f769c7d2a5765321e332adae6d4d2edc1a49697587c349c14bbf"
+    },
+    {
+      "role": "evaluation_start",
+      "bytes": 628600,
+      "raw_sha256": "ac3a9a4102248ec427c1e7431da7fb3d00c09375512fe021e1ffd9d0c7307c5c",
+      "repository_relative_path": "artifacts/research/live-studies/evaluation/evaluation-started.json",
+      "canonical_json_sha256": "22c722e2f7c58a1197b88502cbe91c22197ff60d60be6d905cf2b4d11ae182dd",
+      "source_schema": "wsp-live-evaluation-started/1",
+      "canonical_payload_sha256": "79bf2542dc350542d0e4570abb4f162f380ec6625e651b543de0fc4bb06cdba4"
+    },
+    {
+      "role": "replay_start",
+      "bytes": 628599,
+      "raw_sha256": "460253bd0ee1ed823e820945a5705b9f0b75aca60ca56e69dd19d772bc44b09d",
+      "repository_relative_path": "artifacts/research/live-studies/replay/evaluation-started.json",
+      "canonical_json_sha256": "efd8d9e0dc2ada148388b9fd833f9c66ae7878ccb0b025568bc875b590cdef4e",
+      "source_schema": "wsp-live-evaluation-started/1",
+      "canonical_payload_sha256": "4e3f74f4e9ccf67916d6df7b796d2d2b73abc98648aed7ce002fa72dd62b53de"
+    },
+    {
+      "role": "original_main_comparison_receipt",
+      "bytes": 1619,
+      "raw_sha256": "fee908f943713c93becda4c718bb3c9b552f2abc3c6b64110f92a1c86ca8180e",
+      "canonical_json_sha256": "5c6269c9d00a67613db38d255988b8ab535c63ab58e8133862afcf931acfb383",
+      "source_schema": "wsp-independent-live-replay-comparison/1"
+    },
+    {
+      "role": "original_main_replay_launch_receipt",
+      "bytes": 1410,
+      "raw_sha256": "42a1d23e87164f7c03823a1606bfc6c6156d86d8c80233b0f6cd00f9792b3392",
+      "canonical_json_sha256": "cec9e5e9bdc84541fa835a97b701f7342f75de895e7bd747713955aae60baaaf",
+      "source_schema": "wsp-private-independent-live-replay-control/1"
+    },
+    {
+      "role": "original_main_comparison_start_receipt",
+      "bytes": 2452,
+      "raw_sha256": "6f3fa133a05e874b41078ad195ae3e7116667fd95e97ca4eef8221301b24eaae",
+      "canonical_json_sha256": "ae41254fc98a91f2d00ab649fa56c6fca3d472c3a6ee28851df7591b7923c489",
+      "source_schema": "wsp-private-independent-live-comparison-start/1"
+    }
+  ],
+  "sanitizer": {
+    "id": "wsp-main-verification-whitelist/1",
+    "method": "explicit field whitelist plus documented role and path rewrites",
+    "copied_fields": [
+      "comparison.matching_runtime",
+      "evaluation_start.runtime",
+      "preparation_lock.runtime",
+      "replay_start.runtime"
+    ],
+    "omitted_fields": [
+      "all other source fields except safe command flags and role rewrites"
+    ],
+    "rewrites": [
+      {
+        "source": "captured launcher command locators",
+        "destination": "recorded_launcher_roles",
+        "operation": "replace with source/runtime/repository roles and released relative path"
+      }
+    ],
+    "note": "Only the six recorded runtime fields are copied. Canonical runtime identity and agreement across saved metadata are derived from those fields. No packages, environment variables or interpreter binaries are inspected; study code is not imported or executed.",
+    "raw_evidence_modified": false,
+    "raw_transport_copied": false,
+    "active_comparison_or_evaluation_executed": false
+  },
+  "recorded_runtime": {
+    "python": "3.12.10",
+    "numpy": "2.5.3",
+    "torch": "2.8.0+cpu",
+    "device": "cpu",
+    "torch_threads": 1,
+    "deterministic_algorithms": true
+  },
+  "recorded_runtime_canonical_sha256": "2e1ccfc98d0294c3152b5e1260ed143038d73244be3fbaca48ccbc43ff6bedde",
+  "recorded_runtime_bindings": [
+    {
+      "source_role": "preparation_lock",
+      "source_field": "runtime",
+      "runtime_canonical_sha256": "2e1ccfc98d0294c3152b5e1260ed143038d73244be3fbaca48ccbc43ff6bedde"
+    },
+    {
+      "source_role": "evaluation_start",
+      "source_field": "runtime",
+      "runtime_canonical_sha256": "2e1ccfc98d0294c3152b5e1260ed143038d73244be3fbaca48ccbc43ff6bedde"
+    },
+    {
+      "source_role": "replay_start",
+      "source_field": "runtime",
+      "runtime_canonical_sha256": "2e1ccfc98d0294c3152b5e1260ed143038d73244be3fbaca48ccbc43ff6bedde"
+    },
+    {
+      "source_role": "original_main_comparison_receipt",
+      "source_field": "matching_runtime",
+      "runtime_canonical_sha256": "2e1ccfc98d0294c3152b5e1260ed143038d73244be3fbaca48ccbc43ff6bedde"
+    }
+  ],
+  "same_runtime_declared_in_saved_metadata": true,
+  "recorded_launcher_roles": {
+    "replay": [
+      {
+        "index": 0,
+        "kind": "runtime_role",
+        "value": "captured_python_interpreter"
+      },
+      {
+        "index": 1,
+        "kind": "literal",
+        "value": "-B"
+      },
+      {
+        "index": 2,
+        "kind": "literal",
+        "value": "-u"
+      },
+      {
+        "index": 3,
+        "kind": "repository_relative_path",
+        "value": "experiments/research/live-studies/source-snapshot/scripts/run_live_studies.py"
+      },
+      {
+        "index": 4,
+        "kind": "literal",
+        "value": "replay"
+      },
+      {
+        "index": 5,
+        "kind": "literal",
+        "value": "--repo"
+      },
+      {
+        "index": 6,
+        "kind": "directory_role",
+        "value": "repository_root"
+      },
+      {
+        "index": 7,
+        "kind": "literal",
+        "value": "--expected-gate-sha256"
+      },
+      {
+        "index": 8,
+        "kind": "literal",
+        "value": "601897dc212592ae76cb2eed4b56e120de6ed9d66fa292b7e42ba5b924a13d0f"
+      }
+    ],
+    "comparison": [
+      {
+        "index": 0,
+        "kind": "runtime_role",
+        "value": "captured_python_interpreter"
+      },
+      {
+        "index": 1,
+        "kind": "literal",
+        "value": "-B"
+      },
+      {
+        "index": 2,
+        "kind": "literal",
+        "value": "-u"
+      },
+      {
+        "index": 3,
+        "kind": "artifact_role",
+        "value": "original_main_comparator"
+      }
+    ]
+  },
+  "not_recorded_by_these_sources": [
+    "interpreter_binary_sha256",
+    "operating_system_release",
+    "complete_package_lock",
+    "environment_variable_values"
+  ],
+  "portable_comparator_requirements": {
+    "python_minimum": "3.11",
+    "third_party_dependencies": [],
+    "requires_recorded_numerical_packages": false
+  },
+  "scope": "Whitelisted runtime declarations from saved evidence. Equality here concerns the recorded metadata. This derivative does not attest a complete execution environment or hidden provider runtime, and no evaluator or comparator was executed to create it.",
+  "sha256": "abe57288f0610be7bb07ed7499b7baa530621fb8903654cbb82fb70c6513baf8"
+}

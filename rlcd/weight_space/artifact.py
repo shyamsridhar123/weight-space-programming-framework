@@ -131,6 +131,18 @@ class StructuralPolicy:
                 or self.max_parameter_abs < 0 or self.max_change_abs < 0):
             raise ValueError("Invalid structural admission policy")
 
+    def to_dict(self) -> dict[str, Any]:
+        return {"writable": list(self.writable), "max_edits": self.max_edits,
+                "max_parameter_abs": self.max_parameter_abs, "max_change_abs": self.max_change_abs}
+
+    @classmethod
+    def from_dict(cls, value: dict[str, Any]) -> StructuralPolicy:
+        if (not isinstance(value, dict) or set(value) != {
+                "writable", "max_edits", "max_parameter_abs", "max_change_abs"}
+                or not isinstance(value["writable"], list)):
+            raise ValueError("Unknown structural-policy fields or representation")
+        return cls(**value)
+
     def check(self, base: WeightArtifact, program: Any) -> dict[str, Any]:
         from fractions import Fraction
         from .program import apply_program
@@ -148,7 +160,6 @@ class StructuralPolicy:
         payload = {"schema": "wsp-structural-admission/1", "structural_accepted": not issues,
                    "issues": issues, "program_sha256": program.sha256,
                    "candidate_sha256": candidate.sha256,
-                   "policy": {"writable": list(self.writable), "max_edits": self.max_edits,
-                              "max_parameter_abs": self.max_parameter_abs, "max_change_abs": self.max_change_abs},
+                   "policy": self.to_dict(),
                    "behavioral_status": "not_checked", "formal_certificate": None}
         return payload | {"sha256": digest(payload)}

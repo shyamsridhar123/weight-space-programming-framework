@@ -1,0 +1,94 @@
+{
+  "cases": [
+    {
+      "case_id": "ownership/8",
+      "desired_code": 10,
+      "desired_queue": 10,
+      "selection": "fixed before pilot; no official test opened",
+      "target_label": 8,
+      "target_name": "8",
+      "type": "ownership"
+    },
+    {
+      "case_id": "recognition/4",
+      "confused_with": "6",
+      "desired_code": 4,
+      "desired_queue": 4,
+      "pilot_development_confusion_events": 4,
+      "pilot_development_error_rates": [
+        0.02631578947368421,
+        0.05263157894736842,
+        0.02631578947368421
+      ],
+      "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+      "target_label": 4,
+      "target_name": "4",
+      "type": "recognition"
+    }
+  ],
+  "discovery": {
+    "cross_queue_confusions": [
+      {
+        "events": 4,
+        "predicted": 6,
+        "truth": 4
+      },
+      {
+        "events": 3,
+        "predicted": 4,
+        "truth": 0
+      },
+      {
+        "events": 3,
+        "predicted": 1,
+        "truth": 6
+      },
+      {
+        "events": 3,
+        "predicted": 9,
+        "truth": 3
+      },
+      {
+        "events": 3,
+        "predicted": 1,
+        "truth": 8
+      },
+      {
+        "events": 3,
+        "predicted": 3,
+        "truth": 2
+      },
+      {
+        "events": 2,
+        "predicted": 2,
+        "truth": 5
+      },
+      {
+        "events": 2,
+        "predicted": 8,
+        "truth": 2
+      },
+      {
+        "events": 2,
+        "predicted": 3,
+        "truth": 5
+      },
+      {
+        "events": 1,
+        "predicted": 7,
+        "truth": 9
+      },
+      {
+        "events": 1,
+        "predicted": 2,
+        "truth": 7
+      },
+      {
+        "events": 1,
+        "predicted": 5,
+        "truth": 9
+      }
+    ]
+  },
+  "official_test_opened": false
+}

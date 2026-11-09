@@ -1,0 +1,7 @@
+# Original released-task source archive
+
+This archive retains all 44 selected experiment 1 assets from `RikiyaT/lm_understand-logs` at commit `4d09ba6d6a7e891dd8063974dfe81b3d78e3494f`. The accompanying author report, **Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights**, is by Rikiya Takehi, Jayden Teoh, Alex Zhang, and Omar Khattab. The [source review](../../../docs/weight-space/v2/source-review.md) attributes the report and identifies its scope. The [acquisition record](acquisition.json) supplies public source URLs, exact byte counts, SHA-256 hashes, and Git blob identities for the retained assets.
+
+The upstream [LICENSE](source/LICENSE) assigns these experiment 1 logs, data, and networks to Creative Commons Attribution 4.0 International (CC BY 4.0) and provides its legal-code link. Upstream ownership and notices remain in force. The archive preserves the acquired asset bytes without modification. The separate MIT clause for upstream-authored scripts and GPL-3.0 clause for MinAtar code embedded in experiment 5 do not assign those licenses to the experiment 1 logs, data, or networks.
+
+The [framework conversion notice](../../../docs/research/original-source-inputs-NOTICE.md) identifies adaptations of the released actors. The fresh live-task receipts and local replay records describe this project's adapted repetition; they do not establish an independent rerun of original training or original game trajectories. This project does not imply endorsement by the source authors.

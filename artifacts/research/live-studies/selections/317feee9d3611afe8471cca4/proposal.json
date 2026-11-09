@@ -1,0 +1,20 @@
+{
+  "base_sha256": "47e7bbaa608033d7fa54d30d37767f23a694e1a97b72f893df2062e95b652173",
+  "commands": [
+    {
+      "block": [
+        [
+          46,
+          47
+        ]
+      ],
+      "op": "add",
+      "tensor": "head.bias",
+      "values": [
+        -6.0
+      ]
+    }
+  ],
+  "intent": "Row 46 (pending_transfer) has bias 6.012 while ordinary intent biases cluster near zero, strongly suggesting an additive bias shift. Subtracting 6 preserves its apparent residual bias of 0.012. Gain and harm estimates are approximate without execution or representative evaluation data.",
+  "schema": "wsp-structured-program/1"
+}

@@ -1,0 +1,48 @@
+{
+  "architecture": "trained-frozen-readout/1",
+  "base_sha256": "92789a63dffa3daee3c7d629ab65d36104f312eb9435667680ae8a6c6e42fdd4",
+  "constraints": {
+    "arm": "nullspace",
+    "behavioral_admission": "frozen finite calibration samples; no whole-domain guarantee",
+    "case": {
+      "case_id": "recognition/atm_support",
+      "confused_with": "visa_or_mastercard",
+      "desired_code": 36,
+      "desired_queue": 1,
+      "pilot_development_confusion_events": 7,
+      "pilot_development_error_rates": [
+        0.25,
+        0.125,
+        0.5
+      ],
+      "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+      "target_label": 36,
+      "target_name": "atm_support",
+      "type": "recognition"
+    },
+    "configuration": {},
+    "margins": {
+      "maximum_protected_harm": 0.01,
+      "minimum_target_gain": 0.1,
+      "minimum_useful_coverage": 0.75
+    },
+    "nullspace_additional_contract": "exact real-score equality on stored anchors",
+    "numeric_lane": "native Torch CPU float32 readout",
+    "protected_feature_sha256": "e2655f0cbfbd2f38cf5312631cffb14b7dc2fad7d86887d3c12f5d6cf8737a27",
+    "protocol_sha256": "41179db4fe54abc187c6255526c4705ff67a8d69236e0f3a798a647a94154ded",
+    "structural_policy": {
+      "max_change_abs": 256.0,
+      "max_edits": 5070,
+      "max_parameter_abs": 256.0,
+      "writable": [
+        "head.weight",
+        "head.bias"
+      ]
+    },
+    "target_feature_sha256": "b17f0182e1a03579c925be654191c91202fecb3c58baead48408b340648c82b8"
+  },
+  "mode": "edit",
+  "objective": "Change the derived routing decision for a frozen trained representation",
+  "schema": "wsp-task/1",
+  "task_id": "banking77-main-full-7004/recognition/atm_support/nullspace"
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "wsp-dataset-provenance/1",
+  "review_date_local": "2026-11-08",
+  "study": "trained-nontext",
+  "publication_boundary": "Only sanitized source identities, attribution, learned model parameters, derived learned features, role identifiers/labels and outcome records are published. Raw image/count observation records, acquisition HTML and incidental contact metadata are not redistributed.",
+  "framework_license": "MIT applies to framework code; it does not replace the source dataset license.",
+  "datasets": [
+    {
+      "id": "UCI Optical Recognition of Handwritten Digits",
+      "uci_id": 80,
+      "citation": "Alpaydin, E. and Kaynak, C. (1998), Optical Recognition of Handwritten Digits, UCI Machine Learning Repository, DOI:10.24432/C50P49",
+      "dataset_doi": "10.24432/C50P49",
+      "source_page_url": "https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "preserved_license_relative_path": "../../../docs/research/dataset-licenses/CC-BY-4.0.txt",
+      "preserved_license_note": "Standard CC BY 4.0 legal text is shared with the trained-support notice. UCI license designation is independently recorded below; the PolyAI dataset is not the source of the optical-digits observations.",
+      "license_designation_provenance": {
+        "review_date_local": "2026-11-08",
+        "official_page_sha256": "891f996da7c22b59fd71e2e14fbaa94ec2d955b724f3acf79a7df993ae6d7b33",
+        "official_page_bytes": 131722,
+        "verified_label": "CC BY 4.0",
+        "verified_link": "https://creativecommons.org/licenses/by/4.0/",
+        "acquisition_html_published": false
+      },
+      "package": {
+        "url": "https://archive.ics.uci.edu/static/public/80/optical+recognition+of+handwritten+digits.zip",
+        "bytes": 591292,
+        "sha256": "0d7b054fea010270e9b3f06411c654c5e59547732ad626381980baffe0a23fb0",
+        "acquisition_copy_published": false
+      },
+      "source_files": [
+        {
+          "path_in_package": "optdigits.tra",
+          "rows": 3823,
+          "bytes": 563639,
+          "sha256": "e1b683cc211604fe8fd8c4417e6a69f31380e0c61d4af22e93cc21e9257ffedd",
+          "raw_observations_published": false
+        },
+        {
+          "path_in_package": "optdigits.tes",
+          "rows": 1797,
+          "bytes": 264712,
+          "sha256": "6ebb3d2fee246a4e99363262ddf8a00a3c41bee6014c373ed9d9216ba7f651b8",
+          "raw_observations_published": false
+        }
+      ],
+      "official_train_writers": 30,
+      "official_test_writers": 13,
+      "internal_row_writer_ids_available": false,
+      "uses": "From-scratch encoder/head training on grouped roles from official train; official distinct-writer test opened only after the global seal. Counts are divided by the declared scale 16. Digit-8 diversion to manual review is a project-derived policy, not a UCI label.",
+      "semantic_adapter": "64 row-major 8x8 block counts scaled by 16; independently trained 32-unit affine/ReLU feature extractor; 10 original class codes plus a reserved manual-review output."
+    }
+  ]
+}

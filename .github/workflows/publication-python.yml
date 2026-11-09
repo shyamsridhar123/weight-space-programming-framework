@@ -23,6 +23,7 @@ jobs:
     env:
       RUN_ROOT: .runs/ci-python-${{ github.run_id }}-${{ github.run_attempt }}
       PYTHONDONTWRITEBYTECODE: "1"
+      PYTEST_DISABLE_PLUGIN_AUTOLOAD: "1"
       PIP_DISABLE_PIP_VERSION_CHECK: "1"
     steps:
       - name: Preserve checked-out file bytes
@@ -62,8 +63,8 @@ jobs:
           PY
           python -m pip freeze --all > "$RUN_ROOT/python-packages.txt"
 
-      - name: Run the standalone Python suite
-        run: python -m pytest -q --basetemp "$RUN_ROOT/pytest-tmp" --junitxml="$RUN_ROOT/pytest.xml"
+      - name: Run the engineering Python suite
+        run: python -m pytest -q -c pytest-engineering.ini --basetemp "$RUN_ROOT/pytest-tmp" --junitxml="$RUN_ROOT/pytest.xml"
 
       - name: Build the wheel
         run: python -m build --wheel --outdir "$RUN_ROOT/wheel"

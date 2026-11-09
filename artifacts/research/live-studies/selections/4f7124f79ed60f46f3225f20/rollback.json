@@ -1,0 +1,15 @@
+{
+  "schema": "wsp-program/1",
+  "base_sha256": "dedb58d204096eda7ebea25991603d0846b32d556a6f05ca01631c43f3139e8f",
+  "intent": "Rollback: Row 19 (wrong_amount_of_cash_received, queue 1) has an anomalous bias of 6.013; ordinary biases cluster near zero. A +6 bias shift plausibly overrides pending_transfer and protected routes. Subtracting 6 restores approximately 0.013. Gains are estimates without execution or representative protected coverage.",
+  "edits": [
+    {
+      "tensor": "head.bias",
+      "index": [
+        19
+      ],
+      "before": 0.012831687927246094,
+      "after": 6.012831687927246
+    }
+  ]
+}

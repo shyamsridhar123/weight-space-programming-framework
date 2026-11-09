@@ -1,0 +1,20 @@
+{
+  "base_sha256": "219d51808037a8c02ecb9aaf2cc68f6e6163f3a803c4bac9f885591656074b68",
+  "commands": [
+    {
+      "block": [
+        [
+          38,
+          39
+        ]
+      ],
+      "op": "add",
+      "tensor": "head.bias",
+      "values": [
+        -6.0
+      ]
+    }
+  ],
+  "intent": "Row 38 (passcode_forgotten) has bias 6.04 while ordinary intent biases are near zero, strongly suggesting an additive +6 shift. Subtracting 6 should reduce erroneous routing to queue 3. Gain and harm are uncertain estimates without execution or representative evaluation.",
+  "schema": "wsp-structured-program/1"
+}

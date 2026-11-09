@@ -1,0 +1,47 @@
+{
+  "attempts": 1,
+  "bookkeeping_delta": "Count completed derivative admissions, retain per-load identity assertions, redirect frozen successful replay receipt to posthoc-normalized-interface-replay.json.",
+  "cap_authorization_history": [
+    {
+      "invocation_started": false,
+      "timeout_seconds": 300
+    },
+    {
+      "invocation_started": false,
+      "reason": "Parent raised cap before launch to cover recorded 1299.8s selection cost; same single derivative invocation",
+      "timeout_seconds": 1800
+    }
+  ],
+  "completed_derivative_admissions": 1,
+  "derivative_success_receipt_present": false,
+  "exit_code": 1,
+  "external_log": {
+    "bytes": 814,
+    "name": "posthoc-normalized-interface-verification.log",
+    "sha256": "ea0981a771f998e2cfe27cc8cde38e3bf36768949e6381c46e771cf0c7d0c344"
+  },
+  "finished_at_utc": "2026-11-09T04:56:50.910715+00:00",
+  "frozen_source_sha256": "118c741586369582e8bab39325c95f1d2fd7251544b8551ba30f4a9fb8d71564",
+  "native_replay_verified": false,
+  "normalization_delta": "Frozen load_model result -> Network with identical tensor arrays; input_names=tuple(map(str,model.input_names)); output_names likewise.",
+  "normalized_model_loads": 4,
+  "original_evidence_sha256": {
+    "evaluation.json": "8a452a4a8ce3d61bd1203096d1985be8e7664c561f4359c8a58f93713cd3acf0",
+    "global-selection-seal.json": "4641b45692eeb61f4564c6f1de5458e8bf408ec0aa07b9a2c2541dcb38276bae",
+    "independent-replay-failure.json": "fa9198aa51febfabbd610d0a46600cca7a14176d2c323092266a3469258d351b"
+  },
+  "original_evidence_unchanged": true,
+  "original_interface_tuple_source": "experiments/research/trained-symmetry-pilot/source-freeze/scripts/run_trained_symmetry_pilot.py:84",
+  "original_loader_source": "experiments/research/trained-symmetry-pilot/source-freeze/scripts/run_trained_symmetry_pilot.py:81",
+  "pass": false,
+  "progress_sha256": "22018b52d4812c9990e91b7b7c34f99ba9916c3a97e0fab685ef8894ea376638",
+  "retries": 0,
+  "schema": "wsp-trained-symmetry-pilot-normalized-name-verification/1",
+  "scope": "One separately authorized post-hoc normalized-interface verification. No retraining, reselection, threshold/metric/numeric changes, provider calls, or frozen source writes.",
+  "started_at_utc": "2026-11-09T04:56:24.049917+00:00",
+  "status": "failed",
+  "timeout_seconds": 1800,
+  "unmodified_frozen_replay": false,
+  "verification_gap": "Unmodified frozen native replay remains failed; a timeout or failed derivative does not establish full independent admission/metric replay.",
+  "wrapper_source_sha256": "7978d979c09e2d7ce2051fcb3f9c8b20ef60c5a02dc9cd1bbbf8688eb67c3840"
+}

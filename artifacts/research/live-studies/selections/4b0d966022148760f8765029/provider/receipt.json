@@ -1,0 +1,99 @@
+{
+  "schema": "wsp-live-provider-attempt/1",
+  "started_utc": "2026-11-09T03:49:26.120993+00:00",
+  "status": "completed",
+  "error": null,
+  "returncode": 0,
+  "timeout_cleanup_complete": null,
+  "elapsed_seconds": 7.144468599988613,
+  "invocation": {
+    "executable_sha256": "2692c8c7bb2cf8b0aefe638741fc90236f4b824c59578ce84994f9de58200993",
+    "cli_version": "codex-cli 0.163.0",
+    "configuration": {
+      "schema": "wsp-codex-provider-config/1",
+      "provider": "openai",
+      "requested_model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "tool_free": true,
+      "user_config_loaded": false,
+      "ephemeral": true,
+      "timeout_seconds": 180,
+      "configuration_overrides": {
+        "plugins._default.enabled": "false",
+        "mcp_servers": "{}",
+        "web_search": "\"disabled\"",
+        "features.shell_tool": "false",
+        "features.unified_exec": "false",
+        "features.apps": "false",
+        "features.multi_agent": "false",
+        "features.multi_agent_mode": "false",
+        "features.code_mode": "false",
+        "features.js_repl": "false",
+        "features.tool_search": "false",
+        "features.skill_search": "false",
+        "features.skip_host_skill_discovery": "true",
+        "features.view_image": "false",
+        "features.image_generation": "false",
+        "features.hooks": "false",
+        "features.browser_use": "false",
+        "features.in_app_browser": "false",
+        "features.memories": "false",
+        "features.search_tool": "false",
+        "features.stable_environment_tools": "false",
+        "features.incremental_tools": "false",
+        "features.request_permissions_tool": "false",
+        "tools.update_plan.enabled": "false",
+        "project_doc_max_bytes": "0"
+      },
+      "sandbox": "read-only",
+      "deployment_revision_exposed": false,
+      "internal_model_computation_observed": false,
+      "human_assistance": "task_and_harness_authored_before_trial;_no_midtrial_help"
+    },
+    "prompt_sha256": "7a2fe008ebd00d0df932dc369c7ff4e0a4bf732c8fd69ca6b32c3dddd50fb5b4",
+    "schema_sha256": "2e1eb63f2d4f9588432ddd2a5c0018eb6a2bf1e54b0cb0f7e7014078522e2b69",
+    "cwd_role": "isolated_proposer_directory",
+    "local_invocation_sha256": "b95ff10481df2efbaad1913a4031c6657c88b0b9c89d9c300b121e63e592875a"
+  },
+  "response": {
+    "abstain": true,
+    "commands_json": "[]",
+    "selected_fitted_handle": null,
+    "reason": "The parameter view supplies no head weights or biases, so the original argmax codes, competing codes, and a policy-preserving head edit cannot be determined from the features alone.",
+    "predicted_argmax_codes": [
+      -1,
+      -1
+    ],
+    "prediction_confidences": [
+      0,
+      0
+    ],
+    "strongest_competing_codes": [
+      -1,
+      -1
+    ],
+    "competing_confidences": [
+      0,
+      0
+    ]
+  },
+  "usage": {
+    "input_tokens": 20644,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 129,
+    "reasoning_output_tokens": 20
+  },
+  "unapproved_events": [],
+  "event_errors": [],
+  "diagnostic_items": 1,
+  "events_sha256": "5b0b4b5168b61061a75d3e7169233781536ea2785b9372c443251118911fb903",
+  "cost": {
+    "currency": "USD",
+    "amount": null,
+    "reason": "authenticated_CLI_subscription_not_request_pricing"
+  },
+  "prompt_scope": "exact_harness_prompt;_CLI_system_scaffolding_not_exported",
+  "restrictions_scope": "configured_CLI_tools_and_observed_events;_not_OS_hermeticity",
+  "sha256": "163392c458c34316339a48334624f978004b56b0a446fa9fcde512edd2faf399"
+}

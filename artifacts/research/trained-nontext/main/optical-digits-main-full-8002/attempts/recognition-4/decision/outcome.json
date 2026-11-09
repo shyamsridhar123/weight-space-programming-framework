@@ -1,0 +1,422 @@
+{
+  "abstained": true,
+  "abstention_reasons": [
+    "calibration-target-gain",
+    "calibration-protected-harm"
+  ],
+  "admitted": false,
+  "arm": "decision",
+  "assigned": true,
+  "candidate_artifact_sha256": "cbd66b91d9eb0a97095faaeb02d1e5f615d2fad7341aeddc612f2dd6f30cf09a",
+  "case": {
+    "case_id": "recognition/4",
+    "confused_with": "6",
+    "desired_code": 4,
+    "desired_queue": 4,
+    "pilot_development_confusion_events": 4,
+    "pilot_development_error_rates": [
+      0.02631578947368421,
+      0.05263157894736842,
+      0.02631578947368421
+    ],
+    "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+    "target_label": 4,
+    "target_name": "4",
+    "type": "recognition"
+  },
+  "cost": {
+    "binary64_head_evaluation_seconds": 0.0007941999938338995,
+    "exact_application_rollback_verification_seconds": 0.04160210001282394,
+    "fit_seconds_all_options": 0.3191042999387719,
+    "fit_selection_materialization_seconds": 0.3604905999964103,
+    "heldout_export_seconds": 0.01258490001782775,
+    "heldout_workflow_seconds": 0.06552990002091974,
+    "native_head_evaluation_seconds": 0.001499100006185472,
+    "storage_bytes_pre_outcome": 120137
+  },
+  "evaluation_missing": false,
+  "evaluation_receipt_sha256": "87ffd28ac7f48d8f6cf16a73771f912da63dd2cbfff4a47d99602510094c81d2",
+  "evaluation_receipt_status": "abstained",
+  "external_intervention": false,
+  "global_seal_sha256": "fe44410470ec26c2b02a698d74626422fe02ae96321b1be57a56623b7f7a44fd",
+  "lineage_id": "optical-digits-main-full-8002",
+  "no_op_artifact": false,
+  "predictions_sha256": "ce19acb31aceadaadbdb9231674632b00b7203eaad969bdac9a3d09a597e0ec7",
+  "protocol_sha256": "c3a5d1a5c17a0961c787afe47e0b58d015d4864d1ef43cb7d1c5a28612563e7b",
+  "result": {
+    "all_assigned_policy": "Rejected/failed/abstaining candidate deploys unchanged parent, joint success false",
+    "candidate_diagnostic_only": {
+      "admitted": false,
+      "primary_novel": {
+        "parent_protected_error": 0.053836633663366336,
+        "parent_target_accuracy": 0.9668508287292817,
+        "per_label": [
+          {
+            "label": 0,
+            "parent_queue_accuracy": 0.9775280898876404,
+            "queue_accuracy": 0.9719101123595506,
+            "queue_flips": 1,
+            "rows": 178
+          },
+          {
+            "label": 1,
+            "parent_queue_accuracy": 0.8956043956043956,
+            "queue_accuracy": 0.8791208791208791,
+            "queue_flips": 3,
+            "rows": 182
+          },
+          {
+            "label": 2,
+            "parent_queue_accuracy": 0.9661016949152542,
+            "queue_accuracy": 0.9661016949152542,
+            "queue_flips": 1,
+            "rows": 177
+          },
+          {
+            "label": 3,
+            "parent_queue_accuracy": 0.9398907103825137,
+            "queue_accuracy": 0.9398907103825137,
+            "queue_flips": 0,
+            "rows": 183
+          },
+          {
+            "label": 4,
+            "parent_queue_accuracy": 0.9668508287292817,
+            "queue_accuracy": 0.9834254143646409,
+            "queue_flips": 3,
+            "rows": 181
+          },
+          {
+            "label": 5,
+            "parent_queue_accuracy": 0.9835164835164835,
+            "queue_accuracy": 0.9835164835164835,
+            "queue_flips": 0,
+            "rows": 182
+          },
+          {
+            "label": 6,
+            "parent_queue_accuracy": 0.9779005524861878,
+            "queue_accuracy": 0.9502762430939227,
+            "queue_flips": 6,
+            "rows": 181
+          },
+          {
+            "label": 7,
+            "parent_queue_accuracy": 0.9050279329608939,
+            "queue_accuracy": 0.888268156424581,
+            "queue_flips": 3,
+            "rows": 179
+          },
+          {
+            "label": 8,
+            "parent_queue_accuracy": 0.8908045977011494,
+            "queue_accuracy": 0.8850574712643678,
+            "queue_flips": 2,
+            "rows": 174
+          },
+          {
+            "label": 9,
+            "parent_queue_accuracy": 0.9777777777777777,
+            "queue_accuracy": 0.9555555555555556,
+            "queue_flips": 4,
+            "rows": 180
+          }
+        ],
+        "protected_decision_flip_rate": 0.012376237623762377,
+        "protected_error": 0.06435643564356436,
+        "protected_harm": 0.01051980198019802,
+        "protected_rows": 1616,
+        "target_accuracy": 0.9834254143646409,
+        "target_gain": 0.016574585635359115,
+        "target_rows": 181
+      },
+      "scope": "Sealed candidate diagnostic; rejected outcomes cannot be used for reselection",
+      "secondary_official": {
+        "parent_protected_error": 0.053836633663366336,
+        "parent_target_accuracy": 0.9668508287292817,
+        "per_label": [
+          {
+            "label": 0,
+            "parent_queue_accuracy": 0.9775280898876404,
+            "queue_accuracy": 0.9719101123595506,
+            "queue_flips": 1,
+            "rows": 178
+          },
+          {
+            "label": 1,
+            "parent_queue_accuracy": 0.8956043956043956,
+            "queue_accuracy": 0.8791208791208791,
+            "queue_flips": 3,
+            "rows": 182
+          },
+          {
+            "label": 2,
+            "parent_queue_accuracy": 0.9661016949152542,
+            "queue_accuracy": 0.9661016949152542,
+            "queue_flips": 1,
+            "rows": 177
+          },
+          {
+            "label": 3,
+            "parent_queue_accuracy": 0.9398907103825137,
+            "queue_accuracy": 0.9398907103825137,
+            "queue_flips": 0,
+            "rows": 183
+          },
+          {
+            "label": 4,
+            "parent_queue_accuracy": 0.9668508287292817,
+            "queue_accuracy": 0.9834254143646409,
+            "queue_flips": 3,
+            "rows": 181
+          },
+          {
+            "label": 5,
+            "parent_queue_accuracy": 0.9835164835164835,
+            "queue_accuracy": 0.9835164835164835,
+            "queue_flips": 0,
+            "rows": 182
+          },
+          {
+            "label": 6,
+            "parent_queue_accuracy": 0.9779005524861878,
+            "queue_accuracy": 0.9502762430939227,
+            "queue_flips": 6,
+            "rows": 181
+          },
+          {
+            "label": 7,
+            "parent_queue_accuracy": 0.9050279329608939,
+            "queue_accuracy": 0.888268156424581,
+            "queue_flips": 3,
+            "rows": 179
+          },
+          {
+            "label": 8,
+            "parent_queue_accuracy": 0.8908045977011494,
+            "queue_accuracy": 0.8850574712643678,
+            "queue_flips": 2,
+            "rows": 174
+          },
+          {
+            "label": 9,
+            "parent_queue_accuracy": 0.9777777777777777,
+            "queue_accuracy": 0.9555555555555556,
+            "queue_flips": 4,
+            "rows": 180
+          }
+        ],
+        "protected_decision_flip_rate": 0.012376237623762377,
+        "protected_error": 0.06435643564356436,
+        "protected_harm": 0.01051980198019802,
+        "protected_rows": 1616,
+        "target_accuracy": 0.9834254143646409,
+        "target_gain": 0.016574585635359115,
+        "target_rows": 181
+      }
+    },
+    "joint_useful_success": false,
+    "native_diagnostics": {
+      "binary64_lane": "NumPy binary64 affine head on stored float32 feature coordinates; not an exact real proof",
+      "candidate_float32_binary64_argmax_disagreements": 0,
+      "candidate_margin_below_1e-4": 0,
+      "candidate_margin_minimum": 0.005402326583862305,
+      "candidate_margin_quantiles": [
+        0.005402326583862305,
+        0.128483304977417,
+        0.5891136169433595,
+        4.845666885375977,
+        9.233623695373534,
+        13.849740028381348
+      ],
+      "candidate_mean_head_confidence": 0.9244416380153583,
+      "lane": "Torch CPU float32 affine/ReLU encoder then affine head",
+      "maximum_candidate_score_difference": 2.0988917253106365e-06,
+      "maximum_parent_score_difference": 1.895831076126342e-06,
+      "native_guarantee": false,
+      "parent_float32_binary64_argmax_disagreements": 0
+    },
+    "nearby_protected_per_label": [
+      {
+        "label": 6,
+        "parent_queue_accuracy": 0.9779005524861878,
+        "queue_accuracy": 0.9779005524861878,
+        "queue_flips": 0,
+        "rows": 181
+      }
+    ],
+    "primary_novel": {
+      "parent_protected_error": 0.053836633663366336,
+      "parent_target_accuracy": 0.9668508287292817,
+      "per_label": [
+        {
+          "label": 0,
+          "parent_queue_accuracy": 0.9775280898876404,
+          "queue_accuracy": 0.9775280898876404,
+          "queue_flips": 0,
+          "rows": 178
+        },
+        {
+          "label": 1,
+          "parent_queue_accuracy": 0.8956043956043956,
+          "queue_accuracy": 0.8956043956043956,
+          "queue_flips": 0,
+          "rows": 182
+        },
+        {
+          "label": 2,
+          "parent_queue_accuracy": 0.9661016949152542,
+          "queue_accuracy": 0.9661016949152542,
+          "queue_flips": 0,
+          "rows": 177
+        },
+        {
+          "label": 3,
+          "parent_queue_accuracy": 0.9398907103825137,
+          "queue_accuracy": 0.9398907103825137,
+          "queue_flips": 0,
+          "rows": 183
+        },
+        {
+          "label": 4,
+          "parent_queue_accuracy": 0.9668508287292817,
+          "queue_accuracy": 0.9668508287292817,
+          "queue_flips": 0,
+          "rows": 181
+        },
+        {
+          "label": 5,
+          "parent_queue_accuracy": 0.9835164835164835,
+          "queue_accuracy": 0.9835164835164835,
+          "queue_flips": 0,
+          "rows": 182
+        },
+        {
+          "label": 6,
+          "parent_queue_accuracy": 0.9779005524861878,
+          "queue_accuracy": 0.9779005524861878,
+          "queue_flips": 0,
+          "rows": 181
+        },
+        {
+          "label": 7,
+          "parent_queue_accuracy": 0.9050279329608939,
+          "queue_accuracy": 0.9050279329608939,
+          "queue_flips": 0,
+          "rows": 179
+        },
+        {
+          "label": 8,
+          "parent_queue_accuracy": 0.8908045977011494,
+          "queue_accuracy": 0.8908045977011494,
+          "queue_flips": 0,
+          "rows": 174
+        },
+        {
+          "label": 9,
+          "parent_queue_accuracy": 0.9777777777777777,
+          "queue_accuracy": 0.9777777777777777,
+          "queue_flips": 0,
+          "rows": 180
+        }
+      ],
+      "protected_decision_flip_rate": 0.0,
+      "protected_error": 0.053836633663366336,
+      "protected_harm": 0.0,
+      "protected_rows": 1616,
+      "target_accuracy": 0.9668508287292817,
+      "target_gain": 0.0,
+      "target_rows": 181
+    },
+    "secondary_official": {
+      "parent_protected_error": 0.053836633663366336,
+      "parent_target_accuracy": 0.9668508287292817,
+      "per_label": [
+        {
+          "label": 0,
+          "parent_queue_accuracy": 0.9775280898876404,
+          "queue_accuracy": 0.9775280898876404,
+          "queue_flips": 0,
+          "rows": 178
+        },
+        {
+          "label": 1,
+          "parent_queue_accuracy": 0.8956043956043956,
+          "queue_accuracy": 0.8956043956043956,
+          "queue_flips": 0,
+          "rows": 182
+        },
+        {
+          "label": 2,
+          "parent_queue_accuracy": 0.9661016949152542,
+          "queue_accuracy": 0.9661016949152542,
+          "queue_flips": 0,
+          "rows": 177
+        },
+        {
+          "label": 3,
+          "parent_queue_accuracy": 0.9398907103825137,
+          "queue_accuracy": 0.9398907103825137,
+          "queue_flips": 0,
+          "rows": 183
+        },
+        {
+          "label": 4,
+          "parent_queue_accuracy": 0.9668508287292817,
+          "queue_accuracy": 0.9668508287292817,
+          "queue_flips": 0,
+          "rows": 181
+        },
+        {
+          "label": 5,
+          "parent_queue_accuracy": 0.9835164835164835,
+          "queue_accuracy": 0.9835164835164835,
+          "queue_flips": 0,
+          "rows": 182
+        },
+        {
+          "label": 6,
+          "parent_queue_accuracy": 0.9779005524861878,
+          "queue_accuracy": 0.9779005524861878,
+          "queue_flips": 0,
+          "rows": 181
+        },
+        {
+          "label": 7,
+          "parent_queue_accuracy": 0.9050279329608939,
+          "queue_accuracy": 0.9050279329608939,
+          "queue_flips": 0,
+          "rows": 179
+        },
+        {
+          "label": 8,
+          "parent_queue_accuracy": 0.8908045977011494,
+          "queue_accuracy": 0.8908045977011494,
+          "queue_flips": 0,
+          "rows": 174
+        },
+        {
+          "label": 9,
+          "parent_queue_accuracy": 0.9777777777777777,
+          "queue_accuracy": 0.9777777777777777,
+          "queue_flips": 0,
+          "rows": 180
+        }
+      ],
+      "protected_decision_flip_rate": 0.0,
+      "protected_error": 0.053836633663366336,
+      "protected_harm": 0.0,
+      "protected_rows": 1616,
+      "target_accuracy": 0.9668508287292817,
+      "target_gain": 0.0,
+      "target_rows": 181
+    },
+    "verification": {
+      "application_sha256_verified": true,
+      "rollback_sha256_verified": true
+    }
+  },
+  "schema": "wsp-trained-outcome/1",
+  "task_sha256": "67f9aaea2c116b24a2fd51cc165ab418bd3c5e3050fadb328834f1cbe73c76e7",
+  "trial_id": "optical-digits-main-full-8002/recognition/4/decision"
+}

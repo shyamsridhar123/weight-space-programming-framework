@@ -1,0 +1,233 @@
+{
+  "schema": "wsp-cumulative-protocol/1",
+  "review_date_local": "2026-11-08",
+  "frozen_at_utc": "2026-11-09T02:32:21.157985+00:00",
+  "domains": {
+    "banking77": {
+      "study": "trained-support",
+      "main_seeds": [
+        7001,
+        7002,
+        7003,
+        7004,
+        7005,
+        7006
+      ],
+      "cases": [
+        {
+          "case_id": "ownership/card_arrival",
+          "desired_code": 77,
+          "desired_queue": 5,
+          "selection": "fixed before pilot; no official test opened",
+          "target_label": 0,
+          "target_name": "card_arrival",
+          "type": "ownership"
+        },
+        {
+          "case_id": "ownership/pending_cash_withdrawal",
+          "desired_code": 77,
+          "desired_queue": 5,
+          "selection": "fixed before pilot; no official test opened",
+          "target_label": 5,
+          "target_name": "pending_cash_withdrawal",
+          "type": "ownership"
+        },
+        {
+          "case_id": "recognition/top_up_by_bank_transfer_charge",
+          "confused_with": "top_up_by_card_charge",
+          "desired_code": 15,
+          "desired_queue": 2,
+          "pilot_development_confusion_events": 9,
+          "pilot_development_error_rates": [
+            0.2727272727272727,
+            0.2727272727272727,
+            0.2727272727272727
+          ],
+          "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+          "target_label": 15,
+          "target_name": "top_up_by_bank_transfer_charge",
+          "type": "recognition"
+        },
+        {
+          "case_id": "recognition/atm_support",
+          "confused_with": "visa_or_mastercard",
+          "desired_code": 36,
+          "desired_queue": 1,
+          "pilot_development_confusion_events": 7,
+          "pilot_development_error_rates": [
+            0.25,
+            0.125,
+            0.5
+          ],
+          "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+          "target_label": 36,
+          "target_name": "atm_support",
+          "type": "recognition"
+        }
+      ],
+      "trained_protocol_sha256": "41179db4fe54abc187c6255526c4705ff67a8d69236e0f3a798a647a94154ded"
+    },
+    "optical-digits": {
+      "study": "trained-nontext",
+      "main_seeds": [
+        8001,
+        8002,
+        8003,
+        8004,
+        8005,
+        8006
+      ],
+      "cases": [
+        {
+          "case_id": "ownership/8",
+          "desired_code": 10,
+          "desired_queue": 10,
+          "selection": "fixed before pilot; no official test opened",
+          "target_label": 8,
+          "target_name": "8",
+          "type": "ownership"
+        },
+        {
+          "case_id": "recognition/4",
+          "confused_with": "6",
+          "desired_code": 4,
+          "desired_queue": 4,
+          "pilot_development_confusion_events": 4,
+          "pilot_development_error_rates": [
+            0.02631578947368421,
+            0.05263157894736842,
+            0.02631578947368421
+          ],
+          "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+          "target_label": 4,
+          "target_name": "4",
+          "type": "recognition"
+        }
+      ],
+      "trained_protocol_sha256": "c3a5d1a5c17a0961c787afe47e0b58d015d4864d1ef43cb7d1c5a28612563e7b"
+    }
+  },
+  "input_hashes": {
+    "experiments/research/trained-support/protocol.json": "41179db4fe54abc187c6255526c4705ff67a8d69236e0f3a798a647a94154ded",
+    "artifacts/research/trained-support/main/banking77-main-full-7001/head.json": "3a3281c82394f46ac7862f8ecac8a5ff32aee3a13a8106b95f9185d8d6bb22f6",
+    "artifacts/research/trained-support/main/banking77-main-full-7001/encoder.npz": "1c40ed20db978e904b021b7128793670697679de9c91229bab11b462d6b8397d",
+    "artifacts/research/trained-support/main/banking77-main-full-7001/preprocessing.json": "b5498e3f880ce47c93c9e63c44e5baebf95c579d81d311d421d871b8c07912e4",
+    "artifacts/research/trained-support/main/banking77-main-full-7001/lineage.json": "9833697f2aa9b800dc92880a17393a2ac9e2ed0ac6274baf3b9bfe65c55a1862",
+    "artifacts/research/trained-support/main/banking77-main-full-7001/features.npz": "5d880304cdb91caf81d17c2d329a734c317465a43a783b7efda674df3127d667",
+    "artifacts/research/trained-support/main/banking77-main-full-7001/evaluation-features.json": "8bddcef26ae23329f3faef97caf7fd327cac4982caf54c06c3cb61a4e82ac81b",
+    "artifacts/research/trained-support/main/banking77-main-full-7002/head.json": "4ecf06564b8bbd53c5aa0380640c18400de92cbd0036dc8d014887a480792424",
+    "artifacts/research/trained-support/main/banking77-main-full-7002/encoder.npz": "868b90e6b0b817623aee715ef78e233cd78594084b40178ef14e4a7c1f55336a",
+    "artifacts/research/trained-support/main/banking77-main-full-7002/preprocessing.json": "b5498e3f880ce47c93c9e63c44e5baebf95c579d81d311d421d871b8c07912e4",
+    "artifacts/research/trained-support/main/banking77-main-full-7002/lineage.json": "d9b98d50e95d1f70f6e3237c3f8eedc7864eedfe026de6863abaf33a47a123d2",
+    "artifacts/research/trained-support/main/banking77-main-full-7002/features.npz": "352e785060d1fc29602f7e87c63c80e7d99e7cc3b47c9024ca77fd328862ec99",
+    "artifacts/research/trained-support/main/banking77-main-full-7002/evaluation-features.json": "1dacd37030c365ced91de9fb23cc6c038e54a48b9566663d6359b25db88cb6c6",
+    "artifacts/research/trained-support/main/banking77-main-full-7003/head.json": "0cc2e8fa05eb8cff6e0e6e42e684b2837229402aa70b2f2db6019629d88f29b4",
+    "artifacts/research/trained-support/main/banking77-main-full-7003/encoder.npz": "0a420eee2e777de8a0bbd712851c1fa5dde4d53ea7bc6a8ac654774e7f44728e",
+    "artifacts/research/trained-support/main/banking77-main-full-7003/preprocessing.json": "b5498e3f880ce47c93c9e63c44e5baebf95c579d81d311d421d871b8c07912e4",
+    "artifacts/research/trained-support/main/banking77-main-full-7003/lineage.json": "10640f44cf5244b397035893930cd8b38b0952f9ef4b342a7f6fc9649e031248",
+    "artifacts/research/trained-support/main/banking77-main-full-7003/features.npz": "81d05d4224ea6ef49db726daf4e8ae7f81c3ad2db2e59e414f8b9eb707cb5004",
+    "artifacts/research/trained-support/main/banking77-main-full-7003/evaluation-features.json": "264ee3ffb690dd85c63078dba552bcd88ec672052c835f91bcd3ae5f1f59f324",
+    "artifacts/research/trained-support/main/banking77-main-full-7004/head.json": "473c706469fe5db08ffc80072f483ccf370f69aa1dcf48eb9189ca4d7ad55a9e",
+    "artifacts/research/trained-support/main/banking77-main-full-7004/encoder.npz": "3a98990814be88a31ae68a1f58c10bbddad528bc809cc8c10fdda77455333729",
+    "artifacts/research/trained-support/main/banking77-main-full-7004/preprocessing.json": "b5498e3f880ce47c93c9e63c44e5baebf95c579d81d311d421d871b8c07912e4",
+    "artifacts/research/trained-support/main/banking77-main-full-7004/lineage.json": "a7de2c19e85fedad6e7d021b227d9973f4e76f292db724547a5c7138f19c01a9",
+    "artifacts/research/trained-support/main/banking77-main-full-7004/features.npz": "ea93c29da8272679e355b12f65d994eb1bd4dc5778cc63a975dfdd2f00c91972",
+    "artifacts/research/trained-support/main/banking77-main-full-7004/evaluation-features.json": "4323946f85d66ff870386cec74f9faba794107cdcadc6341efe637e2df25648c",
+    "artifacts/research/trained-support/main/banking77-main-full-7005/head.json": "98b5d76b55591ee785fd249dc2209a695fcdb8ee9f89120ea10a092834a4c61a",
+    "artifacts/research/trained-support/main/banking77-main-full-7005/encoder.npz": "33185f4a52c38d9b729b0c3fd93b19c3205e0357d73b73d2160ccea166861117",
+    "artifacts/research/trained-support/main/banking77-main-full-7005/preprocessing.json": "b5498e3f880ce47c93c9e63c44e5baebf95c579d81d311d421d871b8c07912e4",
+    "artifacts/research/trained-support/main/banking77-main-full-7005/lineage.json": "1838cea0ea0c184e72bb907008f8366a0c9ce63502c86e5360530d06ffe19151",
+    "artifacts/research/trained-support/main/banking77-main-full-7005/features.npz": "804af09f05eb9a63b5a2701394f365218849a8ce58afd3846b6a69a8e7efe74b",
+    "artifacts/research/trained-support/main/banking77-main-full-7005/evaluation-features.json": "08b48bc4006d6e7fe109cf331aef4e37292e240c991c01a83622748478e0dcf3",
+    "artifacts/research/trained-support/main/banking77-main-full-7006/head.json": "e79a915714ac201c22578da211b21be67d1a00cb18b914d8cfbff4689d6cec15",
+    "artifacts/research/trained-support/main/banking77-main-full-7006/encoder.npz": "2508da5a51c1eb221a6afab508a93b99ddc42a143000182634e123750954f717",
+    "artifacts/research/trained-support/main/banking77-main-full-7006/preprocessing.json": "b5498e3f880ce47c93c9e63c44e5baebf95c579d81d311d421d871b8c07912e4",
+    "artifacts/research/trained-support/main/banking77-main-full-7006/lineage.json": "1879d8f99327aaf1e41d333a76a7003d7e7eaf011f71d5c54b15dfb563f61082",
+    "artifacts/research/trained-support/main/banking77-main-full-7006/features.npz": "0aeeaaca9b7dfd1e41aa8c79a72ae995a2f45f4e4be3dbb4dadc205ae414f3a6",
+    "artifacts/research/trained-support/main/banking77-main-full-7006/evaluation-features.json": "09ffdec02a3dff13727b5a4b23cc4249b6110b3e2f319597f0b57511c158a928",
+    "experiments/research/trained-nontext/protocol.json": "c3a5d1a5c17a0961c787afe47e0b58d015d4864d1ef43cb7d1c5a28612563e7b",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8001/head.json": "b1cd7272d751fbc84b99fb27a6c696b8b7ba48f8d30f5c4f02c9b0960870f9b0",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8001/encoder.npz": "ccb8795697f5cf34c51678b4d92955d093c28bc3d42a2f37b8b2189d0cab77cd",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8001/preprocessing.json": "48419918cae4104a30e31d4c5c815d8415d902ca6447abe61f12a72a082d8cb0",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8001/lineage.json": "db6d4a53066959a3022c6e68500d6fe4a548b8d8741fb2d09cf6b77da74ee18e",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8001/features.npz": "c9d312d49a3889c25eff479081b5f6e04d81fd4d979dd18cb2c5bc4ac88c4ccd",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8001/evaluation-features.json": "64e095479ec4a3a480afb351b9047bd151caa191b0f5dec47b45f11c3e4512b0",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8002/head.json": "52944f080d9ec85080a136b6e58d930a95adbf63bb2c68ae8c82be689440d2af",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8002/encoder.npz": "720559b31fd15be797757a233aec147deb22876464e15af83b0a539707e4ec42",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8002/preprocessing.json": "48419918cae4104a30e31d4c5c815d8415d902ca6447abe61f12a72a082d8cb0",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8002/lineage.json": "454148194f9be34635dc5727b99e7d8a08a85e46b84f4c5394f9299853a34f05",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8002/features.npz": "df488b04eae40c70cea14958f5f9279c68d6d9dade522876f5f564d23ae72eae",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8002/evaluation-features.json": "7f93876347aff3b4c8626a3211d38ec5610d31721ca3d872de0f6ae60239a2c9",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8003/head.json": "4920d5c29c1e1c5e7eb256efa2ced31328e9f04adf7536f826c4631d1568e820",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8003/encoder.npz": "f3c9c390646de22e7849933129da2e2e7ba0f93ad5c747d122c1723739caec6d",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8003/preprocessing.json": "48419918cae4104a30e31d4c5c815d8415d902ca6447abe61f12a72a082d8cb0",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8003/lineage.json": "46751236654ce8906c926a6bfe181abac91170998e452a1c278be6d350d9dcf6",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8003/features.npz": "80d9bc524abc51c6b12102c59f47258bac120261f320ed666924972b045714e0",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8003/evaluation-features.json": "7eca39876ac21f8a0664beba1b5ea980d28c5672e7ff203f20665437d083cdbb",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8004/head.json": "9f79b8efcef6332f78b1920760aae262140e119afa859c57b2c50e136983cad0",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8004/encoder.npz": "c72f03dc64a5150aab28eecf4d15cae7172fdd06f2cad4e1b56642b016c4c6a7",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8004/preprocessing.json": "48419918cae4104a30e31d4c5c815d8415d902ca6447abe61f12a72a082d8cb0",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8004/lineage.json": "a3473fd32fcb065972b99d69ecd804a2a5b5aa795a7fa281fb3ccc94feb1a376",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8004/features.npz": "79ea8792effbab641170698c789532674ea42123bb1ae1da9c4945001f9d5397",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8004/evaluation-features.json": "eb9cc35b6d26235156424c28fa7391c944b2b5606a45b8ad6a472364e0a5f6d4",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8005/head.json": "7e09c86c88d31c6248c073b2fe597d7bdce8c2f14724237123104f387091cfb3",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8005/encoder.npz": "ea9f599fad16728f1d9a55d6f854c220446ef8d1184523613150143356ac62bf",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8005/preprocessing.json": "48419918cae4104a30e31d4c5c815d8415d902ca6447abe61f12a72a082d8cb0",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8005/lineage.json": "1f81a5d60d70933538a65d6cf42679d5b2d8b1ed7fd6b8b7da63758db97235c9",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8005/features.npz": "d70266b4ee92d1b3b16d17dea4ec7b64599dcf29a8b0f39b6179bddfdb8bf567",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8005/evaluation-features.json": "c5c7c8cd00f706195451be0d8f92fc5f5aa677b9079113a869f6b44699fd2a33",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8006/head.json": "a80ce0142f7bd4046da0a003781cfa1cbea8929feb9a45b2d4246694bc74aac9",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8006/encoder.npz": "cb0fdf1e9dd5335b3eb53062bfc262a1e5389703284c23a6b577f222d47e91a9",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8006/preprocessing.json": "48419918cae4104a30e31d4c5c815d8415d902ca6447abe61f12a72a082d8cb0",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8006/lineage.json": "de5a3514e31acb94cefea427f4123bbd3f505ebb482645d76df9f2338a329421",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8006/features.npz": "fe78155692ed4e77b98ccfc50d6aa1b7994f376bb55a16f282c22d85f973df98",
+    "artifacts/research/trained-nontext/main/optical-digits-main-full-8006/evaluation-features.json": "f7a4af4527edbc79ab812b9932f6d04c25d1202d0b9f47fbf8b15c3826c859e9"
+  },
+  "orders": [
+    "forward",
+    "reverse"
+  ],
+  "controllers": [
+    "local",
+    "cumulative"
+  ],
+  "fitting": {
+    "arm": "soft",
+    "ridge": 0.01,
+    "retention_weight": 8.0,
+    "nullspace_rtol": 1e-12,
+    "target_role": "all rows of the scheduled label",
+    "protected_fit_rows": 128
+  },
+  "calibration": "Hash-sort supplied IDs, retain at most 128 non-scheduled protected labels; all calibration rows of each scheduled target",
+  "score_budget_rule": "Half the original protected-calibration median winning score margin, fixed for the whole sequence; model-score feasibility cap, not an enterprise SLA",
+  "policy": {
+    "score_budget": 0.0,
+    "maximum_original_decision_flip": 0.01,
+    "maximum_local_decision_flip": 0.01,
+    "maximum_original_net_harm": 0.01,
+    "maximum_local_net_harm": 0.01,
+    "maximum_old_target_loss": 0.01,
+    "maximum_old_target_decision_flip": 0.01,
+    "minimum_new_target_gain": 0.1,
+    "conflict": "reject",
+    "abstention": "keep_last_accepted"
+  },
+  "policy_score_budget_replaced_by_frozen_baseline_rule": true,
+  "local_controller": "The same fixed score cap and native local behavior/gain gates; original-baseline and prior-insertion gates are recorded but not required",
+  "conflict": "Reject contrary code/queue obligations on an already accepted subject; do not silently replace a retained request",
+  "abstention": "Deploy the last accepted parent; record every failed, rejected and no-op proposal",
+  "heldout_boundary": "No evaluation-feature array read until every sequence candidate/admission is sealed in a global ledger",
+  "heldout_scope": "Primary novel official-test feature rows; complete official test is a secondary sensitivity endpoint",
+  "utility": {
+    "minimum_target_gain": 0.1,
+    "maximum_original_net_harm": 0.01,
+    "maximum_retained_target_gain_loss": 0.01,
+    "minimum_useful_coverage": 0.75
+  },
+  "inference": "Descriptive paired 95% Student t over six independent full-training-lineage means per domain; average orders/steps inside lineage; not a confirmatory population claim",
+  "missingness": "Keep every assigned full sequence; missing gain/harm sensitivity [-1,1], joint utility [0,1]; rejected proposals retain prior endpoint",
+  "claim_limit": "These lineages were trained in an earlier sealed study; heldout rows are reused for an adjacent, explicitly secondary sequence study. No new independent data or population-editor confirmation is claimed",
+  "rollback": "Inverse composition restores only the named captured readout artifact; encoder/preprocessing identities are bound and remain frozen, external state is excluded",
+  "raw_publication": "Only derived attributed dataset features/model arrays and IDs; no raw acquired query/image rows"
+}

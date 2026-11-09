@@ -1,0 +1,104 @@
+{
+  "schema": "wsp-dataset-provenance/1",
+  "review_date_local": "2026-11-08",
+  "study": "trained-support",
+  "publication_boundary": "Only sanitized source identities, legal license text, learned model parameters, derived learned features, role identifiers/labels and outcome records are published. Raw acquired query records and incidental contact metadata are not redistributed.",
+  "framework_license": "MIT applies to framework code; it does not replace source dataset licenses.",
+  "datasets": [
+    {
+      "id": "BANKING77",
+      "citation": "Casanueva et al. (2020), Efficient Intent Detection with Dual Sentence Encoders, arXiv:2003.04807",
+      "paper_url": "https://arxiv.org/abs/2003.04807",
+      "upstream_repository": "https://github.com/PolyAI-LDN/task-specific-datasets",
+      "revision": "57ec275d8078af65b7731c2a98be812d844a6d6b",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "preserved_license_relative_path": "../../../docs/research/dataset-licenses/CC-BY-4.0.txt",
+      "official_train_rows": 10003,
+      "official_test_rows": 3080,
+      "intent_labels": 77,
+      "uses": "From-scratch encoder/head training and distinct development, target, protected, calibration roles on official train; official test opened only after the global seal. Intent-to-queue policy is derived by this project, not provided by BANKING77.",
+      "source_files": [
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/57ec275d8078af65b7731c2a98be812d844a6d6b/LICENSE",
+          "bytes": 18650,
+          "sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661",
+          "raw_observations_published": false,
+          "acquisition_copy_published": true
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/57ec275d8078af65b7731c2a98be812d844a6d6b/README.md",
+          "bytes": 4735,
+          "sha256": "7b9ce9069931cc2de89dce8c7ffb53d07806cf413601ccf133b9af5227b3a373",
+          "raw_observations_published": false,
+          "acquisition_copy_published": false
+        },
+        {
+          "path": "banking_data/categories.json",
+          "url": "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/57ec275d8078af65b7731c2a98be812d844a6d6b/banking_data/categories.json",
+          "bytes": 2036,
+          "sha256": "53261da888122daf2d120d925458631d9619e15d82e56052e7a42e535ce32b63",
+          "raw_observations_published": false,
+          "acquisition_copy_published": false
+        },
+        {
+          "path": "banking_data/train.csv",
+          "url": "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/57ec275d8078af65b7731c2a98be812d844a6d6b/banking_data/train.csv",
+          "bytes": 839073,
+          "sha256": "b06e26ac675513959a63135f11b94ea7786ed02da65db93a5650d8838cbc664b",
+          "raw_observations_published": false,
+          "acquisition_copy_published": false
+        },
+        {
+          "path": "banking_data/test.csv",
+          "url": "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/57ec275d8078af65b7731c2a98be812d844a6d6b/banking_data/test.csv",
+          "bytes": 239961,
+          "sha256": "d12d6e3bc4c3103966ae786dc435913c0c563dfa328f5a3646d0e62cfeeb474d",
+          "raw_observations_published": false,
+          "acquisition_copy_published": false
+        }
+      ]
+    },
+    {
+      "id": "CLINC OOS",
+      "citation": "Larson et al. (2019), An Evaluation Dataset for Intent Classification and Out-of-Scope Prediction, EMNLP-IJCNLP, ACL Anthology D19-1131",
+      "paper_url": "https://aclanthology.org/D19-1131/",
+      "upstream_repository": "https://github.com/clinc/oos-eval",
+      "revision": "828f8093932c8fe6ca7936c3d2e52903b1c523de",
+      "license": "CC BY 3.0 Unported",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/",
+      "preserved_license_relative_path": "../../../docs/research/dataset-licenses/CC-BY-3.0.txt",
+      "used_split": "oos_test",
+      "used_rows": 1000,
+      "uses": "After sealing, evaluator-only out-of-distribution dispatch/confidence stress. No training, fitting or selection use. CLINC labels are unrelated to BANKING77 routing correctness.",
+      "source_files": [
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de/LICENSE",
+          "sha256": "e6bc9e9c474700b708f568bac9e5a8a9bcb2b1dad53442f5ba449fcb848b8e76",
+          "bytes": 19467,
+          "raw_observations_published": false,
+          "acquisition_copy_published": true
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de/README.md",
+          "sha256": "8a8df26c4de3d25b6c4cff385ca23602c30e4e56828b015206cbc202f6db363a",
+          "bytes": 2668,
+          "raw_observations_published": false,
+          "acquisition_copy_published": false
+        },
+        {
+          "path": "data/data_full.json",
+          "url": "https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de/data/data_full.json",
+          "sha256": "36923c3705a59e08fe9c3883d8bc2dd966ef93e22cb78ac41171782a698d56e0",
+          "bytes": 2495390,
+          "raw_observations_published": false,
+          "acquisition_copy_published": false
+        }
+      ]
+    }
+  ]
+}

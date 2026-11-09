@@ -59,6 +59,38 @@ def environment() -> dict[str, Any]:
             "machine": platform.machine(), "packages": packages}
 
 
+def numerical_environment(backend: str, device: str = "cpu") -> dict[str, Any]:
+    """Execution scope for receipts; version labels do not verify a kernel."""
+    import os
+    import numpy as np
+    scope = {"backend": backend, "device": device, "python": platform.python_version(),
+             "platform": platform.platform(), "machine": platform.machine(),
+             "processor": platform.processor(), "numpy_version": np.__version__,
+             "thread_environment": {name: os.environ.get(name) for name in
+                                    ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS")}}
+    if backend == "numpy":
+        scope["numpy_build_sha256"] = digest(np.__config__.CONFIG)
+    elif backend == "torch":
+        import torch
+        scope.update({"torch_version": str(torch.__version__), "cuda_version": torch.version.cuda,
+                      "threads": torch.get_num_threads(), "interop_threads": torch.get_num_interop_threads(),
+                      "deterministic_algorithms": torch.are_deterministic_algorithms_enabled(),
+                      "float32_matmul_precision": torch.get_float32_matmul_precision(),
+                      "cuda_matmul_tf32": torch.backends.cuda.matmul.allow_tf32,
+                      "cudnn_tf32": torch.backends.cudnn.allow_tf32,
+                      "cudnn_deterministic": torch.backends.cudnn.deterministic,
+                      "cudnn_benchmark": torch.backends.cudnn.benchmark})
+        if device.startswith("cuda"):
+            if not torch.cuda.is_available():
+                raise ValueError("Requested CUDA backend is unavailable")
+            properties = torch.cuda.get_device_properties(torch.device(device))
+            scope["device_name"] = properties.name
+            scope["compute_capability"] = [properties.major, properties.minor]
+    else:
+        raise ValueError("Unknown numerical backend")
+    return scope
+
+
 def execution_sources() -> list[Path]:
     paths = list((ROOT / "rlcd/weight_space").glob("*.py"))
     # Include all game semantics, not just the directly imported entry points.

@@ -1,0 +1,346 @@
+[
+  {
+    "action": "session_created",
+    "charges": {},
+    "error": null,
+    "previous_sha256": null,
+    "request": {
+      "access": {
+        "activations": false,
+        "feedback": false,
+        "forward": false,
+        "metadata": true,
+        "weight_decimals": null,
+        "weights": true
+      },
+      "architecture": "trained-frozen-readout/1",
+      "base_sha256": "d03e5d2de26380aa1bff921a65673ebc09afb616f9070d3c0e00c854ecb67e41",
+      "callbacks_registered": {
+        "activations": false,
+        "feedback": false,
+        "forward": false
+      },
+      "constraints_sha256": "953f31ecb5736730a2a4e08b535b354f26a58f25c5f616e6f708220d306cde4b",
+      "declared_constraints_automatically_enforced": false,
+      "enforcement": "cooperative_same_process_interface",
+      "execution_accounting": "interface_calls_and_submitted_examples; callback_internal_work_not_observed",
+      "limits": {
+        "execution_calls": 10,
+        "execution_examples": 1000,
+        "feedback_calls": 10,
+        "feedback_examples": 1000,
+        "input_tokens": 100000,
+        "output_tokens": 100000,
+        "proposals": 1,
+        "tool_calls": 4,
+        "weight_values": 726
+      },
+      "mode": "edit",
+      "objective": "Change the derived routing decision for a frozen trained representation",
+      "schema": "wsp-session-config/1",
+      "splits": {
+        "declared_lineage_overlap": false,
+        "lineage_independence_verified": false,
+        "lineage_scope": "caller_declared_only",
+        "sample_overlap": false,
+        "schema": "wsp-split-validation/1",
+        "sha256": "c9ca1376370a5112ed472eda3f50479a713a37aa907b2b5b51d7dc5efa14699d",
+        "splits": [
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "27e34115503b510e0e98d9176c49f06d0392e5ca38808b6ac665e2fc4bb5d5dd",
+            "name": "train",
+            "sample_count": 2291
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "f0619bdcd61944a1170da1b59c2cdbf538e53e7ae16d9eb1dae18c264e844fee",
+            "name": "development",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "6bcd4109602b4a308a8e1746d9e7eb8d92f29b67cf5e4c68bf039fadc608020c",
+            "name": "target",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "97ed332e5be176e20232e4a4c9243886f210c3dcfa7c262bdce7307fe56ab9f1",
+            "name": "protected",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "2d1989e5a8c6c9229594e9f751ec6c39313bacee19d1f1ba863c03b84ccb6aff",
+            "name": "calibration",
+            "sample_count": 401
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "815bbcacc5c9672298d42afe83dec7c49883d769bfad2c80facfb84a7fc73376",
+            "name": "test",
+            "sample_count": 1797
+          }
+        ]
+      },
+      "task_id": "optical-digits-main-full-8002/recognition/4/overlay",
+      "task_sha256": "13bbbead7e879199a4265596fcc69822cb18daa7190348914a3e97b6e38cd86e",
+      "token_accounting": "provider_supplied_not_locally_measured"
+    },
+    "requested_charges": {},
+    "result": {},
+    "schema": "wsp-trace-event/1",
+    "sequence": 0,
+    "session_sha256": "f590b65b429820f68aef58876830c40fbd65f5cfb090caa55d84df7e8215f051",
+    "sha256": "50796c7a54b846269110af22dd0e14442a19c51d81961b6170adb45fd42e452d",
+    "status": "succeeded",
+    "task_sha256": "13bbbead7e879199a4265596fcc69822cb18daa7190348914a3e97b6e38cd86e",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 0,
+      "weight_values": 0
+    }
+  },
+  {
+    "action": "metadata",
+    "charges": {
+      "tool_calls": 1
+    },
+    "error": null,
+    "previous_sha256": "50796c7a54b846269110af22dd0e14442a19c51d81961b6170adb45fd42e452d",
+    "request": {},
+    "requested_charges": {
+      "tool_calls": 1
+    },
+    "result": {
+      "artifact": {
+        "architecture": "trained-frozen-readout/1",
+        "metadata": {
+          "domain": "optical-digits",
+          "encoder_semantics": "Supervised float32 affine/ReLU bottleneck; frozen after development-selected epoch",
+          "encoder_sha256": "e2c21a6cfe3c948b8f8dd73ad9c34a069243df80ddfe6ea36241e7e3d89de145",
+          "feature_id": "8a679e4f44efc7acac1faf844da19ff8223889bd990a4a3402664e9785e19373",
+          "feature_names": [
+            "h000",
+            "h001",
+            "h002",
+            "h003",
+            "h004",
+            "h005",
+            "h006",
+            "h007",
+            "h008",
+            "h009",
+            "h010",
+            "h011",
+            "h012",
+            "h013",
+            "h014",
+            "h015",
+            "h016",
+            "h017",
+            "h018",
+            "h019",
+            "h020",
+            "h021",
+            "h022",
+            "h023",
+            "h024",
+            "h025",
+            "h026",
+            "h027",
+            "h028",
+            "h029",
+            "h030",
+            "h031"
+          ],
+          "head_semantics": "float32 affine output codes; queue decision maps the deterministic lowest-index argmax code",
+          "lineage_seed": 8002,
+          "native_dtype": "float32",
+          "output_names": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "specialist_routing_code"
+          ],
+          "preprocessing_sha256": "8d0585a2e0c6e3218132893bd77c6ef98b04a05b9206173a218aaaa66595f921",
+          "pretraining_ancestry": "Independent encoder and head initialized and supervised-trained from scratch; no pretrained model"
+        },
+        "sha256": "d03e5d2de26380aa1bff921a65673ebc09afb616f9070d3c0e00c854ecb67e41",
+        "tensors": {
+          "head.bias": {
+            "dtype": "float64",
+            "shape": [
+              11
+            ]
+          },
+          "head.weight": {
+            "dtype": "float64",
+            "shape": [
+              11,
+              32
+            ]
+          }
+        }
+      },
+      "constraints_status": "declared_context_not_automatically_enforced",
+      "task": {
+        "architecture": "trained-frozen-readout/1",
+        "base_sha256": "d03e5d2de26380aa1bff921a65673ebc09afb616f9070d3c0e00c854ecb67e41",
+        "constraints": {
+          "arm": "overlay",
+          "behavioral_admission": "frozen finite calibration samples; no whole-domain guarantee",
+          "case": {
+            "case_id": "recognition/4",
+            "confused_with": "6",
+            "desired_code": 4,
+            "desired_queue": 4,
+            "pilot_development_confusion_events": 4,
+            "pilot_development_error_rates": [
+              0.02631578947368421,
+              0.05263157894736842,
+              0.02631578947368421
+            ],
+            "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+            "target_label": 4,
+            "target_name": "4",
+            "type": "recognition"
+          },
+          "configuration": {},
+          "margins": {
+            "maximum_protected_harm": 0.01,
+            "minimum_target_gain": 0.1,
+            "minimum_useful_coverage": 0.75
+          },
+          "nullspace_additional_contract": null,
+          "numeric_lane": "native Torch CPU float32 readout",
+          "protected_feature_sha256": "5076d3bd19234642c157716923f41dea81bcfb8c2a1bad2ffeb8bcc8bfae81e0",
+          "protocol_sha256": "c3a5d1a5c17a0961c787afe47e0b58d015d4864d1ef43cb7d1c5a28612563e7b",
+          "structural_policy": {
+            "max_change_abs": 256.0,
+            "max_edits": 363,
+            "max_parameter_abs": 256.0,
+            "writable": [
+              "head.weight",
+              "head.bias"
+            ]
+          },
+          "target_feature_sha256": "3033cc237c7c5febb1e0ceb517aa6bf1011d188ca5763d827cadef862614fb4d"
+        },
+        "mode": "edit",
+        "objective": "Change the derived routing decision for a frozen trained representation",
+        "schema": "wsp-task/1",
+        "task_id": "optical-digits-main-full-8002/recognition/4/overlay"
+      }
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 1,
+    "session_sha256": "f590b65b429820f68aef58876830c40fbd65f5cfb090caa55d84df7e8215f051",
+    "sha256": "900347224722033a0f24e01fe8d1babeae585f5332656c410d2ee3a971a662da",
+    "status": "succeeded",
+    "task_sha256": "13bbbead7e879199a4265596fcc69822cb18daa7190348914a3e97b6e38cd86e",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 1,
+      "weight_values": 0
+    }
+  },
+  {
+    "action": "propose_program",
+    "charges": {
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 363
+    },
+    "error": null,
+    "previous_sha256": "900347224722033a0f24e01fe8d1babeae585f5332656c410d2ee3a971a662da",
+    "request": {
+      "parser": "typed_program_or_wsp-program/1",
+      "program": {
+        "base_sha256": "d03e5d2de26380aa1bff921a65673ebc09afb616f9070d3c0e00c854ecb67e41",
+        "edits": [],
+        "intent": "overlay external intervention",
+        "schema": "wsp-program/1"
+      },
+      "program_sha256": "adbada71c18c6c7ef0180eed71f56ba2a174a8e5929d566efd2e33881ec6cab9",
+      "proposal_type": "Program"
+    },
+    "requested_charges": {
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 363
+    },
+    "result": {
+      "artifact_sha256": "d03e5d2de26380aa1bff921a65673ebc09afb616f9070d3c0e00c854ecb67e41",
+      "candidate_sha256": "796da2963e9616f92aa130c10a3be92ffeb520369dd291d2cdaf723f34c36d22",
+      "no_op": true
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 2,
+    "session_sha256": "f590b65b429820f68aef58876830c40fbd65f5cfb090caa55d84df7e8215f051",
+    "sha256": "99f03087d1dc23ec832c4d7c69f342a1b9cb014e301c84734945dbff773dc3c4",
+    "status": "succeeded",
+    "task_sha256": "13bbbead7e879199a4265596fcc69822cb18daa7190348914a3e97b6e38cd86e",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 2,
+      "weight_values": 363
+    }
+  },
+  {
+    "action": "seal",
+    "charges": {},
+    "error": null,
+    "previous_sha256": "99f03087d1dc23ec832c4d7c69f342a1b9cb014e301c84734945dbff773dc3c4",
+    "request": {
+      "candidate_sha256": null
+    },
+    "requested_charges": {},
+    "result": {
+      "selection": "abstained"
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 3,
+    "session_sha256": "f590b65b429820f68aef58876830c40fbd65f5cfb090caa55d84df7e8215f051",
+    "sha256": "23db5eb914602772138ec05d6ddae81171a56c3e26209eca604dc63adeb48e76",
+    "status": "succeeded",
+    "task_sha256": "13bbbead7e879199a4265596fcc69822cb18daa7190348914a3e97b6e38cd86e",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 2,
+      "weight_values": 363
+    }
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "architecture": "trained-frozen-readout/1",
+  "base_sha256": "6cb7a6b08c7c2935d7317497afe437b34088874538865b56185b70744d28eff4",
+  "constraints": {
+    "arm": "retrain",
+    "behavioral_admission": "frozen finite calibration samples; no whole-domain guarantee",
+    "case": {
+      "case_id": "ownership/card_arrival",
+      "desired_code": 77,
+      "desired_queue": 5,
+      "selection": "fixed before pilot; no official test opened",
+      "target_label": 0,
+      "target_name": "card_arrival",
+      "type": "ownership"
+    },
+    "configuration": {
+      "target_weight": 8
+    },
+    "margins": {
+      "maximum_protected_harm": 0.01,
+      "minimum_target_gain": 0.1,
+      "minimum_useful_coverage": 0.75
+    },
+    "nullspace_additional_contract": null,
+    "numeric_lane": "native Torch CPU float32 readout",
+    "protected_feature_sha256": "2e46f17dfab6671d3004336d932a84479a24b738a35fead0cbf15d2e68ad4fc0",
+    "structural_policy": {
+      "max_change_abs": 256.0,
+      "max_edits": 5070,
+      "max_parameter_abs": 256.0,
+      "writable": [
+        "head.weight",
+        "head.bias"
+      ]
+    },
+    "target_feature_sha256": "5261d90b67894f9802b27632defbe83d9a022b8718d5e58c05c4af8ab689748b"
+  },
+  "mode": "edit",
+  "objective": "Change the derived routing decision for a frozen trained representation",
+  "schema": "wsp-task/1",
+  "task_id": "banking77-pilot-full-6903/ownership/card_arrival/retrain"
+}

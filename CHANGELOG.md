@@ -7,6 +7,21 @@ research draft.
 
 ## Unreleased
 
+- Integrated the November 8, 2026 study evidence during the November 9 final
+  review (America/Chicago). [Trained applications](docs/research/trained-applications.md)
+  found useful ownership changes but no useful recognition repair; hard
+  protected-score candidates abstained. In the [live studies](docs/research/live-studies.md),
+  all 80 primary weight-access assignments abstained and diagnosis useful
+  coverage missed its threshold. The [original-source repeat](docs/research/original-source-repeat.md)
+  and [construction pilot](docs/research/construction-steering-pilot.md)
+  retained four and twelve failed fresh assignments respectively, with no
+  completed fresh responses. The [synthetic unlearning study](docs/research/synthetic-unlearning.md)
+  completed training, evaluation, and independent checking; both edited methods
+  failed the weight-only and archive-inclusive joint gates across all transforms,
+  while some individual component gates passed. Scoped replay and control success do not
+  establish live-model success, privacy, or native-execution guarantees.
+  Package version remains `0.2.0.dev4`; `v0.2.0-draft.4` remains unpublished.
+
 - Added a November 8, 2026 primary-source research review and actionable GitHub
   roadmap. The plan specifies a trained public support-routing study against
   rules, routing overlays, and retraining; feasibility and abstention; candidate
@@ -15,8 +30,9 @@ research draft.
   transfer, no-fitting construction, and synthetic unlearning. Published a source
   register with acquired-byte hashes, reviewed methods and limitations, and a
   versioned issue index/body snapshot with dependencies and falsification criteria.
-  New studies remain proposed; historical results and requirement statuses are
-  unchanged. See [the research review](docs/weight-space/v2/research-roadmap-2026-11.md).
+  That review recorded planned studies; the completed outcomes are linked above.
+  Historical records retain their original scope. See
+  [the research review](docs/weight-space/v2/research-roadmap-2026-11.md).
 
 - Rebuilt the enterprise explanation around one outage ticket using STE-Pro-Max
   storytelling and original SVG mathematical animations. The 90-second story
@@ -95,9 +111,10 @@ Each needs evidence within a declared scope before it can support a stronger cla
 
 ### Validation scope
 
-Current validation concerns the publication verifier, packaging, verifier
-tests, and the Python suite. This revision does not rerun scientific studies
-or Lean proofs. Public npm verification stopped at TLS before metadata or
+For the November 7 candidate, validation concerned the publication verifier,
+packaging, verifier tests, and the Python suite. That preparation did not rerun
+scientific studies or Lean proofs; later study executions are recorded under
+Unreleased above. Public npm verification stopped at TLS before metadata or
 tarball validation. The root lock omits environment-specific `resolved` URLs
 while retaining versions, integrity values, and the dependency graph; public
 portability remains unverified. No new hosted-CI success is claimed here.
@@ -224,7 +241,11 @@ historical results.
 - Earlier generic/RTS studies, negative and no-op outcomes, receipt repairs,
   and their original reports and identities.
 
-### Boundaries retained in later drafts
+### Historical draft.1 boundaries
+
+These statements describe draft.1. Later live studies and adoption of the
+project MIT license are recorded above; their outcomes do not erase the other
+unsupported claims.
 
 - The older behavioral `Contract` is specialized to a two-layer network;
   generic admission remains incomplete.

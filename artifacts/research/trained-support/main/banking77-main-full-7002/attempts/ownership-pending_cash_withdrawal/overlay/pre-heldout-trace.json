@@ -1,0 +1,438 @@
+[
+  {
+    "action": "session_created",
+    "charges": {},
+    "error": null,
+    "previous_sha256": null,
+    "request": {
+      "access": {
+        "activations": false,
+        "feedback": false,
+        "forward": false,
+        "metadata": true,
+        "weight_decimals": null,
+        "weights": true
+      },
+      "architecture": "trained-frozen-readout/1",
+      "base_sha256": "609d31593d6ffb1fe70e5e2f563746f9c2c4747a8fd0a099183d52afe988e33f",
+      "callbacks_registered": {
+        "activations": false,
+        "feedback": false,
+        "forward": false
+      },
+      "constraints_sha256": "7a194bc454f48b3fb2c6eb6e2f658bd8721fa2f11f584238b538d4acd57a5f21",
+      "declared_constraints_automatically_enforced": false,
+      "enforcement": "cooperative_same_process_interface",
+      "execution_accounting": "interface_calls_and_submitted_examples; callback_internal_work_not_observed",
+      "limits": {
+        "execution_calls": 10,
+        "execution_examples": 1000,
+        "feedback_calls": 10,
+        "feedback_examples": 1000,
+        "input_tokens": 100000,
+        "output_tokens": 100000,
+        "proposals": 1,
+        "tool_calls": 4,
+        "weight_values": 10140
+      },
+      "mode": "edit",
+      "objective": "Change the derived routing decision for a frozen trained representation",
+      "schema": "wsp-session-config/1",
+      "splits": {
+        "declared_lineage_overlap": false,
+        "lineage_independence_verified": false,
+        "lineage_scope": "caller_declared_only",
+        "sample_overlap": false,
+        "schema": "wsp-split-validation/1",
+        "sha256": "34b03697142177d63b1dd5e805926c8db14cf8fbb914a0c4b422e6c5a2fc0cb5",
+        "splits": [
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "40f5a4ba7e8e04fdaeac14cece2a58b0bcfe47c773745872a4ab92670b797bfb",
+            "name": "train",
+            "sample_count": 5971
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "aae6fb6bc2632a1a1134f5e19e5c7a8177c4b6b08d0ba35cc445289e327328df",
+            "name": "development",
+            "sample_count": 965
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "53c5974a34265de1e169b2de6faaa872660ba743fb12c7c78bb5ff35dbd08db0",
+            "name": "target",
+            "sample_count": 968
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "267857f8333ddc893b2b90c06e4c68b94a2b86d4e82a504c0261a9145cbaf55e",
+            "name": "protected",
+            "sample_count": 968
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "e769042bcb33be1a433b1b28d9ca7a9ab391696fe7f5fd25207ad56510716e31",
+            "name": "calibration",
+            "sample_count": 1131
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "3cc7f8d57f56cdde6e2da6114b0ef3a6a3fc305ce40884685abbf947b35aab82",
+            "name": "test",
+            "sample_count": 3080
+          }
+        ]
+      },
+      "task_id": "banking77-main-full-7002/ownership/pending_cash_withdrawal/overlay",
+      "task_sha256": "51ddd029053e79bc4f619a79264744c4e0af7aa8888d336b35e0a7f77ed3917b",
+      "token_accounting": "provider_supplied_not_locally_measured"
+    },
+    "requested_charges": {},
+    "result": {},
+    "schema": "wsp-trace-event/1",
+    "sequence": 0,
+    "session_sha256": "bf088a7b583ff4198b3e4a2e14ec620295d7af2196d6fe1f938bc72187c32f15",
+    "sha256": "f171ac2dd033a6dedd31d7f0eada2a4438f9136820bed2c6ab869e8c9c13d0de",
+    "status": "succeeded",
+    "task_sha256": "51ddd029053e79bc4f619a79264744c4e0af7aa8888d336b35e0a7f77ed3917b",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 0,
+      "weight_values": 0
+    }
+  },
+  {
+    "action": "metadata",
+    "charges": {
+      "tool_calls": 1
+    },
+    "error": null,
+    "previous_sha256": "f171ac2dd033a6dedd31d7f0eada2a4438f9136820bed2c6ab869e8c9c13d0de",
+    "request": {},
+    "requested_charges": {
+      "tool_calls": 1
+    },
+    "result": {
+      "artifact": {
+        "architecture": "trained-frozen-readout/1",
+        "metadata": {
+          "domain": "banking77",
+          "encoder_semantics": "Supervised float32 affine/ReLU bottleneck; frozen after development-selected epoch",
+          "encoder_sha256": "50f8f99fca2cbd63515ffcd4c075ec8d27d8f3417f30a81288d6b6a71dae1da1",
+          "feature_id": "41f100683c3e4528fbd8df9f2560118f50f807d7381b74f1553c90510ab9d010",
+          "feature_names": [
+            "h000",
+            "h001",
+            "h002",
+            "h003",
+            "h004",
+            "h005",
+            "h006",
+            "h007",
+            "h008",
+            "h009",
+            "h010",
+            "h011",
+            "h012",
+            "h013",
+            "h014",
+            "h015",
+            "h016",
+            "h017",
+            "h018",
+            "h019",
+            "h020",
+            "h021",
+            "h022",
+            "h023",
+            "h024",
+            "h025",
+            "h026",
+            "h027",
+            "h028",
+            "h029",
+            "h030",
+            "h031",
+            "h032",
+            "h033",
+            "h034",
+            "h035",
+            "h036",
+            "h037",
+            "h038",
+            "h039",
+            "h040",
+            "h041",
+            "h042",
+            "h043",
+            "h044",
+            "h045",
+            "h046",
+            "h047",
+            "h048",
+            "h049",
+            "h050",
+            "h051",
+            "h052",
+            "h053",
+            "h054",
+            "h055",
+            "h056",
+            "h057",
+            "h058",
+            "h059",
+            "h060",
+            "h061",
+            "h062",
+            "h063"
+          ],
+          "head_semantics": "float32 affine output codes; queue decision maps the deterministic lowest-index argmax code",
+          "lineage_seed": 7002,
+          "native_dtype": "float32",
+          "output_names": [
+            "card_arrival",
+            "card_linking",
+            "exchange_rate",
+            "card_payment_wrong_exchange_rate",
+            "extra_charge_on_statement",
+            "pending_cash_withdrawal",
+            "fiat_currency_support",
+            "card_delivery_estimate",
+            "automatic_top_up",
+            "card_not_working",
+            "exchange_via_app",
+            "lost_or_stolen_card",
+            "age_limit",
+            "pin_blocked",
+            "contactless_not_working",
+            "top_up_by_bank_transfer_charge",
+            "pending_top_up",
+            "cancel_transfer",
+            "top_up_limits",
+            "wrong_amount_of_cash_received",
+            "card_payment_fee_charged",
+            "transfer_not_received_by_recipient",
+            "supported_cards_and_currencies",
+            "getting_virtual_card",
+            "card_acceptance",
+            "top_up_reverted",
+            "balance_not_updated_after_cheque_or_cash_deposit",
+            "card_payment_not_recognised",
+            "edit_personal_details",
+            "why_verify_identity",
+            "unable_to_verify_identity",
+            "get_physical_card",
+            "visa_or_mastercard",
+            "topping_up_by_card",
+            "disposable_card_limits",
+            "compromised_card",
+            "atm_support",
+            "direct_debit_payment_not_recognised",
+            "passcode_forgotten",
+            "declined_cash_withdrawal",
+            "pending_card_payment",
+            "lost_or_stolen_phone",
+            "request_refund",
+            "declined_transfer",
+            "Refund_not_showing_up",
+            "declined_card_payment",
+            "pending_transfer",
+            "terminate_account",
+            "card_swallowed",
+            "transaction_charged_twice",
+            "verify_source_of_funds",
+            "transfer_timing",
+            "reverted_card_payment?",
+            "change_pin",
+            "beneficiary_not_allowed",
+            "transfer_fee_charged",
+            "receiving_money",
+            "failed_transfer",
+            "transfer_into_account",
+            "verify_top_up",
+            "getting_spare_card",
+            "top_up_by_cash_or_cheque",
+            "order_physical_card",
+            "virtual_card_not_working",
+            "wrong_exchange_rate_for_cash_withdrawal",
+            "get_disposable_virtual_card",
+            "top_up_failed",
+            "balance_not_updated_after_bank_transfer",
+            "cash_withdrawal_not_recognised",
+            "exchange_charge",
+            "top_up_by_card_charge",
+            "activate_my_card",
+            "cash_withdrawal_charge",
+            "card_about_to_expire",
+            "apple_pay_or_google_pay",
+            "verify_my_identity",
+            "country_support",
+            "specialist_routing_code"
+          ],
+          "preprocessing_sha256": "906c1ad978464358d4c27ea3b4b716aa9488dc1fc7be8ccf088af1573aff088d",
+          "pretraining_ancestry": "Independent encoder and head initialized and supervised-trained from scratch; no pretrained model"
+        },
+        "sha256": "609d31593d6ffb1fe70e5e2f563746f9c2c4747a8fd0a099183d52afe988e33f",
+        "tensors": {
+          "head.bias": {
+            "dtype": "float64",
+            "shape": [
+              78
+            ]
+          },
+          "head.weight": {
+            "dtype": "float64",
+            "shape": [
+              78,
+              64
+            ]
+          }
+        }
+      },
+      "constraints_status": "declared_context_not_automatically_enforced",
+      "task": {
+        "architecture": "trained-frozen-readout/1",
+        "base_sha256": "609d31593d6ffb1fe70e5e2f563746f9c2c4747a8fd0a099183d52afe988e33f",
+        "constraints": {
+          "arm": "overlay",
+          "behavioral_admission": "frozen finite calibration samples; no whole-domain guarantee",
+          "case": {
+            "case_id": "ownership/pending_cash_withdrawal",
+            "desired_code": 77,
+            "desired_queue": 5,
+            "selection": "fixed before pilot; no official test opened",
+            "target_label": 5,
+            "target_name": "pending_cash_withdrawal",
+            "type": "ownership"
+          },
+          "configuration": {},
+          "margins": {
+            "maximum_protected_harm": 0.01,
+            "minimum_target_gain": 0.1,
+            "minimum_useful_coverage": 0.75
+          },
+          "nullspace_additional_contract": null,
+          "numeric_lane": "native Torch CPU float32 readout",
+          "protected_feature_sha256": "e490cb52b4a6447f7c5e6d1b39e6cf4702e24b68b03fdc43111aefcfe840b4f9",
+          "protocol_sha256": "41179db4fe54abc187c6255526c4705ff67a8d69236e0f3a798a647a94154ded",
+          "structural_policy": {
+            "max_change_abs": 256.0,
+            "max_edits": 5070,
+            "max_parameter_abs": 256.0,
+            "writable": [
+              "head.weight",
+              "head.bias"
+            ]
+          },
+          "target_feature_sha256": "c5d3efd1c27b8eb8da4d9657b571fa341f38f0a2320fd112bbca551e3374bd89"
+        },
+        "mode": "edit",
+        "objective": "Change the derived routing decision for a frozen trained representation",
+        "schema": "wsp-task/1",
+        "task_id": "banking77-main-full-7002/ownership/pending_cash_withdrawal/overlay"
+      }
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 1,
+    "session_sha256": "bf088a7b583ff4198b3e4a2e14ec620295d7af2196d6fe1f938bc72187c32f15",
+    "sha256": "357c77c1a87e27c07363838e4a116de7268c2f48bd295a35910554f65ed325dc",
+    "status": "succeeded",
+    "task_sha256": "51ddd029053e79bc4f619a79264744c4e0af7aa8888d336b35e0a7f77ed3917b",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 1,
+      "weight_values": 0
+    }
+  },
+  {
+    "action": "propose_program",
+    "charges": {
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 5070
+    },
+    "error": null,
+    "previous_sha256": "357c77c1a87e27c07363838e4a116de7268c2f48bd295a35910554f65ed325dc",
+    "request": {
+      "parser": "typed_program_or_wsp-program/1",
+      "program": {
+        "base_sha256": "609d31593d6ffb1fe70e5e2f563746f9c2c4747a8fd0a099183d52afe988e33f",
+        "edits": [],
+        "intent": "overlay external intervention",
+        "schema": "wsp-program/1"
+      },
+      "program_sha256": "e542e4de0980a0ab55d7eb0b0e6677e3e724bc09f705ebd063757366045b584f",
+      "proposal_type": "Program"
+    },
+    "requested_charges": {
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 5070
+    },
+    "result": {
+      "artifact_sha256": "609d31593d6ffb1fe70e5e2f563746f9c2c4747a8fd0a099183d52afe988e33f",
+      "candidate_sha256": "7554d5c1b311a0084bc1fd908b2c14458314ec0d88ae0c7eaac146ad39eb7991",
+      "no_op": true
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 2,
+    "session_sha256": "bf088a7b583ff4198b3e4a2e14ec620295d7af2196d6fe1f938bc72187c32f15",
+    "sha256": "ed1063791f6c68aaab7b72fa5291cded35ad0d6f7f42cf5a20bb84bfebb2f206",
+    "status": "succeeded",
+    "task_sha256": "51ddd029053e79bc4f619a79264744c4e0af7aa8888d336b35e0a7f77ed3917b",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 2,
+      "weight_values": 5070
+    }
+  },
+  {
+    "action": "seal",
+    "charges": {},
+    "error": null,
+    "previous_sha256": "ed1063791f6c68aaab7b72fa5291cded35ad0d6f7f42cf5a20bb84bfebb2f206",
+    "request": {
+      "candidate_sha256": "7554d5c1b311a0084bc1fd908b2c14458314ec0d88ae0c7eaac146ad39eb7991"
+    },
+    "requested_charges": {},
+    "result": {
+      "selection": "candidate"
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 3,
+    "session_sha256": "bf088a7b583ff4198b3e4a2e14ec620295d7af2196d6fe1f938bc72187c32f15",
+    "sha256": "a23dd97d21b08c00175892904a2ade5b2b83c6a2b5a4fe1a21b4130ef7766fcd",
+    "status": "succeeded",
+    "task_sha256": "51ddd029053e79bc4f619a79264744c4e0af7aa8888d336b35e0a7f77ed3917b",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 2,
+      "weight_values": 5070
+    }
+  }
+]

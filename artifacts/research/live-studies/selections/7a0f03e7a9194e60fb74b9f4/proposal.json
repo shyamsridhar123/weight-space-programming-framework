@@ -1,0 +1,20 @@
+{
+  "base_sha256": "5a1eb09d9c499574ee1b326cb6e899572e41b4e8abc70cdd88ff713e6b600575",
+  "commands": [
+    {
+      "block": [
+        [
+          19,
+          20
+        ]
+      ],
+      "op": "add",
+      "tensor": "head.bias",
+      "values": [
+        -6.0
+      ]
+    }
+  ],
+  "intent": "Row 19 has bias 6.01283 while ordinary rows have biases near zero, strongly suggesting an additive bias shift. Removing 6 should restore competition for pending_transfer and protected intents. Gains are estimates without execution or representative evaluation.",
+  "schema": "wsp-structured-program/1"
+}

@@ -1,0 +1,520 @@
+{
+  "abstained": true,
+  "abstention_reasons": [
+    "calibration-target-gain"
+  ],
+  "admitted": false,
+  "arm": "retrain",
+  "assigned": true,
+  "calibration": {
+    "parent_protected_error": 0.027777777777777776,
+    "parent_target_accuracy": 0.975609756097561,
+    "per_label": [
+      {
+        "label": 0,
+        "parent_queue_accuracy": 0.975,
+        "queue_accuracy": 0.975,
+        "queue_flips": 0,
+        "rows": 40
+      },
+      {
+        "label": 1,
+        "parent_queue_accuracy": 0.9523809523809523,
+        "queue_accuracy": 0.9761904761904762,
+        "queue_flips": 1,
+        "rows": 42
+      },
+      {
+        "label": 2,
+        "parent_queue_accuracy": 0.9736842105263158,
+        "queue_accuracy": 0.9210526315789473,
+        "queue_flips": 2,
+        "rows": 38
+      },
+      {
+        "label": 3,
+        "parent_queue_accuracy": 1.0,
+        "queue_accuracy": 1.0,
+        "queue_flips": 0,
+        "rows": 42
+      },
+      {
+        "label": 4,
+        "parent_queue_accuracy": 0.975609756097561,
+        "queue_accuracy": 0.975609756097561,
+        "queue_flips": 0,
+        "rows": 41
+      },
+      {
+        "label": 5,
+        "parent_queue_accuracy": 0.95,
+        "queue_accuracy": 0.975,
+        "queue_flips": 2,
+        "rows": 40
+      },
+      {
+        "label": 6,
+        "parent_queue_accuracy": 0.975,
+        "queue_accuracy": 0.975,
+        "queue_flips": 0,
+        "rows": 40
+      },
+      {
+        "label": 7,
+        "parent_queue_accuracy": 1.0,
+        "queue_accuracy": 0.975609756097561,
+        "queue_flips": 1,
+        "rows": 41
+      },
+      {
+        "label": 8,
+        "parent_queue_accuracy": 0.9473684210526315,
+        "queue_accuracy": 0.9473684210526315,
+        "queue_flips": 0,
+        "rows": 38
+      },
+      {
+        "label": 9,
+        "parent_queue_accuracy": 0.9743589743589743,
+        "queue_accuracy": 0.9743589743589743,
+        "queue_flips": 0,
+        "rows": 39
+      }
+    ],
+    "protected_decision_flip_rate": 0.016666666666666666,
+    "protected_error": 0.030555555555555555,
+    "protected_harm": 0.002777777777777778,
+    "protected_rows": 360,
+    "target_accuracy": 0.975609756097561,
+    "target_gain": 0.0,
+    "target_rows": 41
+  },
+  "candidate_artifact_sha256": "16cc0c734de151ed8d8b1247e734e16ff6d61a8c4a7c2128b1799acaffc74ce3",
+  "case": {
+    "case_id": "recognition/4",
+    "confused_with": "6",
+    "desired_code": 4,
+    "desired_queue": 4,
+    "pilot_development_confusion_events": 4,
+    "pilot_development_error_rates": [
+      0.02631578947368421,
+      0.05263157894736842,
+      0.02631578947368421
+    ],
+    "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+    "target_label": 4,
+    "target_name": "4",
+    "type": "recognition"
+  },
+  "configuration": {
+    "target_weight": 2
+  },
+  "diagnostics": {
+    "encoder_frozen": true,
+    "epochs": 12,
+    "learning_rate": 0.01,
+    "solver": "torch-head-retraining/1",
+    "target_weight": 2
+  },
+  "external_intervention": false,
+  "fit_seconds_all_options": 0.19229859998449683,
+  "fit_selection_materialization_seconds": 0.2608691999921575,
+  "fitting_execution_accounting": "Torch/NumPy work outside cooperative session tools, explicitly timed; not a no-fitting interpreter",
+  "lineage_id": "optical-digits-main-full-8006",
+  "no_op_artifact": false,
+  "options": [
+    {
+      "calibration": {
+        "parent_protected_error": 0.027777777777777776,
+        "parent_target_accuracy": 0.975609756097561,
+        "per_label": [
+          {
+            "label": 0,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 1,
+            "parent_queue_accuracy": 0.9523809523809523,
+            "queue_accuracy": 0.9761904761904762,
+            "queue_flips": 1,
+            "rows": 42
+          },
+          {
+            "label": 2,
+            "parent_queue_accuracy": 0.9736842105263158,
+            "queue_accuracy": 0.9210526315789473,
+            "queue_flips": 2,
+            "rows": 38
+          },
+          {
+            "label": 3,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 42
+          },
+          {
+            "label": 4,
+            "parent_queue_accuracy": 0.975609756097561,
+            "queue_accuracy": 0.975609756097561,
+            "queue_flips": 0,
+            "rows": 41
+          },
+          {
+            "label": 5,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.975,
+            "queue_flips": 2,
+            "rows": 40
+          },
+          {
+            "label": 6,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 7,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 0.975609756097561,
+            "queue_flips": 1,
+            "rows": 41
+          },
+          {
+            "label": 8,
+            "parent_queue_accuracy": 0.9473684210526315,
+            "queue_accuracy": 0.9473684210526315,
+            "queue_flips": 0,
+            "rows": 38
+          },
+          {
+            "label": 9,
+            "parent_queue_accuracy": 0.9743589743589743,
+            "queue_accuracy": 0.9743589743589743,
+            "queue_flips": 0,
+            "rows": 39
+          }
+        ],
+        "protected_decision_flip_rate": 0.016666666666666666,
+        "protected_error": 0.030555555555555555,
+        "protected_harm": 0.002777777777777778,
+        "protected_rows": 360,
+        "target_accuracy": 0.975609756097561,
+        "target_gain": 0.0,
+        "target_rows": 41
+      },
+      "candidate_sha256": "16cc0c734de151ed8d8b1247e734e16ff6d61a8c4a7c2128b1799acaffc74ce3",
+      "configuration": {
+        "target_weight": 2
+      },
+      "diagnostics": {
+        "encoder_frozen": true,
+        "epochs": 12,
+        "learning_rate": 0.01,
+        "solver": "torch-head-retraining/1",
+        "target_weight": 2
+      },
+      "fit_seconds": 0.08705209998879582
+    },
+    {
+      "calibration": {
+        "parent_protected_error": 0.027777777777777776,
+        "parent_target_accuracy": 0.975609756097561,
+        "per_label": [
+          {
+            "label": 0,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 1,
+            "parent_queue_accuracy": 0.9523809523809523,
+            "queue_accuracy": 0.9761904761904762,
+            "queue_flips": 1,
+            "rows": 42
+          },
+          {
+            "label": 2,
+            "parent_queue_accuracy": 0.9736842105263158,
+            "queue_accuracy": 0.9210526315789473,
+            "queue_flips": 2,
+            "rows": 38
+          },
+          {
+            "label": 3,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 42
+          },
+          {
+            "label": 4,
+            "parent_queue_accuracy": 0.975609756097561,
+            "queue_accuracy": 0.975609756097561,
+            "queue_flips": 0,
+            "rows": 41
+          },
+          {
+            "label": 5,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 1.0,
+            "queue_flips": 2,
+            "rows": 40
+          },
+          {
+            "label": 6,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 7,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 0.975609756097561,
+            "queue_flips": 1,
+            "rows": 41
+          },
+          {
+            "label": 8,
+            "parent_queue_accuracy": 0.9473684210526315,
+            "queue_accuracy": 0.8947368421052632,
+            "queue_flips": 2,
+            "rows": 38
+          },
+          {
+            "label": 9,
+            "parent_queue_accuracy": 0.9743589743589743,
+            "queue_accuracy": 0.9487179487179487,
+            "queue_flips": 1,
+            "rows": 39
+          }
+        ],
+        "protected_decision_flip_rate": 0.025,
+        "protected_error": 0.03611111111111111,
+        "protected_harm": 0.008333333333333333,
+        "protected_rows": 360,
+        "target_accuracy": 0.975609756097561,
+        "target_gain": 0.0,
+        "target_rows": 41
+      },
+      "candidate_sha256": "25065420ddeee2a5ebbe927e1ff7400fe1d9909c897363aa90ab551494ac9de4",
+      "configuration": {
+        "target_weight": 8
+      },
+      "diagnostics": {
+        "encoder_frozen": true,
+        "epochs": 12,
+        "learning_rate": 0.01,
+        "solver": "torch-head-retraining/1",
+        "target_weight": 8
+      },
+      "fit_seconds": 0.10524649999570101
+    }
+  ],
+  "parent_sha256": "8938109889f57a0a377353e80709ece1b57a950e9277900259c7dd3d1ca88f7a",
+  "program_sha256": "572d42d705a8645d61df974b6241238d794b2e4ab5ded056bf6e50054245d281",
+  "proposal_error": null,
+  "protected_anchor_rows": [
+    0,
+    8,
+    12,
+    13,
+    18,
+    21,
+    45,
+    49,
+    61,
+    76,
+    91,
+    96,
+    109,
+    117,
+    124,
+    140,
+    161,
+    184,
+    250,
+    257,
+    267,
+    268,
+    273,
+    298,
+    304,
+    313,
+    320,
+    324,
+    329,
+    345,
+    365,
+    370,
+    372,
+    395,
+    398,
+    401,
+    414,
+    426,
+    450,
+    451,
+    454,
+    490,
+    496,
+    526,
+    551,
+    552,
+    564,
+    587,
+    605,
+    617,
+    656,
+    663,
+    664,
+    674,
+    676,
+    678,
+    683,
+    695,
+    696,
+    708,
+    711,
+    723,
+    731,
+    757,
+    763,
+    767,
+    774,
+    777,
+    792,
+    793,
+    799,
+    805,
+    822,
+    823,
+    842,
+    847,
+    854,
+    864,
+    882,
+    887,
+    898,
+    924,
+    937,
+    943,
+    949,
+    953,
+    966,
+    968,
+    991,
+    998,
+    1018,
+    1022,
+    1042,
+    1051,
+    1053,
+    1077,
+    1078,
+    1095,
+    1102,
+    1107,
+    1116,
+    1121,
+    1137,
+    1142,
+    1145,
+    1152,
+    1165,
+    1180,
+    1189,
+    1192,
+    1210,
+    1223,
+    1235,
+    1236,
+    1265,
+    1271,
+    1273,
+    1288,
+    1295,
+    1323,
+    1349,
+    1364,
+    1366,
+    1367,
+    1369,
+    1372,
+    1379,
+    1386
+  ],
+  "schema": "wsp-trained-attempt/1",
+  "sealed_at_utc": "2026-11-09T01:52:52.059508+00:00",
+  "selected_candidate_sha256": "f86885bfb83be18f98d9d7edc28c86f56c0d30320216f63002a1a02c9fd88925",
+  "selected_option": 0,
+  "session_sha256": "2987299b69cde9453f79778e8c1a202819324d1816dc44978ae7e090f4cf7356",
+  "structural_admission": {
+    "behavioral_status": "not_checked",
+    "candidate_sha256": "16cc0c734de151ed8d8b1247e734e16ff6d61a8c4a7c2128b1799acaffc74ce3",
+    "formal_certificate": null,
+    "issues": [],
+    "policy": {
+      "max_change_abs": 256.0,
+      "max_edits": 363,
+      "max_parameter_abs": 256.0,
+      "writable": [
+        "head.weight",
+        "head.bias"
+      ]
+    },
+    "program_sha256": "572d42d705a8645d61df974b6241238d794b2e4ab5ded056bf6e50054245d281",
+    "schema": "wsp-structural-admission/1",
+    "sha256": "d90f263b9f251944f4bdd896278cf3789a5a232d9c3f8a32bbe59b13a58ad3ae",
+    "structural_accepted": true
+  },
+  "target_rows": [
+    46,
+    186,
+    197,
+    222,
+    270,
+    323,
+    467,
+    478,
+    616,
+    685,
+    904,
+    1000,
+    1079,
+    1211,
+    1530,
+    1670,
+    1728,
+    1862,
+    1940,
+    2006,
+    2031,
+    2135,
+    2235,
+    2248,
+    2385,
+    2423,
+    2548,
+    2581,
+    2619,
+    2714,
+    2827,
+    3062,
+    3116,
+    3242,
+    3282,
+    3288,
+    3309,
+    3346
+  ],
+  "task_sha256": "73170713306f4c96f2d1fa7c905022d0256019d2feede0cbac5e719a10e63bf2",
+  "trial_id": "optical-digits-main-full-8006/recognition/4/retrain"
+}

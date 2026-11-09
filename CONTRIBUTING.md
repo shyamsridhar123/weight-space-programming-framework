@@ -12,10 +12,12 @@ Use Python 3.11 or newer. From the repository root:
 python -m pip install -e ".[test,plots]"
 python examples/edit_retention.py
 python examples/session_edit.py
-python -m pytest -q --basetemp .runs/pytest-contributor-1
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest -q -c pytest-engineering.ini --basetemp .runs/pytest-contributor-1
 ```
 
-Choose an unused `--basetemp` directory inside this checkout each time. Freeze tests require repository-contained fixtures, and pytest clears the supplied directory before use. Run focused tests while changing a boundary, then complete the relevant suite and report failures or skips. The examples are constructed API demonstrations, separate from the retained study evidence.
+In PowerShell, set `$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD = "1"` before running the pytest command starting at `python`. This matches publication CI's reviewed engineering selection and disables automatic loading of third-party pytest plugins. [pytest-engineering.ini](pytest-engineering.ini) lists the selected files and deselections; the historical `pytest.ini` remains unchanged. Explicit test paths override the selected file list, so keep ordinary focused checks within those files.
+
+Choose an unused `--basetemp` directory inside this checkout each time; pytest clears the supplied directory before use. Run focused tests while changing a boundary, then complete the engineering selection and report failures, deselections, or skips. The examples are constructed API demonstrations, separate from the retained study evidence. Saved-data replay and fresh study execution are separate, optional scientific procedures described in [REPRODUCING.md](REPRODUCING.md).
 
 [REPRODUCING.md](REPRODUCING.md) covers installation variants, independent replay, report/diagram rendering, and optional historical TypeScript checks. [PROOFS.md](PROOFS.md) covers the pinned formal toolchain. The [interactive explanation](artifacts/explanations/edit-retention/index.html) opens locally without a build or network access; its [static guide](docs/weight-space/v2/worked-example.md) remains available for review.
 

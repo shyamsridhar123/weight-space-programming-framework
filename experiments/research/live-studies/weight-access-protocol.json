@@ -1,0 +1,101 @@
+{
+  "schema": "wsp-live-study-protocol/1",
+  "frozen_at_utc": "2026-11-09T02:04:24.108429+00:00",
+  "designation": "resource-capped estimation; locally frozen, not externally preregistered",
+  "provider": {
+    "name": "openai",
+    "requested_model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "timeout_seconds": 180,
+    "native_tools": "disabled",
+    "retries": 0,
+    "deployment_revision_exposed": false,
+    "hidden_model_computation_observed": false,
+    "subscription_cost_usd": null
+  },
+  "lineages": [
+    "banking77-main-full-7001",
+    "banking77-main-full-7002",
+    "banking77-main-full-7003",
+    "banking77-main-full-7004",
+    "banking77-main-full-7005",
+    "banking77-main-full-7006"
+  ],
+  "task_selection": "Fixed public semantic labels chosen without looking at these families' error tables or any heldout outcomes; disjoint from the four pilot-selected support families",
+  "target_names": [
+    "pending_bank_transfer",
+    "card_payment_wrong_exchange_rate"
+  ],
+  "matched_context": [
+    "trained affine readout architecture",
+    "ordered feature and output names",
+    "native float32 semantics",
+    "fixed output-to-queue mapping",
+    "encoder and preprocessing identities",
+    "explicit target policy",
+    "up to four target-role labeled feature rows",
+    "up to eight protected-role labeled feature rows"
+  ],
+  "forbidden_context": [
+    "clean or planted mechanism identity",
+    "pilot confusion tables",
+    "fitted configurations or candidate deltas",
+    "evaluation features/labels/predictions",
+    "natural-language descriptions of an injected location"
+  ],
+  "parameter_views": [
+    "none",
+    "summary",
+    "rounded",
+    "subset",
+    "exact"
+  ],
+  "rounded_decimals": 3,
+  "subset_rule": "Every eighth hidden feature in every output row plus every output bias; coordinates fixed by shape, not observed values",
+  "primary_repeats": 1,
+  "additional_repeat_lineages": [
+    "banking77-main-full-7001",
+    "banking77-main-full-7002"
+  ],
+  "single_response_selection": "One candidate or explicit abstention; command and answer payload are committed before the trusted harness submits and seals an opaque handle. No endpoint/candidate feedback is sent to the proposer",
+  "primary_regime": "Native-tool-free JSON-only proposer; no brokered forward, target execution, regression, optimizer or fitting. Unobserved internal arithmetic cannot substantiate a semantic no-inference claim",
+  "selection_data": "Only verified lineage.json and its training file allowlist copied to a fresh selection-only directory. evaluation-features files are never copied or read before the new global selection seal",
+  "evaluation": "Native Torch CPU float32 affine head on evaluator-only novel official-test exact-request groups; original official full test secondary; queue accuracy, target gain, protected net harm, decision flips and per-label harms separately",
+  "useful_margins": {
+    "target_gain": 0.1,
+    "maximum_protected_net_harm": 0.01,
+    "useful_coverage": 0.75
+  },
+  "margin_rationale": "Project feasibility thresholds: one additional correct target route per ten requests, at most one percentage point net protected error increase, and useful repair on at least three quarters of assigned cases. These are not enterprise savings or an SLA",
+  "inference": "Average tasks/repeats within full independent training lineage; paired Student-t interval over six lineage means for the fixed request collection, paired sign-flip sensitivity, and explicitly limited first-two-lineage editor-repeat variability. No population-editor or confirmatory claim; all comparisons except the declared primary are descriptive",
+  "missingness": "All assigned provider invocations retained; failed, invalid and abstained candidates deploy their unchanged study parent and count as joint useful success false. Missing evaluation has gain/harm sensitivity [-1,1], coverage [0,1]",
+  "human_involvement": "Protocol and harness authored before provider selection; no midtrial hints, manual repair, substituted lineage or silent retry",
+  "source_lock": "Executable source, exact permitted inputs, all assignments and prompts are hashed before the first live call; any pre-call implementation amendment is recorded without changing this protocol. No post-evaluation amendment can become primary evidence",
+  "global_seal": "No heldout evaluation or intervention execution before all live selections across both studies have receipts/terminal failure and a hashed global seal",
+  "claim_limits": [
+    "Generic framework demonstrated on a trained readout; not a transformer-scale claim",
+    "The semantic context includes labels and target examples; not anonymous-weight or zero-data understanding",
+    "Configured CLI and JSON I/O restrictions are not hermetic OS/network isolation",
+    "Replay verifies declared public bytes and calculations, not a regenerated live model response"
+  ],
+  "study": "matched-weight-access",
+  "issue": 8,
+  "primary_contrast": "Exact weight access minus context-only (none) target gain, jointly requiring protected harm cap and useful coverage; exact versus summaries/rounded/subset descriptive",
+  "read_rubric": "Sealed prediction of original argmax code on the first two fixed target-role feature rows; exact code accuracy and confidence/Brier score separately from edit utility",
+  "diagnosis_rubric": "Sealed strongest competing output code and uncertainty on the same two rows; evaluator-only original native scores establish competing-code accuracy, not causal diagnosis",
+  "edit_rubric": "One literal head.weight/head.bias program or abstention; no fitted deltas supplied to primary live arms",
+  "supplementary_regimes": [
+    "brokered_analysis_only",
+    "brokered_calibration_forward",
+    "brokered_fitting_permitted"
+  ],
+  "supplementary_assignment": "First two lineages x both target families x none/exact views, one independent provider attempt per permitted regime; max three provider rounds. Supplementary regimes are kept separate from no-forward primary; analysis allows deterministic scalar/norm arithmetic only, forward exposes scores on a fixed calibration allowlist, fitting offers a frozen target/protected/ridge grid and opaque candidate only",
+  "controls": [
+    "unchanged parent",
+    "explicit policy overlay on predicted intent",
+    "identical-context cosine routing",
+    "analytic target-row bias construction (formula disclosed)",
+    "frozen ridge/soft-retention fit control in a separately fitting-permitted lane"
+  ],
+  "cost_accounting": "Provider usage/latency/error receipts, parameter values actually exposed, fixed context bytes, broker analysis/forward/fit work, attempts, selection, verification, native execution and export; missing financial amount remains unknown"
+}

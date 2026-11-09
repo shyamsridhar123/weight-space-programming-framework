@@ -1,0 +1,627 @@
+[
+  {
+    "action": "session_created",
+    "charges": {},
+    "error": null,
+    "previous_sha256": null,
+    "request": {
+      "access": {
+        "activations": false,
+        "feedback": false,
+        "forward": false,
+        "metadata": true,
+        "weight_decimals": null,
+        "weights": true
+      },
+      "architecture": "trained-frozen-readout/1",
+      "base_sha256": "71dcd56fe87bb85a3841a91fbeba794468182967efd01f8358acdd133e5d7df5",
+      "callbacks_registered": {
+        "activations": false,
+        "feedback": false,
+        "forward": false
+      },
+      "constraints_sha256": "f04fb5fdf29e7d42524b20bc65da4340a6b23efa73575b1072950576796ca3c6",
+      "declared_constraints_automatically_enforced": false,
+      "enforcement": "cooperative_same_process_interface",
+      "execution_accounting": "interface_calls_and_submitted_examples; callback_internal_work_not_observed",
+      "limits": {
+        "execution_calls": 10,
+        "execution_examples": 1000,
+        "feedback_calls": 10,
+        "feedback_examples": 1000,
+        "input_tokens": 100000,
+        "output_tokens": 100000,
+        "proposals": 1,
+        "tool_calls": 4,
+        "weight_values": 726
+      },
+      "mode": "edit",
+      "objective": "Change the derived routing decision for a frozen trained representation",
+      "schema": "wsp-session-config/1",
+      "splits": {
+        "declared_lineage_overlap": false,
+        "lineage_independence_verified": false,
+        "lineage_scope": "caller_declared_only",
+        "sample_overlap": false,
+        "schema": "wsp-split-validation/1",
+        "sha256": "c9ca1376370a5112ed472eda3f50479a713a37aa907b2b5b51d7dc5efa14699d",
+        "splits": [
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "27e34115503b510e0e98d9176c49f06d0392e5ca38808b6ac665e2fc4bb5d5dd",
+            "name": "train",
+            "sample_count": 2291
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "f0619bdcd61944a1170da1b59c2cdbf538e53e7ae16d9eb1dae18c264e844fee",
+            "name": "development",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "6bcd4109602b4a308a8e1746d9e7eb8d92f29b67cf5e4c68bf039fadc608020c",
+            "name": "target",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "97ed332e5be176e20232e4a4c9243886f210c3dcfa7c262bdce7307fe56ab9f1",
+            "name": "protected",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "2d1989e5a8c6c9229594e9f751ec6c39313bacee19d1f1ba863c03b84ccb6aff",
+            "name": "calibration",
+            "sample_count": 401
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "815bbcacc5c9672298d42afe83dec7c49883d769bfad2c80facfb84a7fc73376",
+            "name": "test",
+            "sample_count": 1797
+          }
+        ]
+      },
+      "task_id": "optical-digits-pilot-full-7902/ownership/8/nullspace",
+      "task_sha256": "e363b8364678d477fc8594bfadebc6a7f3b384b9674be59f419ff2eafc35ef26",
+      "token_accounting": "provider_supplied_not_locally_measured"
+    },
+    "requested_charges": {},
+    "result": {},
+    "schema": "wsp-trace-event/1",
+    "sequence": 0,
+    "session_sha256": "af33946b3251c83e88b6f3a176c6941a5a2517a65353995698e688601794b66b",
+    "sha256": "afdfbc8a00f734ac810c9cb3030de8904bdf5e1c9cd9a79a70ef8505287754cb",
+    "status": "succeeded",
+    "task_sha256": "e363b8364678d477fc8594bfadebc6a7f3b384b9674be59f419ff2eafc35ef26",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 0,
+      "weight_values": 0
+    }
+  },
+  {
+    "action": "metadata",
+    "charges": {
+      "tool_calls": 1
+    },
+    "error": null,
+    "previous_sha256": "afdfbc8a00f734ac810c9cb3030de8904bdf5e1c9cd9a79a70ef8505287754cb",
+    "request": {},
+    "requested_charges": {
+      "tool_calls": 1
+    },
+    "result": {
+      "artifact": {
+        "architecture": "trained-frozen-readout/1",
+        "metadata": {
+          "domain": "optical-digits",
+          "encoder_semantics": "Supervised float32 affine/ReLU bottleneck; frozen after development-selected epoch",
+          "encoder_sha256": "703567357e279077317d6b3ae734a81ce794e1d80b869a7e6d5ab166e904a7ee",
+          "feature_id": "8f546316c7b8a94d28f44f229211f320c12a70e1914ebf50d93e7e25436504a7",
+          "feature_names": [
+            "h000",
+            "h001",
+            "h002",
+            "h003",
+            "h004",
+            "h005",
+            "h006",
+            "h007",
+            "h008",
+            "h009",
+            "h010",
+            "h011",
+            "h012",
+            "h013",
+            "h014",
+            "h015",
+            "h016",
+            "h017",
+            "h018",
+            "h019",
+            "h020",
+            "h021",
+            "h022",
+            "h023",
+            "h024",
+            "h025",
+            "h026",
+            "h027",
+            "h028",
+            "h029",
+            "h030",
+            "h031"
+          ],
+          "head_semantics": "float32 affine output codes; queue decision maps the deterministic lowest-index argmax code",
+          "lineage_seed": 7902,
+          "native_dtype": "float32",
+          "output_names": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "specialist_routing_code"
+          ],
+          "preprocessing_sha256": "8d0585a2e0c6e3218132893bd77c6ef98b04a05b9206173a218aaaa66595f921",
+          "pretraining_ancestry": "Independent encoder and head initialized and supervised-trained from scratch; no pretrained model"
+        },
+        "sha256": "71dcd56fe87bb85a3841a91fbeba794468182967efd01f8358acdd133e5d7df5",
+        "tensors": {
+          "head.bias": {
+            "dtype": "float64",
+            "shape": [
+              11
+            ]
+          },
+          "head.weight": {
+            "dtype": "float64",
+            "shape": [
+              11,
+              32
+            ]
+          }
+        }
+      },
+      "constraints_status": "declared_context_not_automatically_enforced",
+      "task": {
+        "architecture": "trained-frozen-readout/1",
+        "base_sha256": "71dcd56fe87bb85a3841a91fbeba794468182967efd01f8358acdd133e5d7df5",
+        "constraints": {
+          "arm": "nullspace",
+          "behavioral_admission": "frozen finite calibration samples; no whole-domain guarantee",
+          "case": {
+            "case_id": "ownership/8",
+            "desired_code": 10,
+            "desired_queue": 10,
+            "selection": "fixed before pilot; no official test opened",
+            "target_label": 8,
+            "target_name": "8",
+            "type": "ownership"
+          },
+          "configuration": {},
+          "margins": {
+            "maximum_protected_harm": 0.01,
+            "minimum_target_gain": 0.1,
+            "minimum_useful_coverage": 0.75
+          },
+          "nullspace_additional_contract": "exact real-score equality on stored anchors",
+          "numeric_lane": "native Torch CPU float32 readout",
+          "protected_feature_sha256": "01c37803f0b0e2107dd562506dcef960917839c9f4037a4a8b7c2c3d80b9d7d8",
+          "structural_policy": {
+            "max_change_abs": 256.0,
+            "max_edits": 363,
+            "max_parameter_abs": 256.0,
+            "writable": [
+              "head.weight",
+              "head.bias"
+            ]
+          },
+          "target_feature_sha256": "f6bd2928ecc70e89bc3e0777272ab7de1ec9a9958dc46b0c8571beb9f42d84c5"
+        },
+        "mode": "edit",
+        "objective": "Change the derived routing decision for a frozen trained representation",
+        "schema": "wsp-task/1",
+        "task_id": "optical-digits-pilot-full-7902/ownership/8/nullspace"
+      }
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 1,
+    "session_sha256": "af33946b3251c83e88b6f3a176c6941a5a2517a65353995698e688601794b66b",
+    "sha256": "9ed24b12288fa20524db708d61339b93e2495b0e1fc3f97c4ee58eb9932bc973",
+    "status": "succeeded",
+    "task_sha256": "e363b8364678d477fc8594bfadebc6a7f3b384b9674be59f419ff2eafc35ef26",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 1,
+      "weight_values": 0
+    }
+  },
+  {
+    "action": "propose_program",
+    "charges": {
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 363
+    },
+    "error": null,
+    "previous_sha256": "9ed24b12288fa20524db708d61339b93e2495b0e1fc3f97c4ee58eb9932bc973",
+    "request": {
+      "parser": "typed_program_or_wsp-program/1",
+      "program": {
+        "base_sha256": "71dcd56fe87bb85a3841a91fbeba794468182967efd01f8358acdd133e5d7df5",
+        "edits": [
+          {
+            "after": 2.6274073635785156e-27,
+            "before": 0.0,
+            "index": [
+              10,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.668451407157134e-27,
+            "before": 0.0,
+            "index": [
+              10,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.1020400598281044e-29,
+            "before": 0.0,
+            "index": [
+              10,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -7.9576709740859e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -2.45377437986527e-12,
+            "before": 0.0,
+            "index": [
+              10,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0421420670869708e-12,
+            "before": 0.0,
+            "index": [
+              10,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 5.3011857276140315e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              6
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 5.5960966392432435e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              7
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.5319114000435858e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              8
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -8.619410873327632e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              9
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 6.948842869161617e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              10
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -7.8650120770489995e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              11
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0592727361031544e-27,
+            "before": 0.0,
+            "index": [
+              10,
+              12
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 5.96578645520123e-15,
+            "before": 0.0,
+            "index": [
+              10,
+              13
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 9.20243698951384e-15,
+            "before": 0.0,
+            "index": [
+              10,
+              14
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -3.591293319042503e-14,
+            "before": 0.0,
+            "index": [
+              10,
+              15
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -5.857195560813808e-14,
+            "before": 0.0,
+            "index": [
+              10,
+              16
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -2.658658341224418e-13,
+            "before": 0.0,
+            "index": [
+              10,
+              17
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 4.641417138041001e-29,
+            "before": 0.0,
+            "index": [
+              10,
+              18
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -3.5234515183637755e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              19
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 2.6842713600032723e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              20
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -4.548169267552983e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              21
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.2106570086711788e-13,
+            "before": 0.0,
+            "index": [
+              10,
+              22
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -3.541528296821794e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              23
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -5.419652326646964e-29,
+            "before": 0.0,
+            "index": [
+              10,
+              24
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 8.738136750679328e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              25
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -2.397347520594677e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              26
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -2.9085177353017292e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              27
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 3.760606439114488e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              28
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -5.362549707502098e-29,
+            "before": 0.0,
+            "index": [
+              10,
+              29
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 6.422308066840729e-28,
+            "before": 0.0,
+            "index": [
+              10,
+              30
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.496252570233873e-25,
+            "before": 0.0,
+            "index": [
+              10,
+              31
+            ],
+            "tensor": "head.weight"
+          }
+        ],
+        "intent": "Trained task nullspace repair of routing code 10",
+        "schema": "wsp-program/1"
+      },
+      "program_sha256": "b9943e8166feef82903ca855b9f0f7bfad0f7aec1e33e1614e0a982445a32b1b",
+      "proposal_type": "Program"
+    },
+    "requested_charges": {
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 363
+    },
+    "result": {
+      "artifact_sha256": "3c197a705cc0fd7a32b5af1a14e6929ff79bb2763578a16c418c17839674afb6",
+      "candidate_sha256": "599c1d6857e97a8f4ae50134a92123d99063239db940a0cc3566be58e97000f6",
+      "no_op": false
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 2,
+    "session_sha256": "af33946b3251c83e88b6f3a176c6941a5a2517a65353995698e688601794b66b",
+    "sha256": "97ed13761b8ef3b101a43b8a1c01d1309d88cbcee30fdac0fe5bf5adc2096c88",
+    "status": "succeeded",
+    "task_sha256": "e363b8364678d477fc8594bfadebc6a7f3b384b9674be59f419ff2eafc35ef26",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 2,
+      "weight_values": 363
+    }
+  },
+  {
+    "action": "seal",
+    "charges": {},
+    "error": null,
+    "previous_sha256": "97ed13761b8ef3b101a43b8a1c01d1309d88cbcee30fdac0fe5bf5adc2096c88",
+    "request": {
+      "candidate_sha256": null
+    },
+    "requested_charges": {},
+    "result": {
+      "selection": "abstained"
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 3,
+    "session_sha256": "af33946b3251c83e88b6f3a176c6941a5a2517a65353995698e688601794b66b",
+    "sha256": "d3ecf2fc2b56f044d2783f01e902b8b9c943855f7ed3bdd726d9ce8bc542f7bc",
+    "status": "succeeded",
+    "task_sha256": "e363b8364678d477fc8594bfadebc6a7f3b384b9674be59f419ff2eafc35ef26",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 2,
+      "weight_values": 363
+    }
+  }
+]

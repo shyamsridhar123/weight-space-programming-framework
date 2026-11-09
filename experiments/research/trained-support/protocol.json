@@ -1,0 +1,359 @@
+{
+  "all_assigned": "All lineage x case x arm assignments, including failures, rejected edits, no-op artifacts and abstentions; admission failure deploys unchanged parent with zero target gain/harm and joint success false",
+  "arms": [
+    "unchanged",
+    "overlay",
+    "context",
+    "target_only",
+    "soft",
+    "nullspace",
+    "decision",
+    "retrain"
+  ],
+  "budgets": {
+    "cpu_torch_threads": 4,
+    "full_main_lineages": 6,
+    "live_provider_calls": 0,
+    "maximum_selected_candidates_per_case_arm": 1,
+    "maximum_training_epochs_per_lineage": 35,
+    "protected_anchor_rows_per_case": 128,
+    "training_timeout_policy": "Failure retains assigned main seed; no substitute seed"
+  },
+  "candidate_selection": "Frozen grid; calibration protected cap first, then target gain minus protected harm, then smaller harm and larger gain; first index tie",
+  "cases": [
+    {
+      "case_id": "ownership/card_arrival",
+      "desired_code": 77,
+      "desired_queue": 5,
+      "selection": "fixed before pilot; no official test opened",
+      "target_label": 0,
+      "target_name": "card_arrival",
+      "type": "ownership"
+    },
+    {
+      "case_id": "ownership/pending_cash_withdrawal",
+      "desired_code": 77,
+      "desired_queue": 5,
+      "selection": "fixed before pilot; no official test opened",
+      "target_label": 5,
+      "target_name": "pending_cash_withdrawal",
+      "type": "ownership"
+    },
+    {
+      "case_id": "recognition/top_up_by_bank_transfer_charge",
+      "confused_with": "top_up_by_card_charge",
+      "desired_code": 15,
+      "desired_queue": 2,
+      "pilot_development_confusion_events": 9,
+      "pilot_development_error_rates": [
+        0.2727272727272727,
+        0.2727272727272727,
+        0.2727272727272727
+      ],
+      "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+      "target_label": 15,
+      "target_name": "top_up_by_bank_transfer_charge",
+      "type": "recognition"
+    },
+    {
+      "case_id": "recognition/atm_support",
+      "confused_with": "visa_or_mastercard",
+      "desired_code": 36,
+      "desired_queue": 1,
+      "pilot_development_confusion_events": 7,
+      "pilot_development_error_rates": [
+        0.25,
+        0.125,
+        0.5
+      ],
+      "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+      "target_label": 36,
+      "target_name": "atm_support",
+      "type": "recognition"
+    }
+  ],
+  "cost_scope": "Acquisition/preparation, full parent encoder training, all proposal options and selection, exact verification, native/binary64 execution, storage/export and rollback are charged separately; wall times are CPU/environment estimates, not operational savings",
+  "decision_rule": "Lowest-index argmax original-intent/specialist output followed by fixed derived queue mapping; overlay sees predicted code, never truth",
+  "designation": "resource-capped estimation; main is heldout evaluation but not a sufficiently powered confirmation",
+  "domain": "banking77",
+  "encoder_training": {
+    "batch_size": 256,
+    "epoch_selection": "highest development original-intent accuracy, earliest tie",
+    "epochs": 35,
+    "hidden": 64,
+    "learning_rate": 0.015,
+    "weight_decay": 0.001
+  },
+  "evaluation_missingness": "Any missing target/protected evaluation or failed lineage is retained, joint success false; sensitivity imputes missing gain [-1,+1], harm [-1,+1], success [0,1]",
+  "exact_contract": "Numerical nullspace is diagnostic; hard lane additionally requires exact dyadic zero anchor residual on the realized float32 endpoint",
+  "fitting_grid": {
+    "context_cosine_threshold": [
+      0.65,
+      0.75,
+      0.85,
+      0.95
+    ],
+    "decision_penalty": [
+      8.0,
+      64.0
+    ],
+    "decision_steps": 150,
+    "nullspace_relative_cutoff": 1e-12,
+    "retrain_epochs": 12,
+    "retrain_target_oversampling": [
+      2,
+      8
+    ],
+    "soft_retention_weight": [
+      1.0,
+      8.0,
+      64.0
+    ],
+    "soft_ridge": 0.01,
+    "target_only_ridge": [
+      0.01,
+      0.1
+    ]
+  },
+  "freeze_kind": "local executable source and benchmark protocol, not externally preregistered",
+  "frozen_at_utc": "2026-11-09T01:51:53.423462+00:00",
+  "inference": "Two-sided 95% paired Student t over six full lineage means, conditional on fixed requests; independently seeded exact-group crossed bootstrap is a sensitivity estimate. No population-editor inference; few-lineage uncertainty remains",
+  "lineage_unit": "Complete encoder and head initialized/trained independently from scratch; preprocessing and request sets shared across lineages",
+  "main_seeds": [
+    7001,
+    7002,
+    7003,
+    7004,
+    7005,
+    7006
+  ],
+  "margin_rationale": {
+    "maximum_protected_harm": "Project feasibility cap: at most one percentage point net protected queue error increase, with decision flip and per-intent harms reported separately. Improvements cannot conceal those diagnostics.",
+    "minimum_target_gain": "Project feasibility criterion: ten percentage points means at least one additional correct diversion per ten target requests; pilot target-role resolution and SD are reported. This is not an enterprise SLA or measured savings threshold.",
+    "minimum_useful_coverage": "At least three quarters of all assigned cases should meet gain and harm jointly; independent-lineage confidence limits prevent a six-lineage confirmation claim."
+  },
+  "margins": {
+    "maximum_protected_harm": 0.01,
+    "minimum_target_gain": 0.1,
+    "minimum_useful_coverage": 0.75
+  },
+  "multiplicity": "One prespecified primary soft-vs-overlay recognition target contrast with protected-harm condition; every other arm/case/domain comparison is descriptive, with no familywise confirmatory discovery claim",
+  "official_test_count": 3080,
+  "official_test_use": "No test parsing until every main candidate and task is sealed and a global seal ledger is hashed",
+  "pilot_seeds": [
+    6901,
+    6902,
+    6903
+  ],
+  "pilot_sha256": "0a5038d01c811eccf655fc722ae089028e86c30afd7212999df06b9c73538e88",
+  "planned_sample_size": {
+    "claim_limit": "Pilot selection reuses development/calibration and has only three independent lineages; main estimates do not satisfy a confirmatory success gate",
+    "coverage_bound_formula": "Two-sided exact binomial lower bound for n/n successes is .025**(1/n); n is independent full lineage, never request rows or cases",
+    "coverage_minimum_even_if_all_lineages_succeed": 13,
+    "designation": "resource-capped estimation; insufficient independent lineages for the coverage criterion even if every lineage succeeds",
+    "margins": {
+      "maximum_protected_harm": 0.01,
+      "minimum_target_gain": 0.1,
+      "minimum_useful_coverage": 0.75
+    },
+    "maximum_lower_coverage_bound_with_6_lineages": 0.5407418735600995,
+    "nominal_power": 0.8,
+    "normal_approximation_formula": "ceil(((z_.975 + z_.80) * paired lineage SD / effect margin)^2); not a finite-n power guarantee",
+    "pilot_independent_lineages": 3,
+    "pilot_lineage_protected_contrasts": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pilot_lineage_target_contrasts": [
+      0.0,
+      0.0,
+      0.1875
+    ],
+    "pilot_protected_sd": 0.0,
+    "pilot_reused_for_confirmation": false,
+    "pilot_target_sd": 0.10825317547305482,
+    "pilot_variance_scope": "Three independent full encoder/head training lineages; shared fixed requests, selection-reused development diagnostics",
+    "planned_main_lineages": 6,
+    "primary_contrast": "soft retention minus unchanged-intent overlay on recognition repairs, averaged within full training lineage",
+    "required_lineages_point_sd_protected": 2,
+    "required_lineages_point_sd_target": 10,
+    "required_lineages_upper_sd_protected": 2,
+    "required_lineages_upper_sd_target": 180,
+    "schema": "wsp-trained-sample-planning/1",
+    "sd_sensitivity": [
+      {
+        "multiplier": 1.0,
+        "protected_lineages": 2,
+        "target_lineages": 10
+      },
+      {
+        "multiplier": 2.0,
+        "protected_lineages": 2,
+        "target_lineages": 37
+      },
+      {
+        "multiplier": 4.0,
+        "protected_lineages": 8,
+        "target_lineages": 148
+      }
+    ],
+    "two_sided_alpha": 0.05,
+    "upper_sd_multiplier_95_df2": 4.4153964427017955,
+    "zero_variance_boundary": "Three equal pilot outcomes cannot establish zero future variance; sensitivity floors are explicit .025 gain/.0025 harm, not observed SD"
+  },
+  "primary_contrast": "soft retention minus unchanged-intent overlay on recognition repairs, averaged within full training lineage",
+  "raw_acquisition_hashes": {
+    "banking77/LICENSE": {
+      "bytes": 18650,
+      "sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661"
+    },
+    "banking77/banking_data/categories.json": {
+      "bytes": 2036,
+      "sha256": "53261da888122daf2d120d925458631d9619e15d82e56052e7a42e535ce32b63"
+    },
+    "banking77/banking_data/test.csv": {
+      "bytes": 239961,
+      "sha256": "d12d6e3bc4c3103966ae786dc435913c0c563dfa328f5a3646d0e62cfeeb474d"
+    },
+    "banking77/banking_data/train.csv": {
+      "bytes": 839073,
+      "sha256": "b06e26ac675513959a63135f11b94ea7786ed02da65db93a5650d8838cbc664b"
+    },
+    "clinc-oos/LICENSE": {
+      "bytes": 19467,
+      "sha256": "e6bc9e9c474700b708f568bac9e5a8a9bcb2b1dad53442f5ba449fcb848b8e76"
+    },
+    "clinc-oos/data/data_full.json": {
+      "bytes": 2495390,
+      "sha256": "36923c3705a59e08fe9c3883d8bc2dd966ef93e22cb78ac41171782a698d56e0"
+    }
+  },
+  "raw_publication": "No acquired raw query or image observations in repo; publish derived trained features/model arrays and source/license notices for attributed datasets",
+  "request_units": "Exact normalized-text or identical-image duplicate groups; shared groups are crossed observations, semantic independence is not proved",
+  "review_date_local": "2026-11-08",
+  "role_assignment": "Hash-sort whole normalized exact-duplicate groups stratified by first label, .60/.10/.10/.10/remainder train/development/target/protected/calibration; cross-label groups audited",
+  "sample_planning_sha256": "a9ac0d06caa6732d8e7905c0878f5c420e2bc7f94788ad27162fd2c3fbb36af9",
+  "schema": "wsp-trained-protocol/1",
+  "source_files": {
+    "rlcd/__init__.py": {
+      "bytes": 71,
+      "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+    },
+    "rlcd/weight_space/__init__.py": {
+      "bytes": 2836,
+      "sha256": "1fc45e6b5185ea123d04630ab69f94aa7d65a8cba6e5deb78736f351f465ab12"
+    },
+    "rlcd/weight_space/__main__.py": {
+      "bytes": 17017,
+      "sha256": "658fde770befb592cd110ef5ea83ef9a39d3d97137b65e2f29b9028ed50a5377"
+    },
+    "rlcd/weight_space/adapters.py": {
+      "bytes": 2631,
+      "sha256": "87cc20844b8be1354255c2bdb21130911439f60c3cc268cbce54211a29624dd4"
+    },
+    "rlcd/weight_space/artifact.py": {
+      "bytes": 7735,
+      "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+    },
+    "rlcd/weight_space/benchmarks.py": {
+      "bytes": 15545,
+      "sha256": "3edb4f2120572aa8da92078d19c45a2d4cd494191468a893cef46a410e419983"
+    },
+    "rlcd/weight_space/broker.py": {
+      "bytes": 13310,
+      "sha256": "c3ba7be6005b12bf7a42aae76b41948726e05fb854744e7d3d835ae6d3e87373"
+    },
+    "rlcd/weight_space/compiler.py": {
+      "bytes": 3928,
+      "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+    },
+    "rlcd/weight_space/contracts.py": {
+      "bytes": 43906,
+      "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+    },
+    "rlcd/weight_space/demo.py": {
+      "bytes": 4776,
+      "sha256": "26b12f4b19e1656faec2377cb2a7725f4847f37a3633d762a8e1f45f5ac5a0b6"
+    },
+    "rlcd/weight_space/evidence.py": {
+      "bytes": 8003,
+      "sha256": "69c5e8479ce7797de7ef182a4fd1229124c83bfb4fc86ccbfbb14edc1984420d"
+    },
+    "rlcd/weight_space/experiments.py": {
+      "bytes": 14118,
+      "sha256": "72135f830bd7d662bbdf7a9b254712105ff70b00a253ea08a90238f08989ff0a"
+    },
+    "rlcd/weight_space/features.py": {
+      "bytes": 11915,
+      "sha256": "3293e01e4524eb7af5b58d7eba344a0090c6fc3f95488db6486d9379ee323f8b"
+    },
+    "rlcd/weight_space/live_provider.py": {
+      "bytes": 16451,
+      "sha256": "db7ccfb62ba6e09b326b6b868ec1d6a6f9765ed1fb329af522cb0e2ec31318cf"
+    },
+    "rlcd/weight_space/model.py": {
+      "bytes": 9944,
+      "sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+    },
+    "rlcd/weight_space/program.py": {
+      "bytes": 6317,
+      "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+    },
+    "rlcd/weight_space/proof_bridge.py": {
+      "bytes": 27333,
+      "sha256": "f8d4c667a515f7c8e39f23abb7d4cb85d3e2d957e25033cd78ec8f4b2a2e8b93"
+    },
+    "rlcd/weight_space/research_tasks.py": {
+      "bytes": 26902,
+      "sha256": "aadeaedc8cb8a3f0ba4220b25b8b6d701cef5890b4ba39e44ad3e8265fba48fb"
+    },
+    "rlcd/weight_space/rts_study.py": {
+      "bytes": 17923,
+      "sha256": "a284b4e77e4bb57b704271ca170f7b29e7139e333d8dc17a663d4096fabaa476"
+    },
+    "rlcd/weight_space/runtime_research.py": {
+      "bytes": 15940,
+      "sha256": "6b961bba8b396fdc9343da5e57beb610f8c25450291f513de58102cb36a7a951"
+    },
+    "rlcd/weight_space/semantics.py": {
+      "bytes": 6727,
+      "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+    },
+    "rlcd/weight_space/sequential.py": {
+      "bytes": 9106,
+      "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+    },
+    "rlcd/weight_space/structured.py": {
+      "bytes": 26202,
+      "sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+    },
+    "rlcd/weight_space/study_tasks_v2.py": {
+      "bytes": 20140,
+      "sha256": "cf944710cce88a70c400b713b76b699446b1ba47747121ac58f31316fbb01233"
+    },
+    "rlcd/weight_space/study_v2.py": {
+      "bytes": 46314,
+      "sha256": "a1ffd5840d4beb4d7b8f827552a38ae192f300e32809233a1b58681c147bdb3e"
+    },
+    "rlcd/weight_space/symmetry.py": {
+      "bytes": 6034,
+      "sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+    },
+    "rlcd/weight_space/torch_bridge.py": {
+      "bytes": 9678,
+      "sha256": "b532de9574bb13c4c918656cba21ff2e9da61ea2c9aca1a6394376bb64696cda"
+    },
+    "rlcd/weight_space/workflow.py": {
+      "bytes": 39208,
+      "sha256": "72f82f90cdad7c7dae559da331515506bd072fc8bb5450155cf5ab221668c520"
+    },
+    "scripts/run_trained_research.py": {
+      "bytes": 77994,
+      "sha256": "19c1ff60a0df0631e9348cbaec81651059907ed20e230f5570c659c32ac023d4"
+    }
+  },
+  "source_manifest_sha256": "bf9a8a0a6c56fc489a3380891f08db80271e7c40b2de68efa2afb17249c01ee1",
+  "stress": "BANKING77 fixed development confusion neighbors and heldout near-intent metrics; CLINC oos_test only after seal as OOD dispatch/confidence stress with unrelated labels. No authored paraphrase, multi-intent, or blinded enterprise validation claim",
+  "test_overlap_policy": "Primary novel-row analysis excludes normalized exact duplicate groups seen anywhere in official training roles; full official test secondary. Exclusion keys are fixed before labels/outcomes, exact and token-set overlaps audited after sealing; no semantic near-duplicate claim"
+}

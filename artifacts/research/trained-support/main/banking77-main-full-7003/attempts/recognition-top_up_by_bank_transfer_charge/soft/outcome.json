@@ -1,0 +1,2311 @@
+{
+  "abstained": true,
+  "abstention_reasons": [
+    "calibration-target-gain"
+  ],
+  "admitted": false,
+  "arm": "soft",
+  "assigned": true,
+  "candidate_artifact_sha256": "355529bc899b396f89e398b87bf2ec37103d4d54986d340b5e19d1869fb1928a",
+  "case": {
+    "case_id": "recognition/top_up_by_bank_transfer_charge",
+    "confused_with": "top_up_by_card_charge",
+    "desired_code": 15,
+    "desired_queue": 2,
+    "pilot_development_confusion_events": 9,
+    "pilot_development_error_rates": [
+      0.2727272727272727,
+      0.2727272727272727,
+      0.2727272727272727
+    ],
+    "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+    "target_label": 15,
+    "target_name": "top_up_by_bank_transfer_charge",
+    "type": "recognition"
+  },
+  "cost": {
+    "binary64_head_evaluation_seconds": 0.003998200001660734,
+    "exact_application_rollback_verification_seconds": 1.0134084000019357,
+    "fit_seconds_all_options": 3.0713330999715254,
+    "fit_selection_materialization_seconds": 3.2003329999861307,
+    "heldout_export_seconds": 0.025501099997200072,
+    "heldout_workflow_seconds": 1.0823990000062622,
+    "native_head_evaluation_seconds": 0.0030242999782785773,
+    "storage_bytes_pre_outcome": 684646
+  },
+  "evaluation_missing": false,
+  "evaluation_receipt_sha256": "a96cce46b481fe6dc1923c36029371a0e46d69968b7224d3d10847b5e9dbc2d8",
+  "evaluation_receipt_status": "abstained",
+  "external_intervention": false,
+  "global_seal_sha256": "0df0d9d763c4f89b8ecb50946b8711475af109e4398a7a1989b351584af172e2",
+  "lineage_id": "banking77-main-full-7003",
+  "no_op_artifact": false,
+  "predictions_sha256": "778096dab7d64c18b6fc0eb384de9efa73d25c2ac9992a6e5e60e65b2f7da91a",
+  "protocol_sha256": "41179db4fe54abc187c6255526c4705ff67a8d69236e0f3a798a647a94154ded",
+  "result": {
+    "all_assigned_policy": "Rejected/failed/abstaining candidate deploys unchanged parent, joint success false",
+    "candidate_diagnostic_only": {
+      "admitted": false,
+      "primary_novel": {
+        "parent_protected_error": 0.05406301824212272,
+        "parent_target_accuracy": 0.95,
+        "per_label": [
+          {
+            "label": 0,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 1,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 2,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 3,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 4,
+            "parent_queue_accuracy": 0.9,
+            "queue_accuracy": 0.9,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 5,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 6,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 7,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 8,
+            "parent_queue_accuracy": 0.9743589743589743,
+            "queue_accuracy": 0.9743589743589743,
+            "queue_flips": 0,
+            "rows": 39
+          },
+          {
+            "label": 9,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 10,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 11,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 12,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 13,
+            "parent_queue_accuracy": 0.9743589743589743,
+            "queue_accuracy": 0.9743589743589743,
+            "queue_flips": 0,
+            "rows": 39
+          },
+          {
+            "label": 14,
+            "parent_queue_accuracy": 0.725,
+            "queue_accuracy": 0.725,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 15,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 16,
+            "parent_queue_accuracy": 0.8974358974358975,
+            "queue_accuracy": 0.8974358974358975,
+            "queue_flips": 0,
+            "rows": 39
+          },
+          {
+            "label": 17,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 18,
+            "parent_queue_accuracy": 0.9428571428571428,
+            "queue_accuracy": 0.9428571428571428,
+            "queue_flips": 0,
+            "rows": 35
+          },
+          {
+            "label": 19,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 20,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 21,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 22,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 23,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 24,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 38
+          },
+          {
+            "label": 25,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 26,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 27,
+            "parent_queue_accuracy": 0.875,
+            "queue_accuracy": 0.875,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 28,
+            "parent_queue_accuracy": 0.9743589743589743,
+            "queue_accuracy": 0.9743589743589743,
+            "queue_flips": 0,
+            "rows": 39
+          },
+          {
+            "label": 29,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 30,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 31,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 32,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 33,
+            "parent_queue_accuracy": 0.85,
+            "queue_accuracy": 0.85,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 34,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 35,
+            "parent_queue_accuracy": 0.8717948717948718,
+            "queue_accuracy": 0.8717948717948718,
+            "queue_flips": 0,
+            "rows": 39
+          },
+          {
+            "label": 36,
+            "parent_queue_accuracy": 0.9743589743589743,
+            "queue_accuracy": 0.9743589743589743,
+            "queue_flips": 0,
+            "rows": 39
+          },
+          {
+            "label": 37,
+            "parent_queue_accuracy": 0.75,
+            "queue_accuracy": 0.75,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 38,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 39,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 40,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 41,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 42,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 43,
+            "parent_queue_accuracy": 0.725,
+            "queue_accuracy": 0.725,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 44,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 45,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 46,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 47,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 48,
+            "parent_queue_accuracy": 0.65,
+            "queue_accuracy": 0.65,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 49,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 50,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 51,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 52,
+            "parent_queue_accuracy": 0.9487179487179487,
+            "queue_accuracy": 0.9487179487179487,
+            "queue_flips": 0,
+            "rows": 39
+          },
+          {
+            "label": 53,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 39
+          },
+          {
+            "label": 54,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 55,
+            "parent_queue_accuracy": 0.8974358974358975,
+            "queue_accuracy": 0.8974358974358975,
+            "queue_flips": 0,
+            "rows": 39
+          },
+          {
+            "label": 56,
+            "parent_queue_accuracy": 0.9,
+            "queue_accuracy": 0.9,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 57,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 39
+          },
+          {
+            "label": 58,
+            "parent_queue_accuracy": 0.85,
+            "queue_accuracy": 0.85,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 59,
+            "parent_queue_accuracy": 0.9743589743589743,
+            "queue_accuracy": 0.9743589743589743,
+            "queue_flips": 0,
+            "rows": 39
+          },
+          {
+            "label": 60,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 61,
+            "parent_queue_accuracy": 0.8461538461538461,
+            "queue_accuracy": 0.8461538461538461,
+            "queue_flips": 0,
+            "rows": 39
+          },
+          {
+            "label": 62,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 63,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 64,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 65,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 66,
+            "parent_queue_accuracy": 0.9166666666666666,
+            "queue_accuracy": 0.9166666666666666,
+            "queue_flips": 0,
+            "rows": 36
+          },
+          {
+            "label": 67,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 68,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 69,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.9,
+            "queue_flips": 1,
+            "rows": 40
+          },
+          {
+            "label": 70,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 0.925,
+            "queue_flips": 3,
+            "rows": 40
+          },
+          {
+            "label": 71,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 72,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 73,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 74,
+            "parent_queue_accuracy": 0.9743589743589743,
+            "queue_accuracy": 0.9743589743589743,
+            "queue_flips": 0,
+            "rows": 39
+          },
+          {
+            "label": 75,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 76,
+            "parent_queue_accuracy": 0.9487179487179487,
+            "queue_accuracy": 0.9487179487179487,
+            "queue_flips": 0,
+            "rows": 39
+          }
+        ],
+        "protected_decision_flip_rate": 0.0013266998341625207,
+        "protected_error": 0.05538971807628524,
+        "protected_harm": 0.0013266998341625207,
+        "protected_rows": 3015,
+        "target_accuracy": 0.95,
+        "target_gain": 0.0,
+        "target_rows": 40
+      },
+      "scope": "Sealed candidate diagnostic; rejected outcomes cannot be used for reselection",
+      "secondary_official": {
+        "parent_protected_error": 0.05361842105263158,
+        "parent_target_accuracy": 0.95,
+        "per_label": [
+          {
+            "label": 0,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 1,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 2,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 3,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 4,
+            "parent_queue_accuracy": 0.9,
+            "queue_accuracy": 0.9,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 5,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 6,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 7,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 8,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 9,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 10,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 11,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 12,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 13,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 14,
+            "parent_queue_accuracy": 0.725,
+            "queue_accuracy": 0.725,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 15,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 16,
+            "parent_queue_accuracy": 0.9,
+            "queue_accuracy": 0.9,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 17,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 18,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 19,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 20,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 21,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 22,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 23,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 24,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 25,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 26,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 27,
+            "parent_queue_accuracy": 0.875,
+            "queue_accuracy": 0.875,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 28,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 29,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 30,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 31,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 32,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 33,
+            "parent_queue_accuracy": 0.85,
+            "queue_accuracy": 0.85,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 34,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 35,
+            "parent_queue_accuracy": 0.875,
+            "queue_accuracy": 0.875,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 36,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 37,
+            "parent_queue_accuracy": 0.75,
+            "queue_accuracy": 0.75,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 38,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 39,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 40,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 41,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 42,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 43,
+            "parent_queue_accuracy": 0.725,
+            "queue_accuracy": 0.725,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 44,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 45,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 46,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 47,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 48,
+            "parent_queue_accuracy": 0.65,
+            "queue_accuracy": 0.65,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 49,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 50,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 51,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 52,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 53,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 54,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 55,
+            "parent_queue_accuracy": 0.9,
+            "queue_accuracy": 0.9,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 56,
+            "parent_queue_accuracy": 0.9,
+            "queue_accuracy": 0.9,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 57,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 58,
+            "parent_queue_accuracy": 0.85,
+            "queue_accuracy": 0.85,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 59,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 60,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 61,
+            "parent_queue_accuracy": 0.85,
+            "queue_accuracy": 0.85,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 62,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 63,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 64,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 65,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 66,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.925,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 67,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 68,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 69,
+            "parent_queue_accuracy": 0.925,
+            "queue_accuracy": 0.9,
+            "queue_flips": 1,
+            "rows": 40
+          },
+          {
+            "label": 70,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 0.925,
+            "queue_flips": 3,
+            "rows": 40
+          },
+          {
+            "label": 71,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 72,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 73,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 74,
+            "parent_queue_accuracy": 0.975,
+            "queue_accuracy": 0.975,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 75,
+            "parent_queue_accuracy": 1.0,
+            "queue_accuracy": 1.0,
+            "queue_flips": 0,
+            "rows": 40
+          },
+          {
+            "label": 76,
+            "parent_queue_accuracy": 0.95,
+            "queue_accuracy": 0.95,
+            "queue_flips": 0,
+            "rows": 40
+          }
+        ],
+        "protected_decision_flip_rate": 0.0013157894736842105,
+        "protected_error": 0.05493421052631579,
+        "protected_harm": 0.0013157894736842105,
+        "protected_rows": 3040,
+        "target_accuracy": 0.95,
+        "target_gain": 0.0,
+        "target_rows": 40
+      }
+    },
+    "joint_useful_success": false,
+    "native_diagnostics": {
+      "binary64_lane": "NumPy binary64 affine head on stored float32 feature coordinates; not an exact real proof",
+      "candidate_float32_binary64_argmax_disagreements": 0,
+      "candidate_margin_below_1e-4": 0,
+      "candidate_margin_minimum": 0.0018448829650878906,
+      "candidate_margin_quantiles": [
+        0.0018448829650878906,
+        0.022422772645950318,
+        0.12539080381393433,
+        1.687110185623169,
+        4.118716621398925,
+        6.038592338562012
+      ],
+      "candidate_mean_head_confidence": 0.5701889434051177,
+      "lane": "Torch CPU float32 affine/ReLU encoder then affine head",
+      "maximum_candidate_score_difference": 3.145064145115839e-06,
+      "maximum_parent_score_difference": 3.145064145115839e-06,
+      "native_guarantee": false,
+      "parent_float32_binary64_argmax_disagreements": 0
+    },
+    "nearby_protected_per_label": [
+      {
+        "label": 70,
+        "parent_queue_accuracy": 1.0,
+        "queue_accuracy": 1.0,
+        "queue_flips": 0,
+        "rows": 40
+      }
+    ],
+    "ood_stress": {
+      "desired_queue_dispatch_rate": 0.093,
+      "external_confidence_boundary": "External overlay/context changes codes without a probabilistic calibration model; head confidence describes the unchanged head for those arms",
+      "head_confidence_above_.9": 0.0,
+      "label_scope": "CLINC oos_test is unrelated to BANKING77 intent/derived queue labels; no OOD routing accuracy or correct specialist assignment claimed",
+      "mean_head_confidence": 0.12476873147396922,
+      "median_head_margin": 0.29748082160949707,
+      "parent_mean_head_confidence": 0.12476873147396922,
+      "parent_specialist_dispatch_rate": 0.0,
+      "queue_flip_rate": 0.0,
+      "rows": 1000,
+      "specialist_dispatch_rate": 0.0
+    },
+    "primary_novel": {
+      "parent_protected_error": 0.05406301824212272,
+      "parent_target_accuracy": 0.95,
+      "per_label": [
+        {
+          "label": 0,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 1,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 2,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 3,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 4,
+          "parent_queue_accuracy": 0.9,
+          "queue_accuracy": 0.9,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 5,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 6,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 7,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 8,
+          "parent_queue_accuracy": 0.9743589743589743,
+          "queue_accuracy": 0.9743589743589743,
+          "queue_flips": 0,
+          "rows": 39
+        },
+        {
+          "label": 9,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 10,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 11,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 12,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 13,
+          "parent_queue_accuracy": 0.9743589743589743,
+          "queue_accuracy": 0.9743589743589743,
+          "queue_flips": 0,
+          "rows": 39
+        },
+        {
+          "label": 14,
+          "parent_queue_accuracy": 0.725,
+          "queue_accuracy": 0.725,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 15,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 16,
+          "parent_queue_accuracy": 0.8974358974358975,
+          "queue_accuracy": 0.8974358974358975,
+          "queue_flips": 0,
+          "rows": 39
+        },
+        {
+          "label": 17,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 18,
+          "parent_queue_accuracy": 0.9428571428571428,
+          "queue_accuracy": 0.9428571428571428,
+          "queue_flips": 0,
+          "rows": 35
+        },
+        {
+          "label": 19,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 20,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 21,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 22,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 23,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 24,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 38
+        },
+        {
+          "label": 25,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 26,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 27,
+          "parent_queue_accuracy": 0.875,
+          "queue_accuracy": 0.875,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 28,
+          "parent_queue_accuracy": 0.9743589743589743,
+          "queue_accuracy": 0.9743589743589743,
+          "queue_flips": 0,
+          "rows": 39
+        },
+        {
+          "label": 29,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 30,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 31,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 32,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 33,
+          "parent_queue_accuracy": 0.85,
+          "queue_accuracy": 0.85,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 34,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 35,
+          "parent_queue_accuracy": 0.8717948717948718,
+          "queue_accuracy": 0.8717948717948718,
+          "queue_flips": 0,
+          "rows": 39
+        },
+        {
+          "label": 36,
+          "parent_queue_accuracy": 0.9743589743589743,
+          "queue_accuracy": 0.9743589743589743,
+          "queue_flips": 0,
+          "rows": 39
+        },
+        {
+          "label": 37,
+          "parent_queue_accuracy": 0.75,
+          "queue_accuracy": 0.75,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 38,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 39,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 40,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 41,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 42,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 43,
+          "parent_queue_accuracy": 0.725,
+          "queue_accuracy": 0.725,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 44,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 45,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 46,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 47,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 48,
+          "parent_queue_accuracy": 0.65,
+          "queue_accuracy": 0.65,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 49,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 50,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 51,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 52,
+          "parent_queue_accuracy": 0.9487179487179487,
+          "queue_accuracy": 0.9487179487179487,
+          "queue_flips": 0,
+          "rows": 39
+        },
+        {
+          "label": 53,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 39
+        },
+        {
+          "label": 54,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 55,
+          "parent_queue_accuracy": 0.8974358974358975,
+          "queue_accuracy": 0.8974358974358975,
+          "queue_flips": 0,
+          "rows": 39
+        },
+        {
+          "label": 56,
+          "parent_queue_accuracy": 0.9,
+          "queue_accuracy": 0.9,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 57,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 39
+        },
+        {
+          "label": 58,
+          "parent_queue_accuracy": 0.85,
+          "queue_accuracy": 0.85,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 59,
+          "parent_queue_accuracy": 0.9743589743589743,
+          "queue_accuracy": 0.9743589743589743,
+          "queue_flips": 0,
+          "rows": 39
+        },
+        {
+          "label": 60,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 61,
+          "parent_queue_accuracy": 0.8461538461538461,
+          "queue_accuracy": 0.8461538461538461,
+          "queue_flips": 0,
+          "rows": 39
+        },
+        {
+          "label": 62,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 63,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 64,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 65,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 66,
+          "parent_queue_accuracy": 0.9166666666666666,
+          "queue_accuracy": 0.9166666666666666,
+          "queue_flips": 0,
+          "rows": 36
+        },
+        {
+          "label": 67,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 68,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 69,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 70,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 71,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 72,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 73,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 74,
+          "parent_queue_accuracy": 0.9743589743589743,
+          "queue_accuracy": 0.9743589743589743,
+          "queue_flips": 0,
+          "rows": 39
+        },
+        {
+          "label": 75,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 76,
+          "parent_queue_accuracy": 0.9487179487179487,
+          "queue_accuracy": 0.9487179487179487,
+          "queue_flips": 0,
+          "rows": 39
+        }
+      ],
+      "protected_decision_flip_rate": 0.0,
+      "protected_error": 0.05406301824212272,
+      "protected_harm": 0.0,
+      "protected_rows": 3015,
+      "target_accuracy": 0.95,
+      "target_gain": 0.0,
+      "target_rows": 40
+    },
+    "secondary_official": {
+      "parent_protected_error": 0.05361842105263158,
+      "parent_target_accuracy": 0.95,
+      "per_label": [
+        {
+          "label": 0,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 1,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 2,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 3,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 4,
+          "parent_queue_accuracy": 0.9,
+          "queue_accuracy": 0.9,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 5,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 6,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 7,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 8,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 9,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 10,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 11,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 12,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 13,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 14,
+          "parent_queue_accuracy": 0.725,
+          "queue_accuracy": 0.725,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 15,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 16,
+          "parent_queue_accuracy": 0.9,
+          "queue_accuracy": 0.9,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 17,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 18,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 19,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 20,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 21,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 22,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 23,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 24,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 25,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 26,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 27,
+          "parent_queue_accuracy": 0.875,
+          "queue_accuracy": 0.875,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 28,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 29,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 30,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 31,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 32,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 33,
+          "parent_queue_accuracy": 0.85,
+          "queue_accuracy": 0.85,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 34,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 35,
+          "parent_queue_accuracy": 0.875,
+          "queue_accuracy": 0.875,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 36,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 37,
+          "parent_queue_accuracy": 0.75,
+          "queue_accuracy": 0.75,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 38,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 39,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 40,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 41,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 42,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 43,
+          "parent_queue_accuracy": 0.725,
+          "queue_accuracy": 0.725,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 44,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 45,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 46,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 47,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 48,
+          "parent_queue_accuracy": 0.65,
+          "queue_accuracy": 0.65,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 49,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 50,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 51,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 52,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 53,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 54,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 55,
+          "parent_queue_accuracy": 0.9,
+          "queue_accuracy": 0.9,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 56,
+          "parent_queue_accuracy": 0.9,
+          "queue_accuracy": 0.9,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 57,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 58,
+          "parent_queue_accuracy": 0.85,
+          "queue_accuracy": 0.85,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 59,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 60,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 61,
+          "parent_queue_accuracy": 0.85,
+          "queue_accuracy": 0.85,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 62,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 63,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 64,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 65,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 66,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 67,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 68,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 69,
+          "parent_queue_accuracy": 0.925,
+          "queue_accuracy": 0.925,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 70,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 71,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 72,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 73,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 74,
+          "parent_queue_accuracy": 0.975,
+          "queue_accuracy": 0.975,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 75,
+          "parent_queue_accuracy": 1.0,
+          "queue_accuracy": 1.0,
+          "queue_flips": 0,
+          "rows": 40
+        },
+        {
+          "label": 76,
+          "parent_queue_accuracy": 0.95,
+          "queue_accuracy": 0.95,
+          "queue_flips": 0,
+          "rows": 40
+        }
+      ],
+      "protected_decision_flip_rate": 0.0,
+      "protected_error": 0.05361842105263158,
+      "protected_harm": 0.0,
+      "protected_rows": 3040,
+      "target_accuracy": 0.95,
+      "target_gain": 0.0,
+      "target_rows": 40
+    },
+    "verification": {
+      "application_sha256_verified": true,
+      "exact_anchor_receipt_verified": true,
+      "rollback_sha256_verified": true
+    }
+  },
+  "schema": "wsp-trained-outcome/1",
+  "task_sha256": "d9f49b75d218fbf460fd93f93dc21bb9aec75a3e639f156125bcdc1a55d41ceb",
+  "trial_id": "banking77-main-full-7003/recognition/top_up_by_bank_transfer_charge/soft"
+}

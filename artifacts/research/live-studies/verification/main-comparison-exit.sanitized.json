@@ -1,0 +1,142 @@
+{
+  "schema": "wsp-public-main-comparison-exit-derivative/1",
+  "created_utc": "2026-11-09T04:46:52.962320+00:00",
+  "source": {
+    "role": "original_main_comparison_exit_receipt",
+    "bytes": 2931,
+    "raw_sha256": "fbca932a8fb53f2bceec5e9525393f9bb417bf5e07776125e2c7b05a2b1d9097",
+    "canonical_json_sha256": "7ef470d70c574a1f34f15b5700ad63a3ea9d9b8242227d08caa946efed984b69",
+    "source_schema": "wsp-private-independent-live-comparison-exit/1"
+  },
+  "sanitizer": {
+    "id": "wsp-main-verification-whitelist/1",
+    "method": "explicit field whitelist plus documented role and path rewrites",
+    "copied_fields": [
+      "audit_ok",
+      "child_exit_code",
+      "comparison_raw_sha256",
+      "elapsed_seconds",
+      "exit_code",
+      "finished_utc",
+      "gate_canonical_sha256",
+      "input_bytes_unchanged",
+      "phase",
+      "prepared_lock_canonical_sha256",
+      "started_utc",
+      "stderr_bytes",
+      "stderr_sha256",
+      "stdout_sha256"
+    ],
+    "omitted_fields": [
+      "command",
+      "input_raw_sha256",
+      "schema",
+      "wrapper_pid"
+    ],
+    "rewrites": [
+      {
+        "source": "schema",
+        "destination": "source.source_schema",
+        "operation": "retain as source schema"
+      },
+      {
+        "source": "command",
+        "destination": "recorded_command_roles",
+        "operation": "replace executable and source locators with roles; retain interpreter flags"
+      },
+      {
+        "source": "input_raw_sha256",
+        "destination": "recorded_input_artifacts",
+        "operation": "replace map keys with unique roles and released relative paths; retain all nine raw hashes in recorded order"
+      }
+    ],
+    "note": "The wrapper's audit and input-stability claims are retained as recorded claims. The wrapper was not rerun.",
+    "raw_evidence_modified": false,
+    "raw_transport_copied": false,
+    "active_comparison_or_evaluation_executed": false
+  },
+  "recorded": {
+    "phase": "independent_comparison",
+    "started_utc": "2026-11-09T04:29:59.201862+00:00",
+    "gate_canonical_sha256": "601897dc212592ae76cb2eed4b56e120de6ed9d66fa292b7e42ba5b924a13d0f",
+    "prepared_lock_canonical_sha256": "fb465aeac240f769c7d2a5765321e332adae6d4d2edc1a49697587c349c14bbf",
+    "finished_utc": "2026-11-09T04:30:17.412956+00:00",
+    "elapsed_seconds": 18.208579599973746,
+    "child_exit_code": 0,
+    "exit_code": 0,
+    "audit_ok": true,
+    "input_bytes_unchanged": true,
+    "stdout_sha256": "8691bd4b102779012f9a5d5d65209f0de9a6299bf566468dd1459f5a44b8257e",
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "comparison_raw_sha256": "fee908f943713c93becda4c718bb3c9b552f2abc3c6b64110f92a1c86ca8180e"
+  },
+  "recorded_command_roles": [
+    {
+      "index": 0,
+      "kind": "runtime_role",
+      "value": "captured_python_interpreter"
+    },
+    {
+      "index": 1,
+      "kind": "literal",
+      "value": "-B"
+    },
+    {
+      "index": 2,
+      "kind": "literal",
+      "value": "-u"
+    },
+    {
+      "index": 3,
+      "kind": "artifact_role",
+      "value": "original_main_comparator"
+    }
+  ],
+  "recorded_input_artifacts": [
+    {
+      "role": "global_selection_seal",
+      "raw_sha256": "26e67134db350133a2f3ee2a324c39d79d53fd6915ee8513bdae37cc3fcbdc31",
+      "repository_relative_path": "artifacts/research/live-studies/global-selection-seal.json"
+    },
+    {
+      "role": "preparation_lock",
+      "raw_sha256": "357637e9bb363ce0e27ef4dba584a3a89586cf56707ed29f52b674d7e4e1f6c8",
+      "repository_relative_path": "experiments/research/live-studies/preparation-lock.json"
+    },
+    {
+      "role": "frozen_main_study_runner",
+      "raw_sha256": "acc241b1bf47c0fddb0cb3f13838c984b43a45761e997b994e41edb09d305d2f",
+      "repository_relative_path": "experiments/research/live-studies/source-snapshot/scripts/run_live_studies.py"
+    },
+    {
+      "role": "original_main_gate_authenticator",
+      "raw_sha256": "c611bfef9e868e37a8744604013d2f72ea9f693a6af05481b5ec6c03b8714320"
+    },
+    {
+      "role": "original_main_evaluation_exit_receipt",
+      "raw_sha256": "d3dd2d51ef31d6f6149807616737783cf0d5045a19ce54bc3ad57988f296926b"
+    },
+    {
+      "role": "original_main_comparator",
+      "raw_sha256": "3330e42110fa68ce3aa0527c08abb0947cd24047ab4f93f5609df08ef61d0a78"
+    },
+    {
+      "role": "original_main_replay_exit_receipt",
+      "raw_sha256": "cb1509c1991f231b7875b2dafae0df9843e886e7a16f4511e8ec1cadb73f8378"
+    },
+    {
+      "role": "replay_manifest",
+      "raw_sha256": "e9c1ba4fbf76081fb928ea198bcd43f1e297c8ce8f71942faee51789d0f9cb10",
+      "repository_relative_path": "artifacts/research/live-studies/replay/manifest.json"
+    },
+    {
+      "role": "evaluation_manifest",
+      "raw_sha256": "6b3d11adc6ccff72baf0011f0d97902cd6e9d5d6ba92fd3a44fbc4a5d377e36d",
+      "repository_relative_path": "artifacts/research/live-studies/evaluation/manifest.json"
+    }
+  ],
+  "recorded_input_artifact_count": 9,
+  "scope": "Sanitized terminal capture of the original independent comparison and its nine tracked input artifacts. The original source and receipt raw hashes are retained. The capture is evidence of recorded process results, not a new execution or independent provider attestation.",
+  "sha256": "a10203b2e29f47b3e42940aeb163d4c1395183aa4b1d349264c77366d256f3ef"
+}

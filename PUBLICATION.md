@@ -5,26 +5,39 @@ release remains unpublished.**
 
 Draft.4 is derived from private draft.3 commit
 `2424c592fd8ed6b57217bd7b55224f77d0094455`. It prepares a separate public
-snapshot with disclosed privacy transformations. The publication plan uses a
-fresh Git history and a noreply author identity; the original repository and
-its earlier history remain private. Preparing the candidate does not establish
-that the public transition or a hosted workflow has completed.
+snapshot with disclosed privacy transformations. The November 7 publication
+plan specified fresh Git history and a noreply author identity; the original
+repository and its earlier history remain private. Those preparation checks
+did not establish a public transition or a completed hosted workflow. The
+current repository observation is distinguished below.
 
-The framework, worked examples, image flowcharts, research conclusions, and
-conditional proof claims keep their existing scope. This publication work
-does not add an experiment, expand a theorem, or establish a new scientific
-result.
+The November 7 publication preparation retained the framework, worked examples,
+image flowcharts, research conclusions, and conditional proof claims within
+their existing scope; that preparation did not add an experiment or expand a
+theorem. Subsequent November 8 studies and their negative results are linked in
+[VERIFICATION.md](VERIFICATION.md), with the final review dated November 9, 2026
+(America/Chicago). Those new records retain their own freezes, attempts, and
+verification limits.
 
 ## Which record describes which bytes
 
 | Record | Purpose |
 | --- | --- |
-| [Original source inventory](provenance/source-files.json) | Retains the recorded original paths, byte lengths, SHA-256 values, and preservation mappings. Original identity hashes are not replaced with hashes of sanitized copies. |
+| [Original source inventory](provenance/source-files.json) | Retains the recorded original paths, byte lengths, SHA-256 values and order. Six evolved runtime modules now map to byte-exact originals under `provenance/original-files/`; the [pre-research inventory](provenance/historical-publication/draft4-pre-research-source-files.json) preserves the earlier mappings. Original hashes are not replaced with current or sanitized hashes. |
 | [Public sanitation ledger](provenance/public-sanitization.json) | Binds each changed or omitted path to its original identity, public identity or omission, and reasons. |
 | [Current publication manifest](provenance/publication-manifest.json) | Describes the draft.4 publication tree and its transformations. |
 | [Historical draft.3 publication manifest](provenance/historical-publication/draft3-publication-manifest.json) | Preserves the prior publication record in its historical scope. It is not the manifest for draft.4. |
 | [Publication checksums](MANIFEST.sha256) | Identify the delivered public bytes according to the publication verifier's coverage rules. |
 | [Verification guide](VERIFICATION.md) and [archive index](provenance/verification/index.json) | Separate checks of this candidate from records of earlier executions. |
+
+On November 9, the first final publication check rejected six current runtime
+modules whose indexed originals still pointed to their live paths. The originals
+were recovered from the observed pre-research public commit and checked against
+their existing sizes and hashes before preservation. Only those six
+`preserved_path` values changed in the current source inventory; every original
+identity and all other inventory fields remain unchanged. The entire earlier
+inventory is also preserved byte for byte. These implementation changes are
+research additions, separate from the privacy transformations in the ledger.
 
 The ledger uses schema `wspf-public-sanitization/1`. It records the private
 source commit and, for each affected path, the original byte length and
@@ -90,8 +103,12 @@ freeze.
 The generic study and proof procedures retain their own expected identities
 and limits. Do not remove expected hashes or rewrite a freeze receipt to force
 a result. Any new replay must report its actual outcome on its actual inputs.
-No fresh exact scientific replay or Lean run is claimed for draft.4. Historical
-passing receipts and report prose describe their identified historical runs.
+No fresh exact replay of that original private freeze is claimed here. New
+studies and their scoped replays, together with the separate November 9
+handcrafted Lean bridge check, are identified in
+[VERIFICATION.md](VERIFICATION.md). The bridge check does not replay those
+scientific freezes. Historical passing receipts and report prose continue to
+describe their identified historical runs.
 
 For new scientific work, prepare clean inputs, fix a new protocol before
 observing its outcomes, create a new source freeze, and use unused output
@@ -101,15 +118,34 @@ fresh confirmation needs untouched units or task lineages. See
 
 ## Current validation and release status
 
-The local Python suite, isolated wheel build, and fresh external wheel
-installation passed for their recorded inputs. The
-[verification record](VERIFICATION.md) links those current receipts and
-states their environment limits. Final publication, source-archive,
-confidentiality, and hosted receipts separately bind the completed tree and
-commit; historical successes do not supply those outcomes. The public npm attempt was blocked by
-TLS, with no metadata or tarball verified. The public repository transition
-and a hosted result for the new commit are not claimed as complete here. The
-draft.4 release remains unpublished.
+The November 7 Python suite, isolated wheel build, and fresh external wheel
+installation passed for their recorded inputs. They predate the later source
+and guide changes. Fresh November 9 checks now separately record a passing
+explicit Python engineering selection, a passing fixture Lean bridge check,
+and a passing offline wheel build with installation in a separate fresh
+external environment. The [current-source validation record](artifacts/research/current-source-validation/2026-11-09/README.md)
+and [verification guide](VERIFICATION.md#november-9-current-source-checks)
+identify their inputs, boundaries, and retained first failed attempts.
+
+These new checks invoked no scientific study runners or providers and do not
+change the reported scientific outcomes. The bridge compiled fresh framework
+and candidate applications with pinned dependency source identities, but used
+trusted cached imports; its conditional real-valued statements do not certify
+native execution or business usefulness. The new wheel's Python members and
+README metadata match its recorded build inputs. Its build used explicitly
+installed cached requirements and `--no-build-isolation`, followed by a
+separate core-only smoke installation with Torch absent. It is not the
+November 7 wheel, despite sharing version `0.2.0.dev4`.
+
+The November 9 repository review observed the existing repository as public at
+`main` commit `6a2f99815332b3497333636c509c9a31ed0db6e2`. That observation
+predates publication of these research updates, which remain pending at this
+guide revision. Publication, source-archive, confidentiality, and hosted
+receipts must separately bind the completed update tree and commit; the local
+checks do not supply those outcomes. No fresh hosted workflow success is
+claimed. The public npm attempt remains blocked by TLS, with no metadata or
+tarball verified. The package version remains `0.2.0.dev4`, and the draft.4
+release remains unpublished.
 
 Earlier release-asset links and commit identifiers refer to the private
 repository's historical record and may be unavailable to a public reader.

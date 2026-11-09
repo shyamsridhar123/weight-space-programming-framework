@@ -1,0 +1,941 @@
+{
+  "schema": "wsp-public-original-replay-exit-derivative/1",
+  "created_utc": "2026-11-09T04:56:30.244559+00:00",
+  "source": {
+    "role": "original_replay_exit_receipt",
+    "bytes": 38485,
+    "raw_sha256": "8eba0adae7e70ae6fd3401bb74e23e3b51fdae767def4cbbd86cd190b2fe3000",
+    "canonical_json_sha256": "930a558ba7c18c4c0a6588b7e8f85f0af0beb68ae1d56ab2f91faf159593c92e",
+    "source_schema": "wsp-private-independent-original-live-replay-exit/1",
+    "canonical_payload_sha256": "862fe9cc8fa190c3519c344c288524c22062fea4c50cf3bd4cf0f43f0d31afdd"
+  },
+  "sanitizer": {
+    "id": "wsp-original-verification-whitelist/1",
+    "method": "explicit field whitelists and documented role/path rewrites",
+    "copied_fields": [
+      "child_finished_utc",
+      "elapsed_seconds",
+      "evidence_after_sha256",
+      "evidence_unchanged",
+      "exit_code",
+      "failure",
+      "finished_utc",
+      "launch_canonical_sha256",
+      "launch_raw_sha256",
+      "phase",
+      "process_raw_sha256",
+      "started_utc",
+      "stderr_bytes",
+      "stderr_sha256",
+      "stdout_bytes",
+      "stdout_json_verified",
+      "stdout_sha256",
+      "verification_passed",
+      "wrapper_exit_code"
+    ],
+    "omitted_fields": [
+      "child_pid",
+      "evidence_after",
+      "fresh_provider_calls",
+      "schema",
+      "sha256"
+    ],
+    "rewrites": [
+      {
+        "source": "evidence_after",
+        "destination": "recorded_input_artifacts",
+        "operation": "replace 120 absolute repository locators with relative paths and 11 other locators with roles; retain order, all byte counts and raw hashes"
+      },
+      {
+        "source": "fresh_provider_calls",
+        "destination": "captured_claims",
+        "operation": "retain as labeled captured claim"
+      },
+      {
+        "source": "original_replay_launch_receipt.command",
+        "destination": "recorded_command_roles",
+        "operation": "replace interpreter and repository locators with roles and the released relative runner path"
+      }
+    ],
+    "note": "Process identifiers and absolute locators are omitted. The original evidence_after_sha256 hashes the original private locator map; the separate sanitized inventory hash identifies the public rewrite.",
+    "raw_evidence_modified": false,
+    "raw_transport_copied": false,
+    "study_or_verifier_executed": false
+  },
+  "recorded": {
+    "phase": "replay-live",
+    "launch_raw_sha256": "97ff824177d7696321ceeea16ed7633bd3b9fa175396d8380e655cf8bdce3b36",
+    "launch_canonical_sha256": "ff16852ebe0587de985544c83e492f8b9c697f6774f162b80ef398fbb62b3064",
+    "process_raw_sha256": "8f6e0ddd759a48de1c19fc6b538fd438f86bf1fc28224288081783a90365c2e1",
+    "started_utc": "2026-11-09T04:41:04.159931+00:00",
+    "child_finished_utc": "2026-11-09T04:41:05.681323+00:00",
+    "finished_utc": "2026-11-09T04:41:06.599577+00:00",
+    "elapsed_seconds": 2.4168554000207223,
+    "exit_code": 0,
+    "wrapper_exit_code": 0,
+    "verification_passed": true,
+    "failure": null,
+    "stdout_sha256": "85c1fef88c7da5203a05bf041526104020a7ce8170eb6926ce0ca7db018680b1",
+    "stdout_bytes": 259,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_bytes": 0,
+    "stdout_json_verified": true,
+    "evidence_unchanged": true,
+    "evidence_after_sha256": "1841cf35290f9e0c53b6676840408133d676f97f96446deaf96b2591edb7409b"
+  },
+  "scope": "Sanitized terminal capture of the completed original-source offline replay. These are saved process results and input commitments, not a new replay or an independent execution/provider attestation.",
+  "recorded_input_artifacts": [
+    {
+      "kind": "artifact_role",
+      "role": "original_main_comparison_receipt",
+      "bytes": 1619,
+      "raw_sha256": "fee908f943713c93becda4c718bb3c9b552f2abc3c6b64110f92a1c86ca8180e"
+    },
+    {
+      "kind": "artifact_role",
+      "role": "original_main_replay_exit_receipt",
+      "bytes": 1836,
+      "raw_sha256": "cb1509c1991f231b7875b2dafae0df9843e886e7a16f4511e8ec1cadb73f8378"
+    },
+    {
+      "kind": "artifact_role",
+      "role": "original_main_replay_stderr_capture",
+      "bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "kind": "artifact_role",
+      "role": "original_main_replay_stdout_capture",
+      "bytes": 63391,
+      "raw_sha256": "d9b0524577ab695bbbdbdb3d1197faabde17fadbe48ce9b4538deacac805eb3a"
+    },
+    {
+      "kind": "artifact_role",
+      "role": "prior_original_replay_exit_receipt",
+      "bytes": 600,
+      "raw_sha256": "3f7407e7261756f4d3bd96e9ec00b064fac8bc014c22841ada7df37052c5ad49"
+    },
+    {
+      "kind": "artifact_role",
+      "role": "prior_original_replay_start_receipt",
+      "bytes": 484,
+      "raw_sha256": "5d3213661c84c08461a60b460c1d4fe3e1824dc38d3c41d6648ac10232e1043b"
+    },
+    {
+      "kind": "artifact_role",
+      "role": "prior_original_replay_stderr_capture",
+      "bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "kind": "artifact_role",
+      "role": "prior_original_replay_stdout_capture",
+      "bytes": 259,
+      "raw_sha256": "85c1fef88c7da5203a05bf041526104020a7ce8170eb6926ce0ca7db018680b1"
+    },
+    {
+      "kind": "artifact_role",
+      "role": "original_replay_capture_wrapper",
+      "bytes": 26735,
+      "raw_sha256": "01b6aed860f646c9b8074dcdaf12378748518540848f2a93081d4491a2549d76"
+    },
+    {
+      "kind": "artifact_role",
+      "role": "original_audit_verifier",
+      "bytes": 46954,
+      "raw_sha256": "5a0ef7929a3a2f20ec8d16145682479016157b4b955f11fdb83981d5163b4f0d"
+    },
+    {
+      "kind": "runtime_role",
+      "role": "captured_python_interpreter",
+      "bytes": 274424,
+      "raw_sha256": "0b471133e110cfb53a061cad528ce8e517d7b9ac41a0a396c39ad795a487fc14"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/live-studies/global-selection-seal.json",
+      "bytes": 44256,
+      "raw_sha256": "26e67134db350133a2f3ee2a324c39d79d53fd6915ee8513bdae37cc3fcbdc31"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/live-studies/replay/manifest.json",
+      "bytes": 123019,
+      "raw_sha256": "e9c1ba4fbf76081fb928ea198bcd43f1e297c8ce8f71942faee51789d0f9cb10"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/acquisition.json",
+      "bytes": 19323,
+      "raw_sha256": "d152f34250bad0efce097486541616774ebc7d3b667a2fae4267496b188722c7"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/0bbcc3ea/event-publication.json",
+      "bytes": 442,
+      "raw_sha256": "99ff898a5ea27928fdbcea7b90cb87ea011de3a7c258a9176aad849098e34e8b"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/0bbcc3ea/events.jsonl",
+      "bytes": 893,
+      "raw_sha256": "fab75160fc87fdd8a9e649c7fde11635ccdfef417222b6def93d6f7bd781f721"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/0bbcc3ea/receipt.json",
+      "bytes": 2941,
+      "raw_sha256": "0eadbeaade61959924d9426ec4e795d53f7e58cbb8986b7d55dc7f455b66ccd1"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/0bbcc3ea/request.json",
+      "bytes": 117410,
+      "raw_sha256": "cf3dee990afb85660f5e1099fa5213a38b7c011ff8de40cc4be41dfe986cf14d"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/0bbcc3ea/response-schema.json",
+      "bytes": 158,
+      "raw_sha256": "9e3afa3811a1e241af40a70c086b2f7990c271e8b13c3a68376f4e6505098647"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/a9f535cc/event-publication.json",
+      "bytes": 442,
+      "raw_sha256": "85ee26f0257912d7fc04e54622ec6408a6c64409614397e31b92bac23526cf43"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/a9f535cc/events.jsonl",
+      "bytes": 893,
+      "raw_sha256": "0afca0a95550e1c7647a412b1b52ee63cde16d3d42874511c7ce1fbac5f461d5"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/a9f535cc/receipt.json",
+      "bytes": 2942,
+      "raw_sha256": "063cfcd96f20ee5354f0cf640ef91fa3abfc30453a0b090fdd4e7d4565a509b3"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/a9f535cc/request.json",
+      "bytes": 117629,
+      "raw_sha256": "2aa3403e3968d22732fd0cf8d0d116759055a0157cd0990e2df6668af90863d7"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/a9f535cc/response-schema.json",
+      "bytes": 158,
+      "raw_sha256": "9e3afa3811a1e241af40a70c086b2f7990c271e8b13c3a68376f4e6505098647"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/bdf99279/event-publication.json",
+      "bytes": 442,
+      "raw_sha256": "0093a83a2a9a383e959c44764ea8e98db88e725b6969721fd510c0b9574530cf"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/bdf99279/events.jsonl",
+      "bytes": 893,
+      "raw_sha256": "c08bc7c9a6829817fb968570fc234e37c3b4f5f20b7987ba87ae709dd6710d95"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/bdf99279/receipt.json",
+      "bytes": 2942,
+      "raw_sha256": "33cee05b288c90f1888943adf6ad6254cf4927ae7e82f35fec9c9e48cf335f8d"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/bdf99279/request.json",
+      "bytes": 117545,
+      "raw_sha256": "11d8c39e6309f528198a34248eb199bf98d104e7e94a664a0ba4044583b97903"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/bdf99279/response-schema.json",
+      "bytes": 158,
+      "raw_sha256": "9e3afa3811a1e241af40a70c086b2f7990c271e8b13c3a68376f4e6505098647"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/dfc6cb65/event-publication.json",
+      "bytes": 442,
+      "raw_sha256": "8defa35867f86121bafde2ba8f07debee6bfab190c9f69553baff44b1e73742e"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/dfc6cb65/events.jsonl",
+      "bytes": 893,
+      "raw_sha256": "7fd00c72329e2b8b7f17bdcff34d8cdb5e1dd606341a0ed966cd3c53e6697149"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/dfc6cb65/receipt.json",
+      "bytes": 2941,
+      "raw_sha256": "36f10bb9317a6f0ee29604689bc2a149ec162fd565065448328e6ed1854706b1"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/dfc6cb65/request.json",
+      "bytes": 117420,
+      "raw_sha256": "7060384cb434c0cfd8c768a86d0002a30fd69fc98d98567b2b2efc6b31d038a4"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/dfc6cb65/response-schema.json",
+      "bytes": 158,
+      "raw_sha256": "9e3afa3811a1e241af40a70c086b2f7990c271e8b13c3a68376f4e6505098647"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/manifest.json",
+      "bytes": 2915,
+      "raw_sha256": "c22f1484112f76735b091c9cc21c4f81639023d390f1096d7ba5805ddf184288"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/live-20261108-001/outcomes.json",
+      "bytes": 2874,
+      "raw_sha256": "09685f1bfacf3190d09cb941f62c73686f01c9cc8eb3bee1d61c4bf216f0019c"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/LICENSE",
+      "bytes": 1819,
+      "raw_sha256": "395f7febedfda6b5498ca36cfe3344d3986659ce4385dd8b03d2d75604250a8e"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/README.md",
+      "bytes": 5456,
+      "raw_sha256": "37d3210c9644449810c2eb2e6d63835925484caabefbe87559eacdf58c227d8d"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/eval/answer_key.json",
+      "bytes": 207,
+      "raw_sha256": "d2a4f9567a6168b1f161e28e135bab1d2a3262f514c34fc9b3a7b0eb066084f4"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/eval/scores.json",
+      "bytes": 2454,
+      "raw_sha256": "d45bd7eeb5c8bcd620a60020f4583071fadb02e1400e41e0c7815d5dea41f480"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/networks/0bbcc3ea.npz",
+      "bytes": 140742,
+      "raw_sha256": "235276cf02cc7efb51dc6a031ccf2e827adbfbdbd8c860dad437fafaaae9209e"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/networks/0bbcc3ea_actor.txt",
+      "bytes": 112588,
+      "raw_sha256": "a1d589935e24948d3b6baf20aa5d262f04f3f08d0296780cf8dcbdfdecd15c7c"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/networks/a9f535cc.npz",
+      "bytes": 140742,
+      "raw_sha256": "12297581cd5c3dfa4f7494c7f302e578b5819c8b9302c65f59cea5fb2dbe82e2"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/networks/a9f535cc_actor.txt",
+      "bytes": 112807,
+      "raw_sha256": "9f0184fb5145a45ff54386793a85b60fb99887ac56cf32f3d648003b23bbbcfc"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/networks/bdf99279.npz",
+      "bytes": 140742,
+      "raw_sha256": "74d3487acdda971f1c0e18024ac310ac4cb79db65beb5cffb8d4ed9e84bff395"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/networks/bdf99279_actor.txt",
+      "bytes": 112723,
+      "raw_sha256": "4d99e6489334e8f1c6b935290c46745f0ada2d53f1f517a1029281787585a7af"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/networks/description.txt",
+      "bytes": 1810,
+      "raw_sha256": "2361ff107c85c3dafa85420e79503cc01747eed462a8216f7c06ef711d8d93bd"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/networks/dfc6cb65.npz",
+      "bytes": 140742,
+      "raw_sha256": "c3bbd09e8cfaadb89fee8c8092c1240794d132f87a69c2b0ae8b1fe4f424082c"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/networks/dfc6cb65_actor.txt",
+      "bytes": 112598,
+      "raw_sha256": "4093f4dc23af2de711bece6579525eb3c4e014afe477fc474fd342e78effd5fe"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/networks/meta/0bbcc3ea.json",
+      "bytes": 2062,
+      "raw_sha256": "f65af174687ba156054d4dae8f041df83cb8b82488dfae66c362a463e1e92932"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/networks/meta/a9f535cc.json",
+      "bytes": 2079,
+      "raw_sha256": "e308fc0573bc8cbf0359170214183138d5b9c1f4e60a416bc1268e13398b62bf"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/networks/meta/bdf99279.json",
+      "bytes": 2096,
+      "raw_sha256": "191513440780aedc43acfd6f01278ce4ac625007ec098ec6b58cd705c02335d8"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/networks/meta/dfc6cb65.json",
+      "bytes": 2100,
+      "raw_sha256": "b5c6cbeceb11097184906b6888c38f66aa69a620e92d4ab803a4faf6608c5fff"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/breakout/answer.md",
+      "bytes": 3319,
+      "raw_sha256": "697cc463d67c0b5d6ca7ccedcdec7abce090c077e3348eabad7f512c4660663a"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/breakout/events.jsonl",
+      "bytes": 4160,
+      "raw_sha256": "11a2e6366051b066ac8988c717247297fd817c886016bb4627d1e7040a2cd0c9"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/breakout/instructions.md",
+      "bytes": 27,
+      "raw_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/breakout/prompt.txt",
+      "bytes": 115478,
+      "raw_sha256": "ba1d97cfcb585f0ccab628ed1ef983b230d897b97ae6ff10f2de6eac6d390b31"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/breakout/run.json",
+      "bytes": 1152,
+      "raw_sha256": "614042fe7d1aca7d9c1ef159bb4f9e5801bc801ddcc0b90bdff0993f57a57939"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/breakout/stderr.log",
+      "bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/freeway/answer.md",
+      "bytes": 2925,
+      "raw_sha256": "9d5335942031312becd88dfc78b069b6aa32cf6b52526ca82912e7009e41aa4b"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/freeway/events.jsonl",
+      "bytes": 3812,
+      "raw_sha256": "6d92e4b78a1eec1e173a38d0786e035d75c3fb523cfb442581d56856ab55fa24"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/freeway/instructions.md",
+      "bytes": 27,
+      "raw_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/freeway/prompt.txt",
+      "bytes": 115259,
+      "raw_sha256": "76f30db2c4591e340f4a8e1ca56abdfdf6aa9857e3220936ca178f86c29e6070"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/freeway/run.json",
+      "bytes": 1149,
+      "raw_sha256": "cff5c39878845d8ac1b268b4e212064a23dba3d1dcb73269f749320ebe4444b7"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/freeway/stderr.log",
+      "bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/loop.log",
+      "bytes": 472,
+      "raw_sha256": "78c08acd38e94caff85d7ecc5475d3e4a680b72c37f17cc81b1e00390307defe"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/pacman/answer.md",
+      "bytes": 3271,
+      "raw_sha256": "af000b92074a900974f4d24029396f12d0d32a1e6813522914ac767fdc1dbbe5"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/pacman/events.jsonl",
+      "bytes": 4171,
+      "raw_sha256": "322935f9fdb01f8745c82df6f586f1357d3f667138e9777973c0119b4fcca8f6"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/pacman/instructions.md",
+      "bytes": 27,
+      "raw_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/pacman/prompt.txt",
+      "bytes": 115394,
+      "raw_sha256": "1c75e66aab1e611bdb07a87d6f70e3d2ba3d149e58f259b5ad7a485661244acf"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/pacman/run.json",
+      "bytes": 1149,
+      "raw_sha256": "0098f735d493f109788418bedf57ad69ac9e186d31bef6df7021661941effe06"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/pacman/stderr.log",
+      "bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/pong/answer.md",
+      "bytes": 3189,
+      "raw_sha256": "e84e5918e83d1aef2c25a8773a5d3e2aee58d46e5be7e35115f3b5595cb95f5c"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/pong/events.jsonl",
+      "bytes": 4078,
+      "raw_sha256": "a8f28324cb6045f2c22721e8ab7c5ca6b00e135de771ff490510447d0da5aae7"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/pong/instructions.md",
+      "bytes": 27,
+      "raw_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/pong/prompt.txt",
+      "bytes": 115269,
+      "raw_sha256": "1b143ac2f46ab7a0c4b3eb45bd2b9d82314c3b24e2d2412f80566946c935c5ba"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/pong/run.json",
+      "bytes": 1149,
+      "raw_sha256": "00762df535a3b1b607a90b35e0557b1947f15f8340854c6d9eb685377dd489cb"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/pong/stderr.log",
+      "bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/worker0.log",
+      "bytes": 236,
+      "raw_sha256": "c018444fae5e8cb961c8c8032d4a29c85a4a1498e7ea0ea82981c51f88b38a89"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "artifacts/research/original-source-repeat/source/exp1_which_game/runs/worker1.log",
+      "bytes": 236,
+      "raw_sha256": "93c7bf87ad48108091215a8c7131718a54526115cdf7e4984812173384d9f564"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/live-studies/preparation-lock.json",
+      "bytes": 417186,
+      "raw_sha256": "357637e9bb363ce0e27ef4dba584a3a89586cf56707ed29f52b674d7e4e1f6c8"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/arithmetic-correspondence.json",
+      "bytes": 431727,
+      "raw_sha256": "f9bff12f352c679c56716b4019c7da17b0bde840cf1a7f6afd4a63d4a4ba2316"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/conversion-audit.json",
+      "bytes": 2612,
+      "raw_sha256": "fb78d4b0f651a2327976afa6af28ba8c6452fb49eb0d867c7a47644250d72b85"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/converted/0bbcc3ea/full-precision-artifact.json",
+      "bytes": 526394,
+      "raw_sha256": "7e2d92c96d8958ba71cbd9fdfe19dbbbca905642a5f16d24b3fecc222c3ebbcc"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/converted/0bbcc3ea/rounded-artifact.json",
+      "bytes": 284341,
+      "raw_sha256": "d18b014675e97358f90f4282935007a9956d2a5d514438d8d9d2b6a9a5e3d3c1"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/converted/a9f535cc/full-precision-artifact.json",
+      "bytes": 526380,
+      "raw_sha256": "05df685f9da8f9e0d030be9fe69cc8eb28de0fe2875eccddf295afef2d7c7b2a"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/converted/a9f535cc/rounded-artifact.json",
+      "bytes": 284496,
+      "raw_sha256": "365683c8106cb96fc4f231e0f457e1a84f8cbb5c66a8e4195ffed4a53ae36416"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/converted/bdf99279/full-precision-artifact.json",
+      "bytes": 526855,
+      "raw_sha256": "5a2bd84967db3b94e1bb47cf49262d985e89bab6b921284eae968046817a5076"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/converted/bdf99279/rounded-artifact.json",
+      "bytes": 284405,
+      "raw_sha256": "1239777d6f935a88f133c7ed9a1e34942e78ea26c02357110780a2f08b64e2c0"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/converted/dfc6cb65/full-precision-artifact.json",
+      "bytes": 527032,
+      "raw_sha256": "bdd5a252f335f344d40d5ec34c2d77eb78ef970d8c984ac716eb67047e3ff719"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/converted/dfc6cb65/rounded-artifact.json",
+      "bytes": 284267,
+      "raw_sha256": "bb8d02936a5a6ee6bedab1082a145ee5805453c2b9ab32a1618bd01f2f0b61bf"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/historical-replay.json",
+      "bytes": 4227,
+      "raw_sha256": "ee191f4cc6445bbffedd0afc3128a66d87702216141a39f8cfe1aa2d03fe6854"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/protocol-lock.json",
+      "bytes": 6146,
+      "raw_sha256": "b511b73ab2d49848ac0373751c2b2880f99a81f560c4785ee65206940415019e"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/protocol.json",
+      "bytes": 3957,
+      "raw_sha256": "c5e7372d9a790af37c5c3835dbe90c0af7dec22e4f81d6a47ba2379b5ef6749d"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/runtime.json",
+      "bytes": 46987,
+      "raw_sha256": "98bd542041935b5626e2ff2086c495574d86b06c6db96568f95efb6d7feaad77"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/__init__.py",
+      "bytes": 71,
+      "raw_sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/__init__.py",
+      "bytes": 2836,
+      "raw_sha256": "1fc45e6b5185ea123d04630ab69f94aa7d65a8cba6e5deb78736f351f465ab12"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/artifact.py",
+      "bytes": 7735,
+      "raw_sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/broker.py",
+      "bytes": 13310,
+      "raw_sha256": "c3ba7be6005b12bf7a42aae76b41948726e05fb854744e7d3d835ae6d3e87373"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/compiler.py",
+      "bytes": 3928,
+      "raw_sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/contracts.py",
+      "bytes": 43906,
+      "raw_sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/features.py",
+      "bytes": 11915,
+      "raw_sha256": "3293e01e4524eb7af5b58d7eba344a0090c6fc3f95488db6486d9379ee323f8b"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/live_provider.py",
+      "bytes": 18217,
+      "raw_sha256": "7319024ba4491922c07450352a317c2f81966b4631b39cc5419ea9284b2a95c3"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/model.py",
+      "bytes": 9944,
+      "raw_sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/program.py",
+      "bytes": 6317,
+      "raw_sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/proof_bridge.py",
+      "bytes": 27469,
+      "raw_sha256": "642ec0869208d59f1641b31d5887cb5f16b199787418e0b7789aa979ad04a93b"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/semantics.py",
+      "bytes": 6727,
+      "raw_sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/sequential.py",
+      "bytes": 9106,
+      "raw_sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/structured.py",
+      "bytes": 26202,
+      "raw_sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/symmetry.py",
+      "bytes": 6034,
+      "raw_sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/rlcd/weight_space/workflow.py",
+      "bytes": 39208,
+      "raw_sha256": "72f82f90cdad7c7dae559da331515506bd072fc8bb5450155cf5ab221668c520"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/scripts/check_weight_space_bridge.py",
+      "bytes": 35836,
+      "raw_sha256": "128e08b7da99f00944f7d1ccafd77fc3affa2e0cb8b6fbf0b0ce6313a0333f6f"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "experiments/research/original-source-repeat/source-freeze/scripts/run_original_source_repeat.py",
+      "bytes": 43395,
+      "raw_sha256": "58acbb0ee9cc4296177c6354153e647879b0218df4711d01855c91e33e38fff2"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/__init__.py",
+      "bytes": 71,
+      "raw_sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/__init__.py",
+      "bytes": 2836,
+      "raw_sha256": "1fc45e6b5185ea123d04630ab69f94aa7d65a8cba6e5deb78736f351f465ab12"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/artifact.py",
+      "bytes": 7735,
+      "raw_sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/broker.py",
+      "bytes": 13310,
+      "raw_sha256": "c3ba7be6005b12bf7a42aae76b41948726e05fb854744e7d3d835ae6d3e87373"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/compiler.py",
+      "bytes": 3928,
+      "raw_sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/contracts.py",
+      "bytes": 43906,
+      "raw_sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/features.py",
+      "bytes": 11915,
+      "raw_sha256": "3293e01e4524eb7af5b58d7eba344a0090c6fc3f95488db6486d9379ee323f8b"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/live_provider.py",
+      "bytes": 18217,
+      "raw_sha256": "7319024ba4491922c07450352a317c2f81966b4631b39cc5419ea9284b2a95c3"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/model.py",
+      "bytes": 9944,
+      "raw_sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/program.py",
+      "bytes": 6317,
+      "raw_sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/proof_bridge.py",
+      "bytes": 27469,
+      "raw_sha256": "642ec0869208d59f1641b31d5887cb5f16b199787418e0b7789aa979ad04a93b"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/semantics.py",
+      "bytes": 6727,
+      "raw_sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/sequential.py",
+      "bytes": 9106,
+      "raw_sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/structured.py",
+      "bytes": 26202,
+      "raw_sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/symmetry.py",
+      "bytes": 6034,
+      "raw_sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "rlcd/weight_space/workflow.py",
+      "bytes": 39208,
+      "raw_sha256": "72f82f90cdad7c7dae559da331515506bd072fc8bb5450155cf5ab221668c520"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "scripts/check_weight_space_bridge.py",
+      "bytes": 35836,
+      "raw_sha256": "128e08b7da99f00944f7d1ccafd77fc3affa2e0cb8b6fbf0b0ce6313a0333f6f"
+    },
+    {
+      "kind": "repository_relative_path",
+      "path": "scripts/run_original_source_repeat.py",
+      "bytes": 43395,
+      "raw_sha256": "58acbb0ee9cc4296177c6354153e647879b0218df4711d01855c91e33e38fff2"
+    }
+  ],
+  "recorded_input_artifact_count": 131,
+  "sanitized_input_inventory_sha256": "c597a347fa450c033104251192ad5fa91499db7760e30e4e5f2adb595de5badd",
+  "recorded_command_source": {
+    "role": "original_replay_launch_receipt",
+    "bytes": 40581,
+    "raw_sha256": "97ff824177d7696321ceeea16ed7633bd3b9fa175396d8380e655cf8bdce3b36",
+    "canonical_json_sha256": "5199e774a1564f480f86b0935e32d0e3463e3e4344570e7a5c3375c8b819c266",
+    "source_schema": "wsp-private-independent-original-live-replay-launch/1",
+    "canonical_payload_sha256": "ff16852ebe0587de985544c83e492f8b9c697f6774f162b80ef398fbb62b3064"
+  },
+  "recorded_command_roles": [
+    {
+      "index": 0,
+      "kind": "runtime_role",
+      "value": "captured_python_interpreter"
+    },
+    {
+      "index": 1,
+      "kind": "literal",
+      "value": "-B"
+    },
+    {
+      "index": 2,
+      "kind": "literal",
+      "value": "-u"
+    },
+    {
+      "index": 3,
+      "kind": "repository_relative_path",
+      "value": "scripts/run_original_source_repeat.py"
+    },
+    {
+      "index": 4,
+      "kind": "literal",
+      "value": "replay-live"
+    },
+    {
+      "index": 5,
+      "kind": "literal",
+      "value": "--expected-lock-sha256"
+    },
+    {
+      "index": 6,
+      "kind": "literal",
+      "value": "a127b29dc0971163ddb109c66dba569168eade67ea700edc516fdc46d41de1fc"
+    },
+    {
+      "index": 7,
+      "kind": "literal",
+      "value": "--expected-bundle-sha256"
+    },
+    {
+      "index": 8,
+      "kind": "literal",
+      "value": "88d28359ddc8b1b3bbff75a997739609803c8dfb9c58650c975c5cf31c840fec"
+    }
+  ],
+  "recorded_working_directory_role": "repository_root",
+  "captured_claims": [
+    {
+      "source_field": "fresh_provider_calls",
+      "recorded_value": 0,
+      "status": "retained capture claim; not independently established by this packaging operation"
+    }
+  ],
+  "sha256": "b33a488b34d9bbcf5aa743db45d21e9114deb1c3c26663f19f0ded13694087e5"
+}

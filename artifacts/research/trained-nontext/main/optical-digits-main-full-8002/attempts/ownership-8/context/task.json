@@ -1,0 +1,43 @@
+{
+  "architecture": "trained-frozen-readout/1",
+  "base_sha256": "d03e5d2de26380aa1bff921a65673ebc09afb616f9070d3c0e00c854ecb67e41",
+  "constraints": {
+    "arm": "context",
+    "behavioral_admission": "frozen finite calibration samples; no whole-domain guarantee",
+    "case": {
+      "case_id": "ownership/8",
+      "desired_code": 10,
+      "desired_queue": 10,
+      "selection": "fixed before pilot; no official test opened",
+      "target_label": 8,
+      "target_name": "8",
+      "type": "ownership"
+    },
+    "configuration": {
+      "similarity_threshold": 0.95
+    },
+    "margins": {
+      "maximum_protected_harm": 0.01,
+      "minimum_target_gain": 0.1,
+      "minimum_useful_coverage": 0.75
+    },
+    "nullspace_additional_contract": null,
+    "numeric_lane": "native Torch CPU float32 readout",
+    "protected_feature_sha256": "773214ee5cec4374973c5f7dfe1c124896d8f94c8987f10242dedead22856480",
+    "protocol_sha256": "c3a5d1a5c17a0961c787afe47e0b58d015d4864d1ef43cb7d1c5a28612563e7b",
+    "structural_policy": {
+      "max_change_abs": 256.0,
+      "max_edits": 363,
+      "max_parameter_abs": 256.0,
+      "writable": [
+        "head.weight",
+        "head.bias"
+      ]
+    },
+    "target_feature_sha256": "cda570c9ae3a7d420fab6e9abcf2b51e2c80eb13e7418cba442a7d9d0483f3a3"
+  },
+  "mode": "edit",
+  "objective": "Change the derived routing decision for a frozen trained representation",
+  "schema": "wsp-task/1",
+  "task_id": "optical-digits-main-full-8002/ownership/8/context"
+}

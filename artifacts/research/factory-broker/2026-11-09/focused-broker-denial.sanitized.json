@@ -1,0 +1,294 @@
+{
+  "criterion_assessment": {
+    "#5 c4": {
+      "recommended_status": "supported",
+      "scope": "Executed denial/recording and hidden endpoint/test confidentiality on the supported broker submission and feedback JSON routes."
+    },
+    "#8 c7": {
+      "recommended_status": "supported",
+      "scope": "Executed opaque submission and candidate-feedback denial under rounded and subset views."
+    }
+  },
+  "derivative": {
+    "machine_locators_included": false,
+    "private_capture_paths_included": false,
+    "publication_owner": "root integrator",
+    "raw_diagnostics_included": false
+  },
+  "execution_date": "2026-11-09",
+  "execution_limits": {
+    "new_dependencies": 0,
+    "provider_failure_simulation": "The existing missing-CLI monkeypatch prevents the version probe and worker startup.",
+    "real_provider_invocations": 0,
+    "retries": 0,
+    "scientific_study_invocations": 0
+  },
+  "finished_at": "2026-11-09T06:08:07.994359+00:00",
+  "harness": {
+    "adaptations": [
+      "Restricted the existing standalone pytest harness to the focused broker file and a fresh ignored run directory.",
+      "Used the existing inherited-ACL mkdir adjustment only for Windows temporary directories under the ignored run directory.",
+      "Used the existing workspace Python with UTF-8, bytecode disabled and unbuffered output."
+    ],
+    "host_raw_sha256": "3d9ab2e7ad615495223285d5b795fd236d1e70649117d7e282d0d4761b297f20",
+    "raw_sha256": "456684538c3f41c680ee196d13fad0d18e88f5ef6504664b00732f9c2dc0ed55",
+    "template_raw_sha256": "ded9ba9f88f28820ae60eb164fcb1b930adb4e4f7625742b5b1718bb57a23f35",
+    "windows_temporary_directory_workaround": {
+      "behavior": "Use inherited ACLs when a caller requests mode 0700",
+      "mkdir_calls_adjusted": 4,
+      "scope": "Fresh private temporary directories only",
+      "source_files_modified": false
+    }
+  },
+  "limitations": [
+    "These are finite focused tests of supported JSON routes, not a proof of universal confidentiality.",
+    "The broker is a protocol boundary; general operating-system/network containment is not established.",
+    "Proposer-internal or reconstructed computation remains unobserved.",
+    "No live provider variability, request cost or failed-call usage was measured."
+  ],
+  "private_evidence": {
+    "captures": {
+      "host.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "host.stdout.log": {
+        "bytes": 329,
+        "sha256": "d0fb8f63f5cd5420abf34ed93faeb27cdaf8deb159d4ba1cc80ab12f361916ad"
+      },
+      "pytest.raw.log": {
+        "bytes": 98,
+        "sha256": "3a714a917d65cbeb338b7513d34db7ea3b398de44df94e0cb4b01a1fa9b34bb3"
+      },
+      "pytest.raw.xml": {
+        "bytes": 926,
+        "sha256": "fc6d44d888cee1fcdc3db3acdc95aa8c7b40d9e81d4010adb9d74c44b9e52568"
+      }
+    },
+    "execution_receipt": {
+      "bytes": 2200,
+      "sha256": "0c92a7b8eab73d034e328d55f70ad02e7ccc1ec20bec91ff8d15daa7c366dc7c"
+    },
+    "preflight_receipt": {
+      "bytes": 2153,
+      "sha256": "0f20efa56dabcd0727892d1d7b0d20a87d24f58c0b67ea2db85cf8cbb3b9304d"
+    },
+    "pytest_receipt": {
+      "bytes": 159441,
+      "sha256": "bfb02120343fbdeaadcfb82df81ea364bab50bc6a6889c03354bd32628be0f82"
+    },
+    "raw_bytes_published": false
+  },
+  "process": {
+    "exit_code": 0,
+    "invocations": 1,
+    "successful_exit_authenticated": true,
+    "timed_out": false,
+    "wall_seconds": 6.424
+  },
+  "pytest": {
+    "cache_disabled": true,
+    "cases": [
+      {
+        "behavior_checked": "Prior JSON receipt bytes survive nonfinite data rejection and an interrupted atomic replacement.",
+        "name": "test_json_checkpoint_preserves_previous_receipt_when_replace_fails",
+        "status": "passed"
+      },
+      {
+        "behavior_checked": "Rounded weights expose only the configured precision; three submissions expose only opaque handles. Forward, activation, evaluation, feedback, filesystem, network, execution, usage, audit and candidate requests are denied and recorded. Serialized public responses exclude the exact parent digest and value, private metadata, hidden test metadata, endpoint hash and no-op status. Selection seals before trusted evaluation and subsequent weight/metadata access is denied.",
+        "name": "test_opaque_submission_and_all_denied_routes_are_recorded",
+        "status": "passed"
+      },
+      {
+        "behavior_checked": "Whole-tensor and undeclared-coordinate requests are denied; the declared coordinate is accessible. An invalid submission exposes only status and an opaque handle. Candidate and feedback requests return only denial. Selecting that invalid submission does not call the evaluator and is audited as invalid.",
+        "name": "test_subset_and_invalid_selection_do_not_release_endpoint_state",
+        "status": "passed"
+      },
+      {
+        "behavior_checked": "Synthetic event parsing detects a started command event and retains a diagnostic warning. The existing missing-CLI monkeypatch exercises startup-failure accounting without starting a provider process.",
+        "name": "test_provider_failure_accounting_and_started_tool_detection",
+        "status": "passed"
+      },
+      {
+        "behavior_checked": "A synthetic private-profile path is redacted from the event derivative while raw and public SHA-256 identities and the redaction count remain linked.",
+        "name": "test_public_event_derivative_retains_raw_identity_without_private_path",
+        "status": "passed"
+      }
+    ],
+    "counts": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 5,
+      "skipped": 0,
+      "tests": 5
+    },
+    "exit_code": 0,
+    "invocations": 1
+  },
+  "python": {
+    "bytecode_writes_disabled": true,
+    "dependencies": {
+      "numpy": "2.5.3",
+      "pytest": "9.1.1"
+    },
+    "flags": [
+      "-X",
+      "utf8",
+      "-B",
+      "-u"
+    ],
+    "package_import": "rlcd/__init__.py",
+    "version": "3.12.10"
+  },
+  "schema": "wsp-focused-broker-denial-evidence/1",
+  "scope": "One execution of tests/test_research_broker.py against the public checkout source; supported JSON broker confidentiality and denial behavior.",
+  "snapshot_identities": {
+    "after_sha256": "a57d2a6cc762757ea8c7c98d948003cf63f4617c3502c70e7a5009c2016e10fe",
+    "all_snapshotted_inputs_unchanged": true,
+    "before_sha256": "a57d2a6cc762757ea8c7c98d948003cf63f4617c3502c70e7a5009c2016e10fe",
+    "frozen_research_inputs_sha256": "e9ec6ccbaf0f61505fa49854c73009f1cbb36979d82e87bb0fcd6c0bd789b5f0"
+  },
+  "source_identities": {
+    "pyproject.toml": {
+      "bytes": 1136,
+      "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+    },
+    "pytest.ini": {
+      "bytes": 27,
+      "sha256": "c809c969ec7e11b9ff37784e9c6fcc0b7c5148d168e18b05aed797e03fbd6ead"
+    },
+    "rlcd/__init__.py": {
+      "bytes": 71,
+      "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+    },
+    "rlcd/weight_space/__init__.py": {
+      "bytes": 2836,
+      "sha256": "1fc45e6b5185ea123d04630ab69f94aa7d65a8cba6e5deb78736f351f465ab12"
+    },
+    "rlcd/weight_space/__main__.py": {
+      "bytes": 17017,
+      "sha256": "658fde770befb592cd110ef5ea83ef9a39d3d97137b65e2f29b9028ed50a5377"
+    },
+    "rlcd/weight_space/adapters.py": {
+      "bytes": 2631,
+      "sha256": "87cc20844b8be1354255c2bdb21130911439f60c3cc268cbce54211a29624dd4"
+    },
+    "rlcd/weight_space/artifact.py": {
+      "bytes": 7735,
+      "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+    },
+    "rlcd/weight_space/benchmarks.py": {
+      "bytes": 15545,
+      "sha256": "3edb4f2120572aa8da92078d19c45a2d4cd494191468a893cef46a410e419983"
+    },
+    "rlcd/weight_space/bound_research.py": {
+      "bytes": 64648,
+      "sha256": "814fafa6da869e15f7e0066f04e878df037d43f05f40bf32517db96781466917"
+    },
+    "rlcd/weight_space/broker.py": {
+      "bytes": 13310,
+      "sha256": "c3ba7be6005b12bf7a42aae76b41948726e05fb854744e7d3d835ae6d3e87373"
+    },
+    "rlcd/weight_space/compiler.py": {
+      "bytes": 3928,
+      "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+    },
+    "rlcd/weight_space/contracts.py": {
+      "bytes": 43906,
+      "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+    },
+    "rlcd/weight_space/cumulative_research.py": {
+      "bytes": 56668,
+      "sha256": "31abbef4e162779ef684295e33564cf78d5b2081c5ed537fd11814558a83a796"
+    },
+    "rlcd/weight_space/demo.py": {
+      "bytes": 4776,
+      "sha256": "26b12f4b19e1656faec2377cb2a7725f4847f37a3633d762a8e1f45f5ac5a0b6"
+    },
+    "rlcd/weight_space/evidence.py": {
+      "bytes": 8003,
+      "sha256": "69c5e8479ce7797de7ef182a4fd1229124c83bfb4fc86ccbfbb14edc1984420d"
+    },
+    "rlcd/weight_space/experiments.py": {
+      "bytes": 14118,
+      "sha256": "72135f830bd7d662bbdf7a9b254712105ff70b00a253ea08a90238f08989ff0a"
+    },
+    "rlcd/weight_space/features.py": {
+      "bytes": 11915,
+      "sha256": "3293e01e4524eb7af5b58d7eba344a0090c6fc3f95488db6486d9379ee323f8b"
+    },
+    "rlcd/weight_space/live_provider.py": {
+      "bytes": 18217,
+      "sha256": "7319024ba4491922c07450352a317c2f81966b4631b39cc5419ea9284b2a95c3"
+    },
+    "rlcd/weight_space/model.py": {
+      "bytes": 9944,
+      "sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+    },
+    "rlcd/weight_space/program.py": {
+      "bytes": 6317,
+      "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+    },
+    "rlcd/weight_space/proof_bridge.py": {
+      "bytes": 27469,
+      "sha256": "642ec0869208d59f1641b31d5887cb5f16b199787418e0b7789aa979ad04a93b"
+    },
+    "rlcd/weight_space/research_tasks.py": {
+      "bytes": 26902,
+      "sha256": "aadeaedc8cb8a3f0ba4220b25b8b6d701cef5890b4ba39e44ad3e8265fba48fb"
+    },
+    "rlcd/weight_space/rts_study.py": {
+      "bytes": 17923,
+      "sha256": "a284b4e77e4bb57b704271ca170f7b29e7139e333d8dc17a663d4096fabaa476"
+    },
+    "rlcd/weight_space/runtime_research.py": {
+      "bytes": 15940,
+      "sha256": "6b961bba8b396fdc9343da5e57beb610f8c25450291f513de58102cb36a7a951"
+    },
+    "rlcd/weight_space/semantics.py": {
+      "bytes": 6727,
+      "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+    },
+    "rlcd/weight_space/sequential.py": {
+      "bytes": 9106,
+      "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+    },
+    "rlcd/weight_space/structured.py": {
+      "bytes": 26202,
+      "sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+    },
+    "rlcd/weight_space/study_tasks_v2.py": {
+      "bytes": 20140,
+      "sha256": "cf944710cce88a70c400b713b76b699446b1ba47747121ac58f31316fbb01233"
+    },
+    "rlcd/weight_space/study_v2.py": {
+      "bytes": 46314,
+      "sha256": "a1ffd5840d4beb4d7b8f827552a38ae192f300e32809233a1b58681c147bdb3e"
+    },
+    "rlcd/weight_space/symmetry.py": {
+      "bytes": 6034,
+      "sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+    },
+    "rlcd/weight_space/torch_bridge.py": {
+      "bytes": 9678,
+      "sha256": "b532de9574bb13c4c918656cba21ff2e9da61ea2c9aca1a6394376bb64696cda"
+    },
+    "rlcd/weight_space/workflow.py": {
+      "bytes": 39208,
+      "sha256": "72f82f90cdad7c7dae559da331515506bd072fc8bb5450155cf5ab221668c520"
+    },
+    "tests/test_research_broker.py": {
+      "bytes": 7370,
+      "sha256": "187542633026d21330ed3ea1afe48837d9fc8e57cb91320033f4da5374336ffc"
+    }
+  },
+  "source_inputs_unchanged": true,
+  "started_at": "2026-11-09T06:08:01.554179+00:00",
+  "status": "passed",
+  "test_change": {
+    "added_lines": 3,
+    "after_sha256": "187542633026d21330ed3ea1afe48837d9fc8e57cb91320033f4da5374336ffc",
+    "before_sha256": "4428e51a267fd1ff6750bd9b0b152ddfac0a65f1ee989f266036ff18ec697d95",
+    "change": "Assert the subset submission returns only status/candidate_handle and denies candidate/feedback requests."
+  }
+}

@@ -1,0 +1,266 @@
+{
+  "admission": {
+    "native": "Torch CPU float32 empirical error; round endpoint cast",
+    "real_box": [
+      0.0,
+      1.0
+    ],
+    "scope": "Exact box score bound and one real/native witness; sampled calibration retention separate; no whole-domain decision proof",
+    "score_drift_budget_per_output": 1.0,
+    "structural": {
+      "max_change_abs": 256.0,
+      "max_edits": 1024,
+      "max_parameter_abs": 256.0,
+      "writable": [
+        "w2",
+        "b2"
+      ]
+    },
+    "witness": "one fixed all-zero input"
+  },
+  "alignment_ambiguity_policy": "Retain zero/duplicate-row diagnostics; helper deterministic assignment and unit-scale fallback for zero rows; no rejection replacement or reselection",
+  "analysis": {
+    "bootstrap_seed": 161616,
+    "confirmation_margins_preserved": {
+      "aligned_minus_none": 0.05,
+      "aligned_minus_raw": 0.02,
+      "coverage_lower": 0.6,
+      "coverage_observed": 0.8,
+      "protected_loss": 0.02,
+      "subgroup_loss": 0.05
+    },
+    "interval": "paired pair-level percentile bootstrap95; descriptive, no powered confirmation",
+    "missing_bounds": {
+      "accuracy": [
+        0.0,
+        1.0
+      ],
+      "coverage": [
+        0.0,
+        1.0
+      ],
+      "gain": [
+        -1.0,
+        1.0
+      ],
+      "harm": [
+        -1.0,
+        1.0
+      ],
+      "paired_contrast": [
+        -2.0,
+        2.0
+      ]
+    },
+    "primary_contrasts": [
+      "heuristic-minus-raw target gain",
+      "heuristic-minus-none target gain"
+    ],
+    "resamples": 10000
+  },
+  "arms": [
+    "none",
+    "raw",
+    "heuristic",
+    "wrong",
+    "matched_random",
+    "fixed_target_fit"
+  ],
+  "assignments": [
+    {
+      "control_seed": 162101,
+      "domain": "banking77",
+      "donor_seed": 160101,
+      "gauge_seed": 161101,
+      "pair_id": "banking77-pair-01",
+      "recipient_seed": 160102,
+      "variant": "Refund_not_showing_up"
+    },
+    {
+      "control_seed": 162102,
+      "domain": "banking77",
+      "donor_seed": 160103,
+      "gauge_seed": 161111,
+      "pair_id": "banking77-pair-02",
+      "recipient_seed": 160104,
+      "variant": "Refund_not_showing_up"
+    },
+    {
+      "control_seed": 162103,
+      "domain": "banking77",
+      "donor_seed": 160105,
+      "gauge_seed": 161121,
+      "pair_id": "banking77-pair-03",
+      "recipient_seed": 160106,
+      "variant": "activate_my_card"
+    },
+    {
+      "control_seed": 162104,
+      "domain": "banking77",
+      "donor_seed": 160107,
+      "gauge_seed": 161131,
+      "pair_id": "banking77-pair-04",
+      "recipient_seed": 160108,
+      "variant": "activate_my_card"
+    },
+    {
+      "control_seed": 162105,
+      "domain": "banking77",
+      "donor_seed": 160109,
+      "gauge_seed": 161141,
+      "pair_id": "banking77-pair-05",
+      "recipient_seed": 160110,
+      "variant": "age_limit"
+    },
+    {
+      "control_seed": 162106,
+      "domain": "banking77",
+      "donor_seed": 160111,
+      "gauge_seed": 161151,
+      "pair_id": "banking77-pair-06",
+      "recipient_seed": 160112,
+      "variant": "age_limit"
+    },
+    {
+      "control_seed": 162201,
+      "domain": "optical-digits",
+      "donor_seed": 160201,
+      "gauge_seed": 161201,
+      "pair_id": "optical-digits-pair-01",
+      "recipient_seed": 160202,
+      "variant": "0"
+    },
+    {
+      "control_seed": 162202,
+      "domain": "optical-digits",
+      "donor_seed": 160203,
+      "gauge_seed": 161211,
+      "pair_id": "optical-digits-pair-02",
+      "recipient_seed": 160204,
+      "variant": "0"
+    },
+    {
+      "control_seed": 162203,
+      "domain": "optical-digits",
+      "donor_seed": 160205,
+      "gauge_seed": 161221,
+      "pair_id": "optical-digits-pair-03",
+      "recipient_seed": 160206,
+      "variant": "1"
+    },
+    {
+      "control_seed": 162204,
+      "domain": "optical-digits",
+      "donor_seed": 160207,
+      "gauge_seed": 161231,
+      "pair_id": "optical-digits-pair-04",
+      "recipient_seed": 160208,
+      "variant": "1"
+    },
+    {
+      "control_seed": 162205,
+      "domain": "optical-digits",
+      "donor_seed": 160209,
+      "gauge_seed": 161241,
+      "pair_id": "optical-digits-pair-05",
+      "recipient_seed": 160210,
+      "variant": "2"
+    },
+    {
+      "control_seed": 162206,
+      "domain": "optical-digits",
+      "donor_seed": 160211,
+      "gauge_seed": 161251,
+      "pair_id": "optical-digits-pair-06",
+      "recipient_seed": 160212,
+      "variant": "2"
+    }
+  ],
+  "data_access": "Train CSV/ZIP training member only before seal; official tests parsed after external global seal",
+  "expected_independent_candidates": 72,
+  "expected_known_controls": 48,
+  "fit": {
+    "helper": "compile_arm",
+    "mode": "soft",
+    "retain_cap": 128,
+    "retention_weight": 8.0,
+    "ridge": 0.01,
+    "selection": "One fixed candidate, no grid or feedback selection",
+    "target_cap": 32
+  },
+  "frozen_at_utc": "2026-11-09T04:17:49.432366+00:00",
+  "gate_sha256": "601897dc212592ae76cb2eed4b56e120de6ed9d66fa292b7e42ba5b924a13d0f",
+  "independent_unit": "Disjoint initialization pairs; shared corpus/preprocessing within domain",
+  "issue": 16,
+  "known_control_gauges": [
+    "identity",
+    "permutation",
+    "dyadic",
+    "combined"
+  ],
+  "license_scope": {
+    "banking77": "PolyAI task-specific-datasets CC BY4.0; LICENSE pinned",
+    "optical-digits": "E. Alpaydin and C. Kaynak, UCI dataset80, DOI10.24432/C50P49; CC BY4.0 notice in pinned source-page.html; archive has no separate license text"
+  },
+  "limitations": [
+    "shared public corpus",
+    "no learned comparator pool",
+    "no cross-architecture lane",
+    "no universal floating-point proof",
+    "no private/OS hermeticity attestation",
+    "acquisition network time, peak memory, energy, hardware price unknown"
+  ],
+  "lineage_count": 24,
+  "missing_lanes": [
+    "DeepAlign",
+    "NFN",
+    "DWS",
+    "ScaleGMN"
+  ],
+  "native_gate": {
+    "argmax": "lowest index; equality required",
+    "atol": 1e-05,
+    "nonfinite": 0,
+    "rtol": 1e-05
+  },
+  "pair_count": 12,
+  "preprocessing": "Banking training-role-only text vocabulary width2048; digits divide16",
+  "release_sha256": "76d7a7ef8bd49c090341342846ff0bb68a29b3f82c99fbda670794d61289f097",
+  "roles": "Exact-group stratified train60/development10/target10/protected10/calibration remainder; fresh fixed salt",
+  "schema": "wsp-trained-symmetry-pilot-protocol/1",
+  "scope": "Resource-capped estimation pilot; 24-pair confirmation proposal unchanged",
+  "stopping": "Complete every assignment once; failures retained, no replacements",
+  "support_variant_exclusions": [
+    "card_arrival",
+    "pending_cash_withdrawal"
+  ],
+  "support_variant_selection": "First three alphabetically, excluding historical fixed ownership labels",
+  "task": "Route the target original class to the appended specialist; retain every other original class",
+  "training": {
+    "batch_size": 256,
+    "epoch_selection": "highest development class accuracy; earliest tie",
+    "epochs": 35,
+    "hidden": 64,
+    "learning_rate": 0.015,
+    "threads": 4,
+    "weight_decay": 0.001
+  },
+  "useful_admitted": "Useful sampled and accepted integrated admission; no-op never useful",
+  "useful_sampled": {
+    "protected_accuracy_loss_maximum": 0.02,
+    "requires": "valid literal realization, native bridge/control gates; sampled only",
+    "target_gain_minimum": 0.05
+  },
+  "variants": {
+    "banking77": [
+      "Refund_not_showing_up",
+      "activate_my_card",
+      "age_limit"
+    ],
+    "optical-digits": [
+      "0",
+      "1",
+      "2"
+    ]
+  }
+}

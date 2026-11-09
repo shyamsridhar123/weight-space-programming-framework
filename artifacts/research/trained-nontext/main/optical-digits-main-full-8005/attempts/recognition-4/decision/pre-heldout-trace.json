@@ -1,0 +1,609 @@
+[
+  {
+    "action": "session_created",
+    "charges": {},
+    "error": null,
+    "previous_sha256": null,
+    "request": {
+      "access": {
+        "activations": false,
+        "feedback": false,
+        "forward": false,
+        "metadata": true,
+        "weight_decimals": null,
+        "weights": true
+      },
+      "architecture": "trained-frozen-readout/1",
+      "base_sha256": "b52dbc828c98eec6c87c6da23e80a755fe988bf8d22eb02a344a7b05ccaceefa",
+      "callbacks_registered": {
+        "activations": false,
+        "feedback": false,
+        "forward": false
+      },
+      "constraints_sha256": "8796eadca56b7deade6267ce0267427ec0de343aa2aba4b96e3fe8d8645ca090",
+      "declared_constraints_automatically_enforced": false,
+      "enforcement": "cooperative_same_process_interface",
+      "execution_accounting": "interface_calls_and_submitted_examples; callback_internal_work_not_observed",
+      "limits": {
+        "execution_calls": 10,
+        "execution_examples": 1000,
+        "feedback_calls": 10,
+        "feedback_examples": 1000,
+        "input_tokens": 100000,
+        "output_tokens": 100000,
+        "proposals": 1,
+        "tool_calls": 4,
+        "weight_values": 726
+      },
+      "mode": "edit",
+      "objective": "Change the derived routing decision for a frozen trained representation",
+      "schema": "wsp-session-config/1",
+      "splits": {
+        "declared_lineage_overlap": false,
+        "lineage_independence_verified": false,
+        "lineage_scope": "caller_declared_only",
+        "sample_overlap": false,
+        "schema": "wsp-split-validation/1",
+        "sha256": "c9ca1376370a5112ed472eda3f50479a713a37aa907b2b5b51d7dc5efa14699d",
+        "splits": [
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "27e34115503b510e0e98d9176c49f06d0392e5ca38808b6ac665e2fc4bb5d5dd",
+            "name": "train",
+            "sample_count": 2291
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "f0619bdcd61944a1170da1b59c2cdbf538e53e7ae16d9eb1dae18c264e844fee",
+            "name": "development",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "6bcd4109602b4a308a8e1746d9e7eb8d92f29b67cf5e4c68bf039fadc608020c",
+            "name": "target",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "97ed332e5be176e20232e4a4c9243886f210c3dcfa7c262bdce7307fe56ab9f1",
+            "name": "protected",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "2d1989e5a8c6c9229594e9f751ec6c39313bacee19d1f1ba863c03b84ccb6aff",
+            "name": "calibration",
+            "sample_count": 401
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "815bbcacc5c9672298d42afe83dec7c49883d769bfad2c80facfb84a7fc73376",
+            "name": "test",
+            "sample_count": 1797
+          }
+        ]
+      },
+      "task_id": "optical-digits-main-full-8005/recognition/4/decision",
+      "task_sha256": "adfe69ccddff29212d9dac51abb2505bd36db7a9549aba43ec046c6d363962f7",
+      "token_accounting": "provider_supplied_not_locally_measured"
+    },
+    "requested_charges": {},
+    "result": {},
+    "schema": "wsp-trace-event/1",
+    "sequence": 0,
+    "session_sha256": "afb51b72d1095ad1b6903bc1d87f7f7fcfc26d675a7d0cce2bc4f5e1a5bff446",
+    "sha256": "49c6b5bbd9ebe9eaa3f226c36eb9a973f982a0bb0d4eaaddb315e052a74c737f",
+    "status": "succeeded",
+    "task_sha256": "adfe69ccddff29212d9dac51abb2505bd36db7a9549aba43ec046c6d363962f7",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 0,
+      "weight_values": 0
+    }
+  },
+  {
+    "action": "metadata",
+    "charges": {
+      "tool_calls": 1
+    },
+    "error": null,
+    "previous_sha256": "49c6b5bbd9ebe9eaa3f226c36eb9a973f982a0bb0d4eaaddb315e052a74c737f",
+    "request": {},
+    "requested_charges": {
+      "tool_calls": 1
+    },
+    "result": {
+      "artifact": {
+        "architecture": "trained-frozen-readout/1",
+        "metadata": {
+          "domain": "optical-digits",
+          "encoder_semantics": "Supervised float32 affine/ReLU bottleneck; frozen after development-selected epoch",
+          "encoder_sha256": "dbd425a23360b725da81b0292b1d2765286783948009bb53ad34ad9c6d3e4e17",
+          "feature_id": "3761ed7d0f3ec3bb16dea8f7fc1165fbc16c820c35df0211fb9afdbac9ff95b8",
+          "feature_names": [
+            "h000",
+            "h001",
+            "h002",
+            "h003",
+            "h004",
+            "h005",
+            "h006",
+            "h007",
+            "h008",
+            "h009",
+            "h010",
+            "h011",
+            "h012",
+            "h013",
+            "h014",
+            "h015",
+            "h016",
+            "h017",
+            "h018",
+            "h019",
+            "h020",
+            "h021",
+            "h022",
+            "h023",
+            "h024",
+            "h025",
+            "h026",
+            "h027",
+            "h028",
+            "h029",
+            "h030",
+            "h031"
+          ],
+          "head_semantics": "float32 affine output codes; queue decision maps the deterministic lowest-index argmax code",
+          "lineage_seed": 8005,
+          "native_dtype": "float32",
+          "output_names": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "specialist_routing_code"
+          ],
+          "preprocessing_sha256": "8d0585a2e0c6e3218132893bd77c6ef98b04a05b9206173a218aaaa66595f921",
+          "pretraining_ancestry": "Independent encoder and head initialized and supervised-trained from scratch; no pretrained model"
+        },
+        "sha256": "b52dbc828c98eec6c87c6da23e80a755fe988bf8d22eb02a344a7b05ccaceefa",
+        "tensors": {
+          "head.bias": {
+            "dtype": "float64",
+            "shape": [
+              11
+            ]
+          },
+          "head.weight": {
+            "dtype": "float64",
+            "shape": [
+              11,
+              32
+            ]
+          }
+        }
+      },
+      "constraints_status": "declared_context_not_automatically_enforced",
+      "task": {
+        "architecture": "trained-frozen-readout/1",
+        "base_sha256": "b52dbc828c98eec6c87c6da23e80a755fe988bf8d22eb02a344a7b05ccaceefa",
+        "constraints": {
+          "arm": "decision",
+          "behavioral_admission": "frozen finite calibration samples; no whole-domain guarantee",
+          "case": {
+            "case_id": "recognition/4",
+            "confused_with": "6",
+            "desired_code": 4,
+            "desired_queue": 4,
+            "pilot_development_confusion_events": 4,
+            "pilot_development_error_rates": [
+              0.02631578947368421,
+              0.05263157894736842,
+              0.02631578947368421
+            ],
+            "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+            "target_label": 4,
+            "target_name": "4",
+            "type": "recognition"
+          },
+          "configuration": {
+            "penalty": 8.0
+          },
+          "margins": {
+            "maximum_protected_harm": 0.01,
+            "minimum_target_gain": 0.1,
+            "minimum_useful_coverage": 0.75
+          },
+          "nullspace_additional_contract": null,
+          "numeric_lane": "native Torch CPU float32 readout",
+          "protected_feature_sha256": "db6ee154ca699c173a927a57768e8b69b2c2d6af0951da41cb1628829bb8c1d9",
+          "protocol_sha256": "c3a5d1a5c17a0961c787afe47e0b58d015d4864d1ef43cb7d1c5a28612563e7b",
+          "structural_policy": {
+            "max_change_abs": 256.0,
+            "max_edits": 363,
+            "max_parameter_abs": 256.0,
+            "writable": [
+              "head.weight",
+              "head.bias"
+            ]
+          },
+          "target_feature_sha256": "ffb08ff6a4edb3c0519ebf9047959397b834430a682c7e0457d95605f238158d"
+        },
+        "mode": "edit",
+        "objective": "Change the derived routing decision for a frozen trained representation",
+        "schema": "wsp-task/1",
+        "task_id": "optical-digits-main-full-8005/recognition/4/decision"
+      }
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 1,
+    "session_sha256": "afb51b72d1095ad1b6903bc1d87f7f7fcfc26d675a7d0cce2bc4f5e1a5bff446",
+    "sha256": "dab4e087b7f72d0277b0fbb1cfbaf53ecbe4765d1b082e95d76070ae30a0fdf8",
+    "status": "succeeded",
+    "task_sha256": "adfe69ccddff29212d9dac51abb2505bd36db7a9549aba43ec046c6d363962f7",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 1,
+      "weight_values": 0
+    }
+  },
+  {
+    "action": "propose_program",
+    "charges": {
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 363
+    },
+    "error": null,
+    "previous_sha256": "dab4e087b7f72d0277b0fbb1cfbaf53ecbe4765d1b082e95d76070ae30a0fdf8",
+    "request": {
+      "parser": "typed_program_or_wsp-program/1",
+      "program": {
+        "base_sha256": "b52dbc828c98eec6c87c6da23e80a755fe988bf8d22eb02a344a7b05ccaceefa",
+        "edits": [
+          {
+            "after": -0.5052814483642578,
+            "before": -0.5189313888549805,
+            "index": [
+              4,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.1425313800573349,
+            "before": 0.2322300523519516,
+            "index": [
+              4,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.3698054552078247,
+            "before": 0.29163527488708496,
+            "index": [
+              4,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.8131549954414368,
+            "before": 0.7471787929534912,
+            "index": [
+              4,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.33548542857170105,
+            "before": 0.2636685073375702,
+            "index": [
+              4,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.027470551431179047,
+            "before": 0.008233646862208843,
+            "index": [
+              4,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5147265195846558,
+            "before": -0.49707454442977905,
+            "index": [
+              4,
+              6
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.17323549091815948,
+            "before": 0.2030549943447113,
+            "index": [
+              4,
+              7
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.6545223593711853,
+            "before": 0.7075766324996948,
+            "index": [
+              4,
+              8
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.5232025980949402,
+            "before": 0.5497269630432129,
+            "index": [
+              4,
+              9
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.36163920164108276,
+            "before": 0.3379356563091278,
+            "index": [
+              4,
+              10
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.014904007315635681,
+            "before": 0.06540331989526749,
+            "index": [
+              4,
+              11
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.3010414242744446,
+            "before": -0.4192061126232147,
+            "index": [
+              4,
+              13
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.027116693556308746,
+            "before": 0.02378562092781067,
+            "index": [
+              4,
+              15
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5588113069534302,
+            "before": -0.5588410496711731,
+            "index": [
+              4,
+              17
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.3985380530357361,
+            "before": -0.4663620889186859,
+            "index": [
+              4,
+              18
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.1995757818222046,
+            "before": 0.03672949597239494,
+            "index": [
+              4,
+              19
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.3762049078941345,
+            "before": -0.3761572241783142,
+            "index": [
+              4,
+              20
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6949425935745239,
+            "before": -0.6929007172584534,
+            "index": [
+              4,
+              21
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.2462500035762787,
+            "before": 0.15836331248283386,
+            "index": [
+              4,
+              22
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.000888705370016396,
+            "before": -0.0006539957248605788,
+            "index": [
+              4,
+              24
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.18325115740299225,
+            "before": -0.1999683678150177,
+            "index": [
+              4,
+              25
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.420951783657074,
+            "before": 0.4212760329246521,
+            "index": [
+              4,
+              26
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.3892320692539215,
+            "before": -0.5714243650436401,
+            "index": [
+              4,
+              27
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.4127993881702423,
+            "before": 0.3391711413860321,
+            "index": [
+              4,
+              28
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.29747313261032104,
+            "before": -0.2974579334259033,
+            "index": [
+              4,
+              29
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.35606324672698975,
+            "before": -0.4262706935405731,
+            "index": [
+              4,
+              30
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.45081642270088196,
+            "before": 0.455028235912323,
+            "index": [
+              4,
+              31
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.007326589431613684,
+            "before": 0.007955141365528107,
+            "index": [
+              4
+            ],
+            "tensor": "head.bias"
+          }
+        ],
+        "intent": "Trained target repair with sampled protected decision hinges",
+        "schema": "wsp-program/1"
+      },
+      "program_sha256": "93b1c03fdc3baa98ea4057430457c40d4e0801642c69c9c6fed286fb88a8d868",
+      "proposal_type": "Program"
+    },
+    "requested_charges": {
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 363
+    },
+    "result": {
+      "artifact_sha256": "953aa6e5b81d7e7a0f1d63da591aa3e8c7f89931110fca81bbe44738265dd2d5",
+      "candidate_sha256": "e05bd64bdebc082cf917f96d987672df6898252c414e4815a3476235e1b47fac",
+      "no_op": false
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 2,
+    "session_sha256": "afb51b72d1095ad1b6903bc1d87f7f7fcfc26d675a7d0cce2bc4f5e1a5bff446",
+    "sha256": "53d691b72e37c84fa7419caa1fc19c4f09e0eed612aa93930f7a0907079aad41",
+    "status": "succeeded",
+    "task_sha256": "adfe69ccddff29212d9dac51abb2505bd36db7a9549aba43ec046c6d363962f7",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 2,
+      "weight_values": 363
+    }
+  },
+  {
+    "action": "seal",
+    "charges": {},
+    "error": null,
+    "previous_sha256": "53d691b72e37c84fa7419caa1fc19c4f09e0eed612aa93930f7a0907079aad41",
+    "request": {
+      "candidate_sha256": null
+    },
+    "requested_charges": {},
+    "result": {
+      "selection": "abstained"
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 3,
+    "session_sha256": "afb51b72d1095ad1b6903bc1d87f7f7fcfc26d675a7d0cce2bc4f5e1a5bff446",
+    "sha256": "f37eda8e3bf20f1f8c407b6a9e2602a53999c576117bed48903ac0404c8868ad",
+    "status": "succeeded",
+    "task_sha256": "adfe69ccddff29212d9dac51abb2505bd36db7a9549aba43ec046c6d363962f7",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 2,
+      "weight_values": 363
+    }
+  }
+]

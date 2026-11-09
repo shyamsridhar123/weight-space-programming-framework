@@ -1,0 +1,160 @@
+{
+  "schema": "wsp-public-original-audit-exit-derivative/1",
+  "created_utc": "2026-11-09T04:56:30.244559+00:00",
+  "source": {
+    "role": "original_audit_exit_receipt",
+    "bytes": 1960,
+    "raw_sha256": "5d8afc1334b428cf988989eace79af1a9d0b08cbb5f1e0d5d9d526f2f5e64935",
+    "canonical_json_sha256": "72b77477e472eeec14acc109eb30f0507eb158520692b6f5c404721d1f7ee6a8",
+    "source_schema": "wsp-private-original-live-audit-exit/1",
+    "canonical_payload_sha256": "12f59ec18d76d11d552cf225ce7a5c2ce422266a867a34bbf870c6bc4dbc9609"
+  },
+  "sanitizer": {
+    "id": "wsp-original-verification-whitelist/1",
+    "method": "explicit field whitelists and documented role/path rewrites",
+    "copied_fields": [
+      "audit_report",
+      "audit_report_canonical_sha256",
+      "child_finished_utc",
+      "elapsed_seconds",
+      "exit_code",
+      "failure",
+      "finished_utc",
+      "input_records_after",
+      "input_records_before",
+      "inputs_unchanged",
+      "launch_raw_sha256",
+      "process_raw_sha256",
+      "started_utc",
+      "stderr",
+      "stdout",
+      "stdout_json_verified",
+      "verification_passed",
+      "wrapper_exit_code"
+    ],
+    "omitted_fields": [
+      "fresh_provider_calls_performed_by_audit",
+      "schema",
+      "sha256"
+    ],
+    "rewrites": [
+      {
+        "source": "fresh_provider_calls_performed_by_audit",
+        "destination": "captured_claims",
+        "operation": "retain as labeled captured claim"
+      },
+      {
+        "source": "original_audit_launch_receipt.command",
+        "destination": "recorded_command_roles",
+        "operation": "replace interpreter and verifier locators with roles; retain safe flags"
+      }
+    ],
+    "note": "The two saved input maps already contain only roles, byte counts and raw hashes. They are copied unchanged; stdout/stderr contents are omitted.",
+    "raw_evidence_modified": false,
+    "raw_transport_copied": false,
+    "study_or_verifier_executed": false
+  },
+  "recorded": {
+    "audit_report": {
+      "bytes": 12365,
+      "sha256": "0c5d727aad1a0471d83d3575032f3d663f678551cce0766e155318511b4a51ce"
+    },
+    "audit_report_canonical_sha256": "8aa41cf4f5cdebc4bf557f0553f922a1456074bcf8e8144152df2fc119af726c",
+    "child_finished_utc": "2026-11-09T04:43:38.739015+00:00",
+    "elapsed_seconds": 1.5510153999784961,
+    "exit_code": 0,
+    "failure": null,
+    "finished_utc": "2026-11-09T04:43:38.765537+00:00",
+    "input_records_after": {
+      "capture_wrapper": {
+        "bytes": 9523,
+        "sha256": "d45d443e9e0de6f986ff77d3aaa3070547183608696c9d42ed2fb77f89fc5f77"
+      },
+      "python": {
+        "bytes": 274424,
+        "sha256": "0b471133e110cfb53a061cad528ce8e517d7b9ac41a0a396c39ad795a487fc14"
+      },
+      "replay_exit": {
+        "bytes": 38485,
+        "sha256": "8eba0adae7e70ae6fd3401bb74e23e3b51fdae767def4cbbd86cd190b2fe3000"
+      },
+      "verifier": {
+        "bytes": 46954,
+        "sha256": "5a0ef7929a3a2f20ec8d16145682479016157b4b955f11fdb83981d5163b4f0d"
+      }
+    },
+    "input_records_before": {
+      "capture_wrapper": {
+        "bytes": 9523,
+        "sha256": "d45d443e9e0de6f986ff77d3aaa3070547183608696c9d42ed2fb77f89fc5f77"
+      },
+      "python": {
+        "bytes": 274424,
+        "sha256": "0b471133e110cfb53a061cad528ce8e517d7b9ac41a0a396c39ad795a487fc14"
+      },
+      "replay_exit": {
+        "bytes": 38485,
+        "sha256": "8eba0adae7e70ae6fd3401bb74e23e3b51fdae767def4cbbd86cd190b2fe3000"
+      },
+      "verifier": {
+        "bytes": 46954,
+        "sha256": "5a0ef7929a3a2f20ec8d16145682479016157b4b955f11fdb83981d5163b4f0d"
+      }
+    },
+    "inputs_unchanged": true,
+    "launch_raw_sha256": "d57d5924493728d096a33dc06489396183f97605e88974850282424b076bd571",
+    "process_raw_sha256": "15f3ef1f2784161d09650d55be00773e742e470ea7fb8263e6f3c9a65e85c778",
+    "started_utc": "2026-11-09T04:43:37.213438+00:00",
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "bytes": 487,
+      "sha256": "b9a1714eaaef1d579943c2c19220d96cd916fe9d4311fc5de6c74901315455d7"
+    },
+    "stdout_json_verified": true,
+    "verification_passed": true,
+    "wrapper_exit_code": 0
+  },
+  "scope": "Sanitized terminal capture of the completed independent audit. The original audit process and report commitments remain distinct from this derivative's identity. No verifier was executed to create this file.",
+  "recorded_command_source": {
+    "role": "original_audit_launch_receipt",
+    "bytes": 1002,
+    "raw_sha256": "d57d5924493728d096a33dc06489396183f97605e88974850282424b076bd571",
+    "canonical_json_sha256": "072d9e4999ce27961335518cd86dda0ac394ba9c4814f6924e72888111da1791",
+    "source_schema": "wsp-private-original-live-audit-launch/1",
+    "canonical_payload_sha256": "cf7f12f8567e78845b6bdf6c599df5fea5d5981140f94b4bdf9c6aff677c96bd"
+  },
+  "recorded_command_roles": [
+    {
+      "index": 0,
+      "kind": "runtime_role",
+      "value": "captured_python_interpreter"
+    },
+    {
+      "index": 1,
+      "kind": "literal",
+      "value": "-B"
+    },
+    {
+      "index": 2,
+      "kind": "literal",
+      "value": "-u"
+    },
+    {
+      "index": 3,
+      "kind": "artifact_role",
+      "value": "original_audit_verifier"
+    }
+  ],
+  "recorded_working_directory_role": "private_workspace_root",
+  "captured_claims": [
+    {
+      "source_field": "fresh_provider_calls_performed_by_audit",
+      "recorded_value": 0,
+      "status": "retained capture claim; not independently established by this packaging operation"
+    }
+  ],
+  "sha256": "1f00c4aefd62bd8d2eaa560fdcf07a3dec602fe4148a0d413fb894155ae7f080"
+}

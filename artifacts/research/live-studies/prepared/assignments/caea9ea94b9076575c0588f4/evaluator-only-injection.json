@@ -1,0 +1,80 @@
+{
+  "mechanism": "bias_shift",
+  "output_row": 6,
+  "tensor": "head.bias",
+  "clean_parent_sha256": "77790d0c2dd1e25dac1b8a973e6cf46df3d010a8e750a93e455e0ffc74a25926",
+  "planted_parent_sha256": "97ff74b3fe156cede38c1199cb997ea2022fb0ab49e4fea821e2047bb75ce2c1",
+  "proposal": {
+    "base_sha256": "77790d0c2dd1e25dac1b8a973e6cf46df3d010a8e750a93e455e0ffc74a25926",
+    "commands": [
+      {
+        "block": [
+          [
+            6,
+            7
+          ]
+        ],
+        "op": "add",
+        "tensor": "head.bias",
+        "values": [
+          6.0
+        ]
+      }
+    ],
+    "intent": "Evaluator-only planted study parent",
+    "schema": "wsp-structured-program/1"
+  },
+  "lowering": {
+    "base_sha256": "77790d0c2dd1e25dac1b8a973e6cf46df3d010a8e750a93e455e0ffc74a25926",
+    "behavioral_status": "not_checked",
+    "candidate_sha256": "97ff74b3fe156cede38c1199cb997ea2022fb0ab49e4fea821e2047bb75ce2c1",
+    "cast": "round",
+    "command_count": 1,
+    "effective_edits": 1,
+    "native_dtypes": {
+      "head.bias": "float32",
+      "head.weight": "float32"
+    },
+    "numerics": "NumPy binary64 operations; explicit native endpoint projection",
+    "numpy_version": "2.5.3",
+    "program_sha256": "cac676ddac41f5b206d6a7ebd6315f9513fa410d48089fafa0347c7b6b23abd7",
+    "projections": {
+      "head.bias": {
+        "dtype": "float32",
+        "effective_changed_cells": 1,
+        "maximum_rounding_error_exact": "21/134217728",
+        "requested_changed_cells": 1,
+        "rounded_cells": 1,
+        "touched_cells": 1
+      },
+      "head.weight": {
+        "dtype": "float32",
+        "effective_changed_cells": 0,
+        "maximum_rounding_error_exact": "0",
+        "requested_changed_cells": 0,
+        "rounded_cells": 0,
+        "touched_cells": 0
+      }
+    },
+    "proposal_sha256": "bf05b817b15dbb28690a490317e87ae23864fa13d65426e4e2fda9e92dcb093e",
+    "requested_candidate_sha256": "42c0dfd414b2adb4d88868b1b889afdf82ac56672250ae2ab9e4deadb8151394",
+    "schema": "wsp-lowering/1",
+    "sha256": "5025031c1082943a53bdf4a17be994bf6792d6eebdaff1e0bd9e55cf124190ab"
+  },
+  "inverse": {
+    "schema": "wsp-program/1",
+    "base_sha256": "97ff74b3fe156cede38c1199cb997ea2022fb0ab49e4fea821e2047bb75ce2c1",
+    "intent": "Rollback: Evaluator-only planted study parent",
+    "edits": [
+      {
+        "tensor": "head.bias",
+        "index": [
+          6
+        ],
+        "before": 5.9909820556640625,
+        "after": -0.009018100798130035
+      }
+    ]
+  },
+  "sha256": "487f5e711b4bc8eb12bdc0a4a7f80eee30d2656b29fccfdef218926b536e98e6"
+}

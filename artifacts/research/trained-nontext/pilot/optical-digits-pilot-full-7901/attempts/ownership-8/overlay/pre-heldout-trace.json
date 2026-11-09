@@ -1,0 +1,338 @@
+[
+  {
+    "action": "session_created",
+    "charges": {},
+    "error": null,
+    "previous_sha256": null,
+    "request": {
+      "access": {
+        "activations": false,
+        "feedback": false,
+        "forward": false,
+        "metadata": true,
+        "weight_decimals": null,
+        "weights": true
+      },
+      "architecture": "trained-frozen-readout/1",
+      "base_sha256": "8da2d2104cf2ef5122b3036609606d058af86c5bc018ab1b86e33e836bc15b1e",
+      "callbacks_registered": {
+        "activations": false,
+        "feedback": false,
+        "forward": false
+      },
+      "constraints_sha256": "4bf05f54a557a3fbddc7e6dd52586e9abdea049dab17399b214cb462c9647d8b",
+      "declared_constraints_automatically_enforced": false,
+      "enforcement": "cooperative_same_process_interface",
+      "execution_accounting": "interface_calls_and_submitted_examples; callback_internal_work_not_observed",
+      "limits": {
+        "execution_calls": 10,
+        "execution_examples": 1000,
+        "feedback_calls": 10,
+        "feedback_examples": 1000,
+        "input_tokens": 100000,
+        "output_tokens": 100000,
+        "proposals": 1,
+        "tool_calls": 4,
+        "weight_values": 726
+      },
+      "mode": "edit",
+      "objective": "Change the derived routing decision for a frozen trained representation",
+      "schema": "wsp-session-config/1",
+      "splits": {
+        "declared_lineage_overlap": false,
+        "lineage_independence_verified": false,
+        "lineage_scope": "caller_declared_only",
+        "sample_overlap": false,
+        "schema": "wsp-split-validation/1",
+        "sha256": "c9ca1376370a5112ed472eda3f50479a713a37aa907b2b5b51d7dc5efa14699d",
+        "splits": [
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "27e34115503b510e0e98d9176c49f06d0392e5ca38808b6ac665e2fc4bb5d5dd",
+            "name": "train",
+            "sample_count": 2291
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "f0619bdcd61944a1170da1b59c2cdbf538e53e7ae16d9eb1dae18c264e844fee",
+            "name": "development",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "6bcd4109602b4a308a8e1746d9e7eb8d92f29b67cf5e4c68bf039fadc608020c",
+            "name": "target",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "97ed332e5be176e20232e4a4c9243886f210c3dcfa7c262bdce7307fe56ab9f1",
+            "name": "protected",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "2d1989e5a8c6c9229594e9f751ec6c39313bacee19d1f1ba863c03b84ccb6aff",
+            "name": "calibration",
+            "sample_count": 401
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "815bbcacc5c9672298d42afe83dec7c49883d769bfad2c80facfb84a7fc73376",
+            "name": "test",
+            "sample_count": 1797
+          }
+        ]
+      },
+      "task_id": "optical-digits-pilot-full-7901/ownership/8/overlay",
+      "task_sha256": "ab403e5d72a99ed16e521b7826ae20a0771549a6ac55687d72c780fb8ac12b44",
+      "token_accounting": "provider_supplied_not_locally_measured"
+    },
+    "requested_charges": {},
+    "result": {},
+    "schema": "wsp-trace-event/1",
+    "sequence": 0,
+    "session_sha256": "59c100d2dbf0e2e8f5058a156afb9f9c823ee50056cc5d8658c86433ad6cc39c",
+    "sha256": "e69fdfa2a4007c0b4258cb724b7a1bb6077a3d9fe9202ed79ea96649fd0e82a7",
+    "status": "succeeded",
+    "task_sha256": "ab403e5d72a99ed16e521b7826ae20a0771549a6ac55687d72c780fb8ac12b44",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 0,
+      "weight_values": 0
+    }
+  },
+  {
+    "action": "metadata",
+    "charges": {
+      "tool_calls": 1
+    },
+    "error": null,
+    "previous_sha256": "e69fdfa2a4007c0b4258cb724b7a1bb6077a3d9fe9202ed79ea96649fd0e82a7",
+    "request": {},
+    "requested_charges": {
+      "tool_calls": 1
+    },
+    "result": {
+      "artifact": {
+        "architecture": "trained-frozen-readout/1",
+        "metadata": {
+          "domain": "optical-digits",
+          "encoder_semantics": "Supervised float32 affine/ReLU bottleneck; frozen after development-selected epoch",
+          "encoder_sha256": "3edc565b1e9398719b1139e0ea6ea1ac4bcc4ec18b9a1eef354fc1b928ce72ed",
+          "feature_id": "37eb06b9607f18ed8b285e96478d27ca4dc2886a18ea8961f0d91ab6106c7a8c",
+          "feature_names": [
+            "h000",
+            "h001",
+            "h002",
+            "h003",
+            "h004",
+            "h005",
+            "h006",
+            "h007",
+            "h008",
+            "h009",
+            "h010",
+            "h011",
+            "h012",
+            "h013",
+            "h014",
+            "h015",
+            "h016",
+            "h017",
+            "h018",
+            "h019",
+            "h020",
+            "h021",
+            "h022",
+            "h023",
+            "h024",
+            "h025",
+            "h026",
+            "h027",
+            "h028",
+            "h029",
+            "h030",
+            "h031"
+          ],
+          "head_semantics": "float32 affine output codes; queue decision maps the deterministic lowest-index argmax code",
+          "lineage_seed": 7901,
+          "native_dtype": "float32",
+          "output_names": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "specialist_routing_code"
+          ],
+          "preprocessing_sha256": "8d0585a2e0c6e3218132893bd77c6ef98b04a05b9206173a218aaaa66595f921",
+          "pretraining_ancestry": "Independent encoder and head initialized and supervised-trained from scratch; no pretrained model"
+        },
+        "sha256": "8da2d2104cf2ef5122b3036609606d058af86c5bc018ab1b86e33e836bc15b1e",
+        "tensors": {
+          "head.bias": {
+            "dtype": "float64",
+            "shape": [
+              11
+            ]
+          },
+          "head.weight": {
+            "dtype": "float64",
+            "shape": [
+              11,
+              32
+            ]
+          }
+        }
+      },
+      "constraints_status": "declared_context_not_automatically_enforced",
+      "task": {
+        "architecture": "trained-frozen-readout/1",
+        "base_sha256": "8da2d2104cf2ef5122b3036609606d058af86c5bc018ab1b86e33e836bc15b1e",
+        "constraints": {
+          "arm": "overlay",
+          "behavioral_admission": "frozen finite calibration samples; no whole-domain guarantee",
+          "case": {
+            "case_id": "ownership/8",
+            "desired_code": 10,
+            "desired_queue": 10,
+            "selection": "fixed before pilot; no official test opened",
+            "target_label": 8,
+            "target_name": "8",
+            "type": "ownership"
+          },
+          "configuration": {},
+          "margins": {
+            "maximum_protected_harm": 0.01,
+            "minimum_target_gain": 0.1,
+            "minimum_useful_coverage": 0.75
+          },
+          "nullspace_additional_contract": null,
+          "numeric_lane": "native Torch CPU float32 readout",
+          "protected_feature_sha256": "642bec715a8031f044e2cf9b25d088a32d5e59b0b98d980d8efdefec045e50b4",
+          "structural_policy": {
+            "max_change_abs": 256.0,
+            "max_edits": 363,
+            "max_parameter_abs": 256.0,
+            "writable": [
+              "head.weight",
+              "head.bias"
+            ]
+          },
+          "target_feature_sha256": "b542baaaf75d876377059e6a2393151ac0b08dacefebcf9d1e8eb8c15f545214"
+        },
+        "mode": "edit",
+        "objective": "Change the derived routing decision for a frozen trained representation",
+        "schema": "wsp-task/1",
+        "task_id": "optical-digits-pilot-full-7901/ownership/8/overlay"
+      }
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 1,
+    "session_sha256": "59c100d2dbf0e2e8f5058a156afb9f9c823ee50056cc5d8658c86433ad6cc39c",
+    "sha256": "3b7bd1e94307e024025d26271fc56a923812a17f606f1adb4ff9fd167697e3ff",
+    "status": "succeeded",
+    "task_sha256": "ab403e5d72a99ed16e521b7826ae20a0771549a6ac55687d72c780fb8ac12b44",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 1,
+      "weight_values": 0
+    }
+  },
+  {
+    "action": "propose_program",
+    "charges": {
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 363
+    },
+    "error": null,
+    "previous_sha256": "3b7bd1e94307e024025d26271fc56a923812a17f606f1adb4ff9fd167697e3ff",
+    "request": {
+      "parser": "typed_program_or_wsp-program/1",
+      "program": {
+        "base_sha256": "8da2d2104cf2ef5122b3036609606d058af86c5bc018ab1b86e33e836bc15b1e",
+        "edits": [],
+        "intent": "overlay external intervention",
+        "schema": "wsp-program/1"
+      },
+      "program_sha256": "d1473e833712200abd649be4dba25a9df319e55b99071bb476c58866f9ec03ac",
+      "proposal_type": "Program"
+    },
+    "requested_charges": {
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 363
+    },
+    "result": {
+      "artifact_sha256": "8da2d2104cf2ef5122b3036609606d058af86c5bc018ab1b86e33e836bc15b1e",
+      "candidate_sha256": "e40b0beb3f601049ca05a098c5ccdc1969672514a02c1eb7eb7813d9f620c6f6",
+      "no_op": true
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 2,
+    "session_sha256": "59c100d2dbf0e2e8f5058a156afb9f9c823ee50056cc5d8658c86433ad6cc39c",
+    "sha256": "d0cc7b27774543c865cca0292208b4273673cf4fc392374b6abd1dd568ad81ae",
+    "status": "succeeded",
+    "task_sha256": "ab403e5d72a99ed16e521b7826ae20a0771549a6ac55687d72c780fb8ac12b44",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 2,
+      "weight_values": 363
+    }
+  },
+  {
+    "action": "seal",
+    "charges": {},
+    "error": null,
+    "previous_sha256": "d0cc7b27774543c865cca0292208b4273673cf4fc392374b6abd1dd568ad81ae",
+    "request": {
+      "candidate_sha256": "e40b0beb3f601049ca05a098c5ccdc1969672514a02c1eb7eb7813d9f620c6f6"
+    },
+    "requested_charges": {},
+    "result": {
+      "selection": "candidate"
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 3,
+    "session_sha256": "59c100d2dbf0e2e8f5058a156afb9f9c823ee50056cc5d8658c86433ad6cc39c",
+    "sha256": "e7266b333de4489d28154c1d5351fa3e2d23dac811f5de1f8651a0909f1a17c6",
+    "status": "succeeded",
+    "task_sha256": "ab403e5d72a99ed16e521b7826ae20a0771549a6ac55687d72c780fb8ac12b44",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 2,
+      "weight_values": 363
+    }
+  }
+]

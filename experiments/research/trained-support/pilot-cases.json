@@ -1,0 +1,459 @@
+{
+  "cases": [
+    {
+      "case_id": "ownership/card_arrival",
+      "desired_code": 77,
+      "desired_queue": 5,
+      "selection": "fixed before pilot; no official test opened",
+      "target_label": 0,
+      "target_name": "card_arrival",
+      "type": "ownership"
+    },
+    {
+      "case_id": "ownership/pending_cash_withdrawal",
+      "desired_code": 77,
+      "desired_queue": 5,
+      "selection": "fixed before pilot; no official test opened",
+      "target_label": 5,
+      "target_name": "pending_cash_withdrawal",
+      "type": "ownership"
+    },
+    {
+      "case_id": "recognition/top_up_by_bank_transfer_charge",
+      "confused_with": "top_up_by_card_charge",
+      "desired_code": 15,
+      "desired_queue": 2,
+      "pilot_development_confusion_events": 9,
+      "pilot_development_error_rates": [
+        0.2727272727272727,
+        0.2727272727272727,
+        0.2727272727272727
+      ],
+      "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+      "target_label": 15,
+      "target_name": "top_up_by_bank_transfer_charge",
+      "type": "recognition"
+    },
+    {
+      "case_id": "recognition/atm_support",
+      "confused_with": "visa_or_mastercard",
+      "desired_code": 36,
+      "desired_queue": 1,
+      "pilot_development_confusion_events": 7,
+      "pilot_development_error_rates": [
+        0.25,
+        0.125,
+        0.5
+      ],
+      "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+      "target_label": 36,
+      "target_name": "atm_support",
+      "type": "recognition"
+    }
+  ],
+  "discovery": {
+    "cross_queue_confusions": [
+      {
+        "events": 9,
+        "predicted": 70,
+        "truth": 15
+      },
+      {
+        "events": 7,
+        "predicted": 32,
+        "truth": 36
+      },
+      {
+        "events": 6,
+        "predicted": 39,
+        "truth": 48
+      },
+      {
+        "events": 6,
+        "predicted": 20,
+        "truth": 55
+      },
+      {
+        "events": 6,
+        "predicted": 20,
+        "truth": 72
+      },
+      {
+        "events": 5,
+        "predicted": 22,
+        "truth": 6
+      },
+      {
+        "events": 4,
+        "predicted": 64,
+        "truth": 3
+      },
+      {
+        "events": 4,
+        "predicted": 27,
+        "truth": 37
+      },
+      {
+        "events": 4,
+        "predicted": 33,
+        "truth": 66
+      },
+      {
+        "events": 4,
+        "predicted": 50,
+        "truth": 26
+      },
+      {
+        "events": 3,
+        "predicted": 26,
+        "truth": 4
+      },
+      {
+        "events": 3,
+        "predicted": 56,
+        "truth": 10
+      },
+      {
+        "events": 3,
+        "predicted": 72,
+        "truth": 20
+      },
+      {
+        "events": 3,
+        "predicted": 52,
+        "truth": 21
+      },
+      {
+        "events": 3,
+        "predicted": 50,
+        "truth": 27
+      },
+      {
+        "events": 3,
+        "predicted": 17,
+        "truth": 32
+      },
+      {
+        "events": 3,
+        "predicted": 18,
+        "truth": 33
+      },
+      {
+        "events": 3,
+        "predicted": 47,
+        "truth": 33
+      },
+      {
+        "events": 3,
+        "predicted": 4,
+        "truth": 37
+      },
+      {
+        "events": 3,
+        "predicted": 43,
+        "truth": 39
+      },
+      {
+        "events": 3,
+        "predicted": 9,
+        "truth": 39
+      },
+      {
+        "events": 3,
+        "predicted": 45,
+        "truth": 43
+      },
+      {
+        "events": 3,
+        "predicted": 10,
+        "truth": 56
+      },
+      {
+        "events": 3,
+        "predicted": 22,
+        "truth": 58
+      },
+      {
+        "events": 3,
+        "predicted": 76,
+        "truth": 62
+      },
+      {
+        "events": 3,
+        "predicted": 10,
+        "truth": 64
+      },
+      {
+        "events": 3,
+        "predicted": 57,
+        "truth": 66
+      },
+      {
+        "events": 3,
+        "predicted": 27,
+        "truth": 68
+      },
+      {
+        "events": 3,
+        "predicted": 22,
+        "truth": 75
+      },
+      {
+        "events": 3,
+        "predicted": 0,
+        "truth": 76
+      },
+      {
+        "events": 3,
+        "predicted": 62,
+        "truth": 76
+      },
+      {
+        "events": 2,
+        "predicted": 4,
+        "truth": 9
+      },
+      {
+        "events": 2,
+        "predicted": 41,
+        "truth": 11
+      },
+      {
+        "events": 2,
+        "predicted": 33,
+        "truth": 16
+      },
+      {
+        "events": 2,
+        "predicted": 67,
+        "truth": 16
+      },
+      {
+        "events": 2,
+        "predicted": 51,
+        "truth": 16
+      },
+      {
+        "events": 2,
+        "predicted": 7,
+        "truth": 18
+      },
+      {
+        "events": 2,
+        "predicted": 7,
+        "truth": 30
+      },
+      {
+        "events": 2,
+        "predicted": 7,
+        "truth": 37
+      },
+      {
+        "events": 2,
+        "predicted": 26,
+        "truth": 50
+      },
+      {
+        "events": 2,
+        "predicted": 4,
+        "truth": 55
+      },
+      {
+        "events": 2,
+        "predicted": 66,
+        "truth": 61
+      },
+      {
+        "events": 2,
+        "predicted": 69,
+        "truth": 64
+      },
+      {
+        "events": 2,
+        "predicted": 3,
+        "truth": 64
+      },
+      {
+        "events": 2,
+        "predicted": 26,
+        "truth": 67
+      },
+      {
+        "events": 2,
+        "predicted": 15,
+        "truth": 70
+      },
+      {
+        "events": 2,
+        "predicted": 37,
+        "truth": 4
+      },
+      {
+        "events": 2,
+        "predicted": 29,
+        "truth": 9
+      },
+      {
+        "events": 2,
+        "predicted": 57,
+        "truth": 9
+      },
+      {
+        "events": 2,
+        "predicted": 60,
+        "truth": 42
+      },
+      {
+        "events": 2,
+        "predicted": 40,
+        "truth": 49
+      },
+      {
+        "events": 2,
+        "predicted": 68,
+        "truth": 66
+      },
+      {
+        "events": 2,
+        "predicted": 61,
+        "truth": 33
+      },
+      {
+        "events": 1,
+        "predicted": 3,
+        "truth": 2
+      },
+      {
+        "events": 1,
+        "predicted": 15,
+        "truth": 2
+      },
+      {
+        "events": 1,
+        "predicted": 54,
+        "truth": 9
+      },
+      {
+        "events": 1,
+        "predicted": 28,
+        "truth": 17
+      },
+      {
+        "events": 1,
+        "predicted": 67,
+        "truth": 26
+      },
+      {
+        "events": 1,
+        "predicted": 15,
+        "truth": 33
+      },
+      {
+        "events": 1,
+        "predicted": 15,
+        "truth": 62
+      },
+      {
+        "events": 1,
+        "predicted": 54,
+        "truth": 66
+      },
+      {
+        "events": 1,
+        "predicted": 4,
+        "truth": 72
+      },
+      {
+        "events": 1,
+        "predicted": 73,
+        "truth": 76
+      },
+      {
+        "events": 1,
+        "predicted": 56,
+        "truth": 6
+      },
+      {
+        "events": 1,
+        "predicted": 7,
+        "truth": 16
+      },
+      {
+        "events": 1,
+        "predicted": 49,
+        "truth": 17
+      },
+      {
+        "events": 1,
+        "predicted": 68,
+        "truth": 50
+      },
+      {
+        "events": 1,
+        "predicted": 59,
+        "truth": 66
+      },
+      {
+        "events": 1,
+        "predicted": 36,
+        "truth": 76
+      },
+      {
+        "events": 1,
+        "predicted": 2,
+        "truth": 3
+      },
+      {
+        "events": 1,
+        "predicted": 76,
+        "truth": 7
+      },
+      {
+        "events": 1,
+        "predicted": 30,
+        "truth": 9
+      },
+      {
+        "events": 1,
+        "predicted": 0,
+        "truth": 18
+      },
+      {
+        "events": 1,
+        "predicted": 55,
+        "truth": 20
+      },
+      {
+        "events": 1,
+        "predicted": 50,
+        "truth": 21
+      },
+      {
+        "events": 1,
+        "predicted": 61,
+        "truth": 22
+      },
+      {
+        "events": 1,
+        "predicted": 29,
+        "truth": 37
+      },
+      {
+        "events": 1,
+        "predicted": 73,
+        "truth": 38
+      },
+      {
+        "events": 1,
+        "predicted": 56,
+        "truth": 64
+      },
+      {
+        "events": 1,
+        "predicted": 50,
+        "truth": 67
+      }
+    ]
+  },
+  "official_test_opened": false
+}

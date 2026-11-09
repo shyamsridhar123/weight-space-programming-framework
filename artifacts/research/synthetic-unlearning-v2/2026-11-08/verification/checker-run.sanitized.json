@@ -1,0 +1,2762 @@
+{
+  "canonical_recipe": "json.dumps(object, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode('utf-8'); SHA-256 over those bytes",
+  "checker_report": {
+    "all_assigned_outcomes_recomputed": 720,
+    "all_checkpoint_identities_checked": 408,
+    "durable_accounting": {
+      "inventory_transitions_timestamps_statuses_and_summaries_independently_checked": true,
+      "recovery_assigned_and_terminal_ok": 288,
+      "recovery_ledger_sha256": "2d2852ec41694199a62d32004c88c577e69a7b3c29f922619751fa356b1acc4a",
+      "training_assigned_and_terminal_ok": 120,
+      "training_ledger_sha256": "4d0c584eed9c73d9d78425b41d0335c9f156a6254261a35686831a4a1721be0f"
+    },
+    "externally_supplied": {
+      "freeze_sha256": "aebfb931fe110f7e986f05039ba9686373d84eebdfe1ca6a57507aa94044eec8",
+      "results_sha256": "8e8705e03d834806796131ad8b76194f714662e1d9edb3a01f7e2ce8ee5df4fb",
+      "selection_sha256": "d5de5ab12391d1e71dd02256bb76b51e80cfe346aa3fb8f7b47c979434998b0c"
+    },
+    "independence": "own schedule derivation, ledger parsing, transform, inference, scoring, threshold, criteria and cell replay; anchored query constructor reused",
+    "manual_rollback_chain_steps_replayed": 144,
+    "schema": "wsp-independent-unlearning-check/2",
+    "unverified": [
+      "optimizer correctness",
+      "independent model training reproduction",
+      "formal real-to-native refinement",
+      "absence of information in untested internal probes",
+      "production privacy",
+      "untested recovery attacks"
+    ],
+    "verified": true
+  },
+  "created_utc": "2026-11-09T06:14:46.087536+00:00",
+  "limitations": [
+    "optimizer correctness",
+    "independent model training reproduction",
+    "formal real-to-native refinement",
+    "absence of information in untested internal probes",
+    "production privacy",
+    "untested recovery attacks"
+  ],
+  "preservation": {
+    "exact_check_phase_additions": [
+      "private start receipt",
+      "private exit receipt",
+      "private stdout capture",
+      "private stderr capture",
+      "public independent-check.json"
+    ],
+    "frozen_inventories_unchanged": true,
+    "precheck_inventory_canonical_sha256": "86497546663da055d71860b2b214114e47668cb0923f4da18ffb5e802b22c720",
+    "precheck_inventory_unchanged": true,
+    "unexpected_paths": []
+  },
+  "private_hash_only_provenance": {
+    "checker_host_execution": {
+      "bytes": 987,
+      "canonical_whole_object_sha256": "05cddf891110267e0708e0873b23dc15135359c5f144babb49adc9ba499ac9a8",
+      "raw_sha256": "e8fdee7d7e51aa29001b7f98d19c493e0c05957a6ea3a7d60644b2ae959bc982"
+    },
+    "checker_readback": {
+      "bytes": 418932,
+      "canonical_whole_object_sha256": "807115a5a1a9c1405684f5a5359136184ad98cdffd25a5528cf54071e597234b",
+      "raw_sha256": "38269eea6e5669f8ab69516a3838e7f519426886c0bec3df918ad2648540c0f9"
+    },
+    "postexit_reader_raw_sha256": "90640a9c006fd8613f360b55868d95dde5f10ad17603050c5111a650b25f1aa8",
+    "root_results_readback": {
+      "bytes": 62156,
+      "canonical_whole_object_sha256": "0d54a07aef216df20cb628c9586a17feef7d408ab41682b66eeeca62fc578780",
+      "raw_sha256": "348dfd88149ff0c6169e798d9cc96a2b88cad1fcb87876dad178f28ec017a121"
+    }
+  },
+  "process": {
+    "checker_stdout_semantically_matches_report": true,
+    "child_and_host_stderr_empty": true,
+    "host_returncode": 0,
+    "host_stdout_semantically_matches_terminal": true,
+    "host_wall_seconds": 26.74435930000618,
+    "missingness": null,
+    "new_dependencies": 0,
+    "phase_invocations": 1,
+    "provider_calls": 0,
+    "retries": 0,
+    "timed_out": false,
+    "timeout_seconds": 300,
+    "wrapper_returncode": 0,
+    "wrapper_wall_seconds": 26.5377355000237
+  },
+  "public_bindings": {
+    "artifacts/research/synthetic-unlearning-v2/2026-11-08/attack-attempts.json": {
+      "bytes": 168584,
+      "canonical_whole_object_sha256": "635539c70831a0dc6fdfd669aaaa0fa4aae95fca099972f348a658e359f547f3",
+      "raw_sha256": "d3fc40eeda9f50759e9fad36dfe014c200e40b6bb90001c3d2e37086c109e8d0"
+    },
+    "artifacts/research/synthetic-unlearning-v2/2026-11-08/evaluation-manifest.json": {
+      "bytes": 829,
+      "canonical_whole_object_sha256": "82b62d4e6668d9c69e2992b9db5de2299686ec185a79f7622fcf318191b31f6a",
+      "raw_sha256": "bd9e8a6de462086e0132e1892a4c8e148af3496fe0a0ba05a17765b3a9da0aff"
+    },
+    "artifacts/research/synthetic-unlearning-v2/2026-11-08/evaluation-started.json": {
+      "bytes": 205,
+      "canonical_whole_object_sha256": "07793a68cab27240b57116ec6f5768c7beac67351e200e4a1c65fe1f1e80df27",
+      "raw_sha256": "5409cb64396eb4039632bb45fdb3c84169d3d9bb768e1ddae80b51ca3ff130df"
+    },
+    "artifacts/research/synthetic-unlearning-v2/2026-11-08/independent-check.json": {
+      "bytes": 1213,
+      "canonical_whole_object_sha256": "282b608403a57872b0784b0510b594b105c06a46c1328e81cb9dceeae99bcac0",
+      "raw_sha256": "69e5c2124bfc07f60d9e361d8f1ef94528ea9d4b6de234960e89748c88080f42"
+    },
+    "artifacts/research/synthetic-unlearning-v2/2026-11-08/model-selection-seal.json": {
+      "bytes": 15576,
+      "canonical_whole_object_sha256": "51c6ae2cdc5bcdd372dcab237f47e094dc3ce52f8d61f6c556966ef84ec65d99",
+      "raw_sha256": "d5de5ab12391d1e71dd02256bb76b51e80cfe346aa3fb8f7b47c979434998b0c"
+    },
+    "artifacts/research/synthetic-unlearning-v2/2026-11-08/models.jsonl.gz": {
+      "bytes": 3076903,
+      "raw_sha256": "2d7e07c9d0e3b31634ada9e6a8f13998359533abb9e7cc236f595d35255f3aa6"
+    },
+    "artifacts/research/synthetic-unlearning-v2/2026-11-08/programs.jsonl.gz": {
+      "bytes": 9493888,
+      "raw_sha256": "5e33951114e894166f97908b86b5fe0d252bd0080cd8f460d62d5a5c500aece4"
+    },
+    "artifacts/research/synthetic-unlearning-v2/2026-11-08/recovery-attempt-events.jsonl": {
+      "bytes": 233648,
+      "raw_sha256": "2d2852ec41694199a62d32004c88c577e69a7b3c29f922619751fa356b1acc4a"
+    },
+    "artifacts/research/synthetic-unlearning-v2/2026-11-08/recovery-models.jsonl.gz": {
+      "bytes": 7402499,
+      "raw_sha256": "eaeca0c68df68b71f732d76543280a2c954449dcdb6cc42836a9fb516e7a09e5"
+    },
+    "artifacts/research/synthetic-unlearning-v2/2026-11-08/results.json": {
+      "bytes": 3034820,
+      "canonical_whole_object_sha256": "fcd7088c1d25b7f61de780c2d61ec02d3ee7b1e5d36ec4a404c296b49a80c529",
+      "raw_sha256": "8e8705e03d834806796131ad8b76194f714662e1d9edb3a01f7e2ce8ee5df4fb"
+    },
+    "artifacts/research/synthetic-unlearning-v2/2026-11-08/training-attempt-events.jsonl": {
+      "bytes": 91993,
+      "raw_sha256": "4d0c584eed9c73d9d78425b41d0335c9f156a6254261a35686831a4a1721be0f"
+    },
+    "artifacts/research/synthetic-unlearning-v2/2026-11-08/training-attempts.json": {
+      "bytes": 74547,
+      "canonical_whole_object_sha256": "6579b7a88bfc5c7f192dcc740497083fda0db486236b608e24b7862ddfc0b91a",
+      "raw_sha256": "ac6a7c276289f89c6ae7cb49c6ef9fd456ddda5dd907906953cf0d9736bbbef2"
+    },
+    "artifacts/research/synthetic-unlearning-v2/2026-11-08/training-started.json": {
+      "bytes": 119,
+      "canonical_whole_object_sha256": "526befabca6c5db88d3b3ebc4494ec530e057862db4e755482e85d45d2d4468d",
+      "raw_sha256": "f33cbd60e731053928ac8e8fef41ebc291c2854e7eb0699b0bbbea4bc9075ba4"
+    },
+    "experiments/research/synthetic-unlearning-v2/__pycache__/run_unlearning.cpython-312.pyc": {
+      "bytes": 57381,
+      "raw_sha256": "33cb29551e71e6b5f26f9fe349e7b21a833737a78ebc68a55bad4a571aa593d5"
+    },
+    "experiments/research/synthetic-unlearning-v2/amendment.json": {
+      "bytes": 4311,
+      "canonical_whole_object_sha256": "50a0a85e032cfe144a51df92adc4c6606d4380164906f62e5d714782df4377bb",
+      "raw_sha256": "02e44a65f0d0bf785f84b375954d175dc5a57cb67960c91612f2e086690fe014"
+    },
+    "experiments/research/synthetic-unlearning-v2/check_unlearning.py": {
+      "bytes": 48389,
+      "raw_sha256": "5b45d43a72d79a1c5214f3ceaaa06e3df52dda2a70b6c3eac76678837581e75e"
+    },
+    "experiments/research/synthetic-unlearning-v2/framework-source/artifact.py": {
+      "bytes": 7735,
+      "raw_sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+    },
+    "experiments/research/synthetic-unlearning-v2/framework-source/model.py": {
+      "bytes": 9944,
+      "raw_sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+    },
+    "experiments/research/synthetic-unlearning-v2/framework-source/program.py": {
+      "bytes": 6317,
+      "raw_sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+    },
+    "experiments/research/synthetic-unlearning-v2/freeze.json": {
+      "bytes": 1265,
+      "canonical_whole_object_sha256": "227d264e1cf585a96e270d882c83274950076e369fbb3346235d115cef5a616a",
+      "raw_sha256": "aebfb931fe110f7e986f05039ba9686373d84eebdfe1ca6a57507aa94044eec8"
+    },
+    "experiments/research/synthetic-unlearning-v2/input-material.json": {
+      "bytes": 278966,
+      "canonical_whole_object_sha256": "d09911c6b890d90ab96db6a195db83b5a764950c888d0c820c2e5427b57fa1c2",
+      "raw_sha256": "8db483888994c6214d83368fe49195762bdf7d131d1714b7d4dbd2f699814598"
+    },
+    "experiments/research/synthetic-unlearning-v2/protocol.json": {
+      "bytes": 16282,
+      "canonical_whole_object_sha256": "ec995ec5ce886baaef6f782ca3fdc7bf72b7abe020612d33efe9a215a7a96e65",
+      "raw_sha256": "e6289a5e73822d6fa904e15362e5b5eea7f809ebfb061ed8a5c904cdfe976457"
+    },
+    "experiments/research/synthetic-unlearning-v2/run_unlearning.py": {
+      "bytes": 46551,
+      "raw_sha256": "90fbdb5af93f38b8fa67e641f26e972695d187d57f2bcf399a1486bbced93dc0"
+    },
+    "experiments/research/synthetic-unlearning/__pycache__/check_unlearning.cpython-312.pyc": {
+      "bytes": 24601,
+      "raw_sha256": "62df12747a378da4ff8c9a1c6ea60776eb21cfa65e534505fca1973204d79244"
+    },
+    "experiments/research/synthetic-unlearning/__pycache__/run_unlearning.cpython-312.pyc": {
+      "bytes": 44727,
+      "raw_sha256": "c20274963b64bf0dba5daa1c56d5c12d0bf4c1bb9319a7f35194b9f236be826c"
+    },
+    "experiments/research/synthetic-unlearning/check_unlearning.py": {
+      "bytes": 18534,
+      "raw_sha256": "2f278eb358f6ad3e851ae28f83d324e2bbeec5d31e82bc6123b3c736f7c933da"
+    },
+    "experiments/research/synthetic-unlearning/framework-source/artifact.py": {
+      "bytes": 7735,
+      "raw_sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+    },
+    "experiments/research/synthetic-unlearning/framework-source/model.py": {
+      "bytes": 9944,
+      "raw_sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+    },
+    "experiments/research/synthetic-unlearning/framework-source/program.py": {
+      "bytes": 6317,
+      "raw_sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+    },
+    "experiments/research/synthetic-unlearning/freeze.json": {
+      "bytes": 974,
+      "canonical_whole_object_sha256": "9f403417b1338375f732436cb63ddd800461349a44bb0185cb4f91663ee5abf8",
+      "raw_sha256": "8cb44549858912813049f4df5ab0e57a4601cf0266aee1d48aeea08b9b42b099"
+    },
+    "experiments/research/synthetic-unlearning/input-material.json": {
+      "bytes": 279123,
+      "canonical_whole_object_sha256": "716d8f89608c977d31575e9d673b0bf69cb59b3debe582d2a1b9cba170a72d17",
+      "raw_sha256": "5c16271b6a8744148463c0c5505701c0ccef4d0b0ce8f4db79591b0ac79cab1d"
+    },
+    "experiments/research/synthetic-unlearning/protocol.json": {
+      "bytes": 12308,
+      "canonical_whole_object_sha256": "5f5f8f2866d09ba58af8719cc6726ab81e3dfe624414a4dbec685f70a42f074d",
+      "raw_sha256": "566de194161e49505e0c0c89eafecccb5692465f0fe1ebd806b4949d090cc868"
+    },
+    "experiments/research/synthetic-unlearning/run_unlearning.py": {
+      "bytes": 35757,
+      "raw_sha256": "4461a8c059da63128f0af1eccbc7063de1318ac2e7ca14e83d904a9603869c1c"
+    },
+    "experiments/research/synthetic-unlearning/source-review-original-freeze.json": {
+      "bytes": 11137,
+      "canonical_whole_object_sha256": "4ea07b3e57c2bfa0e685ceb5e9816f02df3a24d5330c0948e16f45cbcf2591ce",
+      "raw_sha256": "8f3848e4d6664e903201730125033496b3f5b419f33ea55cae586ba1bf3d7ea0"
+    }
+  },
+  "publication_boundary": "No private locators, transport captures, commands, credentials or raw private receipts included.",
+  "schema": "wsp-unlearning-checker-run-sanitized/1",
+  "scientific_summary": {
+    "aggregation": "Each seeded lineage receives equal weight; its two author scales and three sequential requests are paired, not independent units. Descriptive saved-outcome summaries; no population interval or additional inference run.",
+    "by_method_and_transform": [
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "canonical_refusal",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.9985355763224724,
+            "paired_cell_maximum": 0.9996598474681377,
+            "paired_cell_minimum": 0.9971771610693799
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.7278645833333334,
+            "paired_cell_maximum": 0.828125,
+            "paired_cell_minimum": 0.640625
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.9509387860082305,
+            "paired_cell_maximum": 0.9907407407407407,
+            "paired_cell_minimum": 0.8827160493827161
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.9584780092592592,
+            "paired_cell_maximum": 0.9930555555555556,
+            "paired_cell_minimum": 0.9097222222222222
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "binary32"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "canonical_refusal",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.998535574879943,
+            "paired_cell_maximum": 0.9996598453684666,
+            "paired_cell_minimum": 0.9971771600035457
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.7278645833333334,
+            "paired_cell_maximum": 0.828125,
+            "paired_cell_minimum": 0.640625
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.9509387860082305,
+            "paired_cell_maximum": 0.9907407407407407,
+            "paired_cell_minimum": 0.8827160493827161
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.9584780092592592,
+            "paired_cell_maximum": 0.9930555555555556,
+            "paired_cell_minimum": 0.9097222222222222
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "binary64"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "canonical_refusal",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 0.9997910236625515,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.9965277777777778
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.9937471348848366,
+            "paired_cell_maximum": 0.9994974430236552,
+            "paired_cell_minimum": 0.9799677120625145
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.73046875,
+            "paired_cell_maximum": 0.8125,
+            "paired_cell_minimum": 0.640625
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.9051140260631002,
+            "paired_cell_maximum": 0.9768518518518519,
+            "paired_cell_minimum": 0.7546296296296297
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.9185153034979424,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.8310185185185185
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 0.9989188345091122,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.9916666666666667
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "symmetric-int4"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "canonical_refusal",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.9985153761562037,
+            "paired_cell_maximum": 0.9996593611107932,
+            "paired_cell_minimum": 0.9970838197817405
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.7291666666666666,
+            "paired_cell_maximum": 0.828125,
+            "paired_cell_minimum": 0.640625
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.9502314814814814,
+            "paired_cell_maximum": 0.9907407407407407,
+            "paired_cell_minimum": 0.8842592592592593
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.9590245627572016,
+            "paired_cell_maximum": 0.9930555555555556,
+            "paired_cell_minimum": 0.9074074074074074
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "symmetric-int8"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "retain_finetune",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 0.8987911522633745,
+            "paired_cell_maximum": 0.9861111111111112,
+            "paired_cell_minimum": 0.8003472222222222
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.887915485524978,
+            "paired_cell_maximum": 0.9651077857447995,
+            "paired_cell_minimum": 0.7995676094215409
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.9309413580246915,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.8125
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 0.9209104938271605,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.7916666666666666
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.7100212191358025,
+            "paired_cell_maximum": 0.8125,
+            "paired_cell_minimum": 0.609375
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.8425068587105624,
+            "paired_cell_maximum": 0.9475308641975309,
+            "paired_cell_minimum": 0.6666666666666666
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.8638599537037037,
+            "paired_cell_maximum": 0.9513888888888888,
+            "paired_cell_minimum": 0.6979166666666666
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "binary32"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "retain_finetune",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 0.8987911522633745,
+            "paired_cell_maximum": 0.9861111111111112,
+            "paired_cell_minimum": 0.8003472222222222
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.887915479100078,
+            "paired_cell_maximum": 0.9651077732548726,
+            "paired_cell_minimum": 0.7995676026479075
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.9309413580246915,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.8125
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 0.9209104938271605,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.7916666666666666
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.7100212191358025,
+            "paired_cell_maximum": 0.8125,
+            "paired_cell_minimum": 0.609375
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.8425068587105624,
+            "paired_cell_maximum": 0.9475308641975309,
+            "paired_cell_minimum": 0.6666666666666666
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.8638599537037037,
+            "paired_cell_maximum": 0.9513888888888888,
+            "paired_cell_minimum": 0.6979166666666666
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "binary64"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "retain_finetune",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 0.8718332047325102,
+            "paired_cell_maximum": 0.9861111111111112,
+            "paired_cell_minimum": 0.7447916666666666
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.859349491580335,
+            "paired_cell_maximum": 0.9681529260964857,
+            "paired_cell_minimum": 0.7370560731203485
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": -0.0007146531452087002,
+            "paired_cell_maximum": 0.005952380952380931,
+            "paired_cell_minimum": -0.008333333333333304
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.9052854938271605,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.7708333333333334
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 0.8856095679012346,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.75
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.7049575617283951,
+            "paired_cell_maximum": 0.796875,
+            "paired_cell_minimum": 0.59375
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.805727023319616,
+            "paired_cell_maximum": 0.9290123456790124,
+            "paired_cell_minimum": 0.625
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.8288323045267489,
+            "paired_cell_maximum": 0.9537037037037037,
+            "paired_cell_minimum": 0.6388888888888888
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 0.999633487654321,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.9930555555555556
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "symmetric-int4"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "retain_finetune",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 0.9003504372427984,
+            "paired_cell_maximum": 0.9861111111111112,
+            "paired_cell_minimum": 0.8020833333333334
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.888036530833831,
+            "paired_cell_maximum": 0.9650549487107329,
+            "paired_cell_minimum": 0.7991108528754037
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.9320987654320988,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.8125
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 0.9224537037037037,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.7916666666666666
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.7098283179012346,
+            "paired_cell_maximum": 0.78125,
+            "paired_cell_minimum": 0.609375
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.8421639231824417,
+            "paired_cell_maximum": 0.9444444444444444,
+            "paired_cell_minimum": 0.6666666666666666
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.8632973251028807,
+            "paired_cell_maximum": 0.9513888888888888,
+            "paired_cell_minimum": 0.6979166666666666
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "symmetric-int8"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "retain_only_reference",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 0.11439043209876543,
+            "paired_cell_maximum": 0.20833333333333334,
+            "paired_cell_minimum": 0.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 0.1137795781893004,
+            "paired_cell_maximum": 0.2048611111111111,
+            "paired_cell_minimum": 0.0
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.11416070443483223,
+            "paired_cell_maximum": 0.19666400898518466,
+            "paired_cell_minimum": 0.0035076239591461827
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.1122685185185185,
+            "paired_cell_maximum": 0.2222222222222222,
+            "paired_cell_minimum": 0.0
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 0.11439043209876543,
+            "paired_cell_maximum": 0.20833333333333334,
+            "paired_cell_minimum": 0.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": -0.03361304012345679,
+            "paired_cell_maximum": 0.1684027777777778,
+            "paired_cell_minimum": -0.28125
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.1105752743484225,
+            "paired_cell_maximum": 0.24537037037037038,
+            "paired_cell_minimum": 0.0
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.1104198816872428,
+            "paired_cell_maximum": 0.20833333333333334,
+            "paired_cell_minimum": 0.0
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "binary32"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "retain_only_reference",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 0.11439043209876543,
+            "paired_cell_maximum": 0.20833333333333334,
+            "paired_cell_minimum": 0.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 0.1137795781893004,
+            "paired_cell_maximum": 0.2048611111111111,
+            "paired_cell_minimum": 0.0
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.1141607031032238,
+            "paired_cell_maximum": 0.19666400833906592,
+            "paired_cell_minimum": 0.003507625173827583
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.1122685185185185,
+            "paired_cell_maximum": 0.2222222222222222,
+            "paired_cell_minimum": 0.0
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 0.11439043209876543,
+            "paired_cell_maximum": 0.20833333333333334,
+            "paired_cell_minimum": 0.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": -0.03361304012345679,
+            "paired_cell_maximum": 0.1684027777777778,
+            "paired_cell_minimum": -0.28125
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.1105752743484225,
+            "paired_cell_maximum": 0.24537037037037038,
+            "paired_cell_minimum": 0.0
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.1104198816872428,
+            "paired_cell_maximum": 0.20833333333333334,
+            "paired_cell_minimum": 0.0
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "binary64"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "retain_only_reference",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 0.10725308641975308,
+            "paired_cell_maximum": 0.20833333333333334,
+            "paired_cell_minimum": 0.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 0.11210776748971195,
+            "paired_cell_maximum": 0.2013888888888889,
+            "paired_cell_minimum": 0.0
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.11245124051776322,
+            "paired_cell_maximum": 0.20013666817554374,
+            "paired_cell_minimum": 0.006221727566502812
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": -0.0009020429159318006,
+            "paired_cell_maximum": 0.0011574074074074403,
+            "paired_cell_minimum": -0.008333333333333304
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.11246141975308642,
+            "paired_cell_maximum": 0.20833333333333334,
+            "paired_cell_minimum": 0.0
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 0.10725308641975308,
+            "paired_cell_maximum": 0.20833333333333334,
+            "paired_cell_minimum": 0.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": -0.031684027777777776,
+            "paired_cell_maximum": 0.1684027777777778,
+            "paired_cell_minimum": -0.234375
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.10973936899862825,
+            "paired_cell_maximum": 0.2222222222222222,
+            "paired_cell_minimum": 0.0
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.11466370884773662,
+            "paired_cell_maximum": 0.2152777777777778,
+            "paired_cell_minimum": 0.0
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 0.999820877425044,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.9988425925925926
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "symmetric-int4"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "retain_only_reference",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 0.11207561728395062,
+            "paired_cell_maximum": 0.20833333333333334,
+            "paired_cell_minimum": 0.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 0.11408500514403291,
+            "paired_cell_maximum": 0.2048611111111111,
+            "paired_cell_minimum": 0.0
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.11413756749181524,
+            "paired_cell_maximum": 0.19690017656761885,
+            "paired_cell_minimum": 0.0036297448310206207
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.1114969135802469,
+            "paired_cell_maximum": 0.2222222222222222,
+            "paired_cell_minimum": 0.0
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 0.11207561728395062,
+            "paired_cell_maximum": 0.20833333333333334,
+            "paired_cell_minimum": 0.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": -0.03737461419753087,
+            "paired_cell_maximum": 0.1527777777777778,
+            "paired_cell_minimum": -0.28125
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.11108967764060357,
+            "paired_cell_maximum": 0.24537037037037038,
+            "paired_cell_minimum": 0.0
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.11001800411522633,
+            "paired_cell_maximum": 0.20833333333333334,
+            "paired_cell_minimum": 0.0
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "symmetric-int8"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "unchanged",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.9985355763224724,
+            "paired_cell_maximum": 0.9996598474681377,
+            "paired_cell_minimum": 0.9971771610693799
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.7278645833333334,
+            "paired_cell_maximum": 0.828125,
+            "paired_cell_minimum": 0.640625
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.9509387860082305,
+            "paired_cell_maximum": 0.9907407407407407,
+            "paired_cell_minimum": 0.8827160493827161
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.9584780092592592,
+            "paired_cell_maximum": 0.9930555555555556,
+            "paired_cell_minimum": 0.9097222222222222
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "binary32"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "unchanged",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.998535574879943,
+            "paired_cell_maximum": 0.9996598453684666,
+            "paired_cell_minimum": 0.9971771600035457
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.7278645833333334,
+            "paired_cell_maximum": 0.828125,
+            "paired_cell_minimum": 0.640625
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.9509387860082305,
+            "paired_cell_maximum": 0.9907407407407407,
+            "paired_cell_minimum": 0.8827160493827161
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.9584780092592592,
+            "paired_cell_maximum": 0.9930555555555556,
+            "paired_cell_minimum": 0.9097222222222222
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "binary64"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "unchanged",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 0.9997910236625515,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.9965277777777778
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.9937471348848366,
+            "paired_cell_maximum": 0.9994974430236552,
+            "paired_cell_minimum": 0.9799677120625145
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.73046875,
+            "paired_cell_maximum": 0.8125,
+            "paired_cell_minimum": 0.640625
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.9051140260631002,
+            "paired_cell_maximum": 0.9768518518518519,
+            "paired_cell_minimum": 0.7546296296296297
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.9185153034979424,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.8310185185185185
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 0.9989188345091122,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.9916666666666667
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "symmetric-int4"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "unchanged",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.9985153761562037,
+            "paired_cell_maximum": 0.9996593611107932,
+            "paired_cell_minimum": 0.9970838197817405
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0.0,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.7291666666666666,
+            "paired_cell_maximum": 0.828125,
+            "paired_cell_minimum": 0.640625
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.9502314814814814,
+            "paired_cell_maximum": 0.9907407407407407,
+            "paired_cell_minimum": 0.8842592592592593
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.9590245627572016,
+            "paired_cell_maximum": 0.9930555555555556,
+            "paired_cell_minimum": 0.9074074074074074
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "symmetric-int8"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.8888888888888888,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 0.6666666666666666,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.75,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "uniform_edit",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 0.16158693415637862,
+            "paired_cell_maximum": 0.2152777777777778,
+            "paired_cell_minimum": 0.09722222222222222
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.13608956027447475,
+            "paired_cell_maximum": 0.15083788813677124,
+            "paired_cell_minimum": 0.1244747410593037
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.00025720164609053614,
+            "paired_cell_maximum": 0.0029761904761904656,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.19155092592592593,
+            "paired_cell_maximum": 0.4166666666666667,
+            "paired_cell_minimum": 0.08333333333333333
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 0.17129629629629628,
+            "paired_cell_maximum": 0.375,
+            "paired_cell_minimum": 0.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.5013020833333334,
+            "paired_cell_maximum": 0.8125,
+            "paired_cell_minimum": 0.04340277777777779
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.2050968792866941,
+            "paired_cell_maximum": 0.35185185185185186,
+            "paired_cell_minimum": 0.06481481481481481
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.3551311728395062,
+            "paired_cell_maximum": 0.8194444444444444,
+            "paired_cell_minimum": 0.11574074074074074
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 0.9997427983539094,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.9970238095238095
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "binary32"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.8888888888888888,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 0.6666666666666666,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.75,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "uniform_edit",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "lineage_means": [
+              {
+                "lineage": 18401,
+                "mean": 1.0
+              },
+              {
+                "lineage": 18402,
+                "mean": 1.0
+              },
+              {
+                "lineage": 18403,
+                "mean": 1.0
+              },
+              {
+                "lineage": 18404,
+                "mean": 1.0
+              },
+              {
+                "lineage": 18405,
+                "mean": 1.0
+              },
+              {
+                "lineage": 18406,
+                "mean": 1.0
+              }
+            ],
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "lineage_means": [
+              {
+                "lineage": 18401,
+                "mean": 0.0
+              },
+              {
+                "lineage": 18402,
+                "mean": 0.0
+              },
+              {
+                "lineage": 18403,
+                "mean": 0.0
+              },
+              {
+                "lineage": 18404,
+                "mean": 0.0
+              },
+              {
+                "lineage": 18405,
+                "mean": 0.0
+              },
+              {
+                "lineage": 18406,
+                "mean": 0.0
+              }
+            ],
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 0.16158693415637862,
+            "lineage_means": [
+              {
+                "lineage": 18401,
+                "mean": 0.1629050925925926
+              },
+              {
+                "lineage": 18402,
+                "mean": 0.16338734567901234
+              },
+              {
+                "lineage": 18403,
+                "mean": 0.16049382716049385
+              },
+              {
+                "lineage": 18404,
+                "mean": 0.14969135802469136
+              },
+              {
+                "lineage": 18405,
+                "mean": 0.18045910493827164
+              },
+              {
+                "lineage": 18406,
+                "mean": 0.15258487654320987
+              }
+            ],
+            "paired_cell_maximum": 0.2152777777777778,
+            "paired_cell_minimum": 0.09722222222222222
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.13608956063299615,
+            "lineage_means": [
+              {
+                "lineage": 18401,
+                "mean": 0.13623361589937455
+              },
+              {
+                "lineage": 18402,
+                "mean": 0.13598298910677534
+              },
+              {
+                "lineage": 18403,
+                "mean": 0.13648646770397568
+              },
+              {
+                "lineage": 18404,
+                "mean": 0.13561005072498586
+              },
+              {
+                "lineage": 18405,
+                "mean": 0.1368109110829925
+              },
+              {
+                "lineage": 18406,
+                "mean": 0.13541332927987298
+              }
+            ],
+            "paired_cell_maximum": 0.15083788154803482,
+            "paired_cell_minimum": 0.1244747319537481
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.00025720164609053614,
+            "lineage_means": [
+              {
+                "lineage": 18401,
+                "mean": 0.0
+              },
+              {
+                "lineage": 18402,
+                "mean": 0.0
+              },
+              {
+                "lineage": 18403,
+                "mean": 0.0005235890652557362
+              },
+              {
+                "lineage": 18404,
+                "mean": 0.00033068783068782953
+              },
+              {
+                "lineage": 18405,
+                "mean": 0.00019290123456790673
+              },
+              {
+                "lineage": 18406,
+                "mean": 0.0004960317460317443
+              }
+            ],
+            "paired_cell_maximum": 0.0029761904761904656,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.19155092592592593,
+            "lineage_means": [
+              {
+                "lineage": 18401,
+                "mean": 0.19560185185185186
+              },
+              {
+                "lineage": 18402,
+                "mean": 0.21180555555555555
+              },
+              {
+                "lineage": 18403,
+                "mean": 0.20023148148148148
+              },
+              {
+                "lineage": 18404,
+                "mean": 0.14930555555555555
+              },
+              {
+                "lineage": 18405,
+                "mean": 0.22685185185185186
+              },
+              {
+                "lineage": 18406,
+                "mean": 0.16550925925925927
+              }
+            ],
+            "paired_cell_maximum": 0.4166666666666667,
+            "paired_cell_minimum": 0.08333333333333333
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 0.17129629629629628,
+            "lineage_means": [
+              {
+                "lineage": 18401,
+                "mean": 0.12847222222222224
+              },
+              {
+                "lineage": 18402,
+                "mean": 0.17013888888888887
+              },
+              {
+                "lineage": 18403,
+                "mean": 0.1574074074074074
+              },
+              {
+                "lineage": 18404,
+                "mean": 0.19907407407407407
+              },
+              {
+                "lineage": 18405,
+                "mean": 0.20833333333333334
+              },
+              {
+                "lineage": 18406,
+                "mean": 0.16435185185185183
+              }
+            ],
+            "paired_cell_maximum": 0.375,
+            "paired_cell_minimum": 0.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.5013020833333334,
+            "lineage_means": [
+              {
+                "lineage": 18401,
+                "mean": 0.4945023148148148
+              },
+              {
+                "lineage": 18402,
+                "mean": 0.47164351851851855
+              },
+              {
+                "lineage": 18403,
+                "mean": 0.46903935185185186
+              },
+              {
+                "lineage": 18404,
+                "mean": 0.5674189814814815
+              },
+              {
+                "lineage": 18405,
+                "mean": 0.4797453703703704
+              },
+              {
+                "lineage": 18406,
+                "mean": 0.5254629629629629
+              }
+            ],
+            "paired_cell_maximum": 0.8125,
+            "paired_cell_minimum": 0.04340277777777779
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.2050968792866941,
+            "lineage_means": [
+              {
+                "lineage": 18401,
+                "mean": 0.176440329218107
+              },
+              {
+                "lineage": 18402,
+                "mean": 0.2040895061728395
+              },
+              {
+                "lineage": 18403,
+                "mean": 0.2614454732510288
+              },
+              {
+                "lineage": 18404,
+                "mean": 0.2377829218106996
+              },
+              {
+                "lineage": 18405,
+                "mean": 0.1626800411522634
+              },
+              {
+                "lineage": 18406,
+                "mean": 0.18814300411522633
+              }
+            ],
+            "paired_cell_maximum": 0.35185185185185186,
+            "paired_cell_minimum": 0.06481481481481481
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.3551311728395062,
+            "lineage_means": [
+              {
+                "lineage": 18401,
+                "mean": 0.3283179012345679
+              },
+              {
+                "lineage": 18402,
+                "mean": 0.32320601851851855
+              },
+              {
+                "lineage": 18403,
+                "mean": 0.3314043209876543
+              },
+              {
+                "lineage": 18404,
+                "mean": 0.35050154320987653
+              },
+              {
+                "lineage": 18405,
+                "mean": 0.37008101851851855
+              },
+              {
+                "lineage": 18406,
+                "mean": 0.42727623456790126
+              }
+            ],
+            "paired_cell_maximum": 0.8194444444444444,
+            "paired_cell_minimum": 0.11574074074074074
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 0.9997427983539094,
+            "lineage_means": [
+              {
+                "lineage": 18401,
+                "mean": 1.0
+              },
+              {
+                "lineage": 18402,
+                "mean": 1.0
+              },
+              {
+                "lineage": 18403,
+                "mean": 0.9994764109347442
+              },
+              {
+                "lineage": 18404,
+                "mean": 0.9996693121693122
+              },
+              {
+                "lineage": 18405,
+                "mean": 0.9998070987654321
+              },
+              {
+                "lineage": 18406,
+                "mean": 0.9995039682539683
+              }
+            ],
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.9970238095238095
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "lineage_means": [
+              {
+                "lineage": 18401,
+                "mean": 0.0
+              },
+              {
+                "lineage": 18402,
+                "mean": 0.0
+              },
+              {
+                "lineage": 18403,
+                "mean": 0.0
+              },
+              {
+                "lineage": 18404,
+                "mean": 0.0
+              },
+              {
+                "lineage": 18405,
+                "mean": 0.0
+              },
+              {
+                "lineage": 18406,
+                "mean": 0.0
+              }
+            ],
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "binary64"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.8888888888888888,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 0.8611111111111112,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.7777777777777778,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.08333333333333333,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 0.8888888888888888,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          }
+        },
+        "method": "uniform_edit",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 0.13667052469135801,
+            "paired_cell_maximum": 0.2847222222222222,
+            "paired_cell_minimum": 0.06944444444444445
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.13271173928156713,
+            "paired_cell_maximum": 0.20085678935693405,
+            "paired_cell_minimum": 0.0854649026102076
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.01434909611992946,
+            "paired_cell_maximum": 0.05277777777777781,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.13348765432098766,
+            "paired_cell_maximum": 0.2777777777777778,
+            "paired_cell_minimum": 0.0
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 0.14621913580246915,
+            "paired_cell_maximum": 0.3888888888888889,
+            "paired_cell_minimum": 0.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.33164544753086417,
+            "paired_cell_maximum": 0.828125,
+            "paired_cell_minimum": -0.05208333333333334
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.20949074074074073,
+            "paired_cell_maximum": 0.3611111111111111,
+            "paired_cell_minimum": 0.07407407407407407
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.31886574074074076,
+            "paired_cell_maximum": 0.625,
+            "paired_cell_minimum": 0.12268518518518519
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 0.9845697383891827,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.9458333333333333
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "symmetric-int4"
+      },
+      {
+        "criterion_pass_fractions": {
+          "archival_recovery": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accessibility": {
+            "equal_lineage_mean": 0.8611111111111112,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          },
+          "canonical_answer_suppression": {
+            "equal_lineage_mean": 0.6944444444444445,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          },
+          "exposure_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "extraction": {
+            "equal_lineage_mean": 0.6944444444444445,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          },
+          "membership_proxy": {
+            "equal_lineage_mean": 0.027777777777777776,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 0
+          },
+          "reference_fit_gate": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          },
+          "retained_utility": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1,
+            "paired_cell_minimum": 1
+          }
+        },
+        "method": "uniform_edit",
+        "metrics": {
+          "archival_extraction_accuracy": {
+            "equal_lineage_mean": 1.0,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 1.0
+          },
+          "archive_inclusive_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          },
+          "audit_accuracy": {
+            "equal_lineage_mean": 0.162792566872428,
+            "paired_cell_maximum": 0.20833333333333334,
+            "paired_cell_minimum": 0.1111111111111111
+          },
+          "audit_truth_probability": {
+            "equal_lineage_mean": 0.13588776742730216,
+            "paired_cell_maximum": 0.15055161949971485,
+            "paired_cell_minimum": 0.12369602115359157
+          },
+          "base_retained_harm": {
+            "equal_lineage_mean": 0.0003123162845385077,
+            "paired_cell_maximum": 0.003968253968253954,
+            "paired_cell_minimum": 0.0
+          },
+          "direct_answer_correct_rate": {
+            "equal_lineage_mean": 0.18209876543209877,
+            "paired_cell_maximum": 0.4166666666666667,
+            "paired_cell_minimum": 0.041666666666666664
+          },
+          "label_free_extraction_accuracy": {
+            "equal_lineage_mean": 0.16898148148148148,
+            "paired_cell_maximum": 0.3333333333333333,
+            "paired_cell_minimum": 0.0
+          },
+          "membership_proxy_advantage": {
+            "equal_lineage_mean": 0.4850019290123457,
+            "paired_cell_maximum": 0.8125,
+            "paired_cell_minimum": -0.00347222222222221
+          },
+          "recovery_accuracy:one_label_per_forgotten_author": {
+            "equal_lineage_mean": 0.2065329218106996,
+            "paired_cell_maximum": 0.3611111111111111,
+            "paired_cell_minimum": 0.06481481481481481
+          },
+          "recovery_accuracy:retain_only_refit": {
+            "equal_lineage_mean": 0.3533629115226337,
+            "paired_cell_maximum": 0.8194444444444444,
+            "paired_cell_minimum": 0.11574074074074074
+          },
+          "retained_accuracy": {
+            "equal_lineage_mean": 0.9996876837154615,
+            "paired_cell_maximum": 1.0,
+            "paired_cell_minimum": 0.996031746031746
+          },
+          "weight_only_joint_success_fraction": {
+            "equal_lineage_mean": 0.0,
+            "paired_cell_maximum": 0,
+            "paired_cell_minimum": 0
+          }
+        },
+        "paired_cell_count_bookkeeping": 36,
+        "transform": "symmetric-int8"
+      }
+    ],
+    "independent_units": "six seeded trained lineages; scales, requests, methods, transforms and query rows are paired within lineage",
+    "lineage_seeds": [
+      18401,
+      18402,
+      18403,
+      18404,
+      18405,
+      18406
+    ],
+    "scope": "finite synthetic accessibility estimation, not information erasure, privacy, LLM or enterprise performance",
+    "thresholds": {
+      "maximum_accessibility_advantage": 0.1,
+      "maximum_retained_harm": 0.05,
+      "minimum_training_accuracy": 0.9
+    }
+  },
+  "scientific_summary_binding": {
+    "full_saved_summary_canonical_sha256": "b9e48526301b70e0a4efd1dfa4ebb616ce3d599975e0d52c56f10fa070b779cd",
+    "projection": "Exact saved means and paired ranges; binary64 uniform-edit lineage means retained. No additional aggregation or inference."
+  },
+  "scope": "Root authentication of saved independent checker evidence, with copied descriptive summaries. Synthetic dense MLP only.",
+  "study_date": "2026-11-08",
+  "verified": true
+}

@@ -1,0 +1,20 @@
+{
+  "base_sha256": "47e7bbaa608033d7fa54d30d37767f23a694e1a97b72f893df2062e95b652173",
+  "commands": [
+    {
+      "block": [
+        [
+          46,
+          47
+        ]
+      ],
+      "op": "add",
+      "tensor": "head.bias",
+      "values": [
+        -6.0
+      ]
+    }
+  ],
+  "intent": "Row 46 (pending_transfer, queue 2) has bias 6.011747837, while ordinary intent biases are near zero, strongly suggesting a +6 bias shift. Subtracting 6 restores a plausible 0.011747837 intercept. Gain and harm are rough estimates; partial weights prevent verifying routing margins or population effects.",
+  "schema": "wsp-structured-program/1"
+}

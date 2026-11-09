@@ -1,11 +1,24 @@
 # Research and engineering roadmap
 
 The [November 8, 2026 research review](docs/weight-space/v2/research-roadmap-2026-11.md)
-adds primary-literature findings, a trained enterprise study protocol, evidence
+added primary-literature findings, a trained enterprise study protocol, evidence
 gates, and [published work issues](docs/weight-space/v2/research-issues-2026-11.md).
-Start with a trained support router and compare edits with rules, an ownership
-overlay, and retraining. The existing limitations below remain the foundation;
-the new review translates them into executable work without marking it complete.
+The subsequent [trained support and optical-digit studies](docs/research/trained-applications.md)
+are complete: ownership overlays and soft edits produced useful changes, no
+method achieved useful recognition repair, and hard protected-score candidates
+abstained. Their structural receipt still reports `behavioral_status: not_checked`
+and `formal_certificate: null`. Completion of these experiments does not close
+the claim-level work packages below.
+
+The [live studies](docs/research/live-studies.md),
+[original-source repeat](docs/research/original-source-repeat.md),
+[construction and steering pilot](docs/research/construction-steering-pilot.md),
+and [synthetic unlearning study](docs/research/synthetic-unlearning.md) have also
+run. Their negative outcomes guide the remaining work: all 80 primary live
+weight-access assignments abstained, diagnosis coverage missed its criterion,
+the fresh source and construction calls produced no completed responses, and
+every edited-arm unlearning absolute and joint gate failed. The studies are
+dated November 8; the final review is November 9, 2026 (America/Chicago).
 
 The next work must connect a declared task to an exact candidate, a justified
 guarantee, and a useful measured outcome. The framework already has generic
@@ -62,8 +75,11 @@ reproduction evidence. New confirmation needs new units selected before their
 outcomes are known. Additional rows, episodes, or sampled answers from one
 final edit do not supply independent editor trials or task families.
 
-There is no live language-model/provider study in the current evidence. The
-fitting-permitted compiler and analytic controls answer narrower questions.
+Live provider attempts are now recorded, with failures, abstentions, and
+limited sealed outcomes retained. Reliable delivery, useful primary outcomes,
+enforced access restrictions, and independent provider provenance remain open.
+The fitting-permitted compiler and analytic controls answer narrower questions;
+their success and deterministic replay do not establish live-model success.
 The source Go protocol explicitly forbids regression and least squares; a
 future protocol-replication arm must preserve that restriction.
 
@@ -76,9 +92,11 @@ per-unit records, a complete attempt and selection ledger, reproducible
 analysis, and conclusions matched to the independent units. Both should retain
 negative results and make the stated falsification checks reproducible.
 
-The report's proposals for auditing, zero-data steering, unlearning,
+The report's broader proposals for auditing, zero-data steering, unlearning,
 optimization savings, recursive improvement, and cross-architecture circuit
-grafting remain separate research hypotheses. Their
+grafting remain separate research hypotheses. The bounded construction and
+unlearning pilots above now supply negative evidence within their frozen
+scopes, rather than only proposed tests. Their
 [minimum credible tests](docs/weight-space/v2/limitations-and-next-steps.md#source-future-directions-and-their-unresolved-tests)
 are specified in the detailed plan. The
 [requirements ledger](docs/weight-space/v2/requirements.md) records current

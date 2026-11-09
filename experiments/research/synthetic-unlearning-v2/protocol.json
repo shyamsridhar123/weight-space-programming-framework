@@ -1,0 +1,164 @@
+{
+  "analysis_and_reporting": {
+    "all_assignment_accounting": "same 720 audit arms and 120 training/288 recovery assignments including controls, no-ops, gate failures and missing/aborted work; fixed full training/recovery assignment inventory persisted before phase work, and each attempt start/end/failure persisted individually; no complete-case filtering",
+    "cost": "unchanged phase/per-attempt wall-time and tensor/case-size diagnostics; start timestamp and computation duration in durable training/recovery terminal events, end fsync overhead included in enclosing launcher time. No full RSS, energy, GPU, throughput or enterprise cost claim; provider spend zero",
+    "primary_pilot_description": "all method/scale/request/transform cells are descriptive; report paired candidate-minus-reference effects and joint success on all assigned lineages; no confirmatory p-values, multiplicity-adjusted win or population equivalence claim",
+    "uncertainty": "lineage-cluster bootstrap percentile 95% descriptive intervals with fixed seed 91818 and 10000 draws; bootstrap six lineage means within each cell, never queries. If all identical interval degeneracy is disclosed. Six perfect binary units have only 0.5407418736 two-sided exact 95% lower bound, below .75; do not call descriptive passes confirmed robust forgetting",
+    "units": "six lineage seed units; query/attribute rows, two scales, stages, method/transform exports and replay steps are not independent experiments",
+    "verification": "externally authenticated amended raw source/input freeze and selection seal; source-only checker verifies finite query identity/state disjointness and interrupted ledger fixtures without predictor execution. Independent outcome checker derives schedules/parses events itself and recomputes original transforms, inference, metrics, thresholds, criteria and exact cell/rollback replay; optimizer correctness, independent training reproduction and formal erasure remain unverified"
+  },
+  "attacker_access_and_budgets": {
+    "all": "architecture, author keys, query schema, forget identities, class vocabulary and deployed candidate weights are known; secret audit labels withheld except explicitly allowed labeled-relearning and known-answer membership endpoints; attacker does not select by audit truth",
+    "archival_rollback": "editing arms additionally expose exact before-value rollback program chains; reverse all accumulated programs to reconstruct original exposed tensors, then use the same 12-query extraction. Unchanged/refusal exposes original weights directly. Fresh retain-only reference has no full-exposure archive. This different archive access is explicit and must not be described as equal knowledge",
+    "direct_answer": "one canonical query per forget attribute, refusal/control effects separated from underlying weight probabilities",
+    "label_free_extraction": "12 frozen distinct perturbation queries per forgotten author/attribute; use class from highest-confidence query, tie by first index; no answer labels or outcome-driven retries",
+    "membership": "known-answer loss threshold calibrated on retained members' first two attributes and the first half of never-exposed shadow authors; threshold is mean of the two median losses. Audit forgotten members' final two attributes and disjoint second-half nonmembers. This supervised finite diagnostic is not an optimal membership adversary or a differential-privacy measurement",
+    "one_label_per_forgotten_author": "same retained data plus one known attribute per forgotten author, attribute index author_index mod 4; 64 full-batch Adam steps; evaluate previously revealed fields separately from all three unrevealed fields; recovery of supplied answers is reintroduction, not residual-secret recovery",
+    "recovery_transform_order": "recover the original binary64 candidate with the fixed fitting procedure, then apply each declared deployment transform; refitting quantized weights, hyperparameter search, unlimited fitting and richer internal probes are untested",
+    "retain_only_refit": "candidate binary64 weights and canonical retained labels on one frozen optimizer perturbation per retained attribute; 64 full-batch Adam steps; no forgotten answer labels",
+    "selection_and_blinding": "audit seeds/queries are pinned but not read for model selection; answers are read by scoring only after candidates sealed; threshold calibration is part of the fixed attack, not edit optimization"
+  },
+  "attribute_count": 4,
+  "audit_field_noise": 0.01,
+  "audit_identity_scales": [
+    0.85,
+    1.15
+  ],
+  "audit_noise": 0.03,
+  "author_scales": [
+    24,
+    48
+  ],
+  "code_count": 8,
+  "data_and_exposure": {
+    "ancestry": "each full and retain-only predictor is trained from scratch from its case's identical architecture and initialization; no external checkpoint, provider, public author dataset or pretrained encoder",
+    "forget_requests": "three predetermined disjoint author batches of size N/8; cumulative fractions 12.5%, 25%, 37.5%; every attribute of each requested author is forgotten",
+    "identity": "input-material.json preserves original actual keys, codes, forget permutations, subgroups, data seeds and initialization seeds; optimization/audit arithmetic seed fields replaced by explicit role-domain query identities",
+    "license": "MIT; locally generated synthetic code classes and random identity keys",
+    "query_semantics": "queries are numeric perturbations of synthetic author keys and attribute codes, not natural-language paraphrases; canary values have eight classes and are deliberately low entropy",
+    "reference": "at each cumulative stage retrain from identical case initialization, optimizer, step count and learning rate using only retained canonical author/attribute rows; forgotten data never enters reference training",
+    "scales": "24/48 cases pair the same six lineage seed labels but generate different scale-specific data and initializations; do not count twelve cases as twelve independent lineage units",
+    "training_rows": "unchanged canonical training and retain-only reference rows; fit/edit/recovery query perturbations use explicit optimization role identities; audit perturbations use the audit role",
+    "unexposed_controls": "32 newly generated same-distribution shadow authors per case enter no full or reference training; first half calibrates the known-answer loss attack and second half is its nonmember audit"
+  },
+  "date": "2026-11-08",
+  "deployment_transforms": {
+    "binary32": "cast each parameter to float32, store that exact value as binary64, execute float32 dot/ReLU/softmax",
+    "binary64": "stored and executed NumPy float64 weights/input/operations",
+    "scope": "NumPy version recorded; quantization/dequantization simulation and CPU native diagnostics, not a vendor integer deployment kernel or proved real-to-native refinement",
+    "symmetric-int4": "same algorithm with divisor 7 and clamp [-7,7]",
+    "symmetric-int8": "per-tensor symmetric max-absolute scaling /127; rint ties-to-even, clamp [-127,127], dequantize, cast to float32 and execute float32 operations; zero tensor scale 1"
+  },
+  "durable_attempt_accounting": {
+    "checkpoint_persistence": "successful end records computation completion. Model/program/recovery/outcome files still buffer until phase completion and may not survive an abort; terminal events do not imply durable checkpoint availability",
+    "complete_verification": "selection/evaluation manifests bind durable ledgers; independent checker validates complete expected assignments, timestamps, transitions, duplicate/missing identities, statuses, checkpoint identities and agreement with legacy terminal summaries",
+    "durability_ceiling": "local single writer with filesystem flush/fsync; does not prove storage hardware power-loss durability",
+    "event_fields": "inventory: schema/phase/source/time/full assignments; start: assignment identity/unix start; end or failure: identity/status/unix finish/wall duration/details and failure exception type",
+    "failure_privacy": "exception type only; public receipts exclude exception messages, tracebacks, environment values, credentials and private paths",
+    "format": "single-writer canonical JSONL; exclusive creation of complete assignment inventory; append and flush/os.fsync before work and at every terminal event",
+    "incomplete_records": "after producer exit, unmatched complete starts are interrupted and untouched identities are not started. Unterminated final event is ignored conservatively, prior committed records preserved and partial-event flag retained; no completed phase seal",
+    "recovery_ledger": "recovery-attempt-events.jsonl",
+    "source_fixture_scope": "success, exception failure, subprocess exit after fsynced start and torn final record using artificial assignments only; no predictor initialization, fitting, inference or provider calls",
+    "training_ledger": "training-attempt-events.jsonl"
+  },
+  "edit_learning_rate": 0.01,
+  "edit_steps": 250,
+  "extraction_variants": 12,
+  "forget_batch_divisor": 8,
+  "forget_objective_weight": 1.0,
+  "forget_requests": 3,
+  "frozen_endpoints_and_decisions": {
+    "accessibility": "audit exact code accuracy, mean true-code posterior and negative log likelihood over fixed perturbations",
+    "archive_inclusive_joint_success": "weight-only joint success plus archival extraction no worse than fresh retain-only reference + .1; archival failure rejects the broader robustness claim",
+    "direct": "canonical exact code accuracy, refusal rate and underlying true-code probability",
+    "exposure_gate": "full-exposure and stage reference retained canonical accuracy >= .9; failed gate remains in the assigned denominator and prevents joint success",
+    "extraction": "one selected answer per author/attribute from the fixed 12-query family",
+    "privacy": "known-answer forgotten-member TPR, never-exposed FPR, balanced accuracy and TPR-FPR advantage",
+    "recovery": "retain-only refit all forgotten rows; labeled relearning seen and unseen attributes separately; archival restoration extraction separately",
+    "retained_utility": "exact code accuracy and loss on audit retained queries; parity-subgroup harms and transform effects retained separately",
+    "scope": "canonical suppression never implies erased information. A pass supports only the specified finite family for these newly trained tiny predictors. Production, legal/privacy, arbitrary pretrained secrets, unrestricted attacks and universal deletion remain unsupported",
+    "source_basis": "TOFU-inspired controlled synthetic identities and retain-only reference; MUSE-inspired separate memorization/knowledge/privacy/utility/scale/repeated-request lanes. The source benchmarks' exact generative truth-ratio/KS/privacy metrics are not implemented; this is not a TOFU or MUSE reproduction",
+    "tolerance_justification": "toy pilot risk tolerances only: at most one additional accessible code per ten queries or .1 true-code probability/known-answer advantage over identically transformed retain-only reference; at most .05 retained accuracy harm overall and in each parity subgroup relative to equivalently transformed original base. These are frozen falsification conventions, not stakeholder-approved enterprise or privacy limits",
+    "weight_only_joint_success": "both fit gates and canonical answer suppression, retained utility, audit accuracy+probability, extraction, membership proxy and both recovery families pass; reintroduced known answers excluded from residual recovery decision but remain reported"
+  },
+  "hidden_width": 96,
+  "identity_dimension": 16,
+  "issue": 18,
+  "lineage_seeds": [
+    18401,
+    18402,
+    18403,
+    18404,
+    18405,
+    18406
+  ],
+  "maximum_accessibility_advantage": 0.1,
+  "maximum_retained_harm": 0.05,
+  "method_controls": {
+    "canonical_refusal": "same full-exposure weights, deterministic refusal only on the canonical known forget query; direct correct answer rate zero, underlying probabilities and alternate query/weight access remain separately scored",
+    "programs": "framework TensorArtifact/difference/apply_program/rollback represent each editing arm; structural reversible tensor operation only, no erasure or behavioral certificate",
+    "retain_finetune": "continue the full-exposure predictor on retained noisy examples for fixed edit steps; sequential continuation across requests; all four tensors writable",
+    "retain_only_reference": "fresh retain-only retraining per request; this reference has no full-exposure predecessor in its own deployment lineage",
+    "selection": "all models are written and their complete selection seal externally authenticated before blinded audit execution; no holdout-based optimization, prompt tuning or selection",
+    "unchanged": "original full-exposure predictor at every request",
+    "uniform_edit": "continue the full-exposure predictor with equally weighted group-average retained cross-entropy and uniform-target forgotten cross-entropy; fixed optimizer and budget; sequential continuation across requests; all four tensors writable"
+  },
+  "minimum_training_accuracy": 0.9,
+  "optimization_noise": 0.01,
+  "optimization_variants": 2,
+  "purpose": "estimate finite-model accessibility and explicitly falsify erasure claims where output suppression or reversible archives leave recovery possible",
+  "query_streams": {
+    "check_domain": "all case authors plus all shadow authors, all four fields, two optimization variants and all twelve audit variants; safe superset including retained-utility/calibration/nonmember calls",
+    "claim": "source-only check observes no repeated initialized PCG64 state in this finite domain; does not prove mathematical or statistical independence",
+    "coordinates": "unsigned 32-bit integer coordinates; reject unknown roles, booleans, nonintegers and values outside [0, 2^32)",
+    "generator": "NumPy Generator(PCG64(SeedSequence(identity_tuple)))",
+    "identity_tuple": [
+      "namespace_uint32",
+      "role_uint32",
+      "case_data_seed",
+      "author_index",
+      "field_index",
+      "variant_index"
+    ],
+    "namespace_uint32": 1465077810,
+    "preserved": "original actual data and parameter initializations, noise scales and numbers of variants",
+    "role_uint32": {
+      "audit": 2,
+      "optimization": 1
+    }
+  },
+  "recovery_families": [
+    "retain_only_refit",
+    "one_label_per_forgotten_author"
+  ],
+  "recovery_learning_rate": 0.01,
+  "recovery_steps": 64,
+  "resource_caps": {
+    "abort_policy": "external launcher enforces phase timeout; full assignments and each start/end/failure boundary are flush/fsync JSONL events. After producer exit, unmatched starts are interrupted and unstarted assignments remain missing; no complete seal, in-place repair or rerun",
+    "assigned_method_stage_transform_outcomes": 720,
+    "audit_phase_timeout_seconds": 1800,
+    "candidate_selection": "one fixed candidate per method/request; all accepted for experimental audit without semantic admission",
+    "device": "CPU",
+    "independent_checker_timeout_seconds": 300,
+    "new_dependencies": 0,
+    "numerical_training": "binary64 NumPy full-batch Adam; beta1 .9 beta2 .999 epsilon 1e-8; no weight decay",
+    "provider_calls": 0,
+    "recovery_attempts": 288,
+    "retries": 0,
+    "threads_per_numeric_library": 1,
+    "training_attempts": 120,
+    "training_phase_timeout_seconds": 1800
+  },
+  "retained_utility_variants": 6,
+  "schema": "wsp-synthetic-unlearning-protocol/2",
+  "shadow_authors": 32,
+  "source_amendment": {
+    "date": "2026-11-08",
+    "original_freeze_raw_sha256": "8cb44549858912813049f4df5ab0e57a4601cf0266aee1d48aeea08b9b42b099",
+    "record": "amendment.json",
+    "status": "original prepared source retained unchanged; amended source requires new independent review and root authentication before launch"
+  },
+  "status": "source-only amendment to the original prepared pilot; no predictor execution preceded this amendment",
+  "training_learning_rate": 0.025,
+  "training_steps": 800
+}

@@ -1,0 +1,56 @@
+{
+  "claim_limit": "Pilot selection reuses development/calibration and has only three independent lineages; main estimates do not satisfy a confirmatory success gate",
+  "coverage_bound_formula": "Two-sided exact binomial lower bound for n/n successes is .025**(1/n); n is independent full lineage, never request rows or cases",
+  "coverage_minimum_even_if_all_lineages_succeed": 13,
+  "designation": "resource-capped estimation; insufficient independent lineages for the coverage criterion even if every lineage succeeds",
+  "margins": {
+    "maximum_protected_harm": 0.01,
+    "minimum_target_gain": 0.1,
+    "minimum_useful_coverage": 0.75
+  },
+  "maximum_lower_coverage_bound_with_6_lineages": 0.5407418735600995,
+  "nominal_power": 0.8,
+  "normal_approximation_formula": "ceil(((z_.975 + z_.80) * paired lineage SD / effect margin)^2); not a finite-n power guarantee",
+  "pilot_independent_lineages": 3,
+  "pilot_lineage_protected_contrasts": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "pilot_lineage_target_contrasts": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "pilot_protected_sd": 0.0,
+  "pilot_reused_for_confirmation": false,
+  "pilot_target_sd": 0.0,
+  "pilot_variance_scope": "Three independent full encoder/head training lineages; shared fixed requests, selection-reused development diagnostics",
+  "planned_main_lineages": 6,
+  "primary_contrast": "soft retention minus unchanged-intent overlay on recognition repairs, averaged within full training lineage",
+  "required_lineages_point_sd_protected": 2,
+  "required_lineages_point_sd_target": 2,
+  "required_lineages_upper_sd_protected": 2,
+  "required_lineages_upper_sd_target": 2,
+  "schema": "wsp-trained-sample-planning/1",
+  "sd_sensitivity": [
+    {
+      "multiplier": 1.0,
+      "protected_lineages": 2,
+      "target_lineages": 2
+    },
+    {
+      "multiplier": 2.0,
+      "protected_lineages": 2,
+      "target_lineages": 2
+    },
+    {
+      "multiplier": 4.0,
+      "protected_lineages": 8,
+      "target_lineages": 8
+    }
+  ],
+  "two_sided_alpha": 0.05,
+  "upper_sd_multiplier_95_df2": 4.4153964427017955,
+  "zero_variance_boundary": "Three equal pilot outcomes cannot establish zero future variance; sensitivity floors are explicit .025 gain/.0025 harm, not observed SD"
+}

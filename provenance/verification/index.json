@@ -2432,11 +2432,11 @@
     },
     "sanitization_ledger": {
       "path": "provenance/public-sanitization.json",
-      "bytes": 59306,
-      "sha256": "aebd0bdd2b028702f3c60b574cf5ab65585d17d1dfe5ea0a7fa726c130e91e40"
+      "bytes": 109779,
+      "sha256": "6b903249ecfe25bb4afc5233df1d13132b780f69cd966f8df0d89aba957bf571"
     },
     "historical_entries_and_hashes_unchanged": true,
-    "current_verification": "Current publication, Python, packaging, scanner, and hosted receipts are generated separately and bind the actual final tree or assets; earlier successes are not substituted for current checks.",
+    "current_verification": "Each current check binds its recorded source inputs. Final publication, hosted commit and workflow outcomes require separately observed receipts; historical success is not substituted.",
     "current_local_checks": [
       {
         "original_path": ".runs/independent-draft4/python-tests.safe.json",
@@ -2462,6 +2462,134 @@
         "bytes": 2230,
         "sha256": "4eb5c58b279b08ee96290142c7bcb2329ecb8eb5e7b01e4d22d60216004d7995"
       }
-    ]
-  }
+    ],
+    "current_local_checks_as_of": "2026-11-07; historical pre-research draft.4 checks",
+    "pre_research_index": {
+      "path": "provenance/historical-publication/draft4-pre-research-verification-index.json",
+      "bytes": 128585,
+      "sha256": "a6cc1f18b7c2dd8f5556e0810281b32209d26b968708b963e940d237e616678d"
+    },
+    "research_current_source_checks": {
+      "review_date": "2026-11-09",
+      "receipts": [
+        {
+          "path": "artifacts/research/current-source-validation/2026-11-09/engineering-attempt-1.sanitized.json",
+          "bytes": 17231,
+          "sha256": "30491a584ab972280d8bc4312c868a33c7bf399e4ddcd78d3a230535874a5387",
+          "status": "failed",
+          "check": "engineering",
+          "private_original": {
+            "bytes": 12471,
+            "sha256": "ea359d5bac909a073ac573ef0951c03b58977861466757e834f9e43bb5eff71b"
+          },
+          "interpretation": {
+            "scientific_evidence_effect": "Engineering validation only; does not supersede the separate issue #16 replay failure, trained Lean compilation failure, or synthetic-only negative unlearning result",
+            "public_receipt_is_complete_replay_bundle": false,
+            "new_validation_run_during_derivation": false,
+            "scope": "Explicit engineering selection using fresh synthetic fixtures and temporary Git remotes",
+            "selection_is_full_repository_suite": false
+          }
+        },
+        {
+          "path": "artifacts/research/current-source-validation/2026-11-09/engineering.sanitized.json",
+          "bytes": 15702,
+          "sha256": "5871fcfabeb05a4a5f8baa249f3380fe0fb99cf59274083e98b072391c97bd92",
+          "status": "passed",
+          "check": "engineering",
+          "private_original": {
+            "bytes": 12464,
+            "sha256": "98f223c686924fab1ab065573d9b99388c38c314c0fd04e21e5c6e7e57745937"
+          },
+          "interpretation": {
+            "scientific_evidence_effect": "Engineering validation only; does not supersede the separate issue #16 replay failure, trained Lean compilation failure, or synthetic-only negative unlearning result",
+            "public_receipt_is_complete_replay_bundle": false,
+            "new_validation_run_during_derivation": false,
+            "scope": "Explicit engineering selection using fresh synthetic fixtures and temporary Git remotes",
+            "selection_is_full_repository_suite": false
+          }
+        },
+        {
+          "path": "artifacts/research/current-source-validation/2026-11-09/lean-bridge-attempt-1.sanitized.json",
+          "bytes": 9879,
+          "sha256": "379ff7d3c147cfb2e8b919941d841cf25063ddf0a1e45e6523e82fef96d4559d",
+          "status": "failed",
+          "check": "lean-bridge",
+          "private_original": {
+            "bytes": 6570,
+            "sha256": "20941dbbdbb53c1a4379c9e1526e6de2ab472d5f6cd1773ac77b306542adea40"
+          },
+          "interpretation": {
+            "scientific_evidence_effect": "Engineering validation only; does not supersede the separate issue #16 replay failure, trained Lean compilation failure, or synthetic-only negative unlearning result",
+            "public_receipt_is_complete_replay_bundle": false,
+            "new_validation_run_during_derivation": false,
+            "scope": "A failed fresh-fixture bridge invocation stopped during dependency import-header auditing"
+          }
+        },
+        {
+          "path": "artifacts/research/current-source-validation/2026-11-09/lean-bridge.sanitized.json",
+          "bytes": 38384,
+          "sha256": "e38b09fc727d63db21fabe748c8c2f6d2dc73534ef93297a15d28f2cc1d835da",
+          "status": "passed",
+          "check": "lean-bridge",
+          "private_original": {
+            "bytes": 6565,
+            "sha256": "f436109b1e68f7f76a344ac3b4266d4c572b96145b0c26092e3a9ea20b31dc41"
+          },
+          "interpretation": {
+            "scientific_evidence_effect": "Engineering validation only; does not supersede the separate issue #16 replay failure, trained Lean compilation failure, or synthetic-only negative unlearning result",
+            "public_receipt_is_complete_replay_bundle": false,
+            "new_validation_run_during_derivation": false,
+            "scope": "Fresh handcrafted fixture proofs and mutation checks; four framework modules compiled, five candidates checked, no scientific replay"
+          }
+        },
+        {
+          "path": "artifacts/research/current-source-validation/2026-11-09/wheel-attempt-1.sanitized.json",
+          "bytes": 12634,
+          "sha256": "c52bf2ea14b1b87a835b8bff8c52c7bdfb36a5279c63de9949a9e86ed103bf5a",
+          "status": "failed",
+          "check": "wheel",
+          "private_original": {
+            "bytes": 9682,
+            "sha256": "7ac5ef2f8d85c90043ccccffdd4827d5971ca5a96a5d2b4119842252506556ee"
+          },
+          "interpretation": {
+            "scientific_evidence_effect": "Engineering validation only; does not supersede the separate issue #16 replay failure, trained Lean compilation failure, or synthetic-only negative unlearning result",
+            "public_receipt_is_complete_replay_bundle": false,
+            "new_validation_run_during_derivation": false,
+            "scope": "Wheel build completed; the helper assertion stopped the run before core installation checks"
+          }
+        },
+        {
+          "path": "artifacts/research/current-source-validation/2026-11-09/wheel.sanitized.json",
+          "bytes": 20626,
+          "sha256": "aa057e617485f0ce013dc47e4b59742f31d86ec58a4cfdbc87118eba51f0d63f",
+          "status": "passed",
+          "check": "wheel",
+          "private_original": {
+            "bytes": 19866,
+            "sha256": "8133486ca382fd7572e957f308acfbad25dbebf425ae78394a67d5ae0a45bfdd"
+          },
+          "interpretation": {
+            "scientific_evidence_effect": "Engineering validation only; does not supersede the separate issue #16 replay failure, trained Lean compilation failure, or synthetic-only negative unlearning result",
+            "public_receipt_is_complete_replay_bundle": false,
+            "new_validation_run_during_derivation": false,
+            "completed_command_count": 11,
+            "all_recorded_commands_exit_zero": true,
+            "scope": "Fresh offline build and isolated core install, dependency consistency, two examples, module CLI help and installed CLI help",
+            "torch_extra_checked": false
+          }
+        }
+      ],
+      "guide": {
+        "path": "artifacts/research/current-source-validation/2026-11-09/README.md",
+        "bytes": 7288,
+        "sha256": "b9d6ae0454ce7d2d883c3d8d8fd912001602f195658f7bdd9b89237705c9991f"
+      },
+      "scope": "November 9 engineering, handcrafted real-valued Lean fixtures, and offline core-wheel validation; no scientific replay or provider calls",
+      "historical_outcomes_superseded": false,
+      "hosted_success_inferred": false
+    }
+  },
+  "reviewed_at_utc": "2026-11-09T07:56:37.203742+00:00",
+  "historical_inventory_scope": "files, file_count, total_bytes, earlier append records, timestamps and original identities retain their historical scope; current records are separate"
 }

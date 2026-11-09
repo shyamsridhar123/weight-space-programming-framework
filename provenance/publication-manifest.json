@@ -27,39 +27,108 @@
       "sha256": "0614378b6f7beb0bd06b9d77522a398b5c8219ef60bbde8e6c654783aed8e1ec"
     },
     "historical_manifest_interpretation": "A disclosed public derivative of the old publication record. Its internal hashes continue to describe the historical original inputs; it is not a manifest of the current public files.",
-    "reason": "Remove confidential environment and capture metadata while preserving research scope and separately identifying public derivatives."
+    "reason": "Remove confidential environment and capture metadata while preserving research scope and separately identifying public derivatives.",
+    "pre_research_manifest": {
+      "path": "provenance/historical-publication/draft4-pre-research-publication-manifest.json",
+      "bytes": 16043,
+      "sha256": "636500c67ef2efa74ba0587ea16324604158bd294ec51a7ad2d3b1ce910278f6"
+    },
+    "pre_research_manifest_interpretation": "Byte-exact historical November 7 draft.4 metadata; not current identities or validation outcomes",
+    "research_update": "November 8 bounded studies, preserved failures, primary-source review, generic runtime/proof research, and November 9 engineering validation"
   },
   "source": {
     "inventory": {
       "path": "provenance/source-files.json",
+      "bytes": 2483207,
+      "sha256": "37c199609f078f4ed157ae31e407f93f8df26bffce80d6850d0503d63a827c7e"
+    },
+    "identity_policy": "Original source paths, SHA-256 values, byte lengths, order and all other source-index fields remain unchanged. Six preservation destinations now bind evolved runtime modules to byte-exact indexed originals under provenance/original-files/. The pre-research inventory preserves earlier mapping bytes. Privacy derivatives remain separately disclosed in the sanitation ledger.",
+    "sanitization": {
+      "path": "provenance/public-sanitization.json",
+      "bytes": 109779,
+      "sha256": "6b903249ecfe25bb4afc5233df1d13132b780f69cd966f8df0d89aba957bf571"
+    },
+    "historical_replay": "Strict frozen-source and full-inventory checks are unchanged and can reject sanitized originals. Publication validation of a disclosed derivative is not exact historical replay.",
+    "original_source_inventory_sha256": "1c7b014df4d3545f73f4fea758d9d828b42474d4987da9847d1892ce92c8c661",
+    "historical_inventory": {
+      "path": "provenance/historical-publication/draft4-pre-research-source-files.json",
       "bytes": 2483051,
       "sha256": "1c7b014df4d3545f73f4fea758d9d828b42474d4987da9847d1892ce92c8c661"
     },
-    "identity_policy": "Original source paths, SHA-256 values, byte lengths, order, and preservation mappings remain unchanged. The public sanitation ledger separately binds changed or omitted copies.",
-    "sanitization": {
-      "path": "provenance/public-sanitization.json",
-      "bytes": 59306,
-      "sha256": "aebd0bdd2b028702f3c60b574cf5ab65585d17d1dfe5ea0a7fa726c130e91e40"
-    },
-    "historical_replay": "Strict frozen-source and full-inventory checks are unchanged and can reject sanitized originals. Publication validation of a disclosed derivative is not exact historical replay.",
-    "original_source_inventory_sha256": "1c7b014df4d3545f73f4fea758d9d828b42474d4987da9847d1892ce92c8c661"
+    "preservation_mapping_update": {
+      "review_date": "2026-11-09",
+      "source_commit": "6a2f99815332b3497333636c509c9a31ed0db6e2",
+      "records": [
+        {
+          "original_path": "rlcd/weight_space/__init__.py",
+          "preserved": {
+            "path": "provenance/original-files/rlcd/weight_space/__init__.py",
+            "bytes": 2300,
+            "sha256": "cca471dfd05c2b1edcef52d8a779ec1d05f6dc4acc32432aca76f0e7c2cfe63c"
+          }
+        },
+        {
+          "original_path": "rlcd/weight_space/artifact.py",
+          "preserved": {
+            "path": "provenance/original-files/rlcd/weight_space/artifact.py",
+            "bytes": 7281,
+            "sha256": "8a0a04cc974075ee3aa1063980ed6582055d758bb26ad8519da1380a4e382ece"
+          }
+        },
+        {
+          "original_path": "rlcd/weight_space/contracts.py",
+          "preserved": {
+            "path": "provenance/original-files/rlcd/weight_space/contracts.py",
+            "bytes": 7925,
+            "sha256": "2731015411905d1a5454a3dbde2234eca7cb41233f2ef1875af4839f79932a62"
+          }
+        },
+        {
+          "original_path": "rlcd/weight_space/evidence.py",
+          "preserved": {
+            "path": "provenance/original-files/rlcd/weight_space/evidence.py",
+            "bytes": 6092,
+            "sha256": "1f07217e37a042878e95875d2ddd3d5acb1e1363e9af8f3d2487356bf3988026"
+          }
+        },
+        {
+          "original_path": "rlcd/weight_space/semantics.py",
+          "preserved": {
+            "path": "provenance/original-files/rlcd/weight_space/semantics.py",
+            "bytes": 3792,
+            "sha256": "a63de0ea661110efc700fe8c550832cd92ce3c51a7a69bef3c3f7dd3792130c7"
+          }
+        },
+        {
+          "original_path": "rlcd/weight_space/structured.py",
+          "preserved": {
+            "path": "provenance/original-files/rlcd/weight_space/structured.py",
+            "bytes": 10214,
+            "sha256": "5014d7c7adeade3a6a0749178b20a4fb72ab8793a77d242e1ddfa6355ae858e6"
+          }
+        }
+      ],
+      "current_runtime_bytes_replaced": false,
+      "original_identities_changed": false,
+      "interpretation": "Corrects source-identity failures in the first final publication check; not a scientific rerun or a redaction"
+    }
   },
   "core_documentation": {
     "documents": [
       {
         "path": "README.md",
-        "bytes": 7741,
-        "sha256": "fae4aa849c76fbb283f87f7529408f4d85e1e2be96284b9852576eb3eb0a2d8c"
+        "bytes": 12135,
+        "sha256": "52158fb4e3d3f32afff00bfc5086a6af69521cef89665e910f834eae50754c3a"
       },
       {
         "path": "CHANGELOG.md",
-        "bytes": 10727,
-        "sha256": "8adbc2e71c458347291d4da0affe3802398d0e1fe6e80e8588b00ac34a0618ce"
+        "bytes": 15891,
+        "sha256": "cbf60a16ed7917de9ff6fff080646e1e8f2c99912e4377e24e3d54f44dd984a2"
       },
       {
         "path": "CONTRIBUTING.md",
-        "bytes": 6708,
-        "sha256": "4a8459add3afd1811ac11e8629997225dab41007b100727cce97cd56858d2c49"
+        "bytes": 7356,
+        "sha256": "ef649de3435832450181a6e409a7a8c768ffa23dbc44d0639129b390df2cf367"
       },
       {
         "path": "EVIDENCE.md",
@@ -73,18 +142,18 @@
       },
       {
         "path": "REPRODUCING.md",
-        "bytes": 18589,
-        "sha256": "e2a542ebdea71856669dc1a41370853b94a722b3c70d15464e0b056f37148c1c"
+        "bytes": 18983,
+        "sha256": "151384ddbb818bb4634ca8eb3d03c34cb0e0a96ff1a4f1da33eb9476a9933b3d"
       },
       {
         "path": "ROADMAP.md",
-        "bytes": 7651,
-        "sha256": "c2f0540e9c97d9ed6937c65da3813bc54a5127c31e7a73f2c2ee2a2d448e4717"
+        "bytes": 9406,
+        "sha256": "3aa8d0e7e58ebecb9f70353df2a665549d66dbe2f9cf3e68b38272fdbbdaa076"
       },
       {
         "path": "VERIFICATION.md",
-        "bytes": 32994,
-        "sha256": "356582b04f9fea6b77791fd12c58a7634d2759c87101dae3269fd58c51c7120b"
+        "bytes": 43111,
+        "sha256": "f08780c3bd2be505f80de5318d4c637c02e6412bd3cd4efd0487bc1d7e54c805"
       },
       {
         "path": "releases/v0.2.0-draft.3.md",
@@ -138,18 +207,108 @@
       },
       {
         "path": "docs/weight-space/v2/limitations-and-next-steps.md",
-        "bytes": 41051,
-        "sha256": "510e8eb313001cd2fd89456dfe9e83c61505c3a47a5e72b6be943fc1561e0326"
+        "bytes": 41413,
+        "sha256": "c95729f40d230567729dacfbf76f239dfc6d9c89fc201c44cf0e49984c123839"
       },
       {
         "path": "PUBLICATION.md",
-        "bytes": 7102,
-        "sha256": "3a70b94a265e95ba8227f54f62299d25898ece57a30d8fdf4d5e6f550c4a80f6"
+        "bytes": 9853,
+        "sha256": "5e6ec92ad861eceb094f4615e174f4250037f9b2af50cf8af32d4b7d91c82817"
       },
       {
         "path": "releases/v0.2.0-draft.4.md",
         "bytes": 4099,
         "sha256": "8f31e7dda10e96d8945d715ca9dc988f3b452c399849a4f66ddd00c6e4bfcf03"
+      },
+      {
+        "path": "LICENSE",
+        "bytes": 1072,
+        "sha256": "ca4020ea310eca7964b8692b0cf7a1b97e4cddd783ab309e254f702b9b520aa3"
+      },
+      {
+        "path": "RIGHTS.md",
+        "bytes": 6470,
+        "sha256": "e499b59abd39ef510b81bb2f4b3ddc71ed24f60f5f512ca943094884c2554c2a"
+      },
+      {
+        "path": "docs/research/admission-runtime.md",
+        "bytes": 15662,
+        "sha256": "11d61c7580f6c7c71fad25e02c69142f8045c97a19856b82583aec35c659d582"
+      },
+      {
+        "path": "docs/research/affine-bounds.md",
+        "bytes": 24216,
+        "sha256": "403520b3c505e1c1987fdcdf429628cf1985c39958ab902ac7413e00f321a142"
+      },
+      {
+        "path": "docs/research/construction-steering-pilot.md",
+        "bytes": 32967,
+        "sha256": "e8e3cd0f43b9b33f8847250b27bca416b70c76223dd42e36f2670551318a64bb"
+      },
+      {
+        "path": "docs/research/cumulative-admission.md",
+        "bytes": 11432,
+        "sha256": "ee880f390563c9ecd284ecf5bc993605264db4c0a874361f1044c23ad7293272"
+      },
+      {
+        "path": "docs/research/cumulative-and-bounds.md",
+        "bytes": 13973,
+        "sha256": "7ed8fd5fdd142b241ef17170ee1ca881e551f424f51c1f2365732e71c29d52a7"
+      },
+      {
+        "path": "docs/research/dark-factory.md",
+        "bytes": 8987,
+        "sha256": "374aa3067e3f611735783cbf066a6d2d49dbef9911e15ba8cce915eeb3c6d8d0"
+      },
+      {
+        "path": "docs/research/issue-acceptance-status.md",
+        "bytes": 134684,
+        "sha256": "595e724db1a9036e78a4c14d5f87f58ba4108404e11d9e1517b1b9de8c35f397"
+      },
+      {
+        "path": "docs/research/live-studies.md",
+        "bytes": 28474,
+        "sha256": "46e093c6888a4b83f11bd383a3201689d5b854659a080dc1808899e7d782b99d"
+      },
+      {
+        "path": "docs/research/next-directions.md",
+        "bytes": 38044,
+        "sha256": "6a7b928827eca5a4c026404d6dc8459c8d24b03cf42d52d69d95e7b5746954e3"
+      },
+      {
+        "path": "docs/research/original-source-inputs-NOTICE.md",
+        "bytes": 1859,
+        "sha256": "950957d481c936cb6ea63a29009751ee1f9076519a2f49c06f2caa2b6b239b4b"
+      },
+      {
+        "path": "docs/research/original-source-repeat.md",
+        "bytes": 32416,
+        "sha256": "8e69ffac9198e9748f734a985ab56eb207fa7272048c5efff35a9865a1bdcc09"
+      },
+      {
+        "path": "docs/research/primary-paper-review.md",
+        "bytes": 60559,
+        "sha256": "0891f1aec53b9ad11e680be6d8d0099d60e8af01fea4a7ff10cb353e754bbc64"
+      },
+      {
+        "path": "docs/research/synthetic-unlearning.md",
+        "bytes": 42078,
+        "sha256": "3380494d70129c0bb9d920bffa415f9042401528115656133b82e22ed02583b3"
+      },
+      {
+        "path": "docs/research/trained-applications.md",
+        "bytes": 37456,
+        "sha256": "ad1362853c050f2f25a3fbafcfe8a70aefa25a31d767b22bb7735e2f11f1d2b3"
+      },
+      {
+        "path": "docs/research/trained-symmetry-pilot-criterion-map.md",
+        "bytes": 20080,
+        "sha256": "33b579a27e4ae3ae43d4e5f3ebc4ac4a96f5a509c484741aa1b7bc1227de7516"
+      },
+      {
+        "path": "docs/research/trained-symmetry-pilot.md",
+        "bytes": 37502,
+        "sha256": "df92995751e5bfe81713b86ee63bf4ce806c0aedfee9c98c482a42dea9c5c7e9"
       }
     ],
     "runnable_illustrations": [
@@ -262,8 +421,8 @@
   },
   "scientific_scope": {
     "framework": "Generic read, diagnose, edit, and create task framework. RTS is one retained historical application.",
-    "new_scientific_study": false,
-    "new_lean_run": false,
+    "new_scientific_study": true,
+    "new_lean_run": true,
     "historical_reference_inputs": [
       {
         "path": "artifacts/weight-space/study-v2-report-complete/report.md",
@@ -291,20 +450,55 @@
         "sha256": "5c596da6925dc1a2278d933a063264c5199d7c225dcd08eb082df4325977a874"
       }
     ],
-    "interpretation": "The retained local study concerns synthetic feature maps and trained/edited output heads. It supports a target-retention tradeoff within that design. Existing seeds are observed; replay is not fresh confirmation. The conditional Lean results concern declared real-valued semantics. No live LLM/provider arm, useful large-model editing result, or automatic runtime-to-proof correspondence is added.",
+    "interpretation": "Generic framework research includes bounded trained text/nontext, provider, original-source, construction and synthetic-unlearning experiments with frozen failures and negative outcomes. The primary live weight-access lane abstained, cumulative trained admissions were zero, the useful/bound intersection was zero, and edited unlearning methods failed every joint gate. Original/normalized #16 native replays and trained Lean compilation remain failed. November 9 handcrafted real-valued bridge checks are separate engineering evidence, not live capability or business usefulness.",
     "native_floating_point_or_python_compiler_verified": false,
     "automatic_runtime_candidate_to_proof_binding": false,
     "execution_attestation_or_hostile_code_isolation": false,
     "next_steps": {
       "path": "docs/weight-space/v2/limitations-and-next-steps.md",
-      "bytes": 41051,
-      "sha256": "510e8eb313001cd2fd89456dfe9e83c61505c3a47a5e72b6be943fc1561e0326"
+      "bytes": 41413,
+      "sha256": "c95729f40d230567729dacfbf76f239dfc6d9c89fc201c44cf0e49984c123839"
+    },
+    "historical_pre_research_scope": {
+      "as_of": "2026-11-07",
+      "new_scientific_study": false,
+      "new_lean_run": false,
+      "interpretation": "The retained local study concerns synthetic feature maps and trained/edited output heads. It supports a target-retention tradeoff within that design. Existing seeds are observed; replay is not fresh confirmation. The conditional Lean results concern declared real-valued semantics. No live LLM/provider arm, useful large-model editing result, or automatic runtime-to-proof correspondence is added."
+    },
+    "study_dates": [
+      "2026-11-08"
+    ],
+    "current_validation_date": "2026-11-09",
+    "automatic_runtime_candidate_to_proof_binding_scope": "Universal arbitrary-operator, trained-extractor and native/compiler guarantees remain unverified; restricted canonical binding is described separately",
+    "canonical_fixture_bridge": {
+      "restricted_binding_checked": true,
+      "semantics": "finite affine/identity/ReLU/abs candidates over real values",
+      "candidate_axiom_audits": true,
+      "framework_axiom_audits_requested": false,
+      "native_floating_point_verified": false,
+      "encoder_or_trained_extractor_verified": false,
+      "dependency_and_distribution_trust": "Pinned source identities with trusted cached compiled imports; no complete rebuild or kernel recheck",
+      "receipt": {
+        "path": "artifacts/research/current-source-validation/2026-11-09/lean-bridge.sanitized.json",
+        "bytes": 38384,
+        "sha256": "e38b09fc727d63db21fabe748c8c2f6d2dc73534ef93297a15d28f2cc1d835da"
+      }
+    },
+    "next_directions": {
+      "path": "docs/research/next-directions.md",
+      "bytes": 38044,
+      "sha256": "6a7b928827eca5a4c026404d6dc8459c8d24b03cf42d52d69d95e7b5746954e3"
+    },
+    "acceptance_map": {
+      "path": "docs/research/issue-acceptance-status.md",
+      "bytes": 134684,
+      "sha256": "595e724db1a9036e78a4c14d5f87f58ba4108404e11d9e1517b1b9de8c35f397"
     }
   },
   "verification_archive": {
     "path": "provenance/verification/index.json",
-    "bytes": 128585,
-    "sha256": "a6cc1f18b7c2dd8f5556e0810281b32209d26b968708b963e940d237e616678d"
+    "bytes": 135761,
+    "sha256": "a1b7db76267c076a2ad842e5fd3c81a6eab66449c42163ef3d3acb86ae9d7c23"
   },
   "public_npm_lock_review": {
     "path": "provenance/public-npm-lock.json",
@@ -313,11 +507,11 @@
   },
   "current_validation": {
     "publication_command": "python scripts/verify_publication.py",
-    "python_command": "python -m pytest -q",
+    "python_command": "python -m pytest -c pytest-engineering.ini -q",
     "workflow": {
       "path": ".github/workflows/publication-python.yml",
-      "bytes": 7687,
-      "sha256": "b056aa34b21b385cc15681de3a475fb447ca8fbceb0ff87869522bc517b4c059"
+      "bytes": 7756,
+      "sha256": "0617bbdb70c5fde6a69f3f194b1dd967fa5f7741933e1fd9ff57f3e7dc64dcfd"
     },
     "precommit_local_checks": [
       {
@@ -345,8 +539,135 @@
         "sha256": "4eb5c58b279b08ee96290142c7bcb2329ecb8eb5e7b01e4d22d60216004d7995"
       }
     ],
-    "receipt_policy": "Local Python and package receipts bind their specific unchanged inputs and are retained in the tree. Final tree/commit, source archive, confidentiality, and hosted receipts are separate release assets. Historical receipts remain historical; no outcome is inferred from this manifest.",
-    "no_new_scientific_replay_or_lean_run": true
+    "receipt_policy": "Historical receipts retain their identities and date. November 9 receipts bind separately checked source inputs; final publication and hosted outcomes are observed separately without circular metadata bindings.",
+    "precommit_local_checks_as_of": "2026-11-07; historical pre-research draft.4 checks",
+    "python_environment_configuration": {
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+    },
+    "historical_no_new_scientific_replay_or_lean_run": {
+      "as_of": "2026-11-07",
+      "value": true
+    },
+    "research_current_source_checks": {
+      "review_date": "2026-11-09",
+      "receipts": [
+        {
+          "path": "artifacts/research/current-source-validation/2026-11-09/engineering-attempt-1.sanitized.json",
+          "bytes": 17231,
+          "sha256": "30491a584ab972280d8bc4312c868a33c7bf399e4ddcd78d3a230535874a5387",
+          "status": "failed",
+          "check": "engineering",
+          "private_original": {
+            "bytes": 12471,
+            "sha256": "ea359d5bac909a073ac573ef0951c03b58977861466757e834f9e43bb5eff71b"
+          },
+          "interpretation": {
+            "scientific_evidence_effect": "Engineering validation only; does not supersede the separate issue #16 replay failure, trained Lean compilation failure, or synthetic-only negative unlearning result",
+            "public_receipt_is_complete_replay_bundle": false,
+            "new_validation_run_during_derivation": false,
+            "scope": "Explicit engineering selection using fresh synthetic fixtures and temporary Git remotes",
+            "selection_is_full_repository_suite": false
+          }
+        },
+        {
+          "path": "artifacts/research/current-source-validation/2026-11-09/engineering.sanitized.json",
+          "bytes": 15702,
+          "sha256": "5871fcfabeb05a4a5f8baa249f3380fe0fb99cf59274083e98b072391c97bd92",
+          "status": "passed",
+          "check": "engineering",
+          "private_original": {
+            "bytes": 12464,
+            "sha256": "98f223c686924fab1ab065573d9b99388c38c314c0fd04e21e5c6e7e57745937"
+          },
+          "interpretation": {
+            "scientific_evidence_effect": "Engineering validation only; does not supersede the separate issue #16 replay failure, trained Lean compilation failure, or synthetic-only negative unlearning result",
+            "public_receipt_is_complete_replay_bundle": false,
+            "new_validation_run_during_derivation": false,
+            "scope": "Explicit engineering selection using fresh synthetic fixtures and temporary Git remotes",
+            "selection_is_full_repository_suite": false
+          }
+        },
+        {
+          "path": "artifacts/research/current-source-validation/2026-11-09/lean-bridge-attempt-1.sanitized.json",
+          "bytes": 9879,
+          "sha256": "379ff7d3c147cfb2e8b919941d841cf25063ddf0a1e45e6523e82fef96d4559d",
+          "status": "failed",
+          "check": "lean-bridge",
+          "private_original": {
+            "bytes": 6570,
+            "sha256": "20941dbbdbb53c1a4379c9e1526e6de2ab472d5f6cd1773ac77b306542adea40"
+          },
+          "interpretation": {
+            "scientific_evidence_effect": "Engineering validation only; does not supersede the separate issue #16 replay failure, trained Lean compilation failure, or synthetic-only negative unlearning result",
+            "public_receipt_is_complete_replay_bundle": false,
+            "new_validation_run_during_derivation": false,
+            "scope": "A failed fresh-fixture bridge invocation stopped during dependency import-header auditing"
+          }
+        },
+        {
+          "path": "artifacts/research/current-source-validation/2026-11-09/lean-bridge.sanitized.json",
+          "bytes": 38384,
+          "sha256": "e38b09fc727d63db21fabe748c8c2f6d2dc73534ef93297a15d28f2cc1d835da",
+          "status": "passed",
+          "check": "lean-bridge",
+          "private_original": {
+            "bytes": 6565,
+            "sha256": "f436109b1e68f7f76a344ac3b4266d4c572b96145b0c26092e3a9ea20b31dc41"
+          },
+          "interpretation": {
+            "scientific_evidence_effect": "Engineering validation only; does not supersede the separate issue #16 replay failure, trained Lean compilation failure, or synthetic-only negative unlearning result",
+            "public_receipt_is_complete_replay_bundle": false,
+            "new_validation_run_during_derivation": false,
+            "scope": "Fresh handcrafted fixture proofs and mutation checks; four framework modules compiled, five candidates checked, no scientific replay"
+          }
+        },
+        {
+          "path": "artifacts/research/current-source-validation/2026-11-09/wheel-attempt-1.sanitized.json",
+          "bytes": 12634,
+          "sha256": "c52bf2ea14b1b87a835b8bff8c52c7bdfb36a5279c63de9949a9e86ed103bf5a",
+          "status": "failed",
+          "check": "wheel",
+          "private_original": {
+            "bytes": 9682,
+            "sha256": "7ac5ef2f8d85c90043ccccffdd4827d5971ca5a96a5d2b4119842252506556ee"
+          },
+          "interpretation": {
+            "scientific_evidence_effect": "Engineering validation only; does not supersede the separate issue #16 replay failure, trained Lean compilation failure, or synthetic-only negative unlearning result",
+            "public_receipt_is_complete_replay_bundle": false,
+            "new_validation_run_during_derivation": false,
+            "scope": "Wheel build completed; the helper assertion stopped the run before core installation checks"
+          }
+        },
+        {
+          "path": "artifacts/research/current-source-validation/2026-11-09/wheel.sanitized.json",
+          "bytes": 20626,
+          "sha256": "aa057e617485f0ce013dc47e4b59742f31d86ec58a4cfdbc87118eba51f0d63f",
+          "status": "passed",
+          "check": "wheel",
+          "private_original": {
+            "bytes": 19866,
+            "sha256": "8133486ca382fd7572e957f308acfbad25dbebf425ae78394a67d5ae0a45bfdd"
+          },
+          "interpretation": {
+            "scientific_evidence_effect": "Engineering validation only; does not supersede the separate issue #16 replay failure, trained Lean compilation failure, or synthetic-only negative unlearning result",
+            "public_receipt_is_complete_replay_bundle": false,
+            "new_validation_run_during_derivation": false,
+            "completed_command_count": 11,
+            "all_recorded_commands_exit_zero": true,
+            "scope": "Fresh offline build and isolated core install, dependency consistency, two examples, module CLI help and installed CLI help",
+            "torch_extra_checked": false
+          }
+        }
+      ],
+      "guide": {
+        "path": "artifacts/research/current-source-validation/2026-11-09/README.md",
+        "bytes": 7288,
+        "sha256": "b9d6ae0454ce7d2d883c3d8d8fd912001602f195658f7bdd9b89237705c9991f"
+      },
+      "scope": "November 9 engineering, handcrafted real-valued Lean fixtures, and offline core-wheel validation; no scientific replay or provider calls",
+      "historical_outcomes_superseded": false,
+      "hosted_success_inferred": false
+    }
   },
   "publication_selection": {
     "authority": "scripts/verify_publication.py:publication_files",
@@ -360,14 +681,39 @@
     "self_reference": "MANIFEST.sha256 includes this record and all selected files but excludes itself. Current metadata does not circularly bind its own checksum manifest."
   },
   "rights": {
-    "project_wide_license_selected": false,
-    "guide": "RIGHTS.md",
+    "project_wide_license_selected": true,
+    "authored_material_license": "MIT",
+    "license": {
+      "path": "LICENSE",
+      "bytes": 1072,
+      "sha256": "ca4020ea310eca7964b8692b0cf7a1b97e4cddd783ab309e254f702b9b520aa3"
+    },
+    "guide": {
+      "path": "RIGHTS.md",
+      "bytes": 6470,
+      "sha256": "e499b59abd39ef510b81bb2f4b3ddc71ed24f60f5f512ca943094884c2554c2a"
+    },
     "upstream_notices_preserved": true
   },
   "package_asset": {
     "path": "dist/weight_space_programming_framework-0.2.0.dev4-py3-none-any.whl",
     "bytes": 89067,
     "sha256": "8621ff4ff3e95ddf0100579aa76fa79a8595c43bfd47fb2ef8fc3a0cda89bcd9",
-    "delivery": "Separate draft-release asset; not part of the source tree. Build/install receipts establish validation."
+    "delivery": "Separate draft-release asset; not part of the source tree. Build/install receipts establish validation.",
+    "as_of": "2026-11-07; historical wheel identity; not the current research build"
+  },
+  "reviewed_at_utc": "2026-11-09T07:56:37.203742+00:00",
+  "research_package_asset": {
+    "filename": "weight_space_programming_framework-0.2.0.dev4-py3-none-any.whl",
+    "bytes": 166103,
+    "sha256": "81d418cf56490d873de98812250de2ecf6e199d0555b721930015ac970e20546",
+    "build_isolation": false,
+    "receipt": {
+      "path": "artifacts/research/current-source-validation/2026-11-09/wheel.sanitized.json",
+      "bytes": 20626,
+      "sha256": "aa057e617485f0ce013dc47e4b59742f31d86ec58a4cfdbc87118eba51f0d63f"
+    },
+    "delivery": "Private validation build; not in source tree and no published draft.4 release asset claimed",
+    "draft_release_published": false
   }
 }

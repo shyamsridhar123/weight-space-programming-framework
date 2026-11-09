@@ -1,0 +1,3525 @@
+[
+  {
+    "action": "session_created",
+    "charges": {},
+    "error": null,
+    "previous_sha256": null,
+    "request": {
+      "access": {
+        "activations": false,
+        "feedback": false,
+        "forward": false,
+        "metadata": true,
+        "weight_decimals": null,
+        "weights": true
+      },
+      "architecture": "trained-frozen-readout/1",
+      "base_sha256": "71dcd56fe87bb85a3841a91fbeba794468182967efd01f8358acdd133e5d7df5",
+      "callbacks_registered": {
+        "activations": false,
+        "feedback": false,
+        "forward": false
+      },
+      "constraints_sha256": "c87eca143dca43106f33e00900be0300be67f8e1babfc33881b8a6079f02f5b9",
+      "declared_constraints_automatically_enforced": false,
+      "enforcement": "cooperative_same_process_interface",
+      "execution_accounting": "interface_calls_and_submitted_examples; callback_internal_work_not_observed",
+      "limits": {
+        "execution_calls": 10,
+        "execution_examples": 1000,
+        "feedback_calls": 10,
+        "feedback_examples": 1000,
+        "input_tokens": 100000,
+        "output_tokens": 100000,
+        "proposals": 1,
+        "tool_calls": 4,
+        "weight_values": 726
+      },
+      "mode": "edit",
+      "objective": "Change the derived routing decision for a frozen trained representation",
+      "schema": "wsp-session-config/1",
+      "splits": {
+        "declared_lineage_overlap": false,
+        "lineage_independence_verified": false,
+        "lineage_scope": "caller_declared_only",
+        "sample_overlap": false,
+        "schema": "wsp-split-validation/1",
+        "sha256": "c9ca1376370a5112ed472eda3f50479a713a37aa907b2b5b51d7dc5efa14699d",
+        "splits": [
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "27e34115503b510e0e98d9176c49f06d0392e5ca38808b6ac665e2fc4bb5d5dd",
+            "name": "train",
+            "sample_count": 2291
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "f0619bdcd61944a1170da1b59c2cdbf538e53e7ae16d9eb1dae18c264e844fee",
+            "name": "development",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "6bcd4109602b4a308a8e1746d9e7eb8d92f29b67cf5e4c68bf039fadc608020c",
+            "name": "target",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "97ed332e5be176e20232e4a4c9243886f210c3dcfa7c262bdce7307fe56ab9f1",
+            "name": "protected",
+            "sample_count": 377
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "2d1989e5a8c6c9229594e9f751ec6c39313bacee19d1f1ba863c03b84ccb6aff",
+            "name": "calibration",
+            "sample_count": 401
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "815bbcacc5c9672298d42afe83dec7c49883d769bfad2c80facfb84a7fc73376",
+            "name": "test",
+            "sample_count": 1797
+          }
+        ]
+      },
+      "task_id": "optical-digits-pilot-full-7902/ownership/8/retrain",
+      "task_sha256": "8658afb721edd9be21c81c1c84dc3ad6fa4356547c54725bddabd48aad016620",
+      "token_accounting": "provider_supplied_not_locally_measured"
+    },
+    "requested_charges": {},
+    "result": {},
+    "schema": "wsp-trace-event/1",
+    "sequence": 0,
+    "session_sha256": "8425ad599110bebe71f539811e83be1319f8820905b10866850f1764bbe47809",
+    "sha256": "a112f3a320cd70f1f4257aeb672c2d7625ec24b022cb36fe8918b5010258866e",
+    "status": "succeeded",
+    "task_sha256": "8658afb721edd9be21c81c1c84dc3ad6fa4356547c54725bddabd48aad016620",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 0,
+      "weight_values": 0
+    }
+  },
+  {
+    "action": "metadata",
+    "charges": {
+      "tool_calls": 1
+    },
+    "error": null,
+    "previous_sha256": "a112f3a320cd70f1f4257aeb672c2d7625ec24b022cb36fe8918b5010258866e",
+    "request": {},
+    "requested_charges": {
+      "tool_calls": 1
+    },
+    "result": {
+      "artifact": {
+        "architecture": "trained-frozen-readout/1",
+        "metadata": {
+          "domain": "optical-digits",
+          "encoder_semantics": "Supervised float32 affine/ReLU bottleneck; frozen after development-selected epoch",
+          "encoder_sha256": "703567357e279077317d6b3ae734a81ce794e1d80b869a7e6d5ab166e904a7ee",
+          "feature_id": "8f546316c7b8a94d28f44f229211f320c12a70e1914ebf50d93e7e25436504a7",
+          "feature_names": [
+            "h000",
+            "h001",
+            "h002",
+            "h003",
+            "h004",
+            "h005",
+            "h006",
+            "h007",
+            "h008",
+            "h009",
+            "h010",
+            "h011",
+            "h012",
+            "h013",
+            "h014",
+            "h015",
+            "h016",
+            "h017",
+            "h018",
+            "h019",
+            "h020",
+            "h021",
+            "h022",
+            "h023",
+            "h024",
+            "h025",
+            "h026",
+            "h027",
+            "h028",
+            "h029",
+            "h030",
+            "h031"
+          ],
+          "head_semantics": "float32 affine output codes; queue decision maps the deterministic lowest-index argmax code",
+          "lineage_seed": 7902,
+          "native_dtype": "float32",
+          "output_names": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "specialist_routing_code"
+          ],
+          "preprocessing_sha256": "8d0585a2e0c6e3218132893bd77c6ef98b04a05b9206173a218aaaa66595f921",
+          "pretraining_ancestry": "Independent encoder and head initialized and supervised-trained from scratch; no pretrained model"
+        },
+        "sha256": "71dcd56fe87bb85a3841a91fbeba794468182967efd01f8358acdd133e5d7df5",
+        "tensors": {
+          "head.bias": {
+            "dtype": "float64",
+            "shape": [
+              11
+            ]
+          },
+          "head.weight": {
+            "dtype": "float64",
+            "shape": [
+              11,
+              32
+            ]
+          }
+        }
+      },
+      "constraints_status": "declared_context_not_automatically_enforced",
+      "task": {
+        "architecture": "trained-frozen-readout/1",
+        "base_sha256": "71dcd56fe87bb85a3841a91fbeba794468182967efd01f8358acdd133e5d7df5",
+        "constraints": {
+          "arm": "retrain",
+          "behavioral_admission": "frozen finite calibration samples; no whole-domain guarantee",
+          "case": {
+            "case_id": "ownership/8",
+            "desired_code": 10,
+            "desired_queue": 10,
+            "selection": "fixed before pilot; no official test opened",
+            "target_label": 8,
+            "target_name": "8",
+            "type": "ownership"
+          },
+          "configuration": {
+            "target_weight": 8
+          },
+          "margins": {
+            "maximum_protected_harm": 0.01,
+            "minimum_target_gain": 0.1,
+            "minimum_useful_coverage": 0.75
+          },
+          "nullspace_additional_contract": null,
+          "numeric_lane": "native Torch CPU float32 readout",
+          "protected_feature_sha256": "01c37803f0b0e2107dd562506dcef960917839c9f4037a4a8b7c2c3d80b9d7d8",
+          "structural_policy": {
+            "max_change_abs": 256.0,
+            "max_edits": 363,
+            "max_parameter_abs": 256.0,
+            "writable": [
+              "head.weight",
+              "head.bias"
+            ]
+          },
+          "target_feature_sha256": "f6bd2928ecc70e89bc3e0777272ab7de1ec9a9958dc46b0c8571beb9f42d84c5"
+        },
+        "mode": "edit",
+        "objective": "Change the derived routing decision for a frozen trained representation",
+        "schema": "wsp-task/1",
+        "task_id": "optical-digits-pilot-full-7902/ownership/8/retrain"
+      }
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 1,
+    "session_sha256": "8425ad599110bebe71f539811e83be1319f8820905b10866850f1764bbe47809",
+    "sha256": "0023085c4d749aab0cf8b5a780270f5e97eecc9e6ccb657a955fa9de8c7b8c69",
+    "status": "succeeded",
+    "task_sha256": "8658afb721edd9be21c81c1c84dc3ad6fa4356547c54725bddabd48aad016620",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 1,
+      "weight_values": 0
+    }
+  },
+  {
+    "action": "propose_program",
+    "charges": {
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 363
+    },
+    "error": null,
+    "previous_sha256": "0023085c4d749aab0cf8b5a780270f5e97eecc9e6ccb657a955fa9de8c7b8c69",
+    "request": {
+      "parser": "typed_program_or_wsp-program/1",
+      "program": {
+        "base_sha256": "71dcd56fe87bb85a3841a91fbeba794468182967efd01f8358acdd133e5d7df5",
+        "edits": [
+          {
+            "after": -1.260995864868164,
+            "before": -0.6129183769226074,
+            "index": [
+              0,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.8161222338676453,
+            "before": -0.34884539246559143,
+            "index": [
+              0,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.628645896911621,
+            "before": -0.721788763999939,
+            "index": [
+              0,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.04705365002155304,
+            "before": 0.6360377669334412,
+            "index": [
+              0,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 3.4116931146854768e-06,
+            "before": -3.634391898543754e-09,
+            "index": [
+              0,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 4.8631154641043395e-06,
+            "before": 4.0318884231282937e-08,
+            "index": [
+              0,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.18246139585971832,
+            "before": 0.5883905291557312,
+            "index": [
+              0,
+              6
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.4069726765155792,
+            "before": 0.4510229229927063,
+            "index": [
+              0,
+              7
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.8441356420516968,
+            "before": -0.8788542747497559,
+            "index": [
+              0,
+              8
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7298692464828491,
+            "before": 0.1057959645986557,
+            "index": [
+              0,
+              9
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.4448341131210327,
+            "before": 0.44278886914253235,
+            "index": [
+              0,
+              10
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.4431115984916687,
+            "before": 0.3844496011734009,
+            "index": [
+              0,
+              11
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.10395389050245285,
+            "before": 0.7012003660202026,
+            "index": [
+              0,
+              12
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -5.3011331146990415e-06,
+            "before": -0.000737908179871738,
+            "index": [
+              0,
+              13
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -6.9572397478623316e-06,
+            "before": 1.2296989382321044e-07,
+            "index": [
+              0,
+              14
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -6.284132268774556e-06,
+            "before": -1.6273919527520775e-06,
+            "index": [
+              0,
+              15
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 2.0662876067945035e-06,
+            "before": -8.213240754173512e-09,
+            "index": [
+              0,
+              16
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 3.215854121663142e-06,
+            "before": -0.0009116914006881416,
+            "index": [
+              0,
+              17
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.8368642330169678,
+            "before": -0.05521133169531822,
+            "index": [
+              0,
+              18
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.23688632249832153,
+            "before": 0.5863662958145142,
+            "index": [
+              0,
+              19
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.3451497554779053,
+            "before": -0.45777568221092224,
+            "index": [
+              0,
+              20
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.1603416204452515,
+            "before": -0.5394078493118286,
+            "index": [
+              0,
+              21
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -4.1366502046003006e-07,
+            "before": -0.0023121621925383806,
+            "index": [
+              0,
+              22
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6623273491859436,
+            "before": -0.30173802375793457,
+            "index": [
+              0,
+              23
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.1782995462417603,
+            "before": -0.4923672080039978,
+            "index": [
+              0,
+              24
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -8.114525371638592e-06,
+            "before": 4.5001831949775806e-07,
+            "index": [
+              0,
+              25
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.8833251595497131,
+            "before": -0.02608545497059822,
+            "index": [
+              0,
+              26
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.8536037802696228,
+            "before": -0.05459476634860039,
+            "index": [
+              0,
+              27
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.1171399354934692,
+            "before": -0.4718325734138489,
+            "index": [
+              0,
+              28
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.1037445068359375,
+            "before": -0.18421564996242523,
+            "index": [
+              0,
+              29
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.1966476440429688,
+            "before": -0.27645596861839294,
+            "index": [
+              0,
+              30
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.0073395986109972,
+            "before": -3.6915153032168746e-06,
+            "index": [
+              0,
+              31
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.12457071989774704,
+            "before": 0.30376380681991577,
+            "index": [
+              1,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6622331738471985,
+            "before": -0.1186244785785675,
+            "index": [
+              1,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5059525966644287,
+            "before": 0.30319082736968994,
+            "index": [
+              1,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.8529406189918518,
+            "before": -0.38035428524017334,
+            "index": [
+              1,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -5.799662176286802e-06,
+            "before": 2.2655623155287685e-08,
+            "index": [
+              1,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -5.3050503083795775e-06,
+            "before": 5.1357780250782525e-09,
+            "index": [
+              1,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.365742564201355,
+            "before": -0.3656996488571167,
+            "index": [
+              1,
+              6
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.0938879251480103,
+            "before": -0.3366582989692688,
+            "index": [
+              1,
+              7
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.6172986030578613,
+            "before": -0.6366815567016602,
+            "index": [
+              1,
+              8
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.08928413689136505,
+            "before": 0.34207242727279663,
+            "index": [
+              1,
+              9
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.9312758445739746,
+            "before": -0.9169192314147949,
+            "index": [
+              1,
+              10
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.6767951250076294,
+            "before": -0.7512742280960083,
+            "index": [
+              1,
+              11
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5076122283935547,
+            "before": -0.10515260696411133,
+            "index": [
+              1,
+              12
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 6.589916665689088e-06,
+            "before": -3.037360940538747e-08,
+            "index": [
+              1,
+              13
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.258302745554829e-06,
+            "before": 1.5107655144674936e-06,
+            "index": [
+              1,
+              14
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -6.894385933264857e-06,
+            "before": -1.4348022887133993e-05,
+            "index": [
+              1,
+              15
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.140049789682962e-06,
+            "before": -4.233514871998523e-08,
+            "index": [
+              1,
+              16
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 5.041138138039969e-07,
+            "before": -0.024829065427184105,
+            "index": [
+              1,
+              17
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.2128734588623047,
+            "before": 0.5011492967605591,
+            "index": [
+              1,
+              18
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5180130004882812,
+            "before": 0.3534289002418518,
+            "index": [
+              1,
+              19
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.08278722316026688,
+            "before": 0.7725434899330139,
+            "index": [
+              1,
+              20
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.20362679660320282,
+            "before": 0.8144516944885254,
+            "index": [
+              1,
+              21
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 2.1969508452457376e-06,
+            "before": -0.012969348579645157,
+            "index": [
+              1,
+              22
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6578874588012695,
+            "before": -0.20219670236110687,
+            "index": [
+              1,
+              23
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -2.0578863620758057,
+            "before": -1.3733129501342773,
+            "index": [
+              1,
+              24
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 2.8488877887866693e-06,
+            "before": -1.8151276037770003e-08,
+            "index": [
+              1,
+              25
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.5964109897613525,
+            "before": -0.6855172514915466,
+            "index": [
+              1,
+              26
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5318619608879089,
+            "before": 0.25318238139152527,
+            "index": [
+              1,
+              27
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.3721725344657898,
+            "before": 0.4377838969230652,
+            "index": [
+              1,
+              28
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.0877082347869873,
+            "before": -0.20092494785785675,
+            "index": [
+              1,
+              29
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.22989702224731445,
+            "before": 0.4896453022956848,
+            "index": [
+              1,
+              30
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.007213774137198925,
+            "before": -0.0009203067165799439,
+            "index": [
+              1,
+              31
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5977191925048828,
+            "before": -0.11839772015810013,
+            "index": [
+              2,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.807303249835968,
+            "before": -0.28230881690979004,
+            "index": [
+              2,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6228249669075012,
+            "before": 0.25130510330200195,
+            "index": [
+              2,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5645328760147095,
+            "before": -0.14543461799621582,
+            "index": [
+              2,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 4.747907496494008e-06,
+            "before": -1.1046122949665005e-07,
+            "index": [
+              2,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -6.7240343923913315e-06,
+            "before": -1.9925470162718284e-09,
+            "index": [
+              2,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6177167892456055,
+            "before": 0.2505831718444824,
+            "index": [
+              2,
+              6
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.3600244522094727,
+            "before": -0.39319318532943726,
+            "index": [
+              2,
+              7
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.9737390279769897,
+            "before": -0.06767963618040085,
+            "index": [
+              2,
+              8
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.3781062364578247,
+            "before": -0.5549482107162476,
+            "index": [
+              2,
+              9
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5845375061035156,
+            "before": 0.32503557205200195,
+            "index": [
+              2,
+              10
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5403479337692261,
+            "before": 0.20136705040931702,
+            "index": [
+              2,
+              11
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5130677819252014,
+            "before": -0.1454182267189026,
+            "index": [
+              2,
+              12
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -2.294030764460331e-06,
+            "before": 1.0241598829452414e-05,
+            "index": [
+              2,
+              13
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -5.491900992637966e-06,
+            "before": -8.10784115401475e-07,
+            "index": [
+              2,
+              14
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -9.282977771363221e-06,
+            "before": 2.5951408133551013e-06,
+            "index": [
+              2,
+              15
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 5.410844096331857e-06,
+            "before": -3.895956446342552e-09,
+            "index": [
+              2,
+              16
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -3.995994120487012e-06,
+            "before": -0.006415079813450575,
+            "index": [
+              2,
+              17
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.6169825792312622,
+            "before": -0.7298284769058228,
+            "index": [
+              2,
+              18
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.449655294418335,
+            "before": -0.501971960067749,
+            "index": [
+              2,
+              19
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.032606840133667,
+            "before": -0.16215568780899048,
+            "index": [
+              2,
+              20
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.02325676567852497,
+            "before": 0.7452087998390198,
+            "index": [
+              2,
+              21
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.393193451804109e-05,
+            "before": 0.01618991605937481,
+            "index": [
+              2,
+              22
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.442643642425537,
+            "before": -0.771169900894165,
+            "index": [
+              2,
+              23
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.8109604120254517,
+            "before": -0.08991534262895584,
+            "index": [
+              2,
+              24
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.148905539594125e-06,
+            "before": -3.348765176269808e-08,
+            "index": [
+              2,
+              25
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.4224626421928406,
+            "before": 0.46514663100242615,
+            "index": [
+              2,
+              26
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.07268250733613968,
+            "before": 0.7740493416786194,
+            "index": [
+              2,
+              27
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.03814060240983963,
+            "before": 0.9096611142158508,
+            "index": [
+              2,
+              28
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -2.049909830093384,
+            "before": -1.0682644844055176,
+            "index": [
+              2,
+              29
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.7409371137619019,
+            "before": -0.7430456876754761,
+            "index": [
+              2,
+              30
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.005877349525690079,
+            "before": 0.0007725534960627556,
+            "index": [
+              2,
+              31
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.24205879867076874,
+            "before": 0.7814148664474487,
+            "index": [
+              3,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.13473646342754364,
+            "before": 0.7293587923049927,
+            "index": [
+              3,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7375172972679138,
+            "before": 0.10473521798849106,
+            "index": [
+              3,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.9046018719673157,
+            "before": -0.9407891631126404,
+            "index": [
+              3,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.7264424059248995e-06,
+            "before": -3.444505125571595e-08,
+            "index": [
+              3,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 3.5808211578114424e-06,
+            "before": 3.398870518367403e-09,
+            "index": [
+              3,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.4157063961029053,
+            "before": -0.4338774085044861,
+            "index": [
+              3,
+              6
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.1467127799987793,
+            "before": -0.2338392287492752,
+            "index": [
+              3,
+              7
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.2092158943414688,
+            "before": 0.6114040613174438,
+            "index": [
+              3,
+              8
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.1274731606245041,
+            "before": 0.8002793192863464,
+            "index": [
+              3,
+              9
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.3194088041782379,
+            "before": 0.5240980386734009,
+            "index": [
+              3,
+              10
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.10574336349964142,
+            "before": 0.6431894302368164,
+            "index": [
+              3,
+              11
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.9574142098426819,
+            "before": -0.6749582290649414,
+            "index": [
+              3,
+              12
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -5.520470494957408e-06,
+            "before": 6.896986451465636e-05,
+            "index": [
+              3,
+              13
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -6.299332198977936e-06,
+            "before": 3.0021234920241113e-07,
+            "index": [
+              3,
+              14
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -3.6000644740852294e-06,
+            "before": 7.84038184065139e-06,
+            "index": [
+              3,
+              15
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -4.5547499212261755e-06,
+            "before": -2.0184250715260532e-08,
+            "index": [
+              3,
+              16
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 2.745454548858106e-05,
+            "before": 0.032798998057842255,
+            "index": [
+              3,
+              17
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.3915866613388062,
+            "before": -0.5529157519340515,
+            "index": [
+              3,
+              18
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.2664016485214233,
+            "before": -0.39448678493499756,
+            "index": [
+              3,
+              19
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7876079678535461,
+            "before": 0.038959890604019165,
+            "index": [
+              3,
+              20
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.9373850226402283,
+            "before": -0.2704307734966278,
+            "index": [
+              3,
+              21
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 8.178681127901655e-06,
+            "before": -0.008176662027835846,
+            "index": [
+              3,
+              22
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7917813062667847,
+            "before": -0.4730897545814514,
+            "index": [
+              3,
+              23
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7627615928649902,
+            "before": -0.37808629870414734,
+            "index": [
+              3,
+              24
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 3.584455043892376e-08,
+            "before": -4.128541508663375e-09,
+            "index": [
+              3,
+              25
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5328744053840637,
+            "before": 0.3329184353351593,
+            "index": [
+              3,
+              26
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.280099630355835,
+            "before": -0.374088317155838,
+            "index": [
+              3,
+              27
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.5781058073043823,
+            "before": -0.6089321374893188,
+            "index": [
+              3,
+              28
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.4073210954666138,
+            "before": -0.49938490986824036,
+            "index": [
+              3,
+              29
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.3450218439102173,
+            "before": -0.4142385423183441,
+            "index": [
+              3,
+              30
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.006461834069341421,
+            "before": 0.00011550654744496569,
+            "index": [
+              3,
+              31
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7939557433128357,
+            "before": -0.38763096928596497,
+            "index": [
+              4,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.0094069242477417,
+            "before": -0.40180838108062744,
+            "index": [
+              4,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.4809772968292236,
+            "before": -0.6815239787101746,
+            "index": [
+              4,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.2654018998146057,
+            "before": 0.7258563041687012,
+            "index": [
+              4,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 9.547635272610933e-06,
+            "before": 0.0004733883833978325,
+            "index": [
+              4,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 8.398600584769156e-06,
+            "before": 0.0006451420485973358,
+            "index": [
+              4,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.2249846458435059,
+            "before": -0.35044869780540466,
+            "index": [
+              4,
+              6
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.20116446912288666,
+            "before": 0.5276215672492981,
+            "index": [
+              4,
+              7
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.4550830125808716,
+            "before": -0.5923587679862976,
+            "index": [
+              4,
+              8
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.026596391573548317,
+            "before": 0.6025121808052063,
+            "index": [
+              4,
+              9
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.6534372568130493,
+            "before": -0.7835313677787781,
+            "index": [
+              4,
+              10
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.6431984901428223,
+            "before": -0.8888676762580872,
+            "index": [
+              4,
+              11
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5219142436981201,
+            "before": -0.07892047613859177,
+            "index": [
+              4,
+              12
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -4.591734523273772e-06,
+            "before": -0.0007543988758698106,
+            "index": [
+              4,
+              13
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -5.106895514472853e-06,
+            "before": -1.5885095763223944e-06,
+            "index": [
+              4,
+              14
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -5.8505706874711905e-06,
+            "before": -1.4442561223404482e-05,
+            "index": [
+              4,
+              15
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 6.018583462719107e-06,
+            "before": -2.8808000934077427e-05,
+            "index": [
+              4,
+              16
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 3.0575451091863215e-05,
+            "before": -0.045654647052288055,
+            "index": [
+              4,
+              17
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.16001519560813904,
+            "before": 0.5791549682617188,
+            "index": [
+              4,
+              18
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.606138825416565,
+            "before": -0.8347639441490173,
+            "index": [
+              4,
+              19
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.9378368258476257,
+            "before": -0.21307985484600067,
+            "index": [
+              4,
+              20
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.012075662612915,
+            "before": -0.22739741206169128,
+            "index": [
+              4,
+              21
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -5.002365469408687e-06,
+            "before": -0.0014731984119862318,
+            "index": [
+              4,
+              22
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.1337539702653885,
+            "before": 0.4067915380001068,
+            "index": [
+              4,
+              23
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.1393202543258667,
+            "before": 1.6949440240859985,
+            "index": [
+              4,
+              24
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -5.540529855352361e-06,
+            "before": 1.746562539040042e-08,
+            "index": [
+              4,
+              25
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.7045769691467285,
+            "before": -0.8478377461433411,
+            "index": [
+              4,
+              26
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.27267080545425415,
+            "before": 0.5589985847473145,
+            "index": [
+              4,
+              27
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.2136595249176025,
+            "before": -0.3055535852909088,
+            "index": [
+              4,
+              28
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.3896908164024353,
+            "before": 0.3646104335784912,
+            "index": [
+              4,
+              29
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.11585556715726852,
+            "before": 0.6355404853820801,
+            "index": [
+              4,
+              30
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.020607300102710724,
+            "before": 0.00022421211178880185,
+            "index": [
+              4,
+              31
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.19149291515350342,
+            "before": 0.7621440291404724,
+            "index": [
+              5,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.2116982489824295,
+            "before": 0.8365132212638855,
+            "index": [
+              5,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.840213418006897,
+            "before": 0.013982071541249752,
+            "index": [
+              5,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.20720763504505157,
+            "before": 0.6234878301620483,
+            "index": [
+              5,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 2.4914143068599515e-06,
+            "before": -1.663145177133174e-09,
+            "index": [
+              5,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.7003628727252362e-06,
+            "before": 8.675002938218768e-09,
+            "index": [
+              5,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5390092730522156,
+            "before": 0.361397922039032,
+            "index": [
+              5,
+              6
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -2.03532338142395,
+            "before": -1.1221330165863037,
+            "index": [
+              5,
+              7
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.20213328301906586,
+            "before": 0.5891928672790527,
+            "index": [
+              5,
+              8
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.624993085861206,
+            "before": -0.9746994972229004,
+            "index": [
+              5,
+              9
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.4028065204620361,
+            "before": -0.5272926092147827,
+            "index": [
+              5,
+              10
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7566090822219849,
+            "before": 0.030645670369267464,
+            "index": [
+              5,
+              11
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.1133588552474976,
+            "before": -0.6256921887397766,
+            "index": [
+              5,
+              12
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 4.699286364484578e-06,
+            "before": -1.3726619840781495e-08,
+            "index": [
+              5,
+              13
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -6.202583335834788e-06,
+            "before": 2.8867140144939185e-07,
+            "index": [
+              5,
+              14
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 5.705605872208253e-07,
+            "before": 1.8925116819445975e-05,
+            "index": [
+              5,
+              15
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -2.1536529857257847e-06,
+            "before": -1.6269849467676067e-08,
+            "index": [
+              5,
+              16
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -5.883806443307549e-05,
+            "before": -0.07356966286897659,
+            "index": [
+              5,
+              17
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.565970242023468,
+            "before": 0.19171637296676636,
+            "index": [
+              5,
+              18
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.17048519849777222,
+            "before": 0.5911054015159607,
+            "index": [
+              5,
+              19
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.441310167312622,
+            "before": -0.6077588200569153,
+            "index": [
+              5,
+              20
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7530648708343506,
+            "before": -0.07008901238441467,
+            "index": [
+              5,
+              21
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -2.157305061700754e-06,
+            "before": -0.009145067073404789,
+            "index": [
+              5,
+              22
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.1844562143087387,
+            "before": 0.21120205521583557,
+            "index": [
+              5,
+              23
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.3702424466609955,
+            "before": 0.028793562203645706,
+            "index": [
+              5,
+              24
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 4.596864982886473e-06,
+            "before": 5.8300493321894464e-09,
+            "index": [
+              5,
+              25
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7281696200370789,
+            "before": 0.1483280211687088,
+            "index": [
+              5,
+              26
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.7258349657058716,
+            "before": -0.8128193020820618,
+            "index": [
+              5,
+              27
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.260269045829773,
+            "before": -0.2758772671222687,
+            "index": [
+              5,
+              28
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.1630660891532898,
+            "before": 0.6184789538383484,
+            "index": [
+              5,
+              29
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -2.0009500980377197,
+            "before": -1.1097201108932495,
+            "index": [
+              5,
+              30
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.0020440265070647,
+            "before": -9.01816674740985e-05,
+            "index": [
+              5,
+              31
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.175336480140686,
+            "before": -0.4113489091396332,
+            "index": [
+              6,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.42376649379730225,
+            "before": 0.2842951714992523,
+            "index": [
+              6,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.7512539625167847,
+            "before": -0.7630026936531067,
+            "index": [
+              6,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.3827399015426636,
+            "before": -0.9352737069129944,
+            "index": [
+              6,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 7.2117700256058015e-06,
+            "before": -4.86348668005121e-08,
+            "index": [
+              6,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -7.517257017752854e-06,
+            "before": 3.879397922901262e-07,
+            "index": [
+              6,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.139341801404953,
+            "before": 0.6610236763954163,
+            "index": [
+              6,
+              6
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.3413625955581665,
+            "before": -0.4743012487888336,
+            "index": [
+              6,
+              7
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.1566572189331055,
+            "before": -0.187586709856987,
+            "index": [
+              6,
+              8
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.3164650201797485,
+            "before": -0.6143127679824829,
+            "index": [
+              6,
+              9
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.9768821597099304,
+            "before": -0.02608606033027172,
+            "index": [
+              6,
+              10
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.4128012955188751,
+            "before": 0.4811612069606781,
+            "index": [
+              6,
+              11
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6805699467658997,
+            "before": -0.09977436810731888,
+            "index": [
+              6,
+              12
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 8.945447916630656e-06,
+            "before": 0.0004191790649201721,
+            "index": [
+              6,
+              13
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 7.463853307854151e-06,
+            "before": 0.00023749932006467134,
+            "index": [
+              6,
+              14
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0862117960641626e-06,
+            "before": -1.8843547877622768e-06,
+            "index": [
+              6,
+              15
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -6.675147233181633e-06,
+            "before": -3.8811968749996595e-08,
+            "index": [
+              6,
+              16
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -6.9792895374121144e-06,
+            "before": 0.011615892872214317,
+            "index": [
+              6,
+              17
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.31103089451789856,
+            "before": 0.4859570562839508,
+            "index": [
+              6,
+              18
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.6498655080795288,
+            "before": -0.7034826874732971,
+            "index": [
+              6,
+              19
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.4144433736801147,
+            "before": -0.4863820970058441,
+            "index": [
+              6,
+              20
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.6854925155639648,
+            "before": -0.8580117225646973,
+            "index": [
+              6,
+              21
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -3.5429420677246526e-06,
+            "before": 0.0040293424390256405,
+            "index": [
+              6,
+              22
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.9043964743614197,
+            "before": -0.48531073331832886,
+            "index": [
+              6,
+              23
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.602329432964325,
+            "before": -0.14195409417152405,
+            "index": [
+              6,
+              24
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 4.842358521273127e-06,
+            "before": 1.2216158751243711e-08,
+            "index": [
+              6,
+              25
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.6223070621490479,
+            "before": -0.6543844938278198,
+            "index": [
+              6,
+              26
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.14205828309059143,
+            "before": 0.6767165064811707,
+            "index": [
+              6,
+              27
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6060097813606262,
+            "before": 0.21785789728164673,
+            "index": [
+              6,
+              28
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.3609905540943146,
+            "before": 0.5417882800102234,
+            "index": [
+              6,
+              29
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.1877930611371994,
+            "before": 0.6822026371955872,
+            "index": [
+              6,
+              30
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.002275432227179408,
+            "before": 0.00012163286010036245,
+            "index": [
+              6,
+              31
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7149353623390198,
+            "before": -0.18861447274684906,
+            "index": [
+              7,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.21077914535999298,
+            "before": 0.7536644339561462,
+            "index": [
+              7,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.046944305300712585,
+            "before": 0.6669124364852905,
+            "index": [
+              7,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.33484119176864624,
+            "before": -0.012637052685022354,
+            "index": [
+              7,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 4.312401415518252e-06,
+            "before": -1.0871719524629953e-07,
+            "index": [
+              7,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.8850505512091331e-06,
+            "before": 3.4500668988357575e-08,
+            "index": [
+              7,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.6627371311187744,
+            "before": -0.5824822187423706,
+            "index": [
+              7,
+              6
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.07938536256551743,
+            "before": 0.6609049439430237,
+            "index": [
+              7,
+              7
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.6105045080184937,
+            "before": -0.720514714717865,
+            "index": [
+              7,
+              8
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.2148864269256592,
+            "before": -0.6089538931846619,
+            "index": [
+              7,
+              9
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.0660879611968994,
+            "before": -0.16023069620132446,
+            "index": [
+              7,
+              10
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6472080945968628,
+            "before": 0.13298442959785461,
+            "index": [
+              7,
+              11
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6901212930679321,
+            "before": -0.22675998508930206,
+            "index": [
+              7,
+              12
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 9.691908417153172e-06,
+            "before": 0.015029397793114185,
+            "index": [
+              7,
+              13
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.428485120413825e-06,
+            "before": -1.5137394484554534e-06,
+            "index": [
+              7,
+              14
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 3.295969236205565e-06,
+            "before": -1.071563019650057e-05,
+            "index": [
+              7,
+              15
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.1962861208303366e-06,
+            "before": 1.3227497319689974e-08,
+            "index": [
+              7,
+              16
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.402730958943721e-06,
+            "before": 0.009957179427146912,
+            "index": [
+              7,
+              17
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.858189582824707,
+            "before": -0.07692107558250427,
+            "index": [
+              7,
+              18
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.6015549898147583,
+            "before": -0.74805748462677,
+            "index": [
+              7,
+              19
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.21090175211429596,
+            "before": 0.46493247151374817,
+            "index": [
+              7,
+              20
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.3986883163452148,
+            "before": -0.7108017206192017,
+            "index": [
+              7,
+              21
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -4.552816790237557e-06,
+            "before": -0.002654759678989649,
+            "index": [
+              7,
+              22
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.3633246421813965,
+            "before": 0.7848619818687439,
+            "index": [
+              7,
+              23
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.31339791417121887,
+            "before": 0.14036992192268372,
+            "index": [
+              7,
+              24
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.6039148249546997e-06,
+            "before": 2.3678101257473827e-08,
+            "index": [
+              7,
+              25
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.0917917862534523,
+            "before": 0.8399009704589844,
+            "index": [
+              7,
+              26
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.8135693073272705,
+            "before": -0.7739739418029785,
+            "index": [
+              7,
+              27
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.1379464864730835,
+            "before": -0.28109270334243774,
+            "index": [
+              7,
+              28
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.9830389022827148,
+            "before": -0.15389323234558105,
+            "index": [
+              7,
+              29
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.8592035174369812,
+            "before": -0.020492348819971085,
+            "index": [
+              7,
+              30
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.003809621324762702,
+            "before": 0.0005026990547776222,
+            "index": [
+              7,
+              31
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.6749420166015625,
+            "before": -0.7147305011749268,
+            "index": [
+              8,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.89182448387146,
+            "before": -0.9689565896987915,
+            "index": [
+              8,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7779932022094727,
+            "before": 0.24895085394382477,
+            "index": [
+              8,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.7464321851730347,
+            "before": -0.8746672868728638,
+            "index": [
+              8,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -6.064539775252342e-06,
+            "before": -2.6273495379314227e-08,
+            "index": [
+              8,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -6.07836363997194e-06,
+            "before": -6.61988934780311e-08,
+            "index": [
+              8,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.8641604781150818,
+            "before": 0.1683468073606491,
+            "index": [
+              8,
+              6
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6215993762016296,
+            "before": 0.4080732762813568,
+            "index": [
+              8,
+              7
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5497951507568359,
+            "before": 0.48931214213371277,
+            "index": [
+              8,
+              8
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.9087232351303101,
+            "before": 0.1185692697763443,
+            "index": [
+              8,
+              9
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.69062739610672,
+            "before": 0.3466426730155945,
+            "index": [
+              8,
+              10
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.5218660831451416,
+            "before": -0.49584731459617615,
+            "index": [
+              8,
+              11
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.5552726984024048,
+            "before": -0.5990352034568787,
+            "index": [
+              8,
+              12
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.7262750588997733e-06,
+            "before": 8.74131345085516e-09,
+            "index": [
+              8,
+              13
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 4.489188086154172e-06,
+            "before": 2.348815087316325e-06,
+            "index": [
+              8,
+              14
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -5.808964033349184e-06,
+            "before": -3.3763397368602455e-05,
+            "index": [
+              8,
+              15
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 5.097465418657521e-06,
+            "before": -2.180994940204073e-08,
+            "index": [
+              8,
+              16
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 5.278997923596762e-05,
+            "before": 0.07001407444477081,
+            "index": [
+              8,
+              17
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.2153452634811401,
+            "before": -0.201138436794281,
+            "index": [
+              8,
+              18
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.46241047978401184,
+            "before": 0.5642099976539612,
+            "index": [
+              8,
+              19
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.9142354130744934,
+            "before": 0.10744734108448029,
+            "index": [
+              8,
+              20
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.4755977392196655,
+            "before": -0.47559991478919983,
+            "index": [
+              8,
+              21
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 4.131426976528019e-06,
+            "before": 0.009088573977351189,
+            "index": [
+              8,
+              22
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.5848512649536133,
+            "before": -0.6788039207458496,
+            "index": [
+              8,
+              23
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.7922253608703613,
+            "before": -0.7889201045036316,
+            "index": [
+              8,
+              24
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 3.650127382570645e-06,
+            "before": 1.6074666930876447e-08,
+            "index": [
+              8,
+              25
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6797279715538025,
+            "before": 0.34917765855789185,
+            "index": [
+              8,
+              26
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.8585895299911499,
+            "before": 0.1711377650499344,
+            "index": [
+              8,
+              27
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.0718469619750977,
+            "before": -0.047642454504966736,
+            "index": [
+              8,
+              28
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.462226927280426,
+            "before": 0.572719931602478,
+            "index": [
+              8,
+              29
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6970347166061401,
+            "before": 0.3360885679721832,
+            "index": [
+              8,
+              30
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.027104642242193222,
+            "before": 0.0021337103098630905,
+            "index": [
+              8,
+              31
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.2925662696361542,
+            "before": 0.08955349028110504,
+            "index": [
+              9,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7974638938903809,
+            "before": -0.3893071711063385,
+            "index": [
+              9,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.3801973760128021,
+            "before": 0.39642202854156494,
+            "index": [
+              9,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.09573741257190704,
+            "before": 0.3959810733795166,
+            "index": [
+              9,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.5430523490067571e-06,
+            "before": 4.847053425294234e-09,
+            "index": [
+              9,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -4.686839019996114e-06,
+            "before": -4.042866308395787e-08,
+            "index": [
+              9,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.7790356874465942,
+            "before": -0.6845661401748657,
+            "index": [
+              9,
+              6
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.9075070023536682,
+            "before": -0.022137600928544998,
+            "index": [
+              9,
+              7
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5970120429992676,
+            "before": 0.2799302339553833,
+            "index": [
+              9,
+              8
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7016801238059998,
+            "before": 0.030808184295892715,
+            "index": [
+              9,
+              9
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.39753958582878113,
+            "before": 0.4726019501686096,
+            "index": [
+              9,
+              10
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6747328639030457,
+            "before": 0.0925622507929802,
+            "index": [
+              9,
+              11
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.3140121400356293,
+            "before": 0.7257705926895142,
+            "index": [
+              9,
+              12
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -7.747979907435365e-06,
+            "before": -7.203193774785177e-08,
+            "index": [
+              9,
+              13
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 6.688735993520822e-06,
+            "before": -1.3450558071781415e-06,
+            "index": [
+              9,
+              14
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 6.103337000240572e-06,
+            "before": -1.2310446436458733e-05,
+            "index": [
+              9,
+              15
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.5332952898461372e-06,
+            "before": -1.8324266548574997e-08,
+            "index": [
+              9,
+              16
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 2.7718102501239628e-05,
+            "before": 0.032688479870557785,
+            "index": [
+              9,
+              17
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.5101194381713867,
+            "before": -0.6124264597892761,
+            "index": [
+              9,
+              18
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.4795740246772766,
+            "before": 0.3528681993484497,
+            "index": [
+              9,
+              19
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5278152823448181,
+            "before": 0.21065038442611694,
+            "index": [
+              9,
+              20
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.14415736496448517,
+            "before": 0.40598687529563904,
+            "index": [
+              9,
+              21
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.9057226381846704e-05,
+            "before": -0.02337130717933178,
+            "index": [
+              9,
+              22
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.1635347306728363,
+            "before": 0.29518255591392517,
+            "index": [
+              9,
+              23
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.12628811597824097,
+            "before": 0.5333811640739441,
+            "index": [
+              9,
+              24
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 6.84411452311906e-06,
+            "before": 3.855023678056568e-08,
+            "index": [
+              9,
+              25
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.2420705556869507,
+            "before": -0.3651401996612549,
+            "index": [
+              9,
+              26
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.9240903854370117,
+            "before": -0.8958543539047241,
+            "index": [
+              9,
+              27
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -1.8548864126205444,
+            "before": -0.7679963707923889,
+            "index": [
+              9,
+              28
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.44370219111442566,
+            "before": 0.4431549906730652,
+            "index": [
+              9,
+              29
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7027544379234314,
+            "before": 0.19621047377586365,
+            "index": [
+              9,
+              30
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.003132775891572237,
+            "before": -0.0006444171885959804,
+            "index": [
+              9,
+              31
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.9430756568908691,
+            "before": 0.0,
+            "index": [
+              10,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.9484160542488098,
+            "before": 0.0,
+            "index": [
+              10,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0425729751586914,
+            "before": 0.0,
+            "index": [
+              10,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.8567253947257996,
+            "before": 0.0,
+            "index": [
+              10,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0891786813735962,
+            "before": 0.0,
+            "index": [
+              10,
+              6
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0506365299224854,
+            "before": 0.0,
+            "index": [
+              10,
+              7
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.072059154510498,
+            "before": 0.0,
+            "index": [
+              10,
+              8
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0276970863342285,
+            "before": 0.0,
+            "index": [
+              10,
+              9
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.069225788116455,
+            "before": 0.0,
+            "index": [
+              10,
+              10
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0557578802108765,
+            "before": 0.0,
+            "index": [
+              10,
+              11
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.963057816028595,
+            "before": 0.0,
+            "index": [
+              10,
+              12
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.259264081454603e-05,
+            "before": 0.0,
+            "index": [
+              10,
+              15
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0507078170776367,
+            "before": 0.0,
+            "index": [
+              10,
+              18
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0543267726898193,
+            "before": 0.0,
+            "index": [
+              10,
+              19
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0287930965423584,
+            "before": 0.0,
+            "index": [
+              10,
+              20
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.9990290999412537,
+            "before": 0.0,
+            "index": [
+              10,
+              21
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.8752430081367493,
+            "before": 0.0,
+            "index": [
+              10,
+              23
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.9637663960456848,
+            "before": 0.0,
+            "index": [
+              10,
+              24
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0546200275421143,
+            "before": 0.0,
+            "index": [
+              10,
+              26
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0685911178588867,
+            "before": 0.0,
+            "index": [
+              10,
+              27
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.06358802318573,
+            "before": 0.0,
+            "index": [
+              10,
+              28
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0702416896820068,
+            "before": 0.0,
+            "index": [
+              10,
+              29
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0616191625595093,
+            "before": 0.0,
+            "index": [
+              10,
+              30
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.0636327788233757,
+            "before": 0.0,
+            "index": [
+              10,
+              31
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.8089432716369629,
+            "before": -0.03569159284234047,
+            "index": [
+              0
+            ],
+            "tensor": "head.bias"
+          },
+          {
+            "after": -1.1233913898468018,
+            "before": -0.2676129639148712,
+            "index": [
+              1
+            ],
+            "tensor": "head.bias"
+          },
+          {
+            "after": -0.7517258524894714,
+            "before": 0.0837632417678833,
+            "index": [
+              2
+            ],
+            "tensor": "head.bias"
+          },
+          {
+            "after": -0.7388626337051392,
+            "before": 0.07448334991931915,
+            "index": [
+              3
+            ],
+            "tensor": "head.bias"
+          },
+          {
+            "after": -0.48949095606803894,
+            "before": 0.26721376180648804,
+            "index": [
+              4
+            ],
+            "tensor": "head.bias"
+          },
+          {
+            "after": -0.6545131802558899,
+            "before": 0.1335206776857376,
+            "index": [
+              5
+            ],
+            "tensor": "head.bias"
+          },
+          {
+            "after": -0.7934930920600891,
+            "before": 0.04719936475157738,
+            "index": [
+              6
+            ],
+            "tensor": "head.bias"
+          },
+          {
+            "after": -0.7751511931419373,
+            "before": -0.014993426389992237,
+            "index": [
+              7
+            ],
+            "tensor": "head.bias"
+          },
+          {
+            "after": -1.1423147916793823,
+            "before": -0.11007591336965561,
+            "index": [
+              8
+            ],
+            "tensor": "head.bias"
+          },
+          {
+            "after": -0.9549760222434998,
+            "before": -0.12744826078414917,
+            "index": [
+              9
+            ],
+            "tensor": "head.bias"
+          },
+          {
+            "after": -62.86497116088867,
+            "before": -64.0,
+            "index": [
+              10
+            ],
+            "tensor": "head.bias"
+          }
+        ],
+        "intent": "Tuned head retraining with the same eligible labeled observations",
+        "schema": "wsp-program/1"
+      },
+      "program_sha256": "18433f4ec2926465a26f10910b28558372c440f725ce3111d4a53f9d63aac364",
+      "proposal_type": "Program"
+    },
+    "requested_charges": {
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 363
+    },
+    "result": {
+      "artifact_sha256": "d3e53fb33bff7b9b77b389329c6c2160c635b5af43d2f79f5c04b4c40bbc3e44",
+      "candidate_sha256": "c167793f5ae1a41e9518fb3f571e0b2dfbc75bc81b54f44ccadaad5e4a273677",
+      "no_op": false
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 2,
+    "session_sha256": "8425ad599110bebe71f539811e83be1319f8820905b10866850f1764bbe47809",
+    "sha256": "be587eaaa2b61ae107344684d0e921b0c2f4745589ae18dbb4ba76af2fa6871f",
+    "status": "succeeded",
+    "task_sha256": "8658afb721edd9be21c81c1c84dc3ad6fa4356547c54725bddabd48aad016620",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 2,
+      "weight_values": 363
+    }
+  },
+  {
+    "action": "seal",
+    "charges": {},
+    "error": null,
+    "previous_sha256": "be587eaaa2b61ae107344684d0e921b0c2f4745589ae18dbb4ba76af2fa6871f",
+    "request": {
+      "candidate_sha256": null
+    },
+    "requested_charges": {},
+    "result": {
+      "selection": "abstained"
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 3,
+    "session_sha256": "8425ad599110bebe71f539811e83be1319f8820905b10866850f1764bbe47809",
+    "sha256": "0bcd08f990d385ea03f14d01e53aeb524edc3796fa0123ce35ee043d0aab079f",
+    "status": "succeeded",
+    "task_sha256": "8658afb721edd9be21c81c1c84dc3ad6fa4356547c54725bddabd48aad016620",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 2,
+      "weight_values": 363
+    }
+  }
+]

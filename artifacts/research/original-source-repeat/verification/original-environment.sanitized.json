@@ -1,0 +1,172 @@
+{
+  "schema": "wsp-public-original-environment-derivative/1",
+  "created_utc": "2026-11-09T04:56:30.244559+00:00",
+  "source": {
+    "role": "original_runtime_declaration",
+    "bytes": 46987,
+    "raw_sha256": "98bd542041935b5626e2ff2086c495574d86b06c6db96568f95efb6d7feaad77",
+    "repository_relative_path": "experiments/research/original-source-repeat/runtime.json",
+    "canonical_json_sha256": "9696ee75b25f7467dd6b9a344311b1604de6c9b57100d34329ff4cd329703402"
+  },
+  "sanitizer": {
+    "id": "wsp-original-verification-whitelist/1",
+    "method": "explicit field whitelists and documented role/path rewrites",
+    "copied_fields": [
+      "byteorder",
+      "executable_sha256",
+      "numpy_installation_sha256",
+      "numpy_version",
+      "platform",
+      "source_package",
+      "tensor_dtype",
+      "trust_boundary",
+      "version",
+      "weight_order"
+    ],
+    "omitted_fields": [
+      "numpy_files_sha256"
+    ],
+    "rewrites": [
+      {
+        "source": "numpy_files_sha256",
+        "destination": "recorded_numpy_inventory",
+        "operation": "retain recorded inventory count and canonical map digest; omit detailed installed-file map"
+      }
+    ],
+    "note": "Values come from saved runtime metadata. The inventory digest is recalculated from that recorded map; no interpreter binary, installed package, environment variable or native runtime is inspected during packaging.",
+    "raw_evidence_modified": false,
+    "raw_transport_copied": false,
+    "study_or_verifier_executed": false
+  },
+  "recorded": {
+    "version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "numpy_version": "2.5.3",
+    "executable_sha256": "0b471133e110cfb53a061cad528ce8e517d7b9ac41a0a396c39ad795a487fc14",
+    "numpy_installation_sha256": "c02cb829d7edd63b46243e73c7b28786d167f044aefe45c935715cf6b306f9fc",
+    "platform": "win32",
+    "byteorder": "little",
+    "tensor_dtype": "finite-binary64",
+    "weight_order": "C/output-then-input",
+    "source_package": "source-freeze/rlcd",
+    "trust_boundary": "Interpreter executable and installed NumPy source/binaries are hashed; Python standard-library/native runtime correctness remains trusted"
+  },
+  "scope": "Whitelisted original-source runtime declarations bound to the saved protocol lock and replay input inventory. The completed stdlib audit did not independently rehash the installed NumPy files or runtime import closure; the authenticated runner supplied those checks. This file is not a full environment attestation.",
+  "binding_sources": [
+    {
+      "role": "original_protocol_lock",
+      "bytes": 6146,
+      "raw_sha256": "b511b73ab2d49848ac0373751c2b2880f99a81f560c4785ee65206940415019e",
+      "repository_relative_path": "experiments/research/original-source-repeat/protocol-lock.json",
+      "canonical_json_sha256": "60e17b1ef3730be9cd834707ceb0a199de29b42e602205395bc767d3b73fb7da",
+      "source_schema": "wsp-original-source-repeat-lock/1",
+      "canonical_payload_sha256": "a127b29dc0971163ddb109c66dba569168eade67ea700edc516fdc46d41de1fc"
+    },
+    {
+      "role": "original_replay_launch_receipt",
+      "bytes": 40581,
+      "raw_sha256": "97ff824177d7696321ceeea16ed7633bd3b9fa175396d8380e655cf8bdce3b36",
+      "canonical_json_sha256": "5199e774a1564f480f86b0935e32d0e3463e3e4344570e7a5c3375c8b819c266",
+      "source_schema": "wsp-private-independent-original-live-replay-launch/1",
+      "canonical_payload_sha256": "ff16852ebe0587de985544c83e492f8b9c697f6774f162b80ef398fbb62b3064"
+    },
+    {
+      "role": "original_replay_exit_receipt",
+      "bytes": 38485,
+      "raw_sha256": "8eba0adae7e70ae6fd3401bb74e23e3b51fdae767def4cbbd86cd190b2fe3000",
+      "canonical_json_sha256": "930a558ba7c18c4c0a6588b7e8f85f0af0beb68ae1d56ab2f91faf159593c92e",
+      "source_schema": "wsp-private-independent-original-live-replay-exit/1",
+      "canonical_payload_sha256": "862fe9cc8fa190c3519c344c288524c22062fea4c50cf3bd4cf0f43f0d31afdd"
+    },
+    {
+      "role": "original_audit_report",
+      "bytes": 12365,
+      "raw_sha256": "0c5d727aad1a0471d83d3575032f3d663f678551cce0766e155318511b4a51ce",
+      "canonical_json_sha256": "c76e5e9c65bf976ff9efc6fb15c93700e9fffe228e58c9118fd4bdb37338fd74",
+      "source_schema": "wsp-independent-original-live-replay-audit/1",
+      "canonical_payload_sha256": "8aa41cf4f5cdebc4bf557f0553f922a1456074bcf8e8144152df2fc119af726c"
+    }
+  ],
+  "recorded_runtime_fields_sha256": "47866c68ab9d1a1e5a756a3a3f1e22adeec1ade01e4e5d95a9a77fd3aa73d44e",
+  "recorded_numpy_inventory": {
+    "file_count": 428,
+    "canonical_sha256": "c02cb829d7edd63b46243e73c7b28786d167f044aefe45c935715cf6b306f9fc",
+    "source_field": "numpy_files_sha256",
+    "installed_files_rehashed_during_packaging": false
+  },
+  "runtime_raw_identity_matches_saved_lock": true,
+  "runtime_raw_identity_matches_saved_replay_inventory": true,
+  "recorded_interpreter_identity_agrees_across_sources": true,
+  "audit_recorded_installed_numpy_files_independently_rehashed": false,
+  "recorded_launcher_roles": {
+    "replay": [
+      {
+        "index": 0,
+        "kind": "runtime_role",
+        "value": "captured_python_interpreter"
+      },
+      {
+        "index": 1,
+        "kind": "literal",
+        "value": "-B"
+      },
+      {
+        "index": 2,
+        "kind": "literal",
+        "value": "-u"
+      },
+      {
+        "index": 3,
+        "kind": "repository_relative_path",
+        "value": "scripts/run_original_source_repeat.py"
+      },
+      {
+        "index": 4,
+        "kind": "literal",
+        "value": "replay-live"
+      },
+      {
+        "index": 5,
+        "kind": "literal",
+        "value": "--expected-lock-sha256"
+      },
+      {
+        "index": 6,
+        "kind": "literal",
+        "value": "a127b29dc0971163ddb109c66dba569168eade67ea700edc516fdc46d41de1fc"
+      },
+      {
+        "index": 7,
+        "kind": "literal",
+        "value": "--expected-bundle-sha256"
+      },
+      {
+        "index": 8,
+        "kind": "literal",
+        "value": "88d28359ddc8b1b3bbff75a997739609803c8dfb9c58650c975c5cf31c840fec"
+      }
+    ],
+    "audit": [
+      {
+        "index": 0,
+        "kind": "runtime_role",
+        "value": "captured_python_interpreter"
+      },
+      {
+        "index": 1,
+        "kind": "literal",
+        "value": "-B"
+      },
+      {
+        "index": 2,
+        "kind": "literal",
+        "value": "-u"
+      },
+      {
+        "index": 3,
+        "kind": "artifact_role",
+        "value": "original_audit_verifier"
+      }
+    ]
+  },
+  "sha256": "23ce3929897b5de87684dfc55974fc0487a4b841a392de4582e8e8249b176786"
+}

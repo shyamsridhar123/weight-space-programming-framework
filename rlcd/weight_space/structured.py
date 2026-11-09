@@ -220,3 +220,266 @@ def verify_lowering(base: WeightArtifact, proposal: StructuredProgram,
         return canonical_bytes(actual) == canonical_bytes(receipt)
     except (ValueError, TypeError, KeyError, FloatingPointError):
         return False
+
+
+@dataclass(frozen=True)
+class ExecutionSpec:
+    """One measured operator/backend model, never a universal float proof."""
+
+    backend: str = "numpy"
+    dtype: str = "float64"
+    device: str = "cpu"
+    accumulation: str = "matmul"
+    endpoint_cast: str = "reject"
+    error_model: str = "empirical"
+
+    def __post_init__(self) -> None:
+        import re
+        if (self.backend not in ("numpy", "torch") or self.dtype not in NATIVE_DTYPES
+                or not isinstance(self.device, str) or not re.fullmatch(r"cpu|cuda(?::[0-9]+)?", self.device)
+                or self.accumulation not in ("matmul", "left_to_right", "right_to_left")
+                or self.endpoint_cast not in ("reject", "round")
+                or self.error_model not in ("empirical", "formal")):
+            raise ValueError("Unknown native execution scope")
+
+    def to_dict(self) -> dict[str, Any]:
+        return {"backend": self.backend, "dtype": self.dtype, "device": self.device,
+                "accumulation": self.accumulation, "endpoint_cast": self.endpoint_cast,
+                "error_model": self.error_model}
+
+    @classmethod
+    def from_dict(cls, value: dict[str, Any]) -> ExecutionSpec:
+        if not isinstance(value, dict) or set(value) != {
+                "backend", "dtype", "device", "accumulation", "endpoint_cast", "error_model"}:
+            raise ValueError("Unknown execution-spec fields")
+        return cls(**value)
+
+
+def _execution_layers(artifact: WeightArtifact) -> list[tuple[np.ndarray, np.ndarray, str]]:
+    from .model import Network
+    from .semantics import RELU_ARCHITECTURE, as_relu_network
+    from .sequential import SEQUENTIAL_ARCHITECTURE, validate_sequential
+    if isinstance(artifact, Network):
+        model = artifact
+    elif artifact.architecture == RELU_ARCHITECTURE:
+        model = as_relu_network(artifact)
+    elif artifact.architecture == SEQUENTIAL_ARCHITECTURE:
+        tensors = artifact.tensors
+        return [(tensors[layer["weight"]], tensors[layer["bias"]], layer["activation"])
+                for layer in validate_sequential(artifact)]
+    else:
+        raise ValueError("Native accounting has no operator model for this architecture")
+    return [(model.w1, model.b1, "relu"), (model.w2, model.b2, "identity")]
+
+
+def _exact_execution(layers: list[tuple[np.ndarray, np.ndarray, str]],
+                     inputs: np.ndarray) -> list[list[Fraction]]:
+    q = lambda value: Fraction.from_float(float(value))
+    result = []
+    for sample in inputs:
+        values = list(map(q, sample))
+        for weights, bias, activation in layers:
+            values = [q(b) + sum((q(w)*x for w, x in zip(row, values)), Fraction(0))
+                      for row, b in zip(weights, bias)]
+            if activation == "relu":
+                values = [max(Fraction(0), value) for value in values]
+            elif activation == "abs":
+                values = list(map(abs, values))
+            elif activation != "identity":
+                raise ValueError("Exact real execution is unsupported for this activation")
+        result.append(values)
+    return result
+
+
+def _native_execution(layers: list[tuple[np.ndarray, np.ndarray, str]],
+                      inputs: np.ndarray, spec: ExecutionSpec) -> np.ndarray:
+    if spec.backend == "numpy":
+        if spec.dtype == "bfloat16" or spec.device != "cpu":
+            raise ValueError("NumPy execution requires CPU float64/float32/float16")
+        dtype = np.dtype(spec.dtype)
+        values = inputs.astype(dtype)
+        with np.errstate(over="ignore", invalid="ignore", under="ignore"):
+            for weights, bias, activation in layers:
+                weight, offset = weights.astype(dtype), bias.astype(dtype)
+                if spec.accumulation == "matmul":
+                    values = values @ weight.T + offset
+                else:
+                    summed = np.zeros((len(values), len(offset)), dtype=dtype)
+                    order = range(weight.shape[1])
+                    if spec.accumulation == "right_to_left":
+                        order = reversed(order)
+                    for j in order:
+                        summed = summed + values[:, j:j+1]*weight[:, j]
+                    values = summed + offset
+                if activation == "relu":
+                    values = np.maximum(values, dtype.type(0))
+                elif activation == "abs":
+                    values = np.abs(values)
+                elif activation == "tanh":
+                    values = np.tanh(values)
+        return values.astype(np.float64)
+    import torch
+    dtype, device = getattr(torch, spec.dtype), torch.device(spec.device)
+    with torch.no_grad():
+        values = torch.tensor(inputs.copy(), dtype=dtype, device=device)
+        for weights, bias, activation in layers:
+            weight = torch.tensor(weights.copy(), dtype=dtype, device=device)
+            offset = torch.tensor(bias.copy(), dtype=dtype, device=device)
+            if spec.accumulation == "matmul":
+                values = values @ weight.T + offset
+            else:
+                summed = torch.zeros((len(values), len(offset)), dtype=dtype, device=device)
+                order = range(weight.shape[1])
+                if spec.accumulation == "right_to_left":
+                    order = reversed(order)
+                for j in order:
+                    summed = summed + values[:, j:j+1]*weight[:, j]
+                values = summed + offset
+            if activation == "relu":
+                values = torch.relu(values)
+            elif activation == "abs":
+                values = torch.abs(values)
+            elif activation == "tanh":
+                values = torch.tanh(values)
+        return values.to(device="cpu", dtype=torch.float64).numpy()
+
+
+def native_execution_receipt(base: WeightArtifact, candidate: WeightArtifact, inputs: Any,
+                             spec: ExecutionSpec = ExecutionSpec(), *, decision: Any = None,
+                             binding_sha256: str | None = None) -> dict[str, Any]:
+    """Retain endpoint/input quantization, intermediate errors, and decisions.
+
+    Exact outputs concern mathematical affine/identity/ReLU/abs paths. Native
+    values are measurements on the pinned backend. Backend matmul may reassociate
+    or fuse arithmetic; the two serial arms expose specified multiply/add order.
+    """
+    from .contracts import DecisionRule, _result_status
+    from .evidence import numerical_environment
+    if not base.compatible(candidate) or not isinstance(spec, ExecutionSpec):
+        raise ValueError("Native comparison needs compatible endpoints and an ExecutionSpec")
+    rule = DecisionRule() if decision is None else decision
+    if not isinstance(rule, DecisionRule):
+        raise ValueError("Supply explicit decision semantics")
+    samples = _array(inputs)
+    if samples.ndim == 1:
+        samples = samples.reshape(1, -1)
+    if samples.ndim != 2:
+        raise ValueError("Native witnesses must be vectors or a nonempty matrix")
+    payload: dict[str, Any] = {
+        "schema": "wsp-native-execution/1", "binding_sha256": binding_sha256,
+        "base_sha256": base.sha256, "candidate_sha256": candidate.sha256,
+        "stored_parent": base.to_dict(), "stored_candidate": candidate.to_dict(),
+        "no_op": base.sha256 == candidate.sha256,
+        "witness_inputs": samples.tolist(), "witness_sha256": digest(samples.tolist()),
+        "execution": spec.to_dict(), "decision_rule": rule.to_dict(),
+        "operator_order": "dot product then explicit bias then activation; separate multiply/add in serial arms",
+        "formal_execution_verified": False,
+        "scope": "Empirical paired execution on these witnesses/backend; no all-input or cross-backend guarantee",
+    }
+    def finish(status: str, reason: str | None = None) -> dict[str, Any]:
+        payload["status"] = status
+        payload["reason"] = reason
+        return payload | {"sha256": digest(payload)}
+    try:
+        payload["environment"] = numerical_environment(spec.backend, spec.device)
+        before_layers, after_layers = _execution_layers(base), _execution_layers(candidate)
+    except (ValueError, ImportError, RuntimeError) as error:
+        return finish("unsupported", str(error))
+    if samples.shape[1] != before_layers[0][0].shape[1]:
+        raise ValueError("Native witness coordinate order/width differs from the model")
+    payload["operator_coverage"] = [activation for _, _, activation in before_layers]
+    if spec.error_model == "formal":
+        return finish("unsupported", "No formal native rounding/domain proof backend is registered")
+    try:
+        projected_base = base.replace(**{name: native_round(tensor, spec.dtype) for name, tensor in base.tensors.items()})
+        projected_candidate = candidate.replace(**{name: native_round(tensor, spec.dtype) for name, tensor in candidate.tensors.items()})
+        projected_inputs = native_round(samples, spec.dtype)
+    except ValueError as error:
+        return finish("invalid", "Endpoint/input projection failed: " + str(error))
+    payload.update({"projected_parent": projected_base.to_dict(), "projected_candidate": projected_candidate.to_dict(),
+                    "projected_parent_sha256": projected_base.sha256,
+                    "projected_candidate_sha256": projected_candidate.sha256,
+                    "projected_witness_inputs": projected_inputs.tolist(),
+                    "parent_projection_changed": projected_base.sha256 != base.sha256,
+                    "candidate_projection_changed": projected_candidate.sha256 != candidate.sha256,
+                    "input_projection_changed": not np.array_equal(samples, projected_inputs)})
+    if spec.endpoint_cast == "reject" and (payload["parent_projection_changed"] or payload["candidate_projection_changed"]):
+        return finish("invalid", "Declared endpoint cast forbids quantization; the projected parent is a different baseline")
+    exact_available = all(a in ("identity", "relu", "abs") for _, _, a in before_layers)
+    payload["exact_real_supported"] = exact_available
+    observations = {}
+    for name, original, projected in (("parent", base, projected_base), ("candidate", candidate, projected_candidate)):
+        original_layers, projected_layers = _execution_layers(original), _execution_layers(projected)
+        try:
+            native = _native_execution(projected_layers, projected_inputs, spec)
+        except (ValueError, RuntimeError, ImportError, TypeError) as error:
+            return finish("unsupported", "Native operator execution failed: " + str(error))
+        encoded = [[float(x) if np.isfinite(x) else "NaN" if np.isnan(x) else
+                    "+Infinity" if x > 0 else "-Infinity" for x in row] for row in native]
+        lanes = {"native_outputs": encoded, "native_decisions": [rule.classify(row) for row in native]}
+        if exact_available:
+            original_exact = _exact_execution(original_layers, samples)
+            endpoint_exact = _exact_execution(projected_layers, samples)
+            input_exact = _exact_execution(projected_layers, projected_inputs)
+            lanes.update({"stored_exact_outputs": [[str(x) for x in row] for row in original_exact],
+                          "projected_endpoint_exact_outputs": [[str(x) for x in row] for row in endpoint_exact],
+                          "projected_input_exact_outputs": [[str(x) for x in row] for row in input_exact],
+                          "stored_exact_decisions": [rule.classify(row) for row in original_exact],
+                          "projected_endpoint_exact_decisions": [rule.classify(row) for row in endpoint_exact],
+                          "projected_input_exact_decisions": [rule.classify(row) for row in input_exact]})
+            effects = []
+            for a, b, c, executed in zip(original_exact, endpoint_exact, input_exact, native):
+                effects.append([{"endpoint_error_exact": str(y-x), "input_error_exact": str(z-y),
+                                 "intermediate_error_exact": None if not np.isfinite(n) else str(Fraction.from_float(float(n))-z),
+                                 "total_error_exact": None if not np.isfinite(n) else str(Fraction.from_float(float(n))-x)}
+                                for x, y, z, n in zip(a, b, c, executed)])
+            lanes["per_coordinate_errors"] = effects
+            lanes["decision_effects"] = {
+                "endpoint_quantization": [rule.preservation(a, b) for a, b in zip(
+                    lanes["stored_exact_decisions"], lanes["projected_endpoint_exact_decisions"])],
+                "input_quantization": [rule.preservation(a, b) for a, b in zip(
+                    lanes["projected_endpoint_exact_decisions"], lanes["projected_input_exact_decisions"])],
+                "intermediate_arithmetic": [rule.preservation(a, b) for a, b in zip(
+                    lanes["projected_input_exact_decisions"], lanes["native_decisions"])],
+                "stored_real_to_native": [rule.preservation(a, b) for a, b in zip(
+                    lanes["stored_exact_decisions"], lanes["native_decisions"])],
+            }
+        observations[name] = lanes
+    payload["observations"] = observations
+    payload["native_decision_preserved"] = [rule.preservation(a, b) for a, b in zip(
+        observations["parent"]["native_decisions"], observations["candidate"]["native_decisions"])]
+    if exact_available:
+        payload["stored_real_decision_preserved"] = [rule.preservation(a, b) for a, b in zip(
+            observations["parent"]["stored_exact_decisions"], observations["candidate"]["stored_exact_decisions"])]
+        paired = []
+        for index, (old, new) in enumerate(zip(observations["parent"]["stored_exact_outputs"],
+                                               observations["candidate"]["stored_exact_outputs"])):
+            paired.append([{
+                "stored_real_drift_exact": str(Fraction(b)-Fraction(a)),
+                "native_drift_exact": None if not (np.isfinite(left) and np.isfinite(right)) else
+                                      str(Fraction.from_float(float(right))-Fraction.from_float(float(left))),
+                "parent_total_error_exact": observations["parent"]["per_coordinate_errors"][index][j]["total_error_exact"],
+                "candidate_total_error_exact": observations["candidate"]["per_coordinate_errors"][index][j]["total_error_exact"],
+            } for j, (a, b, left, right) in enumerate(zip(old, new,
+                [float(x) if not isinstance(x, str) else float("nan") for x in observations["parent"]["native_outputs"][index]],
+                [float(x) if not isinstance(x, str) else float("nan") for x in observations["candidate"]["native_outputs"][index]]))])
+        payload["paired_coordinate_effects"] = paired
+    if any(any(isinstance(x, str) for x in row) for lanes in observations.values() for row in lanes["native_outputs"]):
+        return finish("observed_violation", "Native execution produced nonfinite outputs")
+    if not exact_available:
+        return finish("unsupported", "Native outputs retained; exact real-to-native error accounting is unsupported for this activation")
+    decision_status = _result_status(payload["native_decision_preserved"])
+    return finish(decision_status, None if decision_status == "pass" else "The declared native decision-preservation rule did not pass")
+
+
+def verify_native_execution(base: WeightArtifact, candidate: WeightArtifact,
+                            receipt: dict[str, Any]) -> bool:
+    from .contracts import DecisionRule
+    try:
+        actual = native_execution_receipt(base, candidate, receipt["witness_inputs"],
+            ExecutionSpec.from_dict(receipt["execution"]),
+            decision=DecisionRule.from_dict(receipt["decision_rule"]),
+            binding_sha256=receipt["binding_sha256"])
+        return canonical_bytes(actual) == canonical_bytes(receipt)
+    except (ValueError, TypeError, KeyError, OverflowError):
+        return False

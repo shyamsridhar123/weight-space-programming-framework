@@ -78,7 +78,7 @@ The [session example](examples/session_edit.py) supplies the desired formula and
 
 You can also open the [interactive explanation](artifacts/explanations/edit-retention/index.html) directly in a browser. It is a standalone local HTML artifact with no build or network requirement. The [static worked guide](docs/weight-space/v2/worked-example.md) gives the same core explanation, and the Python examples exercise the implementation. The [README quickstart](README.md) gives the shorter installation and example-running path.
 
-Install the extra dependencies when you need the PyTorch bridge, native-execution replay, the complete Python suite, or report plotting:
+Install the extra dependencies when you need the PyTorch bridge, native-execution replay, the engineering Python suite, or report plotting:
 
 ```bash
 python -m pip install -e ".[test,plots]"
@@ -97,22 +97,25 @@ The root `requirements.txt` and `requirements.lock.txt` are preserved historical
 
 ## 3. Run the tests
 
-```bash
-python -m pytest -q --basetemp .runs/pytest-review-1
-```
-
-Use the suite to check edit algebra, certificate boundaries, tensor/adaptor compatibility, lowering, native precision, feature editing, sequential bounds, workflow state, study fixtures, and the independent auditor. Auditor tests exercise rejection of malformed evidence, tampered identities, ambiguous types, and inconsistent calculations. Historical model fixtures remain included for compatibility checks.
-
-Keep `--basetemp` inside this checkout. Freeze tests reject source inputs outside the repository, so the system temporary-directory default can fail on a clean Linux checkout. Choose an unused `.runs/` directory for each invocation: pytest clears that directory before use. The historical `pytest.ini`, implementation, and tests retain their original identities.
-
-For focused work:
+Run the reviewed engineering selection used by publication CI. Disable automatic loading of third-party pytest plugins:
 
 ```bash
-python -m pytest -q --basetemp .runs/pytest-focused-1 tests/test_weight_space_v2.py tests/test_weight_space_workflow.py
-python -m pytest -q --basetemp .runs/pytest-auditor-1 tests/test_independent_weight_space_v2_audit.py
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest -q -c pytest-engineering.ini --basetemp .runs/pytest-review-1
 ```
 
-Inspect failures and skipped tests before interpreting the result. The complete verification run requires Torch. These tests use development fixtures; they do not execute the full published study or establish compiler correctness, useful model editing, or confirmation on untouched tasks.
+In PowerShell, set `$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD = "1"` first, then run the same command starting at `python`.
+
+Use this selection to check edit algebra, certificate boundaries, tensor/adaptor compatibility, lowering, native precision, feature editing, sequential bounds, workflow state, factory behavior, publication sanitation, and the proof bridge. [pytest-engineering.ini](pytest-engineering.ini) selects the engineering files and deselects three generic study tests. The independent-auditor fixtures and other research suites are outside this selection. The historical `pytest.ini` remains unchanged; omitting `-c pytest-engineering.ini` uses its broader collection.
+
+Keep `--basetemp` inside this checkout and choose an unused `.runs/` directory for each invocation: pytest clears that directory before use.
+
+For focused work, choose files listed in `pytest-engineering.ini`. Explicit test paths override its `testpaths` list:
+
+```bash
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest -q -c pytest-engineering.ini --basetemp .runs/pytest-focused-1 tests/test_weight_space_v2.py tests/test_weight_space_workflow.py
+```
+
+Inspect failures, deselections, and skipped tests before interpreting the result. The selected Torch checks require Torch. These tests use development fixtures; they do not execute the full published study or establish compiler correctness, useful model editing, or confirmation on untouched tasks. Saved-data replay and fresh study execution below are separate, optional scientific procedures.
 
 ## 4. Replay the saved generic study independently
 

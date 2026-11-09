@@ -1,0 +1,241 @@
+{
+  "additional_material_accounting_limitations": [
+    {
+      "finding": "attempt ledgers and checkpoints remain buffered until phase completion. The launcher and failure marker preserve phase abort evidence but not precise within-case completed/failed attempt identities or partial timings.",
+      "recommendation": "in a separately frozen amendment, persist attempt-start/end/failure records with immutable assignment IDs; retain incomplete original attempt without retries. If not amended, report all unresolved assignments as missing and do not claim complete per-attempt interrupted-run accounting.",
+      "source_lines": [
+        237,
+        295,
+        297,
+        298,
+        299,
+        373,
+        431,
+        432,
+        483,
+        485,
+        486,
+        560,
+        561,
+        562,
+        563
+      ]
+    },
+    {
+      "checker_lines": [
+        138,
+        139,
+        142,
+        143,
+        148,
+        149,
+        150,
+        151,
+        157,
+        263,
+        264,
+        265,
+        269
+      ],
+      "finding": "checker independently recomputes the complete outcome assignment set and finite metrics, but training/recovery ledger totals and complete model/program row metadata are only indirectly authenticated by files. Optimizer correctness and independently trained reproduction are expressly unverified.",
+      "recommendation": "root must separately authenticate model selection ancestry and attempt set/counts before audit; scope checker claims to what it actually recomputes."
+    }
+  ],
+  "authenticated_files": {
+    "check_unlearning.py": {
+      "bytes": 18534,
+      "raw_sha256": "2f278eb358f6ad3e851ae28f83d324e2bbeec5d31e82bc6123b3c736f7c933da"
+    },
+    "framework-source/artifact.py": {
+      "bytes": 7735,
+      "raw_sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+    },
+    "framework-source/model.py": {
+      "bytes": 9944,
+      "raw_sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+    },
+    "framework-source/program.py": {
+      "bytes": 6317,
+      "raw_sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+    },
+    "input-material.json": {
+      "bytes": 279123,
+      "raw_sha256": "5c16271b6a8744148463c0c5505701c0ccef4d0b0ce8f4db79591b0ac79cab1d"
+    },
+    "protocol.json": {
+      "bytes": 12308,
+      "raw_sha256": "566de194161e49505e0c0c89eafecccb5692465f0fe1ebd806b4949d090cc868"
+    },
+    "run_unlearning.py": {
+      "bytes": 35757,
+      "raw_sha256": "4461a8c059da63128f0af1eccbc7063de1318ac2e7ca14e83d904a9603869c1c"
+    }
+  },
+  "blocker": {
+    "affected_author_attribute_pair_identities": 1728,
+    "collisions": [
+      {
+        "audit_variant": 0,
+        "author_attribute_pairs": 96,
+        "case": "L18401-N24",
+        "optimization_variant": 1,
+        "reason": "the same entity*10000 + field*100 offset is added in both streams",
+        "shared_base_query_seed": 18401027
+      },
+      {
+        "audit_variant": 0,
+        "author_attribute_pairs": 192,
+        "case": "L18401-N48",
+        "optimization_variant": 1,
+        "reason": "the same entity*10000 + field*100 offset is added in both streams",
+        "shared_base_query_seed": 18401051
+      },
+      {
+        "audit_variant": 0,
+        "author_attribute_pairs": 96,
+        "case": "L18402-N24",
+        "optimization_variant": 1,
+        "reason": "the same entity*10000 + field*100 offset is added in both streams",
+        "shared_base_query_seed": 18402027
+      },
+      {
+        "audit_variant": 0,
+        "author_attribute_pairs": 192,
+        "case": "L18402-N48",
+        "optimization_variant": 1,
+        "reason": "the same entity*10000 + field*100 offset is added in both streams",
+        "shared_base_query_seed": 18402051
+      },
+      {
+        "audit_variant": 0,
+        "author_attribute_pairs": 96,
+        "case": "L18403-N24",
+        "optimization_variant": 1,
+        "reason": "the same entity*10000 + field*100 offset is added in both streams",
+        "shared_base_query_seed": 18403027
+      },
+      {
+        "audit_variant": 0,
+        "author_attribute_pairs": 192,
+        "case": "L18403-N48",
+        "optimization_variant": 1,
+        "reason": "the same entity*10000 + field*100 offset is added in both streams",
+        "shared_base_query_seed": 18403051
+      },
+      {
+        "audit_variant": 0,
+        "author_attribute_pairs": 96,
+        "case": "L18404-N24",
+        "optimization_variant": 1,
+        "reason": "the same entity*10000 + field*100 offset is added in both streams",
+        "shared_base_query_seed": 18404027
+      },
+      {
+        "audit_variant": 0,
+        "author_attribute_pairs": 192,
+        "case": "L18404-N48",
+        "optimization_variant": 1,
+        "reason": "the same entity*10000 + field*100 offset is added in both streams",
+        "shared_base_query_seed": 18404051
+      },
+      {
+        "audit_variant": 0,
+        "author_attribute_pairs": 96,
+        "case": "L18405-N24",
+        "optimization_variant": 1,
+        "reason": "the same entity*10000 + field*100 offset is added in both streams",
+        "shared_base_query_seed": 18405027
+      },
+      {
+        "audit_variant": 0,
+        "author_attribute_pairs": 192,
+        "case": "L18405-N48",
+        "optimization_variant": 1,
+        "reason": "the same entity*10000 + field*100 offset is added in both streams",
+        "shared_base_query_seed": 18405051
+      },
+      {
+        "audit_variant": 0,
+        "author_attribute_pairs": 96,
+        "case": "L18406-N24",
+        "optimization_variant": 1,
+        "reason": "the same entity*10000 + field*100 offset is added in both streams",
+        "shared_base_query_seed": 18406027
+      },
+      {
+        "audit_variant": 0,
+        "author_attribute_pairs": 192,
+        "case": "L18406-N48",
+        "optimization_variant": 1,
+        "reason": "the same entity*10000 + field*100 offset is added in both streams",
+        "shared_base_query_seed": 18406051
+      }
+    ],
+    "finding": "optimization_seed=data_seed+2; audit_seed=data_seed+3; adding variant produces optimizer variant1 == audit variant0. Common standardized identity noise enters the edit fit and audit perturbation family. No audit outcome-driven selection was found, but independent stochastic stream isolation is false.",
+    "id": "optimizer_audit_rng_collision",
+    "recommended_resolution": "preserve this prepared freeze; author a separately versioned and reviewed amendment using explicit stream domain separation before any training. Do not modify this freeze or silently relabel the data as independently seeded.",
+    "source_lines": [
+      104,
+      133,
+      134,
+      264,
+      268,
+      385
+    ]
+  },
+  "complete_private_source_review_sha256": "3fc9f9b37e0cc3145e65d358d49fadd51e1d2e87aa44f46dc767656e95961024",
+  "created_at_utc": "2026-11-09T04:53:22.067298+00:00",
+  "data_structure": {
+    "author_scales": [
+      24,
+      48
+    ],
+    "cases": 12,
+    "each_forget_order_is_a_full_permutation": true,
+    "lineage_units": [
+      18401,
+      18402,
+      18403,
+      18404,
+      18405,
+      18406
+    ],
+    "shadow_authors_excluded_from_training_by_source": true,
+    "synthetic_public_material": true
+  },
+  "execution_state_observed": "prepared-only source/data state; no model training, audit, recovery or independent inference check has run under this freeze",
+  "expected_accounting": {
+    "audit_outcomes": 720,
+    "editing_programs": 72,
+    "optimizer_steps": 74832,
+    "recovery_fits": 288,
+    "training_attempts": 120,
+    "unchanged_refusal_share_recovery_fits": true
+  },
+  "freeze_raw_sha256": "8cb44549858912813049f4df5ab0e57a4601cf0266aee1d48aeea08b9b42b099",
+  "frozen_mutations": false,
+  "read_scope": "all 564 runner lines, all 284 checker lines, all protocol fields, actual input structure and all copied framework closure files, complete private launcher and preparation handoff, original issue18 requirements",
+  "recommendation": "hold execution until RNG stream separation amendment is prepared and authenticated; preserve original prepared-only bytes and reviewer receipt",
+  "review_local_date": "2026-11-08",
+  "review_receipt_role": "separate source review added after preparation, outside the original seven-file freeze inventory; no original frozen bytes changed",
+  "reviewer": "primary_paper_review",
+  "schema": "wsp-public-source-only-synthetic-unlearning-review/1",
+  "semantics_checked": {
+    "archived_endpoint_attacks": "editing inverse chains restore original exposed tensors; fresh reference has no full-exposure archive; unequal archive access explicitly declared",
+    "canonical_refusal": "authored simulated deterministic refusal control, same base weights and alternate-query probabilities; direct rate explicitly assigned zero, no real serving-wrapper measurement",
+    "current_weight_attacks": "fixed alternate queries and recovery fits; forgotten labels only deliberately reintroduced one attribute per author and supervised membership endpoint; extraction selection uses confidence not truth",
+    "joint_criteria": "bounded named criteria only; recovery mean accuracies enter joint decision while recovery highest-confidence extraction remains reported as a separate diagnostic",
+    "membership": "fixed candidate-specific supervised known-answer threshold calibration; no edit selection; disjoint shadow halves and fact-field partitions documented; finite proxy only",
+    "model_training": "full and references restart from same case initialization; references train retained canonical rows only; editing arms sequentially continue each own previous weights and reset local Adam optimizer",
+    "scope": "six descriptive paired seed labels, not 720 independent trials; no universal erasure or enterprise benefit claim",
+    "selection": "all deterministic candidates saved before external selection authentication; no audit generator call or audit score used by train; fit-data accuracy diagnostic does not select among candidates"
+  },
+  "source_faithfulness": {
+    "muse": "separate access, privacy proxy, utility, scale and repeated-request lanes are motivated by the six-way evaluation principle; source-specific text/privacy metrics are explicitly absent",
+    "quantization": "four frozen CPU NumPy transforms measure finite dequantized accessibility; no vendor integer kernel, real-to-native refinement, unlimited attack or production privacy guarantee",
+    "tofu": "controlled synthetic facts and matched retain-only reference are faithful design motivations; numeric eight-code classification is explicitly not its generative likelihood/truth-ratio/KS implementation or reproduction"
+  },
+  "status": "execution_not_recommended_for_current_freeze",
+  "timezone": "America/Chicago",
+  "training_evaluation_recovery_or_provider_execution": false
+}

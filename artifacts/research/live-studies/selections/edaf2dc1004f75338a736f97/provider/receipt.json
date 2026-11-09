@@ -1,0 +1,99 @@
+{
+  "schema": "wsp-live-provider-attempt/1",
+  "started_utc": "2026-11-09T03:48:59.996147+00:00",
+  "status": "completed",
+  "error": null,
+  "returncode": 0,
+  "timeout_cleanup_complete": null,
+  "elapsed_seconds": 10.275578200002201,
+  "invocation": {
+    "executable_sha256": "2692c8c7bb2cf8b0aefe638741fc90236f4b824c59578ce84994f9de58200993",
+    "cli_version": "codex-cli 0.163.0",
+    "configuration": {
+      "schema": "wsp-codex-provider-config/1",
+      "provider": "openai",
+      "requested_model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "tool_free": true,
+      "user_config_loaded": false,
+      "ephemeral": true,
+      "timeout_seconds": 180,
+      "configuration_overrides": {
+        "plugins._default.enabled": "false",
+        "mcp_servers": "{}",
+        "web_search": "\"disabled\"",
+        "features.shell_tool": "false",
+        "features.unified_exec": "false",
+        "features.apps": "false",
+        "features.multi_agent": "false",
+        "features.multi_agent_mode": "false",
+        "features.code_mode": "false",
+        "features.js_repl": "false",
+        "features.tool_search": "false",
+        "features.skill_search": "false",
+        "features.skip_host_skill_discovery": "true",
+        "features.view_image": "false",
+        "features.image_generation": "false",
+        "features.hooks": "false",
+        "features.browser_use": "false",
+        "features.in_app_browser": "false",
+        "features.memories": "false",
+        "features.search_tool": "false",
+        "features.stable_environment_tools": "false",
+        "features.incremental_tools": "false",
+        "features.request_permissions_tool": "false",
+        "tools.update_plan.enabled": "false",
+        "project_doc_max_bytes": "0"
+      },
+      "sandbox": "read-only",
+      "deployment_revision_exposed": false,
+      "internal_model_computation_observed": false,
+      "human_assistance": "task_and_harness_authored_before_trial;_no_midtrial_help"
+    },
+    "prompt_sha256": "2ef5b5f44f97de849e8a7a824b9db42e5d4f5a33838cf4cb7cbc8974ffdf3954",
+    "schema_sha256": "2e1eb63f2d4f9588432ddd2a5c0018eb6a2bf1e54b0cb0f7e7014078522e2b69",
+    "cwd_role": "isolated_proposer_directory",
+    "local_invocation_sha256": "593debba065c9abbec2584805789277a2b32d58d8f13f2a94ad7f8a1c1bfda26"
+  },
+  "response": {
+    "abstain": true,
+    "commands_json": "[]",
+    "selected_fitted_handle": null,
+    "reason": "I cannot reliably identify the original top two codes from the supplied affine head by unassisted arithmetic, or establish an edit that preserves all other intent routes.",
+    "predicted_argmax_codes": [
+      -1,
+      -1
+    ],
+    "prediction_confidences": [
+      0.0,
+      0.0
+    ],
+    "strongest_competing_codes": [
+      -1,
+      -1
+    ],
+    "competing_confidences": [
+      0.0,
+      0.0
+    ]
+  },
+  "usage": {
+    "input_tokens": 65939,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 182,
+    "reasoning_output_tokens": 69
+  },
+  "unapproved_events": [],
+  "event_errors": [],
+  "diagnostic_items": 1,
+  "events_sha256": "80be62e789a80fa7d9998424dabdb0632e560968c833a4ca379a51e5998790d0",
+  "cost": {
+    "currency": "USD",
+    "amount": null,
+    "reason": "authenticated_CLI_subscription_not_request_pricing"
+  },
+  "prompt_scope": "exact_harness_prompt;_CLI_system_scaffolding_not_exported",
+  "restrictions_scope": "configured_CLI_tools_and_observed_events;_not_OS_hermeticity",
+  "sha256": "7b021e438fffb7c8bd7f8c5c06092f2870436f77c1216b413e1724891064cd40"
+}

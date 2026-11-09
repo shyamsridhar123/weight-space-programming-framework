@@ -1,0 +1,47 @@
+{
+  "architecture": "trained-frozen-readout/1",
+  "base_sha256": "f0038c51291ecf7aca61f6227f69dd84f53207a09dd49ebfcea301d7b266ca4d",
+  "constraints": {
+    "arm": "nullspace",
+    "behavioral_admission": "frozen finite calibration samples; no whole-domain guarantee",
+    "case": {
+      "case_id": "recognition/4",
+      "confused_with": "6",
+      "desired_code": 4,
+      "desired_queue": 4,
+      "pilot_development_confusion_events": 4,
+      "pilot_development_error_rates": [
+        0.02631578947368421,
+        0.05263157894736842,
+        0.02631578947368421
+      ],
+      "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+      "target_label": 4,
+      "target_name": "4",
+      "type": "recognition"
+    },
+    "configuration": {},
+    "margins": {
+      "maximum_protected_harm": 0.01,
+      "minimum_target_gain": 0.1,
+      "minimum_useful_coverage": 0.75
+    },
+    "nullspace_additional_contract": "exact real-score equality on stored anchors",
+    "numeric_lane": "native Torch CPU float32 readout",
+    "protected_feature_sha256": "12fba3946e19154e9c1a53666a0c5ea12becbb8be30888e0049b54276f796fd6",
+    "structural_policy": {
+      "max_change_abs": 256.0,
+      "max_edits": 363,
+      "max_parameter_abs": 256.0,
+      "writable": [
+        "head.weight",
+        "head.bias"
+      ]
+    },
+    "target_feature_sha256": "11e57944492f7652e22344a0ca769cf3bf5478da334f1c5af14f41abf6f277d7"
+  },
+  "mode": "edit",
+  "objective": "Change the derived routing decision for a frozen trained representation",
+  "schema": "wsp-task/1",
+  "task_id": "optical-digits-pilot-full-7903/recognition/4/nullspace"
+}

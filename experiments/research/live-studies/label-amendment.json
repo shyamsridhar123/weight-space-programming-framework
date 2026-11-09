@@ -1,0 +1,21 @@
+{
+  "schema": "wsp-live-precall-amendment/1",
+  "phase": "before_executable_lock_and_before_any_live_call",
+  "recorded_date_local": "2026-11-08",
+  "timezone": "America/Chicago",
+  "protocol_sha256": {
+    "weight-access-protocol.json": "d39e207131da8e751817ad657c29d09267c679fbe87c6b8cbdf5072c395d6937",
+    "blind-diagnosis-protocol.json": "d2750eddc91a37597f26e450cf96fcf952a487cfeb2394fd9b1b3166ab42e938"
+  },
+  "semantic_label_to_dataset_label": {
+    "pending_bank_transfer": "pending_transfer",
+    "card_payment_wrong_exchange_rate": "card_payment_wrong_exchange_rate"
+  },
+  "reason": "The frozen design names the pending transfer semantic family using a label not present in the public BANKING77 label vocabulary. The actual label is pending_transfer. This spelling correction preserves the chosen semantic family.",
+  "verification_scope": "Verified lineage.json and the head/encoder/preprocessing/selection-feature training allowlist only; no evaluation bundle was loaded.",
+  "task_reselection": false,
+  "root_inspected_main_utility_outcomes": false,
+  "root_opened_new_evaluation_inputs": false,
+  "original_protocols_modified": false,
+  "implementation_choices": "The executable lock will bind deterministic example ordering, assignments, prompts, source bytes and permitted input bytes before the first live invocation."
+}

@@ -1,0 +1,99 @@
+{
+  "schema": "wsp-live-provider-attempt/1",
+  "started_utc": "2026-11-09T03:48:46.402294+00:00",
+  "status": "completed",
+  "error": null,
+  "returncode": 0,
+  "timeout_cleanup_complete": null,
+  "elapsed_seconds": 8.166321400029119,
+  "invocation": {
+    "executable_sha256": "2692c8c7bb2cf8b0aefe638741fc90236f4b824c59578ce84994f9de58200993",
+    "cli_version": "codex-cli 0.163.0",
+    "configuration": {
+      "schema": "wsp-codex-provider-config/1",
+      "provider": "openai",
+      "requested_model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "tool_free": true,
+      "user_config_loaded": false,
+      "ephemeral": true,
+      "timeout_seconds": 180,
+      "configuration_overrides": {
+        "plugins._default.enabled": "false",
+        "mcp_servers": "{}",
+        "web_search": "\"disabled\"",
+        "features.shell_tool": "false",
+        "features.unified_exec": "false",
+        "features.apps": "false",
+        "features.multi_agent": "false",
+        "features.multi_agent_mode": "false",
+        "features.code_mode": "false",
+        "features.js_repl": "false",
+        "features.tool_search": "false",
+        "features.skill_search": "false",
+        "features.skip_host_skill_discovery": "true",
+        "features.view_image": "false",
+        "features.image_generation": "false",
+        "features.hooks": "false",
+        "features.browser_use": "false",
+        "features.in_app_browser": "false",
+        "features.memories": "false",
+        "features.search_tool": "false",
+        "features.stable_environment_tools": "false",
+        "features.incremental_tools": "false",
+        "features.request_permissions_tool": "false",
+        "tools.update_plan.enabled": "false",
+        "project_doc_max_bytes": "0"
+      },
+      "sandbox": "read-only",
+      "deployment_revision_exposed": false,
+      "internal_model_computation_observed": false,
+      "human_assistance": "task_and_harness_authored_before_trial;_no_midtrial_help"
+    },
+    "prompt_sha256": "000e25e67eccaf10bd10e90dd117075f2c4a833fb034d726f0237ac8571bb634",
+    "schema_sha256": "2e1eb63f2d4f9588432ddd2a5c0018eb6a2bf1e54b0cb0f7e7014078522e2b69",
+    "cwd_role": "isolated_proposer_directory",
+    "local_invocation_sha256": "f2c9c443e8bc7a75c92cd92d34d69fb6b5b500b4131fb3f97af1a7e972943577"
+  },
+  "response": {
+    "abstain": true,
+    "commands_json": "[]",
+    "selected_fitted_handle": null,
+    "reason": "Only 8 of 64 weights per output are disclosed. The missing weights prevent determining original argmax codes, strongest competitors, or a head edit that preserves all other intent routes.",
+    "predicted_argmax_codes": [
+      -1,
+      -1
+    ],
+    "prediction_confidences": [
+      0.0,
+      0.0
+    ],
+    "strongest_competing_codes": [
+      -1,
+      -1
+    ],
+    "competing_confidences": [
+      0.0,
+      0.0
+    ]
+  },
+  "usage": {
+    "input_tokens": 34896,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 153,
+    "reasoning_output_tokens": 35
+  },
+  "unapproved_events": [],
+  "event_errors": [],
+  "diagnostic_items": 1,
+  "events_sha256": "f22129820e84e270acde13601110d577792a50e8121189bb1d963e7cbe8276fa",
+  "cost": {
+    "currency": "USD",
+    "amount": null,
+    "reason": "authenticated_CLI_subscription_not_request_pricing"
+  },
+  "prompt_scope": "exact_harness_prompt;_CLI_system_scaffolding_not_exported",
+  "restrictions_scope": "configured_CLI_tools_and_observed_events;_not_OS_hermeticity",
+  "sha256": "c3c47cbb022e67eff9c34fe10871b6b1a00e79ab0d5bd1aefd489a1fce6cb410"
+}

@@ -1,0 +1,383 @@
+{
+  "schema": "wsp-public-original-replay-audit-derivative/1",
+  "created_utc": "2026-11-09T04:56:30.244559+00:00",
+  "source": {
+    "role": "original_audit_report",
+    "bytes": 12365,
+    "raw_sha256": "0c5d727aad1a0471d83d3575032f3d663f678551cce0766e155318511b4a51ce",
+    "canonical_json_sha256": "c76e5e9c65bf976ff9efc6fb15c93700e9fffe228e58c9118fd4bdb37338fd74",
+    "source_schema": "wsp-independent-original-live-replay-audit/1",
+    "canonical_payload_sha256": "8aa41cf4f5cdebc4bf557f0553f922a1456074bcf8e8144152df2fc119af726c"
+  },
+  "sanitizer": {
+    "id": "wsp-original-verification-whitelist/1",
+    "method": "explicit field whitelists and documented role/path rewrites",
+    "copied_fields": [
+      "accounted",
+      "acquired_assets_sha256_and_git_blob_sha1_checked",
+      "acquisition_canonical_sha256",
+      "acquisition_raw_sha256",
+      "assigned",
+      "attempted_harness_calls",
+      "attempts",
+      "audit_script_raw_sha256",
+      "bundle_canonical_sha256",
+      "capability_accuracy_estimated",
+      "checked_utc",
+      "completed_provider_receipts",
+      "credited_correct",
+      "distinct_policy_ids",
+      "event_error_categories",
+      "event_semantics_independently_reparsed",
+      "event_semantics_replay_basis",
+      "evidence_unchanged",
+      "exit_canonical_sha256",
+      "failed_provider_receipts",
+      "failure_categories",
+      "gate_canonical_sha256",
+      "harness_error_rows",
+      "input_evidence_sha256",
+      "input_files_authenticated",
+      "installed_numpy_files_independently_rehashed",
+      "launch_canonical_sha256",
+      "limitations",
+      "listed_current_and_frozen_source_pairs_checked",
+      "live_bundle_files_checked",
+      "main_comparison_assigned_total",
+      "main_comparison_checked_utc",
+      "main_comparison_deterministic_matches",
+      "main_comparison_deterministic_mismatches",
+      "main_comparison_raw_sha256",
+      "main_evaluation_outcome_files_opened",
+      "main_lock_canonical_sha256",
+      "main_lock_raw_sha256",
+      "main_replay_exit_raw_sha256",
+      "main_replay_manifest_canonical_sha256",
+      "ok",
+      "preparation_files_checked",
+      "prior_original_exit_raw_sha256",
+      "process_canonical_sha256",
+      "protocol_canonical_sha256",
+      "protocol_lock_canonical_sha256",
+      "publication_hash_links_verified",
+      "python_executable_raw_sha256",
+      "recorded_numpy_inventory_sha256",
+      "replay_child_exit_code",
+      "replay_finished_utc",
+      "replay_started_utc",
+      "replay_stdout_exactly_verified",
+      "replay_wrapper_exit_code",
+      "request_cost_amounts_unknown",
+      "retry_rule",
+      "runner_raw_sha256",
+      "started_utc",
+      "usage_by_field",
+      "usage_scope",
+      "valid_responses",
+      "withheld_raw_event_bytes_independently_verified",
+      "wrapper_raw_sha256"
+    ],
+    "omitted_fields": [
+      "capture_files",
+      "fresh_provider_calls_performed_by_audit",
+      "fresh_provider_calls_performed_by_replay",
+      "schema",
+      "scope",
+      "sha256",
+      "subprocess_calls_performed_by_audit"
+    ],
+    "rewrites": [
+      {
+        "source": "capture_files",
+        "destination": "recorded_capture_artifacts",
+        "operation": "replace five absolute capture locators with unique roles; retain all byte counts and raw hashes"
+      },
+      {
+        "source": "fresh_provider_calls_performed_by_replay, subprocess_calls_performed_by_audit, fresh_provider_calls_performed_by_audit",
+        "destination": "captured_claims",
+        "operation": "retain each unchanged value as a labeled capture claim"
+      }
+    ],
+    "note": "All selected nested attempt, usage and limitation fields are retained unchanged. Provider text, stderr contents, absolute locators and process identifiers are not copied.",
+    "raw_evidence_modified": false,
+    "raw_transport_copied": false,
+    "study_or_verifier_executed": false
+  },
+  "recorded": {
+    "ok": true,
+    "started_utc": "2026-11-09T04:43:37.452391+00:00",
+    "checked_utc": "2026-11-09T04:43:38.697284+00:00",
+    "protocol_lock_canonical_sha256": "a127b29dc0971163ddb109c66dba569168eade67ea700edc516fdc46d41de1fc",
+    "protocol_canonical_sha256": "5c0015a1b1a5b5d8e612fb733173b60780d633f13c6056e0e2c565ed775b6533",
+    "bundle_canonical_sha256": "88d28359ddc8b1b3bbff75a997739609803c8dfb9c58650c975c5cf31c840fec",
+    "acquisition_canonical_sha256": "7b9fb07e48225e40246fde2e3cd79869a8320ef3ca63341935feb08e4d05d606",
+    "acquisition_raw_sha256": "d152f34250bad0efce097486541616774ebc7d3b667a2fae4267496b188722c7",
+    "gate_canonical_sha256": "601897dc212592ae76cb2eed4b56e120de6ed9d66fa292b7e42ba5b924a13d0f",
+    "main_lock_canonical_sha256": "fb465aeac240f769c7d2a5765321e332adae6d4d2edc1a49697587c349c14bbf",
+    "main_lock_raw_sha256": "357637e9bb363ce0e27ef4dba584a3a89586cf56707ed29f52b674d7e4e1f6c8",
+    "runner_raw_sha256": "58acbb0ee9cc4296177c6354153e647879b0218df4711d01855c91e33e38fff2",
+    "python_executable_raw_sha256": "0b471133e110cfb53a061cad528ce8e517d7b9ac41a0a396c39ad795a487fc14",
+    "wrapper_raw_sha256": "01b6aed860f646c9b8074dcdaf12378748518540848f2a93081d4491a2549d76",
+    "audit_script_raw_sha256": "5a0ef7929a3a2f20ec8d16145682479016157b4b955f11fdb83981d5163b4f0d",
+    "prior_original_exit_raw_sha256": "3f7407e7261756f4d3bd96e9ec00b064fac8bc014c22841ada7df37052c5ad49",
+    "main_replay_exit_raw_sha256": "cb1509c1991f231b7875b2dafae0df9843e886e7a16f4511e8ec1cadb73f8378",
+    "main_comparison_raw_sha256": "fee908f943713c93becda4c718bb3c9b552f2abc3c6b64110f92a1c86ca8180e",
+    "main_replay_manifest_canonical_sha256": "09d87404c770b18f60632718379fd77d0c8ef673b37bfa3cb97c499eccd4d837",
+    "main_comparison_checked_utc": "2026-11-09T04:30:17.361270+00:00",
+    "main_comparison_assigned_total": 224,
+    "main_comparison_deterministic_matches": 224,
+    "main_comparison_deterministic_mismatches": 0,
+    "main_evaluation_outcome_files_opened": 0,
+    "launch_canonical_sha256": "ff16852ebe0587de985544c83e492f8b9c697f6774f162b80ef398fbb62b3064",
+    "process_canonical_sha256": "bf653814fd2f9379392f53c2b98333f8aa15097fb825293123c54196fc8c2d15",
+    "exit_canonical_sha256": "862fe9cc8fa190c3519c344c288524c22062fea4c50cf3bd4cf0f43f0d31afdd",
+    "replay_child_exit_code": 0,
+    "replay_wrapper_exit_code": 0,
+    "replay_started_utc": "2026-11-09T04:41:04.159931+00:00",
+    "replay_finished_utc": "2026-11-09T04:41:06.599577+00:00",
+    "replay_stdout_exactly_verified": true,
+    "evidence_unchanged": true,
+    "input_files_authenticated": 131,
+    "input_evidence_sha256": "1841cf35290f9e0c53b6676840408133d676f97f96446deaf96b2591edb7409b",
+    "preparation_files_checked": 31,
+    "listed_current_and_frozen_source_pairs_checked": 18,
+    "acquired_assets_sha256_and_git_blob_sha1_checked": 44,
+    "live_bundle_files_checked": 21,
+    "recorded_numpy_inventory_sha256": "c02cb829d7edd63b46243e73c7b28786d167f044aefe45c935715cf6b306f9fc",
+    "installed_numpy_files_independently_rehashed": false,
+    "assigned": 4,
+    "accounted": 4,
+    "attempted_harness_calls": 4,
+    "distinct_policy_ids": 4,
+    "failed_provider_receipts": 4,
+    "completed_provider_receipts": 0,
+    "harness_error_rows": 0,
+    "valid_responses": 0,
+    "credited_correct": 0,
+    "capability_accuracy_estimated": false,
+    "retry_rule": "none",
+    "attempts": [
+      {
+        "policy_id": "a9f535cc",
+        "receipt_sha256": "711ba4d28205e4b4b4a119a34b8b66d547c154d850bae7c9f2f058651db93c9b",
+        "receipt_raw_sha256": "063cfcd96f20ee5354f0cf640ef91fa3abfc30453a0b090fdd4e7d4565a509b3",
+        "status": "failed",
+        "true_game": "breakout",
+        "attempted": true,
+        "valid_response": false,
+        "credited_correct": false,
+        "independent_empty_score_verified": true,
+        "failure_category": "transport_or_response_failed",
+        "response_present": false,
+        "usage_observed": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "usage_missing_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "output_tokens"
+        ],
+        "unapproved_event_count": 0,
+        "event_error_count": 2,
+        "diagnostic_items": 1,
+        "public_events_sha256": "0afca0a95550e1c7647a412b1b52ee63cde16d3d42874511c7ce1fbac5f461d5",
+        "public_events_bytes": 893,
+        "disclosed_raw_events_sha256": "ba0262bc7fe9d80c3c874575d0533ccfe66200dc01ce11fc2eb99bb6d3d9668f",
+        "publication_redactions": 1,
+        "cost_amount_known": false
+      },
+      {
+        "policy_id": "dfc6cb65",
+        "receipt_sha256": "48f3e8240b3683cb2616c31b5e853c663f214814126b55d93b5fd9082025708b",
+        "receipt_raw_sha256": "36f10bb9317a6f0ee29604689bc2a149ec162fd565065448328e6ed1854706b1",
+        "status": "failed",
+        "true_game": "pong",
+        "attempted": true,
+        "valid_response": false,
+        "credited_correct": false,
+        "independent_empty_score_verified": true,
+        "failure_category": "transport_or_response_failed",
+        "response_present": false,
+        "usage_observed": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "usage_missing_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "output_tokens"
+        ],
+        "unapproved_event_count": 0,
+        "event_error_count": 2,
+        "diagnostic_items": 1,
+        "public_events_sha256": "7fd00c72329e2b8b7f17bdcff34d8cdb5e1dd606341a0ed966cd3c53e6697149",
+        "public_events_bytes": 893,
+        "disclosed_raw_events_sha256": "0d5566a57e9eca65c0bfea5d831dffa399a48c590e8332226431158057266e07",
+        "publication_redactions": 1,
+        "cost_amount_known": false
+      },
+      {
+        "policy_id": "bdf99279",
+        "receipt_sha256": "a9bd2a742ca3cdeeb0fae23e93f1e236d55fc233374213f2ab4fb83831940d0c",
+        "receipt_raw_sha256": "33cee05b288c90f1888943adf6ad6254cf4927ae7e82f35fec9c9e48cf335f8d",
+        "status": "failed",
+        "true_game": "pacman",
+        "attempted": true,
+        "valid_response": false,
+        "credited_correct": false,
+        "independent_empty_score_verified": true,
+        "failure_category": "transport_or_response_failed",
+        "response_present": false,
+        "usage_observed": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "usage_missing_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "output_tokens"
+        ],
+        "unapproved_event_count": 0,
+        "event_error_count": 2,
+        "diagnostic_items": 1,
+        "public_events_sha256": "c08bc7c9a6829817fb968570fc234e37c3b4f5f20b7987ba87ae709dd6710d95",
+        "public_events_bytes": 893,
+        "disclosed_raw_events_sha256": "0cb3b6d4b260b5392df7dd6f79559f4ee58bc98701c7860d75db5bebe2c64936",
+        "publication_redactions": 1,
+        "cost_amount_known": false
+      },
+      {
+        "policy_id": "0bbcc3ea",
+        "receipt_sha256": "11f4927b46f21266b57debf86ea57ff30f1ac152ae594ffaf742936a885a2b80",
+        "receipt_raw_sha256": "0eadbeaade61959924d9426ec4e795d53f7e58cbb8986b7d55dc7f455b66ccd1",
+        "status": "failed",
+        "true_game": "freeway",
+        "attempted": true,
+        "valid_response": false,
+        "credited_correct": false,
+        "independent_empty_score_verified": true,
+        "failure_category": "transport_or_response_failed",
+        "response_present": false,
+        "usage_observed": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "usage_missing_fields": [
+          "input_tokens",
+          "cached_input_tokens",
+          "output_tokens"
+        ],
+        "unapproved_event_count": 0,
+        "event_error_count": 2,
+        "diagnostic_items": 1,
+        "public_events_sha256": "fab75160fc87fdd8a9e649c7fde11635ccdfef417222b6def93d6f7bd781f721",
+        "public_events_bytes": 893,
+        "disclosed_raw_events_sha256": "dbb821269529125386b4c13ef66a815f13e9dfac771906a18f8599bc28294ec0",
+        "publication_redactions": 1,
+        "cost_amount_known": false
+      }
+    ],
+    "failure_categories": {
+      "transport_or_response_failed": 4
+    },
+    "event_error_categories": {
+      "error": 4,
+      "turn.failed": 4
+    },
+    "usage_by_field": {
+      "input_tokens": {
+        "observed_sum_lower_bound": 0,
+        "present_receipts": 0,
+        "missing_receipts": 4,
+        "total_is_fully_observed": false,
+        "exact_total_if_fully_observed": null,
+        "finite_upper_bound": null
+      },
+      "cached_input_tokens": {
+        "observed_sum_lower_bound": 0,
+        "present_receipts": 0,
+        "missing_receipts": 4,
+        "total_is_fully_observed": false,
+        "exact_total_if_fully_observed": null,
+        "finite_upper_bound": null
+      },
+      "output_tokens": {
+        "observed_sum_lower_bound": 0,
+        "present_receipts": 0,
+        "missing_receipts": 4,
+        "total_is_fully_observed": false,
+        "exact_total_if_fully_observed": null,
+        "finite_upper_bound": null
+      }
+    },
+    "usage_scope": "Present nonnegative integer values are summed separately as lower bounds; missing fields are unknown, never imputed as zero. A missing field gives no finite upper bound. Cached input is not added to input tokens.",
+    "request_cost_amounts_unknown": 4,
+    "publication_hash_links_verified": 4,
+    "withheld_raw_event_bytes_independently_verified": false,
+    "event_semantics_independently_reparsed": false,
+    "event_semantics_replay_basis": "Successful exact stdout from the authenticated offline runner; this audit hashes public event bytes without decoding them",
+    "limitations": [
+      "The four failed provider receipts yield zero credited correct outcomes, not a measured capability accuracy.",
+      "Attempted harness calls do not independently attest completed model executions or hidden provider retries.",
+      "Broad transport_or_response_failed categories do not establish network, authentication, quota, or capability causes.",
+      "Listed source files are authenticated; actual runtime import closure and installed NumPy validation are supplied by the authenticated runner, not independently reimplemented here.",
+      "Public event hashes link to disclosed raw hashes; withheld raw event reconstruction and provider provenance are not independently verified.",
+      "The main comparison report is a raw-hash-bound prerequisite; this audit does not repeat the main outcome comparison.",
+      "Zero fresh replay calls is supported by authenticated offline command/source and exact stdout, without OS or network attestation.",
+      "No independent provider provenance, original training reproduction, original environment/reward reproduction, or mechanistic explanation validation is claimed.",
+      "Interpreter, standard-library/native-runtime correctness, filesystem observations, and local clocks remain trusted."
+    ]
+  },
+  "scope": "Sanitized derivative of the saved successful stdlib audit. Its success establishes the recorded bounded checks, while the live result remains four failed receipts and zero valid responses. Packaging performs no new audit, replay, provider-origin check, event-semantic reconstruction or installed-package validation.",
+  "recorded_capture_artifacts": [
+    {
+      "role": "original_replay_exit_receipt",
+      "bytes": 38485,
+      "raw_sha256": "8eba0adae7e70ae6fd3401bb74e23e3b51fdae767def4cbbd86cd190b2fe3000"
+    },
+    {
+      "role": "original_replay_launch_receipt",
+      "bytes": 40581,
+      "raw_sha256": "97ff824177d7696321ceeea16ed7633bd3b9fa175396d8380e655cf8bdce3b36"
+    },
+    {
+      "role": "original_replay_process_receipt",
+      "bytes": 957,
+      "raw_sha256": "8f6e0ddd759a48de1c19fc6b538fd438f86bf1fc28224288081783a90365c2e1"
+    },
+    {
+      "role": "original_replay_stderr_capture",
+      "bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "role": "original_replay_stdout_capture",
+      "bytes": 259,
+      "raw_sha256": "85c1fef88c7da5203a05bf041526104020a7ce8170eb6926ce0ca7db018680b1"
+    }
+  ],
+  "recorded_capture_artifact_count": 5,
+  "captured_claims": [
+    {
+      "source_field": "fresh_provider_calls_performed_by_replay",
+      "recorded_value": 0,
+      "status": "retained capture claim; not independently established by this packaging operation"
+    },
+    {
+      "source_field": "subprocess_calls_performed_by_audit",
+      "recorded_value": 0,
+      "status": "retained capture claim; not independently established by this packaging operation"
+    },
+    {
+      "source_field": "fresh_provider_calls_performed_by_audit",
+      "recorded_value": 0,
+      "status": "retained capture claim; not independently established by this packaging operation"
+    }
+  ],
+  "sha256": "909b7dfede645084ef8adb0899bbeb94147754908eca04c58b4ea2ae5ab4170c"
+}

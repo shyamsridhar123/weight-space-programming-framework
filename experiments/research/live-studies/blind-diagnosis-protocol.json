@@ -1,0 +1,120 @@
+{
+  "schema": "wsp-live-study-protocol/1",
+  "frozen_at_utc": "2026-11-09T02:04:24.108429+00:00",
+  "designation": "resource-capped estimation; locally frozen, not externally preregistered",
+  "provider": {
+    "name": "openai",
+    "requested_model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "timeout_seconds": 180,
+    "native_tools": "disabled",
+    "retries": 0,
+    "deployment_revision_exposed": false,
+    "hidden_model_computation_observed": false,
+    "subscription_cost_usd": null
+  },
+  "lineages": [
+    "banking77-main-full-7001",
+    "banking77-main-full-7002",
+    "banking77-main-full-7003",
+    "banking77-main-full-7004",
+    "banking77-main-full-7005",
+    "banking77-main-full-7006"
+  ],
+  "task_selection": "Fixed public semantic labels chosen without looking at these families' error tables or any heldout outcomes; disjoint from the four pilot-selected support families",
+  "target_names": [
+    "pending_bank_transfer",
+    "card_payment_wrong_exchange_rate"
+  ],
+  "matched_context": [
+    "trained affine readout architecture",
+    "ordered feature and output names",
+    "native float32 semantics",
+    "fixed output-to-queue mapping",
+    "encoder and preprocessing identities",
+    "explicit target policy",
+    "up to four target-role labeled feature rows",
+    "up to eight protected-role labeled feature rows"
+  ],
+  "forbidden_context": [
+    "clean or planted mechanism identity",
+    "pilot confusion tables",
+    "fitted configurations or candidate deltas",
+    "evaluation features/labels/predictions",
+    "natural-language descriptions of an injected location"
+  ],
+  "parameter_views": [
+    "none",
+    "summary",
+    "rounded",
+    "subset",
+    "exact"
+  ],
+  "rounded_decimals": 3,
+  "subset_rule": "Every eighth hidden feature in every output row plus every output bias; coordinates fixed by shape, not observed values",
+  "primary_repeats": 1,
+  "additional_repeat_lineages": [],
+  "single_response_selection": "One candidate or explicit abstention; command and answer payload are committed before the trusted harness submits and seals an opaque handle. No endpoint/candidate feedback is sent to the proposer",
+  "primary_regime": "Native-tool-free JSON-only proposer; no brokered forward, target execution, regression, optimizer or fitting. Unobserved internal arithmetic cannot substantiate a semantic no-inference claim",
+  "selection_data": "Only verified lineage.json and its training file allowlist copied to a fresh selection-only directory. evaluation-features files are never copied or read before the new global selection seal",
+  "evaluation": "Native Torch CPU float32 affine head on evaluator-only novel official-test exact-request groups; original official full test secondary; queue accuracy, target gain, protected net harm, decision flips and per-label harms separately",
+  "useful_margins": {
+    "target_gain": 0.1,
+    "maximum_protected_net_harm": 0.01,
+    "useful_coverage": 0.75
+  },
+  "margin_rationale": "Project feasibility thresholds: one additional correct target route per ten requests, at most one percentage point net protected error increase, and useful repair on at least three quarters of assigned cases. These are not enterprise savings or an SLA",
+  "inference": "Average tasks/repeats within full independent training lineage; paired Student-t interval over six lineage means for the fixed request collection, paired sign-flip sensitivity, and explicitly limited first-two-lineage editor-repeat variability. No population-editor or confirmatory claim; all comparisons except the declared primary are descriptive",
+  "missingness": "All assigned provider invocations retained; failed, invalid and abstained candidates deploy their unchanged study parent and count as joint useful success false. Missing evaluation has gain/harm sensitivity [-1,1], coverage [0,1]",
+  "human_involvement": "Protocol and harness authored before provider selection; no midtrial hints, manual repair, substituted lineage or silent retry",
+  "source_lock": "Executable source, exact permitted inputs, all assignments and prompts are hashed before the first live call; any pre-call implementation amendment is recorded without changing this protocol. No post-evaluation amendment can become primary evidence",
+  "global_seal": "No heldout evaluation or intervention execution before all live selections across both studies have receipts/terminal failure and a hashed global seal",
+  "claim_limits": [
+    "Generic framework demonstrated on a trained readout; not a transformer-scale claim",
+    "The semantic context includes labels and target examples; not anonymous-weight or zero-data understanding",
+    "Configured CLI and JSON I/O restrictions are not hermetic OS/network isolation",
+    "Replay verifies declared public bytes and calculations, not a regenerated live model response"
+  ],
+  "study": "blind-causal-diagnosis",
+  "issue": 9,
+  "primary_contrast": "Proposed repair minus prespecified support-and-Frobenius-norm-matched shuffled-location intervention target gain, with protected harm cap and useful coverage",
+  "mechanisms": [
+    "wrong-output bias shift (+6, native float32)",
+    "wrong-output feature-row shift (norm 8 along normalized mean of permitted target-role features, native float32)"
+  ],
+  "mechanism_assignment": "Two families crossed with two injected mechanisms in every lineage; wrong output is selected by a frozen hash among original intents mapped to another queue. Clean reference and injection ledger are evaluator-only",
+  "primary_views": [
+    "none",
+    "summary",
+    "rounded",
+    "subset",
+    "exact"
+  ],
+  "diagnosis_payload": [
+    "tensor and output-row location",
+    "mechanism class or uncertain",
+    "predicted target gain and protected harm",
+    "confidence in [0,1]",
+    "proposed literal repair commands or abstention"
+  ],
+  "intervention_boundary": "Diagnosis and repair are selected together without causal feedback. Sham, random-location, support/norm-matched and exact inverse interventions execute only after both studies' global seal",
+  "controls": [
+    "sham unchanged planted parent",
+    "random-row intervention with the proposed support and norm",
+    "deterministically shuffled output-row intervention with the same tensor support and Frobenius norm",
+    "context-only proposer repair",
+    "clean original trained head/exact inverse oracle"
+  ],
+  "endpoints": [
+    "location accuracy",
+    "mechanism accuracy",
+    "confidence calibration/Brier and abstention",
+    "predicted versus observed signed intervention effect",
+    "target repair gain versus planted parent and matched controls",
+    "protected harm versus planted parent",
+    "protected error and flips versus original clean parent",
+    "novel-row heldout generalization"
+  ],
+  "resource_limit": "Only two controlled planted mechanism families; rows, tasks and editor attempts from one mechanism do not establish natural backdoor detection or new independent mechanisms",
+  "claim_limit": "If prespecified effect/retention/coverage criteria do not hold, publish rejection/insufficient evidence. Localization without retained repair is not causal success"
+}

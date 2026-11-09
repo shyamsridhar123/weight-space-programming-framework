@@ -1,0 +1,185 @@
+{
+  "schema": "wsp-public-original-prelaunch-history-derivative/1",
+  "created_utc": "2026-11-09T04:56:30.244559+00:00",
+  "sources": [
+    {
+      "role": "original_prelaunch_block_record",
+      "bytes": 1284,
+      "raw_sha256": "024315de202b1a96a7b32627e569bee8a5200baf7309175b39d5c3f7161a2d98",
+      "canonical_json_sha256": "3112cf7fdb2c3777c7233413bda9a351733d4e1dcd4abc8211c51c8642646a60",
+      "source_schema": "wsp-private-original-replay-prelaunch-block/1"
+    },
+    {
+      "role": "original_final_preflight_record",
+      "bytes": 635,
+      "raw_sha256": "fa8aba7097568aaab956a7c2328bc30ce1432a892f2c08b9fc6fbdbf31388c28",
+      "canonical_json_sha256": "1053b0c1469e8cb87a6ba09a89706edf330344492056b1cdbc5f15c714e0c13e",
+      "source_schema": "wsp-private-original-replay-final-preflight/1"
+    },
+    {
+      "role": "original_private_handoff",
+      "bytes": 9187,
+      "raw_sha256": "f8248d61398457809174a999c74553bb0869124f58911bb9652ec11a1dd1e733"
+    },
+    {
+      "role": "original_archived_replay_wrapper_v1",
+      "bytes": 26194,
+      "raw_sha256": "23527c69f30b4411bf54c06b5aca33ee46b5e0b871c08fee1eb50d2e3be7b539"
+    },
+    {
+      "role": "original_archived_verifier_v1",
+      "bytes": 46431,
+      "raw_sha256": "7531ae35f23da01cc1ee361881982c73ab19d2f50da0437f2c4b982ffec54994"
+    },
+    {
+      "role": "original_replay_capture_wrapper",
+      "bytes": 26735,
+      "raw_sha256": "01b6aed860f646c9b8074dcdaf12378748518540848f2a93081d4491a2549d76"
+    },
+    {
+      "role": "original_audit_verifier",
+      "bytes": 46954,
+      "raw_sha256": "5a0ef7929a3a2f20ec8d16145682479016157b4b955f11fdb83981d5163b4f0d"
+    }
+  ],
+  "prelaunch_record": {
+    "source_role": "original_prelaunch_block_record",
+    "sanitizer": {
+      "id": "wsp-original-verification-whitelist/1",
+      "method": "explicit field whitelists and documented role/path rewrites",
+      "copied_fields": [
+        "basis",
+        "diagnosis_pending",
+        "exact_start_and_finish_timestamps_available",
+        "phase",
+        "phase_capture_files_present",
+        "recorded_utc",
+        "replay_child_launched",
+        "sanitized_stdout",
+        "shell_tool_elapsed_seconds_rounded",
+        "shell_tool_exit_code"
+      ],
+      "omitted_fields": [
+        "invocation",
+        "provider_calls_performed",
+        "reviewed_sources",
+        "schema"
+      ],
+      "rewrites": [
+        {
+          "source": "reviewed_sources",
+          "destination": "archived_source_identities",
+          "operation": "replace archived helper names with roles; retain byte counts and raw hashes"
+        },
+        {
+          "source": "provider_calls_performed",
+          "destination": "captured_claims",
+          "operation": "retain as labeled captured claim"
+        }
+      ],
+      "note": "The retrospective record is retained as recorded, including diagnosis_pending=true at that earlier point; later diagnosis is separately labeled.",
+      "raw_evidence_modified": false,
+      "raw_transport_copied": false,
+      "study_or_verifier_executed": false
+    },
+    "recorded": {
+      "basis": "Wrapper launch receipt precedes subprocess launch; all launch/process/exit/stdout/stderr phase files absent after failed invocation. This record was written afterward and is not an original command receipt.",
+      "diagnosis_pending": true,
+      "exact_start_and_finish_timestamps_available": false,
+      "phase": "prelaunch_authentication",
+      "phase_capture_files_present": [],
+      "recorded_utc": "2026-11-09T04:35:17.383013+00:00",
+      "replay_child_launched": false,
+      "sanitized_stdout": {
+        "exception_type": "ValueError",
+        "status": "blocked"
+      },
+      "shell_tool_elapsed_seconds_rounded": 1.2,
+      "shell_tool_exit_code": 1
+    },
+    "archived_source_identities": [
+      {
+        "role": "original_archived_replay_wrapper_v1",
+        "bytes": 26194,
+        "raw_sha256": "23527c69f30b4411bf54c06b5aca33ee46b5e0b871c08fee1eb50d2e3be7b539"
+      },
+      {
+        "role": "original_archived_verifier_v1",
+        "bytes": 46431,
+        "raw_sha256": "7531ae35f23da01cc1ee361881982c73ab19d2f50da0437f2c4b982ffec54994"
+      }
+    ],
+    "captured_claims": [
+      {
+        "source_field": "provider_calls_performed",
+        "recorded_value": 0,
+        "status": "retained capture claim; not independently established by this packaging operation"
+      }
+    ]
+  },
+  "final_preflight_record": {
+    "source_role": "original_final_preflight_record",
+    "sanitizer": {
+      "id": "wsp-original-verification-whitelist/1",
+      "method": "explicit field whitelists and documented role/path rewrites",
+      "copied_fields": [
+        "authenticated_input_files",
+        "finished_utc",
+        "fresh_provider_calls",
+        "input_evidence_sha256",
+        "main_comparison_checked_utc",
+        "phase",
+        "script_raw_sha256",
+        "started_utc",
+        "status",
+        "subprocess_calls",
+        "terminal_attempts"
+      ],
+      "omitted_fields": [
+        "schema"
+      ],
+      "rewrites": [],
+      "note": "The final read-only preflight values are copied unchanged as recorded claims; no preflight is repeated during packaging.",
+      "raw_evidence_modified": false,
+      "raw_transport_copied": false,
+      "study_or_verifier_executed": false
+    },
+    "recorded": {
+      "authenticated_input_files": 131,
+      "finished_utc": "2026-11-09T04:40:51.459309+00:00",
+      "fresh_provider_calls": 0,
+      "input_evidence_sha256": "1841cf35290f9e0c53b6676840408133d676f97f96446deaf96b2591edb7409b",
+      "main_comparison_checked_utc": "2026-11-09T04:30:17.361270+00:00",
+      "phase": "authenticate_only",
+      "script_raw_sha256": {
+        "verifier": "5a0ef7929a3a2f20ec8d16145682479016157b4b955f11fdb83981d5163b4f0d",
+        "wrapper": "01b6aed860f646c9b8074dcdaf12378748518540848f2a93081d4491a2549d76"
+      },
+      "started_utc": "2026-11-09T04:40:50.569132+00:00",
+      "status": "pass",
+      "subprocess_calls": 0,
+      "terminal_attempts": 4
+    }
+  },
+  "later_diagnosis_and_resolution": {
+    "basis_role": "original_private_handoff",
+    "status": "historical explanation from the preserved handoff, not a new execution receipt",
+    "windows_metadata_observation": "Path.stat and os.fstat disagreed on ctime; the Python executable also had differing permission bits through path and handle APIs.",
+    "private_helper_correction": "Cross-API identity checks compare device, inode, file type, size and mtime. Complete same-API before/after metadata checks, regular-file requirements and both no-link checks remain.",
+    "extra_readme_preflight": "A later read-only authenticate preflight stopped on an extra README inside the strict 31-file preparation inventory. It was not another replay launch or provider attempt.",
+    "notice_move": {
+      "from_repository_relative_path": "experiments/research/original-source-repeat/README.md",
+      "to_repository_relative_path": "docs/research/original-source-inputs-NOTICE.md",
+      "bytes_preserved_at_move_raw_sha256": "e579f9b54d1c1ed2356c775ab81a0016cbd580a58163707cb88751739174c5d2",
+      "scope": "Historical byte identity at the move; no claim about later documentation edits."
+    },
+    "frozen_study_sources_or_evidence_edited_for_helper_correction": false,
+    "successful_phases_after_final_preflight": [
+      "original offline replay",
+      "standalone independent audit"
+    ],
+    "prior_parent_original_replay_remains_recorded": true
+  },
+  "scope": "Public history of the first blocked prelaunch, a subsequent inventory-only preflight block, final successful preflight, and private helper corrections. Exact timestamps of the first failed invocation were not captured; its record was written retrospectively. Successful later phases do not erase earlier attempts.",
+  "sha256": "35146654f9825d7ee51bffd24ac7ae284dbbd11e8fa9d3199247025fd3d6f227"
+}

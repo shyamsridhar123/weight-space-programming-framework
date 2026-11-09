@@ -1,0 +1,49 @@
+{
+  "architecture": "trained-frozen-readout/1",
+  "base_sha256": "c6e1e4f277789c935c986ce751816d80a829b915c92342ba42456c024fa8c8ed",
+  "constraints": {
+    "arm": "retrain",
+    "behavioral_admission": "frozen finite calibration samples; no whole-domain guarantee",
+    "case": {
+      "case_id": "recognition/top_up_by_bank_transfer_charge",
+      "confused_with": "top_up_by_card_charge",
+      "desired_code": 15,
+      "desired_queue": 2,
+      "pilot_development_confusion_events": 9,
+      "pilot_development_error_rates": [
+        0.2727272727272727,
+        0.2727272727272727,
+        0.2727272727272727
+      ],
+      "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+      "target_label": 15,
+      "target_name": "top_up_by_bank_transfer_charge",
+      "type": "recognition"
+    },
+    "configuration": {
+      "target_weight": 8
+    },
+    "margins": {
+      "maximum_protected_harm": 0.01,
+      "minimum_target_gain": 0.1,
+      "minimum_useful_coverage": 0.75
+    },
+    "nullspace_additional_contract": null,
+    "numeric_lane": "native Torch CPU float32 readout",
+    "protected_feature_sha256": "c6a91e37aa4cbbc354ae71e6bd31545cc573a4531d1ef747fd17049f6dfda3eb",
+    "structural_policy": {
+      "max_change_abs": 256.0,
+      "max_edits": 5070,
+      "max_parameter_abs": 256.0,
+      "writable": [
+        "head.weight",
+        "head.bias"
+      ]
+    },
+    "target_feature_sha256": "040e895f3fa4f579969acbc27a0da879450ac7cf8f1561090f3b4646919f36e4"
+  },
+  "mode": "edit",
+  "objective": "Change the derived routing decision for a frozen trained representation",
+  "schema": "wsp-task/1",
+  "task_id": "banking77-pilot-full-6902/recognition/top_up_by_bank_transfer_charge/retrain"
+}

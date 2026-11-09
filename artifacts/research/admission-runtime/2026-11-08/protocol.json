@@ -1,0 +1,4930 @@
+{
+  "schema": "wsp-admission-runtime-protocol/1",
+  "research_date": "2026-11-08",
+  "pre_result_scope": "Local frozen designed inputs; not an external preregistration",
+  "relation_to_v2": "Adjacent supplement to study_v2.run_ablation_case; historical results are unchanged",
+  "falsifiers": [
+    "A substituted record verifies against the original trusted request hash",
+    "An observed native decision violation is labeled preserved",
+    "An unsupported kernel/activation is reported as formally verified"
+  ],
+  "admission_cases": [
+    {
+      "case": "valid-edit",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "layers.0.bias": [
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "layers.0.bias": [
+            2.125,
+            0.0
+          ]
+        }
+      },
+      "program": {
+        "schema": "wsp-program/1",
+        "base_sha256": "592dfb76d443881e2248240c281d20fae71975d78529841cc54d9e38ca443e41",
+        "intent": "valid-edit",
+        "edits": [
+          {
+            "tensor": "layers.0.bias",
+            "index": [
+              0
+            ],
+            "before": 2.0,
+            "after": 2.125
+          }
+        ]
+      },
+      "task": {
+        "schema": "wsp-task/1",
+        "task_id": "valid-edit",
+        "mode": "edit",
+        "objective": "Designed admission boundary example",
+        "architecture": "sequential-affine-activation/1",
+        "base_sha256": "592dfb76d443881e2248240c281d20fae71975d78529841cc54d9e38ca443e41",
+        "constraints": {}
+      },
+      "domain": {
+        "lower": [
+          -1.0,
+          -1.0
+        ],
+        "upper": [
+          1.0,
+          1.0
+        ]
+      },
+      "budgets": [
+        0.125,
+        0.0
+      ],
+      "witnesses": [
+        [
+          0.5,
+          0.5
+        ]
+      ],
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      },
+      "policy": {
+        "writable": [
+          "layers.0.weight",
+          "layers.0.bias"
+        ],
+        "max_edits": 16,
+        "max_parameter_abs": 7.205759403792794e+16,
+        "max_change_abs": 7.205759403792794e+16
+      },
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float64",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "feature": {
+        "head": {
+          "weight": "layers.0.weight",
+          "bias": "layers.0.bias",
+          "feature_id": "supplied-affine-inputs/1"
+        },
+        "anchors": [
+          [
+            0.5,
+            0.5
+          ]
+        ],
+        "feature_names": [
+          "x0",
+          "x1"
+        ]
+      }
+    },
+    {
+      "case": "no-op",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "layers.0.bias": [
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "layers.0.bias": [
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "program": {
+        "schema": "wsp-program/1",
+        "base_sha256": "592dfb76d443881e2248240c281d20fae71975d78529841cc54d9e38ca443e41",
+        "intent": "no-op",
+        "edits": []
+      },
+      "task": {
+        "schema": "wsp-task/1",
+        "task_id": "no-op",
+        "mode": "edit",
+        "objective": "Designed admission boundary example",
+        "architecture": "sequential-affine-activation/1",
+        "base_sha256": "592dfb76d443881e2248240c281d20fae71975d78529841cc54d9e38ca443e41",
+        "constraints": {}
+      },
+      "domain": {
+        "lower": [
+          -1.0,
+          -1.0
+        ],
+        "upper": [
+          1.0,
+          1.0
+        ]
+      },
+      "budgets": [
+        0.0,
+        0.0
+      ],
+      "witnesses": [
+        [
+          0.5,
+          0.5
+        ]
+      ],
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      },
+      "policy": {
+        "writable": [
+          "layers.0.weight",
+          "layers.0.bias"
+        ],
+        "max_edits": 16,
+        "max_parameter_abs": 7.205759403792794e+16,
+        "max_change_abs": 7.205759403792794e+16
+      },
+      "execution": null,
+      "feature": {
+        "head": {
+          "weight": "layers.0.weight",
+          "bias": "layers.0.bias",
+          "feature_id": "supplied-affine-inputs/1"
+        },
+        "anchors": [
+          [
+            0.5,
+            0.5
+          ]
+        ],
+        "feature_names": [
+          "x0",
+          "x1"
+        ]
+      }
+    },
+    {
+      "case": "stale-program",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "layers.0.bias": [
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "layers.0.bias": [
+            2.125,
+            0.0
+          ]
+        }
+      },
+      "program": {
+        "schema": "wsp-program/1",
+        "base_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "intent": "stale-program",
+        "edits": [
+          {
+            "tensor": "layers.0.bias",
+            "index": [
+              0
+            ],
+            "before": 2.0,
+            "after": 2.125
+          }
+        ]
+      },
+      "task": {
+        "schema": "wsp-task/1",
+        "task_id": "stale-program",
+        "mode": "edit",
+        "objective": "Designed admission boundary example",
+        "architecture": "sequential-affine-activation/1",
+        "base_sha256": "592dfb76d443881e2248240c281d20fae71975d78529841cc54d9e38ca443e41",
+        "constraints": {}
+      },
+      "domain": {
+        "lower": [
+          -1.0,
+          -1.0
+        ],
+        "upper": [
+          1.0,
+          1.0
+        ]
+      },
+      "budgets": [
+        0.125,
+        0.0
+      ],
+      "witnesses": [
+        [
+          0.5,
+          0.5
+        ]
+      ],
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      },
+      "policy": {
+        "writable": [
+          "layers.0.weight",
+          "layers.0.bias"
+        ],
+        "max_edits": 16,
+        "max_parameter_abs": 7.205759403792794e+16,
+        "max_change_abs": 7.205759403792794e+16
+      },
+      "execution": null,
+      "feature": {
+        "head": {
+          "weight": "layers.0.weight",
+          "bias": "layers.0.bias",
+          "feature_id": "supplied-affine-inputs/1"
+        },
+        "anchors": [
+          [
+            0.5,
+            0.5
+          ]
+        ],
+        "feature_names": [
+          "x0",
+          "x1"
+        ]
+      }
+    },
+    {
+      "case": "witness-budget-violation",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "layers.0.bias": [
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "layers.0.bias": [
+            2.25,
+            0.0
+          ]
+        }
+      },
+      "program": {
+        "schema": "wsp-program/1",
+        "base_sha256": "592dfb76d443881e2248240c281d20fae71975d78529841cc54d9e38ca443e41",
+        "intent": "witness-budget-violation",
+        "edits": [
+          {
+            "tensor": "layers.0.bias",
+            "index": [
+              0
+            ],
+            "before": 2.0,
+            "after": 2.25
+          }
+        ]
+      },
+      "task": {
+        "schema": "wsp-task/1",
+        "task_id": "witness-budget-violation",
+        "mode": "edit",
+        "objective": "Designed admission boundary example",
+        "architecture": "sequential-affine-activation/1",
+        "base_sha256": "592dfb76d443881e2248240c281d20fae71975d78529841cc54d9e38ca443e41",
+        "constraints": {}
+      },
+      "domain": {
+        "lower": [
+          -1.0,
+          -1.0
+        ],
+        "upper": [
+          1.0,
+          1.0
+        ]
+      },
+      "budgets": [
+        0.125,
+        0.0
+      ],
+      "witnesses": [
+        [
+          0.5,
+          0.5
+        ]
+      ],
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      },
+      "policy": {
+        "writable": [
+          "layers.0.weight",
+          "layers.0.bias"
+        ],
+        "max_edits": 16,
+        "max_parameter_abs": 7.205759403792794e+16,
+        "max_change_abs": 7.205759403792794e+16
+      },
+      "execution": null,
+      "feature": {
+        "head": {
+          "weight": "layers.0.weight",
+          "bias": "layers.0.bias",
+          "feature_id": "supplied-affine-inputs/1"
+        },
+        "anchors": [
+          [
+            0.5,
+            0.5
+          ]
+        ],
+        "feature_names": [
+          "x0",
+          "x1"
+        ]
+      }
+    },
+    {
+      "case": "stochastic-decision-unsupported",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "layers.0.bias": [
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "layers.0.bias": [
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "program": {
+        "schema": "wsp-program/1",
+        "base_sha256": "592dfb76d443881e2248240c281d20fae71975d78529841cc54d9e38ca443e41",
+        "intent": "stochastic-decision-unsupported",
+        "edits": []
+      },
+      "task": {
+        "schema": "wsp-task/1",
+        "task_id": "stochastic-decision-unsupported",
+        "mode": "edit",
+        "objective": "Designed admission boundary example",
+        "architecture": "sequential-affine-activation/1",
+        "base_sha256": "592dfb76d443881e2248240c281d20fae71975d78529841cc54d9e38ca443e41",
+        "constraints": {}
+      },
+      "domain": {
+        "lower": [
+          -1.0,
+          -1.0
+        ],
+        "upper": [
+          1.0,
+          1.0
+        ]
+      },
+      "budgets": [
+        0.0,
+        0.0
+      ],
+      "witnesses": [
+        [
+          0.5,
+          0.5
+        ]
+      ],
+      "decision": {
+        "kind": "stochastic",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      },
+      "policy": {
+        "writable": [
+          "layers.0.weight",
+          "layers.0.bias"
+        ],
+        "max_edits": 16,
+        "max_parameter_abs": 7.205759403792794e+16,
+        "max_change_abs": 7.205759403792794e+16
+      },
+      "execution": null,
+      "feature": {
+        "head": {
+          "weight": "layers.0.weight",
+          "bias": "layers.0.bias",
+          "feature_id": "supplied-affine-inputs/1"
+        },
+        "anchors": [
+          [
+            0.5,
+            0.5
+          ]
+        ],
+        "feature_names": [
+          "x0",
+          "x1"
+        ]
+      }
+    },
+    {
+      "case": "conservative-bound-rejection",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              2.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "program": {
+        "schema": "wsp-program/1",
+        "base_sha256": "6339788e43a17e0e06616cdb5cbb1de8558ce5e5ac9a9c91fd8c7236fabc319e",
+        "intent": "conservative-bound-rejection",
+        "edits": [
+          {
+            "tensor": "layers.0.weight",
+            "index": [
+              0,
+              0
+            ],
+            "before": 1.0,
+            "after": 2.0
+          },
+          {
+            "tensor": "layers.0.weight",
+            "index": [
+              0,
+              1
+            ],
+            "before": 1.0,
+            "after": 0.0
+          }
+        ]
+      },
+      "task": {
+        "schema": "wsp-task/1",
+        "task_id": "conservative-bound-rejection",
+        "mode": "edit",
+        "objective": "Designed admission boundary example",
+        "architecture": "sequential-affine-activation/1",
+        "base_sha256": "6339788e43a17e0e06616cdb5cbb1de8558ce5e5ac9a9c91fd8c7236fabc319e",
+        "constraints": {}
+      },
+      "domain": {
+        "lower": [
+          -1.0,
+          -1.0
+        ],
+        "upper": [
+          1.0,
+          1.0
+        ]
+      },
+      "budgets": [
+        0.0,
+        0.0
+      ],
+      "witnesses": [
+        [
+          0.5,
+          0.5
+        ]
+      ],
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      },
+      "policy": {
+        "writable": [
+          "layers.0.weight",
+          "layers.0.bias"
+        ],
+        "max_edits": 16,
+        "max_parameter_abs": 7.205759403792794e+16,
+        "max_change_abs": 7.205759403792794e+16
+      },
+      "execution": null,
+      "feature": {
+        "head": {
+          "weight": "layers.0.weight",
+          "bias": "layers.0.bias",
+          "feature_id": "supplied-affine-inputs/1"
+        },
+        "anchors": [
+          [
+            0.5,
+            0.5
+          ]
+        ],
+        "feature_names": [
+          "x0",
+          "x1"
+        ]
+      }
+    },
+    {
+      "case": "tie-reject",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "program": {
+        "schema": "wsp-program/1",
+        "base_sha256": "9b336c182ac8448d6680c99ea6b13bc6ab45f1a2a943783dc6454477d9b98f7c",
+        "intent": "tie-reject",
+        "edits": []
+      },
+      "task": {
+        "schema": "wsp-task/1",
+        "task_id": "tie-reject",
+        "mode": "edit",
+        "objective": "Designed admission boundary example",
+        "architecture": "sequential-affine-activation/1",
+        "base_sha256": "9b336c182ac8448d6680c99ea6b13bc6ab45f1a2a943783dc6454477d9b98f7c",
+        "constraints": {}
+      },
+      "domain": {
+        "lower": [
+          0.0
+        ],
+        "upper": [
+          0.0
+        ]
+      },
+      "budgets": [
+        0.0,
+        0.0
+      ],
+      "witnesses": [
+        [
+          0.0
+        ]
+      ],
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      },
+      "policy": {
+        "writable": [
+          "layers.0.weight",
+          "layers.0.bias"
+        ],
+        "max_edits": 16,
+        "max_parameter_abs": 7.205759403792794e+16,
+        "max_change_abs": 7.205759403792794e+16
+      },
+      "execution": null,
+      "feature": {
+        "head": {
+          "weight": "layers.0.weight",
+          "bias": "layers.0.bias",
+          "feature_id": "supplied-affine-inputs/1"
+        },
+        "anchors": [
+          [
+            0.0
+          ]
+        ],
+        "feature_names": [
+          "x0"
+        ]
+      }
+    },
+    {
+      "case": "tie-first_index",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "program": {
+        "schema": "wsp-program/1",
+        "base_sha256": "9b336c182ac8448d6680c99ea6b13bc6ab45f1a2a943783dc6454477d9b98f7c",
+        "intent": "tie-first_index",
+        "edits": []
+      },
+      "task": {
+        "schema": "wsp-task/1",
+        "task_id": "tie-first_index",
+        "mode": "edit",
+        "objective": "Designed admission boundary example",
+        "architecture": "sequential-affine-activation/1",
+        "base_sha256": "9b336c182ac8448d6680c99ea6b13bc6ab45f1a2a943783dc6454477d9b98f7c",
+        "constraints": {}
+      },
+      "domain": {
+        "lower": [
+          0.0
+        ],
+        "upper": [
+          0.0
+        ]
+      },
+      "budgets": [
+        0.0,
+        0.0
+      ],
+      "witnesses": [
+        [
+          0.0
+        ]
+      ],
+      "decision": {
+        "kind": "argmax",
+        "tie_rule": "first_index",
+        "nonfinite": "reject"
+      },
+      "policy": {
+        "writable": [
+          "layers.0.weight",
+          "layers.0.bias"
+        ],
+        "max_edits": 16,
+        "max_parameter_abs": 7.205759403792794e+16,
+        "max_change_abs": 7.205759403792794e+16
+      },
+      "execution": null,
+      "feature": {
+        "head": {
+          "weight": "layers.0.weight",
+          "bias": "layers.0.bias",
+          "feature_id": "supplied-affine-inputs/1"
+        },
+        "anchors": [
+          [
+            0.0
+          ]
+        ],
+        "feature_names": [
+          "x0"
+        ]
+      }
+    },
+    {
+      "case": "tie-last_index",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "program": {
+        "schema": "wsp-program/1",
+        "base_sha256": "9b336c182ac8448d6680c99ea6b13bc6ab45f1a2a943783dc6454477d9b98f7c",
+        "intent": "tie-last_index",
+        "edits": []
+      },
+      "task": {
+        "schema": "wsp-task/1",
+        "task_id": "tie-last_index",
+        "mode": "edit",
+        "objective": "Designed admission boundary example",
+        "architecture": "sequential-affine-activation/1",
+        "base_sha256": "9b336c182ac8448d6680c99ea6b13bc6ab45f1a2a943783dc6454477d9b98f7c",
+        "constraints": {}
+      },
+      "domain": {
+        "lower": [
+          0.0
+        ],
+        "upper": [
+          0.0
+        ]
+      },
+      "budgets": [
+        0.0,
+        0.0
+      ],
+      "witnesses": [
+        [
+          0.0
+        ]
+      ],
+      "decision": {
+        "kind": "argmax",
+        "tie_rule": "last_index",
+        "nonfinite": "reject"
+      },
+      "policy": {
+        "writable": [
+          "layers.0.weight",
+          "layers.0.bias"
+        ],
+        "max_edits": 16,
+        "max_parameter_abs": 7.205759403792794e+16,
+        "max_change_abs": 7.205759403792794e+16
+      },
+      "execution": null,
+      "feature": {
+        "head": {
+          "weight": "layers.0.weight",
+          "bias": "layers.0.bias",
+          "feature_id": "supplied-affine-inputs/1"
+        },
+        "anchors": [
+          [
+            0.0
+          ]
+        ],
+        "feature_names": [
+          "x0"
+        ]
+      }
+    },
+    {
+      "case": "unregistered-semantics",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "unregistered-affine/1",
+        "metadata": {},
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "unregistered-affine/1",
+        "metadata": {},
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "program": {
+        "schema": "wsp-program/1",
+        "base_sha256": "32eecc866fb16b567afa59bce9332e64639b01b493d6240a54bd1c1a7874ea1b",
+        "intent": "unregistered-semantics",
+        "edits": []
+      },
+      "task": {
+        "schema": "wsp-task/1",
+        "task_id": "unregistered-semantics",
+        "mode": "edit",
+        "objective": "Designed admission boundary example",
+        "architecture": "unregistered-affine/1",
+        "base_sha256": "32eecc866fb16b567afa59bce9332e64639b01b493d6240a54bd1c1a7874ea1b",
+        "constraints": {}
+      },
+      "domain": {
+        "lower": [
+          0.0
+        ],
+        "upper": [
+          0.0
+        ]
+      },
+      "budgets": [
+        0.0,
+        0.0
+      ],
+      "witnesses": [
+        [
+          0.0
+        ]
+      ],
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      },
+      "policy": {
+        "writable": [
+          "layers.0.weight",
+          "layers.0.bias"
+        ],
+        "max_edits": 16,
+        "max_parameter_abs": 7.205759403792794e+16,
+        "max_change_abs": 7.205759403792794e+16
+      },
+      "execution": null,
+      "feature": null
+    },
+    {
+      "case": "real-pass-native-fail",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            1.0000000298023224,
+            1.0000000596046448
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            1.0000000298023224,
+            1.0000001192092896
+          ]
+        }
+      },
+      "program": {
+        "schema": "wsp-program/1",
+        "base_sha256": "34e0dde563cc630e86af2026c8340e8c2fc4edb11e9270a75f390e1317cea263",
+        "intent": "real-pass-native-fail",
+        "edits": [
+          {
+            "tensor": "layers.0.bias",
+            "index": [
+              1
+            ],
+            "before": 1.0000000596046448,
+            "after": 1.0000001192092896
+          }
+        ]
+      },
+      "task": {
+        "schema": "wsp-task/1",
+        "task_id": "real-pass-native-fail",
+        "mode": "edit",
+        "objective": "Designed admission boundary example",
+        "architecture": "sequential-affine-activation/1",
+        "base_sha256": "34e0dde563cc630e86af2026c8340e8c2fc4edb11e9270a75f390e1317cea263",
+        "constraints": {}
+      },
+      "domain": {
+        "lower": [
+          0.0
+        ],
+        "upper": [
+          0.0
+        ]
+      },
+      "budgets": [
+        0.0,
+        5.960464477539063e-08
+      ],
+      "witnesses": [
+        [
+          0.0
+        ]
+      ],
+      "decision": {
+        "kind": "argmax",
+        "tie_rule": "first_index",
+        "nonfinite": "reject"
+      },
+      "policy": {
+        "writable": [
+          "layers.0.weight",
+          "layers.0.bias"
+        ],
+        "max_edits": 16,
+        "max_parameter_abs": 7.205759403792794e+16,
+        "max_change_abs": 7.205759403792794e+16
+      },
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float32",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "round",
+        "error_model": "empirical"
+      },
+      "feature": {
+        "head": {
+          "weight": "layers.0.weight",
+          "bias": "layers.0.bias",
+          "feature_id": "supplied-affine-inputs/1"
+        },
+        "anchors": [
+          [
+            0.0
+          ]
+        ],
+        "feature_names": [
+          "x0"
+        ]
+      }
+    }
+  ],
+  "native_cases": [
+    {
+      "case": "cancellation/numpy/float64/left_to_right",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.8014398509481984e+16,
+              -1.8014398509481984e+16,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.8014398509481984e+16,
+              1.0,
+              -1.8014398509481984e+16
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float64",
+        "device": "cpu",
+        "accumulation": "left_to_right",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/numpy/float64/right_to_left",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.8014398509481984e+16,
+              -1.8014398509481984e+16,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.8014398509481984e+16,
+              1.0,
+              -1.8014398509481984e+16
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float64",
+        "device": "cpu",
+        "accumulation": "right_to_left",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/numpy/float64/matmul",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.8014398509481984e+16,
+              -1.8014398509481984e+16,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.8014398509481984e+16,
+              1.0,
+              -1.8014398509481984e+16
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float64",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/torch/float64/left_to_right",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.8014398509481984e+16,
+              -1.8014398509481984e+16,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.8014398509481984e+16,
+              1.0,
+              -1.8014398509481984e+16
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "torch",
+        "dtype": "float64",
+        "device": "cpu",
+        "accumulation": "left_to_right",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/torch/float64/right_to_left",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.8014398509481984e+16,
+              -1.8014398509481984e+16,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.8014398509481984e+16,
+              1.0,
+              -1.8014398509481984e+16
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "torch",
+        "dtype": "float64",
+        "device": "cpu",
+        "accumulation": "right_to_left",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/torch/float64/matmul",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.8014398509481984e+16,
+              -1.8014398509481984e+16,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.8014398509481984e+16,
+              1.0,
+              -1.8014398509481984e+16
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "torch",
+        "dtype": "float64",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/numpy/float32/left_to_right",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              33554432.0,
+              -33554432.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              33554432.0,
+              1.0,
+              -33554432.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float32",
+        "device": "cpu",
+        "accumulation": "left_to_right",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/numpy/float32/right_to_left",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              33554432.0,
+              -33554432.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              33554432.0,
+              1.0,
+              -33554432.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float32",
+        "device": "cpu",
+        "accumulation": "right_to_left",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/numpy/float32/matmul",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              33554432.0,
+              -33554432.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              33554432.0,
+              1.0,
+              -33554432.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float32",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/torch/float32/left_to_right",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              33554432.0,
+              -33554432.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              33554432.0,
+              1.0,
+              -33554432.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "torch",
+        "dtype": "float32",
+        "device": "cpu",
+        "accumulation": "left_to_right",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/torch/float32/right_to_left",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              33554432.0,
+              -33554432.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              33554432.0,
+              1.0,
+              -33554432.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "torch",
+        "dtype": "float32",
+        "device": "cpu",
+        "accumulation": "right_to_left",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/torch/float32/matmul",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              33554432.0,
+              -33554432.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              33554432.0,
+              1.0,
+              -33554432.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "torch",
+        "dtype": "float32",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/numpy/float16/left_to_right",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              4096.0,
+              -4096.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              4096.0,
+              1.0,
+              -4096.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float16",
+        "device": "cpu",
+        "accumulation": "left_to_right",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/numpy/float16/right_to_left",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              4096.0,
+              -4096.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              4096.0,
+              1.0,
+              -4096.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float16",
+        "device": "cpu",
+        "accumulation": "right_to_left",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/numpy/float16/matmul",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              4096.0,
+              -4096.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              4096.0,
+              1.0,
+              -4096.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float16",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/torch/float16/left_to_right",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              4096.0,
+              -4096.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              4096.0,
+              1.0,
+              -4096.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "torch",
+        "dtype": "float16",
+        "device": "cpu",
+        "accumulation": "left_to_right",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/torch/float16/right_to_left",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              4096.0,
+              -4096.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              4096.0,
+              1.0,
+              -4096.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "torch",
+        "dtype": "float16",
+        "device": "cpu",
+        "accumulation": "right_to_left",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/torch/float16/matmul",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              4096.0,
+              -4096.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              4096.0,
+              1.0,
+              -4096.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "torch",
+        "dtype": "float16",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/numpy/bfloat16/left_to_right",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              512.0,
+              -512.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              512.0,
+              1.0,
+              -512.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "bfloat16",
+        "device": "cpu",
+        "accumulation": "left_to_right",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/numpy/bfloat16/right_to_left",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              512.0,
+              -512.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              512.0,
+              1.0,
+              -512.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "bfloat16",
+        "device": "cpu",
+        "accumulation": "right_to_left",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/numpy/bfloat16/matmul",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              512.0,
+              -512.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              512.0,
+              1.0,
+              -512.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "bfloat16",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/torch/bfloat16/left_to_right",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              512.0,
+              -512.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              512.0,
+              1.0,
+              -512.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "torch",
+        "dtype": "bfloat16",
+        "device": "cpu",
+        "accumulation": "left_to_right",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/torch/bfloat16/right_to_left",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              512.0,
+              -512.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              512.0,
+              1.0,
+              -512.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "torch",
+        "dtype": "bfloat16",
+        "device": "cpu",
+        "accumulation": "right_to_left",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "cancellation/torch/bfloat16/matmul",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              512.0,
+              -512.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1",
+            "x2"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              512.0,
+              1.0,
+              -512.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "torch",
+        "dtype": "bfloat16",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "near-tie-endpoint-projection",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            1.0000000298023224,
+            1.0000000596046448
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            1.0000000298023224,
+            1.0000001192092896
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          0.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float32",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "round",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "argmax",
+        "tie_rule": "first_index",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "no-op-native-preserved-real-correspondence-fails",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            1.0000000298023224,
+            1.0000000596046448
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            1.0000000298023224,
+            1.0000000596046448
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          0.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float32",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "round",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "argmax",
+        "tie_rule": "first_index",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "forbidden-endpoint-projection",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            1.0000000298023224,
+            1.0000000596046448
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            1.0000000298023224,
+            1.0000000596046448
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          0.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float32",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "argmax",
+        "tie_rule": "first_index",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "input-projection-only",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0000000298023224
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float32",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "finite-endpoints-intermediate-overflow",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              65504.0,
+              65504.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0",
+            "x1"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              65504.0,
+              65504.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          2.0,
+          2.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float16",
+        "device": "cpu",
+        "accumulation": "left_to_right",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "tanh-native-only",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "tanh",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "tanh",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float64",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "formal-native-lane-unsupported",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float64",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "formal"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "unknown-operator-model",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "unregistered-affine/1",
+        "metadata": {},
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "unregistered-affine/1",
+        "metadata": {},
+        "tensors": {
+          "layers.0.weight": [
+            [
+              0.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "numpy",
+        "dtype": "float64",
+        "device": "cpu",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    },
+    {
+      "case": "optional-cuda-scope",
+      "parent": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "candidate": {
+        "schema": "wsp-tensors/1",
+        "dtype": "float64",
+        "architecture": "sequential-affine-activation/1",
+        "metadata": {
+          "input_names": [
+            "x0"
+          ],
+          "layers": [
+            {
+              "activation": "identity",
+              "bias": "layers.0.bias",
+              "weight": "layers.0.weight"
+            }
+          ],
+          "output_names": [
+            "y0",
+            "y1"
+          ]
+        },
+        "tensors": {
+          "layers.0.weight": [
+            [
+              1.0
+            ],
+            [
+              0.0
+            ]
+          ],
+          "layers.0.bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "witnesses": [
+        [
+          1.0
+        ]
+      ],
+      "execution": {
+        "backend": "torch",
+        "dtype": "float32",
+        "device": "cuda",
+        "accumulation": "matmul",
+        "endpoint_cast": "reject",
+        "error_model": "empirical"
+      },
+      "decision": {
+        "kind": "unique_argmax",
+        "tie_rule": "reject",
+        "nonfinite": "reject"
+      }
+    }
+  ],
+  "substitutions": [
+    "parent",
+    "candidate",
+    "program",
+    "domain",
+    "adapter_version",
+    "adapter_configuration",
+    "input_order",
+    "output_order",
+    "tensor_order",
+    "bias_convention",
+    "witnesses",
+    "feature_names",
+    "feature_anchors",
+    "feature_head",
+    "feature_bias",
+    "decision_rule",
+    "score_budgets",
+    "structural_policy",
+    "task",
+    "backend_environment"
+  ],
+  "inference_scope": "Designed boundary examples only; no traffic frequency, business impact or population inference"
+}

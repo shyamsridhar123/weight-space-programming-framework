@@ -1,0 +1,99 @@
+{
+  "schema": "wsp-live-provider-attempt/1",
+  "started_utc": "2026-11-09T03:49:21.443577+00:00",
+  "status": "completed",
+  "error": null,
+  "returncode": 0,
+  "timeout_cleanup_complete": null,
+  "elapsed_seconds": 7.430886200047098,
+  "invocation": {
+    "executable_sha256": "2692c8c7bb2cf8b0aefe638741fc90236f4b824c59578ce84994f9de58200993",
+    "cli_version": "codex-cli 0.163.0",
+    "configuration": {
+      "schema": "wsp-codex-provider-config/1",
+      "provider": "openai",
+      "requested_model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "tool_free": true,
+      "user_config_loaded": false,
+      "ephemeral": true,
+      "timeout_seconds": 180,
+      "configuration_overrides": {
+        "plugins._default.enabled": "false",
+        "mcp_servers": "{}",
+        "web_search": "\"disabled\"",
+        "features.shell_tool": "false",
+        "features.unified_exec": "false",
+        "features.apps": "false",
+        "features.multi_agent": "false",
+        "features.multi_agent_mode": "false",
+        "features.code_mode": "false",
+        "features.js_repl": "false",
+        "features.tool_search": "false",
+        "features.skill_search": "false",
+        "features.skip_host_skill_discovery": "true",
+        "features.view_image": "false",
+        "features.image_generation": "false",
+        "features.hooks": "false",
+        "features.browser_use": "false",
+        "features.in_app_browser": "false",
+        "features.memories": "false",
+        "features.search_tool": "false",
+        "features.stable_environment_tools": "false",
+        "features.incremental_tools": "false",
+        "features.request_permissions_tool": "false",
+        "tools.update_plan.enabled": "false",
+        "project_doc_max_bytes": "0"
+      },
+      "sandbox": "read-only",
+      "deployment_revision_exposed": false,
+      "internal_model_computation_observed": false,
+      "human_assistance": "task_and_harness_authored_before_trial;_no_midtrial_help"
+    },
+    "prompt_sha256": "95367837d05fbbf19ee91a6f3a3b12f8ae845383d14a96b8d73040043b3e48e6",
+    "schema_sha256": "2e1eb63f2d4f9588432ddd2a5c0018eb6a2bf1e54b0cb0f7e7014078522e2b69",
+    "cwd_role": "isolated_proposer_directory",
+    "local_invocation_sha256": "81f998ced538e4abb679208ea62ff403a373ec7df7ae589e96a1ae7a704e3722"
+  },
+  "response": {
+    "abstain": true,
+    "commands_json": "[]",
+    "selected_fitted_handle": null,
+    "reason": "Only aggregate parameter statistics are disclosed; the original logits, argmax codes, and strongest competitors cannot be determined. No literal edit can be justified as preserving other intent routes.",
+    "predicted_argmax_codes": [
+      -1,
+      -1
+    ],
+    "prediction_confidences": [
+      0,
+      0
+    ],
+    "strongest_competing_codes": [
+      -1,
+      -1
+    ],
+    "competing_confidences": [
+      0,
+      0
+    ]
+  },
+  "usage": {
+    "input_tokens": 20538,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 135,
+    "reasoning_output_tokens": 27
+  },
+  "unapproved_events": [],
+  "event_errors": [],
+  "diagnostic_items": 1,
+  "events_sha256": "6c1993046e31613f63f2d976963b5f1b99080f6e9c3f762dc46d3f2dc54e0f23",
+  "cost": {
+    "currency": "USD",
+    "amount": null,
+    "reason": "authenticated_CLI_subscription_not_request_pricing"
+  },
+  "prompt_scope": "exact_harness_prompt;_CLI_system_scaffolding_not_exported",
+  "restrictions_scope": "configured_CLI_tools_and_observed_events;_not_OS_hermeticity",
+  "sha256": "9923827a1b7a70a7823cb80e1408e9bdacc1e95f08fb86cbd5a1454f88413819"
+}

@@ -102,8 +102,8 @@ quiet cinematic music. [Read the timed transcript](artifacts/explanations/enterp
 
 ## What the evidence shows
 
-The synthetic study found a **target–retention tradeoff**. Soft retention reduced
-collateral error, while leaving more error on the requested target:
+The historical synthetic study found a **target–retention tradeoff**. Soft
+retention reduced collateral error, while leaving more error on the requested target:
 
 | Method | Mean target NRMSE ↓ | Mean collateral NRMSE ↓ |
 | --- | ---: | ---: |
@@ -122,6 +122,25 @@ not measure an LLM's ability to discover edits.
 The [results](docs/weight-space/v2/results.md) retain world-cluster uncertainty,
 family differences, baselines, precision effects, no-op outcomes, and repeated-edit
 failures. The [methods](docs/weight-space/v2/methods.md) explain the comparison.
+
+The completed [trained application studies](docs/research/trained-applications.md)
+found useful ownership-routing changes from overlays and soft head edits, but
+no useful recognition repair. Every hard protected-score candidate abstained.
+Their structural receipt retains `behavioral_status: not_checked` and
+`formal_certificate: null`; finite behavioral measurements do not supply a
+whole-network or native-execution certificate.
+
+In the [live studies](docs/research/live-studies.md), all 80 primary
+weight-access assignments abstained, and diagnosis useful coverage fell below
+its frozen threshold. The [original-source repeat](docs/research/original-source-repeat.md)
+had four failed fresh calls and no completed response. The
+[construction and steering pilot](docs/research/construction-steering-pilot.md)
+had twelve failed assignments and no live candidate to score; the usefulness of
+a completed live artifact cannot be assessed. Successful controls and replay
+do not establish live-model success. The completed
+[synthetic unlearning study](docs/research/synthetic-unlearning.md) failed every
+edited-arm absolute and joint gate. Its finite accessibility measurements do
+not establish information erasure or privacy.
 
 ### What the proofs establish
 
@@ -143,16 +162,16 @@ The [research plan](docs/weight-space/v2/limitations-and-next-steps.md) connects
 the remaining limits to concrete success and failure criteria:
 
 - General behavioral admission and automatic binding of new candidates to proofs.
-- Verified floating-point execution and an isolated live-provider harness.
+- Verified floating-point execution, enforced access restrictions, and independent
+  provider provenance.
 - Evidence of useful large-model editing and stronger cumulative edit contracts.
 
 The [November 2026 research review](docs/weight-space/v2/research-roadmap-2026-11.md)
 turns those gaps and the original report's future directions into
-[work issues](docs/weight-space/v2/research-issues-2026-11.md). The next milestone
-is a trained support-routing study against rules, a routing overlay, and
-retraining, with explicit feasibility, retained-behavior, abstention, and cost
-criteria. A second trained non-text task tests the shared framework afterward.
-All new work remains proposed.
+[work issues](docs/weight-space/v2/research-issues-2026-11.md). The completed
+studies above narrow the next decisions: feasible recognition repair, useful
+causal diagnosis, reliable live delivery, and cumulative edits that meet their
+utility and retention criteria. Their negative results remain part of the evidence.
 
 All published study seeds have been observed. Replaying them is reproduction;
 fresh confirmation needs untouched units and a newly frozen protocol.

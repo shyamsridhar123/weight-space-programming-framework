@@ -1,0 +1,48 @@
+{
+  "architecture": "trained-frozen-readout/1",
+  "base_sha256": "846bf2faec95f5e0ee735afb668a625669181686c24f5d845745c475eb8d4966",
+  "constraints": {
+    "arm": "overlay",
+    "behavioral_admission": "frozen finite calibration samples; no whole-domain guarantee",
+    "case": {
+      "case_id": "recognition/atm_support",
+      "confused_with": "visa_or_mastercard",
+      "desired_code": 36,
+      "desired_queue": 1,
+      "pilot_development_confusion_events": 7,
+      "pilot_development_error_rates": [
+        0.25,
+        0.125,
+        0.5
+      ],
+      "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+      "target_label": 36,
+      "target_name": "atm_support",
+      "type": "recognition"
+    },
+    "configuration": {},
+    "margins": {
+      "maximum_protected_harm": 0.01,
+      "minimum_target_gain": 0.1,
+      "minimum_useful_coverage": 0.75
+    },
+    "nullspace_additional_contract": null,
+    "numeric_lane": "native Torch CPU float32 readout",
+    "protected_feature_sha256": "c035bbe348e04025b0777c10998bce86cdc8a1dab7a85cde152fda2eb071607c",
+    "protocol_sha256": "41179db4fe54abc187c6255526c4705ff67a8d69236e0f3a798a647a94154ded",
+    "structural_policy": {
+      "max_change_abs": 256.0,
+      "max_edits": 5070,
+      "max_parameter_abs": 256.0,
+      "writable": [
+        "head.weight",
+        "head.bias"
+      ]
+    },
+    "target_feature_sha256": "99fc33599772e0127a3206979e5d2b7c57177e7c5ea05e0e3f85c63500c46b55"
+  },
+  "mode": "edit",
+  "objective": "Change the derived routing decision for a frozen trained representation",
+  "schema": "wsp-task/1",
+  "task_id": "banking77-main-full-7005/recognition/atm_support/overlay"
+}

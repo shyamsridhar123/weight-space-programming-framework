@@ -1,0 +1,73 @@
+{
+  "type": "object",
+  "properties": {
+    "abstain": {
+      "type": "boolean"
+    },
+    "commands_json": {
+      "type": "string",
+      "maxLength": 500000
+    },
+    "selected_fitted_handle": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "predicted_argmax_codes": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": -1,
+        "maximum": 77
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "prediction_confidences": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "strongest_competing_codes": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": -1,
+        "maximum": 77
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "competing_confidences": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "minItems": 2,
+      "maxItems": 2
+    }
+  },
+  "required": [
+    "abstain",
+    "commands_json",
+    "selected_fitted_handle",
+    "reason",
+    "predicted_argmax_codes",
+    "prediction_confidences",
+    "strongest_competing_codes",
+    "competing_confidences"
+  ],
+  "additionalProperties": false
+}

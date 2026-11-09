@@ -1,0 +1,41 @@
+{
+  "architecture": "trained-frozen-readout/1",
+  "base_sha256": "77790d0c2dd1e25dac1b8a973e6cf46df3d010a8e750a93e455e0ffc74a25926",
+  "constraints": {
+    "arm": "unchanged",
+    "behavioral_admission": "frozen finite calibration samples; no whole-domain guarantee",
+    "case": {
+      "case_id": "ownership/pending_cash_withdrawal",
+      "desired_code": 77,
+      "desired_queue": 5,
+      "selection": "fixed before pilot; no official test opened",
+      "target_label": 5,
+      "target_name": "pending_cash_withdrawal",
+      "type": "ownership"
+    },
+    "configuration": {},
+    "margins": {
+      "maximum_protected_harm": 0.01,
+      "minimum_target_gain": 0.1,
+      "minimum_useful_coverage": 0.75
+    },
+    "nullspace_additional_contract": null,
+    "numeric_lane": "native Torch CPU float32 readout",
+    "protected_feature_sha256": "153d9fb41e8ceb9f6cb31a76eaab90bcab82fc9c9a8d4827cd70e8b30fc679bb",
+    "protocol_sha256": "41179db4fe54abc187c6255526c4705ff67a8d69236e0f3a798a647a94154ded",
+    "structural_policy": {
+      "max_change_abs": 256.0,
+      "max_edits": 5070,
+      "max_parameter_abs": 256.0,
+      "writable": [
+        "head.weight",
+        "head.bias"
+      ]
+    },
+    "target_feature_sha256": "9ae98a583bca2f837121cba4ceb63a57f6d9d58fa209600517d191ab6c40b959"
+  },
+  "mode": "edit",
+  "objective": "Change the derived routing decision for a frozen trained representation",
+  "schema": "wsp-task/1",
+  "task_id": "banking77-main-full-7003/ownership/pending_cash_withdrawal/unchanged"
+}

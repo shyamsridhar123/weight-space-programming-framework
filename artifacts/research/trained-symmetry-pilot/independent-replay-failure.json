@@ -1,0 +1,46 @@
+{
+  "attempts": 1,
+  "canonical_evaluation_sha256": "a218166e568e691340312b50020adc62c83e241931fc1d146c1f7e2e67fba347",
+  "cause": "Frozen NPZ loader preserves numpy.str_ interface names; AdmissionRequest strict JSON normalization accepts exact Python str and rejects numpy.str_.",
+  "completed_admission_replays": 0,
+  "completed_pair_replays": 0,
+  "error": "Expected finite JSON data, received str_",
+  "error_type": "ValueError",
+  "evaluation_sha256": "8a452a4a8ce3d61bd1203096d1985be8e7664c561f4359c8a58f93713cd3acf0",
+  "expected_success_receipt_present": false,
+  "external_evidence": {
+    "replay-launch.json": {
+      "bytes": 190,
+      "sha256": "ad0806f3fe0d4a833de0510891b393d936959ef9de663f92f739679d274774be"
+    },
+    "replay-stderr.log": {
+      "bytes": 3065,
+      "sha256": "1e5a49b526dbf95057de639b433b5a63cb1e9ac4a972a7b4c4f646736c0fb5c8"
+    },
+    "replay-stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "freeze_sha256": "f5e067f5f61d2c59830e6c895d697b02106b0945e224635fc3cda39129cfe4c7",
+  "frozen_source_sha256": "118c741586369582e8bab39325c95f1d2fd7251544b8551ba30f4a9fb8d71564",
+  "launched_at_utc": "2026-11-09T04:44:05.8091284Z",
+  "pass": false,
+  "recorded_at_utc": "2026-11-09T04:49:49.494602+00:00",
+  "retries": 0,
+  "schema": "wsp-trained-symmetry-pilot-native-replay-failure/1",
+  "seal_sha256": "4641b45692eeb61f4564c6f1de5458e8bf408ec0aa07b9a2c2541dcb38276bae",
+  "source_locations": {
+    "admission_bind": "experiments/research/trained-symmetry-pilot/source-freeze/scripts/run_trained_symmetry_pilot.py:280",
+    "bind_request": "experiments/research/trained-symmetry-pilot/source-freeze/rlcd/weight_space/contracts.py:476",
+    "load_model": "experiments/research/trained-symmetry-pilot/source-freeze/scripts/run_trained_symmetry_pilot.py:81",
+    "replay_admission": "experiments/research/trained-symmetry-pilot/source-freeze/scripts/run_trained_symmetry_pilot.py:500",
+    "request_normalization": "experiments/research/trained-symmetry-pilot/source-freeze/rlcd/weight_space/contracts.py:305",
+    "strict_json_error": "experiments/research/trained-symmetry-pilot/source-freeze/rlcd/weight_space/workflow.py:46",
+    "strict_json_string": "experiments/research/trained-symmetry-pilot/source-freeze/rlcd/weight_space/workflow.py:27"
+  },
+  "stage": "First replay admission binding, before first pair progress",
+  "status": "failed",
+  "successful_native_replay": false,
+  "verification_gap": "No successful independent frozen native admission/metric replay. Original sealed selection and evaluation remain retained, without retries or changed usefulness gates."
+}

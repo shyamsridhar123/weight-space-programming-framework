@@ -1,0 +1,106 @@
+{
+  "schema": "wsp-public-main-replay-comparison-derivative/1",
+  "created_utc": "2026-11-09T04:46:52.962320+00:00",
+  "source": {
+    "role": "original_main_comparison_receipt",
+    "bytes": 1619,
+    "raw_sha256": "fee908f943713c93becda4c718bb3c9b552f2abc3c6b64110f92a1c86ca8180e",
+    "canonical_json_sha256": "5c6269c9d00a67613db38d255988b8ab535c63ab58e8133862afcf931acfb383",
+    "source_schema": "wsp-independent-live-replay-comparison/1"
+  },
+  "sanitizer": {
+    "id": "wsp-main-verification-whitelist/1",
+    "method": "explicit field whitelist plus documented role and path rewrites",
+    "copied_fields": [
+      "all_assigned_retained",
+      "assigned_total",
+      "checked_utc",
+      "comparison_inventory_sha256",
+      "deterministic_matches",
+      "deterministic_mismatches",
+      "distinct_assignment_ids",
+      "evaluation_manifest_canonical_sha256",
+      "evaluation_missing_total",
+      "evaluator_input_files_checked",
+      "evaluator_input_files_sha256",
+      "frozen_source_files_checked",
+      "gate_canonical_sha256",
+      "matching_runtime",
+      "ok",
+      "outcome_files_checked",
+      "prepared_lock_canonical_sha256",
+      "replay_manifest_canonical_sha256",
+      "replay_missing_total",
+      "terminal_statuses"
+    ],
+    "omitted_fields": [
+      "provider_calls_performed_by_replay",
+      "schema",
+      "scope"
+    ],
+    "rewrites": [
+      {
+        "source": "schema",
+        "destination": "source.source_schema",
+        "operation": "retain as source schema"
+      },
+      {
+        "source": "scope",
+        "destination": "scope",
+        "operation": "replace with bounded derivative scope"
+      },
+      {
+        "source": "provider_calls_performed_by_replay",
+        "destination": "captured_claims",
+        "operation": "retain as a labeled capture claim"
+      }
+    ],
+    "note": "All recorded counts, hashes, timestamps and whitelisted runtime values are copied unchanged.",
+    "raw_evidence_modified": false,
+    "raw_transport_copied": false,
+    "active_comparison_or_evaluation_executed": false
+  },
+  "recorded": {
+    "ok": true,
+    "checked_utc": "2026-11-09T04:30:17.361270+00:00",
+    "gate_canonical_sha256": "601897dc212592ae76cb2eed4b56e120de6ed9d66fa292b7e42ba5b924a13d0f",
+    "prepared_lock_canonical_sha256": "fb465aeac240f769c7d2a5765321e332adae6d4d2edc1a49697587c349c14bbf",
+    "evaluation_manifest_canonical_sha256": "4681c2d762ec2d0d1f8b48a8c5239194bb09c2d6d8e901eb43310d0739f44e95",
+    "replay_manifest_canonical_sha256": "09d87404c770b18f60632718379fd77d0c8ef673b37bfa3cb97c499eccd4d837",
+    "assigned_total": 224,
+    "distinct_assignment_ids": 224,
+    "deterministic_matches": 224,
+    "deterministic_mismatches": 0,
+    "all_assigned_retained": true,
+    "terminal_statuses": {
+      "abstained": 116,
+      "failed": 90,
+      "invalid": 2,
+      "sealed": 16
+    },
+    "evaluation_missing_total": 0,
+    "replay_missing_total": 0,
+    "evaluator_input_files_checked": 2760,
+    "evaluator_input_files_sha256": "14787a5ba67ecf8d390f2c3b285ce7e18ed2174783f518630ba98d3059a1700e",
+    "frozen_source_files_checked": 18,
+    "outcome_files_checked": 448,
+    "comparison_inventory_sha256": "29401957afb0826da33f5ff1fe0e33d3987b477f0a4556e347b218044d1a3adc",
+    "matching_runtime": {
+      "python": "3.12.10",
+      "numpy": "2.5.3",
+      "torch": "2.8.0+cpu",
+      "device": "cpu",
+      "torch_threads": 1,
+      "deterministic_algorithms": true
+    }
+  },
+  "captured_claims": [
+    {
+      "source_field": "provider_calls_performed_by_replay",
+      "recorded_value": 0,
+      "status": "retained capture claim; not independently established by artifact comparison"
+    }
+  ],
+  "scope": "Sanitized derivative of the saved successful comparison receipt. It records comparison of released deterministic outputs and bound input inventories. It does not record a new comparator run, active evaluator execution, or independently establish provider provenance. Timing and opaque handles are outside deterministic equality.",
+  "sha256": "7adf874b20f0e863d609f2782dcfec96a5bc5c09b4d314841fe6084eeef0410f"
+}

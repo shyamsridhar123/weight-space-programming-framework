@@ -1,0 +1,65 @@
+[
+  {
+    "id": "torchlean",
+    "title": "TorchLean: Formalizing Neural Networks in Lean",
+    "publication_note": "May 2026 v2 preprint",
+    "acquired_url": "https://arxiv.org/pdf/2602.22631v2",
+    "resolved_url_at_acquisition": "https://arxiv.org/pdf/2602.22631v2",
+    "version_url": "https://arxiv.org/pdf/2602.22631v2",
+    "retrieved_at_utc": "2026-11-09T00:50:15.029504+00:00",
+    "sha256": "dd8b7ce74b70d6a5bd928bf32f5caaeaf9354b56902d8f9a47f6f14f77c0c4d3",
+    "bytes": 7762633,
+    "pdf_pages": 55,
+    "reviewed_pdf_pages": [
+      6,
+      8,
+      19,
+      54,
+      55
+    ],
+    "reviewed_sections": "Shared graph semantics; Table 3 scope; finite Float32 refinement and external boundaries",
+    "finding": "Shared SSA/DAG semantics connect execution and analysis. The scope table distinguishes proved, checked, and external components; finite-path IEEE32Exec refinement is explicitly restricted.",
+    "limitation": "The paper does not discharge the target CPU/CUDA kernel and hardware link universally. Repository code was not built or audited in this review.",
+    "framework_implication": "Evaluate reuse of explicit semantic/proof subsets; keep serializer, compiler, backend, nonfinite values, and unsupported operators visible in the trust boundary."
+  },
+  {
+    "id": "crown",
+    "title": "Efficient Neural Network Robustness Certification with General Activation Functions",
+    "publication_note": "2018 primary paper version reviewed",
+    "acquired_url": "https://arxiv.org/pdf/1811.00866v1",
+    "resolved_url_at_acquisition": "https://arxiv.org/pdf/1811.00866v1",
+    "version_url": "https://arxiv.org/pdf/1811.00866v1",
+    "retrieved_at_utc": "2026-11-09T00:50:15.096074+00:00",
+    "sha256": "7b57198bb3693c7a32c1000f2585b7772b5e76c6954614d8d3392c7a1a32ad32",
+    "bytes": 976200,
+    "pdf_pages": 17,
+    "reviewed_pdf_pages": [
+      1,
+      3
+    ],
+    "reviewed_sections": "Activation relaxations and certified bounds",
+    "finding": "Activation envelopes yield conservative bounds for a specified input domain and supported network.",
+    "limitation": "Loose bounds can reject safe candidates; absence of a passing bound is different from an observed violation. The paper is not a proof of this repository runtime.",
+    "framework_implication": "Compare current sequential drift bounds with tighter validated relaxations using coverage, width, time, and memory under identical domains."
+  },
+  {
+    "id": "provable-repair",
+    "title": "Provable Repair of Deep Neural Networks",
+    "publication_note": "2021 primary paper version reviewed",
+    "acquired_url": "https://arxiv.org/pdf/2104.04413v2",
+    "resolved_url_at_acquisition": "https://arxiv.org/pdf/2104.04413v2",
+    "version_url": "https://arxiv.org/pdf/2104.04413v2",
+    "retrieved_at_utc": "2026-11-09T00:50:15.443094+00:00",
+    "sha256": "948b259ed6e359ad7926182ebce4f62a5a3c0c3c431f660687460abbdf8d2302",
+    "bytes": 1188602,
+    "pdf_pages": 20,
+    "reviewed_pdf_pages": [
+      2,
+      4
+    ],
+    "reviewed_sections": "Decoupled architecture and one-layer linear-program repair",
+    "finding": "Separating activation and value paths permits a one-layer repair problem to be expressed as an LP in the specified setting.",
+    "limitation": "This tractability does not extend automatically to arbitrary ordinary networks, unknown activation regions, or a general editor.",
+    "framework_implication": "Explore a narrowly supported repair adapter and benchmark certificate coverage before promising arbitrary nonlinear repair."
+  }
+]

@@ -1,0 +1,157 @@
+{
+  "schema": "wsp-public-current-source-validation/1",
+  "check": "lean-bridge",
+  "attempt": 1,
+  "provenance": {
+    "source_schema": "wsp-current-bridge-command/1",
+    "private_result_origin": ".runs/root-bridge-20261109-214pav5q/result.json",
+    "private_result_sha256": "20941dbbdbb53c1a4379c9e1526e6de2ab472d5f6cd1773ac77b306542adea40",
+    "private_result_bytes": 6570,
+    "derivation": "Explicit field allowlists; source observation scalars and relative identity maps retained exactly; contextual interpretation is separate",
+    "argv_transformation": "Private and machine-specific path arguments replaced by role placeholders; path separators normalized to forward slashes; other arguments retained",
+    "input_identity_scope": "Repository-relative input paths at the original run; inputs_unchanged describes that run's before/after comparison",
+    "raw_output_public": false,
+    "omitted_content": [
+      "absolute paths and local account or workspace layout",
+      "stdout, stderr, raw logs, transport contents and path-bearing exception text",
+      "private helper source",
+      "dependency sources, cached compiled artifacts, executables and wheel binaries"
+    ]
+  },
+  "started_at_utc": "2026-11-09T06:46:34.299856+00:00",
+  "finished_at_utc": "2026-11-09T06:47:46.159824+00:00",
+  "input_sha256": {
+    "formal/weight-space/lake-manifest.json": "cd42e2c798056244b8d399857d616d30d2497a78c62f647d7eecb0fb3fd103b0",
+    "formal/weight-space/lakefile.toml": "d6f3654e5118fbe37f64db51bda02f6c3425921153ec03be9d82cdfec3c3d2e5",
+    "formal/weight-space/lean-toolchain": "42779d67b81608af8a12aa4328d2ab47ca201925b3b2bd68369587b5340bb434",
+    "formal/weight-space/WeightSpace/AxiomAudit.lean": "c5b1e8ccf6b4f44d0d8826c05f5da03c82ad27988abcbfcfb96ea5223390f637",
+    "formal/weight-space/WeightSpace/Bounds.lean": "85c59f76bb5dea11951024db8b1a7e2fd55438583c8613ad912b9b37334e9b17",
+    "formal/weight-space/WeightSpace/Bridge.lean": "057ef2fd253f071d1e1cff7d182a341baf7b8f86ad58246524367a34b9c4e24e",
+    "formal/weight-space/WeightSpace/Contracts.lean": "80869b222f002222947f5932821d30aa7e38dbdaf18b71f5bf56f4dabf101224",
+    "formal/weight-space/WeightSpace/Core.lean": "bd8e8188ec12ce507a3e6991198622f9ddc43c2595ec261491a3c5ef9d9cd181",
+    "formal/weight-space/WeightSpace/Examples.lean": "8e7f030a60602bc0104ab8fe40e2d131c6066b184ae1d12eca750787a43654ee",
+    "formal/weight-space/WeightSpace/Gauge.lean": "6b353d14398756889b5b1c7908b62008b5c0ab22869de768f58c91da7a82437a",
+    "formal/weight-space/WeightSpace/Generic.lean": "114da4c7fe42955476fa80214e7f7d51ba565eeadf8982ec2b6da678c014319c",
+    "formal/weight-space/WeightSpace/GenericAudit.lean": "5c596da6925dc1a2278d933a063264c5199d7c225dcd08eb082df4325977a874",
+    "formal/weight-space/WeightSpace/GenericExamples.lean": "9f385b60f3d3f6ca65607fd8c6039ea9588ffaf690fa593339d138cbf0fe4100",
+    "formal/weight-space/WeightSpace/ImportClosure.lean": "351d1ededb206bd7e8bc7900237ec595a92fede4b54927cb06d0158ba0e70beb",
+    "formal/weight-space/WeightSpace/RTS.lean": "b3b52da81d345a44eac8d26ff4802bfc8561a31f08cb1307d1e41b3aea792ed1",
+    "formal/weight-space/WeightSpace/Sequential.lean": "5cb1ca354a52a31244fb63d702f5d9277fe5663371d762071861088a02d98116",
+    "rlcd/weight_space/__init__.py": "1fc45e6b5185ea123d04630ab69f94aa7d65a8cba6e5deb78736f351f465ab12",
+    "rlcd/weight_space/__main__.py": "658fde770befb592cd110ef5ea83ef9a39d3d97137b65e2f29b9028ed50a5377",
+    "rlcd/weight_space/adapters.py": "87cc20844b8be1354255c2bdb21130911439f60c3cc268cbce54211a29624dd4",
+    "rlcd/weight_space/artifact.py": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500",
+    "rlcd/weight_space/benchmarks.py": "3edb4f2120572aa8da92078d19c45a2d4cd494191468a893cef46a410e419983",
+    "rlcd/weight_space/bound_research.py": "814fafa6da869e15f7e0066f04e878df037d43f05f40bf32517db96781466917",
+    "rlcd/weight_space/broker.py": "c3ba7be6005b12bf7a42aae76b41948726e05fb854744e7d3d835ae6d3e87373",
+    "rlcd/weight_space/compiler.py": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac",
+    "rlcd/weight_space/contracts.py": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019",
+    "rlcd/weight_space/cumulative_research.py": "31abbef4e162779ef684295e33564cf78d5b2081c5ed537fd11814558a83a796",
+    "rlcd/weight_space/demo.py": "26b12f4b19e1656faec2377cb2a7725f4847f37a3633d762a8e1f45f5ac5a0b6",
+    "rlcd/weight_space/evidence.py": "69c5e8479ce7797de7ef182a4fd1229124c83bfb4fc86ccbfbb14edc1984420d",
+    "rlcd/weight_space/experiments.py": "72135f830bd7d662bbdf7a9b254712105ff70b00a253ea08a90238f08989ff0a",
+    "rlcd/weight_space/features.py": "3293e01e4524eb7af5b58d7eba344a0090c6fc3f95488db6486d9379ee323f8b",
+    "rlcd/weight_space/live_provider.py": "7319024ba4491922c07450352a317c2f81966b4631b39cc5419ea9284b2a95c3",
+    "rlcd/weight_space/model.py": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af",
+    "rlcd/weight_space/program.py": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd",
+    "rlcd/weight_space/proof_bridge.py": "642ec0869208d59f1641b31d5887cb5f16b199787418e0b7789aa979ad04a93b",
+    "rlcd/weight_space/research_tasks.py": "aadeaedc8cb8a3f0ba4220b25b8b6d701cef5890b4ba39e44ad3e8265fba48fb",
+    "rlcd/weight_space/rts_study.py": "a284b4e77e4bb57b704271ca170f7b29e7139e333d8dc17a663d4096fabaa476",
+    "rlcd/weight_space/runtime_research.py": "6b961bba8b396fdc9343da5e57beb610f8c25450291f513de58102cb36a7a951",
+    "rlcd/weight_space/semantics.py": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef",
+    "rlcd/weight_space/sequential.py": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae",
+    "rlcd/weight_space/structured.py": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab",
+    "rlcd/weight_space/study_tasks_v2.py": "cf944710cce88a70c400b713b76b699446b1ba47747121ac58f31316fbb01233",
+    "rlcd/weight_space/study_v2.py": "a1ffd5840d4beb4d7b8f827552a38ae192f300e32809233a1b58681c147bdb3e",
+    "rlcd/weight_space/symmetry.py": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623",
+    "rlcd/weight_space/torch_bridge.py": "b532de9574bb13c4c918656cba21ff2e9da61ea2c9aca1a6394376bb64696cda",
+    "rlcd/weight_space/workflow.py": "72f82f90cdad7c7dae559da331515506bd072fc8bb5450155cf5ab221668c520",
+    "scripts/check_weight_space_bridge.py": "128e08b7da99f00944f7d1ccafd77fc3affa2e0cb8b6fbf0b0ce6313a0333f6f"
+  },
+  "scientific_replays": 0,
+  "provider_calls": 0,
+  "scope": "fresh handcrafted bridge fixtures and mutations; conditional real-valued semantics",
+  "status": "failed",
+  "failure_type": "RuntimeError",
+  "changed_inputs": [],
+  "inputs_unchanged": true,
+  "commands": [
+    {
+      "operation": "lean_bridge",
+      "status": "failed",
+      "returncode": 1,
+      "error": null,
+      "timeout_cleanup_complete": null,
+      "elapsed_seconds": 71.34772030002205,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "20d5fb9cea1405b7aa333adffc06f145dfdc7c5196f0ec4d5b4a212b4c53ce32",
+      "raw_output_public": false,
+      "argv": [
+        "[PYTHON]",
+        "-X",
+        "utf8",
+        "-B",
+        "-u",
+        "scripts/check_weight_space_bridge.py",
+        "--output",
+        "[PRIVATE_RUN]/lean-bridge",
+        "--lean",
+        "[LEAN_EXECUTABLE]",
+        "--dependency-cache",
+        "[LEAN_DEPENDENCY_CACHE]",
+        "--timeout-seconds",
+        "60"
+      ]
+    }
+  ],
+  "interpretation": {
+    "scientific_evidence_effect": "Engineering validation only; does not supersede the separate issue #16 replay failure, trained Lean compilation failure, or synthetic-only negative unlearning result",
+    "public_receipt_is_complete_replay_bundle": false,
+    "new_validation_run_during_derivation": false,
+    "scope": "A failed fresh-fixture bridge invocation stopped during dependency import-header auditing"
+  },
+  "attempt_history": {
+    "subsequent_public_receipt": "lean-bridge.sanitized.json",
+    "original_failure_preserved": true,
+    "recorded_input_changes_before_subsequent_attempt": {
+      "scripts/check_weight_space_bridge.py": {
+        "earlier_sha256": "128e08b7da99f00944f7d1ccafd77fc3affa2e0cb8b6fbf0b0ce6313a0333f6f",
+        "current_sha256": "04fb387ce392ed1b938ff2c566120103f23d11b56af6037ef12aa9d0ea5eb576"
+      }
+    }
+  },
+  "failure_context": {
+    "stage": "Import-header dependency audit before framework or candidate compilation",
+    "outer_failure_type": "RuntimeError",
+    "outer_command_status": "failed",
+    "outer_command_returncode": 1,
+    "inner_command": [
+      "[LEAN_EXECUTABLE]",
+      "--run",
+      "WeightSpace/ImportClosure.lean",
+      "[IMPORT_AUDIT]/imports.json"
+    ],
+    "inner_timeout_seconds": 60,
+    "diagnosis": "The import-header parser subprocess exceeded its 60-second timeout",
+    "diagnosis_basis": "Independently corroborated by the private bridge failure.json and outer-command stderr; no theorem rejection is implied",
+    "failure_artifact_status": "failed",
+    "supporting_private_artifacts": [
+      {
+        "role": "private bridge failure.json",
+        "raw_sha256": "b5c919534025dac7cb9fc5cd683fa05128634cf192a505f2abc651d88f0d7ff8",
+        "bytes": 503,
+        "raw_content_public": false
+      },
+      {
+        "role": "private outer bridge command stderr",
+        "raw_sha256": "20d5fb9cea1405b7aa333adffc06f145dfdc7c5196f0ec4d5b4a212b4c53ce32",
+        "bytes": 438,
+        "raw_content_public": false
+      }
+    ],
+    "framework_or_candidate_compilation_reached": false,
+    "subsequent_correction": "Propagate the configured timeout into the import-header audit and use a 180-second per-command allowance",
+    "subsequent_correction_source": "scripts/check_weight_space_bridge.py",
+    "subsequent_success_receipt": "lean-bridge.sanitized.json"
+  }
+}

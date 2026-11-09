@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "properties": {
+    "abstain": {
+      "type": "boolean"
+    },
+    "commands_json": {
+      "type": "string",
+      "maxLength": 500000
+    },
+    "selected_fitted_handle": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "location_tensor": {
+      "type": "string",
+      "enum": [
+        "head.weight",
+        "head.bias",
+        "uncertain"
+      ]
+    },
+    "output_row": {
+      "type": "integer",
+      "minimum": -1,
+      "maximum": 77
+    },
+    "mechanism_class": {
+      "type": "string",
+      "enum": [
+        "bias_shift",
+        "feature_row_shift",
+        "uncertain"
+      ]
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "predicted_target_gain": {
+      "type": "number",
+      "minimum": -1,
+      "maximum": 1
+    },
+    "predicted_protected_harm": {
+      "type": "number",
+      "minimum": -1,
+      "maximum": 1
+    }
+  },
+  "required": [
+    "abstain",
+    "commands_json",
+    "selected_fitted_handle",
+    "reason",
+    "location_tensor",
+    "output_row",
+    "mechanism_class",
+    "confidence",
+    "predicted_target_gain",
+    "predicted_protected_harm"
+  ],
+  "additionalProperties": false
+}

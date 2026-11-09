@@ -1,0 +1,2530 @@
+{
+  "local": {
+    "contract": {
+      "schema": "wsp-cumulative-sequence-contract/1",
+      "original_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+      "head": {
+        "weight": "w",
+        "bias": "b",
+        "feature_id": "designed/1"
+      },
+      "queue_map": [
+        0,
+        1
+      ],
+      "baseline_features": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+      "baseline_labels": "3200661a490a71c7ef2acf143ba1c5935beb547d0bd004ed398a84e2715a0660",
+      "policy": {
+        "score_budget": 0.5,
+        "maximum_original_decision_flip": 0.01,
+        "maximum_local_decision_flip": 0.01,
+        "maximum_original_net_harm": 0.01,
+        "maximum_local_net_harm": 0.01,
+        "maximum_old_target_loss": 0.01,
+        "maximum_old_target_decision_flip": 0.01,
+        "minimum_new_target_gain": 0.1,
+        "conflict": "reject",
+        "abstention": "keep_last_accepted"
+      },
+      "mode": "local",
+      "order": [
+        {
+          "subject": "positive",
+          "case_id": "first",
+          "target_label": 1,
+          "desired_code": 1,
+          "desired_queue": 1,
+          "features": "477615cf31dac0275da3bf4abfaf7ba09fbe201d7447bc2f9e63ee62dd67b329"
+        },
+        {
+          "subject": "negative",
+          "case_id": "second",
+          "target_label": 1,
+          "desired_code": 1,
+          "desired_queue": 1,
+          "features": "cc8274820d5c921d58679a097dd44aba1add7a3fc09b12ed5813e65d9c667d30"
+        }
+      ]
+    },
+    "contract_sha256": "37a5641b2b6cf9d7623b21ba3a1d253845013a282c14b1ac2a4aa49135366e1b",
+    "records": [
+      {
+        "schema": "wsp-cumulative-record/1",
+        "request_sha256": "a9e0a8ff3632fbb9f2a76e6ddcc985ec30e067fa994cd47f6f55bad227fc5669",
+        "request": {
+          "baseline_features": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+          "baseline_labels": "3200661a490a71c7ef2acf143ba1c5935beb547d0bd004ed398a84e2715a0660",
+          "candidate_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+          "execution": {
+            "backend": "torch",
+            "bias": "native linear argument; fusion and reduction order are backend-controlled",
+            "decision": "lowest-index argmax then frozen queue map",
+            "device": "cpu",
+            "dtype": "float32",
+            "endpoint_cast": "round",
+            "environment": {
+              "backend": "torch",
+              "cuda_matmul_tf32": false,
+              "cuda_version": null,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": false,
+              "cudnn_tf32": true,
+              "deterministic_algorithms": true,
+              "device": "cpu",
+              "float32_matmul_precision": "highest",
+              "interop_threads": 8,
+              "machine": "AMD64",
+              "numpy_version": "2.5.3",
+              "platform": "Windows-11-10.0.26300-SP0",
+              "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+              "python": "3.12.10",
+              "thread_environment": {
+                "MKL_NUM_THREADS": null,
+                "OMP_NUM_THREADS": null,
+                "OPENBLAS_NUM_THREADS": null
+              },
+              "threads": 4,
+              "torch_version": "2.8.0+cpu"
+            },
+            "feature_cast": "round",
+            "layout": "C-order [outputs,features]",
+            "operator": "torch.nn.functional.linear"
+          },
+          "head": {
+            "bias": "b",
+            "feature_id": "designed/1",
+            "weight": "w"
+          },
+          "history_sha256": "37a5641b2b6cf9d7623b21ba3a1d253845013a282c14b1ac2a4aa49135366e1b",
+          "mode": "local",
+          "original_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+          "parent_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+          "policy": {
+            "abstention": "keep_last_accepted",
+            "conflict": "reject",
+            "maximum_local_decision_flip": 0.01,
+            "maximum_local_net_harm": 0.01,
+            "maximum_old_target_decision_flip": 0.01,
+            "maximum_old_target_loss": 0.01,
+            "maximum_original_decision_flip": 0.01,
+            "maximum_original_net_harm": 0.01,
+            "minimum_new_target_gain": 0.1,
+            "score_budget": 0.5
+          },
+          "program": {
+            "base_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+            "edits": [
+              {
+                "after": 0.25,
+                "before": 0.0,
+                "index": [
+                  1,
+                  0
+                ],
+                "tensor": "w"
+              },
+              {
+                "after": 0.375,
+                "before": 0.0,
+                "index": [
+                  1
+                ],
+                "tensor": "b"
+              }
+            ],
+            "intent": "Designed cumulative budget counterexample",
+            "schema": "wsp-program/1"
+          },
+          "proposal_error": null,
+          "queue_map": [
+            0,
+            1
+          ],
+          "retained": [],
+          "schema": "wsp-cumulative-request/1",
+          "sequence_contract_sha256": "37a5641b2b6cf9d7623b21ba3a1d253845013a282c14b1ac2a4aa49135366e1b",
+          "step": 1,
+          "target": {
+            "case_id": "first",
+            "desired_code": 1,
+            "desired_queue": 1,
+            "features": "477615cf31dac0275da3bf4abfaf7ba09fbe201d7447bc2f9e63ee62dd67b329",
+            "subject": "positive",
+            "target_label": 1
+          }
+        },
+        "gates": [
+          {
+            "name": "correspondence",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "a9e0a8ff3632fbb9f2a76e6ddcc985ec30e067fa994cd47f6f55bad227fc5669",
+            "evidence": {
+              "original": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+              "parent": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+              "candidate": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+              "program": "ae38ff52ee5ca38a3af8e6aeec5f77768285eb82584e6323a5049f581a7975fa",
+              "execution": {
+                "backend": "torch",
+                "bias": "native linear argument; fusion and reduction order are backend-controlled",
+                "decision": "lowest-index argmax then frozen queue map",
+                "device": "cpu",
+                "dtype": "float32",
+                "endpoint_cast": "round",
+                "environment": {
+                  "backend": "torch",
+                  "cuda_matmul_tf32": false,
+                  "cuda_version": null,
+                  "cudnn_benchmark": false,
+                  "cudnn_deterministic": false,
+                  "cudnn_tf32": true,
+                  "deterministic_algorithms": true,
+                  "device": "cpu",
+                  "float32_matmul_precision": "highest",
+                  "interop_threads": 8,
+                  "machine": "AMD64",
+                  "numpy_version": "2.5.3",
+                  "platform": "Windows-11-10.0.26300-SP0",
+                  "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+                  "python": "3.12.10",
+                  "thread_environment": {
+                    "MKL_NUM_THREADS": null,
+                    "OMP_NUM_THREADS": null,
+                    "OPENBLAS_NUM_THREADS": null
+                  },
+                  "threads": 4,
+                  "torch_version": "2.8.0+cpu"
+                },
+                "feature_cast": "round",
+                "layout": "C-order [outputs,features]",
+                "operator": "torch.nn.functional.linear"
+              }
+            }
+          },
+          {
+            "name": "proposal",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "a9e0a8ff3632fbb9f2a76e6ddcc985ec30e067fa994cd47f6f55bad227fc5669",
+            "evidence": null
+          },
+          {
+            "name": "conflict",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "a9e0a8ff3632fbb9f2a76e6ddcc985ec30e067fa994cd47f6f55bad227fc5669",
+            "evidence": {
+              "conflicting_subjects": [],
+              "policy": "reject"
+            }
+          },
+          {
+            "name": "local_protected_behavior",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "a9e0a8ff3632fbb9f2a76e6ddcc985ec30e067fa994cd47f6f55bad227fc5669",
+            "evidence": {
+              "net_harm": 0.0,
+              "decision_flip": 0.0
+            }
+          },
+          {
+            "name": "original_protected_behavior",
+            "required": false,
+            "status": "pass",
+            "request_sha256": "a9e0a8ff3632fbb9f2a76e6ddcc985ec30e067fa994cd47f6f55bad227fc5669",
+            "evidence": {
+              "net_harm": 0.0,
+              "decision_flip": 0.0
+            }
+          },
+          {
+            "name": "local_score_budget",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "a9e0a8ff3632fbb9f2a76e6ddcc985ec30e067fa994cd47f6f55bad227fc5669",
+            "evidence": {
+              "budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+                "candidate_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "3/8"
+                ],
+                "maximum_exact": "3/8",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "a2c0a35ca073fbc3ce5968754de9a0f88dbdb3abea96f208ba5ffa5da9731ec9",
+                  "candidate_sha256": "d73e0613067ad4cfac5200bf1a128cf85208c83d83973e279ca594aa1a22101d",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "c752b96f9e20964ab7cf627f2998e2673f6852298fd52deb2e2e0f094a518877",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "3/8"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "3/8"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "6e93c02dab09be531c2d01b3fa7f8aadd48fb74b05041e3bbc789f403612ad45"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "b6208009ddbae98b68eca5ed966a0f209277f32c2bfda071955e6f5f42cbc1a8"
+              }
+            }
+          },
+          {
+            "name": "original_score_budget",
+            "required": false,
+            "status": "pass",
+            "request_sha256": "a9e0a8ff3632fbb9f2a76e6ddcc985ec30e067fa994cd47f6f55bad227fc5669",
+            "evidence": {
+              "budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+                "candidate_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "3/8"
+                ],
+                "maximum_exact": "3/8",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "a2c0a35ca073fbc3ce5968754de9a0f88dbdb3abea96f208ba5ffa5da9731ec9",
+                  "candidate_sha256": "d73e0613067ad4cfac5200bf1a128cf85208c83d83973e279ca594aa1a22101d",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "c752b96f9e20964ab7cf627f2998e2673f6852298fd52deb2e2e0f094a518877",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "3/8"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "3/8"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "6e93c02dab09be531c2d01b3fa7f8aadd48fb74b05041e3bbc789f403612ad45"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "b6208009ddbae98b68eca5ed966a0f209277f32c2bfda071955e6f5f42cbc1a8"
+              }
+            }
+          },
+          {
+            "name": "new_target_gain",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "a9e0a8ff3632fbb9f2a76e6ddcc985ec30e067fa994cd47f6f55bad227fc5669",
+            "evidence": {
+              "gain_from_current_parent": 1.0,
+              "parent_accuracy": 0.0,
+              "candidate_accuracy": 1.0,
+              "minimum_gain": 0.1
+            }
+          }
+        ],
+        "accepted": true,
+        "no_op": false,
+        "deployed_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+        "scope": "Sampled cumulative affine-head contract; native decisions measured on declared CPU; no heldout utility claim",
+        "sha256": "91e6014f846cb530006d2a4b5bbfae7212b306c44f39f186794c8d8d015fa4e0"
+      },
+      {
+        "schema": "wsp-cumulative-record/1",
+        "request_sha256": "a8f78c38a8c650067f6a4192cd266ce7e7b7bac3378cd80317d442d11de284e8",
+        "request": {
+          "baseline_features": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+          "baseline_labels": "3200661a490a71c7ef2acf143ba1c5935beb547d0bd004ed398a84e2715a0660",
+          "candidate_sha256": "50f7827ca6d2a6a2391df7b8236283ca29641841b1da33032d0e9e481b31adb8",
+          "execution": {
+            "backend": "torch",
+            "bias": "native linear argument; fusion and reduction order are backend-controlled",
+            "decision": "lowest-index argmax then frozen queue map",
+            "device": "cpu",
+            "dtype": "float32",
+            "endpoint_cast": "round",
+            "environment": {
+              "backend": "torch",
+              "cuda_matmul_tf32": false,
+              "cuda_version": null,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": false,
+              "cudnn_tf32": true,
+              "deterministic_algorithms": true,
+              "device": "cpu",
+              "float32_matmul_precision": "highest",
+              "interop_threads": 8,
+              "machine": "AMD64",
+              "numpy_version": "2.5.3",
+              "platform": "Windows-11-10.0.26300-SP0",
+              "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+              "python": "3.12.10",
+              "thread_environment": {
+                "MKL_NUM_THREADS": null,
+                "OMP_NUM_THREADS": null,
+                "OPENBLAS_NUM_THREADS": null
+              },
+              "threads": 4,
+              "torch_version": "2.8.0+cpu"
+            },
+            "feature_cast": "round",
+            "layout": "C-order [outputs,features]",
+            "operator": "torch.nn.functional.linear"
+          },
+          "head": {
+            "bias": "b",
+            "feature_id": "designed/1",
+            "weight": "w"
+          },
+          "history_sha256": "91e6014f846cb530006d2a4b5bbfae7212b306c44f39f186794c8d8d015fa4e0",
+          "mode": "local",
+          "original_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+          "parent_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+          "policy": {
+            "abstention": "keep_last_accepted",
+            "conflict": "reject",
+            "maximum_local_decision_flip": 0.01,
+            "maximum_local_net_harm": 0.01,
+            "maximum_old_target_decision_flip": 0.01,
+            "maximum_old_target_loss": 0.01,
+            "maximum_original_decision_flip": 0.01,
+            "maximum_original_net_harm": 0.01,
+            "minimum_new_target_gain": 0.1,
+            "score_budget": 0.5
+          },
+          "program": {
+            "base_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+            "edits": [
+              {
+                "after": -0.25,
+                "before": 0.25,
+                "index": [
+                  1,
+                  0
+                ],
+                "tensor": "w"
+              },
+              {
+                "after": 0.75,
+                "before": 0.375,
+                "index": [
+                  1
+                ],
+                "tensor": "b"
+              }
+            ],
+            "intent": "Designed cumulative budget counterexample",
+            "schema": "wsp-program/1"
+          },
+          "proposal_error": null,
+          "queue_map": [
+            0,
+            1
+          ],
+          "retained": [
+            {
+              "accepted_step": 1,
+              "case_id": "first",
+              "desired_code": 1,
+              "desired_queue": 1,
+              "features": "477615cf31dac0275da3bf4abfaf7ba09fbe201d7447bc2f9e63ee62dd67b329",
+              "inserted_endpoint_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+              "request_sha256": "a9e0a8ff3632fbb9f2a76e6ddcc985ec30e067fa994cd47f6f55bad227fc5669",
+              "subject": "positive",
+              "target_label": 1
+            }
+          ],
+          "schema": "wsp-cumulative-request/1",
+          "sequence_contract_sha256": "37a5641b2b6cf9d7623b21ba3a1d253845013a282c14b1ac2a4aa49135366e1b",
+          "step": 2,
+          "target": {
+            "case_id": "second",
+            "desired_code": 1,
+            "desired_queue": 1,
+            "features": "cc8274820d5c921d58679a097dd44aba1add7a3fc09b12ed5813e65d9c667d30",
+            "subject": "negative",
+            "target_label": 1
+          }
+        },
+        "gates": [
+          {
+            "name": "correspondence",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "a8f78c38a8c650067f6a4192cd266ce7e7b7bac3378cd80317d442d11de284e8",
+            "evidence": {
+              "original": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+              "parent": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+              "candidate": "50f7827ca6d2a6a2391df7b8236283ca29641841b1da33032d0e9e481b31adb8",
+              "program": "c45540ed49328733cefd0ab0773c981254fce7b08daa92da51f2223e6bc7fff5",
+              "execution": {
+                "backend": "torch",
+                "bias": "native linear argument; fusion and reduction order are backend-controlled",
+                "decision": "lowest-index argmax then frozen queue map",
+                "device": "cpu",
+                "dtype": "float32",
+                "endpoint_cast": "round",
+                "environment": {
+                  "backend": "torch",
+                  "cuda_matmul_tf32": false,
+                  "cuda_version": null,
+                  "cudnn_benchmark": false,
+                  "cudnn_deterministic": false,
+                  "cudnn_tf32": true,
+                  "deterministic_algorithms": true,
+                  "device": "cpu",
+                  "float32_matmul_precision": "highest",
+                  "interop_threads": 8,
+                  "machine": "AMD64",
+                  "numpy_version": "2.5.3",
+                  "platform": "Windows-11-10.0.26300-SP0",
+                  "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+                  "python": "3.12.10",
+                  "thread_environment": {
+                    "MKL_NUM_THREADS": null,
+                    "OMP_NUM_THREADS": null,
+                    "OPENBLAS_NUM_THREADS": null
+                  },
+                  "threads": 4,
+                  "torch_version": "2.8.0+cpu"
+                },
+                "feature_cast": "round",
+                "layout": "C-order [outputs,features]",
+                "operator": "torch.nn.functional.linear"
+              }
+            }
+          },
+          {
+            "name": "proposal",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "a8f78c38a8c650067f6a4192cd266ce7e7b7bac3378cd80317d442d11de284e8",
+            "evidence": null
+          },
+          {
+            "name": "conflict",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "a8f78c38a8c650067f6a4192cd266ce7e7b7bac3378cd80317d442d11de284e8",
+            "evidence": {
+              "conflicting_subjects": [],
+              "policy": "reject"
+            }
+          },
+          {
+            "name": "local_protected_behavior",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "a8f78c38a8c650067f6a4192cd266ce7e7b7bac3378cd80317d442d11de284e8",
+            "evidence": {
+              "net_harm": 0.0,
+              "decision_flip": 0.0
+            }
+          },
+          {
+            "name": "original_protected_behavior",
+            "required": false,
+            "status": "pass",
+            "request_sha256": "a8f78c38a8c650067f6a4192cd266ce7e7b7bac3378cd80317d442d11de284e8",
+            "evidence": {
+              "net_harm": 0.0,
+              "decision_flip": 0.0
+            }
+          },
+          {
+            "name": "local_score_budget",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "a8f78c38a8c650067f6a4192cd266ce7e7b7bac3378cd80317d442d11de284e8",
+            "evidence": {
+              "budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+                "candidate_sha256": "50f7827ca6d2a6a2391df7b8236283ca29641841b1da33032d0e9e481b31adb8",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "3/8"
+                ],
+                "maximum_exact": "3/8",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "d73e0613067ad4cfac5200bf1a128cf85208c83d83973e279ca594aa1a22101d",
+                  "candidate_sha256": "e274383b35dc4bfe54847e19f5b6938f667c7a840f1a520532ed5247ce48b530",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "c752b96f9e20964ab7cf627f2998e2673f6852298fd52deb2e2e0f094a518877",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "3/8"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "3/8"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "a85bcf4d6232357f28e3c7558bf4ac4db4a038d66f4f357b64584701ae825236"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "c8de28518e790b1734d0c007e61c93f96d8dd79d0de8cd9a9e1f5ba0278142e3"
+              }
+            }
+          },
+          {
+            "name": "original_score_budget",
+            "required": false,
+            "status": "observed_violation",
+            "request_sha256": "a8f78c38a8c650067f6a4192cd266ce7e7b7bac3378cd80317d442d11de284e8",
+            "evidence": {
+              "budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+                "candidate_sha256": "50f7827ca6d2a6a2391df7b8236283ca29641841b1da33032d0e9e481b31adb8",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "3/4"
+                ],
+                "maximum_exact": "3/4",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "a2c0a35ca073fbc3ce5968754de9a0f88dbdb3abea96f208ba5ffa5da9731ec9",
+                  "candidate_sha256": "e274383b35dc4bfe54847e19f5b6938f667c7a840f1a520532ed5247ce48b530",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "c752b96f9e20964ab7cf627f2998e2673f6852298fd52deb2e2e0f094a518877",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "3/4"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "3/4"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "cbf3c1f268a3d1577c75b3e88d5a20fad5d25c340e05cd595ef39d184c9d83a0"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "dc900a2a797c23e56719bcf1691b0dae68606e1e4f44f704091db85e4a65b814"
+              }
+            }
+          },
+          {
+            "name": "new_target_gain",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "a8f78c38a8c650067f6a4192cd266ce7e7b7bac3378cd80317d442d11de284e8",
+            "evidence": {
+              "gain_from_current_parent": 1.0,
+              "parent_accuracy": 0.0,
+              "candidate_accuracy": 1.0,
+              "minimum_gain": 0.1
+            }
+          },
+          {
+            "name": "retained/positive/1/a9e0a8ff3632fbb9f2a76e6ddcc985ec30e067fa994cd47f6f55bad227fc5669",
+            "required": false,
+            "status": "observed_violation",
+            "request_sha256": "a8f78c38a8c650067f6a4192cd266ce7e7b7bac3378cd80317d442d11de284e8",
+            "evidence": {
+              "insertion": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+              "memory_age_steps": 1,
+              "accepted_request_sha256": "a9e0a8ff3632fbb9f2a76e6ddcc985ec30e067fa994cd47f6f55bad227fc5669",
+              "accuracy_loss": 1.0,
+              "decision_flip": 1.0,
+              "score_budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+                "candidate_sha256": "50f7827ca6d2a6a2391df7b8236283ca29641841b1da33032d0e9e481b31adb8",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "477615cf31dac0275da3bf4abfaf7ba09fbe201d7447bc2f9e63ee62dd67b329",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "29/8"
+                ],
+                "maximum_exact": "29/8",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "d73e0613067ad4cfac5200bf1a128cf85208c83d83973e279ca594aa1a22101d",
+                  "candidate_sha256": "e274383b35dc4bfe54847e19f5b6938f667c7a840f1a520532ed5247ce48b530",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "79705e64a61ec7342e4e8fc708bbb5be7c1e15bdf6a42314e7b325ee9010d91b",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "29/8"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "29/8"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "e7e4f7d826d8c19762266bd839c78c6f1cec5f213476d4f75c2324ec3c1c8b6d"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "9f0dab02a67ea346258e8df3d7ea6f8ac862809551085205a5b0d9706048cb65"
+              }
+            }
+          }
+        ],
+        "accepted": true,
+        "no_op": false,
+        "deployed_sha256": "50f7827ca6d2a6a2391df7b8236283ca29641841b1da33032d0e9e481b31adb8",
+        "scope": "Sampled cumulative affine-head contract; native decisions measured on declared CPU; no heldout utility claim",
+        "sha256": "84adf76a2d015b4d075ca805e636cf4101f5f11741162c292502fd1b23195fec"
+      }
+    ],
+    "endpoint_sha256": "50f7827ca6d2a6a2391df7b8236283ca29641841b1da33032d0e9e481b31adb8",
+    "rollback": {
+      "schema": "wsp-cumulative-rollback/1",
+      "original_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+      "endpoint_sha256": "50f7827ca6d2a6a2391df7b8236283ca29641841b1da33032d0e9e481b31adb8",
+      "composition_sha256": "ba1f919c268fee7a23100314b039992bae23418772f813e506d86d63fe810c6c",
+      "inverse": {
+        "schema": "wsp-program/1",
+        "base_sha256": "50f7827ca6d2a6a2391df7b8236283ca29641841b1da33032d0e9e481b31adb8",
+        "intent": "Rollback: Sequential composition",
+        "edits": [
+          {
+            "tensor": "w",
+            "index": [
+              1,
+              0
+            ],
+            "before": -0.25,
+            "after": 0.0
+          },
+          {
+            "tensor": "b",
+            "index": [
+              1
+            ],
+            "before": 0.75,
+            "after": 0.0
+          }
+        ]
+      },
+      "restored_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+      "restored": true,
+      "named_state": [
+        "captured readout artifact tensors and immutable interface metadata"
+      ],
+      "external_state_restored": false,
+      "excluded_state": [
+        "encoder mutation",
+        "caches",
+        "RNG",
+        "assignments",
+        "deployment process",
+        "business actions"
+      ]
+    },
+    "proposals": [
+      {
+        "step": 1,
+        "fit_seconds": 0.0,
+        "shared_proposal": false,
+        "diagnostics": null
+      },
+      {
+        "step": 2,
+        "fit_seconds": 0.0,
+        "shared_proposal": false,
+        "diagnostics": null
+      }
+    ]
+  },
+  "cumulative": {
+    "contract": {
+      "schema": "wsp-cumulative-sequence-contract/1",
+      "original_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+      "head": {
+        "weight": "w",
+        "bias": "b",
+        "feature_id": "designed/1"
+      },
+      "queue_map": [
+        0,
+        1
+      ],
+      "baseline_features": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+      "baseline_labels": "3200661a490a71c7ef2acf143ba1c5935beb547d0bd004ed398a84e2715a0660",
+      "policy": {
+        "score_budget": 0.5,
+        "maximum_original_decision_flip": 0.01,
+        "maximum_local_decision_flip": 0.01,
+        "maximum_original_net_harm": 0.01,
+        "maximum_local_net_harm": 0.01,
+        "maximum_old_target_loss": 0.01,
+        "maximum_old_target_decision_flip": 0.01,
+        "minimum_new_target_gain": 0.1,
+        "conflict": "reject",
+        "abstention": "keep_last_accepted"
+      },
+      "mode": "cumulative",
+      "order": [
+        {
+          "subject": "positive",
+          "case_id": "first",
+          "target_label": 1,
+          "desired_code": 1,
+          "desired_queue": 1,
+          "features": "477615cf31dac0275da3bf4abfaf7ba09fbe201d7447bc2f9e63ee62dd67b329"
+        },
+        {
+          "subject": "negative",
+          "case_id": "second",
+          "target_label": 1,
+          "desired_code": 1,
+          "desired_queue": 1,
+          "features": "cc8274820d5c921d58679a097dd44aba1add7a3fc09b12ed5813e65d9c667d30"
+        }
+      ]
+    },
+    "contract_sha256": "4fbd5f1411acba1e7cf509cb518610c6b635cd0946e48978162e56476a023413",
+    "records": [
+      {
+        "schema": "wsp-cumulative-record/1",
+        "request_sha256": "e4571cfad43a95a48c394a94e9476f670091a8cc9b840fee2d1eba9586b34ddd",
+        "request": {
+          "baseline_features": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+          "baseline_labels": "3200661a490a71c7ef2acf143ba1c5935beb547d0bd004ed398a84e2715a0660",
+          "candidate_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+          "execution": {
+            "backend": "torch",
+            "bias": "native linear argument; fusion and reduction order are backend-controlled",
+            "decision": "lowest-index argmax then frozen queue map",
+            "device": "cpu",
+            "dtype": "float32",
+            "endpoint_cast": "round",
+            "environment": {
+              "backend": "torch",
+              "cuda_matmul_tf32": false,
+              "cuda_version": null,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": false,
+              "cudnn_tf32": true,
+              "deterministic_algorithms": true,
+              "device": "cpu",
+              "float32_matmul_precision": "highest",
+              "interop_threads": 8,
+              "machine": "AMD64",
+              "numpy_version": "2.5.3",
+              "platform": "Windows-11-10.0.26300-SP0",
+              "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+              "python": "3.12.10",
+              "thread_environment": {
+                "MKL_NUM_THREADS": null,
+                "OMP_NUM_THREADS": null,
+                "OPENBLAS_NUM_THREADS": null
+              },
+              "threads": 4,
+              "torch_version": "2.8.0+cpu"
+            },
+            "feature_cast": "round",
+            "layout": "C-order [outputs,features]",
+            "operator": "torch.nn.functional.linear"
+          },
+          "head": {
+            "bias": "b",
+            "feature_id": "designed/1",
+            "weight": "w"
+          },
+          "history_sha256": "4fbd5f1411acba1e7cf509cb518610c6b635cd0946e48978162e56476a023413",
+          "mode": "cumulative",
+          "original_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+          "parent_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+          "policy": {
+            "abstention": "keep_last_accepted",
+            "conflict": "reject",
+            "maximum_local_decision_flip": 0.01,
+            "maximum_local_net_harm": 0.01,
+            "maximum_old_target_decision_flip": 0.01,
+            "maximum_old_target_loss": 0.01,
+            "maximum_original_decision_flip": 0.01,
+            "maximum_original_net_harm": 0.01,
+            "minimum_new_target_gain": 0.1,
+            "score_budget": 0.5
+          },
+          "program": {
+            "base_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+            "edits": [
+              {
+                "after": 0.25,
+                "before": 0.0,
+                "index": [
+                  1,
+                  0
+                ],
+                "tensor": "w"
+              },
+              {
+                "after": 0.375,
+                "before": 0.0,
+                "index": [
+                  1
+                ],
+                "tensor": "b"
+              }
+            ],
+            "intent": "Designed cumulative budget counterexample",
+            "schema": "wsp-program/1"
+          },
+          "proposal_error": null,
+          "queue_map": [
+            0,
+            1
+          ],
+          "retained": [],
+          "schema": "wsp-cumulative-request/1",
+          "sequence_contract_sha256": "4fbd5f1411acba1e7cf509cb518610c6b635cd0946e48978162e56476a023413",
+          "step": 1,
+          "target": {
+            "case_id": "first",
+            "desired_code": 1,
+            "desired_queue": 1,
+            "features": "477615cf31dac0275da3bf4abfaf7ba09fbe201d7447bc2f9e63ee62dd67b329",
+            "subject": "positive",
+            "target_label": 1
+          }
+        },
+        "gates": [
+          {
+            "name": "correspondence",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "e4571cfad43a95a48c394a94e9476f670091a8cc9b840fee2d1eba9586b34ddd",
+            "evidence": {
+              "original": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+              "parent": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+              "candidate": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+              "program": "ae38ff52ee5ca38a3af8e6aeec5f77768285eb82584e6323a5049f581a7975fa",
+              "execution": {
+                "backend": "torch",
+                "bias": "native linear argument; fusion and reduction order are backend-controlled",
+                "decision": "lowest-index argmax then frozen queue map",
+                "device": "cpu",
+                "dtype": "float32",
+                "endpoint_cast": "round",
+                "environment": {
+                  "backend": "torch",
+                  "cuda_matmul_tf32": false,
+                  "cuda_version": null,
+                  "cudnn_benchmark": false,
+                  "cudnn_deterministic": false,
+                  "cudnn_tf32": true,
+                  "deterministic_algorithms": true,
+                  "device": "cpu",
+                  "float32_matmul_precision": "highest",
+                  "interop_threads": 8,
+                  "machine": "AMD64",
+                  "numpy_version": "2.5.3",
+                  "platform": "Windows-11-10.0.26300-SP0",
+                  "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+                  "python": "3.12.10",
+                  "thread_environment": {
+                    "MKL_NUM_THREADS": null,
+                    "OMP_NUM_THREADS": null,
+                    "OPENBLAS_NUM_THREADS": null
+                  },
+                  "threads": 4,
+                  "torch_version": "2.8.0+cpu"
+                },
+                "feature_cast": "round",
+                "layout": "C-order [outputs,features]",
+                "operator": "torch.nn.functional.linear"
+              }
+            }
+          },
+          {
+            "name": "proposal",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "e4571cfad43a95a48c394a94e9476f670091a8cc9b840fee2d1eba9586b34ddd",
+            "evidence": null
+          },
+          {
+            "name": "conflict",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "e4571cfad43a95a48c394a94e9476f670091a8cc9b840fee2d1eba9586b34ddd",
+            "evidence": {
+              "conflicting_subjects": [],
+              "policy": "reject"
+            }
+          },
+          {
+            "name": "local_protected_behavior",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "e4571cfad43a95a48c394a94e9476f670091a8cc9b840fee2d1eba9586b34ddd",
+            "evidence": {
+              "net_harm": 0.0,
+              "decision_flip": 0.0
+            }
+          },
+          {
+            "name": "original_protected_behavior",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "e4571cfad43a95a48c394a94e9476f670091a8cc9b840fee2d1eba9586b34ddd",
+            "evidence": {
+              "net_harm": 0.0,
+              "decision_flip": 0.0
+            }
+          },
+          {
+            "name": "local_score_budget",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "e4571cfad43a95a48c394a94e9476f670091a8cc9b840fee2d1eba9586b34ddd",
+            "evidence": {
+              "budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+                "candidate_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "3/8"
+                ],
+                "maximum_exact": "3/8",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "a2c0a35ca073fbc3ce5968754de9a0f88dbdb3abea96f208ba5ffa5da9731ec9",
+                  "candidate_sha256": "d73e0613067ad4cfac5200bf1a128cf85208c83d83973e279ca594aa1a22101d",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "c752b96f9e20964ab7cf627f2998e2673f6852298fd52deb2e2e0f094a518877",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "3/8"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "3/8"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "6e93c02dab09be531c2d01b3fa7f8aadd48fb74b05041e3bbc789f403612ad45"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "b6208009ddbae98b68eca5ed966a0f209277f32c2bfda071955e6f5f42cbc1a8"
+              }
+            }
+          },
+          {
+            "name": "original_score_budget",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "e4571cfad43a95a48c394a94e9476f670091a8cc9b840fee2d1eba9586b34ddd",
+            "evidence": {
+              "budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+                "candidate_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "3/8"
+                ],
+                "maximum_exact": "3/8",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "a2c0a35ca073fbc3ce5968754de9a0f88dbdb3abea96f208ba5ffa5da9731ec9",
+                  "candidate_sha256": "d73e0613067ad4cfac5200bf1a128cf85208c83d83973e279ca594aa1a22101d",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "c752b96f9e20964ab7cf627f2998e2673f6852298fd52deb2e2e0f094a518877",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "3/8"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "3/8"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "6e93c02dab09be531c2d01b3fa7f8aadd48fb74b05041e3bbc789f403612ad45"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "b6208009ddbae98b68eca5ed966a0f209277f32c2bfda071955e6f5f42cbc1a8"
+              }
+            }
+          },
+          {
+            "name": "new_target_gain",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "e4571cfad43a95a48c394a94e9476f670091a8cc9b840fee2d1eba9586b34ddd",
+            "evidence": {
+              "gain_from_current_parent": 1.0,
+              "parent_accuracy": 0.0,
+              "candidate_accuracy": 1.0,
+              "minimum_gain": 0.1
+            }
+          }
+        ],
+        "accepted": true,
+        "no_op": false,
+        "deployed_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+        "scope": "Sampled cumulative affine-head contract; native decisions measured on declared CPU; no heldout utility claim",
+        "sha256": "4aa95ef9c2357bc3e8eeec0919d7a669892ab4cfef025b0909c28b1557b4ffe0"
+      },
+      {
+        "schema": "wsp-cumulative-record/1",
+        "request_sha256": "6d367d2fcf8047c46b0c96f082791d15d816706d499b1dd801f9c18be5a97654",
+        "request": {
+          "baseline_features": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+          "baseline_labels": "3200661a490a71c7ef2acf143ba1c5935beb547d0bd004ed398a84e2715a0660",
+          "candidate_sha256": "50f7827ca6d2a6a2391df7b8236283ca29641841b1da33032d0e9e481b31adb8",
+          "execution": {
+            "backend": "torch",
+            "bias": "native linear argument; fusion and reduction order are backend-controlled",
+            "decision": "lowest-index argmax then frozen queue map",
+            "device": "cpu",
+            "dtype": "float32",
+            "endpoint_cast": "round",
+            "environment": {
+              "backend": "torch",
+              "cuda_matmul_tf32": false,
+              "cuda_version": null,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": false,
+              "cudnn_tf32": true,
+              "deterministic_algorithms": true,
+              "device": "cpu",
+              "float32_matmul_precision": "highest",
+              "interop_threads": 8,
+              "machine": "AMD64",
+              "numpy_version": "2.5.3",
+              "platform": "Windows-11-10.0.26300-SP0",
+              "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+              "python": "3.12.10",
+              "thread_environment": {
+                "MKL_NUM_THREADS": null,
+                "OMP_NUM_THREADS": null,
+                "OPENBLAS_NUM_THREADS": null
+              },
+              "threads": 4,
+              "torch_version": "2.8.0+cpu"
+            },
+            "feature_cast": "round",
+            "layout": "C-order [outputs,features]",
+            "operator": "torch.nn.functional.linear"
+          },
+          "head": {
+            "bias": "b",
+            "feature_id": "designed/1",
+            "weight": "w"
+          },
+          "history_sha256": "4aa95ef9c2357bc3e8eeec0919d7a669892ab4cfef025b0909c28b1557b4ffe0",
+          "mode": "cumulative",
+          "original_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+          "parent_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+          "policy": {
+            "abstention": "keep_last_accepted",
+            "conflict": "reject",
+            "maximum_local_decision_flip": 0.01,
+            "maximum_local_net_harm": 0.01,
+            "maximum_old_target_decision_flip": 0.01,
+            "maximum_old_target_loss": 0.01,
+            "maximum_original_decision_flip": 0.01,
+            "maximum_original_net_harm": 0.01,
+            "minimum_new_target_gain": 0.1,
+            "score_budget": 0.5
+          },
+          "program": {
+            "base_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+            "edits": [
+              {
+                "after": -0.25,
+                "before": 0.25,
+                "index": [
+                  1,
+                  0
+                ],
+                "tensor": "w"
+              },
+              {
+                "after": 0.75,
+                "before": 0.375,
+                "index": [
+                  1
+                ],
+                "tensor": "b"
+              }
+            ],
+            "intent": "Designed cumulative budget counterexample",
+            "schema": "wsp-program/1"
+          },
+          "proposal_error": null,
+          "queue_map": [
+            0,
+            1
+          ],
+          "retained": [
+            {
+              "accepted_step": 1,
+              "case_id": "first",
+              "desired_code": 1,
+              "desired_queue": 1,
+              "features": "477615cf31dac0275da3bf4abfaf7ba09fbe201d7447bc2f9e63ee62dd67b329",
+              "inserted_endpoint_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+              "request_sha256": "e4571cfad43a95a48c394a94e9476f670091a8cc9b840fee2d1eba9586b34ddd",
+              "subject": "positive",
+              "target_label": 1
+            }
+          ],
+          "schema": "wsp-cumulative-request/1",
+          "sequence_contract_sha256": "4fbd5f1411acba1e7cf509cb518610c6b635cd0946e48978162e56476a023413",
+          "step": 2,
+          "target": {
+            "case_id": "second",
+            "desired_code": 1,
+            "desired_queue": 1,
+            "features": "cc8274820d5c921d58679a097dd44aba1add7a3fc09b12ed5813e65d9c667d30",
+            "subject": "negative",
+            "target_label": 1
+          }
+        },
+        "gates": [
+          {
+            "name": "correspondence",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "6d367d2fcf8047c46b0c96f082791d15d816706d499b1dd801f9c18be5a97654",
+            "evidence": {
+              "original": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+              "parent": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+              "candidate": "50f7827ca6d2a6a2391df7b8236283ca29641841b1da33032d0e9e481b31adb8",
+              "program": "c45540ed49328733cefd0ab0773c981254fce7b08daa92da51f2223e6bc7fff5",
+              "execution": {
+                "backend": "torch",
+                "bias": "native linear argument; fusion and reduction order are backend-controlled",
+                "decision": "lowest-index argmax then frozen queue map",
+                "device": "cpu",
+                "dtype": "float32",
+                "endpoint_cast": "round",
+                "environment": {
+                  "backend": "torch",
+                  "cuda_matmul_tf32": false,
+                  "cuda_version": null,
+                  "cudnn_benchmark": false,
+                  "cudnn_deterministic": false,
+                  "cudnn_tf32": true,
+                  "deterministic_algorithms": true,
+                  "device": "cpu",
+                  "float32_matmul_precision": "highest",
+                  "interop_threads": 8,
+                  "machine": "AMD64",
+                  "numpy_version": "2.5.3",
+                  "platform": "Windows-11-10.0.26300-SP0",
+                  "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+                  "python": "3.12.10",
+                  "thread_environment": {
+                    "MKL_NUM_THREADS": null,
+                    "OMP_NUM_THREADS": null,
+                    "OPENBLAS_NUM_THREADS": null
+                  },
+                  "threads": 4,
+                  "torch_version": "2.8.0+cpu"
+                },
+                "feature_cast": "round",
+                "layout": "C-order [outputs,features]",
+                "operator": "torch.nn.functional.linear"
+              }
+            }
+          },
+          {
+            "name": "proposal",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "6d367d2fcf8047c46b0c96f082791d15d816706d499b1dd801f9c18be5a97654",
+            "evidence": null
+          },
+          {
+            "name": "conflict",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "6d367d2fcf8047c46b0c96f082791d15d816706d499b1dd801f9c18be5a97654",
+            "evidence": {
+              "conflicting_subjects": [],
+              "policy": "reject"
+            }
+          },
+          {
+            "name": "local_protected_behavior",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "6d367d2fcf8047c46b0c96f082791d15d816706d499b1dd801f9c18be5a97654",
+            "evidence": {
+              "net_harm": 0.0,
+              "decision_flip": 0.0
+            }
+          },
+          {
+            "name": "original_protected_behavior",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "6d367d2fcf8047c46b0c96f082791d15d816706d499b1dd801f9c18be5a97654",
+            "evidence": {
+              "net_harm": 0.0,
+              "decision_flip": 0.0
+            }
+          },
+          {
+            "name": "local_score_budget",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "6d367d2fcf8047c46b0c96f082791d15d816706d499b1dd801f9c18be5a97654",
+            "evidence": {
+              "budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+                "candidate_sha256": "50f7827ca6d2a6a2391df7b8236283ca29641841b1da33032d0e9e481b31adb8",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "3/8"
+                ],
+                "maximum_exact": "3/8",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "d73e0613067ad4cfac5200bf1a128cf85208c83d83973e279ca594aa1a22101d",
+                  "candidate_sha256": "e274383b35dc4bfe54847e19f5b6938f667c7a840f1a520532ed5247ce48b530",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "c752b96f9e20964ab7cf627f2998e2673f6852298fd52deb2e2e0f094a518877",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "3/8"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "3/8"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "a85bcf4d6232357f28e3c7558bf4ac4db4a038d66f4f357b64584701ae825236"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "c8de28518e790b1734d0c007e61c93f96d8dd79d0de8cd9a9e1f5ba0278142e3"
+              }
+            }
+          },
+          {
+            "name": "original_score_budget",
+            "required": true,
+            "status": "observed_violation",
+            "request_sha256": "6d367d2fcf8047c46b0c96f082791d15d816706d499b1dd801f9c18be5a97654",
+            "evidence": {
+              "budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+                "candidate_sha256": "50f7827ca6d2a6a2391df7b8236283ca29641841b1da33032d0e9e481b31adb8",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "3/4"
+                ],
+                "maximum_exact": "3/4",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "a2c0a35ca073fbc3ce5968754de9a0f88dbdb3abea96f208ba5ffa5da9731ec9",
+                  "candidate_sha256": "e274383b35dc4bfe54847e19f5b6938f667c7a840f1a520532ed5247ce48b530",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "c752b96f9e20964ab7cf627f2998e2673f6852298fd52deb2e2e0f094a518877",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "3/4"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "3/4"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "cbf3c1f268a3d1577c75b3e88d5a20fad5d25c340e05cd595ef39d184c9d83a0"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "dc900a2a797c23e56719bcf1691b0dae68606e1e4f44f704091db85e4a65b814"
+              }
+            }
+          },
+          {
+            "name": "new_target_gain",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "6d367d2fcf8047c46b0c96f082791d15d816706d499b1dd801f9c18be5a97654",
+            "evidence": {
+              "gain_from_current_parent": 1.0,
+              "parent_accuracy": 0.0,
+              "candidate_accuracy": 1.0,
+              "minimum_gain": 0.1
+            }
+          },
+          {
+            "name": "retained/positive/1/e4571cfad43a95a48c394a94e9476f670091a8cc9b840fee2d1eba9586b34ddd",
+            "required": true,
+            "status": "observed_violation",
+            "request_sha256": "6d367d2fcf8047c46b0c96f082791d15d816706d499b1dd801f9c18be5a97654",
+            "evidence": {
+              "insertion": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+              "memory_age_steps": 1,
+              "accepted_request_sha256": "e4571cfad43a95a48c394a94e9476f670091a8cc9b840fee2d1eba9586b34ddd",
+              "accuracy_loss": 1.0,
+              "decision_flip": 1.0,
+              "score_budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+                "candidate_sha256": "50f7827ca6d2a6a2391df7b8236283ca29641841b1da33032d0e9e481b31adb8",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "477615cf31dac0275da3bf4abfaf7ba09fbe201d7447bc2f9e63ee62dd67b329",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "29/8"
+                ],
+                "maximum_exact": "29/8",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "d73e0613067ad4cfac5200bf1a128cf85208c83d83973e279ca594aa1a22101d",
+                  "candidate_sha256": "e274383b35dc4bfe54847e19f5b6938f667c7a840f1a520532ed5247ce48b530",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "79705e64a61ec7342e4e8fc708bbb5be7c1e15bdf6a42314e7b325ee9010d91b",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "29/8"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "29/8"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "e7e4f7d826d8c19762266bd839c78c6f1cec5f213476d4f75c2324ec3c1c8b6d"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "9f0dab02a67ea346258e8df3d7ea6f8ac862809551085205a5b0d9706048cb65"
+              }
+            }
+          }
+        ],
+        "accepted": false,
+        "no_op": false,
+        "deployed_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+        "scope": "Sampled cumulative affine-head contract; native decisions measured on declared CPU; no heldout utility claim",
+        "sha256": "38df6a1af11678b058e3461804d83f724e8ab7dd1dc92c5bc8cd88ad054c48ee"
+      }
+    ],
+    "endpoint_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+    "rollback": {
+      "schema": "wsp-cumulative-rollback/1",
+      "original_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+      "endpoint_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+      "composition_sha256": "82042b298991eb302f628a5446bae0288ec3deebf7c304280bfeea622feb9bbe",
+      "inverse": {
+        "schema": "wsp-program/1",
+        "base_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+        "intent": "Rollback: Sequential composition",
+        "edits": [
+          {
+            "tensor": "w",
+            "index": [
+              1,
+              0
+            ],
+            "before": 0.25,
+            "after": 0.0
+          },
+          {
+            "tensor": "b",
+            "index": [
+              1
+            ],
+            "before": 0.375,
+            "after": 0.0
+          }
+        ]
+      },
+      "restored_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+      "restored": true,
+      "named_state": [
+        "captured readout artifact tensors and immutable interface metadata"
+      ],
+      "external_state_restored": false,
+      "excluded_state": [
+        "encoder mutation",
+        "caches",
+        "RNG",
+        "assignments",
+        "deployment process",
+        "business actions"
+      ]
+    },
+    "proposals": [
+      {
+        "step": 1,
+        "fit_seconds": 0.0,
+        "shared_proposal": false,
+        "diagnostics": null
+      },
+      {
+        "step": 2,
+        "fit_seconds": 0.0,
+        "shared_proposal": false,
+        "diagnostics": null
+      }
+    ]
+  },
+  "conflict": {
+    "contract": {
+      "schema": "wsp-cumulative-sequence-contract/1",
+      "original_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+      "head": {
+        "weight": "w",
+        "bias": "b",
+        "feature_id": "designed/1"
+      },
+      "queue_map": [
+        0,
+        1
+      ],
+      "baseline_features": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+      "baseline_labels": "3200661a490a71c7ef2acf143ba1c5935beb547d0bd004ed398a84e2715a0660",
+      "policy": {
+        "score_budget": 0.5,
+        "maximum_original_decision_flip": 0.01,
+        "maximum_local_decision_flip": 0.01,
+        "maximum_original_net_harm": 0.01,
+        "maximum_local_net_harm": 0.01,
+        "maximum_old_target_loss": 0.01,
+        "maximum_old_target_decision_flip": 0.01,
+        "minimum_new_target_gain": 0.1,
+        "conflict": "reject",
+        "abstention": "keep_last_accepted"
+      },
+      "mode": "cumulative",
+      "order": [
+        {
+          "subject": "positive",
+          "case_id": "first",
+          "target_label": 1,
+          "desired_code": 1,
+          "desired_queue": 1,
+          "features": "477615cf31dac0275da3bf4abfaf7ba09fbe201d7447bc2f9e63ee62dd67b329"
+        },
+        {
+          "subject": "positive",
+          "case_id": "conflict",
+          "target_label": 1,
+          "desired_code": 0,
+          "desired_queue": 0,
+          "features": "477615cf31dac0275da3bf4abfaf7ba09fbe201d7447bc2f9e63ee62dd67b329"
+        }
+      ]
+    },
+    "contract_sha256": "a3dd322029d1c2041b78cbbe7d44949ba9efffe2a4e75f0eab90320ad8777d57",
+    "records": [
+      {
+        "schema": "wsp-cumulative-record/1",
+        "request_sha256": "18ac0e70f637b95deda1a463c712317f58cafa0423a351bae8d4b859ae1eda68",
+        "request": {
+          "baseline_features": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+          "baseline_labels": "3200661a490a71c7ef2acf143ba1c5935beb547d0bd004ed398a84e2715a0660",
+          "candidate_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+          "execution": {
+            "backend": "torch",
+            "bias": "native linear argument; fusion and reduction order are backend-controlled",
+            "decision": "lowest-index argmax then frozen queue map",
+            "device": "cpu",
+            "dtype": "float32",
+            "endpoint_cast": "round",
+            "environment": {
+              "backend": "torch",
+              "cuda_matmul_tf32": false,
+              "cuda_version": null,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": false,
+              "cudnn_tf32": true,
+              "deterministic_algorithms": true,
+              "device": "cpu",
+              "float32_matmul_precision": "highest",
+              "interop_threads": 8,
+              "machine": "AMD64",
+              "numpy_version": "2.5.3",
+              "platform": "Windows-11-10.0.26300-SP0",
+              "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+              "python": "3.12.10",
+              "thread_environment": {
+                "MKL_NUM_THREADS": null,
+                "OMP_NUM_THREADS": null,
+                "OPENBLAS_NUM_THREADS": null
+              },
+              "threads": 4,
+              "torch_version": "2.8.0+cpu"
+            },
+            "feature_cast": "round",
+            "layout": "C-order [outputs,features]",
+            "operator": "torch.nn.functional.linear"
+          },
+          "head": {
+            "bias": "b",
+            "feature_id": "designed/1",
+            "weight": "w"
+          },
+          "history_sha256": "a3dd322029d1c2041b78cbbe7d44949ba9efffe2a4e75f0eab90320ad8777d57",
+          "mode": "cumulative",
+          "original_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+          "parent_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+          "policy": {
+            "abstention": "keep_last_accepted",
+            "conflict": "reject",
+            "maximum_local_decision_flip": 0.01,
+            "maximum_local_net_harm": 0.01,
+            "maximum_old_target_decision_flip": 0.01,
+            "maximum_old_target_loss": 0.01,
+            "maximum_original_decision_flip": 0.01,
+            "maximum_original_net_harm": 0.01,
+            "minimum_new_target_gain": 0.1,
+            "score_budget": 0.5
+          },
+          "program": {
+            "base_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+            "edits": [
+              {
+                "after": 0.25,
+                "before": 0.0,
+                "index": [
+                  1,
+                  0
+                ],
+                "tensor": "w"
+              },
+              {
+                "after": 0.375,
+                "before": 0.0,
+                "index": [
+                  1
+                ],
+                "tensor": "b"
+              }
+            ],
+            "intent": "Designed cumulative budget counterexample",
+            "schema": "wsp-program/1"
+          },
+          "proposal_error": null,
+          "queue_map": [
+            0,
+            1
+          ],
+          "retained": [],
+          "schema": "wsp-cumulative-request/1",
+          "sequence_contract_sha256": "a3dd322029d1c2041b78cbbe7d44949ba9efffe2a4e75f0eab90320ad8777d57",
+          "step": 1,
+          "target": {
+            "case_id": "first",
+            "desired_code": 1,
+            "desired_queue": 1,
+            "features": "477615cf31dac0275da3bf4abfaf7ba09fbe201d7447bc2f9e63ee62dd67b329",
+            "subject": "positive",
+            "target_label": 1
+          }
+        },
+        "gates": [
+          {
+            "name": "correspondence",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "18ac0e70f637b95deda1a463c712317f58cafa0423a351bae8d4b859ae1eda68",
+            "evidence": {
+              "original": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+              "parent": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+              "candidate": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+              "program": "ae38ff52ee5ca38a3af8e6aeec5f77768285eb82584e6323a5049f581a7975fa",
+              "execution": {
+                "backend": "torch",
+                "bias": "native linear argument; fusion and reduction order are backend-controlled",
+                "decision": "lowest-index argmax then frozen queue map",
+                "device": "cpu",
+                "dtype": "float32",
+                "endpoint_cast": "round",
+                "environment": {
+                  "backend": "torch",
+                  "cuda_matmul_tf32": false,
+                  "cuda_version": null,
+                  "cudnn_benchmark": false,
+                  "cudnn_deterministic": false,
+                  "cudnn_tf32": true,
+                  "deterministic_algorithms": true,
+                  "device": "cpu",
+                  "float32_matmul_precision": "highest",
+                  "interop_threads": 8,
+                  "machine": "AMD64",
+                  "numpy_version": "2.5.3",
+                  "platform": "Windows-11-10.0.26300-SP0",
+                  "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+                  "python": "3.12.10",
+                  "thread_environment": {
+                    "MKL_NUM_THREADS": null,
+                    "OMP_NUM_THREADS": null,
+                    "OPENBLAS_NUM_THREADS": null
+                  },
+                  "threads": 4,
+                  "torch_version": "2.8.0+cpu"
+                },
+                "feature_cast": "round",
+                "layout": "C-order [outputs,features]",
+                "operator": "torch.nn.functional.linear"
+              }
+            }
+          },
+          {
+            "name": "proposal",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "18ac0e70f637b95deda1a463c712317f58cafa0423a351bae8d4b859ae1eda68",
+            "evidence": null
+          },
+          {
+            "name": "conflict",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "18ac0e70f637b95deda1a463c712317f58cafa0423a351bae8d4b859ae1eda68",
+            "evidence": {
+              "conflicting_subjects": [],
+              "policy": "reject"
+            }
+          },
+          {
+            "name": "local_protected_behavior",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "18ac0e70f637b95deda1a463c712317f58cafa0423a351bae8d4b859ae1eda68",
+            "evidence": {
+              "net_harm": 0.0,
+              "decision_flip": 0.0
+            }
+          },
+          {
+            "name": "original_protected_behavior",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "18ac0e70f637b95deda1a463c712317f58cafa0423a351bae8d4b859ae1eda68",
+            "evidence": {
+              "net_harm": 0.0,
+              "decision_flip": 0.0
+            }
+          },
+          {
+            "name": "local_score_budget",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "18ac0e70f637b95deda1a463c712317f58cafa0423a351bae8d4b859ae1eda68",
+            "evidence": {
+              "budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+                "candidate_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "3/8"
+                ],
+                "maximum_exact": "3/8",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "a2c0a35ca073fbc3ce5968754de9a0f88dbdb3abea96f208ba5ffa5da9731ec9",
+                  "candidate_sha256": "d73e0613067ad4cfac5200bf1a128cf85208c83d83973e279ca594aa1a22101d",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "c752b96f9e20964ab7cf627f2998e2673f6852298fd52deb2e2e0f094a518877",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "3/8"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "3/8"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "6e93c02dab09be531c2d01b3fa7f8aadd48fb74b05041e3bbc789f403612ad45"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "b6208009ddbae98b68eca5ed966a0f209277f32c2bfda071955e6f5f42cbc1a8"
+              }
+            }
+          },
+          {
+            "name": "original_score_budget",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "18ac0e70f637b95deda1a463c712317f58cafa0423a351bae8d4b859ae1eda68",
+            "evidence": {
+              "budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+                "candidate_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "3/8"
+                ],
+                "maximum_exact": "3/8",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "a2c0a35ca073fbc3ce5968754de9a0f88dbdb3abea96f208ba5ffa5da9731ec9",
+                  "candidate_sha256": "d73e0613067ad4cfac5200bf1a128cf85208c83d83973e279ca594aa1a22101d",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "c752b96f9e20964ab7cf627f2998e2673f6852298fd52deb2e2e0f094a518877",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "3/8"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "3/8"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "6e93c02dab09be531c2d01b3fa7f8aadd48fb74b05041e3bbc789f403612ad45"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "b6208009ddbae98b68eca5ed966a0f209277f32c2bfda071955e6f5f42cbc1a8"
+              }
+            }
+          },
+          {
+            "name": "new_target_gain",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "18ac0e70f637b95deda1a463c712317f58cafa0423a351bae8d4b859ae1eda68",
+            "evidence": {
+              "gain_from_current_parent": 1.0,
+              "parent_accuracy": 0.0,
+              "candidate_accuracy": 1.0,
+              "minimum_gain": 0.1
+            }
+          }
+        ],
+        "accepted": true,
+        "no_op": false,
+        "deployed_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+        "scope": "Sampled cumulative affine-head contract; native decisions measured on declared CPU; no heldout utility claim",
+        "sha256": "a890a3b00904e67fe1d480e7e1b3dba39b182bbbd141d725323eaa343307333e"
+      },
+      {
+        "schema": "wsp-cumulative-record/1",
+        "request_sha256": "62604ecd51b88999b80465e8142643d990bcc0d8b2193ab557a5aa4f72e65849",
+        "request": {
+          "baseline_features": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+          "baseline_labels": "3200661a490a71c7ef2acf143ba1c5935beb547d0bd004ed398a84e2715a0660",
+          "candidate_sha256": "a9313b01566e62181bdbc66d71c9fbf2e206b0740e4f14826547430e96268812",
+          "execution": {
+            "backend": "torch",
+            "bias": "native linear argument; fusion and reduction order are backend-controlled",
+            "decision": "lowest-index argmax then frozen queue map",
+            "device": "cpu",
+            "dtype": "float32",
+            "endpoint_cast": "round",
+            "environment": {
+              "backend": "torch",
+              "cuda_matmul_tf32": false,
+              "cuda_version": null,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": false,
+              "cudnn_tf32": true,
+              "deterministic_algorithms": true,
+              "device": "cpu",
+              "float32_matmul_precision": "highest",
+              "interop_threads": 8,
+              "machine": "AMD64",
+              "numpy_version": "2.5.3",
+              "platform": "Windows-11-10.0.26300-SP0",
+              "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+              "python": "3.12.10",
+              "thread_environment": {
+                "MKL_NUM_THREADS": null,
+                "OMP_NUM_THREADS": null,
+                "OPENBLAS_NUM_THREADS": null
+              },
+              "threads": 4,
+              "torch_version": "2.8.0+cpu"
+            },
+            "feature_cast": "round",
+            "layout": "C-order [outputs,features]",
+            "operator": "torch.nn.functional.linear"
+          },
+          "head": {
+            "bias": "b",
+            "feature_id": "designed/1",
+            "weight": "w"
+          },
+          "history_sha256": "a890a3b00904e67fe1d480e7e1b3dba39b182bbbd141d725323eaa343307333e",
+          "mode": "cumulative",
+          "original_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+          "parent_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+          "policy": {
+            "abstention": "keep_last_accepted",
+            "conflict": "reject",
+            "maximum_local_decision_flip": 0.01,
+            "maximum_local_net_harm": 0.01,
+            "maximum_old_target_decision_flip": 0.01,
+            "maximum_old_target_loss": 0.01,
+            "maximum_original_decision_flip": 0.01,
+            "maximum_original_net_harm": 0.01,
+            "minimum_new_target_gain": 0.1,
+            "score_budget": 0.5
+          },
+          "program": {
+            "base_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+            "edits": [
+              {
+                "after": 0.75,
+                "before": 0.375,
+                "index": [
+                  1
+                ],
+                "tensor": "b"
+              }
+            ],
+            "intent": "Designed cumulative budget counterexample",
+            "schema": "wsp-program/1"
+          },
+          "proposal_error": null,
+          "queue_map": [
+            0,
+            1
+          ],
+          "retained": [
+            {
+              "accepted_step": 1,
+              "case_id": "first",
+              "desired_code": 1,
+              "desired_queue": 1,
+              "features": "477615cf31dac0275da3bf4abfaf7ba09fbe201d7447bc2f9e63ee62dd67b329",
+              "inserted_endpoint_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+              "request_sha256": "18ac0e70f637b95deda1a463c712317f58cafa0423a351bae8d4b859ae1eda68",
+              "subject": "positive",
+              "target_label": 1
+            }
+          ],
+          "schema": "wsp-cumulative-request/1",
+          "sequence_contract_sha256": "a3dd322029d1c2041b78cbbe7d44949ba9efffe2a4e75f0eab90320ad8777d57",
+          "step": 2,
+          "target": {
+            "case_id": "conflict",
+            "desired_code": 0,
+            "desired_queue": 0,
+            "features": "477615cf31dac0275da3bf4abfaf7ba09fbe201d7447bc2f9e63ee62dd67b329",
+            "subject": "positive",
+            "target_label": 1
+          }
+        },
+        "gates": [
+          {
+            "name": "correspondence",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "62604ecd51b88999b80465e8142643d990bcc0d8b2193ab557a5aa4f72e65849",
+            "evidence": {
+              "original": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+              "parent": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+              "candidate": "a9313b01566e62181bdbc66d71c9fbf2e206b0740e4f14826547430e96268812",
+              "program": "148b953c17bb2638ae1543e061caffbb0f07a892f9e050a2064a58a711ef1e1d",
+              "execution": {
+                "backend": "torch",
+                "bias": "native linear argument; fusion and reduction order are backend-controlled",
+                "decision": "lowest-index argmax then frozen queue map",
+                "device": "cpu",
+                "dtype": "float32",
+                "endpoint_cast": "round",
+                "environment": {
+                  "backend": "torch",
+                  "cuda_matmul_tf32": false,
+                  "cuda_version": null,
+                  "cudnn_benchmark": false,
+                  "cudnn_deterministic": false,
+                  "cudnn_tf32": true,
+                  "deterministic_algorithms": true,
+                  "device": "cpu",
+                  "float32_matmul_precision": "highest",
+                  "interop_threads": 8,
+                  "machine": "AMD64",
+                  "numpy_version": "2.5.3",
+                  "platform": "Windows-11-10.0.26300-SP0",
+                  "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+                  "python": "3.12.10",
+                  "thread_environment": {
+                    "MKL_NUM_THREADS": null,
+                    "OMP_NUM_THREADS": null,
+                    "OPENBLAS_NUM_THREADS": null
+                  },
+                  "threads": 4,
+                  "torch_version": "2.8.0+cpu"
+                },
+                "feature_cast": "round",
+                "layout": "C-order [outputs,features]",
+                "operator": "torch.nn.functional.linear"
+              }
+            }
+          },
+          {
+            "name": "proposal",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "62604ecd51b88999b80465e8142643d990bcc0d8b2193ab557a5aa4f72e65849",
+            "evidence": null
+          },
+          {
+            "name": "conflict",
+            "required": true,
+            "status": "conflict_rejection",
+            "request_sha256": "62604ecd51b88999b80465e8142643d990bcc0d8b2193ab557a5aa4f72e65849",
+            "evidence": {
+              "conflicting_subjects": [
+                "positive"
+              ],
+              "policy": "reject"
+            }
+          },
+          {
+            "name": "local_protected_behavior",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "62604ecd51b88999b80465e8142643d990bcc0d8b2193ab557a5aa4f72e65849",
+            "evidence": {
+              "net_harm": 0.0,
+              "decision_flip": 0.0
+            }
+          },
+          {
+            "name": "original_protected_behavior",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "62604ecd51b88999b80465e8142643d990bcc0d8b2193ab557a5aa4f72e65849",
+            "evidence": {
+              "net_harm": 0.0,
+              "decision_flip": 0.0
+            }
+          },
+          {
+            "name": "local_score_budget",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "62604ecd51b88999b80465e8142643d990bcc0d8b2193ab557a5aa4f72e65849",
+            "evidence": {
+              "budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+                "candidate_sha256": "a9313b01566e62181bdbc66d71c9fbf2e206b0740e4f14826547430e96268812",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "3/8"
+                ],
+                "maximum_exact": "3/8",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "d73e0613067ad4cfac5200bf1a128cf85208c83d83973e279ca594aa1a22101d",
+                  "candidate_sha256": "ae65b629df93537ef690b0c5cc5f741babfc73b4ed77713adf3b66e6f000f363",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "c752b96f9e20964ab7cf627f2998e2673f6852298fd52deb2e2e0f094a518877",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "3/8"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "3/8"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "72ed2c88c2de7de060480272180d75baf1898a7293203f79e6281b5e901d0d1c"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "6a27c04697f95d83982260a4c9f12fa40171afa95408941addd5b1e1931fde78"
+              }
+            }
+          },
+          {
+            "name": "original_score_budget",
+            "required": true,
+            "status": "observed_violation",
+            "request_sha256": "62604ecd51b88999b80465e8142643d990bcc0d8b2193ab557a5aa4f72e65849",
+            "evidence": {
+              "budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+                "candidate_sha256": "a9313b01566e62181bdbc66d71c9fbf2e206b0740e4f14826547430e96268812",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "a2d6671c825b3d82e37d81d78fd126ade04c1bb359a72d8e85a32719b98c45c7",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "3/4"
+                ],
+                "maximum_exact": "3/4",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "a2c0a35ca073fbc3ce5968754de9a0f88dbdb3abea96f208ba5ffa5da9731ec9",
+                  "candidate_sha256": "ae65b629df93537ef690b0c5cc5f741babfc73b4ed77713adf3b66e6f000f363",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "c752b96f9e20964ab7cf627f2998e2673f6852298fd52deb2e2e0f094a518877",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "3/4"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "3/4"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "e8723f5ce8735aa0a8f5a13ebff12d6044c54c096ddd420751a7a8f305c5a510"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "15aba469364b48157b6fe4458bd9ce600b5029a14a1cf857da16bc50e12944e1"
+              }
+            }
+          },
+          {
+            "name": "new_target_gain",
+            "required": true,
+            "status": "observed_violation",
+            "request_sha256": "62604ecd51b88999b80465e8142643d990bcc0d8b2193ab557a5aa4f72e65849",
+            "evidence": {
+              "gain_from_current_parent": 0.0,
+              "parent_accuracy": 0.0,
+              "candidate_accuracy": 0.0,
+              "minimum_gain": 0.1
+            }
+          },
+          {
+            "name": "retained/positive/1/18ac0e70f637b95deda1a463c712317f58cafa0423a351bae8d4b859ae1eda68",
+            "required": true,
+            "status": "pass",
+            "request_sha256": "62604ecd51b88999b80465e8142643d990bcc0d8b2193ab557a5aa4f72e65849",
+            "evidence": {
+              "insertion": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+              "memory_age_steps": 1,
+              "accepted_request_sha256": "18ac0e70f637b95deda1a463c712317f58cafa0423a351bae8d4b859ae1eda68",
+              "accuracy_loss": 0.0,
+              "decision_flip": 0.0,
+              "score_budget": 0.5,
+              "receipt": {
+                "schema": "wsp-cumulative-sample-drift/1",
+                "base_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+                "candidate_sha256": "a9313b01566e62181bdbc66d71c9fbf2e206b0740e4f14826547430e96268812",
+                "head": {
+                  "weight": "w",
+                  "bias": "b",
+                  "feature_id": "designed/1"
+                },
+                "features_sha256": "477615cf31dac0275da3bf4abfaf7ba09fbe201d7447bc2f9e63ee62dd67b329",
+                "changed_outputs": [
+                  1
+                ],
+                "maximum_residuals_exact": [
+                  "0",
+                  "3/8"
+                ],
+                "maximum_exact": "3/8",
+                "exactly_zero": false,
+                "changed_output_certificate": {
+                  "schema": "wsp-feature-retention/1",
+                  "base_sha256": "d73e0613067ad4cfac5200bf1a128cf85208c83d83973e279ca594aa1a22101d",
+                  "candidate_sha256": "ae65b629df93537ef690b0c5cc5f741babfc73b4ed77713adf3b66e6f000f363",
+                  "head": {
+                    "weight": "w",
+                    "bias": "b",
+                    "feature_id": "designed/1"
+                  },
+                  "feature_sha256": "79705e64a61ec7342e4e8fc708bbb5be7c1e15bdf6a42314e7b325ee9010d91b",
+                  "anchor_count": 1,
+                  "absolute_residuals_exact": [
+                    [
+                      "3/8"
+                    ]
+                  ],
+                  "maximum_residuals_exact": [
+                    "3/8"
+                  ],
+                  "exactly_zero_on_supplied_features": false,
+                  "semantics": "Real linear head on supplied frozen features; bias is a constant augmented feature",
+                  "feature_extractor_verified": false,
+                  "floating_execution_verified": false,
+                  "span_extension": "At augmented feature sum(c[k]*anchor[k]), drift <= sum(abs(c[k])*anchor_residual[k])",
+                  "sha256": "422aaede31fedf6c24d37990e8a952b1091c4b58aeead89579d459f5c639ccc5"
+                },
+                "scope": "Exact real affine residuals on these supplied features only; equal stored rows contribute exactly zero",
+                "feature_extractor_verified": false,
+                "native_execution_verified": false,
+                "implementation_machine_checked": false,
+                "sha256": "78dd5b5837e151c36b94c497920f5b3550b39f48fb29aa92bbe851c5e2bccea1"
+              }
+            }
+          }
+        ],
+        "accepted": false,
+        "no_op": false,
+        "deployed_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+        "scope": "Sampled cumulative affine-head contract; native decisions measured on declared CPU; no heldout utility claim",
+        "sha256": "ad18d5bbb96e4f2d844ee9b2d17707166afe2013fbd99e08957660cf3c071689"
+      }
+    ],
+    "endpoint_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+    "rollback": {
+      "schema": "wsp-cumulative-rollback/1",
+      "original_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+      "endpoint_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+      "composition_sha256": "82042b298991eb302f628a5446bae0288ec3deebf7c304280bfeea622feb9bbe",
+      "inverse": {
+        "schema": "wsp-program/1",
+        "base_sha256": "8e135e260f3662715f4d03453d0b3ed4a4a274db4a4db5def10b15532732b86e",
+        "intent": "Rollback: Sequential composition",
+        "edits": [
+          {
+            "tensor": "w",
+            "index": [
+              1,
+              0
+            ],
+            "before": 0.25,
+            "after": 0.0
+          },
+          {
+            "tensor": "b",
+            "index": [
+              1
+            ],
+            "before": 0.375,
+            "after": 0.0
+          }
+        ]
+      },
+      "restored_sha256": "e7e55ed9744194821449b95593c8026b79d8c1d0d35f01ac77e919867b20d1f9",
+      "restored": true,
+      "named_state": [
+        "captured readout artifact tensors and immutable interface metadata"
+      ],
+      "external_state_restored": false,
+      "excluded_state": [
+        "encoder mutation",
+        "caches",
+        "RNG",
+        "assignments",
+        "deployment process",
+        "business actions"
+      ]
+    },
+    "proposals": [
+      {
+        "step": 1,
+        "fit_seconds": 0.0,
+        "shared_proposal": false,
+        "diagnostics": null
+      },
+      {
+        "step": 2,
+        "fit_seconds": 0.0,
+        "shared_proposal": false,
+        "diagnostics": null
+      }
+    ]
+  }
+}

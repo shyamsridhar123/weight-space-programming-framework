@@ -1,0 +1,1005 @@
+[
+  {
+    "action": "session_created",
+    "charges": {},
+    "error": null,
+    "previous_sha256": null,
+    "request": {
+      "access": {
+        "activations": false,
+        "feedback": false,
+        "forward": false,
+        "metadata": true,
+        "weight_decimals": null,
+        "weights": true
+      },
+      "architecture": "trained-frozen-readout/1",
+      "base_sha256": "8c6fe11404b7821175a6eea7f5c47e533128a47777b72e8a994c6d608304ebfe",
+      "callbacks_registered": {
+        "activations": false,
+        "feedback": false,
+        "forward": false
+      },
+      "constraints_sha256": "790cafd5dff6642ccaa5c96bb1e80802c6e421a44b30dbba704c1f83af099083",
+      "declared_constraints_automatically_enforced": false,
+      "enforcement": "cooperative_same_process_interface",
+      "execution_accounting": "interface_calls_and_submitted_examples; callback_internal_work_not_observed",
+      "limits": {
+        "execution_calls": 10,
+        "execution_examples": 1000,
+        "feedback_calls": 10,
+        "feedback_examples": 1000,
+        "input_tokens": 100000,
+        "output_tokens": 100000,
+        "proposals": 1,
+        "tool_calls": 4,
+        "weight_values": 10140
+      },
+      "mode": "edit",
+      "objective": "Change the derived routing decision for a frozen trained representation",
+      "schema": "wsp-session-config/1",
+      "splits": {
+        "declared_lineage_overlap": false,
+        "lineage_independence_verified": false,
+        "lineage_scope": "caller_declared_only",
+        "sample_overlap": false,
+        "schema": "wsp-split-validation/1",
+        "sha256": "34b03697142177d63b1dd5e805926c8db14cf8fbb914a0c4b422e6c5a2fc0cb5",
+        "splits": [
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "40f5a4ba7e8e04fdaeac14cece2a58b0bcfe47c773745872a4ab92670b797bfb",
+            "name": "train",
+            "sample_count": 5971
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "aae6fb6bc2632a1a1134f5e19e5c7a8177c4b6b08d0ba35cc445289e327328df",
+            "name": "development",
+            "sample_count": 965
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "53c5974a34265de1e169b2de6faaa872660ba743fb12c7c78bb5ff35dbd08db0",
+            "name": "target",
+            "sample_count": 968
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "267857f8333ddc893b2b90c06e4c68b94a2b86d4e82a504c0261a9145cbaf55e",
+            "name": "protected",
+            "sample_count": 968
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "e769042bcb33be1a433b1b28d9ca7a9ab391696fe7f5fd25207ad56510716e31",
+            "name": "calibration",
+            "sample_count": 1131
+          },
+          {
+            "lineage_count": 0,
+            "manifest_sha256": "3cc7f8d57f56cdde6e2da6114b0ef3a6a3fc305ce40884685abbf947b35aab82",
+            "name": "test",
+            "sample_count": 3080
+          }
+        ]
+      },
+      "task_id": "banking77-main-full-7001/recognition/atm_support/decision",
+      "task_sha256": "1d8f825e1ade5e7fcc453684680ab12e3193ee4dc7c3c2e6eb48f0fb083bd00c",
+      "token_accounting": "provider_supplied_not_locally_measured"
+    },
+    "requested_charges": {},
+    "result": {},
+    "schema": "wsp-trace-event/1",
+    "sequence": 0,
+    "session_sha256": "f7304ca5ff1d7ff2fa3673e84835705770ab21429d5f4e0abef261bb5549bf2e",
+    "sha256": "94e5b1fbcc86a81377f35c7a84f0cc9b1c37701199c3076728fbbe9073f9c19e",
+    "status": "succeeded",
+    "task_sha256": "1d8f825e1ade5e7fcc453684680ab12e3193ee4dc7c3c2e6eb48f0fb083bd00c",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 0,
+      "weight_values": 0
+    }
+  },
+  {
+    "action": "metadata",
+    "charges": {
+      "tool_calls": 1
+    },
+    "error": null,
+    "previous_sha256": "94e5b1fbcc86a81377f35c7a84f0cc9b1c37701199c3076728fbbe9073f9c19e",
+    "request": {},
+    "requested_charges": {
+      "tool_calls": 1
+    },
+    "result": {
+      "artifact": {
+        "architecture": "trained-frozen-readout/1",
+        "metadata": {
+          "domain": "banking77",
+          "encoder_semantics": "Supervised float32 affine/ReLU bottleneck; frozen after development-selected epoch",
+          "encoder_sha256": "e3d0fe7a6e333c957f203de3f04a41621a2c467379a29de450a778aeaa0241ab",
+          "feature_id": "23350df68035fa55e6c12da7d9f2ce1f23383eec483bcf0cd4347a42f4c6ef26",
+          "feature_names": [
+            "h000",
+            "h001",
+            "h002",
+            "h003",
+            "h004",
+            "h005",
+            "h006",
+            "h007",
+            "h008",
+            "h009",
+            "h010",
+            "h011",
+            "h012",
+            "h013",
+            "h014",
+            "h015",
+            "h016",
+            "h017",
+            "h018",
+            "h019",
+            "h020",
+            "h021",
+            "h022",
+            "h023",
+            "h024",
+            "h025",
+            "h026",
+            "h027",
+            "h028",
+            "h029",
+            "h030",
+            "h031",
+            "h032",
+            "h033",
+            "h034",
+            "h035",
+            "h036",
+            "h037",
+            "h038",
+            "h039",
+            "h040",
+            "h041",
+            "h042",
+            "h043",
+            "h044",
+            "h045",
+            "h046",
+            "h047",
+            "h048",
+            "h049",
+            "h050",
+            "h051",
+            "h052",
+            "h053",
+            "h054",
+            "h055",
+            "h056",
+            "h057",
+            "h058",
+            "h059",
+            "h060",
+            "h061",
+            "h062",
+            "h063"
+          ],
+          "head_semantics": "float32 affine output codes; queue decision maps the deterministic lowest-index argmax code",
+          "lineage_seed": 7001,
+          "native_dtype": "float32",
+          "output_names": [
+            "card_arrival",
+            "card_linking",
+            "exchange_rate",
+            "card_payment_wrong_exchange_rate",
+            "extra_charge_on_statement",
+            "pending_cash_withdrawal",
+            "fiat_currency_support",
+            "card_delivery_estimate",
+            "automatic_top_up",
+            "card_not_working",
+            "exchange_via_app",
+            "lost_or_stolen_card",
+            "age_limit",
+            "pin_blocked",
+            "contactless_not_working",
+            "top_up_by_bank_transfer_charge",
+            "pending_top_up",
+            "cancel_transfer",
+            "top_up_limits",
+            "wrong_amount_of_cash_received",
+            "card_payment_fee_charged",
+            "transfer_not_received_by_recipient",
+            "supported_cards_and_currencies",
+            "getting_virtual_card",
+            "card_acceptance",
+            "top_up_reverted",
+            "balance_not_updated_after_cheque_or_cash_deposit",
+            "card_payment_not_recognised",
+            "edit_personal_details",
+            "why_verify_identity",
+            "unable_to_verify_identity",
+            "get_physical_card",
+            "visa_or_mastercard",
+            "topping_up_by_card",
+            "disposable_card_limits",
+            "compromised_card",
+            "atm_support",
+            "direct_debit_payment_not_recognised",
+            "passcode_forgotten",
+            "declined_cash_withdrawal",
+            "pending_card_payment",
+            "lost_or_stolen_phone",
+            "request_refund",
+            "declined_transfer",
+            "Refund_not_showing_up",
+            "declined_card_payment",
+            "pending_transfer",
+            "terminate_account",
+            "card_swallowed",
+            "transaction_charged_twice",
+            "verify_source_of_funds",
+            "transfer_timing",
+            "reverted_card_payment?",
+            "change_pin",
+            "beneficiary_not_allowed",
+            "transfer_fee_charged",
+            "receiving_money",
+            "failed_transfer",
+            "transfer_into_account",
+            "verify_top_up",
+            "getting_spare_card",
+            "top_up_by_cash_or_cheque",
+            "order_physical_card",
+            "virtual_card_not_working",
+            "wrong_exchange_rate_for_cash_withdrawal",
+            "get_disposable_virtual_card",
+            "top_up_failed",
+            "balance_not_updated_after_bank_transfer",
+            "cash_withdrawal_not_recognised",
+            "exchange_charge",
+            "top_up_by_card_charge",
+            "activate_my_card",
+            "cash_withdrawal_charge",
+            "card_about_to_expire",
+            "apple_pay_or_google_pay",
+            "verify_my_identity",
+            "country_support",
+            "specialist_routing_code"
+          ],
+          "preprocessing_sha256": "906c1ad978464358d4c27ea3b4b716aa9488dc1fc7be8ccf088af1573aff088d",
+          "pretraining_ancestry": "Independent encoder and head initialized and supervised-trained from scratch; no pretrained model"
+        },
+        "sha256": "8c6fe11404b7821175a6eea7f5c47e533128a47777b72e8a994c6d608304ebfe",
+        "tensors": {
+          "head.bias": {
+            "dtype": "float64",
+            "shape": [
+              78
+            ]
+          },
+          "head.weight": {
+            "dtype": "float64",
+            "shape": [
+              78,
+              64
+            ]
+          }
+        }
+      },
+      "constraints_status": "declared_context_not_automatically_enforced",
+      "task": {
+        "architecture": "trained-frozen-readout/1",
+        "base_sha256": "8c6fe11404b7821175a6eea7f5c47e533128a47777b72e8a994c6d608304ebfe",
+        "constraints": {
+          "arm": "decision",
+          "behavioral_admission": "frozen finite calibration samples; no whole-domain guarantee",
+          "case": {
+            "case_id": "recognition/atm_support",
+            "confused_with": "visa_or_mastercard",
+            "desired_code": 36,
+            "desired_queue": 1,
+            "pilot_development_confusion_events": 7,
+            "pilot_development_error_rates": [
+              0.25,
+              0.125,
+              0.5
+            ],
+            "selection": "largest aggregated cross-queue confusion over pilot development; distinct truth labels, >=2 pilot lineages err, label-order tie break",
+            "target_label": 36,
+            "target_name": "atm_support",
+            "type": "recognition"
+          },
+          "configuration": {
+            "penalty": 8.0
+          },
+          "margins": {
+            "maximum_protected_harm": 0.01,
+            "minimum_target_gain": 0.1,
+            "minimum_useful_coverage": 0.75
+          },
+          "nullspace_additional_contract": null,
+          "numeric_lane": "native Torch CPU float32 readout",
+          "protected_feature_sha256": "1e15be3513bbed3e2b953b4d05d6971ef2caa98c2680dc4aefc504a02cb2f1ad",
+          "protocol_sha256": "41179db4fe54abc187c6255526c4705ff67a8d69236e0f3a798a647a94154ded",
+          "structural_policy": {
+            "max_change_abs": 256.0,
+            "max_edits": 5070,
+            "max_parameter_abs": 256.0,
+            "writable": [
+              "head.weight",
+              "head.bias"
+            ]
+          },
+          "target_feature_sha256": "5711e3cea9c80a7c7d5273dfec59e770ddfb8ce0ff6d90eb2fb601a39b6293f9"
+        },
+        "mode": "edit",
+        "objective": "Change the derived routing decision for a frozen trained representation",
+        "schema": "wsp-task/1",
+        "task_id": "banking77-main-full-7001/recognition/atm_support/decision"
+      }
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 1,
+    "session_sha256": "f7304ca5ff1d7ff2fa3673e84835705770ab21429d5f4e0abef261bb5549bf2e",
+    "sha256": "5b445d8ffda957252e929ebabf6c23609d158de3f561f29a7f60a49aed3ed1e4",
+    "status": "succeeded",
+    "task_sha256": "1d8f825e1ade5e7fcc453684680ab12e3193ee4dc7c3c2e6eb48f0fb083bd00c",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 0,
+      "tool_calls": 1,
+      "weight_values": 0
+    }
+  },
+  {
+    "action": "propose_program",
+    "charges": {
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 5070
+    },
+    "error": null,
+    "previous_sha256": "5b445d8ffda957252e929ebabf6c23609d158de3f561f29a7f60a49aed3ed1e4",
+    "request": {
+      "parser": "typed_program_or_wsp-program/1",
+      "program": {
+        "base_sha256": "8c6fe11404b7821175a6eea7f5c47e533128a47777b72e8a994c6d608304ebfe",
+        "edits": [
+          {
+            "after": 0.14220556616783142,
+            "before": 0.12183812260627747,
+            "index": [
+              36,
+              0
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.447814017534256,
+            "before": -0.47731813788414,
+            "index": [
+              36,
+              1
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.10051606595516205,
+            "before": 0.05383440852165222,
+            "index": [
+              36,
+              2
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.8017719388008118,
+            "before": 0.7118226289749146,
+            "index": [
+              36,
+              3
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.26349982619285583,
+            "before": 0.21323922276496887,
+            "index": [
+              36,
+              4
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.6765673756599426,
+            "before": -0.6704129576683044,
+            "index": [
+              36,
+              5
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.28081750869750977,
+            "before": -0.3207194209098816,
+            "index": [
+              36,
+              6
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5198617577552795,
+            "before": -0.5438452959060669,
+            "index": [
+              36,
+              7
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.4166199266910553,
+            "before": -0.5022130012512207,
+            "index": [
+              36,
+              8
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.0396587960422039,
+            "before": -0.028512727469205856,
+            "index": [
+              36,
+              9
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.2662547826766968,
+            "before": 0.19658897817134857,
+            "index": [
+              36,
+              10
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.6005268692970276,
+            "before": 0.5379788279533386,
+            "index": [
+              36,
+              11
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.10080613195896149,
+            "before": -0.12265046685934067,
+            "index": [
+              36,
+              12
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.44229230284690857,
+            "before": -0.499295711517334,
+            "index": [
+              36,
+              13
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.33721527457237244,
+            "before": 0.26278871297836304,
+            "index": [
+              36,
+              14
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.3361055552959442,
+            "before": 0.2792315185070038,
+            "index": [
+              36,
+              15
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.05058620125055313,
+            "before": -0.010505083948373795,
+            "index": [
+              36,
+              16
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.1615322381258011,
+            "before": -0.2550317943096161,
+            "index": [
+              36,
+              17
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7540039420127869,
+            "before": -0.7764491438865662,
+            "index": [
+              36,
+              18
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.3828962743282318,
+            "before": 0.3278760612010956,
+            "index": [
+              36,
+              19
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.6288138031959534,
+            "before": 0.5749324560165405,
+            "index": [
+              36,
+              20
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.10149343311786652,
+            "before": -0.12824557721614838,
+            "index": [
+              36,
+              22
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.38333815336227417,
+            "before": -0.4640299677848816,
+            "index": [
+              36,
+              23
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.11110824346542358,
+            "before": 0.09948724508285522,
+            "index": [
+              36,
+              24
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.3493908941745758,
+            "before": -0.34833624958992004,
+            "index": [
+              36,
+              25
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.24293267726898193,
+            "before": -0.23482327163219452,
+            "index": [
+              36,
+              26
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.594941258430481,
+            "before": 0.5028280019760132,
+            "index": [
+              36,
+              27
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.1488729864358902,
+            "before": 0.10052187740802765,
+            "index": [
+              36,
+              28
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.6807885766029358,
+            "before": 0.6153565049171448,
+            "index": [
+              36,
+              29
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.4874880313873291,
+            "before": -0.5420446991920471,
+            "index": [
+              36,
+              30
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.7730653882026672,
+            "before": 0.7010281085968018,
+            "index": [
+              36,
+              31
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.5631013512611389,
+            "before": 0.501535952091217,
+            "index": [
+              36,
+              32
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5445626974105835,
+            "before": -0.6031861901283264,
+            "index": [
+              36,
+              33
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.2036142647266388,
+            "before": 0.12512122094631195,
+            "index": [
+              36,
+              34
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.4712056815624237,
+            "before": -0.49055999517440796,
+            "index": [
+              36,
+              35
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.11464430391788483,
+            "before": 0.06166878342628479,
+            "index": [
+              36,
+              36
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.3538890779018402,
+            "before": -0.3636015057563782,
+            "index": [
+              36,
+              37
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.19621413946151733,
+            "before": 0.11622612178325653,
+            "index": [
+              36,
+              38
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.21797308325767517,
+            "before": -0.26888027787208557,
+            "index": [
+              36,
+              39
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.35382670164108276,
+            "before": -0.47003060579299927,
+            "index": [
+              36,
+              40
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.10968455672264099,
+            "before": 0.011655536480247974,
+            "index": [
+              36,
+              42
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 1.0393885374069214,
+            "before": 0.991694450378418,
+            "index": [
+              36,
+              43
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.20887625217437744,
+            "before": -0.2728636860847473,
+            "index": [
+              36,
+              44
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.018656734377145767,
+            "before": -0.022922834381461143,
+            "index": [
+              36,
+              45
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.4039683938026428,
+            "before": 0.293559730052948,
+            "index": [
+              36,
+              46
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.09717947989702225,
+            "before": -0.11903434246778488,
+            "index": [
+              36,
+              47
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.6545092463493347,
+            "before": 0.5601294636726379,
+            "index": [
+              36,
+              48
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.852060079574585,
+            "before": 0.804545521736145,
+            "index": [
+              36,
+              49
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5062458515167236,
+            "before": -0.5897706151008606,
+            "index": [
+              36,
+              50
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.9405681490898132,
+            "before": 0.8318862318992615,
+            "index": [
+              36,
+              51
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.36877232789993286,
+            "before": 0.3148666024208069,
+            "index": [
+              36,
+              52
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.441223680973053,
+            "before": -0.5395962595939636,
+            "index": [
+              36,
+              54
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5776428580284119,
+            "before": -0.5870480537414551,
+            "index": [
+              36,
+              55
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.592159628868103,
+            "before": 0.5059341788291931,
+            "index": [
+              36,
+              56
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.2589775323867798,
+            "before": -0.32539990544319153,
+            "index": [
+              36,
+              57
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.4014767110347748,
+            "before": 0.3896048665046692,
+            "index": [
+              36,
+              58
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.5933606624603271,
+            "before": -0.5971053242683411,
+            "index": [
+              36,
+              59
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": -0.7198324799537659,
+            "before": -0.7290570139884949,
+            "index": [
+              36,
+              60
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.2654552757740021,
+            "before": 0.20791248977184296,
+            "index": [
+              36,
+              61
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.4072856605052948,
+            "before": 0.35028934478759766,
+            "index": [
+              36,
+              62
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.18295758962631226,
+            "before": 0.13293221592903137,
+            "index": [
+              36,
+              63
+            ],
+            "tensor": "head.weight"
+          },
+          {
+            "after": 0.12856310606002808,
+            "before": 0.03681373596191406,
+            "index": [
+              36
+            ],
+            "tensor": "head.bias"
+          }
+        ],
+        "intent": "Trained target repair with sampled protected decision hinges",
+        "schema": "wsp-program/1"
+      },
+      "program_sha256": "0f0eea3d1955dc8bf06db2a26d5897ab8a18abc4a7826cf2b9d6d449c226dadf",
+      "proposal_type": "Program"
+    },
+    "requested_charges": {
+      "proposals": 1,
+      "tool_calls": 1,
+      "weight_values": 5070
+    },
+    "result": {
+      "artifact_sha256": "90e7bdba592043be71d93663c94046b168eb6df15a4b1963b196126f72a22598",
+      "candidate_sha256": "b337a8f1a4f56585c9d18d9b85510bf7c8bf1141a10ac80b1d049ffcff0cec3d",
+      "no_op": false
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 2,
+    "session_sha256": "f7304ca5ff1d7ff2fa3673e84835705770ab21429d5f4e0abef261bb5549bf2e",
+    "sha256": "50679db2d423268efe8110ed95c7b1ed4e6be05d1adbf2c623c2f778f826b9e9",
+    "status": "succeeded",
+    "task_sha256": "1d8f825e1ade5e7fcc453684680ab12e3193ee4dc7c3c2e6eb48f0fb083bd00c",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 2,
+      "weight_values": 5070
+    }
+  },
+  {
+    "action": "seal",
+    "charges": {},
+    "error": null,
+    "previous_sha256": "50679db2d423268efe8110ed95c7b1ed4e6be05d1adbf2c623c2f778f826b9e9",
+    "request": {
+      "candidate_sha256": null
+    },
+    "requested_charges": {},
+    "result": {
+      "selection": "abstained"
+    },
+    "schema": "wsp-trace-event/1",
+    "sequence": 3,
+    "session_sha256": "f7304ca5ff1d7ff2fa3673e84835705770ab21429d5f4e0abef261bb5549bf2e",
+    "sha256": "6e4aba3d2029f130dc98e40dd8f5c250d0081758f7963acbe00e3b03be401360",
+    "status": "succeeded",
+    "task_sha256": "1d8f825e1ade5e7fcc453684680ab12e3193ee4dc7c3c2e6eb48f0fb083bd00c",
+    "usage": {
+      "execution_calls": 0,
+      "execution_examples": 0,
+      "feedback_calls": 0,
+      "feedback_examples": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "proposals": 1,
+      "tool_calls": 2,
+      "weight_values": 5070
+    }
+  }
+]
