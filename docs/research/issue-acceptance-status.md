@@ -1140,6 +1140,17 @@ Historical records and criterion statuses are unchanged.
 
 **Remaining requirement / scope limit:** Diagnosis and repair are selected jointly in the frozen design. Separate fields/endpoints do not satisfy the original separate diagnosis/repair-selection requirement.
 
+**Terminal receipt engineering supplement, November 9, 2026:** The prospective
+[separate-stage lane](staged-diagnosis.md) classifies terminal outcomes, records
+failures when sealing and persistence succeed, preserves original exceptions,
+and invalidates failed finalization without overwrite or retry. Its
+[separate execution receipt](../../provenance/verification/staged-terminal-failures-20261109.json)
+preserves failed-invocation evidence for the lazy-broker fixture error and both
+test-source identities, plus the passing test-only correction against unchanged
+production source, with one invocation per test version. The older
+guard does not cover these changes. This adds no provider, training or scientific
+study and does not establish useful causal repair; c1 remains partial and #9 open.
+
 #### #9 c2
 
 - [ ] Compare sham, random, support/norm-matched and context-only controls, then measure target effect, collateral behavior and held-out generalization.

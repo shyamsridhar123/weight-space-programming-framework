@@ -133,3 +133,16 @@ are outside the saved pass. This adds no live trial, study result, host/network
 containment, off-ledger or reconstructed-computation guarantee; historical outcomes
 and unknown usage/costs retain their original scope. Issue #5 c1/c3 remain partial
 and the issue remains open in the acceptance assessment.
+
+**Staged terminal receipt supplement, November 9, 2026.** The prospective
+[diagnosis-before-repair lane](staged-diagnosis.md) now distinguishes selected,
+abstained, invalid-submission and selector-failure outcomes, retains terminal
+failure receipts when sealing and persistence succeed, preserves original
+exceptions, and invalidates failed finalization without overwrite or retry.
+The [separate engineering receipt](../../provenance/verification/staged-terminal-failures-20261109.json)
+retains evidence of the failed lazy-broker fixture lookup, the passing test-only
+correction and both test-source identities against the same production source,
+with one invocation per test version. The older
+guard does not cover this change. No provider, training, scientific study or
+completed-tree gate ran for this focused check. Historical results remain
+unchanged; Issue #9 c1 remains partial and the issue remains open.
