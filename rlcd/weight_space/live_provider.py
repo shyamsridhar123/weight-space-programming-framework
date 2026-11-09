@@ -99,6 +99,7 @@ def _communicate_bounded(process: subprocess.Popen, *, timeout: float, input=Non
 def parse_events(output: str) -> tuple[Any, dict[str, Any], list[str], list[str], list[dict[str, Any]]]:
     """Parse the final message, and inspect tool events at every lifecycle stage."""
     final, usage, unapproved, errors, diagnostics = None, {}, [], [], []
+    completion_seen = False
     for line in output.splitlines():
         try:
             event = json.loads(line)
@@ -117,9 +118,15 @@ def parse_events(output: str) -> tuple[Any, dict[str, Any], list[str], list[str]
                 elif kind not in ("reasoning", "agent_message"):
                     unapproved.append(f"{event['type']}:{kind}")
                 if event.get("type") == "item.completed" and kind == "agent_message":
+                    if completion_seen:
+                        errors.append("agent_message_after_turn_completed")
+                        usage = {}
                     final = item.get("text")
             if event.get("type") == "turn.completed":
-                usage = event.get("usage", {})
+                if completion_seen:
+                    errors.append("duplicate_turn_completed")
+                usage = {} if completion_seen else event.get("usage", {})
+                completion_seen = True
             if event.get("type") in ("error", "turn.failed"):
                 errors.append(event["type"])
         except (ValueError, TypeError, RecursionError):

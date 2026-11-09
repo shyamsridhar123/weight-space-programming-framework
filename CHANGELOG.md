@@ -7,6 +7,15 @@ research draft.
 
 ## Unreleased
 
+- Reject duplicate provider completions and completed agent messages after
+  completion through the existing failed-attempt/trial path, retaining the
+  parsed response and unknown usage before broker charges or proposed actions.
+  The [scoped offline receipt](provenance/verification/provider-completion-lifecycle-20261109.json)
+  records one synthetic regression with an accepted preterminal-message control.
+  Future shared-parser revalidation of ambiguous prior streams can differ or
+  fail; historical occurrences were not inspected. Historical charges remain
+  unknown, and Issue #5 c2 and #8 c6 remain partial.
+
 - Add `verify_registered_cohort_evaluation` for a saved successful cohort
   terminal, independently retained commitments and binding, and its durable
   successful registry attempt. The verification-only commitment join uses
