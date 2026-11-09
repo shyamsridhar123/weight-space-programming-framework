@@ -120,3 +120,16 @@ The evidence supports concrete next work, with new protocols rather than retrosp
 5. **Advance semantics and cost only within a declared application.** Bind submitted program, parent, native conversion, resulting tensors, and supported execution semantics before seeking broader architecture or certificate claims. Record preparation, training, provider, fitting, execution, admission/proof, and deployment work with missing amounts explicit. Compare gain and retention at matched total cost and state any amortization assumptions. Extend only when the chosen application meets a newly justified, frozen decision rule; retain negative results and unsupported correspondence when it does not.
 
 This report was written from released frozen outcomes, selection/provider receipts, protocols, and sanitized verification. It executes no study, evaluator, replay, comparator, validator, or provider call. Its evidence assessment is confined to the stated task, information, execution, lineage, and missingness scopes; the frozen negative primary result and the separate diagnosis/repair requirement remain visible.
+
+**Broker ingress accounting supplement, November 9, 2026.** The shared request
+boundary now records normalization recursion failures as a fixed malformed denial,
+without retaining the nested request. The [sanitized local engineering receipt](../../provenance/verification/broker-ingress-accounting-20261109.json)
+records one passing synthetic test: the denial consumes the request allowance,
+leaves proposal usage and opaque handles unchanged, and permits trusted
+abstention to seal the session idempotently. Its 21-file source inventory, 16
+actual imported sources, before/after identities and private evidence hashes
+bind that captured uncommitted snapshot. Later integration and publication bytes
+are outside the saved pass. This adds no live trial, study result, host/network
+containment, off-ledger or reconstructed-computation guarantee; historical outcomes
+and unknown usage/costs retain their original scope. Issue #5 c1/c3 remain partial
+and the issue remains open in the acceptance assessment.

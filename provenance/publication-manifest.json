@@ -578,8 +578,8 @@
   },
   "verification_archive": {
     "path": "provenance/verification/index.json",
-    "bytes": 145075,
-    "sha256": "350fcd96274d9c2284e993df92487e6e3695e4fdaaec550e85648661d3790ef9"
+    "bytes": 147194,
+    "sha256": "f5a9c889de77e66169865413b85446667243c542a772c7ccba40489ad1bf5e0f"
   },
   "public_npm_lock_review": {
     "path": "provenance/public-npm-lock.json",
@@ -1240,6 +1240,145 @@
       }
     ],
     "publication_scope": "Current file identities identify later integration and publication bytes. The local pass covers only the saved uncommitted source snapshot; the merged verifier changed workflow.py afterward. Earlier publication records remain historical snapshots.",
+    "raw_artifact_commitments_preserved": true,
+    "source_index_sha256": "45169cd9aa2422e9ac7b624b0e4c15e364beb5a4a2e257ff43f15f6e1109e3f3"
+  },
+  "broker_ingress_accounting_update_20261109": {
+    "review_date": "2026-11-09",
+    "integration_base_main_commit": "18bd1787405480c1817dbf21773c32e03847cf41",
+    "verification": {
+      "path": "provenance/verification/broker-ingress-accounting-20261109.json",
+      "bytes": 15707,
+      "sha256": "c9bad1eea41cd5ce644f0d76b4e83627aa1a4b1699e1e2e74e976b9d4d55b1fd"
+    },
+    "current_files": [
+      {
+        "path": "CHANGELOG.md",
+        "bytes": 23743,
+        "sha256": "0259adb3eefde5e86a8b31e31b84531cb97957bbe58f01220c7939c26ea972d9"
+      },
+      {
+        "path": "docs/research/issue-acceptance-status.md",
+        "bytes": 150206,
+        "sha256": "ff1cbc30635cbdc181205ccd514c9dda084477330f2b0135570c2bebdca710fa"
+      },
+      {
+        "path": "docs/research/live-studies.md",
+        "bytes": 30916,
+        "sha256": "86366533a3293d3fbc4f9150a7178a49083cda1b348c1b45b29ebda7254eb6b4"
+      },
+      {
+        "path": "rlcd/weight_space/broker.py",
+        "bytes": 14521,
+        "sha256": "eb7d485e09ffea1e0136373f9f8a1fc4fcaee191796f91e007aa4fa8347d851a"
+      },
+      {
+        "path": "rlcd/weight_space/live_provider.py",
+        "bytes": 18782,
+        "sha256": "c4723b35471916d677f020a1e51964918ee1a062b22fd25f3514a51d93cc5ac5"
+      },
+      {
+        "path": "tests/test_research_broker.py",
+        "bytes": 16487,
+        "sha256": "3cc65514f4b52c03b2b204f2e31905a943f4f7bb65598d5f2a9eb86425ecc873"
+      }
+    ],
+    "scope": "One fresh offline synthetic engineering test of recursive broker request admission",
+    "recorded_execution_status": "passed",
+    "execution_started_utc": "2026-11-09T15:00:39.2114435Z",
+    "execution_completed_utc": "2026-11-09T15:00:41.0317096Z",
+    "test_node": "tests/test_research_broker.py::test_recursive_request_is_denied_and_counted_before_trusted_sealing",
+    "execution_count": 1,
+    "recorded_exit_code": 0,
+    "recorded_pytest_result": "1 passed in 0.54s",
+    "tested_source_base_commit": "b041deed6f6703ceedafde32d9a487a69ab9ee20",
+    "tested_changes_were_uncommitted": true,
+    "captured_source_before_after_equal": true,
+    "receipt_added_after_execution": true,
+    "publication_snapshot_head_commit": "18bd1787405480c1817dbf21773c32e03847cf41",
+    "publication_prepared_at_utc": "2026-11-09T15:16:09.519025+00:00",
+    "later_integration_verified_by_recorded_test": false,
+    "issue5_c1_status": "partial",
+    "issue5_c3_status": "partial",
+    "issue5_kept_open": true,
+    "historical_outcomes_superseded": false,
+    "publication_bookkeeping_reran_test": false,
+    "new_scientific_study": false,
+    "new_provider_calls": 0,
+    "hosted_success_inferred": false,
+    "historical_inventory_changed": false,
+    "publication_scope": "Current file identities identify later integration and publication bytes. The local pass covers only the saved uncommitted source snapshot. The test file and provider source changed during integration; the recorded test does not verify this integrated tree. Earlier publication records remain historical snapshots.",
+    "captured_primary_source_comparison_scope": [
+      "rlcd/weight_space/broker.py",
+      "tests/test_research_broker.py",
+      "rlcd/weight_space/live_provider.py"
+    ],
+    "captured_primary_source_comparisons": [
+      {
+        "path": "rlcd/weight_space/broker.py",
+        "captured": {
+          "bytes": 14521,
+          "sha256": "eb7d485e09ffea1e0136373f9f8a1fc4fcaee191796f91e007aa4fa8347d851a"
+        },
+        "current": {
+          "bytes": 14521,
+          "sha256": "eb7d485e09ffea1e0136373f9f8a1fc4fcaee191796f91e007aa4fa8347d851a"
+        },
+        "equal": true
+      },
+      {
+        "path": "tests/test_research_broker.py",
+        "captured": {
+          "bytes": 12079,
+          "sha256": "7f7c69623a6956cd913e74eca13e31054a740e5363a2c2ec7a8d3897750557b1"
+        },
+        "current": {
+          "bytes": 16487,
+          "sha256": "3cc65514f4b52c03b2b204f2e31905a943f4f7bb65598d5f2a9eb86425ecc873"
+        },
+        "equal": false
+      },
+      {
+        "path": "rlcd/weight_space/live_provider.py",
+        "captured": {
+          "bytes": 18217,
+          "sha256": "7319024ba4491922c07450352a317c2f81966b4631b39cc5419ea9284b2a95c3"
+        },
+        "current": {
+          "bytes": 18782,
+          "sha256": "c4723b35471916d677f020a1e51964918ee1a062b22fd25f3514a51d93cc5ac5"
+        },
+        "equal": false
+      }
+    ],
+    "broker_source_matches_captured_execution": true,
+    "current_source_inventory_matches_captured_bytes": false,
+    "captured_source_differences_after_integration": [
+      {
+        "path": "tests/test_research_broker.py",
+        "captured": {
+          "bytes": 12079,
+          "sha256": "7f7c69623a6956cd913e74eca13e31054a740e5363a2c2ec7a8d3897750557b1"
+        },
+        "current": {
+          "bytes": 16487,
+          "sha256": "3cc65514f4b52c03b2b204f2e31905a943f4f7bb65598d5f2a9eb86425ecc873"
+        },
+        "equal": false
+      },
+      {
+        "path": "rlcd/weight_space/live_provider.py",
+        "captured": {
+          "bytes": 18217,
+          "sha256": "7319024ba4491922c07450352a317c2f81966b4631b39cc5419ea9284b2a95c3"
+        },
+        "current": {
+          "bytes": 18782,
+          "sha256": "c4723b35471916d677f020a1e51964918ee1a062b22fd25f3514a51d93cc5ac5"
+        },
+        "equal": false
+      }
+    ],
     "raw_artifact_commitments_preserved": true,
     "source_index_sha256": "45169cd9aa2422e9ac7b624b0e4c15e364beb5a4a2e257ff43f15f6e1109e3f3"
   }

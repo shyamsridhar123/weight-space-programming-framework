@@ -3,8 +3,8 @@
   "archived_at_utc": "2026-11-07T03:45:20.420489+00:00",
   "purpose": "Historical execution records retain their original identities. Public copies may be disclosed derivatives or omissions. This index does not claim that sanitized bytes equal the historical hashes.",
   "original_path_convention": "Original run paths describe historical runs; path locates a published copy when retained. Resolve public changes through provenance/public-sanitization.json before interpreting historical bytes or passed fields.",
-  "file_count": 254,
-  "total_bytes": 4608550,
+  "file_count": 255,
+  "total_bytes": 4624257,
   "excluded": [
     "Temporary pytest fixtures from new runs",
     "Dependency caches, package tarballs, and fetched registry metadata",
@@ -1540,6 +1540,12 @@
       "path": "provenance/verification/runs/documentation-links-draft3.json",
       "bytes": 185783,
       "sha256": "fd954d5685833688faf6edd419e16074ae2ed697dc4e46db1effa5fbfb4a3336"
+    },
+    {
+      "original_run_path": "provenance/verification/broker-ingress-accounting-20261109.json",
+      "path": "provenance/verification/broker-ingress-accounting-20261109.json",
+      "bytes": 15707,
+      "sha256": "c9bad1eea41cd5ce644f0d76b4e83627aa1a4b1699e1e2e74e976b9d4d55b1fd"
     }
   ],
   "updated_at_utc": "2026-11-07T04:12:52.087625+00:00",
@@ -2768,5 +2774,35 @@
     "new_provider_calls": 0,
     "hosted_success_inferred": false,
     "historical_inventory_changed": false
+  },
+  "broker_ingress_accounting_20261109": {
+    "path": "provenance/verification/broker-ingress-accounting-20261109.json",
+    "bytes": 15707,
+    "sha256": "c9bad1eea41cd5ce644f0d76b4e83627aa1a4b1699e1e2e74e976b9d4d55b1fd",
+    "scope": "One fresh offline synthetic engineering test of recursive broker request admission",
+    "recorded_execution_status": "passed",
+    "execution_started_utc": "2026-11-09T15:00:39.2114435Z",
+    "execution_completed_utc": "2026-11-09T15:00:41.0317096Z",
+    "test_node": "tests/test_research_broker.py::test_recursive_request_is_denied_and_counted_before_trusted_sealing",
+    "execution_count": 1,
+    "recorded_exit_code": 0,
+    "recorded_pytest_result": "1 passed in 0.54s",
+    "tested_source_base_commit": "b041deed6f6703ceedafde32d9a487a69ab9ee20",
+    "tested_changes_were_uncommitted": true,
+    "captured_source_before_after_equal": true,
+    "receipt_added_after_execution": true,
+    "publication_snapshot_head_commit": "18bd1787405480c1817dbf21773c32e03847cf41",
+    "publication_prepared_at_utc": "2026-11-09T15:16:09.519025+00:00",
+    "later_integration_verified_by_recorded_test": false,
+    "issue5_c1_status": "partial",
+    "issue5_c3_status": "partial",
+    "issue5_kept_open": true,
+    "historical_outcomes_superseded": false,
+    "publication_bookkeeping_reran_test": false,
+    "new_scientific_study": false,
+    "new_provider_calls": 0,
+    "hosted_success_inferred": false,
+    "historical_inventory_changed": false,
+    "publication_scope": "Current file identities identify later integration and publication bytes. The local pass covers only the saved uncommitted source snapshot. The test file and provider source changed during integration; the recorded test does not verify this integrated tree. Earlier publication records remain historical snapshots."
   }
 }
