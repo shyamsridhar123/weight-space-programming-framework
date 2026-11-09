@@ -13,7 +13,10 @@ research draft.
   limits. Stored endpoint residuals remain separate from the numerical optimizer.
   The [November 9 verification receipt](provenance/verification/bounded-feature-feasibility-20261109.json)
   binds passing focused and configured engineering checks to unchanged source
-  identities. Issue #6 c0 is supported at this diagnostic scope; its trained
+  identities. A separate [affine endpoint correction receipt](provenance/verification/affine-endpoint-certificate-correction-20261109.json)
+  preserves the subsequent hosted assertion failure and records the corrected
+  exact-fraction endpoint check; no tolerance or implementation change was made.
+  Issue #6 c0 is supported at this diagnostic scope; its trained
   cutoff/budget sweep and generic exact-target admission gate remain partial.
   Historical trained outcomes are preserved, with no new scientific study or
   enterprise operational-effect claim.

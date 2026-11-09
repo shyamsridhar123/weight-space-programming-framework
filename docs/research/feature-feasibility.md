@@ -13,9 +13,18 @@ with the affine research adapter in
 [research_tasks.py](../../rlcd/weight_space/research_tasks.py).
 [The verification receipt](../../provenance/verification/bounded-feature-feasibility-20261109.json)
 records the execution results and captured source identities for this
-engineering extension: 47 focused checks passed, followed by 397 configured
-engineering checks passed with three frozen-study deselections. The captured
-inputs remained unchanged, with no provider calls or scientific study runs.
+engineering extension at its then-captured source: 47 focused checks passed,
+followed by 397 configured engineering checks passed with three frozen-study
+deselections. Those inputs remained unchanged, with no provider calls or
+scientific study runs. The separate
+[affine endpoint correction receipt](../../provenance/verification/affine-endpoint-certificate-correction-20261109.json)
+preserves the later PR #20 hosted failure: its affine fixture incorrectly
+required an SVD-derived stored endpoint to have an exactly zero protected
+residual. The corrected assertion independently computes that residual with
+exact fractions and checks the certificate fields and zero flag. Its focused
+local check passed without adding a tolerance or changing the implementation.
+The original receipt is unchanged; corrected hosted results are tracked
+separately at the PR head.
 [The focused checks](../../tests/test_feature_constraints.py)
 include direct rational checks of conflict witnesses, known minimum norms,
 resource exhaustion, and numerical/endpoint disagreements. They cover

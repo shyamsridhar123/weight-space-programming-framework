@@ -119,9 +119,18 @@ def test_editable_bias_changes_the_constraint_problem_and_immutable_bias_stays_f
     assert fixed.diagnostics["feature_constraints"]["editable_width"] == 1
     assert affine.diagnostics["edit_bias"] is True and affine.diagnostics["no_op"] is False
     assert affine.diagnostics["feature_constraints"]["editable_width"] == 2
+    assert affine_exact["consistency_status"] == "feasible"
     assert affine_exact["minimum_squared_l2_norm_exact"] == ["2"]
-    assert affine.retention_certificate["exactly_zero_on_supplied_features"] is True
-    assert apply_program(base, affine.program).tensors["head.bias"][0] > .9
+    candidate = apply_program(base, affine.program)
+    # SVD rounding can leave a nonzero protected residual even for this
+    # feasible affine system. Check the stored endpoint without a tolerance.
+    residual = abs(Fraction.from_float(float(candidate.tensors["head.weight"][0, 0])) +
+                   Fraction.from_float(float(candidate.tensors["head.bias"][0])))
+    certificate = affine.retention_certificate
+    assert certificate["absolute_residuals_exact"] == [[str(residual)]]
+    assert certificate["maximum_residuals_exact"] == [str(residual)]
+    assert certificate["exactly_zero_on_supplied_features"] is (residual == 0)
+    assert candidate.tensors["head.bias"][0] > .9
 
 
 def test_wide_protection_preserves_missing_right_singular_vectors_and_allows_edit():
