@@ -142,6 +142,75 @@ def test_provider_failure_accounting_and_started_tool_detection(tmp_path, monkey
     assert json.loads((tmp_path / "attempt" / "receipt.json").read_text())["sha256"] == receipt["sha256"]
 
 
+def test_malformed_provider_event_type_retains_failed_attempt_and_trial(tmp_path, monkeypatch):
+    import hashlib
+    from types import SimpleNamespace
+    from unittest.mock import Mock
+    from rlcd.weight_space.live_provider import CodexProvider, run_brokered
+
+    cli = tmp_path / "fake-codex"
+    cli.write_bytes(b"offline transport placeholder; never executed")
+    monkeypatch.setattr("rlcd.weight_space.live_provider.shutil.which", lambda _: str(cli))
+    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.run",
+                        lambda *args, **kwargs: SimpleNamespace(stdout="offline-test\n"))
+    transport = Mock(side_effect=lambda *args, **kwargs: SimpleNamespace(returncode=0,
+        communicate=lambda *args, **kwargs: (raw, "")))
+    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.Popen", transport)
+    base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
+    task = TaskSpec("event-type", "edit", "Retain a malformed offline event", base.architecture, base.sha256)
+    response = {"actions": [json.dumps({"op": "submit", "commands": [], "intent": "Freeze baseline"}),
+                            json.dumps({"op": "seal", "candidate_handle": None})],
+                "reason": "offline fixture"}
+    usage = {"input_tokens": 12, "output_tokens": 3}
+    reasoning_item = {"type": "reasoning", "text": "offline fixture"}
+    # All malformed representatives are falsey, so a truthiness guard is insufficient.
+    malformed_types = (None, 0, False, [], {})
+    cases = [({"type": event_type, "item": reasoning_item}, False)
+             for event_type in malformed_types]
+    # Rejection belongs to the event boundary, including events without an item.
+    cases.extend(({"type": event_type}, False) for event_type in malformed_types)
+    cases.extend(({"type": event_type, "item": reasoning_item}, True)
+                 for event_type in ("item.started", "provider.extension", ""))
+    cases.append(({"item": reasoning_item}, True))
+
+    for index, (leading_event, valid) in enumerate(cases):
+        raw = "\n".join(json.dumps(event) for event in [
+            leading_event,
+            {"type": "item.completed", "item": {"type": "agent_message", "text": json.dumps(response)}},
+            {"type": "turn.completed", "usage": usage},
+        ]) + "\n"
+        transport.reset_mock()
+        broker = ProposerBroker(task, base=base)
+        directory = tmp_path / f"case-{index}"
+        trial = run_brokered(CodexProvider(), broker, prompt="Return the fixed offline actions",
+                             directory=directory, max_rounds=3)
+        assert transport.call_count == 1 and len(trial["attempts"]) == 1
+        attempt = trial["attempts"][0]
+        assert trial["status"] == ("sealed" if valid else "failed")
+        assert attempt["status"] == ("completed" if valid else "failed")
+        assert attempt["error"] == (None if valid else "transport_or_response_failed")
+        assert attempt["event_errors"] == ([] if valid else ["invalid_event"])
+        assert attempt["response"] == response and attempt["usage"] == usage
+        assert attempt["unapproved_events"] == [] and attempt["diagnostic_items"] == 0
+        assert attempt["cost"]["amount"] is None
+        folder = directory / "provider-0"
+        assert json.loads((folder / "receipt.json").read_text(encoding="utf-8")) == attempt
+        assert json.loads((directory / "trial.json").read_text(encoding="utf-8")) == trial
+        assert (folder / "events.jsonl").read_bytes() == raw.encode("utf-8")
+        assert attempt["events_sha256"] == hashlib.sha256(raw.encode("utf-8")).hexdigest()
+        assert broker.is_sealed
+        assert [event["request"]["op"] for event in broker.public_trace] == (
+            ["metadata", "submit", "seal"] if valid else ["metadata", "harness_deadline_seal"])
+        charges = [event.to_dict() for event in broker._session.trace
+                   if event.to_dict()["action"] == "provider_usage"]
+        assert len(charges) == int(valid)
+        expected = {key: usage[key] if valid else 0 for key in ("input_tokens", "output_tokens")}
+        assert {key: getattr(broker._session.usage, key) for key in expected} == expected
+        assert broker._session.usage.proposals == int(valid)
+        if valid:
+            assert charges[0]["status"] == "succeeded" and charges[0]["charges"] == expected
+
+
 def test_provider_usage_is_complete_before_broker_actions(tmp_path, monkeypatch):
     import hashlib
     from types import SimpleNamespace

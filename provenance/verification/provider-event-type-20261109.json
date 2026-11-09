@@ -1,0 +1,377 @@
+{
+  "assembled_utc": "2026-11-09T21:19:05.049042+00:00",
+  "automatic_retry_performed": false,
+  "base_commit": "d0d21e11de07d04f0feeae047b589fb4175b28fd",
+  "completed_utc": "2026-11-09T21:16:16.7177470Z",
+  "covered_behaviors": [
+    "Ten malformed event fixtures use top-level type values null, zero, false, an empty list and an empty object, each with a reasoning item and without an item. Every present nonstring type is rejected as invalid_event after canonical JSON validation.",
+    "Four accepted controls retain prior behavior for item.started, an unknown provider.extension string, an empty type string and an absent type field.",
+    "A valid agent response and valid usage follow each leading event. Malformed event rejection retains that later response and usage, persists a failed provider attempt and failed trial, and keeps monetary cost unknown.",
+    "Raw event bytes and their SHA-256 commitments are retained exactly for both malformed fixtures and accepted controls.",
+    "The broker makes one provider call despite a three-round limit. Malformed fixtures admit no usage charge or proposer actions and seal through harness abstention; accepted controls charge valid usage and submit and seal one proposal.",
+    "The adjacent regression retains recognition of a started command_execution as an unapproved tool event, preserves a configuration warning as a diagnostic, and persists a failed attempt when mocked CLI discovery finds no provider executable."
+  ],
+  "execution_count": 1,
+  "execution_policy": {
+    "environment_removals": [
+      "PYTEST_ADDOPTS"
+    ],
+    "environment_sanitized": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "HF_DATASETS_OFFLINE": "1",
+      "HF_HUB_OFFLINE": "1",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONNOUSERSITE": "1",
+      "PYTHONPATH": "<checked-worktree>",
+      "TEMP": "<private-fixture-temp>",
+      "TMP": "<private-fixture-temp>",
+      "TRANSFORMERS_OFFLINE": "1",
+      "WANDB_MODE": "offline"
+    },
+    "execution_accounting_limit": "The saved runner contains one pytest.main call and the exclusive launch and result records report one invocation with no automatic retry. This is retained process-capture evidence, not independent operating-system process tracing.",
+    "inherited_pytest_addopts_present_in_launcher_environment": false,
+    "offline_configuration_limit": "Offline environment flags record configuration and do not establish a network sandbox. Provider process transport is mocked.",
+    "pytest_addopts_absent_at_runner_start_and_completion": true,
+    "pytest_addopts_removed_from_child": true,
+    "pytest_arguments_sanitized": [
+      "-c",
+      "pytest-engineering.ini",
+      "-o",
+      "addopts=",
+      "-p",
+      "no:cacheprovider",
+      "--noconftest",
+      "-q",
+      "--basetemp",
+      "<private-pytest-temp>",
+      "--junitxml",
+      "<private-junit-xml>",
+      "tests/test_research_broker.py::test_malformed_provider_event_type_retains_failed_attempt_and_trial",
+      "tests/test_research_broker.py::test_provider_failure_accounting_and_started_tool_detection"
+    ],
+    "pytest_automatic_plugins_disabled": true,
+    "pytest_cache_provider_disabled": true,
+    "pytest_conftest_loading_disabled": true,
+    "python_flags": [
+      "-B",
+      "-s"
+    ],
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "timeout_seconds": 600
+  },
+  "exit_code": 0,
+  "historical_results_changed": false,
+  "historical_unknown_usage_or_costs_recovered": false,
+  "interpretation_limit": "These passing assertions cover the saved synthetic fixtures and captured adapter source. They do not establish complete provider schema validation, validation of arbitrary third-party completed receipts, live-provider success, provider-origin attestation, a deployment revision, scientific effectiveness or enterprise impact.",
+  "issue_statuses": {
+    "5:c2": "partial",
+    "8:c6": "partial"
+  },
+  "junit_accounting": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 2
+  },
+  "live_provider_execution_performed": false,
+  "publication_checks_scope": "Final publication verification follows on a separately frozen public snapshot; it is not credited to this engineering capture.",
+  "recorded_pytest_summary": "2 passed in 1.74s",
+  "research_evaluation_performed": false,
+  "saved_raw_artifact_commitments": [
+    {
+      "bytes": 2770,
+      "name": "execution-launch.json",
+      "sha256": "dfd0c7b9bc7a26c5ea590745838c998fb1e1383e25c7daf168dff1500bfc08e2"
+    },
+    {
+      "bytes": 1523,
+      "name": "execution-result.json",
+      "sha256": "863e3e3a37f50cec10d5662a21accf8ed87fa3e7511d7b3702612e3fa5299b7d"
+    },
+    {
+      "bytes": 1660,
+      "name": "runner-launch.json",
+      "sha256": "13f75bfa876c83c9e4627edd62e290dbd20ce018ccb998560e86e8eccba512ed"
+    },
+    {
+      "bytes": 484,
+      "name": "before-state.json",
+      "sha256": "85b0eadae33ba90b774e63c3b10840c477e62199c5cebf490365e04be5d87e24"
+    },
+    {
+      "bytes": 483,
+      "name": "after-state.json",
+      "sha256": "a20119d714f321aad20ab17378c04aec162287fd966780ee990c201ce7da4778"
+    },
+    {
+      "bytes": 11205,
+      "name": "before-source-hashes.json",
+      "sha256": "dc3d55f009e6fdccb9778ba81deae2abf2f1bf12594adc65797b9a8b48bd82a7"
+    },
+    {
+      "bytes": 11205,
+      "name": "after-source-hashes.json",
+      "sha256": "dc3d55f009e6fdccb9778ba81deae2abf2f1bf12594adc65797b9a8b48bd82a7"
+    },
+    {
+      "bytes": 11332,
+      "name": "before-diff.patch",
+      "sha256": "a405d49448e696d818a112a299763f3a2241bd166728440848831edc5d92d350"
+    },
+    {
+      "bytes": 11332,
+      "name": "after-diff.patch",
+      "sha256": "a405d49448e696d818a112a299763f3a2241bd166728440848831edc5d92d350"
+    },
+    {
+      "bytes": 5182,
+      "name": "execution-source-index.json",
+      "sha256": "fe7e8cae409ae3138522d46d9160d15cd11367838be9ec26564eed22e6201d4d"
+    },
+    {
+      "bytes": 678,
+      "name": "execution-verification.json",
+      "sha256": "aca29a576dc22849ceffa743c2a3c17cd83f88a38c05c6a7135fd437796184fa"
+    },
+    {
+      "bytes": 100,
+      "name": "stdout.log",
+      "sha256": "92e38db74f053976856e124fc99c3845833c91739d5bad4032a02afe1871f1f6"
+    },
+    {
+      "bytes": 0,
+      "name": "stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 521,
+      "name": "pytest.xml",
+      "sha256": "15a075a06b4290ca8d8ab7e8ac12cf7d3756139f6f8cdf89f042464e1efe50ce"
+    }
+  ],
+  "schema": "wsp-local-engineering-verification/1",
+  "scope": "Prospective top-level provider event-type failure accounting in parse_events, CodexProvider and the common broker flow, with mocked CLI discovery, version probe and process transport.",
+  "source_evidence": {
+    "archive_timing_limit": "The eight input-source byte copies were made by the captured runner before pytest.main. The supplementary current-source archive was made during receipt assembly after execution. Its imported sources, pytest configuration, project configuration, CHANGELOG and live-studies document match both guarded snapshots. The issue-acceptance-status document is outside this engineering source archive and relies on the separate final publication capture.",
+    "before_and_after_guarded_snapshots_equal": true,
+    "before_and_after_tracked_diffs_equal": true,
+    "current_guarded_bytes_and_tracked_diff_equal_saved_capture_at_assembly": true,
+    "guarded_snapshot_entries": 71,
+    "imported_sources": [
+      {
+        "bytes": 71,
+        "modules": [
+          "rlcd"
+        ],
+        "path": "rlcd/__init__.py",
+        "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+      },
+      {
+        "bytes": 2969,
+        "modules": [
+          "rlcd.weight_space"
+        ],
+        "path": "rlcd/weight_space/__init__.py",
+        "sha256": "9d8cf6bd79b66b9946e50428af4b091f99f870bf68403126682f600b0715ea27"
+      },
+      {
+        "bytes": 7735,
+        "modules": [
+          "rlcd.weight_space.artifact"
+        ],
+        "path": "rlcd/weight_space/artifact.py",
+        "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+      },
+      {
+        "bytes": 15038,
+        "modules": [
+          "rlcd.weight_space.broker"
+        ],
+        "path": "rlcd/weight_space/broker.py",
+        "sha256": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+      },
+      {
+        "bytes": 3928,
+        "modules": [
+          "rlcd.weight_space.compiler"
+        ],
+        "path": "rlcd/weight_space/compiler.py",
+        "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+      },
+      {
+        "bytes": 43906,
+        "modules": [
+          "rlcd.weight_space.contracts"
+        ],
+        "path": "rlcd/weight_space/contracts.py",
+        "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+      },
+      {
+        "bytes": 29559,
+        "modules": [
+          "rlcd.weight_space.data_roles"
+        ],
+        "path": "rlcd/weight_space/data_roles.py",
+        "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+      },
+      {
+        "bytes": 34083,
+        "modules": [
+          "rlcd.weight_space.features"
+        ],
+        "path": "rlcd/weight_space/features.py",
+        "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+      },
+      {
+        "bytes": 18974,
+        "modules": [
+          "rlcd.weight_space.live_provider"
+        ],
+        "path": "rlcd/weight_space/live_provider.py",
+        "sha256": "00add973bb93741f69e69ed5f44a2ac1abedf68990d9a8b2c6f80a83fae2bd4f"
+      },
+      {
+        "bytes": 9944,
+        "modules": [
+          "rlcd.weight_space.model"
+        ],
+        "path": "rlcd/weight_space/model.py",
+        "sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+      },
+      {
+        "bytes": 6317,
+        "modules": [
+          "rlcd.weight_space.program"
+        ],
+        "path": "rlcd/weight_space/program.py",
+        "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+      },
+      {
+        "bytes": 6727,
+        "modules": [
+          "rlcd.weight_space.semantics"
+        ],
+        "path": "rlcd/weight_space/semantics.py",
+        "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+      },
+      {
+        "bytes": 9106,
+        "modules": [
+          "rlcd.weight_space.sequential"
+        ],
+        "path": "rlcd/weight_space/sequential.py",
+        "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+      },
+      {
+        "bytes": 26202,
+        "modules": [
+          "rlcd.weight_space.structured"
+        ],
+        "path": "rlcd/weight_space/structured.py",
+        "sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+      },
+      {
+        "bytes": 6034,
+        "modules": [
+          "rlcd.weight_space.symmetry"
+        ],
+        "path": "rlcd/weight_space/symmetry.py",
+        "sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+      },
+      {
+        "bytes": 54271,
+        "modules": [
+          "rlcd.weight_space.workflow"
+        ],
+        "path": "rlcd/weight_space/workflow.py",
+        "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+      },
+      {
+        "bytes": 24463,
+        "modules": [
+          "test_research_broker"
+        ],
+        "path": "tests/test_research_broker.py",
+        "sha256": "932d0ddb032cc918944713dc7b3baf31cecfb8504a7d16f253a1a1a423dbd4aa"
+      }
+    ],
+    "launcher_private_script_identities_before_and_after_equal": true,
+    "original_preexecution_raw_input_copies": [
+      {
+        "bytes": 24463,
+        "path": "tests/test_research_broker.py",
+        "sha256": "932d0ddb032cc918944713dc7b3baf31cecfb8504a7d16f253a1a1a423dbd4aa"
+      },
+      {
+        "bytes": 18974,
+        "path": "rlcd/weight_space/live_provider.py",
+        "sha256": "00add973bb93741f69e69ed5f44a2ac1abedf68990d9a8b2c6f80a83fae2bd4f"
+      },
+      {
+        "bytes": 2593,
+        "path": "scripts/audit_public_content.py",
+        "sha256": "b5d4bfed042eaeffd040657ea23ab60b95e0826d89a1de15bc26e278ae4e3b3d"
+      },
+      {
+        "bytes": 37714,
+        "path": "scripts/verify_publication.py",
+        "sha256": "e8658f9880310431dfc7ea9b7a57ac738f5615d73d6e8cbb2389b8afeda95f66"
+      },
+      {
+        "bytes": 1295,
+        "path": "pytest-engineering.ini",
+        "sha256": "d417cae6977081655172f7a2ac94b5c9d9f654bc797649294c99baf4cee47880"
+      },
+      {
+        "bytes": 1136,
+        "path": "pyproject.toml",
+        "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+      },
+      {
+        "bytes": 9328,
+        "path": "private-capture/run_check.py",
+        "sha256": "c0ae690f5f1c558dd09838325d259ed86d01014907e5d3e96e1001eec315bb17"
+      },
+      {
+        "bytes": 8123,
+        "path": "private-capture/launch_once.ps1",
+        "sha256": "1ea71350fc0bfea34dbacd85b75f5a58561d2018daa0ef59ae72c73746f0dd13"
+      }
+    ],
+    "publication_scripts_not_executed_by_this_capture": true,
+    "runner_and_launcher_identities": [
+      {
+        "bytes": 9328,
+        "name": "run_check.py",
+        "sha256": "c0ae690f5f1c558dd09838325d259ed86d01014907e5d3e96e1001eec315bb17"
+      },
+      {
+        "bytes": 8123,
+        "name": "launch_once.ps1",
+        "sha256": "1ea71350fc0bfea34dbacd85b75f5a58561d2018daa0ef59ae72c73746f0dd13"
+      }
+    ],
+    "runner_and_launcher_in_guarded_before_and_after_snapshots": true,
+    "runner_integrity_checks": {
+      "diff_check_passed": true,
+      "expected_test_and_provider_imported": true,
+      "git_state_unchanged": true,
+      "guarded_imported_sources_match_before": true,
+      "source_config_and_private_scripts_unchanged": true
+    },
+    "saved_checkout": {
+      "branch": "fix/provider-event-type-20261109",
+      "head": "d0d21e11de07d04f0feeae047b589fb4175b28fd",
+      "status": "M CHANGELOG.md\n M docs/research/issue-acceptance-status.md\n M docs/research/live-studies.md\n M rlcd/weight_space/live_provider.py\n M tests/test_research_broker.py"
+    },
+    "tracked_diff_sha256": "a405d49448e696d818a112a299763f3a2241bd166728440848831edc5d92d350",
+    "unguarded_imported_sources": []
+  },
+  "started_utc": "2026-11-09T21:16:10.1702532Z",
+  "test_nodes": [
+    "tests/test_research_broker.py::test_malformed_provider_event_type_retains_failed_attempt_and_trial",
+    "tests/test_research_broker.py::test_provider_failure_accounting_and_started_tool_detection"
+  ],
+  "timed_out": false
+}
