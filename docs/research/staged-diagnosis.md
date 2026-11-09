@@ -189,11 +189,48 @@ Each report retains five logical controls in order: `random`, `shuffled_1`, `shu
 
 The report separates `materialized` and `unavailable_reason` from each control's `structure` and `matching`. A constructed native no-op is structurally `unusable`. Only a structurally usable selected main supplies `main_reference_norm`; otherwise that field is null and all comparisons report matching `unavailable`, with reason `no_usable_main_reference`, even if a control itself is usable. An unusable main's norm of zero never becomes a matching reference. With a usable main, unavailable or unusable controls retain those reasons instead of becoming mismatches. Two usable endpoints are `matched` exactly when `abs(control_norm - main_norm) <= 1e-5 + 1e-5 * abs(main_norm)`; otherwise they are `mismatched`. This version fixes that main-referenced sum tolerance and never retunes commands after rounding or mismatch.
 
-The detached finite-JSON `wsp-native-control-matching/1` report binds the admission and main structural-report digests, controls digest, run/roster/protocol identities, both barriers and reviewed source identities. Its body digest excludes `sha256`. Every member retains the complete main structural entry and diagnosis Candidate identity when present; materialized controls record separate proposal, literal program, lowering-receipt and artifact hashes, prescribed deltas, realized native effects and matching outcomes. The calculation rechecks local owned control snapshots and live admission, including after construction. Integrity failures permanently close the owner. It writes no evidence files, retains no final study endpoint seal and authorizes no evaluation. A future study seal must capture and revalidate the actual comparison endpoints.
+The detached finite-JSON `wsp-native-control-matching/1` report binds the admission and main structural-report digests, controls digest, run/roster/protocol identities, both barriers and reviewed source identities. Its body digest excludes `sha256`. Every member retains the complete main structural entry and diagnosis Candidate identity when present; materialized controls record separate proposal, literal program, lowering-receipt and artifact hashes, prescribed deltas, realized native effects and matching outcomes. The calculation rechecks local owned control snapshots and live admission, including after construction. Integrity failures permanently close the owner. This checker writes no evidence files and authorizes no evaluation. The separate endpoint accounting seal below retains the actual comparison payloads.
 
 These recipes can be bound for engineering without registering prospective v2/v3. Supplied choices and maps establish neither an independent randomization, seed or pairing procedure nor prospective registration. This checker does not compute the prospective usefulness indicator `U` or change its existing requirement concerning the three shuffled controls; random and opposite controls add no new prerequisites to `U`. Its evaluation, final study seal and causal usefulness flags remain false.
 
-The source-pin scope is `reviewed_disk_format_compatibility_only`. Pins check reviewed on-disk format compatibility, not loaded-code identity, execution provenance or malicious Python behavior. Ownership rejects a second admission owner for the same live cohort object in the same process; it provides no durable identity, reload/resume, race defense or sandbox. This helper uses public framework methods and parsers rather than private framework state. It supplies no final study endpoint seal, seeds, training, holdouts or scoring, and invokes neither `seal_endpoints` nor `evaluate_registered`. The framework repair barrier is not a final study seal. The admission's `evaluation_available`, `final_study_seal`, `trained_ancestry_established` and `causal_usefulness_established` remain `false`. Issue #9 c1 remains partial and the issue remains open; historical results and earlier receipt scopes are unchanged.
+#### Study-specific endpoint accounting
+
+To retain endpoints after successful selection, bind this optional declaration in the shared `protocol` before either constructor and before preparation, together with the complete native-control recipes above:
+
+```json
+{
+  "study_plan": {
+    "schema": "wsp-staged-study-endpoint-plan/1",
+    "selected_fallback": "parent"
+  }
+}
+```
+
+The plan has exactly `schema` and `selected_fallback`. The only other fallback is `"unavailable"`; missing recipes, unknown fields and other fallbacks reject construction. Version 1 fixes the endpoint roster and order rather than accepting slot, execution, holdout or result declarations. After `admission.run(prepare_member)` returns normally, use the same originating live owner:
+
+```python
+endpoint_seal = admission.seal_study_endpoints()
+checked_endpoint_seal = admission.verify_study_endpoints()
+```
+
+There is no seal-time plan argument. Every original assigned member retains these seven logical slots in order: `main`, `parent`, `random`, `shuffled_1`, `shuffled_2`, `shuffled_3`, `opposite`. Slots remain distinct when their artifact hashes coincide.
+
+| Slot | Resolution |
+| --- | --- |
+| `main` with an actual selected Candidate | `selected`, even for an unusable or native no-op repair. |
+| `main` without a selected Candidate | `parent_fallback` only when the frozen fallback is `parent` and a parent exists; otherwise `unavailable`. |
+| `parent` | `parent` when a captured parent exists; otherwise `unavailable`. |
+| Each comparison control | `materialized` when its endpoint exists; otherwise `unavailable`. Structural failure or norm mismatch does not erase an endpoint. |
+
+A proposal followed by a denied seal supplies no selected Candidate, so its attempted artifact cannot become the main endpoint. An absent parent stays unavailable. Parent fallback does not create a selected repair or a usable-main norm reference. Each slot keeps `materialized`, the unavailable reason, structural findings and native matching findings separately.
+
+The private canonical `study-endpoint-seal.json`, schema `wsp-staged-study-endpoint-seal/1`, binds the original admission, assignment order, protocol, frozen plan and recipe digests, complete structural and native-control reports, source pins and `source_pin_scope`, and both barriers. Slots retain full actual artifact payloads and hashes. A selected main additionally retains the actual full Candidate and its distinct Candidate hash, plus its original repair submission. Controls retain full structured proposal, literal program and lowering receipt payloads; every existing native-report proposal, program, lowering and artifact hash is checked against those payloads and their parent bindings. No control Candidate is fabricated.
+
+Sealing uses the existing native construction path once for its retained controls, rechecks live admission, exclusively creates the receipt, flushes and `fsync`s it, then verifies the saved bytes and retained endpoints before returning. The original selection-admission document and its original `receipt_files` remain unchanged; live directory integrity additionally tracks the new seal. Verification reads the saved snapshots and rechecks structure, hashes and bindings without relowering or reapplying a control. After sealing, `check_native_controls()` uses that verification and returns the retained native report. Returned documents are detached JSON copies. A second seal, changed evidence or retained endpoint, persistence failure or cancellation permanently closes the owner without overwriting or retry. Files left by an interrupted seal cannot substitute for its missing successful live return. This provides no reload/resume or crash-recovery mechanism.
+
+This endpoint accounting receipt is not a final scientific study seal. It loads no holdouts, authorizes no scoring and establishes no runtime restoration or behavioral result. Future scientific use requires the complete [prospective protocol](prospective-protocol-rubrics.md), source/ancestry and data-role conditions, assignment and pairing/randomization procedure with seeds, exact runtime and evaluator, authorized untouched holdouts, result schema, useful-effect margins and analysis/missingness rules to be frozen before preparation. The endpoint-only plan does not supply those conditions or preregister v2/v3. It does not compute `U` or change the requirement concerning the three shuffled controls.
+
+The source-pin scope is `reviewed_disk_format_compatibility_only`. Pins check reviewed on-disk format compatibility, not loaded-code identity, execution provenance or malicious Python behavior. Ownership rejects a second admission owner for the same live cohort object in the same process; it provides no durable identity, race defense or sandbox. This helper uses public framework methods and parsers rather than private framework state, and invokes neither `seal_endpoints` nor `evaluate_registered`. The framework repair barrier and this endpoint accounting receipt are not final scientific study seals. The admission and endpoint receipt keep `evaluation_available`, `final_study_seal`, `trained_ancestry_established` and `causal_usefulness_established` as `false`. No #2, #6 or #9 criterion is promoted; Issue #9 c1 remains partial and the issue remains open. Historical results and earlier receipt scopes are unchanged.
 
 The separate [selection-admission engineering receipt](../../provenance/verification/staged-selection-admission-20261109.json) records one passing focused genuine-receipt regression at its captured source snapshot: exit 0, one invocation, no retry or timeout. It used literal artifacts and no registered batches to check both fixed policies, preserved failure outcomes, duplicate live ownership, integrity-change/restoration rejection and interrupted phase returns. That earlier receipt does not cover the added structural or native-control checkers or later source changes, and establishes no trained ancestry or scientific readiness.
 

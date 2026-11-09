@@ -7,6 +7,22 @@ research draft.
 
 ## Unreleased
 
+- Add an optional endpoint-only plan to the study-specific `SelectionAdmission`,
+  bound with native-control recipes before preparation. The one-shot
+  `seal_study_endpoints()` retains all assigned members and seven ordered logical
+  slots, including equal-hash endpoints, in a canonical, exclusively written,
+  flushed and fsynced receipt. Selected no-ops remain selected; only absent
+  selection can use the frozen parent fallback. Retain actual Candidate identity,
+  full artifacts and native proposal/program/lowering payloads, with independent
+  materialization, structure and matching outcomes. `verify_study_endpoints()`
+  rechecks the saved seal and live retained endpoints without reconstruction;
+  integrity or persistence failure permanently closes the originating owner.
+  Add one focused synthetic regression. This accounting seal supplies no final
+  scientific study seal, runtime restoration, holdouts or scoring. Prospective
+  scientific conditions remain required before preparation. Historical results
+  and receipt scopes and #2/#6/#9 limitations are unchanged; #9 c1 stays partial
+  and open.
+
 - Add opt-in, prebound native-control recipes to the study-specific
   `SelectionAdmission` adapter, preserving legacy empty controls and the generic
   framework. `check_native_controls()` constructs random, three shuffled and

@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import os
 from pathlib import Path
 import re
 import stat
@@ -40,6 +41,7 @@ SOURCE_PINS = {
 }
 NATIVE_DTYPES = {"head.weight": "float32", "head.bias": "float32"}
 WEIGHT_REQUEST = {"op": "weights", "tensor": "head.bias", "indices": [[j] for j in range(8)]}
+STUDY_SLOTS = ("main", "parent", "random", "shuffled_1", "shuffled_2", "shuffled_3", "opposite")
 _EVENT = "overall_correct_delta_ge_41_of_4096"
 # Same-process live-cohort ownership; not durable identity or sandbox enforcement.
 _CLAIMED_COHORTS: WeakSet[StagedCohort] = WeakSet()
@@ -263,6 +265,10 @@ class SelectionAdmission:
         self._lanes: dict[int, dict[str, Any]] = {}
         self._diagnoses: dict[int, dict[str, Any]] = {}
         self._evidence: bytes | None = None
+        self._study_plan_bytes: bytes | None = None
+        self._study_seal: bytes | None = None
+        self._study_seal_started = False
+        self._study_controls: dict[tuple[int, str], tuple[TensorArtifact, bytes]] = {}
         try:
             _require(type(cohort) is StagedCohort, "Use an exact public StagedCohort")
             _require(cohort not in _CLAIMED_COHORTS, "This live cohort already has an admission owner")
@@ -309,6 +315,13 @@ class SelectionAdmission:
             self._controls_bytes = _json_bytes(controls)
             supplied = _parse(_json_bytes(protocol))
             _require(type(supplied) is dict and "evaluation_plan" not in supplied, "This increment admits selection only")
+            if "study_plan" in supplied:
+                plan = supplied["study_plan"]
+                _require(type(plan) is dict and set(plan) == {"schema", "selected_fallback"}
+                         and plan["schema"] == "wsp-staged-study-endpoint-plan/1"
+                         and plan["selected_fallback"] in ("parent", "unavailable"), "Unknown study endpoint plan")
+                _require(bool(controls), "Study endpoint plans require prebound native-control recipes")
+                self._study_plan_bytes = _json_bytes(plan)
             for identifier in (registry_id, evaluator_id, attempt_id):
                 _require(type(identifier) is str and bool(identifier.strip()), "Missing expected run identity")
             _hash(driver_sha256)
@@ -361,6 +374,21 @@ class SelectionAdmission:
                 artifact = self._bases[index] if kind == "parent" else self._artifacts[index]
                 _require(_json_bytes(artifact.to_dict()) == raw and artifact.sha256 == digest(_parse(raw)),
                          "A driver-owned artifact changed")
+            for artifact, raw in self._study_controls.values():
+                data = _parse(raw)["artifact"]
+                _require(_json_bytes(artifact.to_dict()) == _json_bytes(data) and artifact.sha256 == digest(data),
+                         "A retained study control changed")
+            if self._study_seal is not None:
+                _require(self._study_seal + b"\n" == self._saved["study-endpoint-seal.json"],
+                         "The retained study seal changed")
+                controls = [(member["member_index"], slot) for member in _parse(self._study_seal)["members"]
+                            for slot in member["slots"][2:] if slot["materialized"]]
+                _require(list(self._study_controls) == [(index, slot["slot_id"]) for index, slot in controls],
+                         "The retained study control roster changed")
+                for index, slot in controls:
+                    artifact, raw = self._study_controls[(index, slot["slot_id"])]
+                    _same(_parse(raw), {"artifact": slot["artifact"], **slot["construction"]})
+                    _same(artifact.sha256, slot["artifact_sha256"])
         except BaseException:
             self._invalidated = True
             raise
@@ -922,12 +950,16 @@ class SelectionAdmission:
             raise
 
     def check_native_controls(self) -> dict[str, Any]:
-        """Materialize prebound comparison controls without sealing or scoring.
+        """Check prebound comparison controls without sealing or scoring.
 
         Recipe version 1 fixes common-repair-v1, magnitude 2, float32 round
         lowering and the main-referenced sum tolerance. Supplied choices/maps
         establish no randomization independence or prospective registration.
         """
+        return self.verify_study_endpoints()["native_controls"] if self._study_seal is not None else self._native_controls()[0]
+
+    def _native_controls(self) -> tuple[dict[str, Any], dict[str, Any],
+                                        dict[tuple[int, str], tuple[TensorArtifact, bytes]]]:
         try:
             before = self.admit()
             recipes = _parse(self._controls_bytes)
@@ -935,7 +967,7 @@ class SelectionAdmission:
             _same(recipes, _parse(self._saved["protocol.json"])["controls"])
             main_report = self.check_repair_usability()
             _same(main_report["selection_admission_sha256"], digest(before))
-            members, owned = [], []
+            members, owned = [], {}
             for member, main, recipe in zip(before["members"], main_report["members"], recipes["members"]):
                 index = member["member_index"]
                 parent = self._bases.get(index)
@@ -978,7 +1010,8 @@ class SelectionAdmission:
                         artifact = TensorArtifact.from_dict(endpoint.to_dict())
                         _same(artifact.to_dict(), endpoint.to_dict())
                         _same(receipt["candidate_sha256"], artifact.sha256)
-                        owned.append((artifact, _json_bytes(artifact.to_dict())))
+                        owned[(index, control_id)] = (artifact, _json_bytes({"artifact": artifact.to_dict(),
+                            "proposal": proposal.to_dict(), "program": program.to_dict(), "lowering": receipt}))
                         control.update(materialized=True, unavailable_reason=None, proposal_sha256=proposal.sha256,
                                        program_sha256=program.sha256, lowering_sha256=receipt["sha256"],
                                        artifact_sha256=artifact.sha256,
@@ -997,8 +1030,9 @@ class SelectionAdmission:
                                 "diagnosis_candidate_sha256": member["diagnosis_candidate"]["sha256"]
                                     if member["diagnosis_candidate"] is not None else None,
                                 "main": main, "main_reference_norm": reference, "controls": controls})
-            for artifact, raw in owned:
-                _require(_json_bytes(artifact.to_dict()) == raw and artifact.sha256 == digest(_parse(raw)),
+            for artifact, raw in owned.values():
+                data = _parse(raw)["artifact"]
+                _require(_json_bytes(artifact.to_dict()) == _json_bytes(data) and artifact.sha256 == digest(data),
                          "A driver-owned control artifact changed during calculation")
             body = {"schema": "wsp-native-control-matching/1", "selection_admission_sha256": digest(before),
                     "repair_structure_sha256": main_report["sha256"], "controls_sha256": digest(recipes),
@@ -1013,7 +1047,131 @@ class SelectionAdmission:
                     "causal_usefulness_established": False}
             report = body | {"sha256": digest(body)}
             _same(self.admit(), before)
-            return _parse(_json_bytes(report))
+            return _parse(_json_bytes(report)), main_report, owned
+        except BaseException:
+            self._invalidated = True
+            raise
+
+    def _study_endpoint_body(self, admission: dict[str, Any], structure: dict[str, Any],
+                             native: dict[str, Any]) -> dict[str, Any]:
+        """Assemble retained endpoint evidence; never lower or apply a program."""
+        _require(self._study_plan_bytes is not None, "Bind a study endpoint plan before preparation")
+        plan = _parse(self._study_plan_bytes)
+        protocol = _parse(self._saved["protocol.json"])
+        _same(plan, protocol["protocol"]["study_plan"])
+        _same(_parse(self._controls_bytes), protocol["controls"])
+        _same(native["sha256"], digest({key: value for key, value in native.items() if key != "sha256"}))
+        _same(native["selection_admission_sha256"], digest(admission))
+        _same(native["repair_structure_sha256"], structure["sha256"])
+        _same(native["controls_sha256"], digest(protocol["controls"]))
+        identities = ("attempt_id", "registry_id", "evaluator_id", "roster_sha256", "cohort_protocol_sha256",
+                      "diagnosis_barrier_sha256", "repair_barrier_sha256", "source_sha256", "source_pin_scope")
+        for key in identities:
+            _same(native[key], admission[key])
+        _same([{key: member[key] for key in ("member_index", "member_id")} for member in native["members"]], self._rows)
+        _require(len(structure["members"]) == len(self._rows), "Incomplete main structural report")
+
+        def slot(slot_id: str, resolution: str, artifact: dict[str, Any] | None, *,
+                 reason: str | None = None, candidate: dict[str, Any] | None = None,
+                 construction: dict[str, Any] | None = None, repair_structure: dict[str, Any] | None = None,
+                 matching: dict[str, Any] | None = None) -> dict[str, Any]:
+            return {"slot_index": STUDY_SLOTS.index(slot_id), "slot_id": slot_id, "resolution": resolution,
+                    "materialized": artifact is not None, "unavailable_reason": reason,
+                    "artifact": artifact, "artifact_sha256": digest(artifact) if artifact is not None else None,
+                    "selected_candidate": candidate, "selected_candidate_sha256": candidate["sha256"] if candidate else None,
+                    "construction": construction, "structure": repair_structure, "matching": matching}
+
+        members, retained = [], []
+        for member, main, comparison in zip(admission["members"], structure["members"], native["members"]):
+            index = member["member_index"]
+            _same(comparison["main"], main)
+            _same(comparison["diagnosis_candidate_sha256"], member["diagnosis_candidate"]["sha256"]
+                  if member["diagnosis_candidate"] is not None else None)
+            _same([control["control_id"] for control in comparison["controls"]], list(STUDY_SLOTS[2:]))
+            candidate, parent = member["repair_candidate"], member["parent"]
+            fallback = candidate is None and plan["selected_fallback"] == "parent" and parent is not None
+            endpoint = candidate["artifact"] if candidate is not None else parent if fallback else None
+            construction = None
+            if candidate is not None:
+                receipt = _parse(self._saved[f"member-{index:06d}/repair.json"])
+                _same(receipt["sha256"], member["repair_receipt_sha256"])
+                _same(receipt["candidate"], candidate)
+                construction = receipt["submission"]
+            slots = [slot("main", "selected" if candidate is not None else "parent_fallback" if fallback else "unavailable",
+                          endpoint, reason=None if endpoint is not None else "no_parent" if parent is None else "no_selected_repair",
+                          candidate=candidate, construction=construction, repair_structure=main),
+                     slot("parent", "parent" if parent is not None else "unavailable", parent,
+                          reason=None if parent is not None else "no_parent")]
+            for control in comparison["controls"]:
+                control_id = control["control_id"]
+                data = None
+                if control["materialized"]:
+                    retained.append((index, control_id))
+                    artifact, raw = self._study_controls[(index, control_id)]
+                    data = _parse(raw)
+                    _same(artifact.to_dict(), data["artifact"])
+                    for key in ("proposal", "program", "artifact"):
+                        _same(digest(data[key]), control[key + "_sha256"])
+                    lowering = data["lowering"]
+                    _same(lowering["sha256"], control["lowering_sha256"])
+                    _same(lowering["sha256"], digest({key: value for key, value in lowering.items() if key != "sha256"}))
+                    for key in ("proposal", "program"):
+                        _same(lowering[key + "_sha256"], control[key + "_sha256"])
+                    _same(lowering["candidate_sha256"], control["artifact_sha256"])
+                    _same(artifact.sha256, control["artifact_sha256"])
+                    for key in ("proposal", "program", "lowering"):
+                        _same(data[key]["base_sha256"], main["parent_sha256"])
+                slots.append(slot(control_id, "materialized" if data is not None else "unavailable",
+                                  data["artifact"] if data is not None else None,
+                                  reason=control["unavailable_reason"],
+                                  construction={key: data[key] for key in ("proposal", "program", "lowering")} if data is not None else None,
+                                  repair_structure=control["structure"], matching=control["matching"]))
+            members.append({key: member[key] for key in ("member_index", "member_id", "policy", "diagnosis_outcome",
+                "repair_outcome", "diagnosis_receipt_sha256", "repair_receipt_sha256", "diagnosis_candidate")} | {"slots": slots})
+        _same(list(self._study_controls), retained)
+        return {"schema": "wsp-staged-study-endpoint-seal/1", "selection_admission_sha256": digest(admission),
+                **{key: admission[key] for key in identities},
+                "assignments": admission["assignments"], "assignments_sha256": admission["assignments_sha256"],
+                "study_plan": plan, "study_plan_sha256": digest(plan), "controls_sha256": native["controls_sha256"],
+                "repair_structure": structure, "repair_structure_sha256": structure["sha256"],
+                "native_controls": native, "native_controls_sha256": native["sha256"], "members": members,
+                "evaluation_available": False, "final_study_seal": False,
+                "trained_ancestry_established": False, "causal_usefulness_established": False}
+
+    def seal_study_endpoints(self) -> dict[str, Any]:
+        """Persist endpoint accounting once in this originating live admission."""
+        try:
+            _require(not self._study_seal_started, "Study endpoints can be sealed only once")
+            self._study_seal_started = True
+            before = self.admit()
+            _require(self._study_plan_bytes is not None, "Bind a study endpoint plan before preparation")
+            native, structure, self._study_controls = self._native_controls()
+            body = self._study_endpoint_body(before, structure, native)
+            document = body | {"sha256": digest(body)}
+            raw = _json_bytes(document) + b"\n"
+            _same(self.admit(), before)
+            with (self._directory / "study-endpoint-seal.json").open("xb") as stream:
+                stream.write(raw)
+                stream.flush()
+                os.fsync(stream.fileno())
+            self._receipt("study-endpoint-seal.json", body)
+            self._study_seal = _json_bytes(document)
+            return self.verify_study_endpoints()
+        except BaseException:
+            self._invalidated = True
+            raise
+
+    def verify_study_endpoints(self) -> dict[str, Any]:
+        """Recheck saved bytes and retained endpoints without reconstructing them."""
+        try:
+            _require(self._study_seal_started and self._study_seal is not None,
+                     "A successful seal in this originating live object is required")
+            before = self.admit()
+            document = _parse(self._study_seal)
+            body = self._study_endpoint_body(before, self.check_repair_usability(), document["native_controls"])
+            _same(document, body | {"sha256": digest(body)})
+            _same(self.admit(), before)
+            return _parse(self._study_seal)
         except BaseException:
             self._invalidated = True
             raise
