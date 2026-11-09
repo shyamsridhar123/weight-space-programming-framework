@@ -44,6 +44,13 @@ exceptions. An exception or interruption can leave the field absent, as can a
 legacy or non-completed attempt. Recovery does not backfill it. Existing attempt
 accounting carries these diagnostics into new failure receipts.
 
+The [diagnostics engineering receipt](../../provenance/verification/factory-assessment-diagnostics-20261109.json)
+records one passing focused offline invocation without retry or timeout. It
+checks rejection order, safe fields, scanner exception propagation and a mocked
+worker's completed-versus-timeout checkpoint behavior. The shared provider path
+also serves the reviewer; this local fixture enters only worker rejection. No
+live provider, scheduler, recovery or research execution was performed.
+
 Before each GitHub POST or PATCH, the factory atomically records a pending
 `github-pull-request.json`, `github-comment.json` or `github-close.json` journal.
 Its binding includes the repository identity, issue, issue snapshot digest, run,
