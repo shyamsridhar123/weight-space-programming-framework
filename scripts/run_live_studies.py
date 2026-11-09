@@ -742,7 +742,7 @@ def check_published_provider(root, assignment, lock, checkpoint, directory):
 
 
 def publish_provider(root, assignment, lock, checkpoint, source, destination):
-    # A publication retry copies an existing receipt; it never calls the model.
+    # Publish existing transport bytes; this never calls the model.
     destination.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(dir=destination.parent, prefix=".provider-publication-") as stage:
         staged = Path(stage) / "provider"
@@ -762,6 +762,56 @@ def publish_provider(root, assignment, lock, checkpoint, source, destination):
     return check_published_provider(root, assignment, lock, checkpoint, destination)
 
 
+def check_publication_failure(root, assignment, lock, checkpoint, failure):
+    check_checkpoint(root, assignment, lock, checkpoint)
+    check_signed(failure)
+    if (failure.get("schema") != "wsp-live-publication-failure/1"
+            or failure.get("assignment_id") != assignment["assignment_id"]
+            or failure.get("assignment_sha256") != checkpoint["assignment_sha256"]
+            or failure.get("prepared_lock_sha256") != lock["sha256"]
+            or failure.get("invocation_checkpoint_sha256") != checkpoint["sha256"]
+            or failure.get("phase") != "provider_publication"
+            or type(failure.get("error_type")) is not str or not failure["error_type"]
+            or failure.get("evidence_scope") != "receipt_only"
+            or failure.get("retry_performed") is not False):
+        raise ValueError("Publication failure differs from the committed invocation")
+    directory = selection_path(root, assignment["assignment_id"]).parent
+    receipt = check_receipt(root, assignment, lock, checkpoint, read(directory / "provider-receipt.json"))
+    if failure.get("provider_receipt_sha256") != receipt["sha256"]:
+        raise ValueError("Publication failure receipt identity mismatch")
+    return failure, receipt
+
+
+def finish_provider_attempt(root, assignment, lock, checkpoint, attempt_dir):
+    directory = selection_path(root, assignment["assignment_id"]).parent
+    failure_path, retained_path = directory / "publication-failure.json", directory / "provider-receipt.json"
+    failure = None
+    if failure_path.exists():
+        failure, receipt = check_publication_failure(root, assignment, lock, checkpoint, read(failure_path))
+    else:
+        receipt = check_receipt(root, assignment, lock, checkpoint,
+                                read(retained_path if retained_path.exists() else attempt_dir / "receipt.json"))
+        if (attempt_dir / "receipt.json").exists() and check_receipt(
+                root, assignment, lock, checkpoint, read(attempt_dir / "receipt.json"))["sha256"] != receipt["sha256"]:
+            raise ValueError("Private receipt differs from the retained provider receipt")
+        if not retained_path.exists():
+            write_json(retained_path, receipt)
+        try:
+            published = publish_provider(root, assignment, lock, checkpoint, attempt_dir, directory / "provider")
+            if published["sha256"] != receipt["sha256"]:
+                raise ValueError("Published receipt differs from the retained provider receipt")
+        except Exception as error:
+            failure = signed({
+                "schema": "wsp-live-publication-failure/1", "assignment_id": assignment["assignment_id"],
+                "assignment_sha256": checkpoint["assignment_sha256"], "prepared_lock_sha256": lock["sha256"],
+                "invocation_checkpoint_sha256": checkpoint["sha256"], "provider_receipt_sha256": receipt["sha256"],
+                "phase": "provider_publication", "error_type": type(error).__name__,
+                "evidence_scope": "receipt_only", "retry_performed": False,
+            })
+            write_json(failure_path, failure)
+    return finish_selection(root, assignment, receipt, receipt["status"], checkpoint, publication_failure=failure)
+
+
 def validate_selection(root, assignment, lock, selected=None):
     directory = selection_path(root, assignment["assignment_id"]).parent
     selected = check_signed(selected if selected is not None else read(directory / "selection.json"))
@@ -776,17 +826,29 @@ def validate_selection(root, assignment, lock, selected=None):
     checkpoint = check_checkpoint(root, assignment, lock, read(directory / "invocation-checkpoint.json"))
     if selected["invocation_checkpoint_sha256"] != checkpoint["sha256"]:
         raise ValueError("Selection checkpoint identity mismatch")
-    receipt = None
-    if selected["provider_receipt_sha256"] is not None:
+    receipt, publication_failure = None, None
+    failure_path = directory / "publication-failure.json"
+    if selected.get("publication_failure_sha256") is not None:
+        publication_failure, receipt = check_publication_failure(root, assignment, lock, checkpoint, read(failure_path))
+        if selected["publication_failure_sha256"] != publication_failure["sha256"]:
+            raise ValueError("Selection publication failure identity mismatch")
+    elif failure_path.exists():
+        raise ValueError("Selection omits its durable publication failure")
+    elif selected["provider_receipt_sha256"] is not None:
         receipt = check_published_provider(root, assignment, lock, checkpoint, directory / "provider")
+    if receipt is not None:
         if (receipt["sha256"] != selected["provider_receipt_sha256"]
                 or receipt["status"] != selected["provider_status"]
                 or canonical_bytes(receipt["response"]) != canonical_bytes(selected["response"])):
             raise ValueError("Selection does not preserve its committed provider response")
     elif selected["provider_status"] != "interrupted" or selected["response"] is not None:
         raise ValueError("Missing receipt cannot contain a completed response")
+    if (directory / "provider-receipt.json").exists():
+        retained = check_receipt(root, assignment, lock, checkpoint, read(directory / "provider-receipt.json"))
+        if receipt is None or retained["sha256"] != receipt["sha256"]:
+            raise ValueError("Selection does not preserve its retained provider receipt")
     parent = TensorArtifact.from_dict(read(root / assignment["parent_path"]))
-    state = selection_state(assignment, parent, receipt, selected["provider_status"])
+    state = selection_state(assignment, parent, receipt, selected["provider_status"], publication_failure)
     for key in ("terminal_status", "validation_error_type", "no_op", "answer_valid", "answer_validation_error_type"):
         if selected[key] != state[key]:
             raise ValueError("Selection decision differs from the committed response")
@@ -823,11 +885,13 @@ def trace_semantics(trace):
     return normalized
 
 
-def selection_state(assignment, parent, receipt, status):
+def selection_state(assignment, parent, receipt, status, publication_failure=None):
     broker, handles = replay_broker(assignment, parent)
     candidate, program, lowering, proposal, no_op, error = parent, None, None, None, False, None
     response = receipt.get("response") if receipt else None
     provider_status = status
+    if publication_failure is not None:
+        status = "interrupted"
     answer_valid, answer_error = False, None
     if status == "completed":
         try:
@@ -878,10 +942,10 @@ def selection_state(assignment, parent, receipt, status):
             "answer_valid": answer_valid, "answer_validation_error_type": answer_error}
 
 
-def finish_selection(root, assignment, receipt, status, invocation):
+def finish_selection(root, assignment, receipt, status, invocation, publication_failure=None):
     directory = selection_path(root, assignment["assignment_id"]).parent
     parent = TensorArtifact.from_dict(read(root / assignment["parent_path"]))
-    state = selection_state(assignment, parent, receipt, status)
+    state = selection_state(assignment, parent, receipt, status, publication_failure)
     candidate, program, lowering, proposal = (state[key] for key in ("candidate", "program", "lowering", "proposal"))
     if program is not None:
         write_json(directory / "program.json", program.to_dict())
@@ -894,6 +958,7 @@ def finish_selection(root, assignment, receipt, status, invocation):
         "terminal_status": state["terminal_status"], "provider_status": state["provider_status"], "selection_utc": now(),
         "invocation_checkpoint_sha256": invocation["sha256"],
         "provider_receipt_sha256": receipt["sha256"] if receipt else None,
+        **({"publication_failure_sha256": publication_failure["sha256"]} if publication_failure is not None else {}),
         **{key: state[key] for key in ("response", "validation_error_type", "no_op", "answer_valid", "answer_validation_error_type")},
         "interrupted_transport_termination_attested": False if state["provider_status"] == "interrupted" else None,
         "parent_sha256": parent.sha256, "candidate_sha256": candidate.sha256,
@@ -918,9 +983,9 @@ def select_one(root, raw, locked_assignment, lock):
     checkpoint_path = public_dir / "invocation-checkpoint.json"
     if checkpoint_path.exists():
         checkpoint = check_checkpoint(root, assignment, lock, read(checkpoint_path))
-        if (attempt_dir / "receipt.json").exists():
-            receipt = publish_provider(root, assignment, lock, checkpoint, attempt_dir, public_dir / "provider")
-            return finish_selection(root, assignment, receipt, receipt["status"], checkpoint)
+        if any(path.exists() for path in (public_dir / "publication-failure.json",
+                                         public_dir / "provider-receipt.json", attempt_dir / "receipt.json")):
+            return finish_provider_attempt(root, assignment, lock, checkpoint, attempt_dir)
         return finish_selection(root, assignment, None, "interrupted", checkpoint)
     checkpoint = signed({
         "schema": "wsp-live-invocation-checkpoint/1", "assignment_id": assignment["assignment_id"],
@@ -931,24 +996,23 @@ def select_one(root, raw, locked_assignment, lock):
         "retry_rule": "No retry after uncertain invocation; recover receipt or account interrupted.",
     })
     write_json(checkpoint_path, checkpoint)
-    receipt, status = None, "interrupted"
     try:
-        receipt = CodexProvider().call(
+        CodexProvider().call(
             (root / assignment["prompt_path"]).read_text(encoding="utf-8"),
             directory=attempt_dir, cwd=raw / assignment["assignment_id"] / "cwd",
             schema=read(root / assignment["schema_path"]),
         )
-        receipt = publish_provider(root, assignment, lock, checkpoint, attempt_dir, public_dir / "provider")
-        status = receipt["status"]
     except Exception as failure:
         write_json(public_dir / "transport-interruption.json", signed({
-            "phase": "transport_or_publication_interrupted", "error_type": type(failure).__name__,
+            "phase": "transport_interrupted", "error_type": type(failure).__name__,
             "receipt_exists": (attempt_dir / "receipt.json").exists(), "retry_performed": False,
         }))
-        if (attempt_dir / "receipt.json").exists():
-            receipt = publish_provider(root, assignment, lock, checkpoint, attempt_dir, public_dir / "provider")
-            status = receipt["status"]
-    selection = finish_selection(root, assignment, receipt, status, checkpoint)
+    if (attempt_dir / "receipt.json").exists():
+        selection = finish_provider_attempt(root, assignment, lock, checkpoint, attempt_dir)
+        receipt = read(public_dir / "provider-receipt.json")
+    else:
+        selection = finish_selection(root, assignment, None, "interrupted", checkpoint)
+        receipt = None
     print(json.dumps({"assignment_id": assignment["assignment_id"],
                       "terminal_status": selection["terminal_status"],
                       "provider_seconds": receipt["elapsed_seconds"] if receipt else None}), flush=True)
@@ -1308,20 +1372,28 @@ def evaluate_assignment(root, assignment, selected, gate, lineage, primary, dest
     return outcome
 
 
+def missing_outcome(assignment, selected, gate, destination, error_type):
+    deterministic = {"assignment_id": assignment["assignment_id"], "selection_sha256": selected["sha256"],
+                     "global_seal_sha256": gate["sha256"], "evaluation_missing": True,
+                     "joint_useful_success": False, "error_type": error_type}
+    if selected.get("publication_failure_sha256") is not None:
+        deterministic["publication_failure_sha256"] = selected["publication_failure_sha256"]
+    outcome = signed({"schema": "wsp-live-outcome/1", **{k: assignment[k] for k in assigned_specs()[0]},
+                      "assigned": True, "terminal_status": selected["terminal_status"], "no_op": selected["no_op"],
+                      "deterministic": deterministic, "deterministic_sha256": digest(deterministic),
+                      "selection_sha256": selected["sha256"], "global_seal_sha256": gate["sha256"],
+                      "missingness_sensitivity": {"gain": [-1., 1.], "harm": [-1., 1.], "useful": [0., 1.]}})
+    write_json(destination / "outcome.json", outcome)
+    return outcome
+
+
 def safe_evaluation(root, assignment, selected, gate, lineage, primary, destination):
+    if selected.get("publication_failure_sha256") is not None:
+        return missing_outcome(assignment, selected, gate, destination, "ProviderPublicationFailure")
     try:
         return evaluate_assignment(root, assignment, selected, gate, lineage, primary, destination)
     except Exception as failure:
-        deterministic = {"assignment_id": assignment["assignment_id"], "selection_sha256": selected["sha256"],
-                         "global_seal_sha256": gate["sha256"], "evaluation_missing": True,
-                         "joint_useful_success": False, "error_type": type(failure).__name__}
-        outcome = signed({"schema": "wsp-live-outcome/1", **{k: assignment[k] for k in assigned_specs()[0]},
-                          "assigned": True, "terminal_status": selected["terminal_status"], "no_op": selected["no_op"],
-                          "deterministic": deterministic, "deterministic_sha256": digest(deterministic),
-                          "selection_sha256": selected["sha256"], "global_seal_sha256": gate["sha256"],
-                          "missingness_sensitivity": {"gain": [-1., 1.], "harm": [-1., 1.], "useful": [0., 1.]}})
-        write_json(destination / "outcome.json", outcome)
-        return outcome
+        return missing_outcome(assignment, selected, gate, destination, type(failure).__name__)
 
 
 def evaluation_inputs(root, lock):
@@ -1372,7 +1444,10 @@ def check_outcome(outcome, assignment, selected, gate):
             or outcome.get("deterministic_sha256") != digest(outcome["deterministic"])
             or outcome["deterministic"].get("assignment_id") != assignment["assignment_id"]
             or outcome["deterministic"].get("selection_sha256") != selected["sha256"]
-            or outcome["deterministic"].get("global_seal_sha256") != gate["sha256"]):
+            or outcome["deterministic"].get("global_seal_sha256") != gate["sha256"]
+            or outcome["deterministic"].get("publication_failure_sha256") != selected.get("publication_failure_sha256")
+            or (selected.get("publication_failure_sha256") is not None
+                and outcome["deterministic"].get("evaluation_missing") is not True)):
         raise ValueError("Evaluation outcome binding differs from its frozen assignment")
     return outcome
 
@@ -1438,15 +1513,7 @@ def run_evaluation(root, lock, gate, replay=False):
             outcome = check_outcome(read(directory / "outcome.json"), assignment, selected, gate)
         elif directory.exists():
             # Preserve partial artifacts and account failure without rerunning the intervention.
-            deterministic = {"assignment_id": assignment["assignment_id"], "selection_sha256": selected["sha256"],
-                             "global_seal_sha256": gate["sha256"], "evaluation_missing": True,
-                             "joint_useful_success": False, "error_type": "InterruptedEvaluation"}
-            outcome = signed({"schema": "wsp-live-outcome/1", **{k: assignment[k] for k in assigned_specs()[0]},
-                              "assigned": True, "terminal_status": selected["terminal_status"], "no_op": selected["no_op"],
-                              "deterministic": deterministic, "deterministic_sha256": digest(deterministic),
-                              "selection_sha256": selected["sha256"], "global_seal_sha256": gate["sha256"],
-                              "missingness_sensitivity": {"gain": [-1., 1.], "harm": [-1., 1.], "useful": [0., 1.]}})
-            write_json(directory / "outcome.json", outcome)
+            outcome = missing_outcome(assignment, selected, gate, directory, "InterruptedEvaluation")
         else:
             outcome = safe_evaluation(root, assignment, selected, gate, loaded, primary, directory)
         outcomes.append(outcome)
@@ -1565,9 +1632,30 @@ def metric(record, control, key):
 def useful_value(record):
     if record["no_op"]:
         return 0.
-    if record["deterministic"]["evaluation_missing"] and record["terminal_status"] == "sealed":
+    if record["deterministic"]["evaluation_missing"] and (
+            record["terminal_status"] == "sealed"
+            or record["deterministic"].get("publication_failure_sha256") is not None):
         return None
     return float(record["deterministic"]["joint_useful_success"])
+
+
+def provider_usage_accounting(receipts):
+    usage = {"assigned_attempts": len(receipts), "known_receipts": sum(x is not None for x in receipts),
+             "unknown_receipts": sum(x is None for x in receipts), "units": "tokens",
+             "missing_usage_is_zero": False, "cached_input_added_to_input": False,
+             "totals_scope": "sums_of_observed_fields;_lower_bounds_when_coverage_is_incomplete"}
+    for key in ("input_tokens", "output_tokens", "cached_input_tokens"):
+        known = [receipt["usage"][key] for receipt in receipts
+                 if receipt is not None and type(receipt.get("usage")) is dict
+                 and type(receipt["usage"].get(key)) is int and receipt["usage"][key] >= 0]
+        usage[key] = {"observed_sum": sum(known) if known else None, "known_attempts": len(known),
+                      "unknown_attempts": len(receipts) - len(known), "complete_for_attempts": len(known) == len(receipts)}
+    return {"provider_latency_seconds": [receipt.get("elapsed_seconds") if receipt is not None else None
+                                         for receipt in receipts],
+            "provider_input_tokens": usage["input_tokens"]["observed_sum"],
+            "provider_output_tokens": usage["output_tokens"]["observed_sum"], "provider_usage": usage,
+            "provider_financial_cost_usd": None,
+            "financial_unknown_reason": "Authenticated CLI subscription; no request charge exposed."}
 
 
 def summarize(root, lock, gate, outcomes):
@@ -1610,10 +1698,13 @@ def summarize(root, lock, gate, outcomes):
             "confidence": confidence_summary(records),
         }
     receipts = []
-    for assignment in lock["assignments"]:
-        path = selection_path(root, assignment["assignment_id"]).parent / "provider" / "receipt.json"
-        if path.exists():
-            receipts.append(read(path))
+    for locked in lock["assignments"]:
+        assignment = check_signed(read(root / locked["assignment_path"]))
+        selected = validate_selection(root, assignment, lock)
+        directory = selection_path(root, assignment["assignment_id"]).parent
+        retained = directory / "provider-receipt.json"
+        path = retained if retained.exists() else directory / "provider" / "receipt.json"
+        receipts.append(read(path) if selected["provider_receipt_sha256"] is not None else None)
     statuses = Counter(x["terminal_status"] for x in outcomes)
     supplemental = {}
     for regime, view in itertools.product(REGIMES, ("none", "exact")):
@@ -1638,10 +1729,7 @@ def summarize(root, lock, gate, outcomes):
                                not x["deterministic"]["control_matching"]["shuffled"]["matches_frozen_tolerance"]
                                for x in primary_diagnosis if not x["deterministic"]["evaluation_missing"])},
         "supplementary": supplemental,
-        "cost": {"provider_latency_seconds": [x["elapsed_seconds"] for x in receipts],
-                 "provider_input_tokens": sum(x["usage"].get("input_tokens", 0) for x in receipts),
-                 "provider_output_tokens": sum(x["usage"].get("output_tokens", 0) for x in receipts),
-                 "provider_financial_cost_usd": None, "financial_unknown_reason": "Authenticated CLI subscription; no request charge exposed.",
+        "cost": {**provider_usage_accounting(receipts),
                  "parameter_values_exposed": sum(check_signed(read(root / x["assignment_path"]))["parameter_values_exposed"] for x in lock["assignments"]),
                  "attempts_are_workload_not_independent_units_or_impact": True},
         "inference_scope": "Six independently initialized and trained complete encoders/heads, shared fixed public requests and one provider configuration. Small-lineage estimation only.",
