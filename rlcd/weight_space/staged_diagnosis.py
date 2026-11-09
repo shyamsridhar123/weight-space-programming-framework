@@ -39,6 +39,9 @@ class StagedDiagnosisRepair:
     for existing structured lowering, or None to abstain. An invalid endpoint
     still closes repair selection. Receipts are private, exclusive JSON files;
     the caller must keep their directory and the shared registry under its control.
+    Terminal outcome codes distinguish selected, abstained, invalid_submission
+    and selector_failed. The coordinator adds no exception-message copy; existing
+    private traces retain their own diagnostic fields.
     """
 
     def __init__(self, run_dir: str | Path, *, task_id: str, objective: str,
@@ -61,6 +64,7 @@ class StagedDiagnosisRepair:
         self._started = {"diagnosis": False, "repair": False, "evaluation": False}
         self._invalidated = False
         self._records: dict[str, bytes] = {}
+        self._outcomes: dict[str, str] = {}
         self._protocol = self._write("protocol", {
             "schema": "wsp-staged-diagnosis-protocol/1", "run_id": uuid.uuid4().hex,
             "task_id": task_id, "objective": objective, "architecture": architecture,
@@ -100,7 +104,7 @@ class StagedDiagnosisRepair:
 
     def _query(self, broker: ProposerBroker, data: Any) -> dict[str, Any]:
         with self._lock:
-            if broker.is_sealed:
+            if self._invalidated or broker.is_sealed:
                 return {"status": "denied"}  # Keep the terminal trace immutable.
             if (type(data) is not dict or type(data.get("op")) is not str
                     or data["op"] not in ("metadata", "weights")):
@@ -144,7 +148,7 @@ class StagedDiagnosisRepair:
             raise WorkflowError("The exact terminal session selection is required")
         # Existing broker internals own the private selection; no endpoint is
         # added to its public request surface to obtain this harness-only snapshot.
-        return {"schema": "wsp-staged-selection/1", "stage": stage,
+        return {"schema": "wsp-staged-selection/1", "stage": stage, "outcome": self._outcomes[stage],
                 "protocol_sha256": json.loads(self._protocol)["sha256"],
                 "task": self._tasks[stage].to_dict(), "task_sha256": self._tasks[stage].sha256,
                 "session_sha256": session.sha256, "configuration": session.configuration,
@@ -174,12 +178,36 @@ class StagedDiagnosisRepair:
             self._invalidated = True
             raise WorkflowError("Terminal evidence changed; the run is invalidated") from None
 
-    def _finish(self, stage: str, submission: dict[str, Any] | None) -> dict[str, Any]:
+    def _finish(self, stage: str, submission: dict[str, Any] | None, *,
+                outcome: str = "selected") -> dict[str, Any]:
         broker = self._brokers[stage]
-        handle = broker.request(submission).get("candidate_handle") if submission is not None else None
-        broker.request({"op": "seal", "candidate_handle": handle})
-        self._records[stage] = self._write(stage, self._snapshot(stage))
-        return self._verify(stage)
+        handle, admission_error = None, None
+        if submission is not None:
+            try:
+                handle = broker.request(submission).get("candidate_handle")
+            except BaseException as error:
+                admission_error, outcome = error, "invalid_submission"
+        try:
+            if admission_error is not None or (
+                    submission is None and outcome in ("invalid_submission", "selector_failed")):
+                broker.abstain()  # Failure cleanup must not depend on the request budget.
+            else:
+                broker.request({"op": "seal", "candidate_handle": handle})
+                if not broker.is_sealed:
+                    broker.abstain()  # A request cap must not leave the broker open.
+            selected = broker._handles.get(broker._selected)
+            if submission is not None and (selected is None or selected[0] is None):
+                outcome = "invalid_submission"
+            self._outcomes[stage] = outcome
+            self._records[stage] = self._write(stage, self._snapshot(stage))
+            result = self._verify(stage)
+        except BaseException:
+            self._invalidated = True
+            if admission_error is None:
+                raise
+        if admission_error is not None:
+            raise admission_error
+        return result
 
     def select_diagnosis(self, selector: Callable[[Callable[..., Any]], Any]) -> dict[str, Any]:
         with self._lock:
@@ -187,11 +215,19 @@ class StagedDiagnosisRepair:
                 raise WorkflowError("Diagnosis selection is available once")
             self._started["diagnosis"] = True
             broker = self._brokers["diagnosis"]
+            outcome = "selector_failed"
             try:
-                answer = self._diagnosis(selector(lambda data: self._query(broker, data)))
-                return self._finish("diagnosis", {"op": "answer", "answer": answer})
-            finally:
-                broker.abstain()  # A failed selection cannot leave its proposer open.
+                answer = selector(lambda data: self._query(broker, data))
+                outcome = "invalid_submission"
+                answer = self._diagnosis(answer)
+            except BaseException:
+                try:
+                    self._finish("diagnosis", None, outcome=outcome)
+                except BaseException:
+                    self._invalidated = True
+                raise
+            return self._finish("diagnosis", {"op": "answer", "answer": answer},
+                                outcome="abstained" if answer["abstain"] else "selected")
 
     def select_repair(self, selector: Callable[[dict[str, Any], Callable[..., Any]], Any]) -> dict[str, Any]:
         with self._lock:
@@ -199,30 +235,43 @@ class StagedDiagnosisRepair:
                 raise WorkflowError("Repair selection is available once")
             diagnosis = self._verify("diagnosis")
             candidate = diagnosis["candidate"]
-            if candidate is None or self._diagnosis(candidate["answer"])["abstain"]:
+            if (diagnosis["outcome"] != "selected" or candidate is None
+                    or self._diagnosis(candidate["answer"])["abstain"]):
                 raise WorkflowError("A nonabstaining sealed diagnosis is required")
             self._started["repair"] = True
-            binding = {"staged_protocol_sha256": diagnosis["protocol_sha256"],
-                       "diagnosis_receipt_sha256": diagnosis["sha256"],
-                       "diagnosis_candidate_sha256": candidate["sha256"],
-                       "diagnosis_task_sha256": diagnosis["task_sha256"],
-                       "diagnosis_session_sha256": diagnosis["session_sha256"],
-                       "diagnosis_seal_sha256": diagnosis["trace_head_sha256"],
-                       "selection_rule": "separate_repair_after_verified_durable_diagnosis"}
-            task = TaskSpec(self._tasks["diagnosis"].task_id + "/repair", "edit",
-                            self._tasks["diagnosis"].objective, _architecture(self._base),
-                            self._base.sha256, binding)
-            self._tasks["repair"] = task
-            broker = self._broker(task, {"stage": "repair", "diagnosis": candidate["answer"],
-                                         "diagnosis_receipt_sha256": diagnosis["sha256"]})
-            self._brokers["repair"] = broker
             try:
-                repair = _json(selector(candidate["answer"], lambda data: self._query(broker, data)))
+                binding = {"staged_protocol_sha256": diagnosis["protocol_sha256"],
+                           "diagnosis_receipt_sha256": diagnosis["sha256"],
+                           "diagnosis_candidate_sha256": candidate["sha256"],
+                           "diagnosis_task_sha256": diagnosis["task_sha256"],
+                           "diagnosis_session_sha256": diagnosis["session_sha256"],
+                           "diagnosis_seal_sha256": diagnosis["trace_head_sha256"],
+                           "selection_rule": "separate_repair_after_verified_durable_diagnosis"}
+                task = TaskSpec(self._tasks["diagnosis"].task_id + "/repair", "edit",
+                                self._tasks["diagnosis"].objective, _architecture(self._base),
+                                self._base.sha256, binding)
+                self._tasks["repair"] = task
+                broker = self._broker(task, {"stage": "repair", "diagnosis": candidate["answer"],
+                                             "diagnosis_receipt_sha256": diagnosis["sha256"]})
+                self._brokers["repair"] = broker
+            except BaseException:
+                self._invalidated = True  # No broker exists from which to attest a terminal selection.
+                raise
+            outcome = "selector_failed"
+            try:
+                repair = selector(candidate["answer"], lambda data: self._query(broker, data))
+                outcome = "invalid_submission"
+                repair = _json(repair)
                 if repair is not None and (type(repair) is not dict or set(repair) != {"commands", "intent"}):
                     raise WorkflowError("Repair selection requires structured commands or abstention")
-                return self._finish("repair", {"op": "submit", **repair} if repair is not None else None)
-            finally:
-                broker.abstain()
+            except BaseException:
+                try:
+                    self._finish("repair", None, outcome=outcome)
+                except BaseException:
+                    self._invalidated = True
+                raise
+            return self._finish("repair", {"op": "submit", **repair} if repair is not None else None,
+                                outcome="selected" if repair is not None else "abstained")
 
     def evaluate_registered(self, batch: RegisteredBatch,
                             evaluator: Callable[[dict[str, Any], Candidate, list[Any]], Any], *,
@@ -231,7 +280,8 @@ class StagedDiagnosisRepair:
             if self._started["evaluation"]:
                 raise WorkflowError("Evaluation was already attempted")
             diagnosis, repair = self._verify("diagnosis"), self._verify("repair")
-            if (diagnosis["candidate"] is None or self._diagnosis(diagnosis["candidate"]["answer"])["abstain"]
+            if (diagnosis["outcome"] != "selected" or repair["outcome"] != "selected"
+                    or diagnosis["candidate"] is None or self._diagnosis(diagnosis["candidate"]["answer"])["abstain"]
                     or repair["candidate"] is None or repair["candidate"]["artifact"] is None
                     or repair["task"]["constraints"]["diagnosis_receipt_sha256"] != diagnosis["sha256"]):
                 raise WorkflowError("Both stages must contain the exact bound nonabstaining selections")

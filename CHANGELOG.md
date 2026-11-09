@@ -7,6 +7,16 @@ research draft.
 
 ## Unreleased
 
+- Add canonical terminal selection outcomes and failure receipts to the
+  [staged diagnosis lane](docs/research/staged-diagnosis.md), preserving original
+  exceptions and invalidating failed finalization without overwrite or retry.
+  The [separate engineering receipt](provenance/verification/staged-terminal-failures-20261109.json)
+  retains failed-invocation evidence and both test-source identities alongside
+  the passing test-only correction against unchanged production source; the older
+  guard covers its original snapshot.
+  Issue #9 c1 remains partial and the issue remains open, with historical results
+  unchanged.
+
 - Require complete, nonnegative exact-integer input/output token usage before
   provider completion and common broker action admission. Serializable rejected
   usage and event identity are retained in failed receipts; missing counts are

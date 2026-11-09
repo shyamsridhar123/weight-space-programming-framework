@@ -578,8 +578,8 @@
   },
   "verification_archive": {
     "path": "provenance/verification/index.json",
-    "bytes": 147194,
-    "sha256": "f5a9c889de77e66169865413b85446667243c542a772c7ccba40489ad1bf5e0f"
+    "bytes": 149809,
+    "sha256": "f053e7f27ff2bb74033c23704225ccd074959e4575ff3a0975ccdb4a8e1bcff7"
   },
   "public_npm_lock_review": {
     "path": "provenance/public-npm-lock.json",
@@ -1381,5 +1381,87 @@
     ],
     "raw_artifact_commitments_preserved": true,
     "source_index_sha256": "45169cd9aa2422e9ac7b624b0e4c15e364beb5a4a2e257ff43f15f6e1109e3f3"
+  },
+  "staged_terminal_failures_update_20261109": {
+    "review_date": "2026-11-09",
+    "integration_base_main_commit": "94df880ecabdb4dd33a144bc016cb09ac71d1b65",
+    "verification": {
+      "path": "provenance/verification/staged-terminal-failures-20261109.json",
+      "bytes": 31273,
+      "sha256": "224c6148eefeadc88676a31b1cdae7cb1b36a116c509403f6d4b710754714614"
+    },
+    "current_files": [
+      {
+        "path": "CHANGELOG.md",
+        "bytes": 24371,
+        "sha256": "1b0acc2e97a323ed50b71b578020ec292c63e606d3342309da52ef3a73f23e09"
+      },
+      {
+        "path": "docs/research/issue-acceptance-status.md",
+        "bytes": 151004,
+        "sha256": "7c55d7e99ce70d5ac9b5f8c79a1f28476e9297bb11707327856e26d6bba76fea"
+      },
+      {
+        "path": "docs/research/live-studies.md",
+        "bytes": 31830,
+        "sha256": "2c5149b740bf2eef10e5a9a927a9d32ec25e004868a0732b0d567f485374bfbb"
+      },
+      {
+        "path": "docs/research/staged-diagnosis.md",
+        "bytes": 12923,
+        "sha256": "755851e6c1f48d059d63478dbf60e0dbee6e7b4ad28f463b4e3345653fbab219"
+      },
+      {
+        "path": "pytest-engineering.ini",
+        "bytes": 1017,
+        "sha256": "8a12e78ec137faa0b5ebbf2d8d969edde85ec08b6ad45778feb562db94a2f35a"
+      },
+      {
+        "path": "rlcd/weight_space/staged_diagnosis.py",
+        "bytes": 24839,
+        "sha256": "efe35d3070b80952f5c7537edd72203fcea05cec5453b6405e93f22919b0c5c5"
+      },
+      {
+        "path": "tests/test_staged_terminal_failure_receipts.py",
+        "bytes": 16362,
+        "sha256": "b36942a438fa11012cdf47ee2999255e4bb9c998204a91c31d625c0a315b9fbb"
+      }
+    ],
+    "current_primary_source_matches_corrected_execution": true,
+    "current_regression_matches_corrected_execution": true,
+    "raw_artifact_commitments_preserved": true,
+    "source_index_sha256": "45169cd9aa2422e9ac7b624b0e4c15e364beb5a4a2e257ff43f15f6e1109e3f3",
+    "scope": "Two saved offline synthetic engineering invocations of staged terminal failure handling; the second changes the test fixture only",
+    "initial_recorded_execution_status": "failed_fixture_setup",
+    "initial_execution_started_utc": "2026-11-09T15:42:14.3240073Z",
+    "initial_execution_completed_utc": "2026-11-09T15:42:18.6940761Z",
+    "initial_recorded_exit_code": 1,
+    "initial_recorded_pytest_result": "1 failed in 2.84s",
+    "initial_raw_test_source_saved": false,
+    "corrected_recorded_execution_status": "passed",
+    "corrected_execution_started_utc": "2026-11-09T15:45:55.2504050Z",
+    "corrected_execution_completed_utc": "2026-11-09T15:45:59.5488061Z",
+    "corrected_recorded_exit_code": 0,
+    "corrected_recorded_pytest_result": "1 passed in 3.08s",
+    "test_node": "tests/test_staged_terminal_failure_receipts.py::test_staged_terminal_failure_receipts",
+    "execution_count_per_test_snapshot": 1,
+    "automatic_retry": false,
+    "production_source_unchanged_between_attempts": true,
+    "tested_source_base_commit": "94df880ecabdb4dd33a144bc016cb09ac71d1b65",
+    "tested_changes_were_uncommitted": true,
+    "captured_source_before_after_equal_per_attempt": true,
+    "receipt_added_after_execution": true,
+    "publication_snapshot_head_commit": "94df880ecabdb4dd33a144bc016cb09ac71d1b65",
+    "publication_prepared_at_utc": "2026-11-09T15:57:01.722669+00:00",
+    "publication_scope": "The corrected local check covers its saved source snapshot. Source and test still match those captured bytes; documentation and publication metadata were updated afterward. This bookkeeping supplies no completed-tree gate or later integration validation. Existing records retain their historical scope.",
+    "later_integration_verified_by_recorded_test": false,
+    "publication_bookkeeping_reran_test": false,
+    "issue9_c1_status": "partial",
+    "issue9_kept_open": true,
+    "historical_outcomes_superseded": false,
+    "historical_inventory_changed": false,
+    "new_scientific_study": false,
+    "new_provider_calls": 0,
+    "hosted_success_inferred": false
   }
 }
