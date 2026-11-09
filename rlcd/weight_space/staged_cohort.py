@@ -19,7 +19,105 @@ from .broker import WeightView
 from .data_roles import DataRoleRegistry
 from .model import canonical_bytes, digest
 from .staged_diagnosis import StagedDiagnosisRepair
+from .structured import ExecutionSpec
 from .workflow import Artifact, BudgetLimits, Candidate, WorkflowError, _json
+
+
+def _validate_evaluation_plan(plan: Any, controls: dict[str, Any],
+                              member_ids: list[str] | tuple[str, ...]) -> None:
+    """Validate declarations only; endpoint construction and scoring stay separate."""
+    def fields(value: Any, expected: set[str], label: str) -> None:
+        if type(value) is not dict or set(value) != expected:
+            raise ValueError(f"Unknown or missing {label} fields")
+
+    def identifier(value: Any) -> str:
+        if type(value) is not str or not value.strip():
+            raise ValueError("Evaluation identities must be nonblank UTF-8 strings")
+        value.encode("utf-8")
+        return value
+
+    fields(plan, {"schema", "result_schema", "aggregate", "holdouts", "members"},
+           "evaluation-plan")
+    if (plan["schema"] != "wsp-staged-cohort-evaluation-plan/1"
+            or plan["result_schema"] != "wsp-staged-cohort-result/1"):
+        raise ValueError("Unknown cohort evaluation-plan or result schema")
+    fields(plan["aggregate"], {"source_id", "family_id"}, "aggregate")
+    aggregate_source = identifier(plan["aggregate"]["source_id"])
+    identifier(plan["aggregate"]["family_id"])
+    if type(plan["holdouts"]) is not list or not plan["holdouts"]:
+        raise ValueError("Declare a nonempty ordered holdout list")
+    holdout_ids, source_ids = set(), {aggregate_source}
+    for holdout in plan["holdouts"]:
+        fields(holdout, {"holdout_id", "source_id", "family_id", "row_count"}, "holdout")
+        holdout_id, source_id = identifier(holdout["holdout_id"]), identifier(holdout["source_id"])
+        identifier(holdout["family_id"])
+        if (holdout_id in holdout_ids or source_id in source_ids
+                or type(holdout["row_count"]) is not int or holdout["row_count"] <= 0):
+            raise ValueError("Use unique holdout/source IDs and strict positive integer row counts")
+        holdout_ids.add(holdout_id)
+        source_ids.add(source_id)
+
+    if set(controls) != set(member_ids):
+        raise ValueError("Evaluation controls must cover exactly the original member IDs")
+    variants = {"parent": {"kind"}, "reference": {"kind", "artifact"},
+                "structured": {"kind", "proposal", "lowering"}}
+    schemas = {"artifact": ("wsp-network/1", "wsp-tensors/1"),
+               "proposal": ("wsp-structured-program/1",), "lowering": ("wsp-lowering/1",)}
+    for definitions in controls.values():
+        if type(definitions) is not dict:
+            raise ValueError("Each member's controls must be a JSON object")
+        for control_id, definition in definitions.items():
+            identifier(control_id)
+            kind = definition.get("kind") if type(definition) is dict else None
+            if type(kind) is not str or kind not in variants:
+                raise ValueError("Unknown cohort control kind")
+            fields(definition, variants[kind], "control")
+            for key in variants[kind] - {"kind"}:
+                payload = definition[key]
+                if type(payload) is not dict or payload.get("schema") not in schemas[key]:
+                    raise ValueError(f"Unknown {key} declaration schema")
+
+    members = plan["members"]
+    if type(members) is not list or len(members) != len(member_ids):
+        raise ValueError("Evaluation members must match the complete ordered roster")
+    for member_id, member in zip(member_ids, members):
+        fields(member, {"member_id", "holdout_id", "slots"}, "evaluation-member")
+        if (identifier(member["member_id"]) != member_id
+                or identifier(member["holdout_id"]) not in holdout_ids):
+            raise ValueError("Evaluation members must match the roster and declared holdouts")
+        if type(member["slots"]) is not list or not member["slots"]:
+            raise ValueError("Declare nonempty ordered slots for every member")
+        slot_ids = set()
+        for slot in member["slots"]:
+            fields(slot, {"slot_id", "source", "execution", "result_keys"}, "evaluation-slot")
+            slot_id = identifier(slot["slot_id"])
+            if slot_id in slot_ids:
+                raise ValueError("Slot IDs must be unique within each member")
+            slot_ids.add(slot_id)
+            source = slot["source"]
+            kind = source.get("kind") if type(source) is dict else None
+            if kind == "selected":
+                fields(source, {"kind", "fallback_control_id"}, "selected source")
+                control_id = source["fallback_control_id"]
+                if control_id is not None:
+                    definition = controls[member_id].get(identifier(control_id))
+                    if definition is None or definition["kind"] != "parent":
+                        raise ValueError("Selected fallback must name a same-member parent control")
+            elif kind == "control":
+                fields(source, {"kind", "control_id"}, "control source")
+                if identifier(source["control_id"]) not in controls[member_id]:
+                    raise ValueError("Slot must name a same-member control")
+            else:
+                raise ValueError("Unknown evaluation-slot source")
+            execution = slot["execution"]
+            if type(execution) is not dict or any(type(value) is not str for value in execution.values()):
+                raise ValueError("Execution declarations must contain the six string fields")
+            ExecutionSpec.from_dict(execution)
+            keys = slot["result_keys"]
+            if type(keys) is not list or not keys:
+                raise ValueError("Declare nonempty unique result keys")
+            if len({identifier(key) for key in keys}) != len(keys):
+                raise ValueError("Result keys must be unique")
 
 
 @dataclass(frozen=True)
@@ -50,6 +148,8 @@ class StagedCohort:
         protocol, controls = _json(protocol), _json(controls)
         if type(protocol) is not dict or type(controls) is not dict:
             raise ValueError("Protocol and controls must be finite JSON objects")
+        if "evaluation_plan" in protocol:
+            _validate_evaluation_plan(protocol["evaluation_plan"], controls, member_ids)
         rows = [{"member_index": index, "member_id": identifier}
                 for index, identifier in enumerate(member_ids)]
         self._rows_bytes = canonical_bytes(rows)

@@ -86,6 +86,51 @@ Only a `selected` diagnosis can proceed to repair. Unavailable preparation, diag
 
 Each phase is available once. An ordinary selector exception permits continuation only when its terminal receipt verifies; missing or changed evidence, persistence failure and cancellation invalidate the cohort attempt. Cohort-owned lanes reject direct public diagnosis/repair selection, so an individual lane cannot bypass the full-cohort barrier. Their public evaluation method is also denied: this API has no cohort scoring bridge and adds no study evidence. It is a trusted cooperative controller, not a Python sandbox, crash-recovery mechanism or independent execution attestation.
 
+### Optional evaluation-plan declaration
+
+Supplying `protocol["evaluation_plan"]` opts into a declaration contract validated before the exclusive run directory is created. Without that key, `controls` retains its existing contract of an arbitrary finite JSON object. The constructor captures the normalized protocol and controls in the immutable protocol receipt; later changes to caller inputs or returned copies do not change that capture.
+
+The plan has exactly `schema`, `result_schema`, `aggregate`, `holdouts` and `members`. Its schema is `wsp-staged-cohort-evaluation-plan/1` and its result schema is `wsp-staged-cohort-result/1`. `aggregate` has exactly `source_id` and `family_id`. Each entry in the nonempty ordered `holdouts` list has exactly `holdout_id`, `source_id`, `family_id` and a strict positive-integer `row_count`; booleans are rejected. Holdout IDs are unique, and source IDs are unique across the aggregate and holdouts. Family IDs may be shared. Identities must be nonblank UTF-8 strings and retain their exact spelling, including surrounding whitespace.
+
+`members` must match the complete original roster exactly and in order. Each member has exactly `member_id`, a declared `holdout_id`, and a nonempty ordered `slots` list. A slot has exactly `slot_id`, `source`, `execution` and `result_keys`. Slot IDs are unique within that member; result keys form a nonempty list of unique identities. A source is either `{"kind": "selected", "fallback_control_id": null}` (or a same-member parent-control ID in place of `null`) or `{"kind": "control", "control_id": "..."}` naming a same-member control. These are declarations of sources and fallback policy, not executed fallbacks.
+
+With a plan, `controls` must map exactly the original member IDs to control-definition objects. Each named definition has one of these exact envelopes:
+
+| Kind | Definition fields | Payload schema labels |
+| --- | --- | --- |
+| `parent` | `kind` | No payload. |
+| `reference` | `kind`, `artifact` | `wsp-network/1` or `wsp-tensors/1` |
+| `structured` | `kind`, `proposal`, `lowering` | `wsp-structured-program/1` and `wsp-lowering/1`, respectively |
+
+Payloads are checked as finite JSON objects with those schema labels only. Full artifact/proposal/lowering parsing, endpoint construction and control materialization are deferred. A member may have an empty control map when no slot or fallback refers to a control. Controls and holdouts may remain unused, and multiple members may share a holdout. No selected-source slot is required. Distinct slots may repeat the same selected or control source under different execution declarations.
+
+For a one-member roster `member_ids=("case-001",)`, a compact declaration is:
+
+```python
+execution = {
+    "backend": "numpy", "dtype": "float64", "device": "cpu",
+    "accumulation": "matmul", "endpoint_cast": "reject",
+    "error_model": "empirical",
+}
+controls = {"case-001": {"parent": {"kind": "parent"}}}
+evaluation_plan = {
+    "schema": "wsp-staged-cohort-evaluation-plan/1",
+    "result_schema": "wsp-staged-cohort-result/1",
+    "aggregate": {"source_id": "aggregate", "family_id": "repair-study"},
+    "holdouts": [{"holdout_id": "heldout", "source_id": "heldout-source",
+                  "family_id": "repair-study", "row_count": 20}],
+    "members": [{"member_id": "case-001", "holdout_id": "heldout", "slots": [{
+        "slot_id": "selected",
+        "source": {"kind": "selected", "fallback_control_id": "parent"},
+        "execution": execution,
+        "result_keys": ["loss"],
+    }]}],
+}
+# Pass protocol={"evaluation_plan": evaluation_plan} and controls to StagedCohort.
+```
+
+Each `execution` contains exactly the six string fields shown above and must pass the existing `ExecutionSpec` syntax checks. Acceptance of that declaration does not establish backend/device availability, numerical support or successful execution. This opt-in contract enables no cohort scoring or evaluation; the endpoint/control seal and single-score bridge remain pending.
+
 ### Complete repair barrier
 
 After all original members have terminal repair dispositions, `select_repairs` writes and verifies `repair-barrier.json` before returning its existing ordered disposition list. Changing that returned list does not change the retained barrier. The private barrier uses schema `wsp-staged-cohort-repair-barrier/1`. It binds the cohort protocol, roster, attempt, registry and evaluator identities to the complete diagnosis barrier. Each ordered member entry links its preparation receipt, diagnosis disposition, diagnosis receipt and outcome, repair disposition, and terminal lane repair receipt and outcome. Members unavailable for repair remain present with no fabricated lane receipt.
@@ -150,6 +195,10 @@ A separate [cohort selection engineering receipt](../../provenance/verification/
 A separate [repair-barrier engineering receipt](../../provenance/verification/staged-cohort-repair-barrier-20261109.json) records one invocation of [`test_complete_repair_barrier_and_fail_stop`](../../tests/test_staged_cohort_repair_barrier.py) on November 9, 2026, from `16:31:53.8747550Z` to `16:32:00.7294848Z`: `1 passed in 5.29s`, with no retry. Independent production/test source review found no findings. The captures at `16:31:48.6786406Z` and `16:32:08.5980405Z` recorded an identical 37-source inventory, SHA-256 `ab556530f586292a1b11e2bed7af1671659fc301d3d9d85e4154eeafedb6b123`, and identical tracked diff and state apart from capture time/phase. Raw affected source and test snapshots were saved privately.
 
 That literal regression covers the complete ordered repair barrier, selected/unavailable/failed/abstained/invalid dispositions, exact linked evidence, and live artifact validation. It also checks permanent invalidation after changed evidence or a substituted live artifact, barrier persistence failure, and cancellation with a secondary disposition-write failure. No provider, study, evaluation data or scoring authorization was used. This focused regression covers its recorded source snapshot; it is not a completed-tree gate or a scientific result.
+
+A separate [evaluation-plan engineering receipt](../../provenance/verification/staged-cohort-evaluation-plan-20261109.json) records one invocation of [`test_frozen_evaluation_plan_and_legacy_compatibility`](../../tests/test_staged_cohort_evaluation_plan.py) on November 9, 2026, from `16:49:52.1333908Z` to `16:49:54.1348456Z`: exit 0, `1 passed in 0.79s`, with no retry or timeout. Independent implementation/test source review found no material findings. The captures at `16:49:47.7425143Z` and `16:49:59.2180664Z` recorded an identical 37-source inventory, SHA-256 `a8333475f09174ace15e4a6731880689d575b4b1f0e34d879a9f9ce8b552cd08`, and identical tracked diff and state apart from capture time/phase. Raw affected source snapshots were retained privately.
+
+This focused declaration regression checks immutable capture, exact field/reference validation, supported declaration variants and legacy finite-JSON controls. No preparation, provider calls, scoring data, scoring authorization or study execution occurred; the check establishes no runtime availability. The permitted case with no selected-source slots was not directly exercised. The receipt covers its recorded source snapshot, not a final-tree gate or a scientific result; Issue #9 c1 remains partial and the issue remains open.
 
 ## Limits and scientific next step
 

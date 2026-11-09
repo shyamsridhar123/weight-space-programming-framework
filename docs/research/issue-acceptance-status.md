@@ -1176,6 +1176,19 @@ evaluation and adds no scientific result; the endpoint/control seal and
 single-score bridge remain pending. Original criteria and historical outcomes
 remain unchanged; c1 is still partial and Issue #9 remains open.
 
+**Evaluation-plan declaration supplement, November 9, 2026:** An opt-in
+[protocol.evaluation_plan contract](staged-diagnosis.md#optional-evaluation-plan-declaration)
+captures exact roster order, holdout/control references, slot execution
+declarations and result keys. It validates declaration envelopes and payload
+schema labels; full endpoint/control parsing and materialization remain deferred.
+Without a plan, arbitrary finite-JSON controls remain supported. The separate
+[engineering receipt](../../provenance/verification/staged-cohort-evaluation-plan-20261109.json)
+records one passing focused declaration regression with no retry; the permitted
+case with no selected-source slots was not directly exercised. This establishes
+no runtime availability and enables no scoring or evaluation. The endpoint/control
+seal and single-score bridge remain pending. Original criteria and historical
+outcomes remain unchanged; c1 stays partial and Issue #9 stays open.
+
 #### #9 c2
 
 - [ ] Compare sham, random, support/norm-matched and context-only controls, then measure target effect, collateral behavior and held-out generalization.
