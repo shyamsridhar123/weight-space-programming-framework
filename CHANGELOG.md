@@ -17,9 +17,12 @@ research draft.
   attempted artifacts. Signed zeros are canonicalized at artifact capture;
   original checkpoint signed-zero preservation is not established. Realized
   magnitude may differ from the prescribed 2. The existing admission schema and
-  preliminary `repair_usable` flag retain their meanings. Add one focused offline
-  regression separating literal helper failures from genuine admitted endpoints;
-  the earlier selection-admission receipt keeps its original source-snapshot scope.
+  preliminary `repair_usable` flag retain their meanings. The separate
+  [structural engineering receipt](provenance/verification/staged-repair-usability-20261109.json)
+  preserves the first signed-zero assertion failure and the corrected focused
+  pass, each with one invocation and no automatic retry or timeout. The check
+  separates literal helper cases from genuine admitted endpoints; the earlier
+  selection-admission receipt keeps its original source-snapshot scope.
   Control matching, final study sealing and scientific usefulness remain pending;
   Issue #9 c1 remains partial and open.
 
