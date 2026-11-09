@@ -236,6 +236,72 @@ outside each other's symmetry orbit. `transfer_edit` adds a raw or aligned
 parameter delta to a compatible target as a new proposal; its admission and task
 evaluation must be rerun on that target.
 
+The optional `align_hidden_checked` API preserves that legacy matcher and its
+two diagnostic keys. It requires an explicit finite nonnegative
+`min_assignment_gap`, and returns a `CheckedAlignment` with an optional gauge,
+reason, gap and gap status. A caller must freeze the threshold and numerical
+policy before outcomes; this API cannot enforce a scientific preregistration.
+Exact zero incoming affine rows in either endpoint cause abstention, with their
+source and target indices retained. A nonzero row whose computed norm underflows
+is instead a numerical failure. Invalid scales, nonfinite intermediate results
+or failure to construct the transformed parent also cause numerical abstention.
+
+For the incoming cost matrix \(C\), selected bijection \(p\), and total cost
+\(J(p)=\sum_i C_{i,p_i}\), the global separation is
+
+\[
+g=\min_{q\ne p}J(q)-J(p).
+\]
+
+Every different bijection omits at least one selected edge \((i,p_i)\).
+Consequently, in exact assignment arithmetic, taking the minimum over the
+optima obtained by excluding each selected edge covers every alternative,
+including a tied optimum. This compares complete bijections rather than local
+row preferences. The existing solver requires finite costs: each exclusion
+uses \(M=(H+1)(C_{\max}+1)\), checked finite and greater than
+\(H C_{\max}\), as its forbidden-edge penalty. With nonnegative costs, any
+allowed assignment costs at most \(H C_{\max}\); a forbidden-edge assignment
+costs at least \(M\). Objectives are summed from the original costs using
+`math.fsum`. For \(H\ge2\), every exclusion is feasible by swapping columns;
+a solver result retaining the forbidden edge is numerical failure. For
+\(H=1\), no alternative bijection exists: the gap is `None`, the status is
+`no_alternative`, and a resolved gauge is permitted. An unavailable gap has
+status `unavailable` and always abstains.
+
+The declared guard is \(64\epsilon_{64}\max(1,H C_{\max})\), an engineering
+policy rather than a proved floating-point error bound. A negative gap within
+the guard is reported as zero and abstains; a more negative gap is numerical
+failure. Otherwise a gauge requires `gap - min_assignment_gap > guard`.
+The checked path requests NumPy arithmetic traps and checks finite results;
+neither this guard nor a positive gap proves real-arithmetic optimality,
+semantic feature identification, causal edit transfer or native equivalence.
+Renumbering invariance is expected away from numerical boundaries, not promised
+bitwise at those boundaries. Up to \(H+1\) Hungarian solves cost \(O(H^4)\),
+with one additional \(O(H^2)\) matrix copy at a time; the existing broadcast
+cost construction also uses memory depending on the input dimension.
+
+Callers must branch explicitly before transfer:
+
+```python
+result = align_hidden_checked(source, target, min_assignment_gap=frozen_gap)
+if result.gauge is None:
+    proposal = None  # Retain this abstention and skip transfer.
+else:
+    proposal = transfer_edit(source, edit, target, gauge=result.gauge)
+    # Run fresh recipient admission and task evaluation.
+```
+
+Passing an abstained `None` to `transfer_edit` would invoke its existing raw
+transfer mode. Existing experiment and frozen replay callers remain unchanged.
+The [literal engineering receipt](../../provenance/verification/checked-hidden-alignment-20261109.json)
+records one passing offline regression for handcrafted separation, abstention
+and edit-transport cases. These checks do not prove the numerical guard is a
+rounding bound or establish native evaluator equivalence. They add no trained
+pilot evidence and leave Issue #16 at five supported, two partial and one open
+criterion. A future trained study requires a separately frozen protocol,
+source, threshold and assignment policy, sealing candidates before evaluator
+access and retaining all abstentions in its assigned denominator.
+
 **Uniform all-layer drift.** Let \(\theta=(W,b,V,c)\) and
 \(\theta'=(W',b',V',c')\). Fix a finite box
 \(\mathcal B=\{x:l_i\leq x_i\leq u_i\}\), with ordered endpoints, and set

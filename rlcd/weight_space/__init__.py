@@ -12,7 +12,7 @@ from .contracts import (Contract, check_contract, certify_drift, verify_certific
                         DecisionRule, AdmissionRequest, AdmissionRecord,
                         bind_admission, admit, replay_admission, verify_admission)
 from .compiler import compile_readout
-from .symmetry import Gauge, align_hidden, transform, transport, transfer_edit
+from .symmetry import Gauge, CheckedAlignment, align_hidden, align_hidden_checked, transform, transport, transfer_edit
 from .semantics import SemanticsAdapter, SemanticsRegistry, default_registry, to_tensor_artifact, as_relu_network
 from .structured import (StructuredProgram, Lowering, lower_structured, native_round, verify_lowering,
                          ExecutionSpec, native_execution_receipt, verify_native_execution)
@@ -25,7 +25,7 @@ from .broker import ProposerBroker, WeightView
 __all__ = [
     "Network", "InputBox", "Edit", "Program", "apply_program", "difference",
     "compose", "interpolate", "Contract", "check_contract", "certify_drift",
-    "verify_certificate", "compile_readout", "Gauge", "align_hidden", "transform",
+    "verify_certificate", "compile_readout", "Gauge", "CheckedAlignment", "align_hidden", "align_hidden_checked", "transform",
     "transport", "rollback", "transfer_edit", "TensorArtifact", "WeightArtifact",
     "StructuralPolicy", "SemanticsAdapter", "SemanticsRegistry", "default_registry",
     "to_tensor_artifact", "as_relu_network",

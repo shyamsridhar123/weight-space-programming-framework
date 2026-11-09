@@ -7,6 +7,17 @@ research draft.
 
 ## Unreleased
 
+- Add optional ambiguity-aware hidden alignment with a mandatory
+  finite nonnegative threshold, global edge-exclusion separation and explicit
+  numerical or ambiguity abstention. Preserve legacy matcher arithmetic,
+  diagnostic keys and callers. One literal synthetic regression passed in the
+  [captured offline check](provenance/verification/checked-hidden-alignment-20261109.json).
+  The numerical guard remains an engineering policy without a proof of a
+  rounding bound. Native equivalence remains unverified. No training, frozen
+  replay or historical evidence is rerun or upgraded. Issue #16 remains five
+  supported, two partial and one open criterion. See the
+  [design notes](docs/weight-space/design.md).
+
 - Capture supported NumPy string semantic labels as plain Python strings at the
   immutable label boundary, preserving text, order and model identity for JSON
   admission binding. Reject custom string subtypes before conversion. Add a focused

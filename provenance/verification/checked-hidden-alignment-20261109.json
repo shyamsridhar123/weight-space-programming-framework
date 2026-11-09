@@ -1,0 +1,509 @@
+{
+  "schema": "wsp-local-engineering-verification/1",
+  "assembled_utc": "2026-11-09T23:47:27.125108+00:00",
+  "status": "passed",
+  "base_commit": "40c6a013500a340bbdc69e72e5cb8e2bfba3fdcb",
+  "scope": "One handcrafted offline checked-alignment regression on literal networks; no trained study, historical replay or native evaluator equivalence proof.",
+  "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "execution_count": 1,
+  "automatic_retry_performed": false,
+  "test_nodes": [
+    "tests/test_weight_space.py::test_checked_alignment_literal_identifiability_and_abstention_boundaries"
+  ],
+  "test_case_count": 1,
+  "capture": {
+    "label": "checked-hidden-alignment-check-20261109",
+    "started_utc": "2026-11-09T23:42:21.9565044Z",
+    "completed_utc": "2026-11-09T23:42:30.1761494Z",
+    "exit_code": 0,
+    "timed_out": false,
+    "junit": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "classname": "tests.test_weight_space",
+      "name": "test_checked_alignment_literal_identifiability_and_abstention_boundaries"
+    },
+    "private_record_identities": [
+      {
+        "path": "execution-launch.json",
+        "bytes": 2877,
+        "sha256": "d447b429a4a6e87a1198319eff6bb9909d439951819cc3923305af81eb696420"
+      },
+      {
+        "path": "execution-result.json",
+        "bytes": 1731,
+        "sha256": "e5274f9821e134bf589a69aabe79ca5be505fdac06133149853d69fa667cc501"
+      },
+      {
+        "path": "runner-launch.json",
+        "bytes": 1674,
+        "sha256": "e0d2a5167f947a8fd2f4cb23890767b952149aabcbd9c28d613587bbf221b6c8"
+      },
+      {
+        "path": "execution-verification.json",
+        "bytes": 1032,
+        "sha256": "5ca56d63b942f4b62b0c068857b7fd2e2de528ba7101bb520792a40656777051"
+      },
+      {
+        "path": "execution-source-index.json",
+        "bytes": 5123,
+        "sha256": "c71dabffe2689bc2e2e8a0fd9dbb86d28361aa971baa8a46f9c68d5207690f83"
+      },
+      {
+        "path": "input-source-index.json",
+        "bytes": 8746,
+        "sha256": "c60dc3d8037202154685f201a461e8dde81d36658f7c3af84cd31e510cff6c6b"
+      },
+      {
+        "path": "before-source-hashes.json",
+        "bytes": 6358,
+        "sha256": "56438fc47f7a8df790aee2a1387948d15ffeb45c3bb174c016b2c6af5862a265"
+      },
+      {
+        "path": "after-source-hashes.json",
+        "bytes": 6358,
+        "sha256": "56438fc47f7a8df790aee2a1387948d15ffeb45c3bb174c016b2c6af5862a265"
+      },
+      {
+        "path": "before-state.json",
+        "bytes": 669,
+        "sha256": "1d5b1419000a2e9081dd7b189ffb8919ad5ae31e21d63d90f034e7807925d44c"
+      },
+      {
+        "path": "after-state.json",
+        "bytes": 668,
+        "sha256": "9b7a825ac6b8c184c5e787bfa8164d6b6e480198587d14a4304fcbb64d032d6b"
+      },
+      {
+        "path": "before-diff.patch",
+        "bytes": 24780,
+        "sha256": "91083e1b3aa3d5b22f23c0fe7e90ab395b521943142726e5f7e3928dd54500de"
+      },
+      {
+        "path": "after-diff.patch",
+        "bytes": 24780,
+        "sha256": "91083e1b3aa3d5b22f23c0fe7e90ab395b521943142726e5f7e3928dd54500de"
+      },
+      {
+        "path": "before-index-diff.patch",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "after-index-diff.patch",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "pytest.xml",
+        "bytes": 392,
+        "sha256": "23423aa038efba7b3bfb9dc4d097e9798f57c9864de32beed15e653cccf25dbf"
+      },
+      {
+        "path": "stdout.log",
+        "bytes": 100,
+        "sha256": "8feba6c9711f796fa73ebde4bd32d3ee4e4a351057ee26b8a6bc1abc84d8e237"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "assembly": {
+    "script_identity": {
+      "path": "<private-assembler>/assemble_receipt.py",
+      "bytes": 35556,
+      "sha256": "dc46713328ff9c1b41f3909f1fc2755fe413b73ce64748218d4480db2dca34e7"
+    },
+    "project_import_performed": false,
+    "regression_rerun_performed": false
+  },
+  "source_evidence": {
+    "all_guarded_current_inputs_match_execution_snapshot_at_assembly": true,
+    "preserved_input_copies_matched_at_assembly": 41,
+    "guarded_snapshot_entries": 41,
+    "guarded_snapshot": [
+      {
+        "bytes": 9165,
+        "path": "<private-capture>/launch_once.ps1",
+        "sha256": "b62829a7092a76dca7b5bf507fed25568ce5d746de4b69f9a016d6aebf952f05"
+      },
+      {
+        "bytes": 13189,
+        "path": "<private-capture>/run_check.py",
+        "sha256": "576e37866adba0ce83dbf61ac236e0ef65757dc85b52c19a5335e5b167b1d635"
+      },
+      {
+        "bytes": 41211,
+        "path": "CHANGELOG.md",
+        "sha256": "3f6dfb56bb2831964ededbe56e224d6d32470f300f3d1cc5f089b1a37a344ebf"
+      },
+      {
+        "bytes": 31129,
+        "path": "docs/weight-space/design.md",
+        "sha256": "cef009c5aafe6558c059be051efec99aaa811ee792e850b506b218e76e5f3bdc"
+      },
+      {
+        "bytes": 2483641,
+        "path": "provenance/source-files.json",
+        "sha256": "f1e089942b4b993c997c51866bfc05f926502b379a0212e88ef9b63428bdd15c"
+      },
+      {
+        "bytes": 1136,
+        "path": "pyproject.toml",
+        "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+      },
+      {
+        "bytes": 1339,
+        "path": "pytest-engineering.ini",
+        "sha256": "acfca48d924de7963c453211da5194dde1425712ae0e7f7bcb4e0f2419d9448b"
+      },
+      {
+        "bytes": 71,
+        "path": "rlcd/__init__.py",
+        "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+      },
+      {
+        "bytes": 3053,
+        "path": "rlcd/weight_space/__init__.py",
+        "sha256": "6add2899c26aabf2f542cc27dce468d528cb658153f0ecc7457e1df85ff0e50a"
+      },
+      {
+        "bytes": 17060,
+        "path": "rlcd/weight_space/__main__.py",
+        "sha256": "0a6992e119665a25bae8ad5392a21dfa35d73ba738523e5f2795675f8dd4336c"
+      },
+      {
+        "bytes": 2631,
+        "path": "rlcd/weight_space/adapters.py",
+        "sha256": "87cc20844b8be1354255c2bdb21130911439f60c3cc268cbce54211a29624dd4"
+      },
+      {
+        "bytes": 7735,
+        "path": "rlcd/weight_space/artifact.py",
+        "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+      },
+      {
+        "bytes": 15545,
+        "path": "rlcd/weight_space/benchmarks.py",
+        "sha256": "3edb4f2120572aa8da92078d19c45a2d4cd494191468a893cef46a410e419983"
+      },
+      {
+        "bytes": 64648,
+        "path": "rlcd/weight_space/bound_research.py",
+        "sha256": "814fafa6da869e15f7e0066f04e878df037d43f05f40bf32517db96781466917"
+      },
+      {
+        "bytes": 15038,
+        "path": "rlcd/weight_space/broker.py",
+        "sha256": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+      },
+      {
+        "bytes": 3928,
+        "path": "rlcd/weight_space/compiler.py",
+        "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+      },
+      {
+        "bytes": 43906,
+        "path": "rlcd/weight_space/contracts.py",
+        "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+      },
+      {
+        "bytes": 56668,
+        "path": "rlcd/weight_space/cumulative_research.py",
+        "sha256": "31abbef4e162779ef684295e33564cf78d5b2081c5ed537fd11814558a83a796"
+      },
+      {
+        "bytes": 29559,
+        "path": "rlcd/weight_space/data_roles.py",
+        "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+      },
+      {
+        "bytes": 4776,
+        "path": "rlcd/weight_space/demo.py",
+        "sha256": "26b12f4b19e1656faec2377cb2a7725f4847f37a3633d762a8e1f45f5ac5a0b6"
+      },
+      {
+        "bytes": 8003,
+        "path": "rlcd/weight_space/evidence.py",
+        "sha256": "69c5e8479ce7797de7ef182a4fd1229124c83bfb4fc86ccbfbb14edc1984420d"
+      },
+      {
+        "bytes": 14118,
+        "path": "rlcd/weight_space/experiments.py",
+        "sha256": "72135f830bd7d662bbdf7a9b254712105ff70b00a253ea08a90238f08989ff0a"
+      },
+      {
+        "bytes": 34083,
+        "path": "rlcd/weight_space/features.py",
+        "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+      },
+      {
+        "bytes": 19260,
+        "path": "rlcd/weight_space/live_provider.py",
+        "sha256": "29ae883408bf52f8a2eece6e58641e9dbe79e004277b9afbb77044944780ef29"
+      },
+      {
+        "bytes": 10004,
+        "path": "rlcd/weight_space/model.py",
+        "sha256": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba"
+      },
+      {
+        "bytes": 6317,
+        "path": "rlcd/weight_space/program.py",
+        "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+      },
+      {
+        "bytes": 27469,
+        "path": "rlcd/weight_space/proof_bridge.py",
+        "sha256": "642ec0869208d59f1641b31d5887cb5f16b199787418e0b7789aa979ad04a93b"
+      },
+      {
+        "bytes": 27063,
+        "path": "rlcd/weight_space/research_tasks.py",
+        "sha256": "31faba89184f4854aa1166f05134f1b2334096bc22b945c812d3581fa3410252"
+      },
+      {
+        "bytes": 17923,
+        "path": "rlcd/weight_space/rts_study.py",
+        "sha256": "a284b4e77e4bb57b704271ca170f7b29e7139e333d8dc17a663d4096fabaa476"
+      },
+      {
+        "bytes": 15940,
+        "path": "rlcd/weight_space/runtime_research.py",
+        "sha256": "6b961bba8b396fdc9343da5e57beb610f8c25450291f513de58102cb36a7a951"
+      },
+      {
+        "bytes": 6727,
+        "path": "rlcd/weight_space/semantics.py",
+        "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+      },
+      {
+        "bytes": 9106,
+        "path": "rlcd/weight_space/sequential.py",
+        "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+      },
+      {
+        "bytes": 58359,
+        "path": "rlcd/weight_space/staged_cohort.py",
+        "sha256": "2501fc968878cd3894646745dd6ce5986f4ffc808e8e6bf5567ca5688cd36687"
+      },
+      {
+        "bytes": 28539,
+        "path": "rlcd/weight_space/staged_diagnosis.py",
+        "sha256": "ff3449c6392d8fca2af2114ff36c3760a207eff5b7bd667f0939bdaf1ef74dd5"
+      },
+      {
+        "bytes": 26202,
+        "path": "rlcd/weight_space/structured.py",
+        "sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+      },
+      {
+        "bytes": 20140,
+        "path": "rlcd/weight_space/study_tasks_v2.py",
+        "sha256": "cf944710cce88a70c400b713b76b699446b1ba47747121ac58f31316fbb01233"
+      },
+      {
+        "bytes": 46314,
+        "path": "rlcd/weight_space/study_v2.py",
+        "sha256": "a1ffd5840d4beb4d7b8f827552a38ae192f300e32809233a1b58681c147bdb3e"
+      },
+      {
+        "bytes": 12162,
+        "path": "rlcd/weight_space/symmetry.py",
+        "sha256": "c459d7e7317d89eda6d8a99c98606bb73b4ccad3a80f77f81f3272646173035d"
+      },
+      {
+        "bytes": 9678,
+        "path": "rlcd/weight_space/torch_bridge.py",
+        "sha256": "b532de9574bb13c4c918656cba21ff2e9da61ea2c9aca1a6394376bb64696cda"
+      },
+      {
+        "bytes": 54271,
+        "path": "rlcd/weight_space/workflow.py",
+        "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+      },
+      {
+        "bytes": 16814,
+        "path": "tests/test_weight_space.py",
+        "sha256": "57e7d4b7f06a28da1e739506bc2bd39cd63f7df4a1cbdf9d86e4932ac5139a8a"
+      }
+    ],
+    "imported_local_source_entries": 17,
+    "imported_sources": [
+      {
+        "path": "rlcd/__init__.py",
+        "bytes": 71,
+        "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+      },
+      {
+        "path": "rlcd/weight_space/__init__.py",
+        "bytes": 3053,
+        "sha256": "6add2899c26aabf2f542cc27dce468d528cb658153f0ecc7457e1df85ff0e50a"
+      },
+      {
+        "path": "rlcd/weight_space/adapters.py",
+        "bytes": 2631,
+        "sha256": "87cc20844b8be1354255c2bdb21130911439f60c3cc268cbce54211a29624dd4"
+      },
+      {
+        "path": "rlcd/weight_space/artifact.py",
+        "bytes": 7735,
+        "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+      },
+      {
+        "path": "rlcd/weight_space/broker.py",
+        "bytes": 15038,
+        "sha256": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+      },
+      {
+        "path": "rlcd/weight_space/compiler.py",
+        "bytes": 3928,
+        "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+      },
+      {
+        "path": "rlcd/weight_space/contracts.py",
+        "bytes": 43906,
+        "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+      },
+      {
+        "path": "rlcd/weight_space/data_roles.py",
+        "bytes": 29559,
+        "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+      },
+      {
+        "path": "rlcd/weight_space/features.py",
+        "bytes": 34083,
+        "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+      },
+      {
+        "path": "rlcd/weight_space/model.py",
+        "bytes": 10004,
+        "sha256": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba"
+      },
+      {
+        "path": "rlcd/weight_space/program.py",
+        "bytes": 6317,
+        "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+      },
+      {
+        "path": "rlcd/weight_space/semantics.py",
+        "bytes": 6727,
+        "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+      },
+      {
+        "path": "rlcd/weight_space/sequential.py",
+        "bytes": 9106,
+        "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+      },
+      {
+        "path": "rlcd/weight_space/structured.py",
+        "bytes": 26202,
+        "sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+      },
+      {
+        "path": "rlcd/weight_space/symmetry.py",
+        "bytes": 12162,
+        "sha256": "c459d7e7317d89eda6d8a99c98606bb73b4ccad3a80f77f81f3272646173035d"
+      },
+      {
+        "path": "rlcd/weight_space/workflow.py",
+        "bytes": 54271,
+        "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+      },
+      {
+        "path": "tests/test_weight_space.py",
+        "bytes": 16814,
+        "sha256": "57e7d4b7f06a28da1e739506bc2bd39cd63f7df4a1cbdf9d86e4932ac5139a8a"
+      }
+    ],
+    "runner_integrity_checks": {
+      "all_guarded_inputs_preserved_before_pytest": true,
+      "all_local_imports_have_preexecution_copies": true,
+      "diff_check_passed": true,
+      "expected_local_dependencies_imported": true,
+      "git_state_unchanged": true,
+      "imported_sources_match_preserved_inputs": true,
+      "junit_written": true,
+      "no_unguarded_local_imports": true,
+      "preserved_input_copies_unchanged": true,
+      "pytest_environment_removals_remain_active": true,
+      "reviewed_base_is_current": true,
+      "source_config_and_private_scripts_unchanged": true
+    },
+    "tracked_diff_sha256": "91083e1b3aa3d5b22f23c0fe7e90ab395b521943142726e5f7e3928dd54500de",
+    "unguarded_local_imports": [],
+    "unpreserved_local_imports": [],
+    "publication_timing": "Input comparisons precede the receipt, issue note, changelog, design, preservation-mapping and manifest edits. Production, regression and pytest configuration retain the captured bytes; final-content checks are separate.",
+    "copy_timing": "The reviewed runner preserved every guarded input before importing pytest. Retained copies match the before/after snapshots; individual copy timestamps were not separately recorded.",
+    "inventory_limit": "File counts and literal subcases describe capture coverage, not scientific confidence or independent study trials."
+  },
+  "captured_regression_assertions": [
+    "A known permutation and positive scale gauge is recovered with a finite assignment gap exceeding the frozen literal threshold by more than the numerical guard. The legacy matcher returns that known gauge and its two existing diagnostic keys in this case.",
+    "Transport of one literal mixed-layer edit reaches the expected target parent hash. Exact rational scores of the edited source and transported edit equal separately specified expectations at four handcrafted inputs.",
+    "Renumbering the separated source and target produces the expected transformed gauge and preserves the assignment gap within the asserted numerical-guard tolerance.",
+    "The regression exhaustively enumerates an independently specified three-by-three integer cost matrix. Checked best and alternative objectives match its first two assignments, including a cheapest alternative that retains one selected edge. Literal thresholds accept clear separation and abstain both inside the guard and at equality.",
+    "Two duplicated-feature parents have equal exact scores at one literal input, while the legacy matching choice gives a different edited score; transport by the known gauge reproduces the specified edited score. This illustrates ambiguity in edit correspondence.",
+    "Duplicate rows have zero assignment gap; a near-tie construction has positive gap below threshold despite large local row preferences. Both cases abstain, including after independent hidden renumbering, with gap agreement within the asserted guard tolerance.",
+    "Zero incoming affine rows in the source, target or both produce abstention with unavailable gap and the expected zero-row diagnostics.",
+    "One nonzero hidden unit returns its known scale with no_alternative gap status. Extreme large and small nonzero magnitudes abstain at incoming_norms with numerical_failure, unavailable gap and empty exact-zero row lists.",
+    "The threshold argument is mandatory. Booleans, negative values, NaN, infinity, a string and a non-exactly-representable integer are rejected. All collected diagnostic mappings serialize with allow_nan=False, and each reported gap is finite or absent."
+  ],
+  "execution_policy": {
+    "execution_count": 1,
+    "automatic_retry_performed": false,
+    "timeout_seconds": 600,
+    "offline_flags_enabled": true,
+    "bytecode_and_user_site_disabled": true,
+    "pytest_plugin_autoload_conftest_and_cache_disabled": true,
+    "inherited_pytest_addopts_and_plugins_removed": true
+  },
+  "preservation": {
+    "source_commit": "d347090e01f9ffbb164268e1ea6b158f293ff180",
+    "records": [
+      {
+        "original_path": "rlcd/weight_space/symmetry.py",
+        "preserved": {
+          "path": "artifacts/research/source-preservation/checked-hidden-alignment-20261109/rlcd/weight_space/symmetry.py",
+          "bytes": 6034,
+          "sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+        }
+      },
+      {
+        "original_path": "tests/test_weight_space.py",
+        "preserved": {
+          "path": "artifacts/research/source-preservation/checked-hidden-alignment-20261109/tests/test_weight_space.py",
+          "bytes": 8384,
+          "sha256": "8970fc14be8f4c57a1cb62d7a094327d55ea21abd127e2b63a806a7c4039d527"
+        }
+      }
+    ],
+    "captured_source_inventory": {
+      "path": "provenance/source-files.json",
+      "bytes": 2483641,
+      "sha256": "f1e089942b4b993c997c51866bfc05f926502b379a0212e88ef9b63428bdd15c"
+    },
+    "published_source_inventory": {
+      "path": "provenance/source-files.json",
+      "bytes": 2483787,
+      "sha256": "2b3386a2f5e08175c2b7598642e8fefa2e5395dc1b14b117707271a5797849fc"
+    },
+    "original_identity_fields_changed": false,
+    "mapping_change": "Only the two named preserved_path values change; original paths, byte lengths, SHA-256 values, order, totals and all other fields retain their existing values."
+  },
+  "limitations": [
+    "Behavioral conclusions rely on the captured regression assertions, without independent recomputation during receipt assembly. A passing handcrafted case is not a trained-pilot result or learned alignment evidence.",
+    "The numerical guard is an engineering abstention policy with no proved rounding bound. A positive computed assignment gap does not prove a real-arithmetic optimum, semantic feature identity, causal edit transfer or native evaluator equivalence.",
+    "The mixed-layer transport exact-score comparison covers four specified literal inputs, without establishing native floating-point evaluation equivalence or general transfer accuracy. The frozen literal thresholds are not a trained-study threshold-selection protocol.",
+    "The legacy matcher arithmetic, diagnostic keys and existing experiment/frozen-replay callers remain unchanged. Callers must branch on absent checked gauges: passing None to transfer_edit invokes its existing raw-transfer mode and does not retain abstention.",
+    "The first historical native replay failed on finite JSON str_ handling; the normalized derivative then failed canonical admission comparison at banking77-pair-01/none. Neither replay was repaired or repeated, and the second cause remains unresolved.",
+    "Imported-source provenance covers local file-backed modules at completion, not dependency binary fingerprints, complete environment identity or OS/network isolation. The 600-second watchdog targets the direct Python process; cleanup and stream waits lack independent timeouts.",
+    "Raw logs, absolute workstation paths, namespace locations and fixture payloads remain private. Public hashes identify retained records without disclosing their contents; SHA-256 identity is not independent attestation.",
+    "The capture and this assembly do not run the full engineering suite, final-content checks, frozen studies or historical audits. Later CI and publication checks are separate executions.",
+    "No scientific preparation, training, holdout generation or lineage loading is performed by this literal check or assembly. Issue #16 remains five supported, two partial and one open; c4 remains partial, learned methods remain absent, and the historical 36/48 edited-score controls and both replay failures remain unchanged. Issue #6 is unchanged."
+  ]
+}
