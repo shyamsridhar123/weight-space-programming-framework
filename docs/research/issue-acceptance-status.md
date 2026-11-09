@@ -560,6 +560,14 @@ replay guarantee; Issue #6 c4 remains partial.
 
 **Remaining requirement / scope limit:** Semantic near-duplicate auditing and task-family independence are not established by byte identity, observed declarations or replay. Shared task templates and within-lineage rows remain dependent. The later ledger cannot capture every historical or uncovered attempt, and its assurance flags do not authenticate provenance or establish scientific freshness.
 
+**Later source and engineering supplement (November 9, 2026):** The registered
+session evidence verifier compares saved receipt, selected artifact, binding,
+attempt, manifest and result identities against caller-trusted expectations and
+the durable registry attempt. A separate [synthetic verifier receipt](../../provenance/verification/registered-evaluation-verifier-20261109.json)
+records the new boundary check. This adds no historical-attempt capture or
+semantic/task-family independence claim; c2 remains partial. See the
+[verifier supplement](evaluation-data-roles.md#registered-session-evidence-verifier-supplement-november-9-2026).
+
 #### #2 c3
 
 - [ ] Implement paired or appropriately hierarchical/crossed analysis, comparison-family/multiplicity rules, per-unit raw records and protocol/source/data hashes. Distinguish local freeze from external preregistration.
@@ -609,6 +617,17 @@ replay guarantee; Issue #6 c4 remains partial.
 **Evidence:** [E02](#e02) · [E08](#e08) · [E00](#e00) · [E24](#e24). Development selection and untouched-evaluation roles are frozen for the reported studies. The historical c7 exercise retains 13 contaminated routes that reached evaluation, two historical-development controls and six working guards. The later registry source commits development exposure and conservative evaluation consumption before callback entry, and the registered session and separate prospective runner bind captured inputs and selected candidates to durable authorization; their recorded engineering checks passed ([E24](#e24)).
 
 **Remaining requirement / scope limit:** The earlier review found no general auditable tuned-holdout invalidation transition, and that historical negative evidence remains preserved in [E24](#e24). The later cooperative implementation enforces monotonic consumption over registered exact aliases and declared family/ancestry scope; it does not cover arbitrary legacy evaluators, ignored materializations, precomputed predictions, copied databases or undeclared semantic relationships. V2 authorization is prospective: a V1-scored batch that was never consumed can receive V2 authorization because migration cannot manufacture its missing reservation. Complete historical-attempt capture, authenticated provenance, semantic independence and a fresh prospective cohort remain unestablished. Frozen hashes alone do not supply those guarantees.
+
+**Later source and engineering supplement (November 9, 2026):** The registered
+session evidence verifier reads only `get_attempt` and requires the independently
+expected successful evaluation-consumption attempt, binding, manifest and result.
+It performs no evaluation or development consumption. The separate synthetic
+check rejects rehashed substitutions and added held-out charges, preserving the
+trusted durable-record requirement. Development exposure must still cross the
+existing consumption boundary before use. This supplement adds no source
+attestation or fresh-cohort result and does not cover the historical or
+uncovered routes above; c7 remains partial.
+See the [verifier supplement](evaluation-data-roles.md#registered-session-evidence-verifier-supplement-november-9-2026).
 
 <a id="issue-3"></a>
 ### #3 — [P0] Bind admission to the exact candidate, contract, domain, and decision rule

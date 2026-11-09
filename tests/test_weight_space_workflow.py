@@ -11,7 +11,7 @@ from rlcd.weight_space.model import digest
 from rlcd.weight_space.workflow import (
     AccessDenied, AccessPolicy, BudgetExceeded, BudgetLimits, ProgrammerSession,
     ReplayProvider, SessionSealed, SplitSpec, TaskSpec, WorkflowError,
-    validate_splits, verify_trace,
+    validate_splits, verify_registered_evaluation, verify_trace,
 )
 
 
@@ -606,3 +606,168 @@ def test_uninitialized_registered_handle_rejects_before_callback_and_records_att
                 getattr(evaluation, route)(RegisteredBatch())
     assert evaluation.trace[-1].to_dict()["status"] == "rejected" and calls == []
     assert verify_trace(evaluation.trace)
+
+
+def test_registered_evaluation_verifier_uses_trusted_terminal_evidence(tmp_path, monkeypatch):
+    registry = DataRoleRegistry(tmp_path / "registry.sqlite3")
+    batch = registry.register_batch([[2., 3.]], source_id="evaluation", family_id="evaluation-family")
+    evaluation = session(data_registry=registry)
+    selected = evaluation.propose_artifact(artifact())
+    with pytest.raises(WorkflowError, match="exact candidate"):
+        evaluation.seal(copy.copy(selected))
+    assert not evaluation.is_sealed
+    assert evaluation.trace[-1].to_dict()["status"] == "rejected"
+    evaluation.seal(selected)
+    binding = {"schema": "wsp-session-evaluation-binding/1", "protocol_sha256": evaluation.sha256,
+        "task_sha256": selected.task_sha256, "parent_sha256": selected.parent_sha256,
+        "candidate_sha256": selected.sha256, "selection_sha256": digest({"selected": selected.to_dict(),
+            "candidates": [selected.to_dict()], "seal_event_sha256": evaluation.trace[-1].sha256}),
+        "evaluator_id": "verifier-check/1", "split_name": "test"}
+    result = {"synthetic_score": 0.5}
+    calls = []
+    receipt = evaluation.evaluate_registered(batch, lambda c, rows: calls.append(rows) or result,
+                                             evaluator_id=binding["evaluator_id"])
+    original = receipt.to_dict()
+    attempt_id = original["freshness"]["decision"]["attempt_id"]
+    expected = {"registry": registry, "candidate": selected.artifact, "expected_binding": binding,
+        "expected_attempt_id": attempt_id, "expected_manifest_sha256": batch.manifest_sha256,
+        "expected_result_sha256": digest(result)}
+
+    # A later registry revision must not revoke a recorded successful attempt.
+    registry.register_batch([[7., 8.]], source_id="later", family_id="later-family")
+    other_registry = DataRoleRegistry(tmp_path / "other-registry.sqlite3")
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Verification must not score, invoke evaluators or materialize rows")
+    monkeypatch.setattr(DataRoleRegistry, "score", forbidden)
+    monkeypatch.setattr(DataRoleRegistry, "_snapshot", forbidden)
+    monkeypatch.setattr(RegisteredBatch, "materialize", forbidden)
+    monkeypatch.setattr(ProgrammerSession, "evaluate_registered", forbidden)
+    assert verify_registered_evaluation(receipt, **expected)
+    assert verify_registered_evaluation(original, **expected)
+    assert calls == [[[2., 3.]]]
+
+    # Expectations belong to the harness. Even consistent receipt hashes cannot
+    # replace the selected wrapper, artifact, split, result or durable attempt.
+    for key, value in (("registry", other_registry), ("candidate", artifact().replace(bias=[1., 0.])),
+                       ("expected_attempt_id", "missing"), ("expected_manifest_sha256", "0" * 64),
+                       ("expected_result_sha256", "0" * 64)):
+        assert not verify_registered_evaluation(original, **{**expected, key: value})
+    for key in ("protocol_sha256", "task_sha256", "parent_sha256", "candidate_sha256", "selection_sha256",
+                "evaluator_id", "split_name", "schema"):
+        changed = {**binding, key: selected.artifact.sha256 if key == "candidate_sha256" else "0" * 64}
+        assert not verify_registered_evaluation(original, **{**expected, "expected_binding": changed})
+
+    def rehash(record, key="sha256"):
+        record[key] = digest({name: value for name, value in record.items() if name != key})
+
+    def reseal(record):
+        # Recompute all caller-owned evidence hashes, including the reservation.
+        decision = record["freshness"]["decision"]
+        if type(decision) is dict:
+            attempt = decision["attempt"]
+            reservation = {key: value for key, value in attempt.items()
+                           if key not in ("reservation_sha256", "lifecycle_sha256")}
+            reservation.update(status="authorized_outcome_unknown", reason="evaluation_authorization_committed",
+                               callback_invocations=None, result=None, result_sha256=None)
+            attempt["reservation_sha256"] = digest(reservation)
+            rehash(attempt, "lifecycle_sha256")
+            decision["reservation_sha256"] = attempt["reservation_sha256"]
+            decision["lifecycle_sha256"] = attempt["lifecycle_sha256"]
+            rehash(decision, "decision_sha256")
+        record["trace"][-1]["request"]["freshness"] = copy.deepcopy(record["freshness"])
+        previous = None
+        for event in record["trace"]:
+            event["previous_sha256"] = previous
+            rehash(event)
+            previous = event["sha256"]
+        record["trace_head_sha256"] = previous
+        rehash(record)
+        return record
+
+    def substitute(path, value):
+        changed = copy.deepcopy(original)
+        target = changed
+        for key in path[:-1]:
+            target = target[key]
+        target[path[-1]] = value
+        assert not verify_registered_evaluation(reseal(changed), **expected), path
+
+    for path, value in (
+            (("status",), "failed"), (("status",), "abstained"),
+            (("candidate_sha256",), selected.artifact.sha256),
+            (("candidate", "artifact_sha256"), "0" * 64),
+            (("candidates",), []), (("evaluator_id",), "substituted/1"), (("split_name",), "development"),
+            (("freshness", "scope"), "opaque_evaluator_inputs"),
+            (("freshness", "manifest_sha256"), "0" * 64),
+            (("freshness", "registry_id"), other_registry.registry_id),
+            (("freshness", "decision"), None),
+            (("freshness", "decision", "attempt_id"), "missing"),
+            (("freshness", "decision", "operation"), "consume"),
+            (("freshness", "decision", "attempt", "status"), "failed"),
+            (("freshness", "decision", "attempt", "status"), "authorized_outcome_unknown"),
+            (("freshness", "decision", "attempt", "evidence_role"), "development"),
+            (("freshness", "decision", "consumed_matches"), [{"kind": "family", "key": "contaminated"}]),
+            (("freshness", "scientific_freshness_verified"), True),
+            (("freshness", "decision", "evaluator_execution_attested"), True),
+            (("scientific_freshness_verified",), True),
+            (("evaluator_attested",), True), (("behavioral_certificate",), {"verified": True}),
+            (("trace", -1, "requested_charges"), {"tool_calls": 1}),
+            (("heldout_accounting", "evaluator_calls"), True)):
+        substitute(path, value)
+
+    # Heldout evaluation does not consume proposer budget. Consistent arithmetic
+    # and recomputed hashes cannot authorize an added final tool-call charge.
+    for requested_charges in ({}, {"tool_calls": 1}):
+        changed = copy.deepcopy(original)
+        final = changed["trace"][-1]
+        final["charges"] = {"tool_calls": 1}
+        final["requested_charges"] = requested_charges
+        final["usage"]["tool_calls"] += 1
+        changed["usage"]["tool_calls"] += 1
+        reseal(changed)
+        assert verify_trace(changed["trace"], expected_head=changed["trace_head_sha256"])
+        assert not verify_registered_evaluation(changed, **expected)
+
+    # A mutually consistent, rehashed changed result still disagrees with durable
+    # evidence, even when the caller expects the substituted result's identity.
+    changed = copy.deepcopy(original)
+    changed_result = {"synthetic_score": 1.0}
+    changed["result"] = changed["trace"][-1]["result"] = changed_result
+    decision = changed["freshness"]["decision"]
+    decision["result_sha256"] = decision["attempt"]["result_sha256"] = digest(changed_result)
+    decision["attempt"]["result"] = changed_result
+    rehash(decision["attempt"], "lifecycle_sha256")
+    decision["lifecycle_sha256"] = decision["attempt"]["lifecycle_sha256"]
+    rehash(decision, "decision_sha256")
+    assert not verify_registered_evaluation(reseal(changed),
+        **{**expected, "expected_result_sha256": digest(changed_result)})
+
+    # A new wrapper around the same artifact cannot inherit the old execution,
+    # even with a fully rehashed trace, selection, binding and reservation.
+    changed = copy.deepcopy(original)
+    replacement = changed["candidate"]
+    replacement["proposal_index"] += 1
+    rehash(replacement)
+    changed["candidate_sha256"] = replacement["sha256"]
+    changed["candidates"] = [copy.deepcopy(replacement)]
+    changed["trace"][1]["result"]["candidate_sha256"] = replacement["sha256"]
+    for event in changed["trace"][-2:]:
+        event["request"]["candidate_sha256"] = replacement["sha256"]
+    reseal(changed)
+    changed_binding = {**binding, "candidate_sha256": replacement["sha256"],
+        "selection_sha256": digest({"selected": replacement, "candidates": changed["candidates"],
+                                   "seal_event_sha256": changed["trace"][-2]["sha256"]})}
+    decision = changed["freshness"]["decision"]
+    decision["attempt"]["binding"] = changed_binding
+    decision["binding_sha256"] = decision["attempt"]["binding_sha256"] = digest(changed_binding)
+    assert not verify_registered_evaluation(reseal(changed), **{**expected, "expected_binding": changed_binding})
+
+    # Missing, failed and interrupted durable attempts cannot be upgraded by a
+    # successful-looking receipt. get_attempt is the sole registry read path.
+    durable = registry.get_attempt(attempt_id)
+    with monkeypatch.context() as patch:
+        for status in (None, "failed", "authorized_outcome_unknown"):
+            current = None if status is None else {**durable, "status": status}
+            patch.setattr(registry, "get_attempt", lambda identity, current=current: current)
+            assert not verify_registered_evaluation(original, **expected)
+    assert verify_registered_evaluation(original, **expected)

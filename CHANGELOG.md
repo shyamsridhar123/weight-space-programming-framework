@@ -7,6 +7,16 @@ research draft.
 
 ## Unreleased
 
+- Added a cooperative [registered session evidence verifier](docs/research/evaluation-data-roles.md#registered-session-evidence-verifier-supplement-november-9-2026)
+  over a caller-owned registry, exact selected artifact and trusted expected
+  binding, attempt, manifest and result identities. It reads only the durable
+  attempt, without evaluation, callbacks, batch materialization or current-state
+  snapshotting. A separate [synthetic verification receipt](provenance/verification/registered-evaluation-verifier-20261109.json)
+  records checks against rehashed substitutions, missing or failed attempts and
+  added held-out charges. Development consumption remains a separate boundary.
+  This adds no source attestation or scientific freshness; earlier receipts
+  retain their original scope, and Issue #2 c2/c7 remain partial.
+
 - Published a [symmetry-family engineering check](docs/research/symmetry-family-boundary-check.md)
   and [sanitized receipt](provenance/verification/symmetry-family-boundary-20261109.json)
   for one standalone invocation covering finite ReLU gauge/edit transport,
