@@ -1858,6 +1858,8 @@ stays partial and Issue #9 stays open.
 
 **Prospective engineering evidence (November 9, 2026):** The [label-boundary receipt](../../provenance/verification/numpy-label-boundary-20261109.json) records one passing handcrafted offline check: exact NumPy string elements become plain strings before JSON admission, preserving text, order, tensor values and model identity; no-op admission replays in memory. Custom string subtypes are rejected before conversion. This does not exercise a fresh-process native evaluator, repair either historical replay, identify the second failure's cause or change this partial status.
 
+**Prospective alignment engineering evidence (November 9, 2026):** The [alignment receipt](../../provenance/verification/checked-hidden-alignment-20261109.json) records one passing handcrafted offline regression for known permutation/scale recovery, literal edit transport, a complete-assignment gap oracle and ambiguity or numerical abstention. Its literal exact-score checks establish neither native evaluator equivalence nor a proved rounding bound. Legacy matcher arithmetic, diagnostic keys and experiment/replay callers remain unchanged. There is no trained or learned transfer evidence and no new scientific trial. Issue #16 stays five supported, two partial and one open; c4 remains partial. The historical 36/48 edited-score controls and both native replay failures are unchanged.
+
 **Remaining requirement / scope limit:** Known-edited heldout score controls pass 36/48. The original native replay failed on finite JSON str_ handling; a once-run normalized derivative then failed canonical admission comparison, so native replay is unverified.
 
 #### #16 c5

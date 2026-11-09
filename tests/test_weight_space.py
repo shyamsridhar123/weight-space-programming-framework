@@ -8,7 +8,7 @@ import pytest
 
 from rlcd.weight_space import (Network, InputBox, Program, Edit, Contract, apply_program,
     difference, compose, certify_drift, verify_certificate, check_contract, compile_readout,
-    Gauge, transform, transport, align_hidden)
+    Gauge, transform, transport, align_hidden, align_hidden_checked)
 from rlcd.weight_space.adapters import from_rts, to_rts
 from rlcd.weight_space.contracts import exact_score, preserves_argmax
 from rlcd.weight_space.program import rollback, interpolate
@@ -102,6 +102,144 @@ def test_assignment_matches_brute_force_and_recovers_identifiable_gauge():
     mapped = apply_program(target, transfer_edit(source, program, target, inferred))
     x = rng.uniform(-1, 1, (20, 3))
     np.testing.assert_allclose(mapped(x), apply_program(source, program)(x), atol=1e-13)
+
+
+def test_checked_alignment_literal_identifiability_and_abstention_boundaries():
+    # Fixed before these literal outcomes; this is not a trained-study threshold.
+    threshold = 2.0**-18
+    source = Network([[1, 0], [0, 1], [-1, 0]], [0, 0, .5], [[1, 2, -1]], [.25])
+    edited = source.replace(w1=[[1.25, .25], [0, 1], [-1, 0]],
+                            b1=[.25, 0, .5], w2=[[1.5, 2, -1]], b2=[.5])
+    known = Gauge((2, 0, 1), (2., .5, 4.))
+    target = transform(source, known)
+    checked = align_hidden_checked(source, target, min_assignment_gap=threshold)
+    outcomes = [checked]
+    assert checked.gauge == known and checked.reason == "separated_assignment"
+    assert checked.gap_status == "finite" and checked.assignment_gap is not None
+    assert checked.assignment_gap - threshold > checked.diagnostics["numerical_guard"]
+    legacy, diagnostics = align_hidden(source, target)
+    assert legacy == known
+    assert set(diagnostics) == {"mean_matching_cost", "relative_parameter_residual"}
+    program = difference(source, edited, "Literal mixed-layer edit")
+    mapped_parent, mapped_program = transport(source, program, checked.gauge)
+    assert mapped_parent.sha256 == target.sha256
+    mapped = apply_program(target, mapped_program)
+    for x, expected in (((-1., 0.), Fraction(-1)), ((0., 0.), Fraction(3, 8)),
+                        ((1., .5), Fraction(63, 16)), ((2., -1.), Fraction(17, 4))):
+        assert exact_score(edited, list(x)) == (expected,)
+        assert exact_score(mapped, list(x)) == (expected,)
+
+    renumbered = align_hidden_checked(
+        transform(source, Gauge((2, 0, 1), (1., 1., 1.))),
+        transform(target, Gauge((1, 2, 0), (1., 1., 1.))),
+        min_assignment_gap=threshold)
+    outcomes.append(renumbered)
+    assert renumbered.gauge == Gauge((1, 2, 0), (.5, 4., 2.))
+    assert renumbered.reason == checked.reason and renumbered.gap_status == checked.gap_status
+    assert renumbered.assignment_gap == pytest.approx(
+        checked.assignment_gap, rel=0, abs=max(checked.diagnostics["numerical_guard"],
+                                            renumbered.diagnostics["numerical_guard"]))
+
+    # Unit-norm rows give this literal squared-distance matrix independently
+    # of the matcher. The cheapest alternative keeps selected edge (0, 0).
+    oracle_cost = ((0, 4, 3), (4, 0, 1), (3, 1, 0))
+    oracle = sorted((sum(oracle_cost[row][col] for row, col in enumerate(p)), p)
+                    for p in permutations(range(3)))
+    assert oracle[0] == (0, (0, 1, 2))
+    assert oracle[1] == (2, (0, 2, 1))
+    assert min(value for value, p in oracle if p[0] != 0) == 6
+    oracle_gap = oracle[1][0] - oracle[0][0]
+    global_source = Network([[-1, 0, 0, 0], [1, 0, 0, 0], [.5, .5, .5, .5]],
+                            [0, 0, 0], [[1, 2, 3]], [0])
+    identity = Gauge((0, 1, 2), (1., 1., 1.))
+    # Literal thresholds: clear separation, inside the guard, and exact equality.
+    for frozen_gap, accepted in ((1.5, True), (2.0 - 2.0**-44, False), (2.0, False)):
+        result = align_hidden_checked(global_source, global_source,
+                                      min_assignment_gap=frozen_gap)
+        outcomes.append(result)
+        assert result.gap_status == "finite" and result.assignment_gap == oracle_gap
+        assert result.diagnostics["assignment_objective"] == oracle[0][0]
+        assert result.diagnostics["best_alternative_objective"] == oracle[1][0]
+        assert result.gauge == (identity if accepted else None)
+        assert result.reason == ("separated_assignment" if accepted
+                                 else "assignment_not_separated")
+
+    # Equal parent functions do not identify which duplicated feature was edited.
+    duplicate_source = Network([[1], [1]], [0, 0], [[1, 2]], [0])
+    duplicate_target = Network([[1], [1]], [0, 0], [[2, 1]], [0])
+    duplicate_edit = difference(duplicate_source, duplicate_source.replace(w1=[[2], [1]]),
+                                "Edit the first duplicate")
+    legacy_duplicate, _ = align_hidden(duplicate_source, duplicate_target)
+    legacy_after = apply_program(duplicate_target, transfer_edit(
+        duplicate_source, duplicate_edit, duplicate_target, legacy_duplicate))
+    known_parent, known_edit = transport(duplicate_source, duplicate_edit, Gauge((1, 0), (1., 1.)))
+    assert known_parent.sha256 == duplicate_target.sha256
+    assert exact_score(duplicate_source, [1]) == exact_score(duplicate_target, [1]) == (Fraction(3),)
+    assert exact_score(apply_program(duplicate_source, duplicate_edit), [1]) == (Fraction(4),)
+    assert exact_score(legacy_after, [1]) == (Fraction(5),)
+    assert exact_score(apply_program(known_parent, known_edit), [1]) == (Fraction(4),)
+
+    tiny = 2.0**-20
+    near_source = Network([[1], [0]], [0, 1], [[1, 1]], [0])
+    near_target = Network([[1], [1]], [0, tiny], [[1, 1]], [0])
+    # Both rows prefer the first source column, with local cost gaps > 1.
+    # Bijection forces a different comparison: the global gap is below threshold.
+    assert 2 * (1 - tiny) / np.sqrt(1 + tiny*tiny) > 1
+    for left, right, duplicate in ((duplicate_source, duplicate_target, True),
+                                    (near_source, near_target, False)):
+        result = align_hidden_checked(left, right, min_assignment_gap=threshold)
+        permuted = align_hidden_checked(
+            transform(left, Gauge((1, 0), (1., 1.))),
+            transform(right, Gauge((0, 1), (1., 1.))), min_assignment_gap=threshold)
+        outcomes.extend((result, permuted))
+        assert result.gauge is None and permuted.gauge is None
+        assert result.reason == permuted.reason == "assignment_not_separated"
+        assert result.gap_status == permuted.gap_status == "finite"
+        assert result.assignment_gap is not None
+        if duplicate:
+            assert result.assignment_gap == 0
+        else:
+            assert 0 < result.assignment_gap < threshold
+        assert permuted.assignment_gap == pytest.approx(
+            result.assignment_gap, rel=0, abs=max(result.diagnostics["numerical_guard"],
+                                                permuted.diagnostics["numerical_guard"]))
+        # An abstention is retained here; it is never passed as a raw-transfer gauge.
+
+    zero = Network([[0], [1]], [0, 0], [[1, 1]], [0])
+    nonzero = Network([[1], [1]], [0, 0], [[1, 1]], [0])
+    for left, right, source_rows, target_rows in ((zero, nonzero, [0], []),
+                                                (nonzero, zero, [], [0]), (zero, zero, [0], [0])):
+        result = align_hidden_checked(left, right, min_assignment_gap=threshold)
+        outcomes.append(result)
+        assert result.gauge is None and result.reason == "zero_incoming_affine_row"
+        assert result.assignment_gap is None and result.gap_status == "unavailable"
+        assert result.diagnostics["source_zero_affine_rows"] == source_rows
+        assert result.diagnostics["target_zero_affine_rows"] == target_rows
+
+    single = Network([[1]], [0], [[2]], [.5])
+    singleton = align_hidden_checked(single, Network([[2]], [0], [[1]], [.5]),
+                                     min_assignment_gap=threshold)
+    outcomes.append(singleton)
+    assert singleton.gauge == Gauge((0,), (2.,))
+    assert singleton.reason == "single_hidden_unit"
+    assert singleton.assignment_gap is None and singleton.gap_status == "no_alternative"
+    for magnitude in (1e308, 2.0**-600):
+        unresolved = Network([[magnitude]], [0], [[1]], [0])
+        result = align_hidden_checked(unresolved, unresolved, min_assignment_gap=threshold)
+        outcomes.append(result)
+        assert result.gauge is None and result.reason == "numerical_failure"
+        assert result.assignment_gap is None and result.gap_status == "unavailable"
+        assert result.diagnostics["failure_stage"] == "incoming_norms"
+        assert result.diagnostics["source_zero_affine_rows"] == []
+        assert result.diagnostics["target_zero_affine_rows"] == []
+    for bad in (True, -1., float("nan"), float("inf"), "0", 2**54 + 1):
+        with pytest.raises(ValueError):
+            align_hidden_checked(source, target, min_assignment_gap=bad)
+    with pytest.raises(TypeError):
+        align_hidden_checked(source, target)
+    for result in outcomes:
+        json.dumps(result.diagnostics, allow_nan=False)
+        assert result.assignment_gap is None or np.isfinite(result.assignment_gap)
 
 
 def test_all_layer_exact_box_certificate_covers_exhaustive_rational_grid_and_tampering():
