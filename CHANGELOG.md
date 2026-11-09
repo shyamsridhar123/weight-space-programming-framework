@@ -16,10 +16,13 @@ research draft.
   main-referenced sum tolerance; unavailable or unusable mains have no norm
   reference. Retain all assigned members, actual selected Candidate identities
   and separate proposal/program/lowering/artifact hashes, without fabricating
-  control Candidates or writing evidence files. Add one focused synthetic
-  regression covering recipe binding, rounded mismatches/no-ops, abstention,
-  unavailable parents and permanent live-admission invalidation. The report
-  supplies no final study seal, scoring,
+  control Candidates or writing evidence files. The separate
+  [native-control engineering receipt](provenance/verification/staged-native-controls-20261109.json)
+  records one passing focused synthetic regression covering recipe binding,
+  rounded mismatches/no-ops, abstention, unavailable parents and permanent
+  live-admission invalidation, without automatic retry or timeout. Its saved
+  execution scope is distinct from later documentation, manifest and publication
+  integration. The report supplies no final study seal, scoring,
   randomization or prospective registration evidence and leaves U's requirement
   concerning the three shuffled controls unchanged. Historical receipt scopes and
   results remain unchanged; Issue #9 c1 remains partial and open.
