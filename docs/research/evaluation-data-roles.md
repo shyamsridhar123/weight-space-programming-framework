@@ -189,6 +189,14 @@ follow-up run or closure evidence exists in the preserved result.
 
 ## Implemented boundary and synthetic verification
 
+**Earlier implementation account, November 9, 2026.** This section describes
+the optional registry version and source hashes bound by the guard receipt
+linked below. Its transaction-spanning scorer and repeatable direct scoring
+limitations are preserved as that version's scope. The separately dated
+[durable lifecycle supplement](#durable-lifecycle-supplement-november-9-2026)
+describes the subsequent source version; earlier successful checks do not verify
+that later version.
+
 The source now includes an optional registry integration added after the frozen
 exercise. The focused registry, session and broker checks and the configured
 engineering suite passed on November 9, 2026. The
@@ -359,3 +367,142 @@ independence, fresh prospective validation, production usefulness, a general
 admission guarantee or the solution to adaptive statistical reuse. The c7
 status therefore remains partial. Any later repair must preserve this original
 failure record and report its own implementation, coverage and evidence limits.
+
+## Durable lifecycle supplement: November 9, 2026
+
+**Later implementation account, November 9, 2026, America/Chicago.** The
+subsequent source version changes registered scoring to commit an attempt
+reservation and conservative observed consumption before scorer entry, release
+the SQLite writer lock, and finalize the outcome in a separate transaction.
+This supplement describes that source contract. It does not use the earlier
+guard receipt as verification of this revision, rerun the original c7 exercise
+or turn the synthetic fixtures into fresh scientific evaluation.
+
+`DataRoleRegistry.score(batch, scorer, *, attempt_id=None, binding=None)` now
+resolves the captured batch and current shared consumption under a short
+`BEGIN IMMEDIATE` transaction. It checks the attempt identity and observed
+scope before committing both the durable reservation and monotonic consumption
+in that same transaction. The reservation binds the registry, batch manifest,
+content and row hashes, copied finite-JSON binding, conservative consumed scope,
+registry revisions and state hashes. The `registry_*_before/after` fields
+describe snapshots of the reservation transaction, not the current registry
+state at terminal finalization. Concurrent disjoint callbacks may advance
+registry state while this callback runs. A missing `attempt_id` generates an
+identity; it does not bypass consumption. Every committed authorization uses
+this lifecycle, including a call with no optional binding.
+
+The evidence role is `evaluation_consumed_on_authorization`. Consuming at
+authorization is conservative: a crash between the commit and callback entry
+can leave no scorer output while still invalidating the observed scope for
+another evaluation. The boundary does not roll that scope back to freshness.
+Exact-row aliases, observed families, registered ancestors, conservative
+connected siblings and late aliases inherit the existing propagation rule.
+New sessions, changed split/source names, new attempt identifiers and registered
+descendants cannot release the consumed scope. A new identifier is not a retry
+authorization. Existing development consumption still rejects before scorer
+entry.
+
+After the reservation transaction closes, the scorer receives a copied
+materialization. No SQLite writer transaction spans scorer execution; another
+thread/process using the same shared database can inspect or mutate disjoint
+registered state while the callback runs. Short writer transactions retain the
+two-second busy timeout, and same-thread callback reentry remains rejected.
+Finite-JSON normalization and terminal evidence persistence occur after
+callback entry. The separate finalization transaction binds a successful result
+or a sanitized failure to the original reservation; it does not grant another
+attempt.
+
+`get_attempt(attempt_id)` returns a copied durable record, or `None` if no
+reservation with that identity exists. Its status meanings are:
+
+| Durable status | What is recorded | Later scoring eligibility |
+| --- | --- | --- |
+| `authorized_outcome_unknown` | Reservation and consumption committed; callback entry, outcome and result are not durably established; `callback_invocations` is `None` | The reserved observed scope remains consumed |
+| `succeeded` | One cooperating scorer callback invocation, finite-JSON result and result hash finalized against the reservation | The reserved observed scope remains consumed |
+| `failed` | One cooperating scorer callback invocation and sanitized terminal failure finalized, with no successful result | The reserved observed scope remains consumed |
+
+Cancellation preserves the original `KeyboardInterrupt` or `SystemExit` and
+attempts to persist a failed terminal record. If that finalization cannot be
+committed, the previously committed record remains
+`authorized_outcome_unknown`; evidence failure does not replace cancellation.
+An abrupt process termination or unsuccessful post-callback persistence can
+also retain that unknown outcome. The API provides inspection rather than a
+resume token. Success, failure, cancellation and crash never undo committed
+consumption, and an unknown record is not proof that the scorer ran zero times.
+Invocation accounting concerns the cooperating callback, not native forward
+passes inside it.
+
+The optional `binding` must be a finite-JSON object copied from the caller's
+actual frozen prospective protocol, selected candidate and evaluator identity.
+Its content hash records the submitted binding; it does not authenticate its
+truth. The default empty object has no protocol/selection identity claim while
+retaining the same scope-consumption rule. In the configured session path,
+`evaluate_registered` constructs a binding from the session configuration hash,
+task and parent hashes, actual selected candidate, all submitted candidates and
+seal event, evaluator identity and split name. A session configuration identity
+is not automatically a complete prospective scientific protocol; a runner must
+also bind its actual frozen preprocessing, assignments, margins, comparison and
+analysis configuration.
+
+A separately frozen prospective runner must place actual preprocessing and
+prediction on the supplied materialization inside the registered callback.
+Capturing inputs but computing predictions before authorization is too late.
+Opaque legacy evaluation, arbitrary callback reads, ignored materializations,
+precomputed returned predictions and copied databases remain outside the
+claimed boundary. The new attempt ledger does not retroactively capture every
+historical attempt made through the earlier API or an uncovered consumer.
+Opening an earlier registry preserves its existing batches, decision bytes and
+monotonic consumption; that compatibility operation cannot manufacture missing
+historical reservations. V2 once-only authorization is prospective: a batch
+scored under V1 but never consumed has no historical reservation and can receive
+V2 authorization. Migration cannot reconstruct that missing history.
+
+The new
+[`run_prospective_support_routing.py`](../../scripts/run_prospective_support_routing.py)
+implements separate `prepare`, `evaluate` and `verify` stages. It reads an
+explicit four-file parent (`head.json`, `encoder.npz`, `preprocessing.json` and
+`lineage.json`) and caller-supplied development envelopes/configuration.
+Preparation records effective configuration and terminal assignments before
+evaluation. Input normalization and request identifiers are registered as
+observed aliases before exposure; raw evaluation rows are linked to those
+registered identities. The scoring callback performs feature preprocessing,
+encoding, native parent and candidate forwards and metrics under one durable
+reservation for the declared cohort and all admitted candidates. Its result
+consumer requires the exact durable successful attempt, binding and result
+commitments rather than accepting a legacy receipt or rerunning predictions.
+
+This runner requires a separately supplied cohort committed by its frozen
+configuration. A caller declaration of no development use remains a declaration,
+and frozen sample admission thresholds are not themselves a scientific
+useful-effect analysis. The source contract creates neither a new cohort nor
+proof that the full prospective rubrics below are satisfied. Synthetic fixtures
+exercise only their declared execution and rejection behavior. The
+[durable lifecycle verification receipt](../../provenance/verification/durable-evaluation-lifecycle-20261109.json)
+records passing focused and configured engineering checks completed on
+November 9, 2026. Captured source identities were unchanged before and after
+execution; the configured selection retains three declared frozen-study
+deselections. These checks establish the listed engineering behaviors only.
+
+The [five prospective protocol rubrics](prospective-protocol-rubrics.md) now
+define reading, diagnosis, editing, creation and transfer separately. Each
+specifies allowed context/weights/examples/computation, independent units and
+ancestry/splits, candidate selection, comparisons, useful-effect margins and
+abstention/missingness/sensitivity rules. They are definitions without invented
+cohorts, numerical margins or results. Issue #2 c0 is supported only for those
+five complete rubric definitions and their requested field inventory. A runnable
+study must freeze its actual
+values and assignments before selection or outcomes. Any separate support-routing
+fixture remains synthetic and cannot stand in for a fresh cohort or enterprise
+service outcomes.
+
+All lifecycle records retain `provenance_authenticated: false`,
+`semantic_independence_verified: false`, `scientific_freshness_verified: false`
+and `evaluator_execution_attested: false`. The source implements a cooperative
+boundary over captured finite JSON and observed declarations. It cannot
+authenticate source provenance, discover undeclared semantic near duplicates,
+attest arbitrary execution or prove fresh sampling. Issue #2 c2 and c7 remain
+partial: observed lineage and exact aliases are enforceable within this scope,
+while semantic independence, complete historical-attempt capture and a fresh
+prospective cohort require separate evidence. The historical 13-route c7 failure,
+two historical-development controls, six working guards and original object
+identities above remain unchanged.

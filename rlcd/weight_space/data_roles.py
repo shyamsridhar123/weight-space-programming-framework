@@ -2,8 +2,9 @@
 
 Hashes bind finite JSON rows, not native tensor semantics or independently
 authenticated provenance. Only declared/observed families and ancestry are
-covered. Arbitrary scorers can ignore the supplied data. This module neither
-attests evaluator execution nor supplies a durable once-only scoring guarantee.
+covered. A shared registry permits at most one cooperative scoring authorization
+over an observed scope. Arbitrary scorers can ignore the supplied data; callback
+completion, independent storage durability and evaluator execution are not attested.
 """
 from __future__ import annotations
 
@@ -19,7 +20,7 @@ from typing import Any, Callable, Iterator
 import uuid
 
 
-_SCHEMA = "wsp-data-role-registry/1"
+_SCHEMA = "wsp-data-role-registry/2"
 _FLAGS = {"provenance_authenticated": False,
           "semantic_independence_verified": False,
           "scientific_freshness_verified": False,
@@ -67,6 +68,12 @@ def _name(value: Any) -> str:
 def _bound(document: dict[str, Any]) -> dict[str, Any]:
     body = {key: value for key, value in document.items() if key != "decision_sha256"}
     body["decision_sha256"] = _sha(_bytes(body))
+    return json.loads(_bytes(body))
+
+
+def _bound_attempt(document: dict[str, Any]) -> dict[str, Any]:
+    body = {key: value for key, value in document.items() if key != "lifecycle_sha256"}
+    body["lifecycle_sha256"] = _sha(_bytes(body))
     return json.loads(_bytes(body))
 
 
@@ -118,7 +125,8 @@ class DataRoleRegistry:
 
     Use one shared database under a trusted harness; copies, undeclared
     transformations, external observations and opaque scorer inputs are outside
-    this boundary. Failed scoring does not invalidate or reserve an evaluation.
+    this boundary. Authorization commits consumption before scorer entry; an
+    interrupted or failed attempt cannot reopen that observed scope.
     """
 
     def __init__(self, path: str | Path):
@@ -140,10 +148,16 @@ class DataRoleRegistry:
                                "reason_sha256 TEXT NOT NULL, revision INTEGER NOT NULL, PRIMARY KEY(kind, key))")
             connection.execute("CREATE TABLE IF NOT EXISTS decisions (decision_sha256 TEXT PRIMARY KEY, "
                                "decision_json BLOB NOT NULL)")
+            connection.execute("CREATE TABLE IF NOT EXISTS attempts (attempt_id TEXT PRIMARY KEY, "
+                               "attempt_json BLOB NOT NULL)")
             metadata = dict(connection.execute("SELECT key, value FROM meta"))
             if not metadata:
                 metadata = {"schema": _SCHEMA, "registry_id": str(uuid.uuid4()), "revision": "0"}
                 connection.executemany("INSERT INTO meta VALUES (?, ?)", metadata.items())
+            if metadata.get("schema") == "wsp-data-role-registry/1":
+                # Preserve existing batch/decision bytes and monotonic consumption.
+                connection.execute("UPDATE meta SET value = ? WHERE key = 'schema'", (_SCHEMA,))
+                metadata["schema"] = _SCHEMA
             if metadata.get("schema") != _SCHEMA or not metadata.get("registry_id"):
                 self._reject(connection, decision, "registry_invalid")
             self._registry_id = metadata["registry_id"]
@@ -170,8 +184,8 @@ class DataRoleRegistry:
             raise DataRoleError({**decision, "reason": "callback_reentry"})
         connection = None
         try:
-            # ponytail: SQLite serializes writers across the scorer. Use a shared
-            # database with finer locking if measured scoring throughput requires it.
+            # SQLite serializes the short reservation/finalization transactions;
+            # no writer transaction spans the caller's scoring callback.
             connection = sqlite3.connect(self._path, timeout=2.0, isolation_level=None)
             connection.execute("BEGIN IMMEDIATE")
             if not initialize:
@@ -189,7 +203,9 @@ class DataRoleRegistry:
             if connection is not None and connection.in_transaction:
                 connection.rollback()
             raise DataRoleError({**decision, "status": "failed" if decision["scoring_started"] else "rejected",
-                                 "verdict": "unverified", "reason": "registry_unavailable"}) from None
+                                 "verdict": "unverified", "reason": "registry_unavailable",
+                                 "registry_revision_after": None,
+                                 "registry_state_sha256_after": None}) from None
         finally:
             if connection is not None:
                 connection.close()
@@ -276,7 +292,7 @@ class DataRoleRegistry:
 
     def _consume_keys(self, connection: sqlite3.Connection, records: dict[str, RegisteredBatch],
                       consumed: dict[tuple[str, str], tuple[str, int]], seeds: set[tuple[str, str]],
-                      reason: str, revision: int, *, registration: bool = False) -> None:
+                      reason: str, revision: int, *, registration: bool = False) -> set[tuple[str, str]]:
         keys = set(consumed) | seeds
         scopes = [self._scope(record, records) for record in records.values()]
         # ponytail: repeated scans of observed scopes; index the lineage graph
@@ -292,6 +308,7 @@ class DataRoleRegistry:
             connection.execute("UPDATE meta SET value = ? WHERE key = 'revision'", (str(revision),))
             connection.executemany("INSERT INTO consumed VALUES (?, ?, ?, ?)",
                                    ((kind, key, _sha(_bytes(reason)), revision) for kind, key in sorted(new)))
+        return new
 
     def _finish(self, connection: sqlite3.Connection, decision: dict[str, Any]) -> dict[str, Any]:
         bound = _bound(decision)
@@ -365,18 +382,98 @@ class DataRoleRegistry:
             except ValueError as failure:
                 self._reject(connection, decision, str(failure))
 
-    def score(self, batch: RegisteredBatch, scorer: Callable[[list[Any]], Any]) -> tuple[Any, dict[str, Any]]:
-        """Resolve observed freshness and score while holding the writer lock."""
+    def _attempt(self, connection: sqlite3.Connection, attempt_id: str) -> dict[str, Any] | None:
+        stored = connection.execute("SELECT attempt_json FROM attempts WHERE attempt_id = ?", (attempt_id,)).fetchone()
+        if stored is None:
+            return None
+        try:
+            raw = bytes(stored[0])
+            record = json.loads(raw)
+            if (_bytes(record) != raw or _bound_attempt(record) != record
+                    or record["schema"] != "wsp-evaluation-attempt/1"
+                    or record["registry_id"] != self.registry_id or record["attempt_id"] != attempt_id
+                    or type(record["binding"]) is not dict
+                    or _sha(_bytes(record["binding"])) != record["binding_sha256"]
+                    or _sha(_bytes(record["consumed_scope"])) != record["consumed_scope_sha256"]):
+                raise ValueError
+            reservation = {key: value for key, value in record.items()
+                           if key not in ("reservation_sha256", "lifecycle_sha256")}
+            reservation.update(status="authorized_outcome_unknown", reason="evaluation_authorization_committed",
+                               callback_invocations=None, result=None, result_sha256=None)
+            if _sha(_bytes(reservation)) != record["reservation_sha256"]:
+                raise ValueError
+            status = record["status"]
+            if status == "succeeded":
+                if record["callback_invocations"] != 1 or _sha(_bytes(record["result"])) != record["result_sha256"]:
+                    raise ValueError
+            elif status in ("authorized_outcome_unknown", "failed"):
+                if (record["callback_invocations"] != (1 if status == "failed" else None)
+                        or record["result"] is not None or record["result_sha256"] is not None):
+                    raise ValueError
+            else:
+                raise ValueError
+            if any(record[name] is not False for name in _FLAGS):
+                raise ValueError
+            return record
+        except (ValueError, TypeError, KeyError, RecursionError, UnicodeError):
+            raise ValueError("attempt_record_invalid") from None
+
+    def get_attempt(self, attempt_id: str) -> dict[str, Any] | None:
+        """Inspect copied durable evidence; this never authorizes/resumes scoring."""
+        decision = self._decision("inspect_attempt")
+        with self._transaction(decision) as connection:
+            return self._attempt(connection, _name(attempt_id))
+
+    def _reserve(self, connection: sqlite3.Connection, attempt: dict[str, Any]) -> None:
+        connection.execute("INSERT INTO attempts VALUES (?, ?)", (attempt["attempt_id"], _bytes(attempt)))
+        # Attempt identity and conservative scope consumption share this commit.
+        connection.commit()
+
+    def _finalize(self, attempt: dict[str, Any], decision: dict[str, Any],
+                  result_bytes: bytes | None) -> dict[str, Any]:
+        with self._transaction(decision) as connection:
+            if self._attempt(connection, attempt["attempt_id"]) != attempt:
+                self._reject(connection, decision, "attempt_state_changed", status="failed")
+            succeeded = result_bytes is not None
+            terminal = _bound_attempt({**attempt,
+                "status": "succeeded" if succeeded else "failed",
+                "reason": "observed_boundary_passed" if succeeded else "scorer_failed",
+                "callback_invocations": 1, "result": json.loads(result_bytes) if succeeded else None,
+                "result_sha256": _sha(result_bytes) if succeeded else None})
+            evidence = {**decision, "status": terminal["status"], "reason": terminal["reason"],
+                        "verdict": "registered_cooperative" if succeeded else "unverified",
+                        "result_sha256": terminal["result_sha256"], "attempt": terminal,
+                        "lifecycle_sha256": terminal["lifecycle_sha256"]}
+            connection.execute("UPDATE attempts SET attempt_json = ? WHERE attempt_id = ?",
+                               (_bytes(terminal), attempt["attempt_id"]))
+            return self._finish(connection, evidence)
+
+    def score(self, batch: RegisteredBatch, scorer: Callable[[list[Any]], Any], *,
+              attempt_id: str | None = None, binding: dict[str, Any] | None = None) -> tuple[Any, dict[str, Any]]:
+        """Commit once-only authorization before calling a cooperative scorer.
+
+        The optional finite-JSON binding must describe the caller's actual frozen
+        protocol, selection and evaluator. Empty bindings provide no such identity
+        claim. Failure, cancellation or abrupt termination never releases scope.
+        """
         decision = self._decision("score")
         with self._transaction(decision) as connection:
             try:
                 snapshot = self._snapshot(connection)
-                records, consumed, _, _ = snapshot
+                records, consumed, revision, _ = snapshot
                 self._before(decision, snapshot)
                 registered = self._known(batch, records)
                 self._details(decision, registered._payload_bytes, registered)
                 if not callable(scorer):
                     raise ValueError("scorer_not_callable")
+                attempt_id = _name(uuid.uuid4().hex if attempt_id is None else attempt_id)
+                binding = {} if binding is None else binding
+                if type(binding) is not dict:
+                    raise ValueError("binding_must_be_json_object")
+                binding = json.loads(_bytes(binding))
+                decision.update(attempt_id=attempt_id, binding_sha256=_sha(_bytes(binding)))
+                if self._attempt(connection, attempt_id) is not None:
+                    self._reject(connection, decision, "attempt_already_authorized", verdict="invalidated")
                 matches = self._scope(registered, records) & set(consumed)
                 decision["consumed_matches"] = [{"kind": kind, "key": key,
                     "reason_sha256": consumed[kind, key][0], "revision": consumed[kind, key][1]}
@@ -387,30 +484,51 @@ class DataRoleRegistry:
                 if isinstance(failure, DataRoleError):
                     raise
                 self._reject(connection, decision, str(failure))
-            paths = getattr(_ACTIVE, "paths", set())
-            identities = getattr(_ACTIVE, "identities", set())
-            _ACTIVE.paths, _ACTIVE.identities = paths, identities
-            paths.add(self._path)
-            identities.add(self.registry_id)
-            decision["scoring_started"] = True
+            reason = "evaluation_authorization/" + attempt_id
+            scope = self._consume_keys(connection, records, consumed, self._scope(registered, records), reason, revision)
+            after = self._snapshot(connection)
+            decision.update(registry_revision_after=after[2], registry_state_sha256_after=after[3])
+            attempt = {"schema": "wsp-evaluation-attempt/1", "attempt_id": attempt_id,
+                       "registry_id": self.registry_id, "source_id": registered.to_dict()["source_id"],
+                       "manifest_sha256": registered.manifest_sha256, "content_sha256": decision["content_sha256"],
+                       "row_sha256": decision["row_sha256"], "binding": binding,
+                       "binding_sha256": decision["binding_sha256"], "evidence_role": "evaluation_consumed_on_authorization",
+                       "consumption_reason_sha256": _sha(_bytes(reason)),
+                       "consumed_scope": [[kind, key] for kind, key in sorted(scope)],
+                       "consumed_scope_sha256": _sha(_bytes([[kind, key] for kind, key in sorted(scope)])),
+                       **{key: decision[key] for key in ("registry_revision_before", "registry_revision_after",
+                           "registry_state_sha256_before", "registry_state_sha256_after")},
+                       "status": "authorized_outcome_unknown", "reason": "evaluation_authorization_committed",
+                       "callback_invocations": None, "result": None, "result_sha256": None, **_FLAGS}
+            attempt["reservation_sha256"] = _sha(_bytes(attempt))
+            attempt = _bound_attempt(attempt)
+            self._reserve(connection, attempt)
+            decision.update(reservation_sha256=attempt["reservation_sha256"],
+                            lifecycle_sha256=attempt["lifecycle_sha256"], attempt=attempt)
+        paths = getattr(_ACTIVE, "paths", set())
+        identities = getattr(_ACTIVE, "identities", set())
+        _ACTIVE.paths, _ACTIVE.identities = paths, identities
+        paths.add(self._path)
+        identities.add(self.registry_id)
+        decision["scoring_started"] = True
+        result_bytes, failure = None, None
+        try:
             try:
-                try:
-                    result_bytes = _bytes(scorer(registered.materialize()))
-                except Exception:
-                    self._reject(connection, decision, "scorer_failed", status="failed")
-                except BaseException as interrupted:
-                    decision.update(status="failed", verdict="unverified", reason="scorer_failed")
-                    try:
-                        interrupted.data_role_decision = None
-                        interrupted.data_role_decision = self._finish(connection, decision)
-                    except BaseException:
-                        # A failed evidence commit must never replace cancellation.
-                        pass
-                    raise
-                decision.update(status="succeeded", verdict="registered_cooperative", reason="observed_boundary_passed",
-                                result_sha256=_sha(result_bytes))
-                evidence = self._finish(connection, decision)
-                return json.loads(result_bytes), evidence
-            finally:
-                paths.remove(self._path)
-                identities.remove(self.registry_id)
+                result_bytes = _bytes(scorer(registered.materialize()))
+            except BaseException as caught:
+                failure = caught
+        finally:
+            paths.remove(self._path)
+            identities.remove(self.registry_id)
+        if failure is not None and not isinstance(failure, Exception):
+            try:
+                failure.data_role_decision = None
+                failure.data_role_decision = self._finalize(attempt, decision, None)
+            except BaseException:
+                # Failed evidence persistence must never replace cancellation.
+                pass
+            raise failure
+        evidence = self._finalize(attempt, decision, result_bytes)
+        if failure is not None:
+            raise DataRoleError(evidence) from None
+        return json.loads(result_bytes), evidence

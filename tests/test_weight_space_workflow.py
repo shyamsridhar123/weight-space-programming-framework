@@ -499,6 +499,34 @@ def test_development_exposure_invalidates_copied_evaluation_across_sessions(tmp_
         evaluation.evaluate_registered(copied, lambda c, x: {}, evaluator_id="retry/1")
 
 
+def test_registered_selection_is_bound_and_new_sessions_cannot_repeat_scoring(tmp_path):
+    path = tmp_path / "data-roles.sqlite3"
+    registry = DataRoleRegistry(path)
+    batch = registry.register_batch([[2., 3.]], source_id="evaluation", family_id="evaluation-family")
+    original = session(data_registry=registry)
+    selected = original.propose_artifact(artifact())
+    original.seal(selected)
+    seal_hash = original.trace[-1].sha256
+    receipt = original.evaluate_registered(batch, lambda c, rows: {"actual": rows},
+                                           evaluator_id="bound-evaluator/1").to_dict()
+    decision = receipt["freshness"]["decision"]
+    attempt = registry.get_attempt(decision["attempt_id"])
+    assert decision["attempt"] == attempt and attempt["status"] == "succeeded"
+    assert attempt["binding"] == {"schema": "wsp-session-evaluation-binding/1",
+        "protocol_sha256": original.sha256, "task_sha256": selected.task_sha256,
+        "parent_sha256": selected.parent_sha256, "candidate_sha256": selected.sha256,
+        "selection_sha256": digest({"selected": selected.to_dict(),
+            "candidates": [selected.to_dict()], "seal_event_sha256": seal_hash}),
+        "evaluator_id": "bound-evaluator/1", "split_name": "test"}
+    rebuilt = session(data_registry=DataRoleRegistry(path))
+    rebuilt.seal(rebuilt.propose_artifact(artifact()))
+    calls = []
+    rejected = rebuilt.evaluate_registered(batch, lambda c, rows: calls.append(rows),
+                                            evaluator_id="new-evaluator/1").to_dict()
+    assert rejected["status"] == "rejected" and calls == []
+    assert rejected["freshness"]["decision"]["reason"] == "observed_development_consumption"
+
+
 def test_registered_scorer_failure_has_one_call_and_legacy_input_remains_unverified(tmp_path):
     registry = DataRoleRegistry(tmp_path / "data-roles.sqlite3")
     batch = registry.register_batch([[2., 3.]], source_id="evaluation", family_id="evaluation-family")
