@@ -446,6 +446,8 @@ integration; it supplies no real held-out study. Runtime-restoration and
 causal-usefulness flags remain false; #9 c1 remains partial and the issue remains
 open, with earlier receipt scopes and historical results unchanged.
 
+The [prospective scientific compatibility companion](staged-scientific-compatibility.md) describes a narrower proposed synthetic signed-bias benchmark, including its eleven-entry scientific mapping, operational fallback and analysis rules. It remains prospective and does not replace the broader trained-task or diffusion requirements below.
+
 The evaluator should sample defect location and strength using a private,
 prespecified intervention generator. The proposer should receive the declared
 context/access arm without the injection record. Freeze the diagnosis before
