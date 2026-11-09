@@ -7,6 +7,12 @@ research draft.
 
 ## Unreleased
 
+- Retain allowlisted [factory acceptance diagnostics](docs/research/dark-factory.md)
+  for completed provider attempts: known outcome, first rejection code and only
+  validated criterion IDs. Acceptance, short-circuit and exception behavior stay
+  unchanged; legacy receipts are not backfilled. Focused offline checks were
+  added but have not been executed for this change.
+
 - Route new accepted [factory publication](docs/research/dark-factory.md) through
   deterministic `factory/<run_id>` branches and durably journalled pull requests.
   Pending PRs block the queue until a separate merge is observed and fetched

@@ -29,6 +29,21 @@ snapshot, assigned provider attempts, raw command output, command receipts, and
 invocation, candidate integration, and publication. Interrupted command output
 is retained under its original name; recovery uses new receipt names.
 
+New completed provider attempts retain `attempts[].assessment` in `result.json`.
+Its `outcome` is `ready`, `partial`, `blocked`, or `null` for an unknown value.
+`reason_codes` is empty on acceptance or contains only the first rejection;
+`rejected_criterion_ids` contains that criterion's expected integer ID when the
+complete ID set was valid. An empty ID list on a structural or global rejection
+does not mean all criteria passed. Codes are limited to `response_not_object`,
+`outcome_not_ready`, `required_text_missing`, `criteria_invalid`,
+`criterion_not_met`, `criterion_evidence_missing`, `criterion_explanation_missing`,
+`evidence_path_invalid`, `evidence_not_published`, and `evidence_file_invalid`.
+The diagnostic retains no assessment prose, evidence paths or raw output. The
+shared validator preserves acceptance order and propagates publication-scanner
+exceptions. An exception or interruption can leave the field absent, as can a
+legacy or non-completed attempt. Recovery does not backfill it. Existing attempt
+accounting carries these diagnostics into new failure receipts.
+
 Before each GitHub POST or PATCH, the factory atomically records a pending
 `github-pull-request.json`, `github-comment.json` or `github-close.json` journal.
 Its binding includes the repository identity, issue, issue snapshot digest, run,
