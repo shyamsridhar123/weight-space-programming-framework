@@ -25,7 +25,7 @@ The #3 canonical admission-runtime replay is successful for its dedicated frozen
 | [#3](#issue-3) | 6 | 0 | 0 | Eligible in stated scope |
 | [#4](#issue-4) | 6 | 0 | 0 | Eligible in stated scope |
 | [#5](#issue-5) | 4 | 3 | 0 | Keep open |
-| [#6](#issue-6) | 6 | 2 | 0 | Keep open |
+| [#6](#issue-6) | 7 | 1 | 0 | Keep open |
 | [#7](#issue-7) | 7 | 1 | 0 | Keep open |
 | [#8](#issue-8) | 6 | 2 | 0 | Keep open |
 | [#9](#issue-9) | 7 | 1 | 0 | Keep open |
@@ -38,7 +38,7 @@ The #3 canonical admission-runtime replay is successful for its dedicated frozen
 | [#16](#issue-16) | 5 | 2 | 1 | Keep open |
 | [#17](#issue-17) | 6 | 2 | 0 | Keep open |
 | [#18](#issue-18) | 8 | 0 | 0 | Eligible in stated scope |
-| **Total: 150** | **115** | **34** | **1** | No blanket closure |
+| **Total: 150** | **116** | **33** | **1** | No blanket closure |
 
 Eligibility is a local closure recommendation only when every original criterion is supported. It does not change GitHub state and does not extend a scoped empirical/theorem result to omitted architectures, data, costs, attacks or deployment behavior.
 
@@ -277,12 +277,22 @@ The five rubric definitions cover the requested c0 field inventory. The later re
 
 This November 9 engineering extension diagnoses supplied dyadic real-score systems within deterministic exact limits, with per-output consistency, direct-checkable conflict witnesses and exact minimum squared norms where completed. Unfinished exact judgments remain unresolved; completed witnesses/judgments survive later limits. Numerical SVD/ridge proposals and stored endpoint residuals are separate. No generic exact-target admission/useful-success gate, rational executable proposal, trained development-only threshold sweep, fresh cohort or whole-domain proof is supplied.
 
+<a id="e26"></a>
+**E26 — Separate frozen synthetic trained-development retention sweep.**
+
+- [docs/research/retention-development.md](retention-development.md)
+- [reports/research/retention-development-20261109/summary.json](../../reports/research/retention-development-20261109/summary.json)
+- [provenance/verification/retention-development-20261109.json](../../provenance/verification/retention-development-20261109.json)
+- [scripts/run_retention_development.py](../../scripts/run_retention_development.py) — repository-only study driver, not a wheel or CLI command.
+
+This separate November 9 study records all thirteen configurations and eighteen fixed score-budget/margin policies for six seed/task assignments from three trained synthetic parents. Bounded exact score-equation feasibility, five numerical hard-projection cutoffs, three soft retention penalties and three decision-hinge penalties are compared under the frozen development plan. Fitting and calibration are reported separately, but all roles were designated development before the attempt and calibration participates in the gates. The earlier trained evaluations were not retuned. The finite public summary and verification record are projections of retained source evidence, not independent evaluator authentication or a fresh replay. No winning policy, population retention or business-usefulness claim is supplied.
+
 ## Original criteria and evidence
 
 <a id="issue-1"></a>
 ### #1 — Research roadmap: trained use cases, verifiable edits, and weight-space capability tests
 
-**Issue-level gaps and limits:** Tracker dependencies remain incomplete: independent benchmark/rubric coverage, broad containment/provenance, geometry conflicts/development sweeps, lifecycle costs, non-text selection chronology, learned transfer/control/native replay, and construction family/lineage/accounting gaps. Completed construction and unlearning outcomes replace the earlier pending/source-only statements.
+**Issue-level gaps and limits:** Tracker dependencies remain incomplete: independent benchmark/rubric coverage, broad containment/provenance, generic exact-target conflict admission, lifecycle costs, non-text selection chronology, learned transfer/control/native replay, and construction family/lineage/accounting gaps. The separate synthetic trained-development retention sweep is available in [E26](#e26). Completed construction and unlearning outcomes replace the earlier pending/source-only statements.
 
 **Closure recommendation:** keep open; at least one original criterion is partial or open.
 
@@ -354,7 +364,7 @@ This November 9 engineering extension diagnoses supplied dyadic real-score syste
 
 **Evidence:** [E01](#e01). This work-checklist entry inherits the complete original #6 assessment below, not merely the existence of its implementation or report.
 
-**Remaining requirement / scope limit:** The bounded supplied-feature consistency diagnostic is available in [E25](#e25). A development-only trained threshold sweep and a generic policy preventing exact-target conflicts from being admitted as exact useful success remain missing; exact resource exhaustion leaves unfinished judgments unresolved. Numerical proposals, stored endpoint retention and alternative argmax usefulness remain separate.
+**Remaining requirement / scope limit:** The bounded supplied-feature consistency diagnostic [E25](#e25) and separate synthetic trained-development sweep [E26](#e26) are available. A generic policy preventing exact-target conflicts from being admitted as exact useful success remains incomplete; exact resource exhaustion leaves unfinished judgments unresolved. Numerical proposals, stored endpoint retention and alternative argmax usefulness remain separate.
 
 #### #1 c7
 
@@ -797,7 +807,7 @@ This November 9 engineering extension diagnoses supplied dyadic real-score syste
 <a id="issue-6"></a>
 ### #6 — [P1] Measure protected feature coverage, nullspace feasibility, and abstention
 
-**Issue-level gaps and limits:** The bounded supplied-feature consistency diagnostic is available in [E25](#e25). A development-only trained threshold sweep and a generic policy preventing exact-target conflicts from being admitted as exact useful success remain missing; exact resource exhaustion leaves unfinished judgments unresolved. Numerical proposals, stored endpoint retention and alternative argmax usefulness remain separate.
+**Issue-level gaps and limits:** The bounded supplied-feature consistency diagnostic [E25](#e25) and separate synthetic trained-development sweep [E26](#e26) are available. A generic policy preventing exact-target conflicts from being admitted as exact useful success remains incomplete; exact resource exhaustion leaves unfinished judgments unresolved. Numerical proposals, stored endpoint retention and alternative argmax usefulness remain separate.
 
 **Closure recommendation:** keep open; at least one original criterion is partial or open.
 
@@ -815,11 +825,11 @@ This November 9 engineering extension diagnoses supplied dyadic real-score syste
 
 - [ ] Compare exact-arithmetic feasibility, numerical hard projection, soft score budgets and margin/decision retention on trained features. Sweep thresholds on development data only.
 
-**Status: partial.** Historical source disposition: `PARTIAL` ([E00](#e00)).
+**Status: supported.** Historical source disposition: `PARTIAL` ([E00](#e00)).
 
-**Evidence:** [E02](#e02) · [E04](#e04) · [E05](#e05). Exact-dyadic feasibility diagnostics, hard numerical projection, soft budgets and decision/retention gates are compared on trained features.
+**Evidence:** [E02](#e02) · [E04](#e04) · [E05](#e05) · [E25](#e25) · [E26](#e26). The separate November 9 frozen synthetic development study compares bounded exact score-equation feasibility, five numerical hard-projection cutoffs, three soft retention penalties and three decision-hinge penalties on trained features. All thirteen configurations and eighteen fixed score-budget/margin policies retain all six seed/task assignments from three trained parents, with fitting and development calibration reported separately. All roles were designated development before the attempt; the earlier trained evaluations were not retuned.
 
-**Remaining requirement / scope limit:** The numerical cutoff is fixed at 1e-12; no development-only threshold sweep is recorded. Do not retrofit a sweep after evaluation.
+**Remaining requirement / scope limit:** Supported only for the declared synthetic trained-development comparison and fixed threshold sweep. Calibration participates in the gates and is not heldout evidence; three independent training seeds and paired tasks do not establish population retention, semantic independence or business usefulness. Exact score infeasibility remains distinct from alternative decision usefulness and native endpoint behavior. No generic exact-target admission/useful-success gate, independent evaluator authentication or selected winning policy is supplied; c4 remains partial.
 
 #### #6 c2
 
@@ -1909,4 +1919,4 @@ This November 9 engineering extension diagnoses supplied dyadic real-score syste
 
 ## Static document verification
 
-The original builder output was preserved before manual reconciliation from authenticated retained evidence. Static verification checks all eighteen issues, all 150 exact original checkbox lines and zero-based IDs exactly once, permitted statuses, issue totals and existing public relative evidence destinations. E24 separately links the completed durable lifecycle engineering verification receipt. E25 links the later bounded feature-feasibility engineering receipt and supports only the stated diagnostic scope; neither supplement's synthetic checks supersede historical scientific evidence. Private commitments are explicitly nonpublic. Reconciliation executes no study, statistical analysis, native admission, provider, proof job or historical audit.
+The original builder output was preserved before manual reconciliation from authenticated retained evidence. Static verification checks all eighteen issues, all 150 exact original checkbox lines and zero-based IDs exactly once, permitted statuses, issue totals and existing public relative evidence destinations. E24 separately links the completed durable lifecycle engineering verification receipt. E25 links the later bounded feature-feasibility engineering receipt and supports only the stated diagnostic scope; neither supplement's synthetic checks supersede historical scientific evidence. E26 links a separate completed synthetic trained-development study and its finite public evidence projections; it does not alter historical trained outcomes or authenticate independent evaluator execution. Private commitments are explicitly nonpublic. Reconciliation executes no study, statistical analysis, native admission, provider, proof job or historical audit.

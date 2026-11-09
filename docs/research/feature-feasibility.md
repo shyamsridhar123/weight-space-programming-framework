@@ -8,6 +8,11 @@ not rerun the November 8 trained studies, change their frozen `1e-12` cutoff,
 or add a trained development-only threshold sweep. Their negative outcomes and
 all-assigned denominators remain in [the trained report](trained-applications.md).
 
+The separate later [synthetic trained-development retention study](retention-development.md),
+also dated November 9, supplies a frozen cutoff/budget/margin sweep. Its
+recorded outcomes are separate from this engineering extension and do not
+retune the earlier trained evaluations.
+
 The implementation is in [features.py](../../rlcd/weight_space/features.py),
 with the affine research adapter in
 [research_tasks.py](../../rlcd/weight_space/research_tasks.py).
@@ -159,5 +164,10 @@ requirement keeps [Issue #6 c4 partial](issue-acceptance-status.md#issue-6).
 The supplied-feature scope remains explicit: no proof of a raw-input encoder,
 native floating execution, unseen/domain coverage, business benefit or useful
 population coverage follows from these diagnostics. Issue #6 c0 is supported
-for this bounded diagnostic deliverable. c1 remains partial for the missing
-development-only trained threshold sweep, and Issue #6 remains open.
+for this bounded diagnostic deliverable. The separate November 9
+[synthetic trained-development sweep](retention-development.md) supports c1
+only for its declared comparison and fixed thresholds on development data.
+Its calibration participates in the gates and supplies no heldout evidence,
+population-retention claim or independently authenticated evaluator run.
+Issue #6 c4 remains partial for the generic conflict-admission requirement,
+and Issue #6 remains open.

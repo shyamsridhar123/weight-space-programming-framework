@@ -7,6 +7,15 @@ research draft.
 
 ## Unreleased
 
+- Published the November 9 [synthetic trained-development retention comparison](docs/research/retention-development.md),
+  its [finite summary](reports/research/retention-development-20261109/summary.json)
+  and [verification receipt](provenance/verification/retention-development-20261109.json).
+  The frozen cutoff, budget and margin sweep found useful edits only at the
+  loosest score budget; the smallest hard-projection cutoffs yielded no-ops.
+  Fitting and calibration both participate in development gates. Issue #6 c1
+  is supported at this bounded comparison scope; c4 remains partial. Historical
+  outcomes remain unchanged, and no policy winner or deployment result is claimed.
+
 - Added a prospective [diagnosis before repair lane](docs/research/staged-diagnosis.md)
   with separate sealed sessions, durable exact-selection receipts and registered
   evaluation gating. The [literal guard receipt](provenance/verification/staged-diagnosis-guard-20261109.json)

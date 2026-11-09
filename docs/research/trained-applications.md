@@ -372,9 +372,24 @@ dated November 9, adds joint exact real-score consistency and minimum-norm
 diagnostics with explicit unresolved limits. Numerical compilation and stored
 endpoint residuals remain separate. This source/engineering extension does
 not rerun the trained studies or alter the historical gap statement above;
-the development-only trained cutoff/budget sweep and alternative
-decision-feasibility analysis remain research work. No generic exact-target
-admission/useful-success gate is added.
+it does not itself supply a development-only trained cutoff/budget sweep or
+a general alternative decision-feasibility analysis. No generic exact-target
+admission/useful-success gate is added by that extension.
+
+The separate later [synthetic trained-development retention study](retention-development.md),
+also dated November 9, records the frozen comparison of exact score-equation
+feasibility, five numerical hard-projection cutoffs, three soft retention
+penalties and three decision-hinge penalties. It retains all thirteen
+configurations across eighteen score-budget/margin policies for six paired
+seed/task assignments from three trained synthetic parents. Fitting and
+calibration are reported separately, but every role was designated
+development before the attempt and calibration participates in the gates.
+This supplies Issue #6 c1 at that bounded synthetic trained-development scope;
+it does not retune the historical fixed-cutoff studies, provide heldout
+confirmation, select a winning policy or establish population retention or
+business usefulness. The generic exact-target admission/useful-success gate
+and general alternative decision-feasibility conditions remain incomplete;
+c4 stays partial and Issue #6 stays open.
 
 ## Native numerical behavior and out-of-scope stress
 
@@ -593,7 +608,7 @@ policy configuration to make the framework useful.
 
 | Research issue | Evidence now delivered | Remaining work within the issue's scope |
 | --- | --- | --- |
-| #6: retention geometry | Trained exact rank, residual, inactive-column, unseen-row, out-of-scope, and abstention analysis; later [bounded supplied-feature score-consistency diagnostics](feature-feasibility.md) with conflict witnesses and exact minimum norms | Development-only trained cutoff/budget sensitivity; generic exact-target admission policy; alternative decision-feasibility conditions; unfinished exact judgments remain unresolved |
+| #6: retention geometry | Trained exact rank, residual, inactive-column, unseen-row, out-of-scope, and abstention analysis; later [bounded supplied-feature score-consistency diagnostics](feature-feasibility.md) with conflict witnesses and exact minimum norms; separate [synthetic trained-development cutoff/budget/margin sweep](retention-development.md) | Generic exact-target admission policy; general alternative decision-feasibility conditions; unfinished exact judgments remain unresolved; no heldout or population-retention claim from the development sweep |
 | #7: trained enterprise comparison | Independently trained support parents, ownership/recognition separation, fitted and non-editing baselines, heldout negative outcomes, all-assigned replay | A separately justified feasible recognition objective; fuller cost comparison and declared cost margin; operational validation before business-impact claims |
 | #8: access and resource accounting | These fitted studies declare task metadata, data roles, candidate grids, and partial resource stages | Live provider and matched context/summary/weight/reader access evidence belongs to the separate access study; these results do not establish weight-reading advantage |
 | #11: trained non-text use | Independent optical-digit training, selective review task, recognition failure, native/real-score diagnostics, and replay | Broader task and representation scope; complete comparable workflow cost; uncertainty appropriate to the claim sought |
