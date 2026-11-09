@@ -719,7 +719,7 @@ class ProgrammerSession:
     def evaluate_registered(self, batch: RegisteredBatch,
                             evaluator: Callable[[Candidate, list[JSON]], JSON], *,
                             evaluator_id: str, split_name: str = "test") -> EvaluationReceipt:
-        """Guard a registered batch before calling the cooperative scorer."""
+        """Bind the frozen selection and durably authorize cooperative scoring."""
         if type(batch) is not RegisteredBatch or self._data_registry is None:
             raise ValueError("Registered evaluation requires a registered batch and configured data registry")
         return self._evaluate(evaluator, evaluator_id=evaluator_id, split_name=split_name, batch=batch)
@@ -761,7 +761,15 @@ class ProgrammerSession:
                 if batch is None:
                     result = score()
                 else:
-                    result, decision = self._data_registry.score(batch, score)
+                    binding = {"schema": "wsp-session-evaluation-binding/1",
+                               "protocol_sha256": self.sha256, "task_sha256": self._task.sha256,
+                               "parent_sha256": self._task.base_sha256,
+                               "candidate_sha256": self._selected.sha256,
+                               "selection_sha256": digest({"selected": self._selected.to_dict(),
+                                   "candidates": [candidate.to_dict() for candidate in self._candidates],
+                                   "seal_event_sha256": self._trace[-1].sha256}),
+                               "evaluator_id": evaluator_id, "split_name": split_name}
+                    result, decision = self._data_registry.score(batch, score, binding=binding)
                     freshness.update(status=decision["verdict"], decision=decision,
                                      manifest_sha256=decision["manifest_sha256"])
             except BaseException as failure:

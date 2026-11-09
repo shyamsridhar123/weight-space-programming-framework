@@ -7,6 +7,21 @@ research draft.
 
 ## Unreleased
 
+- Added the November 9 durable evaluation lifecycle: authorization reserves an
+  attempt and conservatively consumes observed scope before the callback, releases
+  the writer lock during scoring and records terminal or unknown outcomes without
+  reuse. A separate prospective support runner provides `prepare`, `evaluate`
+  and `verify` stages with preprocessing and predictions inside authorization.
+  The [implementation note](docs/research/evaluation-data-roles.md) retains the
+  prospective migration, reservation-snapshot and cooperative-scope limits. The
+  [five rubric definitions](docs/research/prospective-protocol-rubrics.md) support
+  Issue #2 c0 only at definition scope; c2 and c7 remain partial. The
+  [durable lifecycle verification receipt](provenance/verification/durable-evaluation-lifecycle-20261109.json)
+  records passing focused and configured engineering checks completed on
+  November 9, 2026, with captured source identities unchanged. Synthetic fixtures
+  and these definitions establish no fresh scientific
+  cohort or enterprise service effect.
+
 - Added a shared SQLite data-role registry and optional registered scoring in
   sessions and brokers. Development exposure commits consumption before the
   callback; exact JSON aliases and observed family/ancestry scopes stay

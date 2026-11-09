@@ -21,7 +21,7 @@ The #3 canonical admission-runtime replay is successful for its dedicated frozen
 | Issue | Supported | Partial | Open | Closure recommendation |
 | --- | ---: | ---: | ---: | --- |
 | [#1](#issue-1) | 9 | 12 | 0 | Keep open |
-| [#2](#issue-2) | 5 | 3 | 0 | Keep open |
+| [#2](#issue-2) | 6 | 2 | 0 | Keep open |
 | [#3](#issue-3) | 6 | 0 | 0 | Eligible in stated scope |
 | [#4](#issue-4) | 6 | 0 | 0 | Eligible in stated scope |
 | [#5](#issue-5) | 4 | 3 | 0 | Keep open |
@@ -38,7 +38,7 @@ The #3 canonical admission-runtime replay is successful for its dedicated frozen
 | [#16](#issue-16) | 5 | 2 | 1 | Keep open |
 | [#17](#issue-17) | 6 | 2 | 0 | Keep open |
 | [#18](#issue-18) | 8 | 0 | 0 | Eligible in stated scope |
-| **Total: 150** | **113** | **36** | **1** | No blanket closure |
+| **Total: 150** | **114** | **35** | **1** | No blanket closure |
 
 Eligibility is a local closure recommendation only when every original criterion is supported. It does not change GitHub state and does not extend a scoped empirical/theorem result to omitted architectures, data, costs, attacks or deployment behavior.
 
@@ -256,6 +256,16 @@ Each criterion links to one or more entries below. Public links resolve to sourc
 
 - [artifacts/research/factory-broker/2026-11-09/focused-broker-denial.sanitized.json](../../artifacts/research/factory-broker/2026-11-09/focused-broker-denial.sanitized.json)
 
+<a id="e24"></a>
+**E24 — Five prospective rubrics and durable registered-evaluation lifecycle.**
+
+- [docs/research/prospective-protocol-rubrics.md](prospective-protocol-rubrics.md)
+- [docs/research/evaluation-data-roles.md](evaluation-data-roles.md#durable-lifecycle-supplement-november-9-2026)
+- [scripts/run_prospective_support_routing.py](../../scripts/run_prospective_support_routing.py)
+- [provenance/verification/durable-evaluation-lifecycle-20261109.json](../../provenance/verification/durable-evaluation-lifecycle-20261109.json) — passing focused and configured engineering checks completed on November 9, 2026, with captured source identities unchanged; the three configured frozen-study deselections remain explicit.
+
+The five rubric definitions cover the requested c0 field inventory. The later registry/session and prospective support-runner source describes a cooperative authorization boundary over captured inputs and declared relationships. It does not establish semantic independence, authenticate provenance, supply missing historical reservations or create a fresh scientific cohort. Synthetic fixtures do not supply creation/transfer outcomes or enterprise service effects.
+
 ## Original criteria and evidence
 
 <a id="issue-1"></a>
@@ -313,7 +323,7 @@ Each criterion links to one or more entries below. Public links resolve to sourc
 
 **Evidence:** [E01](#e01). This work-checklist entry inherits the complete original #2 assessment below, not merely the existence of its implementation or report.
 
-**Remaining requirement / scope limit:** The remaining literal gaps are complete five-rubric/task-family coverage, semantic near-duplicate/task-family independence and an auditable tuned-holdout invalidation transition.
+**Remaining requirement / scope limit:** The five rubric definitions are complete at definition scope ([E24](#e24)); Issue #2 remains partial for semantic near-duplicate/task-family independence and complete tuned-holdout invalidation across historical and uncovered consumers. The later cooperative registry/session and prospective runner implementation has passing recorded engineering checks in [E24](#e24), but does not resolve those gaps or establish a fresh cohort.
 
 #### #1 c5
 
@@ -478,7 +488,7 @@ Each criterion links to one or more entries below. Public links resolve to sourc
 <a id="issue-2"></a>
 ### #2 — [P0] Freeze independent task protocols, useful-effect margins, and full attempt accounting
 
-**Issue-level gaps and limits:** The remaining literal gaps are complete five-rubric/task-family coverage, semantic near-duplicate/task-family independence and an auditable tuned-holdout invalidation transition.
+**Issue-level gaps and limits:** The five rubric definitions are complete at definition scope. Semantic near-duplicate/task-family independence and complete tuned-holdout invalidation across historical and uncovered consumers remain incomplete. The later cooperative registry/session and prospective runner implementation has passing recorded engineering checks in [E24](#e24); it does not establish a fresh cohort.
 
 **Closure recommendation:** keep open; at least one original criterion is partial or open.
 
@@ -486,11 +496,11 @@ Each criterion links to one or more entries below. Public links resolve to sourc
 
 - [ ] Define separate rubrics for reading, diagnosis, editing, creation and transfer. Specify allowed context/weights/examples/computation, independent units, training ancestry, candidate selection and primary comparisons.
 
-**Status: partial.** Historical source disposition: `PARTIAL` ([E00](#e00)).
+**Status: supported.** Historical source disposition: `PARTIAL` ([E00](#e00)).
 
-**Evidence:** [E02](#e02) · [E08](#e08) · [E20](#e20) · [E21](#e21). Reading, diagnosis and editing rubrics, ancestry, allowed access and selection are frozen; a trained-transfer pilot and a separate construction protocol now exist.
+**Evidence:** [E02](#e02) · [E08](#e08) · [E20](#e20) · [E21](#e21) · [E24](#e24). Separate reading, diagnosis, editing, creation and transfer rubrics now define allowed context/weights/examples/computation, independent units, training ancestry and split policy, candidate selection and primary comparisons, with useful-effect and missingness rules.
 
-**Remaining requirement / scope limit:** Complete the five-rubric field inventory. Construction selection, offline evaluation and replay completed, with twelve failed provider attempts and no completed live artifact; the supplied construction families are not unseen trained task families. Criterion c0 asks for rubric definitions and the specified fields; the separate independence requirements are assessed below.
+**Remaining requirement / scope limit:** Support is limited to complete rubric definitions and the requested field inventory. An actual study must freeze its own cohort, numerical margins, assignments and analysis before selection or outcomes. Construction selection, offline evaluation and replay completed, with twelve failed provider attempts and no completed live artifact; the supplied construction families are not unseen trained task families. Definitions do not prove semantic/task-family independence or successful creation/transfer outcomes; the separate independence requirements are assessed below.
 
 #### #2 c1
 
@@ -508,9 +518,9 @@ Each criterion links to one or more entries below. Public links resolve to sourc
 
 **Status: partial.** Historical source disposition: `PARTIAL` ([E00](#e00)).
 
-**Evidence:** [E03](#e03) · [E09](#e09) · [E10](#e10). Exact/token-overlap and lineage/split checks accompany complete all-assigned ledgers, including no-ops, abstentions, rejected edits and failures.
+**Evidence:** [E03](#e03) · [E09](#e09) · [E10](#e10) · [E24](#e24). Exact/token-overlap and lineage/split checks accompany complete all-assigned ledgers, including no-ops, abstentions, rejected edits and failures. The later cooperative registry and prospective runner adds durable authorization records over exact aliases and observed lineage declarations; its recorded engineering checks passed ([E24](#e24)).
 
-**Remaining requirement / scope limit:** Semantic near-duplicate auditing and task-family independence are not established by byte identity or replay. Shared task templates and within-lineage rows remain dependent.
+**Remaining requirement / scope limit:** Semantic near-duplicate auditing and task-family independence are not established by byte identity, observed declarations or replay. Shared task templates and within-lineage rows remain dependent. The later ledger cannot capture every historical or uncovered attempt, and its assurance flags do not authenticate provenance or establish scientific freshness.
 
 #### #2 c3
 
@@ -558,9 +568,9 @@ Each criterion links to one or more entries below. Public links resolve to sourc
 
 **Status: partial.** Historical source disposition: `PARTIAL` ([E00](#e00)).
 
-**Evidence:** [E02](#e02) · [E08](#e08) · [E00](#e00). Development selection and untouched-evaluation roles are frozen for the reported studies.
+**Evidence:** [E02](#e02) · [E08](#e08) · [E00](#e00) · [E24](#e24). Development selection and untouched-evaluation roles are frozen for the reported studies. The historical c7 exercise retains 13 contaminated routes that reached evaluation, two historical-development controls and six working guards. The later registry source commits development exposure and conservative evaluation consumption before callback entry, and the registered session and separate prospective runner bind captured inputs and selected candidates to durable authorization; their recorded engineering checks passed ([E24](#e24)).
 
-**Remaining requirement / scope limit:** No general auditable holdout invalidation/state transition was found that marks a tuned holdout invalid and converts it to development data. Frozen hashes alone do not supply that transition.
+**Remaining requirement / scope limit:** The earlier review found no general auditable tuned-holdout invalidation transition, and that historical negative evidence remains preserved in [E24](#e24). The later cooperative implementation enforces monotonic consumption over registered exact aliases and declared family/ancestry scope; it does not cover arbitrary legacy evaluators, ignored materializations, precomputed predictions, copied databases or undeclared semantic relationships. V2 authorization is prospective: a V1-scored batch that was never consumed can receive V2 authorization because migration cannot manufacture its missing reservation. Complete historical-attempt capture, authenticated provenance, semantic independence and a fresh prospective cohort remain unestablished. Frozen hashes alone do not supply those guarantees.
 
 <a id="issue-3"></a>
 ### #3 — [P0] Bind admission to the exact candidate, contract, domain, and decision rule
@@ -1888,4 +1898,4 @@ Each criterion links to one or more entries below. Public links resolve to sourc
 
 ## Static document verification
 
-The original builder output was preserved before manual reconciliation from authenticated retained evidence. Static verification checks all eighteen issues, all 150 exact original checkbox lines and zero-based IDs exactly once, permitted statuses, issue totals and existing public relative evidence destinations. Private commitments are explicitly nonpublic. Reconciliation executes no study, statistical analysis, native admission, provider, proof job or historical audit.
+The original builder output was preserved before manual reconciliation from authenticated retained evidence. Static verification checks all eighteen issues, all 150 exact original checkbox lines and zero-based IDs exactly once, permitted statuses, issue totals and existing public relative evidence destinations. E24 separately links the completed durable lifecycle engineering verification receipt; its synthetic checks do not supersede the historical scientific evidence. Private commitments are explicitly nonpublic. Reconciliation executes no study, statistical analysis, native admission, provider, proof job or historical audit.
