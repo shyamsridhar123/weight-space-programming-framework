@@ -7,6 +7,28 @@ research draft.
 
 ## Unreleased
 
+- Add [cohort preparation and selection](docs/research/staged-diagnosis.md#cohort-preparation-and-selection)
+  through `PreparedMember` and `StagedCohort`, retaining the complete assigned
+  roster and requiring a verified whole-cohort diagnosis barrier before repair
+  construction. Supplied subset/native-format configuration is checked before
+  lane construction; ordinary preflight failures remain assigned as unavailable.
+  Owned lanes reject direct public selection and evaluation. The separate
+  [engineering receipt](provenance/verification/staged-cohort-selection-20261109.json)
+  records one passing selection regression with no retry at its captured source
+  snapshot.
+  This adds no scoring bridge or new study evidence; Issue #9 c1 remains partial
+  and the issue remains open, with historical outcomes unchanged.
+
+- Add canonical terminal selection outcomes and failure receipts to the
+  [staged diagnosis lane](docs/research/staged-diagnosis.md), preserving original
+  exceptions and invalidating failed finalization without overwrite or retry.
+  The [separate engineering receipt](provenance/verification/staged-terminal-failures-20261109.json)
+  retains failed-invocation evidence and both test-source identities alongside
+  the passing test-only correction against unchanged production source; the older
+  guard covers its original snapshot.
+  Issue #9 c1 remains partial and the issue remains open, with historical results
+  unchanged.
+
 - Require complete, nonnegative exact-integer input/output token usage before
   provider completion and common broker action admission. Serializable rejected
   usage and event identity are retained in failed receipts; missing counts are

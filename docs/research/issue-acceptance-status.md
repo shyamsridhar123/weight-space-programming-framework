@@ -1140,6 +1140,30 @@ Historical records and criterion statuses are unchanged.
 
 **Remaining requirement / scope limit:** Diagnosis and repair are selected jointly in the frozen design. Separate fields/endpoints do not satisfy the original separate diagnosis/repair-selection requirement.
 
+**Terminal receipt engineering supplement, November 9, 2026:** The prospective
+[separate-stage lane](staged-diagnosis.md) classifies terminal outcomes, records
+failures when sealing and persistence succeed, preserves original exceptions,
+and invalidates failed finalization without overwrite or retry. Its
+[separate execution receipt](../../provenance/verification/staged-terminal-failures-20261109.json)
+preserves failed-invocation evidence for the lazy-broker fixture error and both
+test-source identities, plus the passing test-only correction against unchanged
+production source, with one invocation per test version. The older
+guard does not cover these changes. This adds no provider, training or scientific
+study and does not establish useful causal repair; c1 remains partial and #9 open.
+
+**Cohort selection engineering supplement, November 9, 2026:** The prospective
+[cohort controller](staged-diagnosis.md#cohort-preparation-and-selection) freezes
+the complete ordered assignment roster before preparation, retains unavailable,
+failed and abstaining members, and requires a verified whole-cohort diagnosis
+barrier before repair construction. Supplied subset/native-format configuration
+is checked before lane construction; ordinary preparation and preflight failures
+remain assigned as unavailable. Owned lanes cannot bypass that barrier via their
+public methods. The separate [cohort engineering receipt](../../provenance/verification/staged-cohort-selection-20261109.json)
+records one passing regression invocation with no retry at its captured source
+snapshot. This selection-only API adds no scoring bridge or new study evidence;
+original criteria and historical outcomes are unchanged. c1 remains partial and
+Issue #9 remains open.
+
 #### #9 c2
 
 - [ ] Compare sham, random, support/norm-matched and context-only controls, then measure target effect, collateral behavior and held-out generalization.

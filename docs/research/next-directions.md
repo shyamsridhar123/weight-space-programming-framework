@@ -389,6 +389,15 @@ weights, license, preprocessing, and selected defect family must be fixed
 before confirmation. A diffusion experiment is a further execution regime,
 not an interchangeable export of that first pilot.
 
+The prospective [cohort selection API](staged-diagnosis.md#cohort-preparation-and-selection)
+records the full assignment roster before preparation and requires all terminal
+diagnosis dispositions before any repair construction. Preparation failures,
+including ordinary configuration-preflight failures, remain in the denominator,
+as do abstentions and selection failures. A separate [engineering receipt](../../provenance/verification/staged-cohort-selection-20261109.json)
+records the focused passing selection regression at its captured source snapshot.
+This supplies a selection boundary only; the scoring bridge and new study
+evidence remain future work, and Issue #9 c1 remains partial with the issue open.
+
 The evaluator should sample defect location and strength using a private,
 prespecified intervention generator. The proposer should receive the declared
 context/access arm without the injection record. Freeze the diagnosis before
