@@ -13,6 +13,7 @@ from typing import Any, Callable
 import numpy as np
 
 from .artifact import TensorArtifact
+from .data_roles import DataRoleRegistry, RegisteredBatch
 from .model import Network, canonical_bytes, digest
 from .program import apply_program
 from .structured import StructuredProgram, lower_structured
@@ -65,7 +66,8 @@ class ProposerBroker:
                  public_context: dict[str, Any] | None = None,
                  splits: tuple[SplitSpec, ...] = (),
                  native_dtypes: dict[str, str] | None = None,
-                 max_requests: int = 100, max_request_bytes: int = 1_000_000):
+                 max_requests: int = 100, max_request_bytes: int = 1_000_000,
+                 data_registry: DataRoleRegistry | None = None):
         if type(view) is not WeightView:
             raise ValueError("Use an immutable WeightView")
         if any(type(n) is not int or n <= 0 for n in (max_requests, max_request_bytes)):
@@ -86,7 +88,7 @@ class ProposerBroker:
         self._session = ProgrammerSession(task, base=base,
             access=AccessPolicy(weights=view.mode != "none",
                 weight_decimals=view.decimals if view.mode == "rounded" else None),
-            limits=limits, splits=splits)
+            limits=limits, splits=splits, data_registry=data_registry)
         self._public_context = json.loads(canonical_bytes(_json(public_context or {})))
         self._task = {"task_id": task.task_id, "mode": task.mode,
                       "objective": task.objective, "architecture": task.architecture}
@@ -214,12 +216,28 @@ class ProposerBroker:
 
     def evaluate(self, evaluator: Callable[[Candidate], Any], *, evaluator_id: str,
                  split_name: str = "test") -> dict[str, Any]:
-        """Trusted sealed evaluation. Never send this output back to the proposer."""
+        """Trusted opaque evaluation; callback input freshness is unverified."""
+        return self._evaluate(evaluator, evaluator_id=evaluator_id, split_name=split_name)
+
+    def evaluate_registered(self, batch: RegisteredBatch,
+                            evaluator: Callable[[Candidate, list[Any]], Any], *,
+                            evaluator_id: str, split_name: str = "test") -> dict[str, Any]:
+        """Score registered data inside the session guard; keep the audit private."""
+        if type(batch) is not RegisteredBatch:
+            raise ValueError("Registered evaluation requires a RegisteredBatch")
+        return self._evaluate(evaluator, evaluator_id=evaluator_id, split_name=split_name, batch=batch)
+
+    def _evaluate(self, evaluator: Callable[..., Any], *, evaluator_id: str,
+                  split_name: str, batch: RegisteredBatch | None = None) -> dict[str, Any]:
         if not self._sealed or self._evaluated:
             raise ValueError("Evaluation needs one sealed, unevaluated selection")
         self._evaluated = True
-        receipt = self._session.evaluate_heldout(evaluator, evaluator_id=evaluator_id,
-                                                 split_name=split_name).to_dict()
+        if batch is None:
+            receipt = self._session.evaluate_heldout(evaluator, evaluator_id=evaluator_id,
+                                                     split_name=split_name).to_dict()
+        else:
+            receipt = self._session.evaluate_registered(batch, evaluator, evaluator_id=evaluator_id,
+                                                        split_name=split_name).to_dict()
         if self._selected is not None and self._handles[self._selected][0] is None:
             status = "invalid"
         else:

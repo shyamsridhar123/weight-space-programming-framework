@@ -6,7 +6,7 @@ import json
 import numpy as np
 import pytest
 
-from rlcd.weight_space import Edit, Network, Program, TensorArtifact
+from rlcd.weight_space import DataRoleRegistry, Edit, Network, Program, RegisteredBatch, TensorArtifact
 from rlcd.weight_space.model import digest
 from rlcd.weight_space.workflow import (
     AccessDenied, AccessPolicy, BudgetExceeded, BudgetLimits, ProgrammerSession,
@@ -313,7 +313,7 @@ def test_candidate_identity_prevents_foreign_selection_even_for_identical_conten
     assert receipt.to_dict()["parent_sha256"] == artifact().sha256
 
 
-def test_sealing_closes_all_proposer_operations_and_heldout_is_fresh_and_once():
+def test_sealing_closes_proposer_operations_and_opaque_evaluation_is_once_but_unverified():
     s = session(access=AccessPolicy(feedback=True, forward=True, activations=True))
     candidate = s.propose_artifact(artifact())
     calls = []
@@ -340,6 +340,8 @@ def test_sealing_closes_all_proposer_operations_and_heldout_is_fresh_and_once():
     with pytest.raises(SessionSealed, match="already attempted"):
         s.evaluate_heldout(evaluator, evaluator_id="heldout/1")
     assert len(calls) == 1 and receipt.status == "succeeded"
+    assert receipt.to_dict()["freshness"]["status"] == "unverified"
+    assert receipt.to_dict()["freshness"]["scope"] == "opaque_evaluator_inputs"
     assert all(sample not in json.dumps(receipt.to_dict()) for sample in heldout_examples)
     assert verify_trace(s.trace, expected_head=receipt.to_dict()["trace_head_sha256"])
     exported = receipt.to_dict()
@@ -452,3 +454,127 @@ def test_network_backend_uses_the_same_session_protocol():
     s.seal(candidate)
     receipt = s.evaluate_heldout(lambda c: {"prediction": c.artifact([[3.]])}, evaluator_id="relu/1")
     assert receipt.to_dict()["result"] == {"prediction": [[6.]]}
+
+
+@pytest.mark.parametrize("route", ["feedback", "forward", "activations"])
+@pytest.mark.parametrize("callback_fails", [False, True])
+def test_development_exposure_invalidates_copied_evaluation_across_sessions(tmp_path, route, callback_fails):
+    registry_path = tmp_path / "data-roles.sqlite3"
+    registry = DataRoleRegistry(registry_path)
+    rows = [[1., 0.], [0., 1.]]
+    exposed = []
+    def callback(_, materialized):
+        exposed.append(copy.deepcopy(materialized))
+        if callback_fails:
+            raise RuntimeError("Development callback failed after seeing the batch")
+        return {"observed": len(materialized)}
+    adapters = {"public_feedback" if route == "feedback" else route: callback}
+    development = session(data_registry=registry, access=AccessPolicy(**{route: True}), **adapters)
+    candidate = development.propose_artifact(artifact())
+    def expose():
+        return development.feedback(candidate, rows) if route == "feedback" else getattr(development, route)(rows)
+    if callback_fails:
+        with pytest.raises(RuntimeError):
+            expose()
+    else:
+        assert expose() == {"observed": 2}
+    assert exposed == [rows]
+    assert development.trace[-1].to_dict()["request"]["data_role_decision"]["status"] == "succeeded"
+
+    reopened = DataRoleRegistry(registry_path)
+    copied = reopened.register_batch(copy.deepcopy(rows), source_id="renamed-evaluation", family_id="new-label")
+    evaluation = session(data_registry=reopened)
+    evaluation.seal(evaluation.propose_artifact(artifact()))
+    scoring_calls = []
+    receipt = evaluation.evaluate_registered(copied, lambda candidate, x: scoring_calls.append(x),
+                                            evaluator_id="copied-data-check/1").to_dict()
+    assert receipt["status"] == "rejected" and scoring_calls == []
+    assert receipt["freshness"]["status"] == "invalidated"
+    assert receipt["freshness"]["decision"]["scoring_started"] is False
+    assert receipt["heldout_accounting"]["evaluator_calls"] == 0
+    assert receipt["heldout_accounting"]["evaluated_examples"] == 0
+    assert receipt["freshness"]["semantic_independence_verified"] is False
+    assert verify_trace(development.trace) and verify_trace(evaluation.trace)
+    with pytest.raises(SessionSealed):
+        evaluation.evaluate_registered(copied, lambda c, x: {}, evaluator_id="retry/1")
+
+
+def test_registered_scorer_failure_has_one_call_and_legacy_input_remains_unverified(tmp_path):
+    registry = DataRoleRegistry(tmp_path / "data-roles.sqlite3")
+    batch = registry.register_batch([[2., 3.]], source_id="evaluation", family_id="evaluation-family")
+    registered = session(data_registry=registry)
+    registered.seal(registered.propose_artifact(artifact()))
+    def failing(candidate, rows):
+        raise RuntimeError("private evaluation record")
+    receipt = registered.evaluate_registered(batch, failing, evaluator_id="failure/1").to_dict()
+    assert receipt["status"] == "failed"
+    assert receipt["heldout_accounting"]["evaluator_calls"] == 1
+    assert receipt["freshness"]["decision"]["scoring_started"] is True
+    assert "private evaluation record" not in json.dumps(receipt)
+
+    registry.consume(batch, reason="development")
+    opaque = session(data_registry=registry)
+    opaque.seal(opaque.propose_artifact(artifact()))
+    old = opaque.evaluate_heldout(lambda c: {"precomputed": True}, evaluator_id="opaque/1").to_dict()
+    assert old["status"] == "succeeded"
+    assert old["freshness"]["status"] == "unverified"
+    assert old["freshness"]["scope"] == "opaque_evaluator_inputs"
+    assert old["freshness"]["decision"] is None
+    assert old["freshness"]["scientific_freshness_verified"] is False
+
+
+@pytest.mark.parametrize("failure", ["nonfinite", "nonjson", "interrupt", "exit"])
+def test_registered_scorer_invalid_result_and_cancellation_keep_receipt(tmp_path, failure):
+    registry = DataRoleRegistry(tmp_path / "data-roles.sqlite3")
+    batch = registry.register_batch([[2., 3.]], source_id="evaluation", family_id="evaluation-family")
+    evaluation = session(data_registry=registry)
+    evaluation.seal(evaluation.propose_artifact(artifact()))
+    calls = []
+    def scorer(candidate, rows):
+        calls.append(rows)
+        if failure == "interrupt":
+            raise KeyboardInterrupt("private scorer detail")
+        if failure == "exit":
+            raise SystemExit("private scorer detail")
+        return {"score": float("nan")} if failure == "nonfinite" else object()
+    if failure in ("interrupt", "exit"):
+        with pytest.raises(KeyboardInterrupt if failure == "interrupt" else SystemExit):
+            evaluation.evaluate_registered(batch, scorer, evaluator_id="failure-boundary/1")
+    else:
+        evaluation.evaluate_registered(batch, scorer, evaluator_id="failure-boundary/1")
+    receipt = evaluation.receipt.to_dict()
+    assert calls == [batch.materialize()] and receipt["status"] == "failed"
+    assert receipt["heldout_accounting"] == {"evaluator_calls": 1, "evaluated_examples": 1,
+                                             "scope": "outside_proposer_budget"}
+    assert receipt["freshness"]["decision"]["status"] == "failed"
+    assert receipt["freshness"]["decision"]["scoring_started"] is True
+    assert receipt["freshness"]["manifest_sha256"] == batch.manifest_sha256
+    assert "private scorer detail" not in json.dumps(receipt)
+    assert verify_trace(evaluation.trace)
+    with pytest.raises(SessionSealed):
+        evaluation.evaluate_registered(batch, scorer, evaluator_id="retry/1")
+
+
+@pytest.mark.parametrize("route", ["evaluation", "feedback", "forward", "activations"])
+def test_uninitialized_registered_handle_rejects_before_callback_and_records_attempt(tmp_path, route):
+    calls = []
+    callback = lambda c, rows: calls.append(rows)
+    evaluation = session(data_registry=DataRoleRegistry(tmp_path / "data-roles.sqlite3"),
+                         access=AccessPolicy(feedback=True, forward=True, activations=True),
+                         public_feedback=callback, forward=callback, activations=callback)
+    candidate = evaluation.propose_artifact(artifact())
+    if route == "evaluation":
+        evaluation.seal(candidate)
+        receipt = evaluation.evaluate_registered(RegisteredBatch(), callback,
+                                                 evaluator_id="malformed-handle/1").to_dict()
+        assert receipt["freshness"]["status"] == "unverified"
+        assert receipt["freshness"]["decision"]["reason"] == "invalid_registration"
+        assert receipt["heldout_accounting"]["evaluator_calls"] == 0
+    else:
+        with pytest.raises(ValueError):
+            if route == "feedback":
+                evaluation.feedback(candidate, RegisteredBatch())
+            else:
+                getattr(evaluation, route)(RegisteredBatch())
+    assert evaluation.trace[-1].to_dict()["status"] == "rejected" and calls == []
+    assert verify_trace(evaluation.trace)

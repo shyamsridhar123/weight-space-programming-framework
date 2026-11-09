@@ -7,6 +7,24 @@ research draft.
 
 ## Unreleased
 
+- Added a shared SQLite data-role registry and optional registered scoring in
+  sessions and brokers. Development exposure commits consumption before the
+  callback; exact JSON aliases and observed family/ancestry scopes stay
+  invalidated across registry restart. Synthetic checks cover rejection before
+  scorer entry, callback failures, cancellation and concurrent ordering. The
+  [implementation note](docs/research/evaluation-data-roles.md) and
+  [verification receipt](provenance/verification/registered-data-role-guard-20261109.json)
+  retain the original c7 failure, cooperative scope, absent scientific freshness,
+  remaining caller migration and frozen-auditor compatibility limits. Issue #2
+  remains partial; this change establishes no useful live-model edit.
+
+- Recorded the November 9 GitHub issue reconciliation in a separate
+  [observation receipt](provenance/issue-reconciliation-observation-20261109.json).
+  Seven issues closed and eleven remained open after applying the reviewed
+  acceptance assessment. All original criterion wording and statuses remain
+  preserved; the receipt describes saved observations and journals rather than
+  independent server-side causal provenance.
+
 - Integrated the November 8, 2026 study evidence during the November 9 final
   review (America/Chicago). [Trained applications](docs/research/trained-applications.md)
   found useful ownership changes but no useful recognition repair; hard

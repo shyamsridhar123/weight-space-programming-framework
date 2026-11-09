@@ -142,6 +142,12 @@ do not establish live-model success. The completed
 edited-arm absolute and joint gate. Its finite accessibility measurements do
 not establish information erasure or privacy.
 
+The [evaluation data-role guard](docs/research/evaluation-data-roles.md) now
+rejects registered data after development use, including exact aliases and
+observed family or ancestry links. Synthetic checks cover the shared session
+and broker boundary. Scientific freshness and migration of all research
+scorers remain open requirements.
+
 ### What the proofs establish
 
 Under the stated real-valued assumptions, an edit that vanishes on protected

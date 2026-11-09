@@ -64,6 +64,35 @@ separately identify the broader engineering selection, fresh fixture bridge,
 and new offline wheel. Final publication and hosted receipts must identify the
 completed update tree, commit, and actual outcomes.
 
+## November 9 registered data-role guard
+
+The later optional [data-role registry integration](docs/research/evaluation-data-roles.md)
+passed its explicit focused selection and configured engineering selection on
+November 9, 2026. The
+[separate receipt](provenance/verification/registered-data-role-guard-20261109.json)
+binds the exact source bytes, commands and private-output commitments. The
+focused run recorded 79 passes; the engineering run recorded 329 passes with
+the three named frozen-study checks deselected. These counts are verification
+bookkeeping, not scientific confidence or business impact. The engineering
+configuration included the new registry and broker suites only after the focused
+run; the receipt retains the two configuration identities.
+
+Synthetic fixtures exercised durable consumption across aliases and observed
+lineage, failed development exposure, rejection before callback entry, sanitized
+scorer failures, cancellation, reentry and concurrent ordering. Session and
+broker receipts distinguish zero callback invocations on rejection from one
+invocation before a scorer failure. They do not count native forward passes or
+attest what an arbitrary scorer read.
+
+The earlier c7 exercise remains an authenticated negative result against its
+frozen boundary. These later checks do not rerun it or establish scientific
+freshness. Source provenance, semantic independence, evaluator attestation,
+global once-only scoring, migration of actual research scorers and final
+evidence consumers remain outside the verified scope. Issue #2 criteria c0,
+c2 and c7 remain partial. The unchanged frozen v2 auditor rejects current
+configuration and receipt shapes; historical replay must remain separately
+versioned. No new wheel, scientific study or proof build is claimed here.
+
 ## November 9 current-source checks
 
 These checks completed on November 9, 2026 in America/Chicago. They used new

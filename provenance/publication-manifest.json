@@ -44,10 +44,10 @@
   "source": {
     "inventory": {
       "path": "provenance/source-files.json",
-      "bytes": 2483207,
-      "sha256": "37c199609f078f4ed157ae31e407f93f8df26bffce80d6850d0503d63a827c7e"
+      "bytes": 2483357,
+      "sha256": "63c0569670b19a8b2d03470e6a8b7eef1e7b93f7077dfd741f9430e21bf368bb"
     },
-    "identity_policy": "Original source paths, SHA-256 values, byte lengths, order and all other source-index fields remain unchanged. Six preservation destinations now bind evolved runtime modules to byte-exact indexed originals under provenance/original-files/. The pre-research inventory preserves earlier mapping bytes. Privacy derivatives remain separately disclosed in the sanitation ledger.",
+    "identity_policy": "Original source paths, SHA-256 values, byte lengths, order and all other source-index fields remain unchanged. The earlier six preservation destinations remain under provenance/original-files/. Two later destinations archive exact workflow and test originals under artifacts/research/source-preservation/. The pre-research inventory preserves earlier mapping bytes. Privacy derivatives remain separately disclosed in the sanitation ledger.",
     "sanitization": {
       "path": "provenance/public-sanitization.json",
       "bytes": 110282,
@@ -116,19 +116,43 @@
       "current_runtime_bytes_replaced": false,
       "original_identities_changed": false,
       "interpretation": "Corrects source-identity failures in the first final publication check; not a scientific rerun or a redaction"
+    },
+    "registered_guard_preservation_update": {
+      "review_date": "2026-11-09",
+      "source_commit": "d68525f55a0b8ed417c33dd76f121a3d461b33b5",
+      "records": [
+        {
+          "original_path": "rlcd/weight_space/workflow.py",
+          "preserved": {
+            "path": "artifacts/research/source-preservation/registered-data-role-guard-20261109/rlcd/weight_space/workflow.py",
+            "bytes": 39208,
+            "sha256": "72f82f90cdad7c7dae559da331515506bd072fc8bb5450155cf5ab221668c520"
+          }
+        },
+        {
+          "original_path": "tests/test_weight_space_workflow.py",
+          "preserved": {
+            "path": "artifacts/research/source-preservation/registered-data-role-guard-20261109/tests/test_weight_space_workflow.py",
+            "bytes": 22027,
+            "sha256": "382acf8f300b0eb5aad7bd3051795abbf7e0a791a694dbaa53f0ac8f226a2b16"
+          }
+        }
+      ],
+      "original_identities_changed": false,
+      "interpretation": "Exact historical originals are archived separately from the later tested implementation; not a scientific rerun or redaction."
     }
   },
   "core_documentation": {
     "documents": [
       {
         "path": "README.md",
-        "bytes": 12135,
-        "sha256": "52158fb4e3d3f32afff00bfc5086a6af69521cef89665e910f834eae50754c3a"
+        "bytes": 12471,
+        "sha256": "0edcdaa30d7b45f030349e6c715fe7eaa64fe83c35ec2b104bdd232bbf630e84"
       },
       {
         "path": "CHANGELOG.md",
-        "bytes": 15891,
-        "sha256": "cbf60a16ed7917de9ff6fff080646e1e8f2c99912e4377e24e3d54f44dd984a2"
+        "bytes": 17092,
+        "sha256": "3941088b494de317dcda005748fac4aec4bd93da30e14d0d440290b89851095d"
       },
       {
         "path": "CONTRIBUTING.md",
@@ -157,8 +181,8 @@
       },
       {
         "path": "VERIFICATION.md",
-        "bytes": 43434,
-        "sha256": "f0d2fd14c62e6463296cd769a30218fd103b4ad60a4d7ccbd35382c9e93c1928"
+        "bytes": 45229,
+        "sha256": "4ee8424bca30f45cd598da6781ddf54243ec4755d5853db0eb175d22ef9ef772"
       },
       {
         "path": "releases/v0.2.0-draft.3.md",
@@ -267,8 +291,8 @@
       },
       {
         "path": "docs/research/issue-acceptance-status.md",
-        "bytes": 135756,
-        "sha256": "67fefb05a415da246b1eec112d91660e9afc73dbf98399a0e3c67a85308a1322"
+        "bytes": 136583,
+        "sha256": "f7da4ba63e2c4a1ec4a5385a1eab60432725b28b19df813cc2a5075458096ad4"
       },
       {
         "path": "docs/research/live-studies.md",
@@ -314,6 +338,11 @@
         "path": "docs/research/trained-symmetry-pilot.md",
         "bytes": 37502,
         "sha256": "df92995751e5bfe81713b86ee63bf4ce806c0aedfee9c98c482a42dea9c5c7e9"
+      },
+      {
+        "path": "docs/research/evaluation-data-roles.md",
+        "bytes": 23277,
+        "sha256": "346e22c7081a86accadd3183b179087fa20ad60c56ee3a22fa2cc904b8548b79"
       }
     ],
     "runnable_illustrations": [
@@ -496,14 +525,14 @@
     },
     "acceptance_map": {
       "path": "docs/research/issue-acceptance-status.md",
-      "bytes": 135756,
-      "sha256": "67fefb05a415da246b1eec112d91660e9afc73dbf98399a0e3c67a85308a1322"
+      "bytes": 136583,
+      "sha256": "f7da4ba63e2c4a1ec4a5385a1eab60432725b28b19df813cc2a5075458096ad4"
     }
   },
   "verification_archive": {
     "path": "provenance/verification/index.json",
-    "bytes": 136085,
-    "sha256": "6aef056044bb63d394ffa65a9e6b03dc2b191f109a90df9caf6f169225219f4c"
+    "bytes": 136639,
+    "sha256": "7202389e53374f2dbea71947a217975d87a5dd83ac6eba5bbbdb62084d16e6bf"
   },
   "public_npm_lock_review": {
     "path": "provenance/public-npm-lock.json",
@@ -720,5 +749,35 @@
     },
     "delivery": "Private validation build; not in source tree and no published draft.4 release asset claimed",
     "draft_release_published": false
+  },
+  "registered_data_role_guard_update": {
+    "review_date": "2026-11-09",
+    "verification": {
+      "path": "provenance/verification/registered-data-role-guard-20261109.json",
+      "bytes": 16216,
+      "sha256": "2ec506d56aa903b8ffbd051d7741eca08169b92e6bcb24300133a02b03e6a9af"
+    },
+    "guide": {
+      "path": "docs/research/evaluation-data-roles.md",
+      "bytes": 23277,
+      "sha256": "346e22c7081a86accadd3183b179087fa20ad60c56ee3a22fa2cc904b8548b79"
+    },
+    "issue_reconciliation_observation": {
+      "path": "provenance/issue-reconciliation-observation-20261109.json",
+      "bytes": 7384,
+      "sha256": "ae7b29ec47fc189e533bd2a37203353196426943183edbda646adbd1ef95797e"
+    },
+    "scope": "synthetic engineering checks of an optional cooperative finite-JSON registry boundary",
+    "issue": 2,
+    "criteria": {
+      "c0": "partial",
+      "c2": "partial",
+      "c7": "partial"
+    },
+    "historical_outcomes_superseded": false,
+    "new_scientific_study": false,
+    "new_wheel_or_proof_build": false,
+    "hosted_success_inferred": false,
+    "receipt_policy": "The separate later receipt binds tested source and configuration bytes; earlier source-check entries retain their historical scope."
   }
 }

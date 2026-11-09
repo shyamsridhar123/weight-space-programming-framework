@@ -18,6 +18,7 @@ from .structured import (StructuredProgram, Lowering, lower_structured, native_r
                          ExecutionSpec, native_execution_receipt, verify_native_execution)
 from .features import ReadoutHead, FeatureCompilation, compile_feature_edit, certify_feature_retention, verify_feature_retention
 from .sequential import sequential_artifact, sequential_forward, certify_sequential_drift, verify_sequential_certificate
+from .data_roles import DataRoleError, DataRoleRegistry, RegisteredBatch
 from .workflow import TaskSpec, AccessPolicy, BudgetLimits, BudgetUsage, SplitSpec, ProgrammerSession, Candidate, EvaluationReceipt, ReplayProvider, validate_splits, verify_trace
 from .broker import ProposerBroker, WeightView
 
@@ -36,4 +37,5 @@ __all__ = [
     "DecisionRule", "AdmissionRequest", "AdmissionRecord", "bind_admission", "admit",
     "replay_admission", "verify_admission", "ExecutionSpec", "native_execution_receipt",
     "verify_native_execution", "ProposerBroker", "WeightView",
+    "DataRoleError", "DataRoleRegistry", "RegisteredBatch",
 ]

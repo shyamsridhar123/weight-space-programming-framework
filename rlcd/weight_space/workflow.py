@@ -15,6 +15,7 @@ from typing import Any, Callable, Iterable, Mapping, Sequence
 import numpy as np
 
 from .artifact import TensorArtifact
+from .data_roles import DataRoleError, DataRoleRegistry, RegisteredBatch
 from .model import Network, canonical_bytes, digest
 from .program import Program, apply_program
 
@@ -358,7 +359,8 @@ class ProgrammerSession:
                  public_feedback: Callable[[Candidate, list[JSON]], JSON] | None = None,
                  forward: Callable[[Artifact, list[JSON]], JSON] | None = None,
                  activations: Callable[[Artifact, list[JSON]], JSON] | None = None,
-                 splits: Sequence[SplitSpec] = ()):
+                 splits: Sequence[SplitSpec] = (),
+                 data_registry: DataRoleRegistry | None = None):
         if type(task) is not TaskSpec:
             raise ValueError("A typed TaskSpec is required")
         if task.mode == "create":
@@ -373,8 +375,11 @@ class ProgrammerSession:
         callbacks = {"feedback": public_feedback, "forward": forward, "activations": activations}
         if any(callback is not None and not callable(callback) for callback in callbacks.values()):
             raise ValueError("Execution adapters must be caller-owned callables")
+        if data_registry is not None and type(data_registry) is not DataRoleRegistry:
+            raise ValueError("Use a DataRoleRegistry owned by the trusted harness")
         self._task, self._base, self._access, self._limits = task, base, access, limits
         self._callbacks = callbacks
+        self._data_registry = data_registry
         self._splits = tuple(splits)
         self._split_validation = validate_splits(self._splits)
         # Hidden constraints and split IDs are committed by hash, not disclosed
@@ -387,6 +392,10 @@ class ProgrammerSession:
             "access": access.to_dict(), "limits": limits.to_dict(),
             "callbacks_registered": {name: callback is not None for name, callback in callbacks.items()},
             "splits": self._split_validation.to_dict(),
+            "data_roles": {"registry_id": data_registry.registry_id if data_registry is not None else None,
+                           "scope": "registered_cooperative" if data_registry is not None else "unverified",
+                           "provenance_authenticated": False,
+                           "semantic_independence_verified": False},
             "enforcement": "cooperative_same_process_interface",
             "declared_constraints_automatically_enforced": False,
             "execution_accounting": "interface_calls_and_submitted_examples; callback_internal_work_not_observed",
@@ -624,12 +633,29 @@ class ProgrammerSession:
 
     def _batch(self, action: str, examples: Any) -> int:
         try:
+            if type(examples) is RegisteredBatch:
+                return len(examples.materialize())
             if not isinstance(examples, (list, tuple, np.ndarray)) or len(examples) == 0:
                 raise ValueError("Examples must be a nonempty batch list, tuple, or NumPy array")
             return len(examples)
-        except (TypeError, ValueError):
+        except (TypeError, ValueError, AttributeError):
             self._reject(action, {"examples_type": type(examples).__name__},
                          ValueError("Examples must be a nonempty batch list, tuple, or NumPy array"))
+
+    def _development_examples(self, action: str, examples: Any, request: dict[str, JSON]) -> list[JSON]:
+        registered = type(examples) is RegisteredBatch
+        captured = json.loads(_bytes(examples.materialize() if registered else examples))
+        if registered and self._data_registry is None:
+            raise WorkflowError("Registered batches require a configured data registry")
+        if self._data_registry is not None:
+            try:
+                request["data_role_decision"] = self._data_registry.consume(
+                    examples if registered else captured, reason=action)
+            except DataRoleError as failure:
+                request["data_role_decision"] = failure.decision
+                raise
+        request["examples"] = captured
+        return json.loads(_bytes(captured))
 
     def feedback(self, candidate: Candidate, examples: Any) -> JSON:
         self._require("feedback", ("feedback",))
@@ -637,12 +663,10 @@ class ProgrammerSession:
         count = self._batch("feedback", examples)
         request: dict[str, JSON] = {"candidate_sha256": candidate.sha256, "example_count": count}
         def execute() -> JSON:
-            captured = _bytes(examples)
-            request["examples"] = json.loads(captured)
             callback = self._callbacks["feedback"]
             if callback is None:
                 raise WorkflowError("No public feedback callback is registered")
-            return callback(candidate, json.loads(captured))
+            return callback(candidate, self._development_examples("feedback", examples, request))
         return self._perform("feedback", request, {"tool_calls": 1, "feedback_calls": 1,
                                                    "feedback_examples": count}, execute)
 
@@ -655,12 +679,10 @@ class ProgrammerSession:
         request: dict[str, JSON] = {"candidate_sha256": candidate.sha256 if candidate is not None else None,
                                    "artifact_sha256": artifact.sha256, "example_count": count}
         def execute() -> JSON:
-            captured = _bytes(examples)
-            request["examples"] = json.loads(captured)
             callback = self._callbacks[action]
             if callback is None:
                 raise WorkflowError(f"No {action} callback is registered")
-            return callback(artifact, json.loads(captured))
+            return callback(artifact, self._development_examples(action, examples, request))
         return self._perform(action, request, {"tool_calls": 1, "execution_calls": 1,
                                               "execution_examples": count}, execute)
 
@@ -691,6 +713,19 @@ class ProgrammerSession:
 
     def evaluate_heldout(self, evaluator: Callable[[Candidate], JSON], *, evaluator_id: str,
                          split_name: str = "test") -> EvaluationReceipt:
+        """Evaluate an opaque callback once; its input freshness is unverified."""
+        return self._evaluate(evaluator, evaluator_id=evaluator_id, split_name=split_name)
+
+    def evaluate_registered(self, batch: RegisteredBatch,
+                            evaluator: Callable[[Candidate, list[JSON]], JSON], *,
+                            evaluator_id: str, split_name: str = "test") -> EvaluationReceipt:
+        """Guard a registered batch before calling the cooperative scorer."""
+        if type(batch) is not RegisteredBatch or self._data_registry is None:
+            raise ValueError("Registered evaluation requires a registered batch and configured data registry")
+        return self._evaluate(evaluator, evaluator_id=evaluator_id, split_name=split_name, batch=batch)
+
+    def _evaluate(self, evaluator: Callable[..., JSON], *, evaluator_id: str,
+                  split_name: str, batch: RegisteredBatch | None = None) -> EvaluationReceipt:
         if not self._sealed:
             raise WorkflowError("Seal the selected candidate before heldout evaluation")
         if self._evaluated:
@@ -705,18 +740,45 @@ class ProgrammerSession:
         result, error = None, None
         request = {"evaluator_id": evaluator_id, "split_name": split_name,
                    "candidate_sha256": self._selected.sha256 if self._selected is not None else None}
+        freshness = {"status": "unverified", "scope": "opaque_evaluator_inputs",
+                     "registry_id": None, "manifest_sha256": None, "decision": None,
+                     "provenance_authenticated": False, "semantic_independence_verified": False,
+                     "scientific_freshness_verified": False}
+        if batch is not None:
+            freshness.update(scope="registered_cooperative", registry_id=self._data_registry.registry_id)
         status = "abstained" if self._selected is None else "succeeded"
         interrupted: BaseException | None = None
+        evaluator_calls, evaluated_examples = 0, 0 if batch is not None or self._selected is None else None
+        def score(materialized: list[JSON] | None = None) -> JSON:
+            nonlocal evaluator_calls, evaluated_examples
+            evaluator_calls += 1
+            if batch is not None:
+                evaluated_examples = len(materialized)
+                return _json(evaluator(self._selected, materialized))
+            return _json(evaluator(self._selected))
         if self._selected is not None:
             try:
-                result = _json(evaluator(self._selected))
+                if batch is None:
+                    result = score()
+                else:
+                    result, decision = self._data_registry.score(batch, score)
+                    freshness.update(status=decision["verdict"], decision=decision,
+                                     manifest_sha256=decision["manifest_sha256"])
             except BaseException as failure:
-                status = "failed"
+                decision = failure.decision if isinstance(failure, DataRoleError) else (
+                    getattr(failure, "data_role_decision", None) if batch is not None else None)
+                if decision is not None:
+                    freshness.update(status=decision["verdict"], decision=decision,
+                                     manifest_sha256=decision["manifest_sha256"])
+                status = "rejected" if batch is not None and evaluator_calls == 0 else "failed"
                 # Exception messages can contain private examples. They remain
                 # with the evaluator owner instead of crossing this interface.
-                error = {"type": type(failure).__name__, "message": "Heldout evaluator failed; details remain caller-owned"}
+                error = {"type": type(failure).__name__, "message":
+                         "Registered evaluation rejected before scoring" if status == "rejected" else
+                         "Heldout evaluator failed; details remain caller-owned"}
                 if not isinstance(failure, Exception):
                     interrupted = failure
+        request["freshness"] = freshness
         self._append("heldout_evaluation", status, request, result, {}, error=error)
         self._receipt = EvaluationReceipt({
             "schema": "wsp-evaluation-receipt/1", "status": status,
@@ -729,10 +791,12 @@ class ProgrammerSession:
             "usage": self._usage.to_dict(), "evaluator_id": evaluator_id,
             "split_name": split_name, "result": result, "error": error,
             "trace": [event.to_dict() for event in self._trace], "trace_head_sha256": self._trace[-1].sha256,
-            "heldout_input_handling": "caller_owned_closure_not_passed_to_proposer_tools",
+            "heldout_input_handling": "registered_batch_materialized_inside_cooperative_guard" if batch is not None else
+                                     "caller_owned_closure_not_passed_to_proposer_tools",
+            "freshness": freshness,
             "evaluator_output_leakage_checked": False,
-            "heldout_accounting": {"evaluator_calls": 0 if self._selected is None else 1,
-                                   "evaluated_examples": None, "scope": "outside_proposer_budget"},
+            "heldout_accounting": {"evaluator_calls": evaluator_calls,
+                                   "evaluated_examples": evaluated_examples, "scope": "outside_proposer_budget"},
             "evaluator_attested": False, "behavioral_certificate": None})
         if interrupted is not None:
             raise interrupted

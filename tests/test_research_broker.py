@@ -4,6 +4,7 @@ import json
 import pytest
 
 from rlcd.weight_space.artifact import TensorArtifact
+from rlcd.weight_space.data_roles import DataRoleRegistry, RegisteredBatch
 from rlcd.weight_space.broker import ProposerBroker, WeightView
 from rlcd.weight_space.workflow import BudgetLimits, TaskSpec
 
@@ -123,3 +124,51 @@ def test_public_event_derivative_retains_raw_identity_without_private_path(tmp_p
     assert record["raw_events_sha256"] == hashlib.sha256(raw).hexdigest()
     assert record["public_events_sha256"] == hashlib.sha256(public).hexdigest()
     assert record["redactions"] == 1 and not record["raw_bytes_published"]
+
+
+def test_broker_registered_scoring_uses_materialized_data_and_keeps_public_route_closed(tmp_path):
+    registry = DataRoleRegistry(tmp_path / "data-roles.sqlite3")
+    batch = registry.register_batch([[2.], [3.]], source_id="synthetic-tickets", family_id="evaluation-family")
+    base = TensorArtifact("affine/1", {"W": [[2.]], "b": [1.]})
+    task = TaskSpec("support-routing", "edit", "Check a support routing readout", base.architecture, base.sha256)
+    broker = ProposerBroker(task, base=base, data_registry=registry)
+    assert broker.request({"op": "evaluate_registered", "batch": batch.to_dict()}) == {"status": "denied"}
+    handle = broker.request({"op": "submit", "commands": [], "intent": "Freeze the baseline"})["candidate_handle"]
+    broker.request({"op": "seal", "candidate_handle": handle})
+    public_before = broker.public_trace
+    scoring_calls = []
+    def native_score(candidate, rows):
+        import numpy as np
+        scoring_calls.append(rows)
+        a = candidate.artifact
+        return {"scores": np.asarray(rows) @ a.tensors["W"].T + a.tensors["b"]}
+    audit = broker.evaluate_registered(batch, native_score, evaluator_id="synthetic-support/1")
+    assert audit["status"] == "succeeded" and scoring_calls == [[[2.], [3.]]]
+    assert audit["evaluation"]["result"] == {"scores": [[5.], [7.]]}
+    assert audit["evaluation"]["freshness"]["status"] == "registered_cooperative"
+    assert audit["evaluation"]["freshness"]["provenance_authenticated"] is False
+    assert audit["evaluation"]["freshness"]["semantic_independence_verified"] is False
+    assert audit["evaluation"]["freshness"]["scientific_freshness_verified"] is False
+    assert audit["evaluation"]["heldout_accounting"]["evaluator_calls"] == 1
+    assert audit["evaluation"]["heldout_accounting"]["evaluated_examples"] == 2
+    assert broker.public_trace == public_before
+    assert batch.materialize() == [[2.], [3.]]
+    with pytest.raises(ValueError):
+        broker.evaluate_registered(batch, native_score, evaluator_id="retry/1")
+
+
+def test_broker_malformed_registered_handle_has_private_rejection_receipt(tmp_path):
+    base = TensorArtifact("affine/1", {"W": [[2.]], "b": [1.]})
+    task = TaskSpec("routing", "edit", "Freeze the baseline", base.architecture, base.sha256)
+    broker = ProposerBroker(task, base=base, data_registry=DataRoleRegistry(tmp_path / "data-roles.sqlite3"))
+    handle = broker.request({"op": "submit", "commands": [], "intent": "Freeze the baseline"})["candidate_handle"]
+    broker.request({"op": "seal", "candidate_handle": handle})
+    public_before = broker.public_trace
+    calls = []
+    audit = broker.evaluate_registered(RegisteredBatch(), lambda c, rows: calls.append(rows),
+                                       evaluator_id="malformed-handle/1")
+    assert audit["evaluation"]["status"] == "rejected" and calls == []
+    assert audit["evaluation"]["freshness"]["decision"]["reason"] == "invalid_registration"
+    assert broker.public_trace == public_before
+    with pytest.raises(ValueError):
+        broker.evaluate_registered(RegisteredBatch(), lambda c, rows: {}, evaluator_id="retry/1")
