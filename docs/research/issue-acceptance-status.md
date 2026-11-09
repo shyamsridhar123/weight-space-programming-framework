@@ -1856,6 +1856,8 @@ stays partial and Issue #9 stays open.
 
 **Evidence:** [E20](#e20). Known parent/recovered positive controls pass development and heldout scores 48/48, while raw-coordinate negative controls expose gauge sensitivity; original bridges and binary64 comparisons are retained.
 
+**Prospective engineering evidence (November 9, 2026):** The [label-boundary receipt](../../provenance/verification/numpy-label-boundary-20261109.json) records one passing handcrafted offline check: exact NumPy string elements become plain strings before JSON admission, preserving text, order, tensor values and model identity; no-op admission replays in memory. Custom string subtypes are rejected before conversion. This does not exercise a fresh-process native evaluator, repair either historical replay, identify the second failure's cause or change this partial status.
+
 **Remaining requirement / scope limit:** Known-edited heldout score controls pass 36/48. The original native replay failed on finite JSON str_ handling; a once-run normalized derivative then failed canonical admission comparison, so native replay is unverified.
 
 #### #16 c5

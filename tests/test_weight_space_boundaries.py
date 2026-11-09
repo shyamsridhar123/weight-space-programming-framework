@@ -7,14 +7,66 @@ import numpy as np
 import pytest
 
 from rlcd.weight_space import (
-    Contract, Edit, InputBox, Network, Program, StructuralPolicy, TensorArtifact,
-    apply_program, certify_drift, check_contract, difference, rollback, verify_certificate,
+    Contract, DecisionRule, Edit, InputBox, Network, Program, StructuralPolicy, TaskSpec, TensorArtifact,
+    admit, apply_program, bind_admission, certify_drift, check_contract, difference,
+    replay_admission, rollback, verify_certificate,
 )
 from rlcd.weight_space.contracts import rational
 
 
 def network():
     return Network([[1., 2.], [3., 4.]], [0., 1.], [[1., -1.]], [0.])
+
+
+def test_numpy_semantic_labels_are_captured_before_admission_json():
+    inputs, outputs = (" β ", "alpha"), ("positive", "negative")
+    input_names, output_names = np.array(inputs), np.array(outputs)
+    model = Network([[1., 2.]], [0.], [[1.], [-1.]], [.5, -.5],
+                    input_names=tuple(input_names), output_names=tuple(output_names))
+    plain = Network(**model.tensors, input_names=inputs, output_names=outputs)
+    input_names[0], output_names[0] = "changed", "changed"
+    assert model.input_names == inputs and model.output_names == outputs
+    assert all(type(name) is str for name in (*model.input_names, *model.output_names))
+    assert model.to_dict() == plain.to_dict() and model.sha256 == plain.sha256
+    restored = Network.from_dict(json.loads(json.dumps(model.to_dict())))
+    assert restored.sha256 == model.sha256
+    for name in model.tensors:
+        np.testing.assert_array_equal(restored.tensors[name], plain.tensors[name])
+
+    request = bind_admission(
+        model, model, Program(model.sha256, (), "Synthetic label boundary no-op"),
+        task=TaskSpec("numpy-label-boundary", "edit", "Check label capture",
+                      "dense-relu-dense/1", model.sha256),
+        policy=StructuralPolicy(("b2",), 0, 2., 0.),
+        box=InputBox([0., 0.], [1., 1.]), max_output_drift=(0., 0.),
+        decision=DecisionRule("scores_only"), witnesses=[[0., 0.]],
+    )
+    record = admit(request)
+    assert record.accepted
+    assert replay_admission(record.to_dict(), expected_binding_sha256=request.sha256).to_dict() == record.to_dict()
+
+    class StringSubtype(str):
+        def __str__(self):
+            raise AssertionError("Custom label conversion must not execute")
+
+    class NumpyStringSubtype(np.str_):
+        __str__ = StringSubtype.__str__
+
+    class StringTypeEqualityTrap(type):
+        def __eq__(cls, other):
+            raise AssertionError("Custom label type equality must not execute")
+
+    class MetaclassStringSubtype(StringSubtype, metaclass=StringTypeEqualityTrap):
+        pass
+
+    for invalid in (
+        (StringSubtype("beta"), "alpha"), (NumpyStringSubtype("beta"), "alpha"),
+        (MetaclassStringSubtype("beta"), "alpha"),
+        (np.bytes_("beta"), "alpha"), (object(), "alpha"),
+        (np.str_(" "), "alpha"), (np.str_("alpha"), "alpha"), (np.str_("alpha"),),
+    ):
+        with pytest.raises(ValueError, match="Semantic labels"):
+            Network(**model.tensors, input_names=invalid, output_names=outputs)
 
 
 def mutate_headers(array):

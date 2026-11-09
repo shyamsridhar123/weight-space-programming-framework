@@ -97,10 +97,11 @@ def _labels(value: tuple[str, ...], size: int, prefix: str) -> tuple[str, ...]:
     except TypeError:
         raise ValueError("Semantic labels must be a sequence of names") from None
     labels = labels or tuple(f"{prefix}{i}" for i in range(size))
-    if (len(labels) != size or any(not isinstance(x, str) or not x.strip() for x in labels)
+    if (len(labels) != size
+            or any((type(x) is not str and type(x) is not np.str_) or not x.strip() for x in labels)
             or len(set(labels)) != size):
         raise ValueError("Semantic labels must be nonblank, unique and dimension-matched")
-    return labels
+    return tuple(str(x) for x in labels)
 
 
 @dataclass(frozen=True, eq=False, init=False)
