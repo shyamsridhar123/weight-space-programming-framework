@@ -2000,6 +2000,33 @@
     "historical_outcomes_superseded": false,
     "issue16_c4_status": "partial",
     "issue16_kept_open": true,
-    "hosted_success_inferred": false
+    "hosted_success_inferred": false,
+    "post_regression_source_compatibility_amendment": {
+      "review_date": "2026-11-09",
+      "scope": "Advance only the current staged-selection disk-format compatibility pin for the reviewed NumPy semantic-label boundary. All other pins and the source-byte equality guard remain unchanged.",
+      "prior_model_sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af",
+      "reviewed_model_sha256": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba",
+      "current_driver": {
+        "path": "scripts/staged_diagnosis_selection.py",
+        "bytes": 78276,
+        "sha256": "d09068798eb384066f15ec8e1fead2a58a11f02a07f7474f43060725cac383f0"
+      },
+      "first_post_preservation_hosted_check": {
+        "head_commit": "b27253555fd49f58a5347e10da8c64d91989810f",
+        "run_id": 42721080625,
+        "job_id": 129514900112,
+        "publication_before": "passed",
+        "publication_after": "passed",
+        "engineering": "failed",
+        "failure": "Four staged-selection engineering checks rejected the old model.py compatibility pin with Reviewed source bytes changed; packaging checks were skipped."
+      },
+      "original_offline_regression_receipt_changed": false,
+      "local_regression_rerun": false,
+      "source_pin_scope": "reviewed_disk_format_compatibility_only",
+      "historical_source_bindings_rewritten": false,
+      "historical_outcomes_superseded": false,
+      "new_scientific_study": false,
+      "hosted_success_inferred": false
+    }
   }
 }
