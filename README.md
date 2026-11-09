@@ -155,6 +155,14 @@ observed family or ancestry links. Synthetic checks cover the shared session
 and broker boundary. Scientific freshness and migration of all research
 scorers remain open requirements.
 
+The [symmetry-family check](docs/research/symmetry-family-boundary-check.md)
+passed finite exact ReLU gauge and transported-edit fixtures, raw-coordinate
+transfer negatives, and numerical and specialized-adapter family-boundary checks.
+Its [receipt](provenance/verification/symmetry-family-boundary-20261109.json)
+binds one invocation to its captured source. Issue #16 c0 remains partial:
+the frozen pilot retains 12/48 failed edited-score controls and no native replay
+success receipt.
+
 ### What the proofs establish
 
 Under the stated real-valued assumptions, an edit that vanishes on protected
@@ -198,6 +206,7 @@ fresh confirmation needs untouched units and a newly frozen protocol.
 | How to require exact supplied-feature scores | [Compiler guard and limits](docs/research/feature-feasibility.md) · [Recorded check](provenance/verification/exact-score-admission-20261109.json) |
 | How to freeze a diagnosis before repair | [Staged diagnosis](docs/research/staged-diagnosis.md) |
 | How retention settings affect trained edits | [Development comparison](docs/research/retention-development.md) |
+| Symmetry fixtures and family boundaries | [Engineering report](docs/research/symmetry-family-boundary-check.md) · [Verification receipt](provenance/verification/symmetry-family-boundary-20261109.json) |
 | The guarantees and their premises | [Formal explanation](docs/weight-space/v2/formal.md) · [Proof reproduction](PROOFS.md) |
 | The study and its outcomes | [Methods](docs/weight-space/v2/methods.md) · [Results](docs/weight-space/v2/results.md) |
 | The gaps and next research decisions | [Limitations and next steps](docs/weight-space/v2/limitations-and-next-steps.md) · [Requirements](docs/weight-space/v2/requirements.md) |

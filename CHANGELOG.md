@@ -7,6 +7,14 @@ research draft.
 
 ## Unreleased
 
+- Published a [symmetry-family engineering check](docs/research/symmetry-family-boundary-check.md)
+  and [sanitized receipt](provenance/verification/symmetry-family-boundary-20261109.json)
+  for one standalone invocation covering finite ReLU gauge/edit transport,
+  raw-coordinate negatives and family boundaries. The receipt binds the captured
+  source; later integration remains unverified. Issue #16 c0 remains partial,
+  with the frozen pilot's 12/48 failed edited-score controls and absence of native
+  replay success receipts preserved.
+
 - Added an opt-in [supplied-feature exact-score compiler guard](docs/research/feature-feasibility.md)
   and CLI field. It rejects infeasible or unresolved score equations and
   nonexact stored target/protected residuals. The default numerical path remains
