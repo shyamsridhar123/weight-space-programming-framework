@@ -7,6 +7,15 @@ research draft.
 
 ## Unreleased
 
+- Retain a disclosed public event derivative when JSON decoding, recursive
+  sanitation or serialization raises `RecursionError`. The shared fallback
+  redacts exact home paths, JSON-escaped Windows profile prefixes and quoted
+  POSIX profile prefixes, counting only retained replacements. The
+  [scoped offline receipt](provenance/verification/provider-public-recursion-20261109.json)
+  records one passing synthetic invocation with two home-path cases and a
+  following shallow event. This change adds no live evidence and does not
+  establish complete caller-specific selection terminality.
+
 - Retain provider attempts and brokered trials when deeply nested JSON exceeds
   the interpreter's recursion limit. Event and final-response parsing use their
   existing failure paths; an over-nested action preserves provider completion

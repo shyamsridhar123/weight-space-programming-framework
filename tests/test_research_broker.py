@@ -423,6 +423,83 @@ def test_public_event_derivative_retains_raw_identity_without_private_path(tmp_p
     assert record["redactions"] == 1 and not record["raw_bytes_published"]
 
 
+@pytest.mark.parametrize("custom_home", [r"D:\SyntheticProfiles\synthetic-local-home", r"C:\Users\user name"])
+def test_public_event_derivative_handles_decode_and_sanitation_recursion(tmp_path, monkeypatch, custom_home):
+    import hashlib
+    from rlcd.weight_space import live_provider
+
+    decoder_depth = 100_000
+    decoder_profile = r"C:\Users\example\.codex\config.toml"
+    overnested = "[" * decoder_depth + json.dumps(decoder_profile) + "]" * decoder_depth
+    # This fixture requires actual decoder recursion on the running interpreter.
+    with pytest.raises(RecursionError):
+        json.loads(overnested)
+
+    sanitation_depth = 2 * sys.getrecursionlimit()
+    nested = "synthetic-leaf"
+    for _ in range(sanitation_depth):
+        nested = [nested]
+    sanitizer_event = {"message": r"C:\Users\private-person",
+                       "custom_home": custom_home + r"\config.toml",
+                       "quoted_posix": 'home is "/home/example"',
+                       "nested": "synthetic-traversal"}
+    sanitizer_line = json.dumps(sanitizer_event)
+    shallow_event = {"item": {"message": "/home/username", "ok": True}}
+    raw = ("\n".join((overnested, sanitizer_line, json.dumps(shallow_event))) + "\n").encode("utf-8")
+    source, destination = tmp_path / "private", tmp_path / "public"
+    source.mkdir()
+    metadata = {name: (json.dumps({"synthetic": name}) + "\n").encode("utf-8")
+                for name in ("request.json", "response-schema.json", "receipt.json")}
+    for name, content in metadata.items():
+        (source / name).write_bytes(content)
+    (source / "events.jsonl").write_bytes(raw)
+
+    original_loads, injections = json.loads, []
+
+    def decode_with_deep_sanitation(value, *args, **kwargs):
+        if value == sanitizer_line:
+            injections.append(value)
+            # The earlier message is redacted before traversal reaches this list.
+            return {**sanitizer_event, "nested": nested}
+        return original_loads(value, *args, **kwargs)
+
+    with monkeypatch.context() as scoped:
+        scoped.setattr(live_provider.json, "loads", decode_with_deep_sanitation)
+        scoped.setattr(live_provider.Path, "home", lambda: live_provider.Path(custom_home))
+        record = live_provider.publish_attempt(source, destination)
+
+    expected_public = ("\n".join((
+        "[" * decoder_depth + json.dumps(r"[USER_PROFILE]\.codex\config.toml") + "]" * decoder_depth,
+        json.dumps({"message": "[USER_PROFILE]", "custom_home": r"[USER_PROFILE]\config.toml",
+                    "quoted_posix": 'home is "[USER_PROFILE]"',
+                    "nested": "synthetic-traversal"}),
+        json.dumps({"item": {"message": "[USER_PROFILE]", "ok": True}}),
+    )) + "\n").encode("utf-8")
+    public = (destination / "events.jsonl").read_bytes()
+    assert injections == [sanitizer_line]
+    assert (source / "events.jsonl").read_bytes() == raw
+    assert public == expected_public
+    assert b"example" not in public
+    assert b"private-person" not in public
+    assert custom_home.rsplit("\\", 1)[-1].encode() not in public
+    assert b"username" not in public
+    assert json.loads(public.splitlines()[1]) == {"message": "[USER_PROFILE]",
+                                                 "custom_home": r"[USER_PROFILE]\config.toml",
+                                                 "quoted_posix": 'home is "[USER_PROFILE]"',
+                                                 "nested": "synthetic-traversal"}
+    assert json.loads(public.splitlines()[2]) == {"item": {"message": "[USER_PROFILE]", "ok": True}}
+    for name, content in metadata.items():
+        assert (source / name).read_bytes() == (destination / name).read_bytes() == content
+    assert record == {"schema": "wsp-public-event-derivative/1",
+                      "raw_events_sha256": hashlib.sha256(raw).hexdigest(),
+                      "public_events_sha256": hashlib.sha256(expected_public).hexdigest(),
+                      "redactions": 5,
+                      "transform": "JSON_reserialization_and_user_profile_prefix_redaction",
+                      "raw_bytes_published": False,
+                      "scope": "public_derivative_replay;_raw_identity_disclosed_not_publicly_replayed"}
+    assert json.loads((destination / "event-publication.json").read_text()) == record
+
+
 def test_broker_registered_scoring_uses_materialized_data_and_keeps_public_route_closed(tmp_path):
     registry = DataRoleRegistry(tmp_path / "data-roles.sqlite3")
     batch = registry.register_batch([[2.], [3.]], source_id="synthetic-tickets", family_id="evaluation-family")
