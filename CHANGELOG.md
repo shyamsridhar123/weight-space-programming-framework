@@ -7,6 +7,19 @@ research draft.
 
 ## Unreleased
 
+- Add a [registered cohort evaluation bridge](docs/research/staged-diagnosis.md#registered-cohort-evaluation)
+  after endpoint sealing. A one-shot lazy loader supplies every declared holdout;
+  one aggregate registry score authorization covers their rows in plan order,
+  including unused holdouts. Trusted slot callbacks receive retained sealed
+  endpoints and copied context/rows, with exact finite-JSON result keys. Failures
+  stop later slots and preserve unavailable, not-run and unknown registry states
+  without retry. The separate [engineering receipt](provenance/verification/staged-cohort-evaluation-bridge-20261109.json)
+  records one focused regression: exit 0, `1 passed in 18.47s`, no retry or timeout,
+  with unchanged before/after source inventory and tracked diff. This covers its
+  captured source snapshot. The generic framework bridge leaves runtime restoration
+  and causal usefulness unverified. Issue #9 c1 remains partial and the issue
+  remains open; earlier receipt scopes and historical results are unchanged.
+
 - Add an explicit [cohort endpoint seal](docs/research/staged-diagnosis.md#endpoint-seal)
   after the complete repair barrier, materializing referenced origins once while
   retaining every logical comparison slot. Selected endpoints verify saved literal

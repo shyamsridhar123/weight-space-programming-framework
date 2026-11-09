@@ -1,10 +1,10 @@
-"""Frozen cohort preparation, diagnosis-before-repair selection and endpoint seals.
+"""Frozen cohort selection, endpoint seals and once-only aggregate evaluation.
 
 This trusted cooperative controller owns its lanes and retains failed preparation,
 failed selection and abstention in the complete ordered roster. A proposer gets
 only a member row and the lane's JSON query function. This is not a Python sandbox
-or a study result. There is deliberately no cohort scoring/evaluation method;
-public per-lane evaluation is denied pending a separate evaluation bridge.
+or a study result. Evaluation uses one registered aggregate authorization;
+public per-lane evaluation remains denied for cohort-owned lanes.
 """
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ import numpy as np
 
 from .artifact import TensorArtifact
 from .broker import WeightView
-from .data_roles import DataRoleRegistry
+from .data_roles import DataRoleError, DataRoleRegistry, RegisteredBatch
 from .model import Network, canonical_bytes, digest
 from .program import Program, apply_program
 from .staged_diagnosis import StagedDiagnosisRepair
@@ -214,7 +214,8 @@ class StagedCohort:
         self._lanes: list[StagedDiagnosisRepair | None] = [None] * len(rows)
         self._records: dict[str, bytes] = {}
         self._invalidated, self._prepared = False, False
-        self._started = {"preparation": False, "diagnosis": False, "repair": False, "endpoints": False}
+        self._started = {"preparation": False, "diagnosis": False, "repair": False,
+                         "endpoints": False, "evaluation": False}
         self._endpoints: dict[tuple[int, str, str | None], dict[str, Any]] = {}
         # ponytail: serialize one cohort; use separate controllers for parallel cohorts.
         self._lock = threading.RLock()
@@ -710,6 +711,213 @@ class StagedCohort:
             except BaseException:
                 self._invalidate()
                 raise
+
+    def evaluate_registered(self, load_holdouts: Callable[[], dict[str, RegisteredBatch]],
+                            evaluator: Callable[[dict[str, Any], Artifact, list[Any]], dict[str, Any]]
+                            ) -> dict[str, Any]:
+        """Score sealed slots once; the trusted evaluator honors their execution declarations."""
+        with self._lock:
+            protocol = self._check()
+            if (self._started["evaluation"] or "endpoint-seal" not in self._records
+                    or not callable(load_holdouts) or not callable(evaluator)):
+                raise WorkflowError("Sealed endpoints and trusted callbacks are required once")
+            seal = self._verify_endpoint_seal()
+            plan = protocol["protocol"]["evaluation_plan"]
+            common = {key: seal[key] for key in (
+                "cohort_protocol_sha256", "roster_sha256", "evaluation_plan_sha256",
+                "attempt_id", "registry_id", "evaluator_id")}
+            common["endpoint_seal_sha256"] = seal["sha256"]
+            self._started["evaluation"] = True
+            start = decision = attempt = callback_error = failure = None
+            phase, failure_phase, inspection_error = "start_persistence", None, None
+            score_requested = callback_entered = attempt_inspected = False
+            receipts: list[tuple[str, dict[str, Any]]] = []
+            result = {"schema": plan["result_schema"], **common,
+                "evaluation_start_sha256": None, "holdouts": [], "aggregate": None,
+                "members": [{**member, "slots": [{**slot,
+                    "outcome": "unavailable" if slot["resolution"] == "unavailable" else "not_run",
+                    "evaluator_invocations": 0, "result": None, "exception_type": None,
+                    "receipt_sha256": None} for slot in member["slots"]]} for member in seal["members"]],
+                "runtime_restoration_verified": False, "causal_usefulness_established": False}
+
+            def verify() -> None:
+                self._require(self._read("evaluation-start") == start)
+                self._require(self._verify_endpoint_seal() == seal)
+                for name, receipt in receipts:
+                    self._require(self._read(name) == receipt)
+
+            def save_slot(member: dict[str, Any], slot: dict[str, Any], holdout: dict[str, Any]) -> None:
+                name = self._name(self._name("evaluation", member["member_index"]), slot["slot_index"])
+                body = {"schema": "wsp-staged-cohort-disposition/1", "stage": "evaluation",
+                    **common, "evaluation_start_sha256": start["sha256"],
+                    **{key: value for key, value in member.items() if key != "slots"},
+                    "holdout_manifest_sha256": holdout["manifest_sha256"],
+                    **{key: value for key, value in slot.items() if key != "receipt_sha256"}}
+                # Failure checks may already have invalidated the owner; retain evidence without reopening it.
+                raw = self._write(name, body)
+                self._records[name] = raw
+                receipt = json.loads(raw)
+                slot["receipt_sha256"] = receipt["sha256"]
+                receipts.append((name, receipt))
+
+            def score_all(rows: list[Any]) -> dict[str, Any]:
+                nonlocal callback_entered, callback_error, phase
+                active = None
+                try:
+                    self._require(not callback_entered)
+                    callback_entered = True
+                    phase = "authorized_rows"
+                    verify()
+                    aggregate = result["aggregate"]
+                    self._require(type(rows) is list and digest(rows) == aggregate["content_sha256"]
+                                  and [digest(row) for row in rows] == aggregate["row_sha256"])
+                    authorized = canonical_bytes(rows)
+                    holdouts = {item["holdout_id"]: item for item in result["holdouts"]}
+                    for holdout in result["holdouts"]:
+                        child = rows[holdout["start"]:holdout["stop"]]
+                        self._require(len(child) == holdout["row_count"]
+                                      and digest(child) == holdout["content_sha256"]
+                                      and [digest(row) for row in child] == holdout["row_sha256"])
+                    for member in result["members"]:
+                        holdout = holdouts[member["holdout_id"]]
+                        for slot in member["slots"]:
+                            active = member, slot, holdout
+                            phase = "slot_verification"
+                            verify()
+                            if slot["outcome"] != "unavailable":
+                                origin = slot["resolved_origin"]
+                                endpoint = self._endpoints[(member["member_index"], origin["kind"],
+                                                            origin.get("control_id"))]["endpoint"]
+                                context = {key: value for key, value in member.items() if key != "slots"}
+                                context["slot"] = seal["members"][member["member_index"]]["slots"][slot["slot_index"]]
+                                phase = "slot_evaluation"
+                                slot["evaluator_invocations"] = 1
+                                output = evaluator(json.loads(canonical_bytes(context)), endpoint,
+                                    json.loads(authorized)[holdout["start"]:holdout["stop"]])
+                                phase = "slot_result_validation"
+                                output = _json(output)
+                                if type(output) is not dict or set(output) != set(slot["result_keys"]):
+                                    raise ValueError("Slot result must contain exactly the declared finite JSON keys")
+                                phase = "slot_verification"
+                                verify()
+                                slot.update(outcome="succeeded", result=output)
+                            phase = "slot_persistence"
+                            save_slot(member, slot, holdout)
+                            active = None
+                    phase = "slot_verification"
+                    verify()
+                    phase = "registry_finalization"
+                    return json.loads(canonical_bytes(result))
+                except BaseException as error:
+                    callback_error = error
+                    if active is not None:
+                        member, slot, holdout = active
+                        slot.update(outcome="failed", result=None, exception_type=type(error).__name__)
+                        if phase != "slot_persistence":
+                            try:
+                                save_slot(member, slot, holdout)
+                            except BaseException:
+                                pass
+                    raise
+
+            try:
+                start = self._save("evaluation-start", {
+                    "schema": "wsp-staged-cohort-evaluation-start/1", **common,
+                    "holdout_policy": "all_declared_once_in_plan_order",
+                    "runtime_restoration_verified": False, "causal_usefulness_established": False})
+                result["evaluation_start_sha256"] = start["sha256"]
+                phase = "loader"
+                loaded = load_holdouts()
+                phase = "holdout_validation"
+                if type(loaded) is not dict or set(loaded) != {item["holdout_id"] for item in plan["holdouts"]}:
+                    raise ValueError("Load exactly every declared holdout once")
+                rows, children = [], []
+                for declared in plan["holdouts"]:
+                    batch = loaded[declared["holdout_id"]]
+                    if type(batch) is not RegisteredBatch:
+                        raise ValueError("Holdouts must be exact registered batch handles")
+                    manifest, child = batch.to_dict(), batch.materialize()
+                    if (batch.registry_id != common["registry_id"]
+                            or manifest["schema"] != "wsp-data-batch/1"
+                            or manifest["registry_id"] != common["registry_id"]
+                            or any(manifest[key] != declared[key] for key in ("source_id", "family_id"))
+                            or type(child) is not list or len(child) != declared["row_count"]
+                            or digest(child) != manifest["content_sha256"]
+                            or [digest(row) for row in child] != manifest["row_sha256"]):
+                        raise ValueError("Loaded holdout does not match its declaration and manifest")
+                    result["holdouts"].append({**declared, "manifest_sha256": batch.manifest_sha256,
+                        "content_sha256": manifest["content_sha256"], "row_sha256": manifest["row_sha256"],
+                        "start": len(rows), "stop": len(rows) + len(child)})
+                    rows.extend(child)
+                    children.append(batch)
+                verify()
+                phase = "aggregate_registration"
+                aggregate = self._registry.register_batch(rows, **plan["aggregate"], parents=tuple(children))
+                result["aggregate"] = aggregate.to_dict()
+                self._require(result["aggregate"]["content_sha256"] == digest(rows)
+                    and result["aggregate"]["row_sha256"] == [digest(row) for row in rows]
+                    and result["aggregate"]["parent_manifest_sha256"] == {
+                        item["source_id"]: item["manifest_sha256"] for item in result["holdouts"]})
+                binding = {"schema": "wsp-staged-cohort-evaluation-binding/1", **common,
+                    "evaluation_start_sha256": start["sha256"], "holdouts": result["holdouts"],
+                    "aggregate_manifest_sha256": aggregate.manifest_sha256}
+                verify()
+                phase = "authorization"
+                score_requested = True
+                scored, decision = self._registry.score(aggregate, score_all,
+                    attempt_id=common["attempt_id"], binding=binding)
+                phase = "registry_inspection"
+                attempt_inspected = True
+                try:
+                    attempt = self._registry.get_attempt(common["attempt_id"])
+                except BaseException as error:
+                    inspection_error = type(error).__name__
+                    raise
+                self._require(callback_entered and canonical_bytes(scored) == canonical_bytes(result)
+                    and attempt is not None and attempt == decision["attempt"]
+                    and attempt["status"] == "succeeded" and attempt["callback_invocations"] == 1
+                    and attempt["binding"] == binding
+                    and attempt["manifest_sha256"] == aggregate.manifest_sha256
+                    and canonical_bytes(attempt["result"]) == canonical_bytes(result)
+                    and attempt["result_sha256"] == digest(result))
+                phase = "terminal_verification"
+                verify()
+            except BaseException as error:
+                failure, failure_phase = callback_error if callback_error is not None else error, phase
+                try:
+                    if isinstance(error, DataRoleError):
+                        decision = error.decision
+                    else:
+                        decision = getattr(error, "data_role_decision", decision)
+                except BaseException:
+                    # Exception metadata is best effort; cleanup must preserve the original failure.
+                    pass
+            if score_requested and not attempt_inspected:
+                try:
+                    attempt = self._registry.get_attempt(common["attempt_id"])
+                except BaseException as error:
+                    inspection_error = type(error).__name__
+            terminal = {"schema": "wsp-staged-cohort-evaluation/1", **common,
+                "evaluation_start_sha256": result["evaluation_start_sha256"],
+                "outcome": "succeeded" if failure is None else "failed" if isinstance(failure, Exception) else "cancelled",
+                "failure_phase": failure_phase,
+                "exception_type": type(failure).__name__ if failure is not None else None,
+                "score_requested": score_requested, "score_callback_entered": callback_entered,
+                "data_role_decision": decision, "registry_attempt": attempt,
+                "registry_attempt_inspection_exception_type": inspection_error,
+                "result": result, "runtime_restoration_verified": False,
+                "causal_usefulness_established": False}
+            try:
+                self._records["evaluation"] = self._write("evaluation", terminal)
+                if failure is None:
+                    return self._read("evaluation")
+            except BaseException:
+                self._invalidate()
+                if failure is not None:
+                    raise failure
+                raise
+            self._invalidate()
+            raise failure
 
     def select_diagnoses(self, selector: Callable[..., Any]) -> dict[str, Any]:
         with self._lock:

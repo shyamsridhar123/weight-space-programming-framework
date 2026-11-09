@@ -1207,6 +1207,24 @@ false. The single-score
 bridge remains pending. Original criteria and historical outcomes remain unchanged;
 c1 stays partial and Issue #9 stays open.
 
+**Cohort evaluation-bridge engineering supplement, November 9, 2026:** The
+[registered bridge](staged-diagnosis.md#registered-cohort-evaluation) evaluates
+retained sealed endpoints through a one-shot lazy holdout loader and one aggregate
+registry score authorization. All declared holdouts, including unused ones, enter
+the aggregate in plan order; logical slots retain separate dispositions and result
+keys. Unavailable slots receive no evaluator call, and later slots remain `not_run`
+or unavailable after failure. Authorization remains consumed after failure or
+cancellation; failed inspection and `authorized_outcome_unknown` states remain
+unknown. The separate [engineering receipt](../../provenance/verification/staged-cohort-evaluation-bridge-20261109.json)
+records one focused regression: exit 0, `1 passed in 18.47s`, with no retry or
+timeout and unchanged before/after source inventory and tracked diff. It covers
+its captured source snapshot, not a completed-tree gate or a scientific result.
+The trusted evaluator remains responsible for the execution declarations; this
+generic framework bridge does not restore a runtime module or establish causal
+usefulness. Runtime-restoration and causal-usefulness flags remain false. Original
+criteria, earlier receipt scopes and historical outcomes remain unchanged; c1
+stays partial and Issue #9 stays open.
+
 #### #9 c2
 
 - [ ] Compare sham, random, support/norm-matched and context-only controls, then measure target effect, collateral behavior and held-out generalization.
