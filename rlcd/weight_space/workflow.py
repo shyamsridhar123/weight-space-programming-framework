@@ -347,6 +347,143 @@ def verify_trace(events: Sequence[TraceEvent | Mapping[str, JSON]], *,
         return False
 
 
+def verify_registered_evaluation(receipt: EvaluationReceipt | dict[str, JSON], *,
+                                 registry: DataRoleRegistry, candidate: Artifact,
+                                 expected_binding: dict[str, JSON], expected_attempt_id: str,
+                                 expected_manifest_sha256: str, expected_result_sha256: str) -> bool:
+    """Verify existing session evidence against independently trusted identities.
+
+    The harness supplies the registry, artifact and frozen expectations; copying
+    expectations from an untrusted receipt does not authorize that receipt. The
+    candidate in the binding is a session wrapper, distinct from the artifact.
+    Only get_attempt() reads durable evidence: no scoring, callbacks or batch
+    materialization occur here. Later registry consumption does not invalidate
+    historical authorization. Success attests neither evaluator execution nor
+    provenance, semantic independence, scientific freshness or behavior.
+    """
+    def same(left: JSON, right: JSON) -> bool:
+        return _bytes(left) == _bytes(right)
+
+    def bound(document: dict[str, JSON], key: str) -> bool:
+        return document[key] == digest({name: value for name, value in document.items() if name != key})
+
+    try:
+        if (type(registry) is not DataRoleRegistry or type(candidate) not in (Network, TensorArtifact)
+                or type(expected_binding) is not dict
+                or type(receipt) not in (EvaluationReceipt, dict)):
+            return False
+        record = receipt.to_dict() if type(receipt) is EvaluationReceipt else _json(receipt)
+        binding = _json(expected_binding)
+        if (set(binding) != {"schema", "protocol_sha256", "task_sha256", "parent_sha256",
+                             "candidate_sha256", "selection_sha256", "evaluator_id", "split_name"}
+                or binding["schema"] != "wsp-session-evaluation-binding/1"):
+            return False
+        for key in ("protocol_sha256", "task_sha256", "candidate_sha256", "selection_sha256"):
+            _hash(binding[key], key)
+        if binding["parent_sha256"] is not None:
+            _hash(binding["parent_sha256"], "Parent")
+        for key in ("evaluator_id", "split_name"):
+            _name(binding[key], key)
+        _name(expected_attempt_id, "Attempt")
+        _hash(expected_manifest_sha256, "Manifest")
+        _hash(expected_result_sha256, "Result")
+        if (set(record) != {"schema", "status", "session_sha256", "task_sha256", "parent_sha256",
+                "configuration", "candidate_sha256", "candidate", "candidates", "usage", "evaluator_id",
+                "split_name", "result", "error", "trace", "trace_head_sha256", "heldout_input_handling",
+                "freshness", "evaluator_output_leakage_checked", "heldout_accounting", "evaluator_attested",
+                "behavioral_certificate", "sha256"}
+                or record["schema"] != "wsp-evaluation-receipt/1" or record["status"] != "succeeded"
+                or not bound(record, "sha256") or record["error"] is not None
+                or record["session_sha256"] != binding["protocol_sha256"]
+                or record["task_sha256"] != binding["task_sha256"]
+                or record["parent_sha256"] != binding["parent_sha256"]
+                or record["candidate_sha256"] != binding["candidate_sha256"]
+                or record["evaluator_id"] != binding["evaluator_id"]
+                or record["split_name"] != binding["split_name"]
+                or digest(record["result"]) != expected_result_sha256):
+            return False
+        configuration, selected, trace = record["configuration"], record["candidate"], record["trace"]
+        if (configuration["schema"] != "wsp-session-config/1"
+                or digest(configuration) != binding["protocol_sha256"]
+                or configuration["task_sha256"] != binding["task_sha256"]
+                or configuration["base_sha256"] != binding["parent_sha256"]
+                or not same(configuration["data_roles"], {"registry_id": registry.registry_id,
+                    "scope": "registered_cooperative", "provenance_authenticated": False,
+                    "semantic_independence_verified": False})
+                or selected["schema"] != "wsp-candidate/1" or not bound(selected, "sha256")
+                or selected["sha256"] != binding["candidate_sha256"]
+                or selected["session_sha256"] != binding["protocol_sha256"]
+                or selected["task_sha256"] != binding["task_sha256"]
+                or selected["parent_sha256"] != binding["parent_sha256"]
+                or selected["kind"] not in ("artifact", "program")
+                or selected["artifact_sha256"] != candidate.sha256
+                or not same(selected["artifact"], candidate.to_dict())
+                or not any(same(selected, item) for item in record["candidates"])
+                or len(trace) < 3 or not verify_trace(trace, expected_head=record["trace_head_sha256"])):
+            return False
+        seal, evaluation = trace[-2:]
+        if (any(event["schema"] != "wsp-trace-event/1"
+                or event["session_sha256"] != binding["protocol_sha256"]
+                or event["task_sha256"] != binding["task_sha256"] for event in trace)
+                or sum(event["action"] == "seal" and event["status"] == "succeeded"
+                       for event in trace) != 1
+                or sum(event["action"] == "heldout_evaluation" for event in trace) != 1
+                or not same(trace[0]["request"], configuration)
+                or seal["action"] != "seal" or seal["status"] != "succeeded"
+                or not same(seal["request"], {"candidate_sha256": selected["sha256"]})
+                or not same(seal["result"], {"selection": "candidate"})
+                or digest({"selected": selected, "candidates": record["candidates"],
+                           "seal_event_sha256": seal["sha256"]}) != binding["selection_sha256"]
+                or evaluation["action"] != "heldout_evaluation" or evaluation["status"] != "succeeded"
+                or evaluation["error"] is not None or not same(evaluation["result"], record["result"])
+                or not same(evaluation["charges"], {}) or not same(evaluation["requested_charges"], {})
+                or not same(evaluation["usage"], seal["usage"])
+                or not same(evaluation["usage"], record["usage"])):
+            return False
+        # The trusted registry resolves the expected attempt, never a path or
+        # attempt identity chosen by the receipt. No current snapshot is needed.
+        current = registry.get_attempt(expected_attempt_id)
+        decision = record["freshness"]["decision"]
+        if (current is None or current["status"] != "succeeded"
+                or current["reason"] != "observed_boundary_passed"
+                or type(current["callback_invocations"]) is not int or current["callback_invocations"] != 1
+                or current["evidence_role"] != "evaluation_consumed_on_authorization"
+                or current["registry_id"] != registry.registry_id
+                or current["attempt_id"] != expected_attempt_id
+                or current["manifest_sha256"] != expected_manifest_sha256
+                or current["result_sha256"] != expected_result_sha256
+                or not same(current["binding"], binding) or not same(current["result"], record["result"])
+                or not same(decision["attempt"], current) or not bound(decision, "decision_sha256")
+                or decision["schema"] != "wsp-data-role-decision/1" or decision["operation"] != "score"
+                or decision["status"] != "succeeded" or decision["verdict"] != "registered_cooperative"
+                or decision["reason"] != "observed_boundary_passed" or decision["scoring_started"] is not True
+                or not same(decision["consumed_matches"], [])
+                or any(not same(decision[key], current[key]) for key in (
+                    "attempt_id", "registry_id", "manifest_sha256", "content_sha256", "row_sha256",
+                    "binding_sha256", "result_sha256", "reservation_sha256", "lifecycle_sha256",
+                    "registry_revision_before", "registry_revision_after",
+                    "registry_state_sha256_before", "registry_state_sha256_after"))
+                or any(document[key] is not False for document in (decision, current) for key in (
+                    "provenance_authenticated", "semantic_independence_verified",
+                    "scientific_freshness_verified", "evaluator_execution_attested"))):
+            return False
+        freshness = {"status": "registered_cooperative", "scope": "registered_cooperative",
+                     "registry_id": registry.registry_id, "manifest_sha256": expected_manifest_sha256,
+                     "decision": decision, "provenance_authenticated": False,
+                     "semantic_independence_verified": False, "scientific_freshness_verified": False}
+        return (same(record["freshness"], freshness)
+                and same(evaluation["request"], {"evaluator_id": binding["evaluator_id"],
+                    "split_name": binding["split_name"], "candidate_sha256": selected["sha256"],
+                    "freshness": freshness})
+                and record["heldout_input_handling"] == "registered_batch_materialized_inside_cooperative_guard"
+                and same(record["heldout_accounting"], {"evaluator_calls": 1,
+                    "evaluated_examples": len(current["row_sha256"]), "scope": "outside_proposer_budget"})
+                and record["evaluator_output_leakage_checked"] is False
+                and record["evaluator_attested"] is False and record["behavioral_certificate"] is None)
+    except (ValueError, TypeError, KeyError, IndexError, AttributeError, RecursionError, OverflowError, UnicodeError):
+        return False
+
+
 class ProgrammerSession:
     """Own one immutable task/configuration and a monotonic proposal history.
 

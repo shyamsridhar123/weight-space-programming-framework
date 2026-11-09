@@ -506,3 +506,67 @@ while semantic independence, complete historical-attempt capture and a fresh
 prospective cohort require separate evidence. The historical 13-route c7 failure,
 two historical-development controls, six working guards and original object
 identities above remain unchanged.
+
+## Registered session evidence verifier supplement: November 9, 2026
+
+**Later source and engineering account, November 9, 2026, America/Chicago.**
+`workflow.verify_registered_evaluation` checks saved registered session evidence
+against a caller-owned registry, selected realized artifact and independently
+trusted expectations. The separate [synthetic verifier receipt](../../provenance/verification/registered-evaluation-verifier-20261109.json)
+records one completed check against captured source. It covers the trusted
+identity, terminal-attempt and accounting boundaries, including rehashed
+substitutions and failed or unknown attempts. It is not a scientific study and
+does not extend the earlier guard or durable lifecycle receipts to this verifier.
+
+The API accepts an `EvaluationReceipt` or its finite-JSON dictionary and
+requires `registry`, `candidate`, `expected_binding`, `expected_attempt_id`,
+`expected_manifest_sha256` and `expected_result_sha256`. The registry is the
+trusted `DataRoleRegistry`; the candidate argument is the selected `Network` or
+`TensorArtifact`, not its session wrapper. The caller must retain all expected
+identities independently of the untrusted receipt. Reading them back from that
+receipt supplies no independent authorization.
+
+The exact `wsp-session-evaluation-binding/1` field set is `schema`,
+`protocol_sha256`, `task_sha256`, `parent_sha256`, `candidate_sha256`,
+`selection_sha256`, `evaluator_id` and `split_name`. The candidate hash binds
+the selected session wrapper, distinct from its realized artifact hash.
+The selection hash commits the selected wrapper, all successful candidates and
+the seal event. The protocol hash identifies the session configuration; it
+does not by itself commit a complete prospective scientific protocol.
+
+Verification checks receipt and configuration commitments, the wrapper and
+exact supplied artifact, membership in the saved candidate list, trace links
+and cumulative accounting. It requires one successful seal immediately before
+the sole terminal successful held-out evaluation, matching selection and
+result, no held-out proposer charges and unchanged proposer usage. It accepts
+only the registered artifact/program success lane, not answer-only, abstained,
+rejected, failed or opaque legacy evidence.
+
+The only registry access is `get_attempt(expected_attempt_id)`. That lookup
+must return a durable successful attempt with reason `observed_boundary_passed`,
+one cooperating callback invocation and evidence role
+`evaluation_consumed_on_authorization`. Registry, attempt, manifest, binding
+and result identities must match the trusted expectations. The embedded
+decision and attempt must agree with the durable record, including its
+reservation/lifecycle commitments and recorded reservation revisions and state
+hashes. The receipt result must match both the expected result hash and durable
+result. A rehashed substituted wrapper, binding, result or attempt cannot
+inherit the original durable authorization. Missing, failed and
+`authorized_outcome_unknown` attempts do not satisfy verification.
+
+No evaluation, callback, scoring, batch materialization or current registry
+snapshot occurs during verification. Later registry changes do not invalidate
+a recorded successful attempt. Development `consume(...)` and configured
+session exposure guards remain separate operations before development use;
+the verifier neither consumes data nor reconstructs unrecorded exposure or
+historical attempts.
+
+The registry and expectations remain caller-trusted inputs. The verifier
+does not attest evaluator execution or source provenance, check evaluator
+output for leakage, authenticate undeclared ancestry, establish semantic
+independence or scientific freshness, or certify useful behavior. Provenance,
+independence, freshness and evaluator-attestation fields remain false.
+Issue #2 c2 and c7 remain partial, with 6 supported criteria, 2 partial criteria
+and a keep-open recommendation. All historical outcomes, dates and the earlier
+13-route c7 failure, two development controls and six working guards remain
+unchanged.

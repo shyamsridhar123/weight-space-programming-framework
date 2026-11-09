@@ -259,6 +259,59 @@ the claimed head. Successful verification does not establish that callbacks did
 what their labels claim, that no work occurred outside the interface, or that a
 proposer could not access private attributes in the same Python process.
 
+## Verify registered evaluation evidence against trusted expectations
+
+`verify_registered_evaluation` checks an existing registered session receipt
+against identities supplied by the evaluation owner. Its keyword arguments are
+`registry`, `candidate`, `expected_binding`, `expected_attempt_id`,
+`expected_manifest_sha256` and `expected_result_sha256`; the receipt may be an
+`EvaluationReceipt` or its finite-JSON dictionary. The registry must be the
+caller-owned `DataRoleRegistry`, and `candidate` must be the selected realized
+`Network` or `TensorArtifact`, rather than the session's `Candidate` wrapper.
+Answer-only, abstained, rejected, failed and opaque legacy evaluation receipts
+are outside this successful registered-artifact verification contract.
+
+The caller must retain these expectations in a trusted harness or record
+separately from the receipt being checked. Copying expected identities from an
+untrusted receipt does not authorize that receipt. The binding has schema
+`wsp-session-evaluation-binding/1` and exactly these remaining fields:
+`protocol_sha256`, `task_sha256`, `parent_sha256`, `candidate_sha256`,
+`selection_sha256`, `evaluator_id` and `split_name`. Here `candidate_sha256`
+identifies the session wrapper; the supplied artifact has its own identity.
+`selection_sha256` commits the selected wrapper, the complete successful
+candidate list and the seal event hash. `protocol_sha256` identifies the session
+configuration; the caller must separately freeze a complete scientific protocol.
+
+The verifier checks the receipt and configuration commitments, selected wrapper
+and exact artifact contents, candidate-list membership, linked trace and usage
+accounting. It requires one successful seal immediately before the single
+terminal successful held-out evaluation, with no proposer charge or usage
+increase for that evaluation. It then resolves the independently expected
+attempt with `registry.get_attempt(expected_attempt_id)`. The durable attempt
+must have succeeded with one cooperating callback invocation, the evaluation
+consumption role, and the expected registry, binding, manifest and result
+identities. The receipt's decision, freshness fields and result must agree with
+that durable record. Missing, failed or unknown attempts cannot be upgraded by
+recomputing receipt or trace hashes.
+
+`get_attempt` is the verifier's only registry access. It does not score, invoke
+callbacks, materialize batches, consume development data or request a current
+registry snapshot. A later registry revision does not revoke a recorded
+successful attempt. Development exposure must still cross the existing
+consumption boundary before feedback or other development use; verifying an
+evaluation receipt does not record that exposure or repair missing history.
+
+The separate [synthetic verification receipt](../../../provenance/verification/registered-evaluation-verifier-20261109.json)
+records a completed check against captured source for these evidence and
+accounting boundaries. This engineering check establishes no scientific or
+application outcome. The verifier checks agreement with the caller-trusted
+registry and expectations; it does not attest
+evaluator execution or source provenance, inspect evaluator output for leakage,
+establish semantic independence or scientific freshness, or certify useful
+behavior. The receipt's assurance flags remain false. See the
+[data-role supplement](../../research/evaluation-data-roles.md#registered-session-evidence-verifier-supplement-november-9-2026)
+for the durable-evidence scope and retained Issue #2 limits.
+
 
 For a study, pair this interface record with the [methods](methods.md): the
 proposer mechanism, actual computation, independent units, comparator, selection
