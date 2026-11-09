@@ -44,10 +44,10 @@
   "source": {
     "inventory": {
       "path": "provenance/source-files.json",
-      "bytes": 2483357,
-      "sha256": "63c0569670b19a8b2d03470e6a8b7eef1e7b93f7077dfd741f9430e21bf368bb"
+      "bytes": 2483433,
+      "sha256": "57168f8a4668036e3408c038c0d2f5fd79da21afb7517e505b7308ba625cb382"
     },
-    "identity_policy": "Original source paths, SHA-256 values, byte lengths, order and all other source-index fields remain unchanged. The earlier six preservation destinations remain under provenance/original-files/. Two later destinations archive exact workflow and test originals under artifacts/research/source-preservation/. The pre-research inventory preserves earlier mapping bytes. Privacy derivatives remain separately disclosed in the sanitation ledger.",
+    "identity_policy": "Original source paths, SHA-256 values, byte lengths, order and all other source-index fields remain unchanged. The earlier six preservation destinations remain under provenance/original-files/. The registered data-role update archives two exact workflow/test originals under artifacts/research/source-preservation/; the bounded feature-feasibility update separately archives the exact feature compiler original there. The pre-research inventory preserves earlier mapping bytes. Privacy derivatives remain separately disclosed in the sanitation ledger.",
     "sanitization": {
       "path": "provenance/public-sanitization.json",
       "bytes": 110282,
@@ -140,6 +140,22 @@
       ],
       "original_identities_changed": false,
       "interpretation": "Exact historical originals are archived separately from the later tested implementation; not a scientific rerun or redaction."
+    },
+    "bounded_feature_feasibility_preservation_update": {
+      "review_date": "2026-11-09",
+      "source_commit": "0744b1a6420665cb259976d8dac01d0638d6585b",
+      "records": [
+        {
+          "original_path": "rlcd/weight_space/features.py",
+          "preserved": {
+            "path": "artifacts/research/source-preservation/bounded-feature-feasibility-20261109/rlcd/weight_space/features.py",
+            "bytes": 11915,
+            "sha256": "3293e01e4524eb7af5b58d7eba344a0090c6fc3f95488db6486d9379ee323f8b"
+          }
+        }
+      ],
+      "original_identities_changed": false,
+      "interpretation": "Exact original source bytes are archived separately from the later tested diagnostics; not a scientific rerun or redaction."
     }
   },
   "core_documentation": {
@@ -151,8 +167,8 @@
       },
       {
         "path": "CHANGELOG.md",
-        "bytes": 17092,
-        "sha256": "3941088b494de317dcda005748fac4aec4bd93da30e14d0d440290b89851095d"
+        "bytes": 18959,
+        "sha256": "402b907e21e2a331725415803c06c30f273a6a23fc5cf4d53cfddec2444c3692"
       },
       {
         "path": "CONTRIBUTING.md",
@@ -291,8 +307,8 @@
       },
       {
         "path": "docs/research/issue-acceptance-status.md",
-        "bytes": 136583,
-        "sha256": "f7da4ba63e2c4a1ec4a5385a1eab60432725b28b19df813cc2a5075458096ad4"
+        "bytes": 143273,
+        "sha256": "039507f192450cc7772fd0177bb39c07810d0bf65c5339324ed3b8a61f6673a5"
       },
       {
         "path": "docs/research/live-studies.md",
@@ -326,8 +342,8 @@
       },
       {
         "path": "docs/research/trained-applications.md",
-        "bytes": 37456,
-        "sha256": "ad1362853c050f2f25a3fbafcfe8a70aefa25a31d767b22bb7735e2f11f1d2b3"
+        "bytes": 38224,
+        "sha256": "2177a21c2ff40c61568793da71be6c908c4ba8151fb699f1fc52cd14907e66b4"
       },
       {
         "path": "docs/research/trained-symmetry-pilot-criterion-map.md",
@@ -341,8 +357,13 @@
       },
       {
         "path": "docs/research/evaluation-data-roles.md",
-        "bytes": 23277,
-        "sha256": "346e22c7081a86accadd3183b179087fa20ad60c56ee3a22fa2cc904b8548b79"
+        "bytes": 33106,
+        "sha256": "1a41c4ac095821ee62f6f7bb74846dc76feb7db41bedc031889cb93916073960"
+      },
+      {
+        "path": "docs/research/feature-feasibility.md",
+        "bytes": 8911,
+        "sha256": "53ab02fff90060d57a7f35ee06d6d2f3023f50bb054ca032dcfbccca4e23f2ed"
       }
     ],
     "runnable_illustrations": [
@@ -525,14 +546,14 @@
     },
     "acceptance_map": {
       "path": "docs/research/issue-acceptance-status.md",
-      "bytes": 136583,
-      "sha256": "f7da4ba63e2c4a1ec4a5385a1eab60432725b28b19df813cc2a5075458096ad4"
+      "bytes": 143273,
+      "sha256": "039507f192450cc7772fd0177bb39c07810d0bf65c5339324ed3b8a61f6673a5"
     }
   },
   "verification_archive": {
     "path": "provenance/verification/index.json",
-    "bytes": 136639,
-    "sha256": "7202389e53374f2dbea71947a217975d87a5dd83ac6eba5bbbdb62084d16e6bf"
+    "bytes": 137832,
+    "sha256": "809195ab593695a83233a07b27998c0a9887041085d467eeaf9d2a928a3b2921"
   },
   "public_npm_lock_review": {
     "path": "provenance/public-npm-lock.json",
@@ -779,5 +800,30 @@
     "new_wheel_or_proof_build": false,
     "hosted_success_inferred": false,
     "receipt_policy": "The separate later receipt binds tested source and configuration bytes; earlier source-check entries retain their historical scope."
+  },
+  "bounded_feature_feasibility_update": {
+    "review_date": "2026-11-09",
+    "verification": {
+      "path": "provenance/verification/bounded-feature-feasibility-20261109.json",
+      "bytes": 24867,
+      "sha256": "1ab13ac0807af771ce07301f17fbc1b0d08defea02cddda3562c48f2f16bd9b3"
+    },
+    "guide": {
+      "path": "docs/research/feature-feasibility.md",
+      "bytes": 8911,
+      "sha256": "53ab02fff90060d57a7f35ee06d6d2f3023f50bb054ca032dcfbccca4e23f2ed"
+    },
+    "scope": "bounded supplied-feature score-system diagnostics and configured fresh engineering fixtures",
+    "issue": 6,
+    "criteria": {
+      "c0": "supported_at_bounded_supplied_feature_score_diagnostic_scope",
+      "c1": "partial",
+      "c4": "partial"
+    },
+    "historical_outcomes_superseded": false,
+    "new_scientific_study": false,
+    "new_wheel_or_proof_build": false,
+    "hosted_success_inferred": false,
+    "receipt_policy": "The separate later receipt binds tested source/configuration bytes; earlier validation records retain their historical scope."
   }
 }

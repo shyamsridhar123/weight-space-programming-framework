@@ -25,7 +25,7 @@ The #3 canonical admission-runtime replay is successful for its dedicated frozen
 | [#3](#issue-3) | 6 | 0 | 0 | Eligible in stated scope |
 | [#4](#issue-4) | 6 | 0 | 0 | Eligible in stated scope |
 | [#5](#issue-5) | 4 | 3 | 0 | Keep open |
-| [#6](#issue-6) | 5 | 3 | 0 | Keep open |
+| [#6](#issue-6) | 6 | 2 | 0 | Keep open |
 | [#7](#issue-7) | 7 | 1 | 0 | Keep open |
 | [#8](#issue-8) | 6 | 2 | 0 | Keep open |
 | [#9](#issue-9) | 7 | 1 | 0 | Keep open |
@@ -38,7 +38,7 @@ The #3 canonical admission-runtime replay is successful for its dedicated frozen
 | [#16](#issue-16) | 5 | 2 | 1 | Keep open |
 | [#17](#issue-17) | 6 | 2 | 0 | Keep open |
 | [#18](#issue-18) | 8 | 0 | 0 | Eligible in stated scope |
-| **Total: 150** | **114** | **35** | **1** | No blanket closure |
+| **Total: 150** | **115** | **34** | **1** | No blanket closure |
 
 Eligibility is a local closure recommendation only when every original criterion is supported. It does not change GitHub state and does not extend a scoped empirical/theorem result to omitted architectures, data, costs, attacks or deployment behavior.
 
@@ -266,6 +266,17 @@ Each criterion links to one or more entries below. Public links resolve to sourc
 
 The five rubric definitions cover the requested c0 field inventory. The later registry/session and prospective support-runner source describes a cooperative authorization boundary over captured inputs and declared relationships. It does not establish semantic independence, authenticate provenance, supply missing historical reservations or create a fresh scientific cohort. Synthetic fixtures do not supply creation/transfer outcomes or enterprise service effects.
 
+<a id="e25"></a>
+**E25 — Bounded exact feature-score consistency and separate numerical/endpoint diagnostics.**
+
+- [docs/research/feature-feasibility.md](feature-feasibility.md)
+- [rlcd/weight_space/features.py](../../rlcd/weight_space/features.py)
+- [rlcd/weight_space/research_tasks.py](../../rlcd/weight_space/research_tasks.py)
+- [tests/test_feature_constraints.py](../../tests/test_feature_constraints.py)
+- [provenance/verification/bounded-feature-feasibility-20261109.json](../../provenance/verification/bounded-feature-feasibility-20261109.json) — 47 focused checks and 397 configured engineering checks passed on November 9, 2026, with three frozen-study deselections; captured inputs remained unchanged, with no provider calls or scientific study runs.
+
+This November 9 engineering extension diagnoses supplied dyadic real-score systems within deterministic exact limits, with per-output consistency, direct-checkable conflict witnesses and exact minimum squared norms where completed. Unfinished exact judgments remain unresolved; completed witnesses/judgments survive later limits. Numerical SVD/ridge proposals and stored endpoint residuals are separate. No generic exact-target admission/useful-success gate, rational executable proposal, trained development-only threshold sweep, fresh cohort or whole-domain proof is supplied.
+
 ## Original criteria and evidence
 
 <a id="issue-1"></a>
@@ -343,7 +354,7 @@ The five rubric definitions cover the requested c0 field inventory. The later re
 
 **Evidence:** [E01](#e01). This work-checklist entry inherits the complete original #6 assessment below, not merely the existence of its implementation or report.
 
-**Remaining requirement / scope limit:** General incompatible multi-target exact feasibility/conflict detection and a development-only threshold sweep remain missing; the fixed cutoff and demonstrated rank obstruction are narrower evidence.
+**Remaining requirement / scope limit:** The bounded supplied-feature consistency diagnostic is available in [E25](#e25). A development-only trained threshold sweep and a generic policy preventing exact-target conflicts from being admitted as exact useful success remain missing; exact resource exhaustion leaves unfinished judgments unresolved. Numerical proposals, stored endpoint retention and alternative argmax usefulness remain separate.
 
 #### #1 c7
 
@@ -786,7 +797,7 @@ The five rubric definitions cover the requested c0 field inventory. The later re
 <a id="issue-6"></a>
 ### #6 — [P1] Measure protected feature coverage, nullspace feasibility, and abstention
 
-**Issue-level gaps and limits:** General incompatible multi-target exact feasibility/conflict detection and a development-only threshold sweep remain missing; the fixed cutoff and demonstrated rank obstruction are narrower evidence.
+**Issue-level gaps and limits:** The bounded supplied-feature consistency diagnostic is available in [E25](#e25). A development-only trained threshold sweep and a generic policy preventing exact-target conflicts from being admitted as exact useful success remain missing; exact resource exhaustion leaves unfinished judgments unresolved. Numerical proposals, stored endpoint retention and alternative argmax usefulness remain separate.
 
 **Closure recommendation:** keep open; at least one original criterion is partial or open.
 
@@ -794,11 +805,11 @@ The five rubric definitions cover the requested c0 field inventory. The later re
 
 - [ ] Measure augmented-feature rank/nullity, singular values, numerical cutoff, conditioning, target energy outside protected span and required edit norm; handle incompatible multi-target constraints.
 
-**Status: partial.** Historical source disposition: `PARTIAL` ([E00](#e00)).
+**Status: supported.** Historical source disposition: `PARTIAL` ([E00](#e00)).
 
-**Evidence:** [E02](#e02) · [E04](#e04) · [E05](#e05). Released trained diagnostics include augmented rank/nullity, singular values, fixed numerical cutoff, conditioning, outside-span target energy, required norm and independent exact-dyadic modular-rank/rowwise-cap review.
+**Evidence:** [E02](#e02) · [E04](#e04) · [E05](#e05) · [E25](#e25). Released trained diagnostics retain augmented rank/nullity, singular values, fixed numerical cutoff, conditioning, outside-span target energy, required norm and independent exact-dyadic modular-rank/rowwise-cap review. The later bounded analyzer adds joint supplied-feature real-score consistency, per-output conflict witnesses and exact minimum squared norms, separately from numerical projection and stored endpoint residuals.
 
-**Remaining requirement / scope limit:** No general incompatible multi-target solver/diagnostic is established. Independent modular elimination is a rank bound within its stated scope, not full symbolic solution of all constraints.
+**Remaining requirement / scope limit:** Supported at the bounded supplied-feature diagnostic scope. Unfinished exact work/rational-growth judgments remain unresolved, and a modular lower bound alone does not establish exact nullity. Exact consistency/norms do not establish native representability, parameter-cap feasibility, alternative decision utility or a generic exact-target admission policy; numerical proposals may still be approximate.
 
 #### #6 c1
 
@@ -836,9 +847,9 @@ The five rubric definitions cover the requested c0 field inventory. The later re
 
 **Status: partial.** Historical source disposition: `PARTIAL` ([E00](#e00)).
 
-**Evidence:** [E02](#e02) · [E04](#e04) · [E05](#e05). The exact-dyadic review supports the full-row-rank zero-edit obstruction and preserves rejected/conflicting sampled targets in usefulness accounting.
+**Evidence:** [E02](#e02) · [E04](#e04) · [E05](#e05) · [E25](#e25). With protection rows in R and editable coefficients in its columns, full column rank forces a zero edit under exact real-score retention. The original checkbox's full-row-rank phrase is preserved; full row rank alone does not force zero nullity for a short, wide R. Existing trained review retains rejected/conflicting sampled targets in usefulness accounting. The later bounded analyzer detects joint exact-score conflicts with checkable witnesses and preserves unresolved outputs when exact limits stop further work.
 
-**Remaining requirement / scope limit:** General incompatible multi-target constraint detection remains incomplete. The demonstrated rank obstruction does not solve every possible target conflict.
+**Remaining requirement / scope limit:** A generic exact-target admission/useful-success gate remains incomplete. The compiler reports exact consistency while still emitting numerical ridge/nullspace proposals; it supplies neither an exact rational executable proposal nor a general conflict-rejection policy. Real-system infeasibility does not rule out every alternative argmax-useful edit, and exact feasibility does not certify a stored endpoint. The mathematical orientation is full column rank of the row-oriented editable protection design, including a bias column only when editable.
 
 #### #6 c5
 
@@ -1898,4 +1909,4 @@ The five rubric definitions cover the requested c0 field inventory. The later re
 
 ## Static document verification
 
-The original builder output was preserved before manual reconciliation from authenticated retained evidence. Static verification checks all eighteen issues, all 150 exact original checkbox lines and zero-based IDs exactly once, permitted statuses, issue totals and existing public relative evidence destinations. E24 separately links the completed durable lifecycle engineering verification receipt; its synthetic checks do not supersede the historical scientific evidence. Private commitments are explicitly nonpublic. Reconciliation executes no study, statistical analysis, native admission, provider, proof job or historical audit.
+The original builder output was preserved before manual reconciliation from authenticated retained evidence. Static verification checks all eighteen issues, all 150 exact original checkbox lines and zero-based IDs exactly once, permitted statuses, issue totals and existing public relative evidence destinations. E24 separately links the completed durable lifecycle engineering verification receipt. E25 links the later bounded feature-feasibility engineering receipt and supports only the stated diagnostic scope; neither supplement's synthetic checks supersede historical scientific evidence. Private commitments are explicitly nonpublic. Reconciliation executes no study, statistical analysis, native admission, provider, proof job or historical audit.

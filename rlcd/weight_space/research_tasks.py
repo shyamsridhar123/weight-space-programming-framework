@@ -19,8 +19,8 @@ from typing import Any
 import numpy as np
 
 from .artifact import TensorArtifact
-from .features import ReadoutHead, compile_feature_edit
-from .model import digest
+from .features import ReadoutHead, _analyze_feature_constraints, _editable_design, compile_feature_edit
+from .model import _TensorData, digest
 from .program import Program, apply_program, difference
 from .semantics import SemanticsAdapter, SemanticsRegistry
 
@@ -290,25 +290,25 @@ def modular_rank_witness(features: np.ndarray, *, prime: int = 2147483647) -> di
             "rank_shortfall_is_exact_nullity": False, "implementation_machine_checked": False}
 
 
-def feature_geometry(features: np.ndarray, targets: np.ndarray, *, cutoff: float = 1e-12) -> dict[str, Any]:
+def feature_geometry(features: np.ndarray, targets: np.ndarray, *, cutoff: float = 1e-12,
+                     desired_delta: Any | None = None) -> dict[str, Any]:
+    """Affine geometry, optionally including the requested joint score deltas."""
     if (features.ndim != 2 or targets.ndim != 2 or features.shape[1] != targets.shape[1]
             or not len(features) or not len(targets) or not np.isfinite(features).all()
             or not np.isfinite(targets).all() or not 0 < cutoff < 1):
         raise ValueError("Geometry needs finite aligned nonempty features and a relative cutoff")
-    h = np.column_stack((features.astype(np.float64), np.ones(len(features))))
-    t = np.column_stack((targets.astype(np.float64), np.ones(len(targets))))
-    _, singular, vh = np.linalg.svd(h, full_matrices=True)
-    threshold = cutoff*float(singular[0])
-    rank = int(np.count_nonzero(singular > threshold))
-    basis = vh[rank:].T
-    projected = t @ basis
-    energy = np.linalg.norm(projected, axis=1)**2 / np.maximum(np.linalg.norm(t, axis=1)**2, np.finfo(float).tiny)
+    h = _editable_design(features.astype(np.float64), True)
+    t = _editable_design(targets.astype(np.float64), True)
+    desired = None if desired_delta is None else _TensorData.capture(desired_delta).array()
+    _, analysis = _analyze_feature_constraints(t, h, desired, nullspace_rtol=cutoff)
+    protected = analysis["protected"]
     witness = modular_rank_witness(features)
-    return {"augmented_width": h.shape[1], "anchor_rows": len(features), "numerical_rank": rank,
-            "numerical_nullity": h.shape[1]-rank, "singular_values": singular.tolist(),
-            "relative_cutoff": cutoff, "absolute_cutoff": threshold,
-            "condition_number": None if singular[-1] == 0 else float(singular[0]/singular[-1]),
-            "target_projected_energy_fraction": energy.tolist(), "exact_rank_witness": witness,
+    return {"augmented_width": h.shape[1], "anchor_rows": len(features), "numerical_rank": protected["rank"],
+            "numerical_nullity": protected["nullity"], "singular_values": protected["singular_values"],
+            "relative_cutoff": cutoff, "absolute_cutoff": protected["absolute_cutoff"],
+            "condition_number": protected["condition_number"],
+            "target_projected_energy_fraction": analysis["projected_target"]["row_projected_energy_fraction"],
+            "exact_rank_witness": witness, "feature_constraints": analysis,
             "exact_score_lane": "only_zero_update" if witness["full_rank_certified"] else "unresolved_by_modular_lower_bound",
             "coverage_scope": "Supplied augmented learned features; no raw-text or image whole-domain claim"}
 
