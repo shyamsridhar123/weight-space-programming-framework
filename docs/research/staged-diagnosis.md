@@ -86,6 +86,72 @@ Only a `selected` diagnosis can proceed to repair. Unavailable preparation, diag
 
 Each phase is available once. An ordinary selector exception permits continuation only when its terminal receipt verifies; missing or changed evidence, persistence failure and cancellation invalidate the cohort attempt. Cohort-owned lanes reject direct public diagnosis/repair selection, so an individual lane cannot bypass the full-cohort barrier. Their public evaluation method is also denied: cohort evaluation uses the separate registered bridge below and adds no study evidence by itself. It is a trusted cooperative controller, not a Python sandbox, crash-recovery mechanism or independent execution attestation.
 
+### Selection-only admission for fixed diagnosis policies
+
+[`SelectionAdmission`](../../scripts/staged_diagnosis_selection.py) is a study-specific consumer of the public `StagedCohort` phases. The framework remains generic over captured tensor artifacts; this helper fixes the prospective `bias-outlier` and `metadata-uniform` policies, their views and budgets, and the common repair. It accepts one fresh, exact `StagedCohort` with matching roster, protocol and identities, `controls={}`, and no `evaluation_plan` key. The cohort constructor creates the previously nonexistent run directory before the admission owner is constructed. Do not call the cohort phases separately.
+
+After the trusted harness has selected reviewed source bytes, a concrete integration is:
+
+```python
+import hashlib
+from pathlib import Path
+
+from rlcd.weight_space.staged_cohort import PreparedMember, StagedCohort
+from scripts import staged_diagnosis_selection as selection
+
+run_dir = Path("runs/staged-selection-001")
+assignments = [
+    {"member_id": "case-outlier", "policy": "bias-outlier", "metadata_choice": None},
+    {
+        "member_id": "case-metadata",
+        "policy": "metadata-uniform",
+        "metadata_choice": {"row": 2, "direction": "bias_down"},
+    },
+]
+protocol = {"purpose": "selection-only fixed-policy engineering integration"}
+evaluator_id = "fixed-policy-evaluator-v1"
+attempt_id = "staged-selection-001"
+driver_sha256 = hashlib.sha256(Path(selection.__file__).read_bytes()).hexdigest()
+
+cohort = StagedCohort(
+    run_dir,
+    member_ids=[item["member_id"] for item in assignments],
+    protocol=protocol,
+    controls={},
+    evaluator_id=evaluator_id,
+    registry=registry,
+    attempt_id=attempt_id,
+)
+admission = selection.SelectionAdmission(
+    cohort,
+    run_dir,
+    assignments=assignments,
+    protocol=protocol,
+    registry_id=registry.registry_id,
+    evaluator_id=evaluator_id,
+    attempt_id=attempt_id,
+    driver_sha256=driver_sha256,
+)
+evidence = admission.run(prepare_member)
+checked_evidence = admission.admit()
+```
+
+The harness supplies the shared `registry` and `prepare_member(row)`. The callback receives a copied `member_index`/`member_id` row and returns an exact `PreparedMember` with its base, nonblank task ID and objective, and finite JSON preparation object. The helper supplies the fixed view, budgets and native map, overriding optional callback settings. The assignment list is nonempty, ordered and finite JSON, with unique nonblank member IDs and exactly the fields shown. An outlier assignment requires `metadata_choice=None`; a metadata assignment requires an integer row from 0 through 7 and direction `bias_up` or `bias_down`. These supplied choices are frozen inputs, not evidence that randomization occurred. Computing the driver digest in this example does not itself constitute source review.
+
+This consumer requires an exact `TensorArtifact` with architecture `trained-frozen-readout/1`, exactly `head.weight` of shape 9 by 32 and `head.bias` of shape 9, and finite values exactly representable in float32. The tensor schema still serializes values as binary64 (`dtype="float64"`). Weight row 8 must contain numeric zeros and bias row 8 must equal -64. Required metadata identities `encoder_sha256`, `preprocessing_sha256` and `feature_id` must each be lowercase 64-character hexadecimal strings. The helper clones the captured base through public serialization and uses `{"head.weight": "float32", "head.bias": "float32"}` as its construction native map. These checks establish the captured interface and declared identities; they do not establish training or genuine trained ancestry.
+
+The outlier policy makes one weight request for the eight ordinary bias coordinates, under a subset view with two tool calls and eight weight values. The metadata policy has no weight view, one tool call and zero weight values, and makes no queries. Both sessions allow one proposal and zero feedback, execution and token budgets; no feedback, forward or activation callback is registered. Repair makes no queries, including metadata. It uses only the sealed diagnosis to add -2 for `bias_up` or +2 for `bias_down` at the diagnosed ordinary bias coordinate, with intent `common-repair-v1`. The helper reproduces structured lowering with float32 native formats and `cast="round"`, verifies the lowering, parses the public literal program and checks exact-parent application. It also checks the fixed diagnosis's strict nested payloads.
+
+`run()` is one-shot. It captures independent finite-JSON snapshots of successful normal returns from preparation, diagnosis selection and repair selection. It verifies the complete diagnosis evidence before any repair construction, then checks the framework's complete repair barrier. Files left by an interrupted or failed phase cannot recreate its missing normal return. A premature `admit()` or repeated `run()` closes the owner. After a successful run, `admit()` rechecks the retained evidence and returns a fresh JSON copy of the frozen admission record.
+
+Admission rejects duplicate JSON keys, nonfinite values, unexpected schema fields, noncanonical receipt bytes, links or reparse points, and unexpected or missing evidence files. It retains accepted receipt bytes, phase-return snapshots and owned parent/repair artifact clones, then rechecks their serialization and hashes. The receipt body digest excludes the `sha256` field; the separate file digest covers the complete canonical receipt bytes and final newline. Missing or changed evidence, source bytes or owned objects permanently makes this live owner ineligible, even if the original bytes are restored. Genuine preparation callback failures can remain assigned as unavailable, and genuine denied, failed, invalid or abstained terminal stages retain their outcomes and evidence. No unavailable lane receipt is fabricated. A successful proposal followed by a denied seal remains an attempted candidate in the genuine receipt's `candidates`; the selected `candidate` and exported `repair_candidate` remain null.
+
+The returned `wsp-staged-selection-admission/1` record binds assignments, run identities, source hashes, phase-return hashes, both barriers and each receipt's body/file hashes. Its complete member entries include the captured parent, diagnosis candidate, selected repair candidate, outcomes and `repair_usable`. That last field is only a preliminary selected-candidate presence/non-no-op flag: it does not implement the v2 support, sign, native-bit or magnitude matching requirements or scientific endpoint acceptance. Full captured artifacts and receipt details remain private harness evidence.
+
+The source-pin scope is `reviewed_disk_format_compatibility_only`. Pins check reviewed on-disk format compatibility, not loaded-code identity, execution provenance or malicious Python behavior. Ownership rejects a second admission owner for the same live cohort object in the same process; it provides no durable identity, reload/resume, race defense or sandbox. This helper uses public framework methods and parsers rather than private framework state. It supplies no controls, final study endpoint seal, seeds, training, holdouts or scoring, and invokes neither `seal_endpoints` nor `evaluate_registered`. The framework repair barrier is not a final study seal. `evaluation_available`, `final_study_seal`, `trained_ancestry_established` and `causal_usefulness_established` remain `false`. Issue #9 c1 remains partial and the issue remains open; historical results and earlier receipt scopes are unchanged.
+
+The separate [selection-admission engineering receipt](../../provenance/verification/staged-selection-admission-20261109.json) records one passing focused genuine-receipt regression at its captured source snapshot: exit 0, one invocation, no retry or timeout. It used literal artifacts and no registered batches to check both fixed policies, preserved failure outcomes, duplicate live ownership, integrity-change/restoration rejection and interrupted phase returns. This establishes no structural usability, trained ancestry or scientific readiness.
+
 ### Optional evaluation-plan declaration
 
 Supplying `protocol["evaluation_plan"]` opts into a declaration contract validated before the exclusive run directory is created. Without that key, `controls` retains its existing contract of an arbitrary finite JSON object. The constructor captures the normalized protocol and controls in the immutable protocol receipt; later changes to caller inputs or returned copies do not change that capture.

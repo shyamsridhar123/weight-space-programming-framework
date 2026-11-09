@@ -7,6 +7,21 @@ research draft.
 
 ## Unreleased
 
+- Add [selection-only admission for fixed diagnosis policies](docs/research/staged-diagnosis.md#selection-only-admission-for-fixed-diagnosis-policies)
+  through the study-specific `SelectionAdmission` consumer of public cohort
+  phases. It retains three successful normal returns, exact receipt bytes and
+  owned artifacts; changed evidence permanently closes the live owner. The
+  fixed trained-head interface and policies remain separate from the generic
+  framework. Genuine unavailable and terminal failure outcomes are retained,
+  while `repair_usable` is only a selected/non-no-op preliminary flag. The
+  separate [engineering receipt](provenance/verification/staged-selection-admission-20261109.json)
+  records one passing focused genuine-receipt regression: exit 0, one invocation,
+  no retry or timeout, using literal artifacts and no registered batches at its
+  captured source snapshot. No structural usability, evaluation, final study
+  seal, trained ancestry or causal usefulness is established. Source pins cover
+  reviewed disk format compatibility only. Issue #9 c1 remains partial and open;
+  earlier receipt scopes and historical results are unchanged.
+
 - Route new accepted [factory publication](docs/research/dark-factory.md) through
   deterministic `factory/<run_id>` branches and durably journalled pull requests.
   Pending PRs block the queue until a separate merge is observed and fetched
