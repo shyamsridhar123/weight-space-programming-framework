@@ -1,0 +1,194 @@
+{
+  "schema": "wsp-staged-diagnosis-guard/1",
+  "date": "2026-11-09",
+  "scope": "Completed offline literal synthetic engineering guard; sanitized retrospective execution receipt",
+  "evaluated_source": {
+    "base_commit": "0744b1a6420665cb259976d8dac01d0638d6585b",
+    "module": "rlcd/weight_space/staged_diagnosis.py",
+    "module_sha256": "7a035773d13496f18600d5a55f5165e521231c04d8a9706451749bf7d3cb531c",
+    "coverage": "Recorded source snapshot plus the new module; this receipt does not verify later source or integration changes"
+  },
+  "execution": {
+    "entry_point": "python -B -m rlcd.weight_space.staged_diagnosis",
+    "process_launch_attempts": 2,
+    "attempts": [
+      {
+        "attempt": 1,
+        "interpreter_role": "default Python 3.12",
+        "arguments": [
+          "-B",
+          "-m",
+          "rlcd.weight_space.staged_diagnosis"
+        ],
+        "environment": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONPATH_role": "isolated source checkout; absolute value omitted"
+        },
+        "started_at_utc": "2026-11-09T12:19:39.4164818+00:00",
+        "finished_at_utc": "2026-11-09T12:19:39.7123151+00:00",
+        "duration_seconds": 0.2908897,
+        "exit_code": 1,
+        "result": "startup_import_failure",
+        "error_type": "ModuleNotFoundError",
+        "missing_module": "numpy",
+        "guard_executed": false,
+        "evaluator_callback_invocations": 0
+      },
+      {
+        "attempt": 2,
+        "interpreter_role": "existing project virtual-environment Python",
+        "arguments": [
+          "-B",
+          "-m",
+          "rlcd.weight_space.staged_diagnosis"
+        ],
+        "authorization": "One corrected invocation explicitly authorized after startup-only failure",
+        "environment": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+          "PYTHONNOUSERSITE": "1",
+          "HF_HUB_OFFLINE": "1",
+          "TRANSFORMERS_OFFLINE": "1",
+          "PYTHONPATH_role": "isolated source checkout; absolute value omitted"
+        },
+        "started_at_utc": "2026-11-09T12:22:53.3416753+00:00",
+        "finished_at_utc": "2026-11-09T12:22:54.4050104+00:00",
+        "duration_seconds": 1.0615844,
+        "exit_code": 0,
+        "result": "passed",
+        "guard_executed": true,
+        "evaluator_callback_invocations": 1,
+        "callback_count_basis": "On success, embedded assertions verify calls exactly diagnosis,repair,evaluation and the durable registry attempt has callback_invocations == 1"
+      }
+    ],
+    "timing_interpretation": "Recorded process duration only; no performance benchmark or causal-utility evidence",
+    "additional_guard_invocations_for_this_publication_slice": 0
+  },
+  "synthetic_callback_scope": {
+    "artifact_kind": "Literal generic TensorArtifact",
+    "data": "One literal synthetic row in a temporary SQLite data-role registry; row contents omitted",
+    "evaluator": "Asserts the literal repaired tensor endpoint; no model execution or scientific scoring",
+    "actual_evaluator_callback_invocations": 1,
+    "registry_evidence": "Embedded guard asserts the attempt succeeded and callback_invocations equals one"
+  },
+  "observed_guard_behaviors": [
+    "Diagnosis rejects extra repair-command fields, boolean or nonfinite confidence, and an out-of-bounds location",
+    "Repair and evaluation reject premature invocation; no repair broker exists before verified diagnosis",
+    "Diagnosis query surface denies repair submission",
+    "Diagnosis receipt exists durably and its exact identity is bound before the repair callback",
+    "Mutating the diagnosis copy supplied to repair does not replace the frozen diagnosis",
+    "Duplicate diagnosis, repair, evaluation and run-directory paths are rejected",
+    "Retained query closure is denied after sealing without changing terminal selection",
+    "Exactly one literal evaluator callback is authorized and durably recorded against the repair session",
+    "A recomputed diagnosis receipt replacement is rejected; restoring its original bytes does not reopen the invalidated run",
+    "A replaced repair receipt prevents evaluator invocation",
+    "Explicit diagnostic abstention prevents repair construction"
+  ],
+  "identity_evidence": {
+    "method": "SHA-256 file-byte comparisons already captured before and after each of the two launch attempts",
+    "source_hashes_shared_before_and_after_both_attempts": {
+      "docs/research/issue-acceptance-status.md": "e0ef42caede388766d8cad964a0b6d7fdc3034ef1669fb4c2991e1e1303bf6ca",
+      "docs/research/live-studies.md": "46e093c6888a4b83f11bd383a3201689d5b854659a080dc1808899e7d782b99d",
+      "docs/research/prospective-protocol-rubrics.md": "62a274f0c19980a31aab9ff46b83ea1136ead4399b780c1311473462f59ee6f8",
+      "experiments/research/live-studies/blind-diagnosis-protocol.json": "d2750eddc91a37597f26e450cf96fcf952a487cfeb2394fd9b1b3166ab42e938",
+      "experiments/research/live-studies/implementation-amendment.json": "bfc52527af95414858f8d5bdd252c13368814ef7aa9afe4c479eea31e833b081",
+      "experiments/research/live-studies/label-amendment.json": "524991c911a02a2bb9c6e53ab15763abbe044ddd142fc5d334ae8e9e6a20c224",
+      "experiments/research/live-studies/preparation-lock.json": "357637e9bb363ce0e27ef4dba584a3a89586cf56707ed29f52b674d7e4e1f6c8",
+      "experiments/research/live-studies/protocol-lock.json": "44a5ac8423a00bafab90cb609b368969acd22ec5daed1f3c61435528059738d8",
+      "experiments/research/live-studies/source-snapshot/rlcd/__init__.py": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/__init__.py": "1fc45e6b5185ea123d04630ab69f94aa7d65a8cba6e5deb78736f351f465ab12",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/artifact.py": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/broker.py": "c3ba7be6005b12bf7a42aae76b41948726e05fb854744e7d3d835ae6d3e87373",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/compiler.py": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/contracts.py": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/features.py": "3293e01e4524eb7af5b58d7eba344a0090c6fc3f95488db6486d9379ee323f8b",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/live_provider.py": "7319024ba4491922c07450352a317c2f81966b4631b39cc5419ea9284b2a95c3",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/model.py": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/program.py": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/research_tasks.py": "aadeaedc8cb8a3f0ba4220b25b8b6d701cef5890b4ba39e44ad3e8265fba48fb",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/semantics.py": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/sequential.py": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/structured.py": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/symmetry.py": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/workflow.py": "72f82f90cdad7c7dae559da331515506bd072fc8bb5450155cf5ab221668c520",
+      "experiments/research/live-studies/source-snapshot/scripts/run_live_studies.py": "acc241b1bf47c0fddb0cb3f13838c984b43a45761e997b994e41edb09d305d2f",
+      "experiments/research/live-studies/source-snapshot/scripts/run_trained_research.py": "7c043d9a33babb264adb970067c5a265506ef4453c2bf3bfe25d8797feeeed23",
+      "experiments/research/live-studies/weight-access-protocol.json": "d39e207131da8e751817ad657c29d09267c679fbe87c6b8cbdf5072c395d6937",
+      "rlcd/__init__.py": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418",
+      "rlcd/weight_space/__init__.py": "9d8cf6bd79b66b9946e50428af4b091f99f870bf68403126682f600b0715ea27",
+      "rlcd/weight_space/artifact.py": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500",
+      "rlcd/weight_space/broker.py": "35aefa162516f7e579f16784d006c404dd808b00e8f371dadfee7136c8edc900",
+      "rlcd/weight_space/data_roles.py": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851",
+      "rlcd/weight_space/model.py": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af",
+      "rlcd/weight_space/program.py": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd",
+      "rlcd/weight_space/staged_diagnosis.py": "7a035773d13496f18600d5a55f5165e521231c04d8a9706451749bf7d3cb531c",
+      "rlcd/weight_space/structured.py": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab",
+      "rlcd/weight_space/workflow.py": "1483c10339919a3c5e117c8ef3e2ee6848221a5fa13deda8356c313ac1a424f2",
+      "scripts/run_live_studies.py": "acc241b1bf47c0fddb0cb3f13838c984b43a45761e997b994e41edb09d305d2f"
+    },
+    "recorded_source_bytes_unchanged": true,
+    "frozen_tracked_files": [
+      "experiments/research/live-studies/blind-diagnosis-protocol.json",
+      "experiments/research/live-studies/implementation-amendment.json",
+      "experiments/research/live-studies/label-amendment.json",
+      "experiments/research/live-studies/preparation-lock.json",
+      "experiments/research/live-studies/protocol-lock.json",
+      "experiments/research/live-studies/source-snapshot/rlcd/__init__.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/__init__.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/artifact.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/broker.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/compiler.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/contracts.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/features.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/live_provider.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/model.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/program.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/research_tasks.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/semantics.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/sequential.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/structured.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/symmetry.py",
+      "experiments/research/live-studies/source-snapshot/rlcd/weight_space/workflow.py",
+      "experiments/research/live-studies/source-snapshot/scripts/run_live_studies.py",
+      "experiments/research/live-studies/source-snapshot/scripts/run_trained_research.py",
+      "experiments/research/live-studies/weight-access-protocol.json"
+    ],
+    "frozen_scope": "Every tracked file under experiments/research/live-studies in the recorded base checkout",
+    "original_startup_failure_evidence_unchanged": true,
+    "private_execution_receipt_identities": [
+      {
+        "role": "original startup-only failure",
+        "schema": "wsp-staged-diagnosis-private-check/1",
+        "sha256": "3d698ddaca9bd4e9890f18505aec395b305e69e978e96863a4fdbb6fc763669c"
+      },
+      {
+        "role": "authorized corrected project-interpreter pass",
+        "schema": "wsp-staged-diagnosis-private-check/2",
+        "sha256": "ad3a1a123619e82c1c0b5851be025efd429c299061abd08f36956ad37ee8ade0"
+      }
+    ]
+  },
+  "limits": {
+    "enforcement": "Cooperative trusted coordinator and exact receipt binding; no process sandbox or storage attestation",
+    "scientific_freshness_verified": false,
+    "causal_usefulness_established": false,
+    "issue9_c1_closed": false,
+    "historical_joint_selection_reclassified": false,
+    "frozen_protocols_or_outcomes_changed": false
+  },
+  "non_execution": {
+    "no_training_or_provider_execution": true,
+    "no_research_tasks_or_frozen_script_execution": true,
+    "no_heldout_study_execution": true,
+    "no_guard_rerun_for_publication": true
+  },
+  "publication": {
+    "derivation": "Selected fields from preserved private launch receipts and the already reviewed embedded guard source",
+    "omitted": [
+      "workstation paths",
+      "raw logs",
+      "registry-row contents"
+    ],
+    "private_receipt_hashes_are_commitments_not_public_reproduction_evidence": true
+  }
+}

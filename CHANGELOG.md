@@ -7,6 +7,13 @@ research draft.
 
 ## Unreleased
 
+- Added a prospective [diagnosis before repair lane](docs/research/staged-diagnosis.md)
+  with separate sealed sessions, durable exact-selection receipts and registered
+  evaluation gating. The [literal guard receipt](provenance/verification/staged-diagnosis-guard-20261109.json)
+  preserves both launch outcomes and its recorded source snapshot; later
+  integration validation is not inferred. Issue #9 c1 remains partial and
+  the historical negative joint-selection result is preserved.
+
 - Added [bounded supplied-feature score feasibility](docs/research/feature-feasibility.md)
   to the shared readout diagnostics: joint exact consistency, checkable conflict
   witnesses, and minimum squared edit norms, with explicit resource and numerical
