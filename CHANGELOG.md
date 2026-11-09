@@ -34,11 +34,23 @@ research draft.
   attempted artifacts. Signed zeros are canonicalized at artifact capture;
   original checkpoint signed-zero preservation is not established. Realized
   magnitude may differ from the prescribed 2. The existing admission schema and
-  preliminary `repair_usable` flag retain their meanings. Add one focused offline
-  regression separating literal helper failures from genuine admitted endpoints;
-  the earlier selection-admission receipt keeps its original source-snapshot scope.
+  preliminary `repair_usable` flag retain their meanings. The separate
+  [structural engineering receipt](provenance/verification/staged-repair-usability-20261109.json)
+  preserves the first signed-zero assertion failure and the corrected focused
+  pass, each with one invocation and no automatic retry or timeout. The check
+  separates literal helper cases from genuine admitted endpoints; the earlier
+  selection-admission receipt keeps its original source-snapshot scope.
   This structural method supplies no control matching. Final study sealing and
   scientific usefulness remain pending; Issue #9 c1 remains partial and open.
+
+- Retain allowlisted [factory acceptance diagnostics](docs/research/dark-factory.md)
+  for completed provider attempts: known outcome, first rejection code and only
+  validated criterion IDs. Acceptance, short-circuit and exception behavior stay
+  unchanged; legacy receipts are not backfilled. The separate
+  [engineering receipt](provenance/verification/factory-assessment-diagnostics-20261109.json)
+  records one passing focused offline invocation without retry or timeout.
+  Mocked worker checkpoint and validator checks establish no live provider,
+  scheduler, recovery or research outcome.
 
 - Add [selection-only admission for fixed diagnosis policies](docs/research/staged-diagnosis.md#selection-only-admission-for-fixed-diagnosis-policies)
   through the study-specific `SelectionAdmission` consumer of public cohort
