@@ -119,14 +119,52 @@ def factory_env(tmp_path, monkeypatch):
     issue = {"number": 2, "state": "open", "title": "[P0] offline fixture",
              "body": "- [ ] implement\nDependencies for the final claim: None; independent."}
     env = SimpleNamespace(root=root, remote=remote, state=state, git=git, issue=issue, issues=[issue],
-                          calls=[], comments=[], commands=[], mode="accept", crashed=False,
+                          calls=[], comments=[], pull_requests=[], commands=[], provider_calls=[],
+                          mode="accept", auto_merge=True, crashed=False,
                           before_github=lambda *args: None, after_github=lambda *args: None,
                           after_command=lambda *args: None)
+    repository = {"id": factory.REPOSITORY_ID, "full_name": factory.REPOSITORY}
+
+    def merge_pull_request(pull_request=None, *, delete_branch=False):
+        pull_request = pull_request or env.pull_requests[-1]
+        if not pull_request["merged"]:
+            candidate = pull_request["head"]["sha"]
+            base = git(remote, "rev-parse", "refs/heads/main")
+            tree = git(remote, "rev-parse", candidate + "^{tree}")
+            merged = git(remote, "-c", "user.name=Offline merger", "-c", "user.email=fixture@example.invalid",
+                         "commit-tree", tree, "-p", base, "-p", candidate, "-m", "Externally merged offline PR")
+            git(remote, "update-ref", "refs/heads/main", merged, base)
+            pull_request.update(state="closed", merged=True, merged_at="2026-11-09T00:00:00Z",
+                                merge_commit_sha=merged)
+        if delete_branch:
+            git(remote, "update-ref", "-d", "refs/heads/" + pull_request["head"]["ref"])
+        return pull_request["merge_commit_sha"]
+
+    def create_pull_request(data):
+        branch = data["head"]
+        candidate = git(remote, "rev-parse", "refs/heads/" + branch)
+        pull_request = {"number": len(env.pull_requests) + 1, "id": len(env.pull_requests) + 100,
+                        "title": data["title"], "body": data["body"], "state": "open", "draft": data["draft"],
+                        "merged": False, "merged_at": None, "merge_commit_sha": None,
+                        "html_url": "https://github.com/" + factory.REPOSITORY + "/pull/" + str(len(env.pull_requests) + 1),
+                        "head": {"ref": branch, "sha": candidate, "repo": dict(repository)},
+                        "base": {"ref": data["base"], "sha": git(remote, "rev-parse", "refs/heads/main"),
+                                 "repo": dict(repository)}}
+        env.pull_requests.append(pull_request)
+        if env.auto_merge:
+            merge_pull_request(pull_request)
+        return pull_request
+
+    env.merge_pull_request = merge_pull_request
+    env.create_pull_request = create_pull_request
+
     def github(method, path, data=None):
         env.calls.append((method, path))
         if method in {"POST", "PATCH"}:
-            assert git(root, "rev-parse", "HEAD") == git(remote, "rev-parse", "refs/heads/main")
-            operation = "comment" if method == "POST" else "close"
+            is_pull_request = path == f"/repos/{factory.REPOSITORY}/pulls"
+            if not is_pull_request:
+                assert git(root, "rev-parse", "HEAD") == git(remote, "rev-parse", "refs/heads/main")
+            operation = "pull-request" if is_pull_request else "comment" if method == "POST" else "close"
             journal_path = next(state.glob(f"*/github-{operation}.json"))
             journal = json.loads(journal_path.read_text())
             retained = json.loads((journal_path.parent / "result.json").read_text())
@@ -134,7 +172,23 @@ def factory_env(tmp_path, monkeypatch):
             assert journal["candidate_commit"] == retained["candidate_commit"]
             assert journal["run_id"] == retained["run_id"] and journal["issue"] == issue["number"]
             assert journal["request_sha256"] == factory.digest(data)
+            if is_pull_request:
+                assert method == "POST" and journal["operation"] == "pull-request"
+                assert journal["repository"] == factory.REPOSITORY and journal["repository_id"] == factory.REPOSITORY_ID
+                assert journal["issue_sha256"] == retained["issue_sha256"]
+                assert journal["base_commit"] == retained["base_commit"]
+                assert data["head"] == "factory/" + retained["run_id"]
+                assert data["base"] == "main" and data["draft"] is False
+                assert data["title"] == f"factory: accepted work for #{issue['number']}"
+                assert git(root, "rev-parse", "HEAD") == retained["base_commit"]
+                assert git(remote, "rev-parse", "refs/heads/main") == retained["base_commit"]
         env.before_github(method, path, data)
+        if method == "GET" and "/pulls?" in path:
+            page = int(path.rsplit("page=", 1)[1])
+            return json.loads(json.dumps(env.pull_requests[(page - 1) * 100:page * 100]))
+        if method == "GET" and "/pulls/" in path:
+            number = int(path.rsplit("/", 1)[1])
+            return json.loads(json.dumps(next(pr for pr in env.pull_requests if pr["number"] == number)))
         if method == "GET" and "/comments?" in path:
             page = int(path.rsplit("page=", 1)[1])
             return env.comments[(page - 1) * 100:page * 100]
@@ -144,6 +198,10 @@ def factory_env(tmp_path, monkeypatch):
         if method == "GET" and path == "/repos/" + factory.REPOSITORY:
             return {"id": factory.REPOSITORY_ID, "full_name": factory.REPOSITORY,
                     "visibility": "public", "default_branch": "main", "archived": False}
+        if method == "POST" and path == f"/repos/{factory.REPOSITORY}/pulls":
+            pull_request = create_pull_request(data)
+            env.after_github(method, path, data)
+            return json.loads(json.dumps(pull_request))
         if method == "POST":
             comment = {"id": len(env.comments) + 1, "body": data["body"]}
             env.comments.append(comment)
@@ -158,6 +216,7 @@ def factory_env(tmp_path, monkeypatch):
         def __init__(self, **options):
             self.role = "reviewer" if options.get("sandbox") == "read-only" else "worker"
         def call(self, prompt, *, directory, cwd, schema):
+            env.provider_calls.append(self.role)
             directory.mkdir()
             response = assessment()
             if self.role == "worker":
@@ -176,7 +235,7 @@ def factory_env(tmp_path, monkeypatch):
     original_command = factory.command
     def command(name, argv, **kwargs):
         env.commands.append(name)
-        if name in {"integrate", "push"}:
+        if name in {"integrate", "pr_branch_push"}:
             retained = json.loads((kwargs["run"] / "result.json").read_text())
             assert retained["candidate_commit"] and retained["status"] in {"accepted", "pending"}
         if name == "python_suite":
@@ -208,7 +267,11 @@ def factory_env(tmp_path, monkeypatch):
 
 
 def mutations(env, method):
-    return sum(actual == method for actual, _ in env.calls)
+    return sum(actual == method and "/pulls" not in path for actual, path in env.calls)
+
+
+def pull_request_mutations(env):
+    return sum(method == "POST" and path == f"/repos/{factory.REPOSITORY}/pulls" for method, path in env.calls)
 
 
 def run_cycle(env):
@@ -220,14 +283,30 @@ def crash(env):
     raise SimulatedCrash()
 
 
+def assert_pending_candidate(env, result):
+    assert result["status"] == "pending" and not result["recovery_complete"]
+    assert result["candidate_commit"] and env.issue["state"] == "open"
+    assert "failure_commit" not in result and "failure_publication" not in result
+    assert not (env.state / result["run_id"] / "failure-public.json").exists()
+    assert not (env.root / "artifacts/factory" / result["run_id"] / "failure.json").exists()
+    assert not any(name.startswith("failure_") for name in env.commands)
+    assert "push" not in env.commands
+    assert mutations(env, "PATCH") == 0
+
+
 @pytest.mark.parametrize("mode", ["accept", "partial", "reviewer_mutates"])
-def test_cycle_pushes_before_closing_and_quarantines_failed_work(factory_env, mode):
+def test_cycle_waits_for_pr_merge_before_closing_and_quarantines_failed_work(factory_env, mode):
     env = factory_env
     env.mode = mode
     result = run_cycle(env)
     if mode == "accept":
         assert result["status"] == "completed" and env.issue["state"] == "closed"
+        assert result["publication_mode"] == "pull_request"
+        assert pull_request_mutations(env) == 1 and env.pull_requests[0]["merged"]
         assert mutations(env, "POST") == mutations(env, "PATCH") == 1
+        assert "push" not in env.commands and "failure_push" not in env.commands
+        assert env.commands.index("merged_remote_fetch") < env.commands.index("merged_candidate_ancestor")
+        assert env.commands.index("merged_candidate_ancestor") < env.commands.index("integrate")
         assert (env.root / "README.md").read_text() == "implemented"
         assert result["stages"].index("published_commit_verified") < result["stages"].index("issue_closed_after_publication")
     else:
@@ -255,7 +334,7 @@ def test_lost_github_response_is_reconciled_without_repeating_mutation(factory_e
     assert journal["status"] == "confirmed" and journal["response_error"] == "ConnectionError"
 
 
-@pytest.mark.parametrize("boundary", ["integrate", "push", "POST", "PATCH"])
+@pytest.mark.parametrize("boundary", ["integrate", "pr_branch_push", "POST", "PATCH"])
 def test_crash_recovers_observed_effects_and_preserves_receipts(factory_env, boundary):
     env = factory_env
     # Recovery must locate its marker even when it is on the second page.
@@ -277,7 +356,9 @@ def test_crash_recovers_observed_effects_and_preserves_receipts(factory_env, bou
     assert recovered["status"] == "completed" and recovered["recovery_complete"]
     assert env.issue["state"] == "closed"
     assert mutations(env, "POST") == mutations(env, "PATCH") == 1
-    assert env.commands.count("integrate") == env.commands.count("push") == 1
+    assert pull_request_mutations(env) == 1
+    assert env.commands.count("integrate") == env.commands.count("pr_branch_push") == 1
+    assert "push" not in env.commands and "failure_push" not in env.commands
     assert all((run / name).read_bytes() == content for name, content in before.items())
     assert any("comments?per_page=100&page=2" in path for _, path in env.calls)
     assert factory.recover_pending(env.state, publish=True) == []
@@ -288,7 +369,7 @@ def test_unobserved_request_remains_pending_and_blocks_queue(factory_env, monkey
     env = factory_env
     delayed_request = {}
     def lose_request(actual, path, data):
-        if actual == method:
+        if actual == method and "/issues/" in path:
             delayed_request.update(data)
             raise ConnectionError("outcome unknown")
     env.before_github = lose_request
@@ -314,8 +395,8 @@ def test_unobserved_request_remains_pending_and_blocks_queue(factory_env, monkey
     assert "recovery_error" not in completed and mutations(env, method) == 1
 
 
-@pytest.mark.parametrize("boundary", ["integrate", "comment_read"])
-def test_failures_after_integration_or_push_publish_safe_accounting(factory_env, boundary):
+@pytest.mark.parametrize("boundary", ["pr_branch_remote", "pr_branch_verify", "merged_remote_fetch", "integrate", "comment_read"])
+def test_ordinary_errors_after_candidate_remain_pending_without_failure_accounting(factory_env, monkeypatch, boundary):
     env = factory_env
     private_error = "ghp_" + "Z" * 40
     def fail_command(name, *_):
@@ -327,17 +408,267 @@ def test_failures_after_integration_or_push_publish_safe_accounting(factory_env,
     env.after_command = fail_command
     env.before_github = fail_comment_read
     result = run_cycle(env)
-    assert result["status"] == "failed" and result["recovery_complete"]
-    assert result["failure_publication"] == "published"
+    assert_pending_candidate(env, result)
     assert result["candidate_commit"] != result["base_commit"]
-    assert result["failure_base_commit"] == result["candidate_commit"]
-    assert env.git(env.remote, "rev-parse", "refs/heads/main") == result["failure_commit"]
-    assert env.issue["state"] == "open" and mutations(env, "POST") == mutations(env, "PATCH") == 0
-    failure_path = env.root / "artifacts/factory" / result["run_id"] / "failure.json"
-    failure = json.loads(failure_path.read_text())
-    assert failure["error"] == "RuntimeError" and private_error not in failure_path.read_text()
-    assert failure["candidate_commit"] == result["candidate_commit"]
-    assert audit(env.root)["ok"]
+    assert private_error not in json.dumps(result)
+    def fail_finish(*args):
+        raise RuntimeError(private_error)
+    monkeypatch.setattr(factory, "finish_candidate", fail_finish)
+    recovered, = factory.recover_pending(env.state, publish=True)
+    assert_pending_candidate(env, recovered)
+    assert private_error not in json.dumps(recovered)
+    assert env.provider_calls == ["worker", "reviewer"]
+
+
+def test_pr_body_keeps_review_closing_keywords_in_retained_artifact(factory_env, monkeypatch):
+    env = factory_env
+    env.auto_merge = False
+    original_assessment = assessment
+    def closing_keyword_assessment(evidence="README.md"):
+        return original_assessment(evidence) | {"summary": "Fixes #2", "claim_scope": "Resolves #2"}
+    monkeypatch.setitem(globals(), "assessment", closing_keyword_assessment)
+    result = run_cycle(env)
+    assert_pending_candidate(env, result)
+    body = env.pull_requests[0]["body"]
+    assert "Fixes #2" not in body and "Resolves #2" not in body
+    assert f"/blob/{result['candidate_commit']}/artifacts/factory/{result['run_id']}/cycle.json" in body
+    artifact = env.state / result["run_id"] / "worktree" / "artifacts/factory" / result["run_id"] / "cycle.json"
+    retained_review = json.loads(artifact.read_text())["reviewer_assessment"]
+    assert retained_review["summary"] == "Fixes #2"
+    assert retained_review["claim_scope"] == "Resolves #2"
+
+
+def test_open_pr_blocks_queue_without_repeating_worker_or_publication(factory_env, monkeypatch):
+    env = factory_env
+    env.auto_merge = False
+    result = run_cycle(env)
+    assert_pending_candidate(env, result)
+    assert env.git(env.root, "rev-parse", "HEAD") == result["base_commit"]
+    assert env.git(env.remote, "rev-parse", "refs/heads/main") == result["base_commit"]
+    assert env.git(env.remote, "rev-parse", "refs/heads/factory/" + result["run_id"]) == result["candidate_commit"]
+    assert pull_request_mutations(env) == 1 and mutations(env, "POST") == 0
+    recovered, = factory.recover_pending(env.state, publish=True)
+    assert_pending_candidate(env, recovered)
+    monkeypatch.setattr(factory, "cycle", lambda *args, **kwargs: pytest.fail("selected work while PR pending"))
+    monkeypatch.setattr(sys, "argv", ["dark_factory.py", "run", "--state-directory", str(env.state),
+                                      "--publish", "--max-issues", "2"])
+    assert factory.main() == 1
+    assert env.provider_calls == ["worker", "reviewer"]
+    assert env.commands.count("pr_branch_push") == pull_request_mutations(env) == 1
+    assert not (env.state / "factory.lock").exists()
+
+
+def test_merged_pr_completes_after_source_branch_deletion(factory_env):
+    env = factory_env
+    env.auto_merge = False
+    result = run_cycle(env)
+    assert_pending_candidate(env, result)
+    merged = env.merge_pull_request(delete_branch=True)
+    recovered, = factory.recover_pending(env.state, publish=True)
+    assert recovered["status"] == "completed" and recovered["recovery_complete"]
+    assert env.issue["state"] == "closed"
+    assert env.git(env.root, "rev-parse", "HEAD") == merged
+    assert env.git(env.remote, "rev-parse", "refs/heads/main") == merged
+    assert env.commands.count("pr_branch_push") == pull_request_mutations(env) == 1
+    assert mutations(env, "POST") == mutations(env, "PATCH") == 1
+    assert env.provider_calls == ["worker", "reviewer"]
+
+
+def test_pr_reconciliation_reads_every_page_and_full_detail(factory_env):
+    env = factory_env
+    base = env.git(env.root, "rev-parse", "HEAD")
+    repository = {"id": factory.REPOSITORY_ID, "full_name": factory.REPOSITORY}
+    env.pull_requests = [{"number": number, "id": number + 100, "title": "unrelated PR",
+                          "body": f"unrelated PR {number}", "state": "closed", "draft": False,
+                          "merged": False, "merged_at": None, "merge_commit_sha": None,
+                          "head": {"ref": f"unrelated-{number}", "sha": base, "repo": dict(repository)},
+                          "base": {"ref": "main", "sha": base, "repo": dict(repository)}}
+                         for number in range(1, 101)]
+    result = run_cycle(env)
+    assert result["status"] == "completed" and result["recovery_complete"]
+    assert result["pull_request_number"] == 101 and pull_request_mutations(env) == 1
+    assert any("pulls?state=all&per_page=100&page=2" in path for _, path in env.calls)
+    assert ("GET", f"/repos/{factory.REPOSITORY}/pulls/101") in env.calls
+
+
+@pytest.mark.parametrize("conflict", ["unpublished_merge", "uncontained_merge_commit", "changed_head"])
+def test_merged_pr_requires_remote_candidate_and_merge_containment(factory_env, conflict):
+    env = factory_env
+    env.auto_merge = False
+    result = run_cycle(env)
+    assert_pending_candidate(env, result)
+    env.merge_pull_request()
+    pull_request = env.pull_requests[0]
+    if conflict == "unpublished_merge":
+        env.git(env.remote, "update-ref", "refs/heads/main", result["base_commit"])
+    elif conflict == "uncontained_merge_commit":
+        tree = env.git(env.remote, "rev-parse", result["candidate_commit"] + "^{tree}")
+        pull_request["merge_commit_sha"] = env.git(
+            env.remote, "-c", "user.name=Offline merger", "-c", "user.email=fixture@example.invalid",
+            "commit-tree", tree, "-p", result["candidate_commit"], "-m", "Uncontained offline merge receipt")
+    else:
+        pull_request["head"]["sha"] = result["base_commit"]
+    recovered, = factory.recover_pending(env.state, publish=True)
+    assert_pending_candidate(env, recovered)
+    assert env.git(env.root, "rev-parse", "HEAD") == result["base_commit"]
+    assert "integrate" not in env.commands
+    assert pull_request_mutations(env) == env.commands.count("pr_branch_push") == 1
+    assert env.provider_calls == ["worker", "reviewer"]
+
+
+@pytest.mark.parametrize("boundary", ["pr_branch_push", "pull_request_post"])
+def test_lost_publication_response_reconciles_one_branch_and_pr(factory_env, boundary):
+    env = factory_env
+    def lose_command(name, *_):
+        if boundary == name:
+            raise ConnectionError("offline lost branch push response")
+    def lose_response(method, path, _):
+        if boundary == "pull_request_post" and method == "POST" and path.endswith("/pulls"):
+            raise ConnectionError("offline lost PR response")
+    env.after_command = lose_command
+    env.after_github = lose_response
+    result = run_cycle(env)
+    assert result["status"] == "completed" and result["recovery_complete"]
+    assert env.commands.count("pr_branch_push") == pull_request_mutations(env) == 1
+    assert mutations(env, "POST") == mutations(env, "PATCH") == 1
+    assert "push" not in env.commands and "failure_push" not in env.commands
+    if boundary == "pull_request_post":
+        journal = json.loads((env.state / result["run_id"] / "github-pull-request.json").read_text())
+        assert journal["status"] == "confirmed" and journal["response_error"] == "ConnectionError"
+
+
+def test_unobserved_pr_request_is_not_repeated_and_later_observation_recovers(factory_env):
+    env = factory_env
+    delayed_request = {}
+    def lose_request(method, path, data):
+        if method == "POST" and path.endswith("/pulls"):
+            delayed_request.update(data)
+            raise ConnectionError("offline delayed PR creation")
+    env.before_github = lose_request
+    result = run_cycle(env)
+    assert_pending_candidate(env, result)
+    assert pull_request_mutations(env) == 1 and not env.pull_requests
+    env.before_github = lambda *args: None
+    recovered, = factory.recover_pending(env.state, publish=True)
+    assert_pending_candidate(env, recovered)
+    assert pull_request_mutations(env) == 1 and not env.pull_requests
+    env.create_pull_request(delayed_request)
+    completed, = factory.recover_pending(env.state, publish=True)
+    assert completed["status"] == "completed" and completed["recovery_complete"]
+    assert pull_request_mutations(env) == 1
+    assert env.provider_calls == ["worker", "reviewer"]
+
+
+@pytest.mark.parametrize("conflict", ["duplicate", "head", "closed", "binding", "body", "repository", "base"])
+def test_pr_or_journal_conflicts_remain_pending_without_republication(factory_env, conflict):
+    env = factory_env
+    env.auto_merge = False
+    result = run_cycle(env)
+    assert_pending_candidate(env, result)
+    pull_request = env.pull_requests[0]
+    if conflict == "duplicate":
+        env.pull_requests.append(json.loads(json.dumps(pull_request)) | {"number": 2, "id": 101})
+    elif conflict == "head":
+        pull_request["head"]["sha"] = result["base_commit"]
+    elif conflict == "closed":
+        pull_request["state"] = "closed"
+    elif conflict == "body":
+        pull_request["body"] += "changed"
+    elif conflict == "repository":
+        pull_request["head"]["repo"]["id"] += 1
+    elif conflict == "base":
+        pull_request["base"]["ref"] = "another-base"
+    else:
+        journal_path = env.state / result["run_id"] / "github-pull-request.json"
+        journal = json.loads(journal_path.read_text())
+        factory.write_json(journal_path, journal | {"candidate_commit": "f" * 40})
+    recovered, = factory.recover_pending(env.state, publish=True)
+    assert_pending_candidate(env, recovered)
+    assert pull_request_mutations(env) == env.commands.count("pr_branch_push") == 1
+    assert env.provider_calls == ["worker", "reviewer"]
+
+
+@pytest.mark.parametrize("arrival", ["candidate", "pr_branch_remote"])
+def test_existing_or_racing_conflicting_branch_is_not_overwritten(factory_env, arrival):
+    env = factory_env
+    env.auto_merge = False
+    def occupy_branch(name, run):
+        if name == arrival:
+            retained = json.loads((run / "result.json").read_text())
+            env.git(env.remote, "update-ref", "refs/heads/factory/" + retained["run_id"], retained["base_commit"])
+    env.after_command = occupy_branch
+    result = run_cycle(env)
+    assert_pending_candidate(env, result)
+    assert pull_request_mutations(env) == 0
+    assert env.git(env.remote, "rev-parse", "refs/heads/factory/" + result["run_id"]) == result["base_commit"]
+    assert env.git(env.remote, "rev-parse", "refs/heads/main") == result["base_commit"]
+
+
+@pytest.mark.parametrize("publication_mode", ["pull_request", None])
+def test_failure_accounting_defensively_refuses_accepted_candidate_before_writing(factory_env, publication_mode):
+    env = factory_env
+    env.auto_merge = False
+    result = run_cycle(env)
+    assert_pending_candidate(env, result)
+    if publication_mode is None:
+        # A legacy post-integration error must not publish the candidate through failure accounting.
+        result.pop("publication_mode")
+        env.git(env.root, "merge", "--ff-only", result["candidate_commit"])
+    assert env.git(env.remote, "rev-parse", "refs/heads/main") == result["base_commit"]
+    before = len(env.commands)
+    def forbidden_git(*args):
+        pytest.fail("accepted candidate reached failure-accounting Git mutation")
+    with pytest.raises(factory.RecoveryPending):
+        factory.account_failure(env.state / result["run_id"], result | {"status": "failed"}, forbidden_git, publish=True)
+    assert len(env.commands) == before
+    assert_pending_candidate(env, result)
+
+
+@pytest.mark.parametrize("published", [False, True])
+@pytest.mark.parametrize("retained_status", ["accepted", "failed"])
+def test_legacy_integrated_candidate_only_completes_if_already_published(
+        factory_env, monkeypatch, published, retained_status):
+    env = factory_env
+    original_finish = factory.finish_candidate
+    def interrupt_finish(*args):
+        raise SimulatedCrash()
+    monkeypatch.setattr(factory, "finish_candidate", interrupt_finish)
+    with pytest.raises(SimulatedCrash):
+        run_cycle(env)
+    monkeypatch.setattr(factory, "finish_candidate", original_finish)
+    path = next(env.state.glob("*/result.json"))
+    result = json.loads(path.read_text())
+    result.pop("publication_mode")
+    result["status"] = retained_status
+    factory.write_json(path, result)
+    env.git(env.root, "merge", "--ff-only", result["candidate_commit"])
+    if published:
+        # This is the retained remote effect of the historical direct-push path.
+        env.git(env.root, "push", "origin", result["candidate_commit"] + ":refs/heads/main")
+    recovered, = factory.recover_pending(env.state, publish=True)
+    assert pull_request_mutations(env) == 0 and "push" not in env.commands
+    assert env.provider_calls == ["worker", "reviewer"]
+    if published:
+        assert recovered["status"] == "completed" and recovered["recovery_complete"]
+        assert env.issue["state"] == "closed"
+        assert env.commands.index("legacy_remote_fetch") < env.commands.index("legacy_candidate_ancestor")
+    else:
+        assert_pending_candidate(env, recovered)
+        assert env.git(env.remote, "rev-parse", "refs/heads/main") == result["base_commit"]
+
+
+def test_unfinished_accepted_candidate_recovery_remains_pending(factory_env, monkeypatch):
+    env = factory_env
+    # An interrupted implementation may return without marking its retained candidate complete.
+    monkeypatch.setattr(factory, "finish_candidate", lambda *args: None)
+    result = run_cycle(env)
+    assert result["candidate_commit"] and not result["recovery_complete"]
+    recovered, = factory.recover_pending(env.state, publish=True)
+    assert_pending_candidate(env, recovered)
+    assert env.git(env.root, "rev-parse", "HEAD") == result["base_commit"]
+    assert env.git(env.remote, "rev-parse", "refs/heads/main") == result["base_commit"]
+    assert pull_request_mutations(env) == 0 and "pr_branch_push" not in env.commands
+    assert env.provider_calls == ["worker", "reviewer"]
 
 
 @pytest.mark.parametrize("boundary", ["failure_commit", "failure_push"])

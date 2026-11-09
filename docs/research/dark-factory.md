@@ -6,10 +6,20 @@ assigned checklist requirement. The host checks evidence paths, repository
 changes, dependencies, tests, and publication content. Passing tests is
 engineering evidence, not a measure of scientific impact.
 
-With `--publish`, the factory verifies the accepted candidate on remote `main`
-before commenting on or closing an issue. It pushes an explicit candidate
-commit. Without that flag, accepted work is integrated locally and the issue
-stays open.
+With `--publish`, new accepted work is pushed to the deterministic
+`factory/<run_id>` branch and submitted as a pull request targeting `main`.
+The run stays pending and blocks the queue until that PR is merged separately;
+the factory does not merge it or enable automatic merge. Without `--publish`,
+accepted work is integrated locally and the issue stays open.
+
+Before commenting on or closing the issue, the factory verifies the PR's
+repository identities, branch names, exact title/body and exact candidate head.
+It fetches the commit advertised by remote `main` and requires both the original
+candidate and the PR's reported merge commit to be ancestors of that fetched
+head. Only then does it fast-forward local `main` and record issue completion.
+The merge must preserve the candidate's ancestry: squash or rebase merges that
+drop the original candidate stay pending. A changed PR head, conflicting PR or
+closure without a merge also stops completion.
 
 ## Retained state and recovery
 
@@ -20,29 +30,54 @@ invocation, candidate integration, and publication. Interrupted command output
 is retained under its original name; recovery uses new receipt names.
 
 Before each GitHub POST or PATCH, the factory atomically records a pending
-`github-comment.json` or `github-close.json` journal. Its binding includes the
-repository identity, issue, issue snapshot digest, run, candidate commit,
-method, path, and request digest. The completion comment contains a
-deterministic marker derived from that binding.
+`github-pull-request.json`, `github-comment.json` or `github-close.json` journal.
+Its binding includes the repository identity, issue, issue snapshot digest, run,
+candidate commit, method, path and request digest. The PR binding also fixes the
+base commit and base/head refs. PR bodies and completion comments contain
+deterministic markers derived from their bindings. The PR body uses fixed factory
+text and links to the retained review artifact; model-generated review prose is
+not inserted into it.
 
-Recovery reads the current issue, repository identity, dependencies, and every
-comment page. A matching comment or completed closure confirms an effect even
+Recovery reads the current issue, repository identity and dependencies, all PR
+listing pages and the selected PR's full state, and every completion-comment
+page. A matching PR, comment or completed closure can confirm an effect even
 when its original response was lost. Conflicting or duplicate markers stop
 recovery. An unresolved journal also stops the queue: absence from a fresh read
 cannot prove that a delayed request will never take effect, so the factory does
-not automatically resend it. A later matching observation can complete the
-same run without repeating the request.
+not automatically resend it. A later matching observation can advance the same
+run without repeating the request.
+
+Branch publication is creation-only. An existing `factory/<run_id>` branch must
+point to the exact candidate; the factory never overwrites a conflicting branch.
+After a lost push response, recovery checks the actual remote ref before
+proceeding. Before any PR POST it verifies that ref and writes the pending PR
+journal. A lost POST response is reconciled through PR observations rather than
+a blind duplicate POST. A verified merged PR can still be reconciled after its
+source branch is deleted.
 
 The `run` command recovers retained work before selecting another issue.
-Publishing runs require `--publish` during recovery. Candidate integration and
-push are reconciled against actual Git state. An ordinary failure after
-integration or push can append a public accounting receipt on top of the
-candidate; it does not require `main` to remain at the original base. The
-factory rejects unrelated unpublished changes on `main`. Failure receipts
-retain allowlisted attempt and command accounting, exception classes, and
-candidate identity; failed worktrees, exception text, and raw output stay
-private. Their commit and push checkpoints support recovery without duplicate
-accounting commits.
+Publishing runs require `--publish` during recovery. Candidate branches, PRs and
+local integration are reconciled against actual Git and GitHub observations.
+Every unfinished run with a checkpointed candidate uses candidate reconciliation,
+even when its retained status is `failed`; it cannot fall back to
+failure-accounting publication.
+
+Legacy publishing checkpoints without `publication_mode` can complete only when
+their exact retained candidate is already an ancestor of fetched remote `main`.
+This applies to legacy accepted and failed statuses. An unpublished legacy
+candidate stays pending for operator reconciliation; recovery neither pushes it
+directly to `main` nor silently creates a replacement PR. New PR-mode runs still
+require their bound PR and verified merge ancestry.
+
+The separate failure-accounting path applies only when no candidate commit was
+checkpointed. It retains its existing direct-main behavior: it appends a public
+accounting receipt to clean local `main` and, with `--publish`, can push that
+accounting commit directly to remote `main`. The factory rejects unrelated
+unpublished changes on `main`. Failure receipts retain allowlisted attempt and
+command accounting and exception classes; failed worktrees, exception text and
+raw output stay private. Their commit and push checkpoints support recovery
+without duplicate accounting commits. Historical failure receipts retain their
+original scope.
 
 Failure publication fetches the exact commit advertised by remote `main` before
 checking its ancestry against the retained accounting commit. An advertisement
@@ -71,6 +106,14 @@ accounting. These are offline orchestration checks. They do not establish live
 GitHub consistency behavior, safety against concurrent external writers, or
 scientific outcomes.
 
+The [PR publication engineering receipt](../../provenance/verification/factory-pr-publication-20261109.json)
+records one local attempt on November 9, 2026 that timed out after 300 seconds,
+without retry. Progress dots establish no completed test result; JUnit, actual
+import inventory and runner after-state artifacts were unavailable. A separate
+post-termination read/hash observation found all 68 guarded files unchanged from
+launch, before the receipt and documentation edits. Ordinary new-head hosted PR
+CI remains the next validation; no live GitHub recovery is established.
+
 ## Native Windows schedule
 
 Use Windows Task Scheduler after the verified repository is published and local
@@ -94,10 +137,10 @@ logs.
 
 Before registration, authenticate Git and Codex as the same Windows user who
 will run the task. The factory obtains GitHub API credentials from Git's
-configured credential helper; that sign-in must allow pushing the repository
-and commenting on and closing its issues. The wrapper disables terminal and
-credential-helper prompts, so an expired sign-in fails instead of opening an
-authentication window. Keep credentials in the existing authentication stores.
+configured credential helper; that sign-in must allow pushing branches,
+creating pull requests, and commenting on and closing issues. The wrapper disables
+terminal and credential-helper prompts, so an expired sign-in fails instead of
+opening an authentication window. Keep credentials in the existing authentication stores.
 Logs and startup errors stay under `.runs`.
 
 ```powershell

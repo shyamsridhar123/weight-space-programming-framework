@@ -217,8 +217,8 @@ def checkpoint(run, result, stage=None):
     write_json(run / "result.json", result)
 
 
-def issue_observation(run, result, body, marker):
-    """Read every comment page; a cached issue or POST response is insufficient."""
+def current_issue(run, result):
+    """Recheck the retained issue, repository identity and dependencies."""
     number = result["issue"]
     original = json.loads((run / "issue.json").read_text(encoding="utf-8"))
     if digest(original) != result["issue_sha256"]:
@@ -232,6 +232,13 @@ def issue_observation(run, result, body, marker):
     as_open = [i if i["number"] != number else current | {"state": "open"} for i in issues]
     if number not in {i["number"] for i in eligible(as_open)}:
         raise RuntimeError("issue_dependencies_changed")
+    return current
+
+
+def issue_observation(run, result, body, marker):
+    """Read every comment page; a cached issue or POST response is insufficient."""
+    current = current_issue(run, result)
+    number = result["issue"]
     matches, page = [], 1
     while True:
         comments = github("GET", f"/repos/{REPOSITORY}/issues/{number}/comments?per_page=100&page={page}")
@@ -299,31 +306,153 @@ def complete_issue(run, result):
         write_json(journal_path, journal | {"status": "confirmed", "comment_id": comment_id})
 
 
+def pull_request_observation(data, marker, number):
+    """List all pages for conflicts, then read the selected PR's full state."""
+    matches, page = [], 1
+    while True:
+        batch = github("GET", f"/repos/{REPOSITORY}/pulls?state=all&per_page=100&page={page}")
+        if not isinstance(batch, list) or any(not isinstance(pr, dict) for pr in batch):
+            raise RecoveryPending("invalid_github_pull_requests_response")
+        for pr in batch:
+            head = pr.get("head") or {}
+            if (marker in (pr.get("body") or "") or
+                    (head.get("ref") == data["head"] and
+                     (head.get("repo") or {}).get("full_name") == REPOSITORY)):
+                matches.append(pr)
+        if len(batch) < 100:
+            break
+        page += 1
+    if len(matches) > 1 or (matches and number is not None and matches[0].get("number") != number):
+        raise RecoveryPending("github_pull_request_marker_conflict")
+    if number is None:
+        number = matches[0].get("number") if matches else None
+    if number is None:
+        return None
+    if type(number) is not int or number < 1:
+        raise RecoveryPending("invalid_github_pull_request_number")
+    pr = github("GET", f"/repos/{REPOSITORY}/pulls/{number}")
+    if (pr.get("number") != number or pr.get("body") != data["body"] or
+            pr.get("title") != data["title"] or pr.get("draft") is not False):
+        raise RecoveryPending("github_pull_request_binding_mismatch")
+    for side, ref in (("head", data["head"]), ("base", data["base"])):
+        value = pr.get(side) or {}
+        repository = value.get("repo") or {}
+        if (value.get("ref") != ref or repository.get("id") != REPOSITORY_ID or
+                repository.get("full_name") != REPOSITORY):
+            raise RecoveryPending("github_pull_request_repository_or_ref_changed")
+    if pr["head"].get("sha") != data["candidate_commit"]:
+        raise RecoveryPending("github_pull_request_head_changed")
+    if type(pr.get("merged")) is not bool or pr.get("state") not in {"open", "closed"}:
+        raise RecoveryPending("invalid_github_pull_request_state")
+    if pr["merged"]:
+        if (pr["state"] != "closed" or not pr.get("merged_at") or
+                not re.fullmatch(r"[0-9a-f]{40}(?:[0-9a-f]{24})?", pr.get("merge_commit_sha") or "")):
+            raise RecoveryPending("invalid_github_pull_request_merge")
+    elif pr["state"] == "closed":
+        raise RecoveryPending("github_pull_request_closed_unmerged")
+    return pr
+
+
+def publish_pull_request(run, result, git):
+    candidate = result["candidate_commit"]
+    binding = {"repository": REPOSITORY, "repository_id": REPOSITORY_ID,
+               **{key: result[key] for key in ("run_id", "issue", "issue_sha256", "base_commit", "candidate_commit")},
+               "base_ref": "main", "head_ref": "factory/" + result["run_id"]}
+    marker = "<!-- wsp-dark-factory-pull-request:" + digest(binding) + " -->"
+    data = {"title": f"factory: accepted work for #{result['issue']}",
+            "head": binding["head_ref"], "base": "main", "draft": False,
+            "body": (f"Accepted work for issue #{result['issue']}.\n\n"
+                f"Evidence and independent requirement review: https://github.com/{REPOSITORY}/blob/{candidate}/artifacts/factory/{result['run_id']}/cycle.json\n\n"
+                "Assigned attempts are retained. Engineering checks do not establish scientific impact. "
+                "The factory waits for a verified merge before recording issue completion.\n\n" + marker)}
+    path = f"/repos/{REPOSITORY}/pulls"
+    expected = binding | {"operation": "pull-request", "method": "POST", "path": path,
+                          "request_sha256": digest(data), "marker": marker}
+    journal_path = run / "github-pull-request.json"
+    journal = json.loads(journal_path.read_text(encoding="utf-8")) if journal_path.exists() else None
+    if journal is not None and (any(journal.get(k) != v for k, v in expected.items()) or
+            journal.get("status") not in {"pending", "confirmed"}):
+        raise RecoveryPending("github_pull_request_journal_binding_mismatch")
+    number = result.get("pull_request_number")
+    if journal is not None:
+        retained = journal.get("pull_request_number")
+        if (number is not None and retained is not None and number != retained) or (
+                journal["status"] == "confirmed" and (type(retained) is not int or retained < 1)):
+            raise RecoveryPending("github_pull_request_number_conflict")
+        number = number if number is not None else retained
+    current = current_issue(run, result)
+    observation = data | {"candidate_commit": candidate}
+    # Observe a merged PR before checking its possibly deleted source branch.
+    pr = pull_request_observation(observation, marker, number)
+    if pr is None:
+        # A missing read cannot prove that a delayed creation will never arrive.
+        if journal is not None or number is not None:
+            raise RecoveryPending("github_pull_request_unconfirmed")
+        if current["state"] != "open":
+            raise RecoveryPending("issue_state_conflicts_with_pull_request")
+        ref = "refs/heads/" + binding["head_ref"]
+        branch = git("pr_branch_remote", ["ls-remote", "origin", ref]).split()
+        if branch and branch != [candidate, ref]:
+            raise RecoveryPending("github_pull_request_branch_conflict")
+        if not branch:
+            try:
+                # Empty expected ref is creation-only: even a racing branch cannot be overwritten.
+                git("pr_branch_push", ["push", "--force-with-lease=" + ref + ":", "origin", candidate + ":" + ref])
+            except Exception:
+                pass  # The remote may have accepted the branch before response loss.
+        if git("pr_branch_verify", ["ls-remote", "origin", ref]).split() != [candidate, ref]:
+            raise RecoveryPending("github_pull_request_branch_unconfirmed")
+        checkpoint(run, result, "candidate_branch_verified")
+        journal = expected | {"status": "pending"}
+        write_json(journal_path, journal)
+        try:
+            github("POST", path, data)
+        except Exception as error:
+            journal["response_error"] = type(error).__name__
+            write_json(journal_path, journal)
+        pr = pull_request_observation(observation, marker, None)
+        if pr is None:
+            raise RecoveryPending("github_pull_request_unconfirmed")
+    write_json(journal_path, (journal or expected) | {"status": "confirmed", "pull_request_number": pr["number"]})
+    result["pull_request_number"] = pr["number"]
+    checkpoint(run, result, "pull_request_confirmed")
+    if not pr["merged"]:
+        raise RecoveryPending("pull_request_awaiting_merge")
+    remote = git("merged_remote", ["ls-remote", "origin", "refs/heads/main"]).split()[0]
+    try:
+        git("merged_remote_fetch", ["fetch", "--no-tags", "--no-write-fetch-head", "origin", remote])
+        git("merged_candidate_ancestor", ["merge-base", "--is-ancestor", candidate, remote])
+        git("merged_pr_ancestor", ["merge-base", "--is-ancestor", pr["merge_commit_sha"], remote])
+    except Exception as error:
+        raise RecoveryPending("merged_publication_unconfirmed") from error
+    return remote
+
+
 def finish_candidate(run, result, git, publish):
-    candidate, base = result["candidate_commit"], result["base_commit"]
+    candidate = result["candidate_commit"]
     if (git("integration_branch", ["branch", "--show-current"]) != "main"
             or git("integration_clean", ["status", "--porcelain"])):
         raise RuntimeError("main_changed_during_work")
-    head = git("integration_base", ["rev-parse", "HEAD"])
-    if head == base:
-        git("integrate", ["merge", "--ff-only", candidate])
+    if publish:
+        if result.get("publication_mode") == "pull_request":
+            remote = publish_pull_request(run, result, git)
+        elif "publication_mode" not in result:
+            # Legacy checkpoints may reconcile existing publication, never bypass PRs.
+            remote = git("legacy_remote", ["ls-remote", "origin", "refs/heads/main"]).split()[0]
+            try:
+                git("legacy_remote_fetch", ["fetch", "--no-tags", "--no-write-fetch-head", "origin", remote])
+                git("legacy_candidate_ancestor", ["merge-base", "--is-ancestor", candidate, remote])
+            except Exception as error:
+                raise RecoveryPending("legacy_candidate_requires_operator_reconciliation") from error
+        else:
+            raise RecoveryPending("publication_mode_conflict")
+        target = remote
     else:
-        git("integrated_candidate_ancestor", ["merge-base", "--is-ancestor", candidate, head])
+        target = candidate
+    if git("integration_base", ["rev-parse", "HEAD"]) != target:
+        git("integrate", ["merge", "--ff-only", target])
     checkpoint(run, result, "validated_commit_integrated")
     if publish:
-        remote = git("remote_before_push", ["ls-remote", "origin", "refs/heads/main"]).split()[0]
-        if remote == base:
-            try:
-                git("push", ["push", "origin", candidate + ":refs/heads/main"])
-            except Exception:
-                # The remote may have accepted the push before the connection failed.
-                pass
-            remote = git("remote_verify", ["ls-remote", "origin", "refs/heads/main"]).split()[0]
-        if remote != candidate:
-            try:
-                git("published_candidate_ancestor", ["merge-base", "--is-ancestor", candidate, remote])
-            except Exception as error:
-                raise RecoveryPending("published_commit_unconfirmed") from error
         result["published_head_commit"] = remote
         checkpoint(run, result, "published_commit_verified")
         complete_issue(run, result)
@@ -344,7 +473,9 @@ def finish_candidate(run, result, git, publish):
 
 
 def account_failure(run, result, git, publish):
-    """Append accounting to clean main, including an already integrated candidate."""
+    """Append pre-candidate failure accounting to clean main."""
+    if result.get("candidate_commit"):
+        raise RecoveryPending("accepted_candidate_requires_reconciliation")
     safe_path = run / "failure-public.json"
     if not safe_path.exists():
         write_json(safe_path, failure_summary(result))
@@ -367,9 +498,9 @@ def account_failure(run, result, git, publish):
             git("failure_base_ancestor", ["merge-base", "--is-ancestor", result["base_commit"], head])
         if publish:
             remote = git("failure_start_remote", ["ls-remote", "origin", "refs/heads/main"]).split()[0]
-            if head != remote and (head != result.get("candidate_commit") or remote != result.get("base_commit")):
+            if head != remote:
                 raise RecoveryPending("failure_accounting_unpublished_main_changes")
-        elif result.get("base_commit") and head not in {result["base_commit"], result.get("candidate_commit")}:
+        elif result.get("base_commit") and head != result["base_commit"]:
             raise RecoveryPending("failure_accounting_unexpected_main_changes")
         result["failure_base_commit"] = head
         result["failure_publication"] = "pending_commit"
@@ -443,14 +574,12 @@ def recover_pending(state, *, publish):
         result["commands"] = [json.loads(p.read_text(encoding="utf-8")) for p in sorted(run.glob("command-*.json"))]
         git = lambda name, args: command(name, ["git", *args], cwd=ROOT, run=run, ledger=result["commands"], timeout=60)
         try:
-            if result.get("candidate_commit") and result["status"] in {"accepted", "pending"}:
-                try:
-                    finish_candidate(run, result, git, run_publish)
-                except RecoveryPending:
-                    raise
-                except Exception as error:
-                    result.update(status="failed", error_type=type(error).__name__, error=type(error).__name__)
-            if result["status"] != "completed":
+            if result.get("candidate_commit"):
+                finish_candidate(run, result, git, run_publish)
+                if result["status"] != "completed":
+                    result["status"] = "pending"
+                    checkpoint(run, result)
+            elif result["status"] != "completed":
                 result.update(status="failed", error=result.get("error", "interrupted_before_candidate_checkpoint"))
                 result.setdefault("elapsed_seconds", None)
                 for entry in result["attempts"]:
@@ -466,8 +595,9 @@ def recover_pending(state, *, publish):
                 account_failure(run, result, git, run_publish)
         except Exception as error:
             result["recovery_error"] = type(error).__name__
-            if isinstance(error, RecoveryPending) and result["status"] in {"accepted", "pending"}:
+            if result.get("candidate_commit"):
                 result["status"] = "pending"
+                result["error"] = str(error) if isinstance(error, RecoveryPending) else type(error).__name__
             checkpoint(run, result)
         recovered.append(result)
         if not result.get("recovery_complete") or result["status"] != "completed":
@@ -483,6 +613,7 @@ def cycle(issue, *, state, publish, worker_seconds):
     result = {"schema": "wsp-dark-factory-cycle/1", "run_id": run_id, "issue": issue["number"],
               "issue_sha256": digest(issue), "requirements": requirements(issue), "status": "running",
               "publish": publish, "recovery_complete": False, "elapsed_seconds": None,
+              "publication_mode": "pull_request" if publish else "local",
               "commands": ledger, "attempts": attempts, "stages": stages,
               "limits": {"coding_attempts": 1, "review_attempts": 1, "worker_seconds": worker_seconds},
               "claim": "bounded_coding_and_acceptance_work;_not_a_scientific_weight_reader"}
@@ -585,9 +716,10 @@ def cycle(issue, *, state, publish, worker_seconds):
     except RecoveryPending as error:
         result.update(status="pending", error=str(error))
     except Exception as error:
-        result["status"] = "failed"
+        result["status"] = "pending" if result.get("candidate_commit") else "failed"
         result["error_type"] = type(error).__name__
-        result["error"] = str(error) if isinstance(error, RuntimeError) else type(error).__name__
+        result["error"] = (str(error) if not result.get("candidate_commit") and isinstance(error, RuntimeError)
+                           else type(error).__name__)
     finally:
         result["elapsed_seconds"] = time.perf_counter() - tick
         checkpoint(run, result)
@@ -608,7 +740,7 @@ def main() -> int:
     parser.add_argument("--issue", type=int)
     parser.add_argument("--max-issues", type=int, default=1)
     parser.add_argument("--worker-seconds", type=int, default=480)
-    parser.add_argument("--publish", action="store_true", help="push verified commits and close fully accepted issues")
+    parser.add_argument("--publish", action="store_true", help="open accepted-work PRs; complete issues after verified merges")
     args = parser.parse_args()
     if not 1 <= args.max_issues <= 18 or not 30 <= args.worker_seconds <= 1800:
         parser.error("Use 1..18 issues and a 30..1800 second deadline")

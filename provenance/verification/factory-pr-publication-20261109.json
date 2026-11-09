@@ -1,0 +1,168 @@
+{
+  "schema": "wsp-local-engineering-verification/1",
+  "scope": "One offline factory pull-request publication regression attempt against the captured source snapshot; no completed test outcome established.",
+  "test_node": "tests/test_dark_factory.py",
+  "execution_policy": {
+    "python_flags": [
+      "-B",
+      "-s"
+    ],
+    "pytest_configuration": "pytest-engineering.ini",
+    "pytest_addopts_override": "",
+    "pytest_automatic_plugins_disabled": true,
+    "pytest_cache_provider_disabled": true,
+    "pytest_conftest_loading_disabled": true,
+    "offline_environment_flags_recorded": [
+      "HF_HUB_OFFLINE",
+      "TRANSFORMERS_OFFLINE",
+      "HF_DATASETS_OFFLINE",
+      "WANDB_MODE"
+    ],
+    "temporary_paths_private": true,
+    "timeout_seconds_per_execution": 300
+  },
+  "attempts": [
+    {
+      "execution_id": "factory-pr-publication-check-20261109",
+      "classification": "timed_out",
+      "started_utc": "2026-11-09T18:21:36.6557277Z",
+      "completed_utc": "2026-11-09T18:26:37.2791476Z",
+      "exit_code": null,
+      "timed_out": true,
+      "execution_count": 1,
+      "automatic_retry_performed": false,
+      "recorded_pytest_result": null,
+      "completed_test_count": null,
+      "junit_accounting": null,
+      "stdout_observation": "41 bytes of progress dots only; no completion summary or passing count is inferred.",
+      "stderr_bytes": 0,
+      "runner_completion_evidence": {
+        "after_source_inventory": "unavailable",
+        "after_git_state": "unavailable",
+        "after_tracked_diff": "unavailable",
+        "actual_import_inventory": "unavailable",
+        "junit_xml": "unavailable"
+      },
+      "launched_source_snapshots": [
+        {
+          "path": "tests/test_dark_factory.py",
+          "bytes": 42133,
+          "sha256": "fac643e456f6734f3a6978b0b88b9fffa861276c5d4d9015ae9c694aed7e0263",
+          "equals_before": true,
+          "equals_post_termination": true
+        },
+        {
+          "path": "scripts/dark_factory.py",
+          "bytes": 46086,
+          "sha256": "9a0e33488c445f9bf7fb7b42ae8036658c993db838d600f1a08386ce86fae66d",
+          "equals_before": true,
+          "equals_post_termination": true
+        },
+        {
+          "path": "scripts/audit_public_content.py",
+          "bytes": 2593,
+          "sha256": "b5d4bfed042eaeffd040657ea23ab60b95e0826d89a1de15bc26e278ae4e3b3d",
+          "equals_before": true,
+          "equals_post_termination": true
+        },
+        {
+          "path": "scripts/verify_publication.py",
+          "bytes": 37714,
+          "sha256": "e8658f9880310431dfc7ea9b7a57ac738f5615d73d6e8cbb2389b8afeda95f66",
+          "equals_before": true,
+          "equals_post_termination": true
+        }
+      ],
+      "saved_raw_artifact_commitments": [
+        {
+          "name": "execution-launch.json",
+          "bytes": 1461,
+          "sha256": "5ed6a8136f26a3143d19e70358cb22bf6cf4024f6e468319fabc02bcc4aac74b"
+        },
+        {
+          "name": "execution-result.json",
+          "bytes": 232,
+          "sha256": "cf203af775bdc8fb85931933b6b3dd87066c3017886fa8705d1706804f43bfd1"
+        },
+        {
+          "name": "before-state.json",
+          "bytes": 433,
+          "sha256": "b6afe60f1303a172a074f1298016f9d323c4a684c57dcbdb8348f8c0a56ba73f"
+        },
+        {
+          "name": "before-source-hashes.json",
+          "bytes": 10726,
+          "sha256": "2c1fb7e7ba2eaf32d6c803e101e88ab71a1c4b3b09a3dd5d68c2d6e49fde85ad"
+        },
+        {
+          "name": "before-diff.patch",
+          "bytes": 52705,
+          "sha256": "fe9acc56c3b57acdb7f8075f01f8411d7ce315181d6bfdc55baaa271b8a4d545"
+        },
+        {
+          "name": "run_check.py",
+          "bytes": 3839,
+          "sha256": "5c9078fc33b07e9fb80d40b9fa78d3b8ad28eeb0b4fb23a3dd20ef4e32ee18be"
+        },
+        {
+          "name": "launch_once.ps1",
+          "bytes": 2716,
+          "sha256": "075cb9f63c84dbc581e043c59b0129b7b65da1c97033ad80a8518282b5a56d24"
+        },
+        {
+          "name": "stdout.log",
+          "bytes": 41,
+          "sha256": "008a57ddea91a417b5aa817b9425d8be26d0ceaab0869d19ef30adf758b995c8"
+        },
+        {
+          "name": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "post-termination-source-observation.json",
+          "bytes": 15269,
+          "sha256": "421f7623c764bb13ca243843e7ee870d917c2690e34097e48f482617587dfb78"
+        }
+      ]
+    }
+  ],
+  "saved_checkout": {
+    "head": "55b4dc48abf7f78b1b6f1f54f25737736145dfab",
+    "branch": "research/factory-pr-publication-20261109",
+    "saved_status_lines": [
+      "M CHANGELOG.md",
+      " M docs/research/dark-factory.md",
+      " M scripts/dark_factory.py",
+      " M tests/test_dark_factory.py"
+    ],
+    "before_captured_utc": "2026-11-09T18:21:38.185300+00:00",
+    "before_diff_check_exit_code": 0,
+    "before_tracked_diff_sha256": "fe9acc56c3b57acdb7f8075f01f8411d7ce315181d6bfdc55baaa271b8a4d545"
+  },
+  "separate_post_termination_source_observation": {
+    "captured_utc": "2026-11-09T18:27:47.9281230Z",
+    "guarded_inventory_count": 68,
+    "all_guarded_file_bytes_and_hashes_equal_launch_before": true,
+    "all_four_launched_source_snapshots_equal_before_and_observation": true,
+    "head_and_branch_equal_before": true,
+    "modified_path_set_equal_before": true,
+    "diff_check_exit_code": 0,
+    "project_execution_performed": false,
+    "performed_before_receipt_and_documentation_edits": true,
+    "runner_after_capture": false,
+    "actual_import_inventory": false
+  },
+  "assembly": {
+    "execution_limit": "Saved evidence, native source reads/hashes and read-only Git observations only; no local retry, tests, project imports, studies, gates or providers executed during assembly.",
+    "private_content_excluded": [
+      "workstation paths",
+      "raw logs",
+      "raw JUnit XML",
+      "SQLite",
+      "private values"
+    ],
+    "source_binding_limit": "The separate post-termination observation is not a runner after capture or an actual imported-source inventory. Documentation and this receipt were edited afterward."
+  },
+  "interpretation_limit": "The attempt timed out after the configured 300-second limit and established no completed pytest result. Intended coverage uses temporary Git repositories and a fake GitHub service. Live GitHub recovery, concurrent external writers, scheduler behavior and scientific outcomes remain unverified. Ordinary new-head hosted PR CI is the next validation."
+}
