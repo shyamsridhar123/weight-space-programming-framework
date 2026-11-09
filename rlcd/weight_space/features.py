@@ -484,6 +484,7 @@ def compile_feature_edit(base: WeightArtifact, head: ReadoutHead, target_feature
                          retention: str = "soft", retention_weight: float = 8.0,
                          ridge: float = 0.01, edit_bias: bool = False,
                          nullspace_rtol: float = 1e-12,
+                         require_exact_scores: bool = False,
                          native_dtypes: Mapping[str, str] | None = None,
                          cast: str = "reject", intent: str = "Compile a frozen-feature output edit") -> FeatureCompilation:
     """Fit none/soft/nullspace retention; verify the *actual* rounded endpoint.
@@ -491,7 +492,11 @@ def compile_feature_edit(base: WeightArtifact, head: ReadoutHead, target_feature
     A numerical nullspace is chosen by an explicit SVD threshold. Full rank yields
     a no-op, not an invented successful edit. Exact endpoint residuals remain in
     the receipt even when the solve reports a tiny floating-point residual.
+    Opting into require_exact_scores rejects unresolved/infeasible equations and
+    stored endpoints with nonzero target or supplied protected-score residuals.
     """
+    if type(require_exact_scores) is not bool:
+        raise ValueError("require_exact_scores must be a boolean")
     width, outputs = head.dimensions(base)
     target = _matrix(target_features, width, "Target features")
     desired = _matrix(desired_delta, outputs, "Desired deltas")
@@ -514,6 +519,12 @@ def compile_feature_edit(base: WeightArtifact, head: ReadoutHead, target_feature
     size = target_design.shape[1]
     constrained_basis, constraints = _analyze_feature_constraints(
         target_design, retain_design, desired, nullspace_rtol=nullspace_rtol)
+    if require_exact_scores:
+        consistency = constraints["exact"]["consistency_status"]
+        if consistency == "infeasible":
+            raise ValueError("Exact score contract is infeasible on the supplied features")
+        if consistency != "feasible":
+            raise ValueError(f"Exact score feasibility is not resolved as feasible: {consistency}")
     basis = constrained_basis if retention == "nullspace" else np.eye(size)
     retention_rank = constraints["protected"]["rank"]
     cutoff = constraints["protected"]["absolute_cutoff"] if retention == "nullspace" else None
@@ -552,6 +563,12 @@ def compile_feature_edit(base: WeightArtifact, head: ReadoutHead, target_feature
         return np.column_stack((features, np.ones(len(features)))) @ realized.T
 
     certificate = None if anchors is None else certify_feature_retention(base, candidate, head, anchors)
+    target_matches = all(value == 0 for value in maximum_target_residuals)
+    if require_exact_scores:
+        if not target_matches:
+            raise ValueError("Stored endpoint does not exactly realize the requested target-score changes")
+        if certificate is not None and not certificate["exactly_zero_on_supplied_features"]:
+            raise ValueError("Stored endpoint does not exactly preserve the supplied protected scores")
     diagnostics = {
         "compiler": "generic-frozen-feature-readout/1", "head": head.to_dict(),
         "retention": retention, "retention_weight": retention_weight, "ridge": ridge,
@@ -567,11 +584,13 @@ def compile_feature_edit(base: WeightArtifact, head: ReadoutHead, target_feature
         "target_rmse_after_projection": _rms(effect(target)-desired),
         "realized_target_residuals_exact": [[str(value) for value in row] for row in target_residuals],
         "realized_target_maximum_absolute_residuals_exact": [str(value) for value in maximum_target_residuals],
-        "realized_target_exactly_matches_requested_delta": all(value == 0 for value in maximum_target_residuals),
+        "realized_target_exactly_matches_requested_delta": target_matches,
         "retention_rmse_after_projection": None if anchors is None else _rms(effect(anchors)),
         "edit_cells": len(lowered.program.edits), "no_op": not lowered.program.edits,
         "lowering": lowered.receipt, "behavioral_status": "supplied_features_only",
         "optimizer_verified": False, "feature_extractor_verified": False,
     }
+    if require_exact_scores:
+        diagnostics["require_exact_scores"] = True
     return FeatureCompilation(lowered.program, proposal, canonical_bytes(diagnostics),
                               None if certificate is None else canonical_bytes(certificate))
