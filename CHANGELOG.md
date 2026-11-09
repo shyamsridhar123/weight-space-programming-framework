@@ -7,6 +7,16 @@ research draft.
 
 ## Unreleased
 
+- Retain validated live-provider receipts before publication. Once a publication
+  failure marker is persisted, recovery preserves provider completion and its
+  response while selecting the exact parent as interrupted, without another
+  provider call, publication attempt or proposed-edit interpretation. Missing
+  evaluation and per-field token/latency coverage stay explicit; financial cost
+  remains unknown. The [scoped offline receipt](provenance/verification/publication-terminal-20261109.json)
+  records one passing literal regression, including a simulated crash after the
+  marker and before selection persistence. This does not establish OS crash
+  durability, complete publication atomicity or new live-study evidence.
+
 - Retain a disclosed public event derivative when JSON decoding, recursive
   sanitation or serialization raises `RecursionError`. The shared fallback
   redacts exact home paths, JSON-escaped Windows profile prefixes and quoted

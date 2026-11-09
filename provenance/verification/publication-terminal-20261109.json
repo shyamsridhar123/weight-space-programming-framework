@@ -1,0 +1,358 @@
+{
+  "schema": "wsp-local-engineering-verification/1",
+  "assembled_utc": "2026-11-09T22:43:00.645859+00:00",
+  "status": "passed",
+  "base_commit": "03df26bf9571bc314ff0fa64c2b261011f8f0bbb",
+  "scope": "One literal offline selection/publication-failure regression; no live provider request, scientific preparation, training, holdout generation or study evaluation.",
+  "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "execution_count": 1,
+  "automatic_retry_performed": false,
+  "test_nodes": [
+    "tests/test_live_publication_terminal.py::test_publication_failure_is_durable_without_retry_or_scoring"
+  ],
+  "test_case_count": 1,
+  "capture": {
+    "label": "publication-terminal-check-20261109",
+    "started_utc": "2026-11-09T22:36:49.0503204Z",
+    "completed_utc": "2026-11-09T22:37:02.6428754Z",
+    "exit_code": 0,
+    "timed_out": false,
+    "junit": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "classname": "tests.test_live_publication_terminal",
+      "name": "test_publication_failure_is_durable_without_retry_or_scoring"
+    },
+    "private_record_identities": [
+      {
+        "path": "execution-launch.json",
+        "bytes": 2843,
+        "sha256": "1dfa59e2ea819e03e3525bb257ab9604aa1688fdf093cffb716c9fea01a1feb6"
+      },
+      {
+        "path": "execution-result.json",
+        "bytes": 1715,
+        "sha256": "529b84f220cbc9bd6480eb8623363f918b18d3882a3bd2f4e9e4a7d53341ad76"
+      },
+      {
+        "path": "runner-launch.json",
+        "bytes": 1656,
+        "sha256": "f0339e59f4075d704f9b66a0817762fb83316790a6f400c468d33883fe077387"
+      },
+      {
+        "path": "execution-verification.json",
+        "bytes": 1033,
+        "sha256": "9ea9e1e27af6fefb987a088926da02000d792694a7b002b39bbcd39d6aac5773"
+      },
+      {
+        "path": "execution-source-index.json",
+        "bytes": 6036,
+        "sha256": "ad0d86eaf83d2a1f6b861ea523a4c8335c5fc212d568d9dd3a45c3d5b4a22116"
+      },
+      {
+        "path": "input-source-index.json",
+        "bytes": 15561,
+        "sha256": "1704d0a75bcb7954349d131bd2282394c3bbcc70fb7c5789e185d21dd7b5f8ff"
+      },
+      {
+        "path": "before-source-hashes.json",
+        "bytes": 11216,
+        "sha256": "f95a9fb440fd1b6b6914e39881302591b8f65e689fb78ef153150c358edf7aad"
+      },
+      {
+        "path": "after-source-hashes.json",
+        "bytes": 11216,
+        "sha256": "f95a9fb440fd1b6b6914e39881302591b8f65e689fb78ef153150c358edf7aad"
+      },
+      {
+        "path": "before-state.json",
+        "bytes": 628,
+        "sha256": "250e2702c149ab7be2fde6c5780f55912efc00e148b1a0f4f43dc930204aba12"
+      },
+      {
+        "path": "after-state.json",
+        "bytes": 627,
+        "sha256": "ebe61ff90614d8ae629b11bda0e05afae025f872d5c818ae51fab59daca48ffc"
+      },
+      {
+        "path": "before-diff.patch",
+        "bytes": 23109,
+        "sha256": "317d7356a3fe1aa07798a59113d2a236a22fb92c236bfb2051219afda4ba1e45"
+      },
+      {
+        "path": "after-diff.patch",
+        "bytes": 23109,
+        "sha256": "317d7356a3fe1aa07798a59113d2a236a22fb92c236bfb2051219afda4ba1e45"
+      },
+      {
+        "path": "before-index-diff.patch",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "after-index-diff.patch",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "pytest.xml",
+        "bytes": 393,
+        "sha256": "881ae25cc3d92ac40ee637273be204ef6dacd8072f69276268bc640011076424"
+      },
+      {
+        "path": "stdout.log",
+        "bytes": 100,
+        "sha256": "caf1c6899fa3ae27a3b9a0a5d04017b345e6195410ac49e5f54cfdd1002eb0c6"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "source_evidence": {
+    "all_guarded_current_inputs_match_execution_snapshot_at_assembly": true,
+    "preserved_input_copies_matched_at_assembly": 71,
+    "guarded_snapshot_entries": 71,
+    "imported_local_source_entries": 20,
+    "imported_sources": [
+      {
+        "bytes": 71,
+        "modules": [
+          "rlcd"
+        ],
+        "path": "rlcd/__init__.py",
+        "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+      },
+      {
+        "bytes": 2969,
+        "modules": [
+          "rlcd.weight_space"
+        ],
+        "path": "rlcd/weight_space/__init__.py",
+        "sha256": "9d8cf6bd79b66b9946e50428af4b091f99f870bf68403126682f600b0715ea27"
+      },
+      {
+        "bytes": 7735,
+        "modules": [
+          "rlcd.weight_space.artifact"
+        ],
+        "path": "rlcd/weight_space/artifact.py",
+        "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+      },
+      {
+        "bytes": 15038,
+        "modules": [
+          "rlcd.weight_space.broker"
+        ],
+        "path": "rlcd/weight_space/broker.py",
+        "sha256": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+      },
+      {
+        "bytes": 3928,
+        "modules": [
+          "rlcd.weight_space.compiler"
+        ],
+        "path": "rlcd/weight_space/compiler.py",
+        "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+      },
+      {
+        "bytes": 43906,
+        "modules": [
+          "rlcd.weight_space.contracts"
+        ],
+        "path": "rlcd/weight_space/contracts.py",
+        "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+      },
+      {
+        "bytes": 29559,
+        "modules": [
+          "rlcd.weight_space.data_roles"
+        ],
+        "path": "rlcd/weight_space/data_roles.py",
+        "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+      },
+      {
+        "bytes": 34083,
+        "modules": [
+          "rlcd.weight_space.features"
+        ],
+        "path": "rlcd/weight_space/features.py",
+        "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+      },
+      {
+        "bytes": 19260,
+        "modules": [
+          "rlcd.weight_space.live_provider"
+        ],
+        "path": "rlcd/weight_space/live_provider.py",
+        "sha256": "29ae883408bf52f8a2eece6e58641e9dbe79e004277b9afbb77044944780ef29"
+      },
+      {
+        "bytes": 9944,
+        "modules": [
+          "rlcd.weight_space.model"
+        ],
+        "path": "rlcd/weight_space/model.py",
+        "sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+      },
+      {
+        "bytes": 6317,
+        "modules": [
+          "rlcd.weight_space.program"
+        ],
+        "path": "rlcd/weight_space/program.py",
+        "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+      },
+      {
+        "bytes": 27063,
+        "modules": [
+          "rlcd.weight_space.research_tasks"
+        ],
+        "path": "rlcd/weight_space/research_tasks.py",
+        "sha256": "31faba89184f4854aa1166f05134f1b2334096bc22b945c812d3581fa3410252"
+      },
+      {
+        "bytes": 6727,
+        "modules": [
+          "rlcd.weight_space.semantics"
+        ],
+        "path": "rlcd/weight_space/semantics.py",
+        "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+      },
+      {
+        "bytes": 9106,
+        "modules": [
+          "rlcd.weight_space.sequential"
+        ],
+        "path": "rlcd/weight_space/sequential.py",
+        "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+      },
+      {
+        "bytes": 26202,
+        "modules": [
+          "rlcd.weight_space.structured"
+        ],
+        "path": "rlcd/weight_space/structured.py",
+        "sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+      },
+      {
+        "bytes": 6034,
+        "modules": [
+          "rlcd.weight_space.symmetry"
+        ],
+        "path": "rlcd/weight_space/symmetry.py",
+        "sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+      },
+      {
+        "bytes": 54271,
+        "modules": [
+          "rlcd.weight_space.workflow"
+        ],
+        "path": "rlcd/weight_space/workflow.py",
+        "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+      },
+      {
+        "bytes": 111869,
+        "modules": [
+          "scripts.run_live_studies"
+        ],
+        "path": "scripts/run_live_studies.py",
+        "sha256": "059998b8f538a6dbaa4f75977f1671de4564b899a961b81b44982a489fa5b268"
+      },
+      {
+        "bytes": 94212,
+        "modules": [
+          "scripts.run_trained_research"
+        ],
+        "path": "scripts/run_trained_research.py",
+        "sha256": "7c043d9a33babb264adb970067c5a265506ef4453c2bf3bfe25d8797feeeed23"
+      },
+      {
+        "bytes": 13902,
+        "modules": [
+          "test_live_publication_terminal"
+        ],
+        "path": "tests/test_live_publication_terminal.py",
+        "sha256": "dde1153ed4f9bb1cfcba1b05c69f75ce394212c6c338a5bfffa3c16bba434945"
+      }
+    ],
+    "private_scripts": [
+      {
+        "bytes": 9164,
+        "path": "<private-capture>/launch_once.ps1",
+        "sha256": "971cdfc0a81a2a2f4a6404b20d899be7c0a8b7fbae4aaa6b25e327473c57e149"
+      },
+      {
+        "bytes": 12971,
+        "path": "<private-capture>/run_check.py",
+        "sha256": "18c644744fb3f6c4035084657106b86194e408db7ca7766cdd9bba869c5339b7"
+      }
+    ],
+    "execution_document_snapshot": [
+      {
+        "bytes": 39924,
+        "path": "CHANGELOG.md",
+        "sha256": "5304f4eed22cfd35c07dd9af1bc5fb380d6cc073e16328dfa573de975e29ea5a"
+      },
+      {
+        "bytes": 35492,
+        "path": "docs/research/live-studies.md",
+        "sha256": "a442fde78546cc192dfcacca2493ffdfb303622955f19072811281f1757eedc6"
+      }
+    ],
+    "documentation_timing": "This comparison precedes the final receipt/documentation/manifest edits. Their final-content verification is separate; production, test and pytest configuration remain the captured bytes.",
+    "runner_integrity_checks": {
+      "all_guarded_inputs_preserved_before_pytest": true,
+      "all_local_imports_have_preexecution_copies": true,
+      "diff_check_passed": true,
+      "expected_local_dependencies_imported": true,
+      "git_state_unchanged": true,
+      "imported_sources_match_preserved_inputs": true,
+      "junit_written": true,
+      "no_unguarded_local_imports": true,
+      "preserved_input_copies_unchanged": true,
+      "pytest_environment_removals_remain_active": true,
+      "reviewed_base_is_current": true,
+      "source_config_and_private_scripts_unchanged": true
+    },
+    "tracked_diff_sha256": "317d7356a3fe1aa07798a59113d2a236a22fb92c236bfb2051219afda4ba1e45",
+    "unguarded_local_imports": [],
+    "unpreserved_local_imports": [],
+    "copy_timing": "The reviewed runner preserved every guarded input before importing pytest. Retained copies match the before/after snapshots; individual copy timestamps were not separately recorded.",
+    "inventory_limit": "File and assertion counts describe capture coverage, not scientific confidence or independent study trials."
+  },
+  "captured_regression_assertions": [
+    "One fake completed provider attempt saves a receipt. A replacement publication function first observes the retained validated receipt, writes one partial public event file, then raises OSError.",
+    "A simulated crash occurs after publication-failure.json is persisted and before selection persistence. After the private receipt is deleted, recovery uses the retained receipt; further provider/publication calls are fatally forbidden.",
+    "Recovery and a third selection call preserve the checkpoint, retained receipt, failure marker, partial public event file and final selection bytes.",
+    "The failure record binds assignment, prepared lock, invocation checkpoint and receipt identities; it discloses receipt_only evidence, coarse error type and no retry, excluding the literal private exception detail.",
+    "The provider remains completed with its original response; selection is interrupted, parent and candidate identities are equal, no_op is false, no proposed program is materialized and evaluation_started is false.",
+    "Proposed-edit response validation, lowering/application, fitting/broker requests, registry construction, lineage and evaluation routes are fatally forbidden in this fixture. Broker construction still validates an empty baseline program through its own lowering alias; no provider-command interpretation or network forward occurs.",
+    "An explicit missing outcome binds the publication failure. Gain/harm remain missing with [-1,1] bounds and useful coverage remains missing with [0,1] bounds; removing failure linkage or converting missing evaluation to a numeric outcome fails validation even after canonical rehashing.",
+    "Synthetic observed input/output counters (17 and 7) and latency (0.25 seconds) survive. Missing receipt slots and missing cached-input counters retain per-field denominators; fully missing sums are null, cached input is not added to input, and money is null.",
+    "Lineage summaries retain the single assigned literal unit with unknown estimates and all-assigned sensitivity bounds rather than dropping it or assigning a scientific zero."
+  ],
+  "execution_policy": {
+    "execution_count": 1,
+    "automatic_retry_performed": false,
+    "timeout_seconds": 600,
+    "offline_flags_enabled": true,
+    "bytecode_and_user_site_disabled": true,
+    "pytest_plugin_autoload_conftest_and_cache_disabled": true,
+    "inherited_pytest_addopts_and_plugins_removed": true,
+    "live_provider_request_performed": false
+  },
+  "limitations": [
+    "Behavioral conclusions rely on the passing captured regression assertions, not a separate recomputation of retained fixture bytes or canonical bindings during assembly.",
+    "Recovery without provider/publication retry is conditional on the publication-failure marker having persisted. The fixture injects a replacement publisher and a later crash; it does not interrupt the real copy loop or the marker replacement, establish OS crash durability or prove complete publication atomicity.",
+    "signed() denotes canonical SHA-256 identity, not a cryptographic signature, independent attestation or provider-origin verification.",
+    "Imported-source provenance covers local file-backed modules at completion, not dependency binary fingerprints, complete environment identity or OS/network isolation. The watchdog targets the direct Python process; cleanup and stream waits lack independent timeouts.",
+    "Raw logs, workstation paths and synthetic fixture payloads remain private. Hashes identify retained evidence without disclosing its contents.",
+    "This capture and receipt assembly do not run the full engineering suite, publication checks, frozen studies or historical audits. Later CI and final-content checks are separate executions.",
+    "No live-study result or historical provider record changes. The 90 historical failed requests retain unknown usage/charges/deployment revision; no finite usage/cost upper bound or independent provider-origin attestation is established. Issues #5 c2 and #8 c6 remain partial."
+  ]
+}
