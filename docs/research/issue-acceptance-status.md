@@ -1164,6 +1164,18 @@ snapshot. This selection-only API adds no scoring bridge or new study evidence;
 original criteria and historical outcomes are unchanged. c1 remains partial and
 Issue #9 remains open.
 
+**Repair-barrier engineering supplement, November 9, 2026:** The cohort controller
+now [persists and verifies a complete ordered repair barrier](staged-diagnosis.md#complete-repair-barrier)
+after all terminal repair dispositions, preserving unavailable and failed members.
+It links the full diagnosis/preparation/disposition/lane evidence and checks the
+actual selected candidate and live artifact before persistence and during
+readback. Evidence mutation, persistence failure and cancellation permanently invalidate
+the attempt. The separate [engineering receipt](../../provenance/verification/staged-cohort-repair-barrier-20261109.json)
+records one passing literal regression with no retry. This enables no scoring or
+evaluation and adds no scientific result; the endpoint/control seal and
+single-score bridge remain pending. Original criteria and historical outcomes
+remain unchanged; c1 is still partial and Issue #9 remains open.
+
 #### #9 c2
 
 - [ ] Compare sham, random, support/norm-matched and context-only controls, then measure target effect, collateral behavior and held-out generalization.

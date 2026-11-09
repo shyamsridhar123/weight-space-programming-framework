@@ -7,6 +7,17 @@ research draft.
 
 ## Unreleased
 
+- Add a [complete ordered repair barrier](docs/research/staged-diagnosis.md#complete-repair-barrier)
+  after all cohort repair dispositions, binding diagnosis, preparation,
+  disposition and lane evidence. Selected candidates and live artifacts are
+  checked before persistence and during readback; evidence mutation, persistence failure
+  and cancellation permanently invalidate the attempt. The return list is
+  preserved. A separate [engineering receipt](provenance/verification/staged-cohort-repair-barrier-20261109.json)
+  records one passing literal regression with no retry. Cohort scoring and evaluation
+  remain disabled; the endpoint/control seal and single-score bridge are pending.
+  Issue #9 c1 remains partial and the issue remains open, with historical results
+  unchanged.
+
 - Add [cohort preparation and selection](docs/research/staged-diagnosis.md#cohort-preparation-and-selection)
   through `PreparedMember` and `StagedCohort`, retaining the complete assigned
   roster and requiring a verified whole-cohort diagnosis barrier before repair

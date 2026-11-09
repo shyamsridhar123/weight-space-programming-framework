@@ -19,7 +19,7 @@ from .broker import WeightView
 from .data_roles import DataRoleRegistry
 from .model import canonical_bytes, digest
 from .staged_diagnosis import StagedDiagnosisRepair
-from .workflow import Artifact, BudgetLimits, WorkflowError, _json
+from .workflow import Artifact, BudgetLimits, Candidate, WorkflowError, _json
 
 
 @dataclass(frozen=True)
@@ -296,6 +296,70 @@ class StagedCohort:
             self._invalidate()
             raise
 
+    def _repair_barrier_body(self) -> dict[str, Any]:
+        protocol, barrier = self._check(), self._verify_barrier()
+        members = []
+        for row in self._rows():
+            index = row["member_index"]
+            diagnosis = barrier["members"][index]
+            disposition = self._read(self._name("repair", index))
+            lane, actual = self._lanes[index], None
+            if diagnosis["outcome"] == "selected":
+                self._require(lane is not None)
+                actual = lane._verify("repair")
+                broker = lane._brokers["repair"]
+                session, parent = broker._session, lane._base
+                candidate = session._selected
+                self._require(broker._base is parent and session._base is parent
+                              and actual["task"]["base_sha256"] == parent.sha256)
+                binding = {**self._member_binding(index),
+                           "cohort_diagnosis_barrier_sha256": barrier["sha256"],
+                           "cohort_preparation_receipt_sha256": diagnosis["preparation_receipt_sha256"],
+                           "cohort_diagnosis_disposition_sha256": diagnosis["diagnosis_disposition_sha256"],
+                           "diagnosis_receipt_sha256": diagnosis["diagnosis_receipt_sha256"]}
+                self._require(all(actual["task"]["constraints"][key] == value
+                                  for key, value in binding.items()))
+                if actual["outcome"] == "selected":
+                    self._require(type(candidate) is Candidate and candidate.artifact is not None
+                                  and candidate.to_dict() == actual["candidate"]
+                                  and candidate.parent_sha256 == parent.sha256
+                                  and candidate.task_sha256 == actual["task_sha256"]
+                                  and candidate.to_dict()["session_sha256"] == actual["session_sha256"]
+                                  and candidate.artifact.sha256 == actual["candidate"]["artifact_sha256"]
+                                  and candidate.artifact.to_dict() == actual["candidate"]["artifact"])
+                else:
+                    self._require(candidate is None)
+            else:
+                self._require(lane is None or ("repair" not in lane._records
+                                              and "repair" not in lane._brokers
+                                              and "repair" not in lane._tasks))
+            expected = {key: diagnosis[key] for key in (
+                "preparation_receipt_sha256", "diagnosis_disposition_sha256", "diagnosis_receipt_sha256")}
+            expected.update(diagnosis_outcome=diagnosis["outcome"],
+                            diagnosis_barrier_sha256=barrier["sha256"],
+                            repair_receipt_sha256=actual["sha256"] if actual is not None else None,
+                            outcome=actual["outcome"] if actual is not None else "unavailable")
+            self._require(all(disposition[key] == value for key, value in expected.items()))
+            members.append({**row, **{key: value for key, value in expected.items()
+                                     if key != "diagnosis_barrier_sha256"},
+                            "repair_disposition_sha256": disposition["sha256"]})
+        return {"schema": "wsp-staged-cohort-repair-barrier/1",
+                "cohort_protocol_sha256": protocol["sha256"],
+                "roster_sha256": protocol["roster_sha256"],
+                "attempt_id": protocol["attempt_id"], "registry_id": protocol["registry_id"],
+                "evaluator_id": protocol["evaluator_id"], "diagnosis_barrier_sha256": barrier["sha256"],
+                "members": members}
+
+    def _verify_repair_barrier(self) -> dict[str, Any]:
+        try:
+            barrier = self._read("repair-barrier")
+            self._require(canonical_bytes({key: value for key, value in barrier.items()
+                                           if key != "sha256"}) == canonical_bytes(self._repair_barrier_body()))
+            return barrier
+        except BaseException:
+            self._invalidate()
+            raise
+
     def select_diagnoses(self, selector: Callable[..., Any]) -> dict[str, Any]:
         with self._lock:
             self._check()
@@ -345,13 +409,8 @@ class StagedCohort:
                                "cohort_preparation_receipt_sha256": member["preparation_receipt_sha256"],
                                "cohort_diagnosis_disposition_sha256": member["diagnosis_disposition_sha256"]}
                     results.append(self._select("repair", row, selector, binding))
-                self._verify_barrier()
-                for row, disposition in zip(self._rows(), results):
-                    index = row["member_index"]
-                    self._require(self._read(self._name("repair", index)) == disposition)
-                    if disposition["repair_receipt_sha256"] is not None:
-                        self._require(self._lanes[index]._verify("repair")["sha256"]
-                                      == disposition["repair_receipt_sha256"])
+                self._save("repair-barrier", self._repair_barrier_body())
+                self._verify_repair_barrier()
                 return results
             except BaseException:
                 self._invalidate()
