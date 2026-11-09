@@ -16,6 +16,10 @@ research draft.
   identities. A separate [affine endpoint correction receipt](provenance/verification/affine-endpoint-certificate-correction-20261109.json)
   preserves the subsequent hosted assertion failure and records the corrected
   exact-fraction endpoint check; no tolerance or implementation change was made.
+  A later [numerical diagnostic correction](provenance/verification/edit-coordinate-underflow-correction-20261109.json)
+  marks edit norms unavailable when final coordinate conversion underflows,
+  preserving independently valid residual fields. Its focused check passed;
+  the earlier affine-corrected hosted pass remains scoped to its own head.
   Issue #6 c0 is supported at this diagnostic scope; its trained
   cutoff/budget sweep and generic exact-target admission gate remain partial.
   Historical trained outcomes are preserved, with no new scientific study or

@@ -358,6 +358,20 @@ def test_large_singular_value_and_mixed_desired_scales_keep_a_nonzero_edit_norm(
     assert canonical_bytes(diagnostic)
 
 
+def test_edit_coordinate_underflow_does_not_report_a_false_zero_norm():
+    coordinate = Fraction.from_float(1e-16)/Fraction.from_float(1e308)
+    # Each coordinate rounds to zero, but the norm of 100 equal coordinates does not.
+    assert float(coordinate) == 0. and float(10*coordinate) > 0.
+    _, diagnostic = analyze(1e308*np.eye(100), None, np.full((100, 1), 1e-16), exact_work_limit=0)
+    unregularized = diagnostic["unregularized"]
+    assert unregularized["edit_l2_norm_per_output"] == [None]
+    assert unregularized["edit_frobenius_norm"] is None
+    assert unregularized["per_output_numerical_limit_reason"] == ["edit_coordinate_underflow"]
+    assert unregularized["target_residual_l2_per_output"][0] is not None
+    assert unregularized["target_residual_rmse"] is not None
+    assert canonical_bytes(diagnostic)
+
+
 def test_large_protected_coordinate_does_not_erase_a_small_projected_signal():
     _, diagnostic = analyze([[1e308, 1e-100]], [[1., 0.]], [[1e-100]])
     projected = diagnostic["projected_target"]

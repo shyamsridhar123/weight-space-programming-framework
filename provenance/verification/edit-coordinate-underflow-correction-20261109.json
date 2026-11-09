@@ -1,0 +1,549 @@
+{
+  "schema": "wsp-edit-coordinate-underflow-correction/1",
+  "review_date": "2026-11-09",
+  "completed_utc": "2026-11-09T12:34:19.035360+00:00",
+  "status": "passed",
+  "scope": "One final edit-coordinate underflow regression; unavailable numerical edit norms preserve independently valid residual diagnostics",
+  "earlier_verification_receipts": [
+    {
+      "path": "provenance/verification/bounded-feature-feasibility-20261109.json",
+      "bytes": 24867,
+      "sha256": "1ab13ac0807af771ce07301f17fbc1b0d08defea02cddda3562c48f2f16bd9b3"
+    },
+    {
+      "path": "provenance/verification/affine-endpoint-certificate-correction-20261109.json",
+      "bytes": 17830,
+      "sha256": "3ff595900a53e7cd22cbfa1569facfed33065195aee3133a272c53a74427b480"
+    }
+  ],
+  "earlier_corrected_hosted_observation": {
+    "repository": "shyamsridhar123/weight-space-programming-framework",
+    "pull_request": 20,
+    "head": "809a40e0d4136002066476277be7e15beb26ada0",
+    "workflow": "Publication and Python",
+    "run_id": 42617349987,
+    "job_id": 129160424381,
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "snapshot_saved_utc": "2026-11-09T12:31:21.260Z",
+    "steps": [
+      {
+        "number": 1,
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 2,
+        "name": "Preserve checked-out file bytes",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 3,
+        "name": "Check out publication",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 4,
+        "name": "Set up Python 3.12",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 5,
+        "name": "Verify publication before installing dependencies",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 6,
+        "name": "Install CPU Torch and the standalone test dependencies",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 7,
+        "name": "Run the engineering Python suite",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 8,
+        "name": "Build the wheel",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 9,
+        "name": "Validate a fresh wheel installation outside the checkout",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 10,
+        "name": "Verify publication after tests and packaging",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 11,
+        "name": "Upload new validation receipts and wheel",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 21,
+        "name": "Post Set up Python 3.12",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 22,
+        "name": "Post Check out publication",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 23,
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "observation_source": "Fetched job and step summaries; no job logs fetched",
+    "private_observation": {
+      "bytes": 3374,
+      "sha256": "4befcd1b0387939cfc1a00e581159742dd281a4e7110cb3fffafc34762edbde9"
+    },
+    "test_totals_and_durations": "not_observed",
+    "scope_limit": "Success belongs to the affine-corrected head before this underflow implementation change; no final-head success inferred"
+  },
+  "correction": {
+    "files": [
+      {
+        "path": "rlcd/weight_space/features.py",
+        "bytes": 32902,
+        "sha256": "7678048d626839ea8392419a9ae1acb651d29e33d8b1952b294860b605e94099"
+      },
+      {
+        "path": "tests/test_feature_constraints.py",
+        "bytes": 28623,
+        "sha256": "33f49177bf19e4e5e851019cd9473761cd503febc32a0912bf0483e429855e71"
+      }
+    ],
+    "review_thread": "PRRT_kwDOVmYmBM61P3fX",
+    "review_comment_id": 4512610417,
+    "reason": "Final ldexp conversion can round each nonzero edit coordinate to zero even when their combined norm is representable",
+    "behavior": "Detect nonzero preconversion coordinates that become zero; report affected per-output and aggregate edit norms as unavailable with edit_coordinate_underflow",
+    "residual_behavior": "Keep the independent normalization/projection loss mask for residual fields; final edit-coordinate loss alone does not suppress residual diagnostics",
+    "optimizer_or_executable_proposal_changed": false,
+    "source_only_independent_review": {
+      "disposition": "no findings",
+      "execution": false,
+      "files": [
+        {
+          "path": "rlcd/weight_space/features.py",
+          "bytes": 32902,
+          "sha256": "7678048d626839ea8392419a9ae1acb651d29e33d8b1952b294860b605e94099"
+        },
+        {
+          "path": "tests/test_feature_constraints.py",
+          "bytes": 28623,
+          "sha256": "33f49177bf19e4e5e851019cd9473761cd503febc32a0912bf0483e429855e71"
+        }
+      ]
+    }
+  },
+  "local_focused_check": {
+    "started_utc": "2026-11-09T12:34:17.438980+00:00",
+    "completed_utc": "2026-11-09T12:34:19.035360+00:00",
+    "status": "passed",
+    "normalized_command": [
+      "python",
+      "-X",
+      "utf8",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-c",
+      "pytest-engineering.ini",
+      "tests/test_feature_constraints.py::test_edit_coordinate_underflow_does_not_report_a_false_zero_norm",
+      "--basetemp",
+      "<private-temporary-directory>",
+      "--junitxml",
+      "<private-output>"
+    ],
+    "command_normalization": "Interpreter and private output paths replaced; exact invocation retained privately",
+    "premise": "For a 100-dimensional 1e308 identity design and desired values 1e-16, Fraction arithmetic independently shows each ideal coordinate rounds to zero while ten times that coordinate is representable",
+    "assertions": "Affected edit norms unavailable, numerical-limit reason explicit, independent target residual fields available, canonical serialization valid",
+    "junit_totals": {
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.524"
+    },
+    "private_result": {
+      "bytes": 30745,
+      "sha256": "0ae4a5de9aa1295d54d03d0d4f43df096691d2da2c27a187e75da027a54686dd"
+    },
+    "private_junit": {
+      "bytes": 391,
+      "sha256": "d284c8d633429d0b4b3060b348f8e35aac49c2670f9334c7276368a00508613e"
+    },
+    "source_and_config_unchanged": true
+  },
+  "source_capture": {
+    "files": {
+      "pyproject.toml": {
+        "bytes": 1136,
+        "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+      },
+      "pytest-engineering.ini": {
+        "bytes": 966,
+        "sha256": "a5154d96ae49eeac07e7a7f58a1196936dd0ed04d41ed2824575c31b7d366ab9"
+      },
+      "pytest.ini": {
+        "bytes": 27,
+        "sha256": "c809c969ec7e11b9ff37784e9c6fcc0b7c5148d168e18b05aed797e03fbd6ead"
+      },
+      "rlcd/__init__.py": {
+        "bytes": 71,
+        "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+      },
+      "rlcd/weight_space/__init__.py": {
+        "bytes": 2969,
+        "sha256": "9d8cf6bd79b66b9946e50428af4b091f99f870bf68403126682f600b0715ea27"
+      },
+      "rlcd/weight_space/__main__.py": {
+        "bytes": 17017,
+        "sha256": "658fde770befb592cd110ef5ea83ef9a39d3d97137b65e2f29b9028ed50a5377"
+      },
+      "rlcd/weight_space/adapters.py": {
+        "bytes": 2631,
+        "sha256": "87cc20844b8be1354255c2bdb21130911439f60c3cc268cbce54211a29624dd4"
+      },
+      "rlcd/weight_space/artifact.py": {
+        "bytes": 7735,
+        "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+      },
+      "rlcd/weight_space/benchmarks.py": {
+        "bytes": 15545,
+        "sha256": "3edb4f2120572aa8da92078d19c45a2d4cd494191468a893cef46a410e419983"
+      },
+      "rlcd/weight_space/bound_research.py": {
+        "bytes": 64648,
+        "sha256": "814fafa6da869e15f7e0066f04e878df037d43f05f40bf32517db96781466917"
+      },
+      "rlcd/weight_space/broker.py": {
+        "bytes": 14505,
+        "sha256": "35aefa162516f7e579f16784d006c404dd808b00e8f371dadfee7136c8edc900"
+      },
+      "rlcd/weight_space/compiler.py": {
+        "bytes": 3928,
+        "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+      },
+      "rlcd/weight_space/contracts.py": {
+        "bytes": 43906,
+        "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+      },
+      "rlcd/weight_space/cumulative_research.py": {
+        "bytes": 56668,
+        "sha256": "31abbef4e162779ef684295e33564cf78d5b2081c5ed537fd11814558a83a796"
+      },
+      "rlcd/weight_space/data_roles.py": {
+        "bytes": 29559,
+        "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+      },
+      "rlcd/weight_space/demo.py": {
+        "bytes": 4776,
+        "sha256": "26b12f4b19e1656faec2377cb2a7725f4847f37a3633d762a8e1f45f5ac5a0b6"
+      },
+      "rlcd/weight_space/evidence.py": {
+        "bytes": 8003,
+        "sha256": "69c5e8479ce7797de7ef182a4fd1229124c83bfb4fc86ccbfbb14edc1984420d"
+      },
+      "rlcd/weight_space/experiments.py": {
+        "bytes": 14118,
+        "sha256": "72135f830bd7d662bbdf7a9b254712105ff70b00a253ea08a90238f08989ff0a"
+      },
+      "rlcd/weight_space/features.py": {
+        "bytes": 32902,
+        "sha256": "7678048d626839ea8392419a9ae1acb651d29e33d8b1952b294860b605e94099"
+      },
+      "rlcd/weight_space/live_provider.py": {
+        "bytes": 18217,
+        "sha256": "7319024ba4491922c07450352a317c2f81966b4631b39cc5419ea9284b2a95c3"
+      },
+      "rlcd/weight_space/model.py": {
+        "bytes": 9944,
+        "sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+      },
+      "rlcd/weight_space/program.py": {
+        "bytes": 6317,
+        "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+      },
+      "rlcd/weight_space/proof_bridge.py": {
+        "bytes": 27469,
+        "sha256": "642ec0869208d59f1641b31d5887cb5f16b199787418e0b7789aa979ad04a93b"
+      },
+      "rlcd/weight_space/research_tasks.py": {
+        "bytes": 27063,
+        "sha256": "31faba89184f4854aa1166f05134f1b2334096bc22b945c812d3581fa3410252"
+      },
+      "rlcd/weight_space/rts_study.py": {
+        "bytes": 17923,
+        "sha256": "a284b4e77e4bb57b704271ca170f7b29e7139e333d8dc17a663d4096fabaa476"
+      },
+      "rlcd/weight_space/runtime_research.py": {
+        "bytes": 15940,
+        "sha256": "6b961bba8b396fdc9343da5e57beb610f8c25450291f513de58102cb36a7a951"
+      },
+      "rlcd/weight_space/semantics.py": {
+        "bytes": 6727,
+        "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+      },
+      "rlcd/weight_space/sequential.py": {
+        "bytes": 9106,
+        "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+      },
+      "rlcd/weight_space/structured.py": {
+        "bytes": 26202,
+        "sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+      },
+      "rlcd/weight_space/study_tasks_v2.py": {
+        "bytes": 20140,
+        "sha256": "cf944710cce88a70c400b713b76b699446b1ba47747121ac58f31316fbb01233"
+      },
+      "rlcd/weight_space/study_v2.py": {
+        "bytes": 46314,
+        "sha256": "a1ffd5840d4beb4d7b8f827552a38ae192f300e32809233a1b58681c147bdb3e"
+      },
+      "rlcd/weight_space/symmetry.py": {
+        "bytes": 6034,
+        "sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+      },
+      "rlcd/weight_space/torch_bridge.py": {
+        "bytes": 9678,
+        "sha256": "b532de9574bb13c4c918656cba21ff2e9da61ea2c9aca1a6394376bb64696cda"
+      },
+      "rlcd/weight_space/workflow.py": {
+        "bytes": 44385,
+        "sha256": "1483c10339919a3c5e117c8ef3e2ee6848221a5fa13deda8356c313ac1a424f2"
+      },
+      "scripts/audit_public_content.py": {
+        "bytes": 2593,
+        "sha256": "b5d4bfed042eaeffd040657ea23ab60b95e0826d89a1de15bc26e278ae4e3b3d"
+      },
+      "scripts/audit_trained_symmetry_pilot.py": {
+        "bytes": 11301,
+        "sha256": "0818fbcf29c544b94182b326cafc491b6839c6668ca8da2760de3ecce078e38c"
+      },
+      "scripts/audit_weight_space_study.py": {
+        "bytes": 87682,
+        "sha256": "2258320b0241ee68c60059ce498f71b27570213c9e25d55298c5e616c0f72ee2"
+      },
+      "scripts/audit_weight_space_v2.py": {
+        "bytes": 123278,
+        "sha256": "b7ad808a592539dfb2097fdfb4d53589d11c48e9b77a8ea02b9c494411addad6"
+      },
+      "scripts/authenticate_live_gate.py": {
+        "bytes": 30880,
+        "sha256": "c611bfef9e868e37a8744604013d2f72ea9f693a6af05481b5ec6c03b8714320"
+      },
+      "scripts/authenticate_trained_symmetry_documentation.py": {
+        "bytes": 15555,
+        "sha256": "ebaccd87a0174ee24f7d3787ffdccd3489b09565a197e596fb732a2e0bdf9d86"
+      },
+      "scripts/check_proofs.py": {
+        "bytes": 11772,
+        "sha256": "ee3af77699fbd7d98e08380dbfd1a16d5ad1d517a084f9b8fbf47558523ae306"
+      },
+      "scripts/check_weight_space_bridge.py": {
+        "bytes": 35887,
+        "sha256": "04fb387ce392ed1b938ff2c566120103f23d11b56af6037ef12aa9d0ea5eb576"
+      },
+      "scripts/dark_factory.py": {
+        "bytes": 38343,
+        "sha256": "5ce313ba54a5aafca24c15679fb7043a5005884796057600d2250e446d605cd4"
+      },
+      "scripts/render_enterprise_routing.py": {
+        "bytes": 7245,
+        "sha256": "603a6a32a7c9bc2f051e4bea65ac3071ca360b580b61591db6ae3be546639b14"
+      },
+      "scripts/render_flowcharts.py": {
+        "bytes": 16937,
+        "sha256": "52e736121fb56c2e793c7e6b1a3cd1c14cf13d09518f4af7f72ab4dd70f8be67"
+      },
+      "scripts/replay_trained_symmetry_controls.py": {
+        "bytes": 4152,
+        "sha256": "bfba5b6f345a5de26c2b570cdd54744b1293a37cbb53d8921873bea1146af144"
+      },
+      "scripts/replay_trained_symmetry_normalized_names.py": {
+        "bytes": 8740,
+        "sha256": "7978d979c09e2d7ce2051fcb3f9c8b20ef60c5a02dc9cd1bbbf8688eb67c3840"
+      },
+      "scripts/report_weight_space.py": {
+        "bytes": 43693,
+        "sha256": "46eb7840a2a0785fa22bd9f8c9e29052ea23ed5abdc418a38c77f9fed2210ab1"
+      },
+      "scripts/report_weight_space_v2.py": {
+        "bytes": 23558,
+        "sha256": "f214de95781ea42682df4643e234814d70f84e491726710e37678a0f84a0e0ae"
+      },
+      "scripts/run_broker_trial.py": {
+        "bytes": 7605,
+        "sha256": "5ac2cb7b66591fbae3cecb8c983e5007efcd682c0d070f442ff3f11127722bcf"
+      },
+      "scripts/run_construction_steering_pilot.py": {
+        "bytes": 98132,
+        "sha256": "e270387cf9dbd970e3f0879b5d20da01f3f97d2674344503fcf44c36815a4651"
+      },
+      "scripts/run_live_studies.py": {
+        "bytes": 106273,
+        "sha256": "acc241b1bf47c0fddb0cb3f13838c984b43a45761e997b994e41edb09d305d2f"
+      },
+      "scripts/run_original_source_repeat.py": {
+        "bytes": 43395,
+        "sha256": "58acbb0ee9cc4296177c6354153e647879b0218df4711d01855c91e33e38fff2"
+      },
+      "scripts/run_prospective_support_routing.py": {
+        "bytes": 40195,
+        "sha256": "6370fced4e077fab9847c445e15734a29b8026c59a6ad58c15ba96b15b9f9bde"
+      },
+      "scripts/run_serving_cost_supplement.py": {
+        "bytes": 33909,
+        "sha256": "6df4578019d4822bdbaba84a34fb3fe92c7cb23b592d4bdeb242afcb0d98ca0a"
+      },
+      "scripts/run_trained_research.py": {
+        "bytes": 94212,
+        "sha256": "7c043d9a33babb264adb970067c5a265506ef4453c2bf3bfe25d8797feeeed23"
+      },
+      "scripts/run_trained_symmetry_pilot.py": {
+        "bytes": 45332,
+        "sha256": "118c741586369582e8bab39325c95f1d2fd7251544b8551ba30f4a9fb8d71564"
+      },
+      "scripts/sanitize_serving_cost_records.py": {
+        "bytes": 8330,
+        "sha256": "9804866ee9454e1e8910f5ee8d65818e7c838d9be27ab919314b40dd69de687b"
+      },
+      "scripts/summarize_trained_symmetry_pilot.py": {
+        "bytes": 8383,
+        "sha256": "53472d76d0db6a86493c62fb559b75a46afe5ded416edc6f5e3d7582b594be2c"
+      },
+      "scripts/verify_publication.py": {
+        "bytes": 37714,
+        "sha256": "e8658f9880310431dfc7ea9b7a57ac738f5615d73d6e8cbb2389b8afeda95f66"
+      },
+      "tests/test_dark_factory.py": {
+        "bytes": 20938,
+        "sha256": "aa965d7a36601b65d097f0c38aa73379e0c1abd2f57b395662503159117adb09"
+      },
+      "tests/test_data_roles.py": {
+        "bytes": 35658,
+        "sha256": "b86c2fc0f53082bff091748f5b82272f7487497606f7b74f74ecb6ae1d8d2b7a"
+      },
+      "tests/test_enterprise_support_routing.py": {
+        "bytes": 8119,
+        "sha256": "e1d808afba0bc872a0519f7f86f4d4e5868626855fcacbf64537d2be41e0bd9a"
+      },
+      "tests/test_feature_constraints.py": {
+        "bytes": 28623,
+        "sha256": "33f49177bf19e4e5e851019cd9473761cd503febc32a0912bf0483e429855e71"
+      },
+      "tests/test_independent_weight_space_v2_audit.py": {
+        "bytes": 21521,
+        "sha256": "748bc575cc4b189eb401ec733a350d745a296bc18dbe620c74fd1107216b5af7"
+      },
+      "tests/test_live_studies.py": {
+        "bytes": 56018,
+        "sha256": "736b9ab7d5516b559469162932710d970a839cc620d53571e898e924cf8e82a1"
+      },
+      "tests/test_prospective_support_routing.py": {
+        "bytes": 27861,
+        "sha256": "e9aaaa8d5fcd34d919294856bbd908a8731c06d2ae339a9d5e53fadc17b09c77"
+      },
+      "tests/test_public_sanitization.py": {
+        "bytes": 17287,
+        "sha256": "6fe501b903ff22e44d1421f90aad4dd8de19fd72bb3902244480e9319c464778"
+      },
+      "tests/test_research_admission_runtime.py": {
+        "bytes": 14786,
+        "sha256": "e38d31f0b76e0ca94eca02478ff828693c7e6e4b0e1286264ae343ba7f42adbe"
+      },
+      "tests/test_research_affine_bounds.py": {
+        "bytes": 20511,
+        "sha256": "8d0da59d03fff3ea1a7cd9b027c15797328a9d6ff65e708032408948910c34ad"
+      },
+      "tests/test_research_broker.py": {
+        "bytes": 10578,
+        "sha256": "d1d78d115746c27e915b1cb38c537d5b195782628fe39d5e076695f5e7ee4d30"
+      },
+      "tests/test_research_cumulative_admission.py": {
+        "bytes": 14224,
+        "sha256": "ec39611c1282818fb5d7059c01394ca5a66faa23e4917d9657af6a0d42cabff7"
+      },
+      "tests/test_research_proof_bridge.py": {
+        "bytes": 8448,
+        "sha256": "8e9eef213104dcfc8000004d8219396335b117c28a2b3c76c9d6abdec8327e30"
+      },
+      "tests/test_trained_research.py": {
+        "bytes": 8634,
+        "sha256": "28b9ef84c0bc06cc24ea53732c227dc44f34097139c2598e0db6828d2a61930a"
+      },
+      "tests/test_weight_space.py": {
+        "bytes": 8384,
+        "sha256": "8970fc14be8f4c57a1cb62d7a094327d55ea21abd127e2b63a806a7c4039d527"
+      },
+      "tests/test_weight_space_boundaries.py": {
+        "bytes": 9930,
+        "sha256": "677cac347d00fc101ac8b008b68a8b0d74470b4968bc3dc5b3a8c22bd0a5cbae"
+      },
+      "tests/test_weight_space_generic.py": {
+        "bytes": 13704,
+        "sha256": "aa2c1a6bd20accf1e725f86ebfd356a0176cde566a0ed6c4a211ec7fc808cb32"
+      },
+      "tests/test_weight_space_study_tasks_v2.py": {
+        "bytes": 9247,
+        "sha256": "7ba7d66b853cdbb4a1c2b87283d2b3320ee540c91d33fcacc95adfd28beccef3"
+      },
+      "tests/test_weight_space_study_v2.py": {
+        "bytes": 16189,
+        "sha256": "085fdabf2d068131dda41af40ee878336cd3e96a87c9a1726f0f80e7a53de874"
+      },
+      "tests/test_weight_space_torch.py": {
+        "bytes": 8265,
+        "sha256": "dfe5b5cd6c6e67b11d0b1b7c2a10f87396a8280e2cd08b20d1fc9ed702840908"
+      },
+      "tests/test_weight_space_v2.py": {
+        "bytes": 14253,
+        "sha256": "bf9d7e38400d4718e4ad501265a0a20c52e35a90b801c61d82d88078aeb24852"
+      },
+      "tests/test_weight_space_workflow.py": {
+        "bytes": 30879,
+        "sha256": "7865ec967a4eaabcb5352a5aad8b12d7bb0143ba1a10541ea7aff5f5f704bc28"
+      }
+    },
+    "before_equals_after": true
+  },
+  "underflow_corrected_hosted_validation_at_derivation": {
+    "status": "not_yet_observed",
+    "success_inferred": false,
+    "subsequent_outcomes": "Tracked separately on pull request 20 at its final head"
+  },
+  "provider_calls": 0,
+  "scientific_study_runs": 0,
+  "historical_auditor_executed": false,
+  "earlier_verification_receipts_rewritten": false,
+  "historical_outcomes_superseded": false,
+  "issue_acceptance_changed_by_correction": false,
+  "limitations": [
+    "The local focused pass is not a full-suite result",
+    "The observed hosted success predates this implementation change",
+    "Earlier not-yet-observed fields remain historical observations",
+    "No new trained efficacy, scientific freshness, whole-domain retention, enterprise effect or proof-build claim"
+  ]
+}

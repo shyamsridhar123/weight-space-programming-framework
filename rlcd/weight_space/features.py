@@ -383,14 +383,18 @@ def _analyze_feature_constraints(target_design: np.ndarray, retain_design: np.nd
                 edit_coordinates = np.ldexp(
                     coordinate_mantissa*response_mantissa/(singular_mantissa*projection_mantissa),
                     coordinate_exponent+response_exponent-singular_exponent-projection_exponent)
+            # Individually rounded-away coordinates may have a representable
+            # combined norm. Do not report the norm of their rounded zeros.
+            coordinate_lost = np.any((coordinates != 0.) & (edit_coordinates == 0.), axis=0)
+            edit_lost = lost | coordinate_lost
             unregularized.update({
                 "target_residual_rmse": _rms(residual) if not lost.any() and np.isfinite(residual).all() else None,
                 "target_residual_l2_per_output": [None if missing else norm(row) for missing, row in zip(lost, residual.T)],
-                "edit_l2_norm_per_output": [None if missing else norm(row) for missing, row in zip(lost, edit_coordinates.T)],
-                "edit_frobenius_norm": None if lost.any() else norm(edit_coordinates),
+                "edit_l2_norm_per_output": [None if missing else norm(row) for missing, row in zip(edit_lost, edit_coordinates.T)],
+                "edit_frobenius_norm": None if edit_lost.any() else norm(edit_coordinates),
                 "per_output_numerical_limit_reason": ["response_normalization_underflow" if normalized_loss else
-                    "response_projection_underflow" if projected_loss else None
-                    for normalized_loss, projected_loss in zip(normalization_lost, projection_lost)],
+                    "response_projection_underflow" if projected_loss else "edit_coordinate_underflow" if coordinate_loss else None
+                    for normalized_loss, projected_loss, coordinate_loss in zip(normalization_lost, projection_lost, coordinate_lost)],
             })
     return basis, {
         "schema": "wsp-feature-constraints/1", "editable_width": target_design.shape[1],

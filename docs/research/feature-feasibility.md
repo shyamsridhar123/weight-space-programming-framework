@@ -25,6 +25,13 @@ exact fractions and checks the certificate fields and zero flag. Its focused
 local check passed without adding a tolerance or changing the implementation.
 The original receipt is unchanged; corrected hosted results are tracked
 separately at the PR head.
+A subsequent hosted job at affine-corrected head `809a40e0` completed
+publication verification, the engineering suite, wheel build and a fresh
+wheel-installation check successfully. Its step summaries and the later
+[edit-coordinate underflow correction](../../provenance/verification/edit-coordinate-underflow-correction-20261109.json)
+are recorded separately; that hosted success predates the underflow change.
+The new focused underflow check passed at its captured source. Final-head
+hosted validation is tracked separately on PR #20.
 [The focused checks](../../tests/test_feature_constraints.py)
 include direct rational checks of conflict witnesses, known minimum norms,
 resource exhaustion, and numerical/endpoint disagreements. They cover
@@ -71,6 +78,12 @@ it does not establish exact nullity from a modular rank shortfall.
 | `unregularized` | Truncated-SVD target residuals and minimum edit-norm estimates before ridge fitting or endpoint rounding; numerical limits are explicit |
 | `exact` | Bounded rational consistency, protected/constraint rank where completed, conflict witnesses, and exact minimum squared norms for the specified real-score equations |
 | Compiler endpoint diagnostics and retention certificate | Exact-dyadic residuals of the actual stored head relative to the requested target changes and supplied protected rows |
+
+If final edit-coordinate conversion rounds a nonzero coordinate to zero,
+`unregularized` reports the affected per-output edit norm as `null` with reason
+`edit_coordinate_underflow`; the joint Frobenius norm is also unavailable.
+Individually lost coordinates can have a representable combined norm, so zero
+would be misleading. Residual fields retain their independent loss checks.
 
 The exact procedure lifts the captured finite binary floats to rational
 numbers. Its `consistency_status` is `feasible`, `infeasible`, `unresolved`, or
