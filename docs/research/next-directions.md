@@ -398,6 +398,14 @@ records the focused passing selection regression at its captured source snapshot
 This supplies a selection boundary only; the scoring bridge and new study
 evidence remain future work, and Issue #9 c1 remains partial with the issue open.
 
+The subsequent [complete repair barrier](staged-diagnosis.md#complete-repair-barrier)
+durably binds every assigned member's terminal disposition and lane evidence,
+including the actual selected candidate and live artifact. Its separate
+[literal regression receipt](../../provenance/verification/staged-cohort-repair-barrier-20261109.json)
+adds engineering evidence only. The endpoint/control seal and single-score bridge
+remain pending; no scoring or evaluation is enabled, and #9 c1 remains partial
+with the issue open.
+
 The evaluator should sample defect location and strength using a private,
 prespecified intervention generator. The proposer should receive the declared
 context/access arm without the injection record. Freeze the diagnosis before
