@@ -1128,7 +1128,7 @@ class SelectionAdmission:
                                   repair_structure=control["structure"], matching=control["matching"]))
             members.append({key: member[key] for key in ("member_index", "member_id", "policy", "diagnosis_outcome",
                 "repair_outcome", "diagnosis_receipt_sha256", "repair_receipt_sha256", "diagnosis_candidate")} | {"slots": slots})
-        _same(list(self._study_controls), retained)
+        _require(list(self._study_controls) == retained, "The retained study control roster changed")
         return {"schema": "wsp-staged-study-endpoint-seal/1", "selection_admission_sha256": digest(admission),
                 **{key: admission[key] for key in identities},
                 "assignments": admission["assignments"], "assignments_sha256": admission["assignments_sha256"],
