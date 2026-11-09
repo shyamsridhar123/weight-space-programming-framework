@@ -7,6 +7,26 @@ research draft.
 
 ## Unreleased
 
+- Add opt-in, prebound native-control recipes to the study-specific
+  `SelectionAdmission` adapter, preserving legacy empty controls and the generic
+  framework. `check_native_controls()` constructs random, three shuffled and
+  opposite controls through public native lowering and returns a digest-bound
+  report with separate materialization, structural usability and realized-norm
+  matching outcomes. Recipes fix magnitude 2, float32 rounding and the
+  main-referenced sum tolerance; unavailable or unusable mains have no norm
+  reference. Retain all assigned members, actual selected Candidate identities
+  and separate proposal/program/lowering/artifact hashes, without fabricating
+  control Candidates or writing evidence files. The separate
+  [native-control engineering receipt](provenance/verification/staged-native-controls-20261109.json)
+  records one passing focused synthetic regression covering recipe binding,
+  rounded mismatches/no-ops, abstention, unavailable parents and permanent
+  live-admission invalidation, without automatic retry or timeout. Its saved
+  execution scope is distinct from later documentation, manifest and publication
+  integration. The report supplies no final study seal, scoring,
+  randomization or prospective registration evidence and leaves U's requirement
+  concerning the three shuffled controls unchanged. Historical receipt scopes and
+  results remain unchanged; Issue #9 c1 remains partial and open.
+
 - Add `SelectionAdmission.check_repair_usability()` as a separate, digest-bound
   [common-repair structural report](docs/research/staged-diagnosis.md#selection-only-admission-for-fixed-diagnosis-policies).
   It checks retained endpoints around unchanged live admission, preserves the
@@ -23,8 +43,8 @@ research draft.
   pass, each with one invocation and no automatic retry or timeout. The check
   separates literal helper cases from genuine admitted endpoints; the earlier
   selection-admission receipt keeps its original source-snapshot scope.
-  Control matching, final study sealing and scientific usefulness remain pending;
-  Issue #9 c1 remains partial and open.
+  This structural method supplies no control matching. Final study sealing and
+  scientific usefulness remain pending; Issue #9 c1 remains partial and open.
 
 - Retain allowlisted [factory acceptance diagnostics](docs/research/dark-factory.md)
   for completed provider attempts: known outcome, first rejection code and only

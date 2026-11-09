@@ -248,7 +248,7 @@ class SelectionAdmission:
 
     def __init__(self, cohort: StagedCohort, run_dir: str | Path, *, assignments: list[dict[str, Any]],
                  protocol: dict[str, Any], registry_id: str, evaluator_id: str, attempt_id: str,
-                 driver_sha256: str):
+                 driver_sha256: str, controls: dict[str, Any] | None = None):
         self._invalidated, self._started = False, False
         self._cohort, self._directory = cohort, Path(run_dir).absolute()
         self._saved: dict[str, bytes] = {}
@@ -283,6 +283,30 @@ class SelectionAdmission:
             self._rows = [{"member_index": index, "member_id": item["member_id"]}
                           for index, item in enumerate(self._assignments)]
             _require(len({row["member_id"] for row in self._rows}) == len(self._rows), "Duplicate member assignment")
+            controls = _parse(_json_bytes({} if controls is None else controls))
+            _require(type(controls) is dict, "Control recipes must be a finite JSON object")
+            if controls:
+                _require(set(controls) == {"schema", "members"}
+                         and controls["schema"] == "wsp-native-control-recipes/1"
+                         and type(controls["members"]) is list
+                         and len(controls["members"]) == len(self._rows), "Unknown or incomplete control recipes")
+                for row, recipe in zip(self._rows, controls["members"]):
+                    _require(type(recipe) is dict and set(recipe) == {
+                        "member_index", "member_id", "random", "shuffles"}, "Unknown member control recipe")
+                    _same({key: recipe[key] for key in row}, row)
+                    choice = recipe["random"]
+                    _require(type(choice) is dict and set(choice) == {"row", "direction"}
+                             and type(choice["row"]) is int and 0 <= choice["row"] < 8
+                             and choice["direction"] in ("bias_up", "bias_down"), "Invalid supplied random control")
+                    _require(type(recipe["shuffles"]) is list and len(recipe["shuffles"]) == 3,
+                             "Supply exactly three row derangements")
+                    for mapping in recipe["shuffles"]:
+                        _require(type(mapping) is list and len(mapping) == 8
+                                 and all(type(value) is int for value in mapping)
+                                 and set(mapping) == set(range(8))
+                                 and all(source != target for source, target in enumerate(mapping)),
+                                 "A shuffle must derange exactly the eight eligible rows")
+            self._controls_bytes = _json_bytes(controls)
             supplied = _parse(_json_bytes(protocol))
             _require(type(supplied) is dict and "evaluation_plan" not in supplied, "This increment admits selection only")
             for identifier in (registry_id, evaluator_id, attempt_id):
@@ -295,8 +319,8 @@ class SelectionAdmission:
             self._protocol = self._receipt("protocol.json", {
                 "schema": "wsp-staged-cohort-protocol/1", "attempt_id": attempt_id,
                 "registry_id": registry_id, "evaluator_id": evaluator_id, "members": self._rows,
-                "roster_sha256": digest(self._rows), "protocol": supplied, "controls": {},
-                "controls_sha256": digest({}),
+                "roster_sha256": digest(self._rows), "protocol": supplied, "controls": controls,
+                "controls_sha256": digest(controls),
                 "selection_rule": "all_durable_terminal_diagnoses_before_any_repair_construction",
                 "evaluation_available": False, "causal_usefulness_established": False})
             self._check()
@@ -890,6 +914,103 @@ class SelectionAdmission:
             body = {"schema": "wsp-common-repair-structure/1", "selection_admission_sha256": digest(before),
                     **{key: before[key] for key in ("attempt_id", "registry_id", "evaluator_id", "roster_sha256", "cohort_protocol_sha256")},
                     "members": members}
+            report = body | {"sha256": digest(body)}
+            _same(self.admit(), before)
+            return _parse(_json_bytes(report))
+        except BaseException:
+            self._invalidated = True
+            raise
+
+    def check_native_controls(self) -> dict[str, Any]:
+        """Materialize prebound comparison controls without sealing or scoring.
+
+        Recipe version 1 fixes common-repair-v1, magnitude 2, float32 round
+        lowering and the main-referenced sum tolerance. Supplied choices/maps
+        establish no randomization independence or prospective registration.
+        """
+        try:
+            before = self.admit()
+            recipes = _parse(self._controls_bytes)
+            _require(bool(recipes), "Native controls require recipes bound before run()")
+            _same(recipes, _parse(self._saved["protocol.json"])["controls"])
+            main_report = self.check_repair_usability()
+            _same(main_report["selection_admission_sha256"], digest(before))
+            members, owned = [], []
+            for member, main, recipe in zip(before["members"], main_report["members"], recipes["members"]):
+                index = member["member_index"]
+                parent = self._bases.get(index)
+                answer = None
+                if member["diagnosis_outcome"] == "selected":
+                    _require(type(parent) is TensorArtifact and member["diagnosis_candidate"] is not None,
+                             "A selected diagnosis lacks its owned parent or Candidate")
+                    _same(member["diagnosis_candidate"], self._diagnoses[index]["candidate"])
+                    answer = _diagnosis(member["diagnosis_candidate"]["answer"])
+                    _require(not answer["abstain"], "Diagnosis-dependent controls cannot follow abstention")
+                reference = main["realized_native_norm"] if main["status"] == "usable" else None
+                choices = [("random", recipe["random"]["row"], recipe["random"]["direction"])]
+                for number, mapping in enumerate(recipe["shuffles"], 1):
+                    choices.append((f"shuffled_{number}", mapping[answer["location"]["index_prefix"][0]] if answer else None,
+                                    answer["mechanism"] if answer else None))
+                choices.append(("opposite", answer["location"]["index_prefix"][0] if answer else None,
+                                ("bias_down" if answer["mechanism"] == "bias_up" else "bias_up") if answer else None))
+                controls = []
+                for control_id, row, direction in choices:
+                    control = {"control_id": control_id, "materialized": False,
+                               "unavailable_reason": "no_parent" if parent is None else "no_selected_diagnosis",
+                               "intended_row": row, "direction": direction,
+                               "prescribed_delta": (-2.0 if direction == "bias_up" else 2.0) if direction else None,
+                               "proposal_sha256": None, "program_sha256": None,
+                               "lowering_sha256": None, "artifact_sha256": None,
+                               "structure": {"status": "unavailable", "reason": "not_materialized",
+                                             "realized_native_delta": None, "realized_native_norm": None},
+                               "matching": {"status": "unavailable", "reason": "no_usable_main_reference",
+                                            "norm_difference": None}}
+                    if parent is not None and row is not None:
+                        payload = _repair({"location": {"index_prefix": [row]}, "mechanism": direction})
+                        proposal = StructuredProgram(parent.sha256, payload["commands"], payload["intent"])
+                        lowered = lower_structured(parent, proposal, native_dtypes=NATIVE_DTYPES, cast="round")
+                        receipt = lowered.receipt
+                        _require(verify_lowering(parent, proposal, receipt), "Control lowering does not verify")
+                        program = Program.from_dict(lowered.program.to_dict())
+                        _same(program.to_dict(), lowered.program.to_dict())
+                        endpoint = apply_program(parent, program)
+                        _require(type(endpoint) is TensorArtifact, "Control changed the artifact representation")
+                        artifact = TensorArtifact.from_dict(endpoint.to_dict())
+                        _same(artifact.to_dict(), endpoint.to_dict())
+                        _same(receipt["candidate_sha256"], artifact.sha256)
+                        owned.append((artifact, _json_bytes(artifact.to_dict())))
+                        control.update(materialized=True, unavailable_reason=None, proposal_sha256=proposal.sha256,
+                                       program_sha256=program.sha256, lowering_sha256=receipt["sha256"],
+                                       artifact_sha256=artifact.sha256,
+                                       structure=_repair_structure(parent, artifact, row, direction))
+                    if reference is not None:
+                        matching = control["matching"]
+                        matching["reason"] = "control_unavailable" if not control["materialized"] else "control_unusable"
+                        if control["structure"]["status"] == "usable":
+                            difference = abs(control["structure"]["realized_native_norm"] - reference)
+                            matched = difference <= 1e-5 + 1e-5 * abs(reference)
+                            matching.update(status="matched" if matched else "mismatched",
+                                            reason="native_norm_match" if matched else "native_norm_mismatch",
+                                            norm_difference=difference)
+                    controls.append(control)
+                members.append({"member_index": index, "member_id": member["member_id"],
+                                "diagnosis_candidate_sha256": member["diagnosis_candidate"]["sha256"]
+                                    if member["diagnosis_candidate"] is not None else None,
+                                "main": main, "main_reference_norm": reference, "controls": controls})
+            for artifact, raw in owned:
+                _require(_json_bytes(artifact.to_dict()) == raw and artifact.sha256 == digest(_parse(raw)),
+                         "A driver-owned control artifact changed during calculation")
+            body = {"schema": "wsp-native-control-matching/1", "selection_admission_sha256": digest(before),
+                    "repair_structure_sha256": main_report["sha256"], "controls_sha256": digest(recipes),
+                    **{key: before[key] for key in ("attempt_id", "registry_id", "evaluator_id", "roster_sha256",
+                        "cohort_protocol_sha256", "diagnosis_barrier_sha256", "repair_barrier_sha256",
+                        "source_sha256", "source_pin_scope")},
+                    "construction": {"recipe_schema": "wsp-native-control-recipes/1", "intent": "common-repair-v1",
+                                     "prescribed_magnitude": 2.0, "native_dtypes": dict(NATIVE_DTYPES), "cast": "round"},
+                    "norm_matching": {"reference": "usable_selected_main", "atol": 1e-5, "rtol": 1e-5,
+                                      "rule": "abs(control-main)<=atol+rtol*abs(main)"},
+                    "members": members, "evaluation_available": False, "final_study_seal": False,
+                    "causal_usefulness_established": False}
             report = body | {"sha256": digest(body)}
             _same(self.admit(), before)
             return _parse(_json_bytes(report))
