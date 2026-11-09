@@ -7,6 +7,13 @@ research draft.
 
 ## Unreleased
 
+- Add a [prospective scientific compatibility companion](docs/research/staged-scientific-compatibility.md)
+  mapping seven engineering slots to eleven scientific entries, with separate
+  operational fallback and benchmark-specific analysis rules. This documentation
+  adds no implementation, protocol freeze, execution or scientific admission;
+  historical results and receipt scopes remain unchanged, and Issue #9 c1 stays
+  partial and open.
+
 - Reject a present nonstring provider event `type` through the existing
   parse-failure path, preserving failed-attempt/trial accounting, saved event
   commitments and broker abstention. Missing types and unknown string types

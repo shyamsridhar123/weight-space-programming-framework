@@ -1229,6 +1229,8 @@ usefulness. Runtime-restoration and causal-usefulness flags remain false. Origin
 criteria, earlier receipt scopes and historical outcomes remain unchanged; c1
 stays partial and Issue #9 stays open.
 
+**Prospective scientific compatibility note, November 9, 2026:** The [companion](staged-scientific-compatibility.md) proposes a benchmark-specific reconciliation of the seven engineering slots with eleven scientific entries and separate scientific fallback. This documentation adds no implementation, protocol freeze, execution or scientific admission. Original criteria, engineering receipt scopes and historical outcomes remain unchanged; c1 stays partial and Issue #9 stays open.
+
 #### #9 c2
 
 - [ ] Compare sham, random, support/norm-matched and context-only controls, then measure target effect, collateral behavior and held-out generalization.
