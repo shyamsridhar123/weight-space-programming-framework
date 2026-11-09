@@ -130,6 +130,13 @@ Their structural receipt retains `behavioral_status: not_checked` and
 `formal_certificate: null`; finite behavioral measurements do not supply a
 whole-network or native-execution certificate.
 
+The later [trained-development retention study](docs/research/retention-development.md)
+compares protection cutoffs, soft score budgets and decision margins. Useful
+ownership edits appeared only under its loosest score budget. The stricter
+settings produced no useful edit; the three smallest hard-projection cutoffs
+produced no-ops. This synthetic development comparison selects no winner and
+provides no untouched evaluation or deployment evidence.
+
 In the [live studies](docs/research/live-studies.md), all 80 primary
 weight-access assignments abstained, and diagnosis useful coverage fell below
 its frozen threshold. The [original-source repeat](docs/research/original-source-repeat.md)
@@ -189,6 +196,7 @@ fresh confirmation needs untouched units and a newly frozen protocol.
 | The motivation and original research | [Framework guide](docs/weight-space/v2/README.md) · [Source review](docs/weight-space/v2/source-review.md) |
 | How to represent and check an edit | [Architecture and API](docs/weight-space/v2/architecture.md) · [Task workflow](docs/weight-space/v2/workflow.md) |
 | How to freeze a diagnosis before repair | [Staged diagnosis](docs/research/staged-diagnosis.md) |
+| How retention settings affect trained edits | [Development comparison](docs/research/retention-development.md) |
 | The guarantees and their premises | [Formal explanation](docs/weight-space/v2/formal.md) · [Proof reproduction](PROOFS.md) |
 | The study and its outcomes | [Methods](docs/weight-space/v2/methods.md) · [Results](docs/weight-space/v2/results.md) |
 | The gaps and next research decisions | [Limitations and next steps](docs/weight-space/v2/limitations-and-next-steps.md) · [Requirements](docs/weight-space/v2/requirements.md) |
