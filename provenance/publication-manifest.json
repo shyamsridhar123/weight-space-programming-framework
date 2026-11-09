@@ -44,10 +44,10 @@
   "source": {
     "inventory": {
       "path": "provenance/source-files.json",
-      "bytes": 2483503,
-      "sha256": "45169cd9aa2422e9ac7b624b0e4c15e364beb5a4a2e257ff43f15f6e1109e3f3"
+      "bytes": 2483641,
+      "sha256": "f1e089942b4b993c997c51866bfc05f926502b379a0212e88ef9b63428bdd15c"
     },
-    "identity_policy": "Original source paths, SHA-256 values, byte lengths, order and all other source-index fields remain unchanged. The earlier six preservation destinations remain under provenance/original-files/. The registered data-role update archives two exact workflow/test originals under artifacts/research/source-preservation/; the bounded feature-feasibility update separately archives the exact feature compiler original there. The pre-research inventory preserves earlier mapping bytes. Privacy derivatives remain separately disclosed in the sanitation ledger. The exact-score admission update archives the unchanged CLI original separately from its later opt-in interface.",
+    "identity_policy": "Original source paths, SHA-256 values, byte lengths, order and all other source-index fields remain unchanged. The earlier six preservation destinations remain under provenance/original-files/. The registered data-role update archives two exact workflow/test originals under artifacts/research/source-preservation/; the bounded feature-feasibility update separately archives the exact feature compiler original there. The pre-research inventory preserves earlier mapping bytes. Privacy derivatives remain separately disclosed in the sanitation ledger. The exact-score admission update archives the unchanged CLI original separately from its later opt-in interface. The NumPy label-boundary update separately archives the exact model and boundary-test originals; only their preservation destinations change.",
     "sanitization": {
       "path": "provenance/public-sanitization.json",
       "bytes": 110282,
@@ -172,6 +172,36 @@
       ],
       "original_identities_changed": false,
       "interpretation": "Corrects the CLI preservation destination after the first exact-score publication check failed; exact original source bytes are archived separately from the later opt-in interface, not a scientific rerun or redaction."
+    },
+    "numpy_label_boundary_preservation_update": {
+      "review_date": "2026-11-09",
+      "source_commit": "d347090e01f9ffbb164268e1ea6b158f293ff180",
+      "records": [
+        {
+          "original_path": "rlcd/weight_space/model.py",
+          "preserved": {
+            "path": "artifacts/research/source-preservation/numpy-label-boundary-20261109/rlcd/weight_space/model.py",
+            "bytes": 9944,
+            "sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+          }
+        },
+        {
+          "original_path": "tests/test_weight_space_boundaries.py",
+          "preserved": {
+            "path": "artifacts/research/source-preservation/numpy-label-boundary-20261109/tests/test_weight_space_boundaries.py",
+            "bytes": 9930,
+            "sha256": "677cac347d00fc101ac8b008b68a8b0d74470b4968bc3dc5b3a8c22bd0a5cbae"
+          }
+        }
+      ],
+      "original_identities_changed": false,
+      "first_hosted_check": {
+        "head_commit": "0dbac354c15409a5bc686b7136bed33fc0d9f734",
+        "workflow_run_id": 42720324186,
+        "conclusion": "failure",
+        "failure_scope": "The two edited live files still served as original-source preservation destinations; their recorded original sizes and hashes did not match."
+      },
+      "interpretation": "Exact historical originals are archived separately from the later label-boundary implementation. This metadata repair changes preservation destinations without changing original identities, prior receipts or scientific outcomes; it reruns no regression or historical study."
     }
   },
   "core_documentation": {
@@ -1928,6 +1958,75 @@
       "bytes": 23623,
       "path": "provenance/verification/staged-cohort-evaluation-bridge-20261109.json",
       "sha256": "2679a6ce15da5b2bc1ba3397bd9d57e8ff5d6a63b3ac8bb120f7e6ade789bfb1"
+    }
+  },
+  "numpy_label_boundary_update_20261109": {
+    "review_date": "2026-11-09",
+    "integration_base_main_commit": "d347090e01f9ffbb164268e1ea6b158f293ff180",
+    "verification": {
+      "path": "provenance/verification/numpy-label-boundary-20261109.json",
+      "bytes": 19373,
+      "sha256": "b49d74f16fbe36ca443265c1b1e48230cb1f14adf3ef5ed64541266587de65b7"
+    },
+    "publication_files": [
+      {
+        "path": "CHANGELOG.md",
+        "bytes": 40683,
+        "sha256": "312f4c7031f827faa0489be37a109ed18c46212a4604ec01dd60315a765667bf"
+      },
+      {
+        "path": "docs/research/issue-acceptance-status.md",
+        "bytes": 162121,
+        "sha256": "f68ec111b9bb4d73813842f3af4b9f593820a8b76d186ab23d4eb89a2364451a"
+      },
+      {
+        "path": "rlcd/weight_space/model.py",
+        "bytes": 10004,
+        "sha256": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba"
+      },
+      {
+        "path": "tests/test_weight_space_boundaries.py",
+        "bytes": 12493,
+        "sha256": "0961ba079eaf2aefc477c77e9e10c88f8cf981fd57105749850ba5b713e77bcd"
+      }
+    ],
+    "scope": "One handcrafted offline label-boundary regression, including JSON admission and in-memory replay; no historical native replay or scientific study.",
+    "execution_count": 1,
+    "automatic_retry_performed": false,
+    "source_and_regression_match_execution": true,
+    "receipt_added_after_execution": true,
+    "publication_bookkeeping_reran_test": false,
+    "new_scientific_study": false,
+    "historical_outcomes_superseded": false,
+    "issue16_c4_status": "partial",
+    "issue16_kept_open": true,
+    "hosted_success_inferred": false,
+    "post_regression_source_compatibility_amendment": {
+      "review_date": "2026-11-09",
+      "scope": "Advance only the current staged-selection disk-format compatibility pin for the reviewed NumPy semantic-label boundary. All other pins and the source-byte equality guard remain unchanged.",
+      "prior_model_sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af",
+      "reviewed_model_sha256": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba",
+      "current_driver": {
+        "path": "scripts/staged_diagnosis_selection.py",
+        "bytes": 78276,
+        "sha256": "d09068798eb384066f15ec8e1fead2a58a11f02a07f7474f43060725cac383f0"
+      },
+      "first_post_preservation_hosted_check": {
+        "head_commit": "b27253555fd49f58a5347e10da8c64d91989810f",
+        "run_id": 42721080625,
+        "job_id": 129514900112,
+        "publication_before": "passed",
+        "publication_after": "passed",
+        "engineering": "failed",
+        "failure": "Four staged-selection engineering checks rejected the old model.py compatibility pin with Reviewed source bytes changed; packaging checks were skipped."
+      },
+      "original_offline_regression_receipt_changed": false,
+      "local_regression_rerun": false,
+      "source_pin_scope": "reviewed_disk_format_compatibility_only",
+      "historical_source_bindings_rewritten": false,
+      "historical_outcomes_superseded": false,
+      "new_scientific_study": false,
+      "hosted_success_inferred": false
     }
   }
 }

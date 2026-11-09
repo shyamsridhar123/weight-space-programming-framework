@@ -33,7 +33,7 @@ SOURCE_PINS = {
     "rlcd/weight_space/staged_diagnosis.py": "ff3449c6392d8fca2af2114ff36c3760a207eff5b7bd667f0939bdaf1ef74dd5",
     "rlcd/weight_space/data_roles.py": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851",
     "rlcd/weight_space/artifact.py": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500",
-    "rlcd/weight_space/model.py": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af",
+    "rlcd/weight_space/model.py": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba",
     "rlcd/weight_space/workflow.py": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040",
     "rlcd/weight_space/structured.py": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab",
     "rlcd/weight_space/program.py": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd",

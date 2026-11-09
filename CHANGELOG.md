@@ -7,6 +7,12 @@ research draft.
 
 ## Unreleased
 
+- Capture supported NumPy string semantic labels as plain Python strings at the
+  immutable label boundary, preserving text, order and model identity for JSON
+  admission binding. Reject custom string subtypes before conversion. Add a focused
+  synthetic regression; historical replay results and partial issue statuses
+  remain unchanged.
+
 - Retain validated live-provider receipts before publication. Once a publication
   failure marker is persisted, recovery preserves provider completion and its
   response while selecting the exact parent as interrupted, without another
