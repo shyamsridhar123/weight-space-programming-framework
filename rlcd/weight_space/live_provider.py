@@ -336,7 +336,9 @@ def publish_attempt(source: Path, destination: Path) -> dict[str, Any]:
         shutil.copyfile(source / name, destination / name)
     raw = (source / "events.jsonl").read_bytes()
     redactions = 0
-    profile = re.compile(r"(?:[A-Za-z]:[\\/](?:Users|Documents and Settings)[\\/][^\\/\s]+|/(?:home|Users)/[^/\s]+)")
+    profile = re.compile(
+        r'(?:[A-Za-z]:[\\/]+(?:Users|Documents and Settings)[\\/]+[^\\/"\s]+'
+        r'|/(?:home|Users)/[^\\/"\s]+)')
 
     def sanitize(value: Any) -> Any:
         nonlocal redactions
@@ -352,13 +354,17 @@ def publish_attempt(source: Path, destination: Path) -> dict[str, Any]:
 
     lines = []
     for line in raw.decode("utf-8").splitlines():
+        previous_redactions = redactions
         try:
             value = json.loads(line)
             lines.append(json.dumps(sanitize(value), ensure_ascii=False, allow_nan=False))
-        except ValueError:
-            # Failed transports may emit a non-JSON line. Retain it as a
-            # disclosed derivative, including escaped profile prefixes.
-            value = line.replace(str(Path.home()).replace("\\", "\\\\"), "[USER_PROFILE]")
+        except (ValueError, RecursionError):
+            # Retain malformed or overnested lines as disclosed derivatives,
+            # redacting escaped profile prefixes without counting abandoned work.
+            redactions = previous_redactions
+            escaped_home = str(Path.home()).replace("\\", "\\\\")
+            redactions += line.count(escaped_home)
+            value = line.replace(escaped_home, "[USER_PROFILE]")
             lines.append(sanitize(value))
     public = ("\n".join(lines) + ("\n" if lines else "")).encode("utf-8")
     (destination / "events.jsonl").write_bytes(public)
