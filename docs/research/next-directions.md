@@ -395,24 +395,25 @@ diagnosis dispositions before any repair construction. Preparation failures,
 including ordinary configuration-preflight failures, remain in the denominator,
 as do abstentions and selection failures. A separate [engineering receipt](../../provenance/verification/staged-cohort-selection-20261109.json)
 records the focused passing selection regression at its captured source snapshot.
-This supplies a selection boundary only; the scoring bridge and new study
-evidence remain future work, and Issue #9 c1 remains partial with the issue open.
+That receipt covers the selection boundary at its captured source snapshot; it
+does not cover the later registered bridge or supply new study evidence. Issue
+#9 c1 remains partial with the issue open.
 
 The subsequent [complete repair barrier](staged-diagnosis.md#complete-repair-barrier)
 durably binds every assigned member's terminal disposition and lane evidence,
 including the actual selected candidate and live artifact. Its separate
 [literal regression receipt](../../provenance/verification/staged-cohort-repair-barrier-20261109.json)
 adds engineering evidence only. At that receipt's source snapshot, the endpoint
-seal and single-score bridge remained pending. No scoring or evaluation is enabled,
-and #9 c1 remains partial with the issue open.
+seal and single-score bridge remained pending. The repair barrier alone enables no
+scoring or evaluation, and #9 c1 remains partial with the issue open.
 
 An opt-in [evaluation-plan declaration](staged-diagnosis.md#optional-evaluation-plan-declaration)
 now freezes roster order, holdout/control references, execution declarations and
 result keys. Its [focused regression receipt](../../provenance/verification/staged-cohort-evaluation-plan-20261109.json)
 covers declaration validation and immutable capture, without establishing runtime
 availability. That declaration-only receipt does not cover the later endpoint
-seal. Cohort scoring and evaluation remain disabled; #9 c1 is partial and the
-issue remains open.
+seal or registered bridge. Declaration validation alone enables no cohort scoring
+or evaluation; #9 c1 is partial and the issue remains open.
 
 The explicit [endpoint seal](staged-diagnosis.md#endpoint-seal) now materializes
 referenced origins once after the complete repair barrier, preserving all logical
@@ -425,9 +426,25 @@ remain declarations, and selected no-ops do not become fallbacks. Its separate
 records one focused regression: exit 0, `1 passed in 4.30s`, with no retry or
 timeout and unchanged before/after source inventory and tracked diff. This covers
 its captured source snapshot, not a completed-tree gate or scientific result.
-Evaluation, runtime-restoration verification and causal-usefulness flags remain
-false; the single-score bridge remains pending, #9 c1 remains partial and the
-issue remains open.
+The seal's evaluation, runtime-restoration verification and causal-usefulness
+flags remain false. The separate registered bridge below evaluates sealed slots;
+#9 c1 remains partial and the issue remains open.
+
+The [registered cohort bridge](staged-diagnosis.md#registered-cohort-evaluation)
+now supplies one aggregate registry score authorization over every declared holdout
+in plan order, including unused holdouts, after the lazy loader runs once and
+sealed endpoints verify. It evaluates each available logical slot reached against
+its retained endpoint, with copied member context and holdout rows, and requires
+exactly the declared finite-JSON result keys. Failure stops later slots and
+preserves unavailable, `not_run` and unresolved registry outcomes without retry or
+releasing authorized scope. Its separate [engineering receipt](../../provenance/verification/staged-cohort-evaluation-bridge-20261109.json)
+records one focused regression: exit 0, `1 passed in 18.47s`, with no retry or
+timeout and unchanged before/after source inventory and tracked diff. This covers
+its captured source snapshot, not a completed-tree gate or scientific result.
+This generic bridge still needs the trusted study evaluator and its runtime
+integration; it supplies no real held-out study. Runtime-restoration and
+causal-usefulness flags remain false; #9 c1 remains partial and the issue remains
+open, with earlier receipt scopes and historical results unchanged.
 
 The evaluator should sample defect location and strength using a private,
 prespecified intervention generator. The proposer should receive the declared
