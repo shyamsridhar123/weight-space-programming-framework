@@ -44,6 +44,14 @@ candidate identity; failed worktrees, exception text, and raw output stay
 private. Their commit and push checkpoints support recovery without duplicate
 accounting commits.
 
+Failure publication fetches the exact commit advertised by remote `main` before
+checking its ancestry against the retained accounting commit. An advertisement
+alone does not provide the local Git object. Divergent history and fetch failure
+still stop recovery; the existing failure receipt remains unchanged. The
+[focused engineering receipt](../../provenance/verification/factory-recovery-remote-fetch-20261109.json)
+records an offline mock of those branches. It does not execute retained recovery
+or verify a live missing-object transfer.
+
 ## Operator boundaries
 
 The lock is conservative. A killed process can leave `factory.lock`. Inspect
