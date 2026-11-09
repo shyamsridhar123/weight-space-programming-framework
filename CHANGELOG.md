@@ -19,6 +19,12 @@ research draft.
   or unverified. The single-score bridge remains pending, Issue #9 c1 remains
   partial and the issue remains open; historical results are unchanged.
 
+- Fetch the exact advertised remote commit before reconciling failure-accounting
+  ancestry. The [focused engineering receipt](provenance/verification/factory-recovery-remote-fetch-20261109.json)
+  records the offline regression for a remote descendant, divergence and fetch
+  failure, preserving the original failure and unknown-cost accounting. This
+  change does not execute factory recovery or establish live Git transfer behavior.
+
 - Add an opt-in [cohort evaluation-plan declaration](docs/research/staged-diagnosis.md#optional-evaluation-plan-declaration)
   with exact roster/order, holdout/control references, execution declarations and
   immutable capture. Control payloads receive schema-label checks; full parsing

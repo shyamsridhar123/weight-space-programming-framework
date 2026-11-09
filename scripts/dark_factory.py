@@ -402,6 +402,8 @@ def account_failure(run, result, git, publish):
     if publish:
         remote = git("failure_remote_base", ["ls-remote", "origin", "refs/heads/main"]).split()[0]
         if remote != failure_commit:
+            # ls-remote advertises commits without adding their objects locally.
+            git("failure_remote_fetch", ["fetch", "--no-tags", "--no-write-fetch-head", "origin", remote])
             ancestor = git("failure_remote_ancestor", ["merge-base", remote, failure_commit])
             if ancestor != failure_commit:
                 if ancestor != remote:
