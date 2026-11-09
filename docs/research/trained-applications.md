@@ -367,6 +367,15 @@ equality, or whole-domain behavioral admission. Unseen digit rows outside the
 anchor span also prevent replacing a finite anchor claim with universal
 retention. The candidate-specific proof work in the roadmap remains separate.
 
+The later [bounded feature-feasibility engineering supplement](feature-feasibility.md),
+dated November 9, adds joint exact real-score consistency and minimum-norm
+diagnostics with explicit unresolved limits. Numerical compilation and stored
+endpoint residuals remain separate. This source/engineering extension does
+not rerun the trained studies or alter the historical gap statement above;
+the development-only trained cutoff/budget sweep and alternative
+decision-feasibility analysis remain research work. No generic exact-target
+admission/useful-success gate is added.
+
 ## Native numerical behavior and out-of-scope stress
 
 The independent replay verifies stored native float32 predictions and paired
@@ -584,7 +593,7 @@ policy configuration to make the framework useful.
 
 | Research issue | Evidence now delivered | Remaining work within the issue's scope |
 | --- | --- | --- |
-| #6: retention geometry | Trained exact rank, residual, inactive-column, unseen-row, out-of-scope, and abstention analysis | General incompatible-target solver; controlled cutoff and budget sensitivity; alternative decision-feasibility conditions |
+| #6: retention geometry | Trained exact rank, residual, inactive-column, unseen-row, out-of-scope, and abstention analysis; later [bounded supplied-feature score-consistency diagnostics](feature-feasibility.md) with conflict witnesses and exact minimum norms | Development-only trained cutoff/budget sensitivity; generic exact-target admission policy; alternative decision-feasibility conditions; unfinished exact judgments remain unresolved |
 | #7: trained enterprise comparison | Independently trained support parents, ownership/recognition separation, fitted and non-editing baselines, heldout negative outcomes, all-assigned replay | A separately justified feasible recognition objective; fuller cost comparison and declared cost margin; operational validation before business-impact claims |
 | #8: access and resource accounting | These fitted studies declare task metadata, data roles, candidate grids, and partial resource stages | Live provider and matched context/summary/weight/reader access evidence belongs to the separate access study; these results do not establish weight-reading advantage |
 | #11: trained non-text use | Independent optical-digit training, selective review task, recognition failure, native/real-score diagnostics, and replay | Broader task and representation scope; complete comparable workflow cost; uncertainty appropriate to the claim sought |

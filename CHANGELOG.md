@@ -7,6 +7,24 @@ research draft.
 
 ## Unreleased
 
+- Added [bounded supplied-feature score feasibility](docs/research/feature-feasibility.md)
+  to the shared readout diagnostics: joint exact consistency, checkable conflict
+  witnesses, and minimum squared edit norms, with explicit resource and numerical
+  limits. Stored endpoint residuals remain separate from the numerical optimizer.
+  The [November 9 verification receipt](provenance/verification/bounded-feature-feasibility-20261109.json)
+  binds passing focused and configured engineering checks to unchanged source
+  identities. A separate [affine endpoint correction receipt](provenance/verification/affine-endpoint-certificate-correction-20261109.json)
+  preserves the subsequent hosted assertion failure and records the corrected
+  exact-fraction endpoint check; no tolerance or implementation change was made.
+  A later [numerical diagnostic correction](provenance/verification/edit-coordinate-underflow-correction-20261109.json)
+  marks edit norms unavailable when final coordinate conversion underflows,
+  preserving independently valid residual fields. Its focused check passed;
+  the earlier affine-corrected hosted pass remains scoped to its own head.
+  Issue #6 c0 is supported at this diagnostic scope; its trained
+  cutoff/budget sweep and generic exact-target admission gate remain partial.
+  Historical trained outcomes are preserved, with no new scientific study or
+  enterprise operational-effect claim.
+
 - Added the November 9 durable evaluation lifecycle: authorization reserves an
   attempt and conservatively consumes observed scope before the callback, releases
   the writer lock during scoring and records terminal or unknown outcomes without
