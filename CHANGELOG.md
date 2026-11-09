@@ -7,6 +7,21 @@ research draft.
 
 ## Unreleased
 
+- Add `verify_registered_cohort_evaluation` for a saved successful cohort
+  terminal, independently retained commitments and binding, and its durable
+  successful registry attempt. The verification-only commitment join uses
+  `get_attempt` without scoring, row materialization, endpoint reconstruction or
+  a current registry snapshot. The separate
+  [verifier engineering receipt](provenance/verification/staged-cohort-evaluation-verifier-20261109.json)
+  records one passing literal offline regression at its captured source snapshot,
+  with no retry or timeout. Document the independent-trust requirement in the
+  [staged diagnosis guide](docs/research/staged-diagnosis.md#saved-cohort-success-verification).
+  Repair only the selection consumer's staged-cohort compatibility pin before
+  capture; the driver was preserved but not executed. Later publication edits
+  retain separate validation scope. This adds no runtime/provenance/freshness or
+  scientific claim. Issue #2 c7 and #9 c1 remain partial and open; historical
+  failures and evidence scopes are unchanged.
+
 - Add optional ambiguity-aware hidden alignment with a mandatory
   finite nonnegative threshold, global edge-exclusion separation and explicit
   numerical or ambiguity abstention. Preserve legacy matcher arithmetic,

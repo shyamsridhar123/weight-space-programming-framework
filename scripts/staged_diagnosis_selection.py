@@ -29,7 +29,7 @@ from rlcd.weight_space.workflow import (AccessPolicy, BudgetLimits, BudgetUsage,
 
 
 SOURCE_PINS = {
-    "rlcd/weight_space/staged_cohort.py": "2501fc968878cd3894646745dd6ce5986f4ffc808e8e6bf5567ca5688cd36687",
+    "rlcd/weight_space/staged_cohort.py": "b7b45c55955932dc92f4b5196ae9e9eadee472eccbc380145d81a5f4c39fdd80",
     "rlcd/weight_space/staged_diagnosis.py": "ff3449c6392d8fca2af2114ff36c3760a207eff5b7bd667f0939bdaf1ef74dd5",
     "rlcd/weight_space/data_roles.py": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851",
     "rlcd/weight_space/artifact.py": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500",

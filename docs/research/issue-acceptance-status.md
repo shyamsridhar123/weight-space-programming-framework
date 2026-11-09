@@ -629,6 +629,18 @@ attestation or fresh-cohort result and does not cover the historical or
 uncovered routes above; c7 remains partial.
 See the [verifier supplement](evaluation-data-roles.md#registered-session-evidence-verifier-supplement-november-9-2026).
 
+**Saved cohort success verification supplement, November 9, 2026:** The
+[cohort verifier](staged-diagnosis.md#saved-cohort-success-verification) requires
+independently retained binding and terminal/result commitments, then joins one
+caller-selected durable successful attempt without scoring, consumption or a
+current snapshot. The separate [engineering receipt](../../provenance/verification/staged-cohort-evaluation-verifier-20261109.json)
+records one passing literal offline regression, including later development
+consumption and rejection of locally rehashed substitutions. It covers its
+captured source snapshot; subsequent publication edits require separate checks.
+This does not retroactively invalidate uncovered holdouts, establish fresh or
+independent data, or resolve historical gaps. c7 remains partial and Issue #2
+remains open; original criteria and historical evidence are unchanged.
+
 <a id="issue-3"></a>
 ### #3 — [P0] Bind admission to the exact candidate, contract, domain, and decision rule
 
@@ -1238,6 +1250,20 @@ criteria, earlier receipt scopes and historical outcomes remain unchanged; c1
 stays partial and Issue #9 stays open.
 
 **Prospective scientific compatibility note, November 9, 2026:** The [companion](staged-scientific-compatibility.md) proposes a benchmark-specific reconciliation of the seven engineering slots with eleven scientific entries and separate scientific fallback. This documentation adds no implementation, protocol freeze, execution or scientific admission. Original criteria, engineering receipt scopes and historical outcomes remain unchanged; c1 stays partial and Issue #9 stays open.
+
+**Saved cohort success verification supplement, November 9, 2026:** The
+[verification-only helper](staged-diagnosis.md#saved-cohort-success-verification)
+checks the saved successful terminal, complete result, binding and durable
+successful registry attempt using independently retained commitments. Its single
+caller-selected lookup does not reconstruct endpoints or reopen the separate
+slot, barrier or seal files. The separate [engineering receipt](../../provenance/verification/staged-cohort-evaluation-verifier-20261109.json)
+records one passing literal offline regression with no retry or timeout at its
+captured source snapshot; the preserved selection driver changes only its
+staged-cohort compatibility pin and is not executed. Later publication edits
+retain separate validation scope. This establishes no runtime restoration,
+authenticated provenance, scientific freshness or useful causal repair. Original
+criteria, earlier receipt scopes and historical outcomes remain unchanged; c1
+stays partial and Issue #9 stays open.
 
 #### #9 c2
 
