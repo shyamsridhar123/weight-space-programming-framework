@@ -335,6 +335,44 @@ When persistence succeeds, terminal schema `wsp-staged-cohort-evaluation/1` reta
 
 Evidence mutation, loader/evaluator failure, invalid output, persistence failure and cancellation close the attempt without retry; a successful call also cannot repeat. The original loader or evaluator exception is preserved even if registry wrapping, metadata inspection or cleanup also fails. This cooperative bridge supplies no sandbox, crash recovery, authenticated provenance or scientific result. `runtime_restoration_verified` and `causal_usefulness_established` remain `false`. The separate [bridge engineering receipt](../../provenance/verification/staged-cohort-evaluation-bridge-20261109.json) records one focused regression: exit 0, `1 passed in 18.47s`, with no retry or timeout at its captured source snapshot. Earlier receipts retain their own source-snapshot scopes, Issue #9 c1 remains partial and the issue remains open.
 
+### Saved cohort success verification
+
+`verify_registered_cohort_evaluation(receipt, *, registry, expected_binding,
+expected_attempt_id, expected_terminal_sha256, expected_result_sha256)` checks a saved
+successful cohort terminal against identities retained independently by the trusted
+harness. The exact `wsp-staged-cohort-evaluation-binding/1` object binds the protocol,
+ordered roster, evaluation plan, attempt, registry, evaluator, endpoint seal,
+evaluation-start receipt, ordered holdout identities and aggregate manifest.
+The harness must retain the terminal and result commitments from its trusted
+completion boundary; copying expectations from the untrusted saved receipt does
+not authorize it.
+
+The verifier checks finite JSON, terminal/result commitments and success fields,
+the holdout row order and aggregate manifest joins, and the complete saved result
+against the durable successful attempt. Its sole registry lookup is
+`registry.get_attempt(expected_attempt_id)`. Missing, failed or
+`authorized_outcome_unknown` attempts cannot become successful evidence. The
+saved registry decision and embedded attempts must agree with the durable record;
+recomputing local binding, result, reservation, lifecycle, decision and terminal
+hashes cannot replace it. Later unrelated registration or development consumption
+does not revoke the historical successful authorization.
+
+This is a commitment join for a previously completed bridge call. It does not
+score, invoke callbacks, materialize rows, reconstruct endpoints or inspect the
+current registry snapshot. Slot identities, endpoint declarations, outcomes and
+receipt hashes remain committed by the trusted terminal/result hashes and durable
+result; the verifier does not reopen separate slot, barrier or seal files or
+independently reproduce their construction. It supplies no runtime restoration,
+authenticated provenance, semantic independence, scientific freshness or causal
+usefulness claim. Issue #2 c7 and Issue #9 c1 remain partial and open; historical
+failures and evidence scopes are unchanged. The separate
+[verifier engineering receipt](../../provenance/verification/staged-cohort-evaluation-verifier-20261109.json)
+records one passing literal offline regression at its captured source snapshot,
+with no retry or timeout. It checks the saved-success join and negative
+substitutions against the durable attempt after later development consumption.
+The receipt was assembled and this documentation updated afterward; the check
+does not validate those later publication edits or supply scientific evidence.
+
 ## Receipt and rejection behavior
 
 A run writes private `protocol.json`, `diagnosis.json`, `repair.json` and, following the registered evaluation path, `evaluation.json`. Selection receipts contain configuration, candidate and trace details and should remain under the trusted harness's control. They are separate from the sanitized [public guard receipt](../../provenance/verification/staged-diagnosis-guard-20261109.json).

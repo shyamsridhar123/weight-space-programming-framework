@@ -24,7 +24,7 @@ from .model import Network, canonical_bytes, digest
 from .program import Program, apply_program
 from .staged_diagnosis import StagedDiagnosisRepair
 from .structured import ExecutionSpec, StructuredProgram, lower_structured
-from .workflow import Artifact, BudgetLimits, Candidate, WorkflowError, _json
+from .workflow import Artifact, BudgetLimits, Candidate, WorkflowError, _hash, _json, _name
 
 
 def _captured_interface(endpoint: Artifact) -> dict[str, Any] | None:
@@ -175,6 +175,137 @@ def _validate_evaluation_plan(plan: Any, controls: dict[str, Any],
                 raise ValueError("Declare nonempty unique result keys")
             if len({identifier(key) for key in keys}) != len(keys):
                 raise ValueError("Result keys must be unique")
+
+
+def verify_registered_cohort_evaluation(receipt: dict[str, Any], *, registry: DataRoleRegistry,
+        expected_binding: dict[str, Any], expected_attempt_id: str,
+        expected_terminal_sha256: str, expected_result_sha256: str) -> bool:
+    """Join saved success evidence to caller-trusted identities and a durable attempt.
+
+    Keep expectations independently of the untrusted receipt. The binding commits
+    protocol, roster, plan, evaluator, endpoint seal, start and holdout identities;
+    the terminal and result commitments retain every saved slot disposition.
+    Only get_attempt(expected_attempt_id) reads registry evidence. No scoring,
+    materialization, endpoint reconstruction or current snapshot occurs here.
+    This does not revalidate separate slot/barrier files, attest runtime execution
+    or establish provenance, semantic independence or scientific freshness.
+    """
+    def same(left: Any, right: Any) -> bool:
+        return canonical_bytes(left) == canonical_bytes(right)
+
+    def bound(document: dict[str, Any], key: str) -> bool:
+        return document[key] == digest({name: value for name, value in document.items() if name != key})
+
+    common = ("cohort_protocol_sha256", "roster_sha256", "evaluation_plan_sha256",
+              "attempt_id", "registry_id", "evaluator_id", "endpoint_seal_sha256")
+    flags = ("provenance_authenticated", "semantic_independence_verified",
+             "scientific_freshness_verified", "evaluator_execution_attested")
+    try:
+        if (type(receipt) is not dict or type(expected_binding) is not dict
+                or type(registry) is not DataRoleRegistry):
+            return False
+        record, binding = _json(receipt), _json(expected_binding)
+        _name(expected_attempt_id, "Attempt")
+        _hash(expected_terminal_sha256, "Terminal")
+        _hash(expected_result_sha256, "Result")
+        if (set(binding) != {"schema", *common, "evaluation_start_sha256", "holdouts",
+                             "aggregate_manifest_sha256"}
+                or binding["schema"] != "wsp-staged-cohort-evaluation-binding/1"
+                or binding["attempt_id"] != expected_attempt_id
+                or binding["registry_id"] != registry.registry_id):
+            return False
+        for key in (*common[:3], "endpoint_seal_sha256", "evaluation_start_sha256",
+                    "aggregate_manifest_sha256"):
+            _hash(binding[key], key)
+        for key in ("registry_id", "evaluator_id"):
+            _name(binding[key], key)
+        if (set(record) != {"schema", *common, "evaluation_start_sha256", "outcome", "failure_phase",
+                "exception_type", "score_requested", "score_callback_entered", "data_role_decision",
+                "registry_attempt", "registry_attempt_inspection_exception_type", "result",
+                "runtime_restoration_verified", "causal_usefulness_established", "sha256"}
+                or record["schema"] != "wsp-staged-cohort-evaluation/1"
+                or record["sha256"] != expected_terminal_sha256 or not bound(record, "sha256")
+                or record["outcome"] != "succeeded"
+                or any(record[key] is not None for key in (
+                    "failure_phase", "exception_type", "registry_attempt_inspection_exception_type"))
+                or record["score_requested"] is not True or record["score_callback_entered"] is not True):
+            return False
+        result = record["result"]
+        if (type(result) is not dict or set(result) != {"schema", *common, "evaluation_start_sha256",
+                "holdouts", "aggregate", "members", "runtime_restoration_verified", "causal_usefulness_established"}
+                or result["schema"] != "wsp-staged-cohort-result/1"
+                or digest(result) != expected_result_sha256
+                or any(document[key] != binding[key] for document in (record, result)
+                       for key in (*common, "evaluation_start_sha256"))
+                or any(document[key] is not False for document in (record, result)
+                       for key in ("runtime_restoration_verified", "causal_usefulness_established"))
+                or not same(result["holdouts"], binding["holdouts"])):
+            return False
+        aggregate, holdouts = result["aggregate"], result["holdouts"]
+        if (type(aggregate) is not dict
+                or aggregate["schema"] != "wsp-data-batch/1"
+                or aggregate["registry_id"] != registry.registry_id
+                or aggregate["manifest_sha256"] != binding["aggregate_manifest_sha256"]
+                or not bound(aggregate, "manifest_sha256")
+                or any(aggregate[key] is not False for key in flags)
+                or type(holdouts) is not list or not holdouts):
+            return False
+        rows, parents, holdout_ids, stop = [], {}, set(), 0
+        for holdout in holdouts:
+            if (type(holdout) is not dict or set(holdout) != {"holdout_id", "source_id", "family_id",
+                    "row_count", "manifest_sha256", "content_sha256", "row_sha256", "start", "stop"}
+                    or any(type(holdout[key]) is not int for key in ("row_count", "start", "stop"))
+                    or holdout["row_count"] <= 0 or holdout["start"] != stop
+                    or holdout["stop"] != stop + holdout["row_count"]
+                    or type(holdout["row_sha256"]) is not list
+                    or len(holdout["row_sha256"]) != holdout["row_count"]):
+                return False
+            for key in ("holdout_id", "source_id", "family_id"):
+                _name(holdout[key], key)
+            for value in (holdout["manifest_sha256"], holdout["content_sha256"], *holdout["row_sha256"]):
+                _hash(value, "Holdout")
+            if holdout["holdout_id"] in holdout_ids or holdout["source_id"] in parents:
+                return False
+            holdout_ids.add(holdout["holdout_id"])
+            parents[holdout["source_id"]] = holdout["manifest_sha256"]
+            rows.extend(holdout["row_sha256"])
+            stop = holdout["stop"]
+        if (not same(aggregate["row_sha256"], rows)
+                or not same(aggregate["parent_manifest_sha256"], parents)
+                or not same(aggregate["parents"], sorted(parents))
+                or type(result["members"]) is not list or not result["members"]
+                or digest([{key: member[key] for key in ("member_index", "member_id")}
+                           for member in result["members"]]) != binding["roster_sha256"]):
+            return False
+        # The caller selects the trusted attempt identity, never the saved copy.
+        current = registry.get_attempt(expected_attempt_id)
+        decision = record["data_role_decision"]
+        if (current is None or current["status"] != "succeeded"
+                or current["reason"] != "observed_boundary_passed"
+                or type(current["callback_invocations"]) is not int or current["callback_invocations"] != 1
+                or current["evidence_role"] != "evaluation_consumed_on_authorization"
+                or current["registry_id"] != registry.registry_id or current["attempt_id"] != expected_attempt_id
+                or current["manifest_sha256"] != binding["aggregate_manifest_sha256"]
+                or current["content_sha256"] != aggregate["content_sha256"]
+                or not same(current["row_sha256"], rows)
+                or current["result_sha256"] != expected_result_sha256
+                or not same(current["binding"], binding) or current["binding_sha256"] != digest(binding)
+                or not same(current["result"], result) or not same(record["registry_attempt"], current)
+                or not same(decision["attempt"], current) or not bound(decision, "decision_sha256")
+                or decision["schema"] != "wsp-data-role-decision/1" or decision["operation"] != "score"
+                or decision["status"] != "succeeded" or decision["verdict"] != "registered_cooperative"
+                or decision["reason"] != "observed_boundary_passed" or decision["scoring_started"] is not True
+                or not same(decision["consumed_matches"], [])
+                or any(not same(decision[key], current[key]) for key in (
+                    "attempt_id", "registry_id", "manifest_sha256", "content_sha256", "row_sha256",
+                    "binding_sha256", "result_sha256", "reservation_sha256", "lifecycle_sha256",
+                    "registry_revision_before", "registry_revision_after",
+                    "registry_state_sha256_before", "registry_state_sha256_after"))
+                or any(document[key] is not False for document in (decision, current) for key in flags)):
+            return False
+        return True
+    except (ValueError, TypeError, KeyError, IndexError, AttributeError, RecursionError, OverflowError, UnicodeError):
+        return False
 
 
 @dataclass(frozen=True)
