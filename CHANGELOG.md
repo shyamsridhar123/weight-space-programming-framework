@@ -7,6 +7,18 @@ research draft.
 
 ## Unreleased
 
+- Add an explicit [cohort endpoint seal](docs/research/staged-diagnosis.md#endpoint-seal)
+  after the complete repair barrier, materializing referenced origins once while
+  retaining every logical comparison slot. Selected endpoints verify saved literal
+  replay; structured controls reproduce the complete declared lowering receipt.
+  Static capture metadata and construction native maps remain distinct. The separate
+  [engineering receipt](provenance/verification/staged-cohort-endpoint-seal-20261109.json)
+  records one focused regression: exit 0, `1 passed in 4.30s`, no retry or timeout,
+  with unchanged before/after source inventory and tracked diff. Cohort scoring,
+  evaluation, runtime restoration and causal usefulness remain unavailable
+  or unverified. The single-score bridge remains pending, Issue #9 c1 remains
+  partial and the issue remains open; historical results are unchanged.
+
 - Add an opt-in [cohort evaluation-plan declaration](docs/research/staged-diagnosis.md#optional-evaluation-plan-declaration)
   with exact roster/order, holdout/control references, execution declarations and
   immutable capture. Control payloads receive schema-label checks; full parsing

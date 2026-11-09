@@ -1189,6 +1189,24 @@ no runtime availability and enables no scoring or evaluation. The endpoint/contr
 seal and single-score bridge remain pending. Original criteria and historical
 outcomes remain unchanged; c1 stays partial and Issue #9 stays open.
 
+**Endpoint-seal engineering supplement, November 9, 2026:** The explicit
+[`seal_endpoints()` phase](staged-diagnosis.md#endpoint-seal) now requires the
+opt-in evaluation plan and complete repair barrier. It materializes referenced
+origins once and retains every ordered logical slot, including unavailable slots
+and declared parent fallbacks. Selected endpoints verify saved literal replay;
+structured controls reproduce the complete declared lowering receipt. Static
+capture dtype/device/alias declarations remain separate from construction native
+maps and do not establish runtime restoration. Unused controls remain declarations;
+a selected no-op remains selected. The separate [engineering receipt](../../provenance/verification/staged-cohort-endpoint-seal-20261109.json)
+records one focused regression: exit 0, `1 passed in 4.30s`, with no retry or
+timeout and unchanged before/after source inventory and tracked diff. It covers
+its captured source snapshot, not a completed-tree gate or scientific result;
+older receipts retain their own scopes. Scoring and evaluation remain unavailable.
+The seal's evaluation, runtime-restoration and causal-usefulness flags remain
+false. The single-score
+bridge remains pending. Original criteria and historical outcomes remain unchanged;
+c1 stays partial and Issue #9 stays open.
+
 #### #9 c2
 
 - [ ] Compare sham, random, support/norm-matched and context-only controls, then measure target effect, collateral behavior and held-out generalization.

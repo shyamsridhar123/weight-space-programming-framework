@@ -102,7 +102,7 @@ With a plan, `controls` must map exactly the original member IDs to control-defi
 | `reference` | `kind`, `artifact` | `wsp-network/1` or `wsp-tensors/1` |
 | `structured` | `kind`, `proposal`, `lowering` | `wsp-structured-program/1` and `wsp-lowering/1`, respectively |
 
-Payloads are checked as finite JSON objects with those schema labels only. Full artifact/proposal/lowering parsing, endpoint construction and control materialization are deferred. A member may have an empty control map when no slot or fallback refers to a control. Controls and holdouts may remain unused, and multiple members may share a holdout. No selected-source slot is required. Distinct slots may repeat the same selected or control source under different execution declarations.
+At declaration time, payloads are checked as finite JSON objects with those schema labels only. Full artifact/proposal/lowering parsing, endpoint construction and control materialization are deferred to the explicit endpoint seal below. A member may have an empty control map when no slot or fallback refers to a control. Controls and holdouts may remain unused, and multiple members may share a holdout. No selected-source slot is required. Distinct slots may repeat the same selected or control source under different execution declarations.
 
 For a one-member roster `member_ids=("case-001",)`, a compact declaration is:
 
@@ -129,7 +129,7 @@ evaluation_plan = {
 # Pass protocol={"evaluation_plan": evaluation_plan} and controls to StagedCohort.
 ```
 
-Each `execution` contains exactly the six string fields shown above and must pass the existing `ExecutionSpec` syntax checks. Acceptance of that declaration does not establish backend/device availability, numerical support or successful execution. This opt-in contract enables no cohort scoring or evaluation; the endpoint/control seal and single-score bridge remain pending.
+Each `execution` contains exactly the six string fields shown above and must pass the existing `ExecutionSpec` syntax checks. Acceptance of that declaration does not establish backend/device availability, numerical support or successful execution. This opt-in contract enables no cohort scoring or evaluation. The explicit endpoint seal below is separate from declaration validation; the single-score bridge remains pending.
 
 ### Complete repair barrier
 
@@ -137,7 +137,27 @@ After all original members have terminal repair dispositions, `select_repairs` w
 
 Before persisting the barrier, and again during its readback verification, the controller verifies the full diagnosis barrier, member dispositions and terminal lane evidence. For a selected repair it checks the actual selected `Candidate`, its parent/task/session identities, and the live artifact's hash and content against the recorded candidate. A cached candidate record alone cannot establish that the live artifact is unchanged. For other terminal repair outcomes, no selected candidate may remain.
 
-Changed or missing evidence, a substituted live artifact, persistence failure or cancellation permanently invalidates the cohort attempt. Restoring the original evidence does not reopen it; finalization is not retried. Cancellation preserves the original exception even if writing its disposition also fails. This barrier enables no scoring or evaluation. The separate endpoint/control seal and single-score bridge remain pending, and Issue #9 c1 remains partial with the issue open.
+Changed or missing evidence, a substituted live artifact, persistence failure or cancellation permanently invalidates the cohort attempt. Restoring the original evidence does not reopen it; finalization is not retried. Cancellation preserves the original exception even if writing its disposition also fails. This barrier enables no scoring or evaluation. The separate endpoint seal below requires it; the single-score bridge remains pending, and Issue #9 c1 remains partial with the issue open.
+
+### Endpoint seal
+
+With an opt-in evaluation plan and a complete durable repair barrier, the trusted harness may call the one-shot `seal_endpoints()` phase:
+
+```python
+endpoint_seal = cohort.seal_endpoints()
+```
+
+The call materializes only referenced member/source origins, writes `endpoint-seal.json`, and verifies it against the retained objects and complete repair evidence before returning a copied receipt. Schema `wsp-staged-cohort-endpoint-seal/1` binds the protocol, roster, evaluation plan, controls, attempt, registry, evaluator, diagnosis barrier and repair barrier. Changed configuration or evidence, endpoint construction or persistence failure, and cancellation invalidate the attempt; the phase cannot be retried.
+
+The receipt distinguishes `origins` from ordered `members[*].slots`. An origin is identified by member and either `selected` or a control ID and is materialized once. Multiple logical slots can resolve to that origin while retaining their own slot ID, declared source, resolution, execution declaration and result keys. Distinct origins remain distinct even when their endpoint hashes coincide. Each materialized origin records its full artifact and hash. For a selected origin, the controller retains and checks the actual selected `Candidate` identity, and the receipt adds its candidate hash. Slot execution declarations are retained without execution or scoring.
+
+A selected origin uses the actual selected candidate artifact. The seal checks the broker's saved proposal, literal program and lowering-receipt bindings and reproduces the endpoint by replaying the saved literal program. Its construction verification is `saved_literal_replay_only; structured_lowering_is_broker_provenance`: this does not independently reproduce the selected proposal's structured lowering. A referenced structured control instead parses its proposal, reruns `lower_structured` once with its declared native map and cast policy, requires equality with the complete supplied lowering receipt, and applies the resulting literal program. Its verification is `complete_lowering_receipt_reproduced_once`. A parent control uses the member's parent artifact; a reference control parses its supplied artifact. Every materialized endpoint must be compatible with that parent.
+
+An unselected repair uses a declared same-member parent fallback when one exists; otherwise its selected origin and slots remain `unavailable`. A member without a prepared parent remains unavailable even with a fallback or control declaration. A selected no-op remains selected and does not trigger fallback. Referenced no-op controls remain valid controls, and repeated endpoint hashes do not erase logical slots. `unused_controls` lists unreferenced control IDs: their payloads remain frozen declarations and receive no full parsing or materialization during sealing.
+
+For retained Torch capture metadata, the seal validates saved module/state declarations, shapes, supported dtype labels, devices and alias groups, including equality of declared aliased tensor data. It records `captured_native_dtypes`, `captured_devices` and `captured_alias_groups` separately from the construction native map. `construction_capture_agreement` is `absent`, `not_applicable`, `agree` or `mismatch`; a map mismatch is recorded rather than treated as runtime restoration or silently reconciled. These are static capture declarations, not restored modules, verified device availability or executed native semantics.
+
+The separate [endpoint-seal engineering receipt](../../provenance/verification/staged-cohort-endpoint-seal-20261109.json) records one passing focused regression with no retry or timeout at its captured source snapshot. Earlier engineering receipts cover only their own captured source snapshots. This phase enables no cohort scoring or evaluation: `evaluation_available`, `runtime_restoration_verified` and `causal_usefulness_established` remain `false`. The single-score bridge remains pending, Issue #9 c1 remains partial and the issue remains open; historical results are unchanged.
 
 ## Receipt and rejection behavior
 
@@ -199,6 +219,8 @@ That literal regression covers the complete ordered repair barrier, selected/una
 A separate [evaluation-plan engineering receipt](../../provenance/verification/staged-cohort-evaluation-plan-20261109.json) records one invocation of [`test_frozen_evaluation_plan_and_legacy_compatibility`](../../tests/test_staged_cohort_evaluation_plan.py) on November 9, 2026, from `16:49:52.1333908Z` to `16:49:54.1348456Z`: exit 0, `1 passed in 0.79s`, with no retry or timeout. Independent implementation/test source review found no material findings. The captures at `16:49:47.7425143Z` and `16:49:59.2180664Z` recorded an identical 37-source inventory, SHA-256 `a8333475f09174ace15e4a6731880689d575b4b1f0e34d879a9f9ce8b552cd08`, and identical tracked diff and state apart from capture time/phase. Raw affected source snapshots were retained privately.
 
 This focused declaration regression checks immutable capture, exact field/reference validation, supported declaration variants and legacy finite-JSON controls. No preparation, provider calls, scoring data, scoring authorization or study execution occurred; the check establishes no runtime availability. The permitted case with no selected-source slots was not directly exercised. The receipt covers its recorded source snapshot, not a final-tree gate or a scientific result; Issue #9 c1 remains partial and the issue remains open.
+
+A separate [endpoint-seal engineering receipt](../../provenance/verification/staged-cohort-endpoint-seal-20261109.json) records one focused regression invocation on November 9, 2026, from `17:18:35.4154661Z` to `17:18:41.1152709Z`: exit 0, `1 passed in 4.30s`, with no retry or timeout. The before/after source inventory and tracked diff were unchanged. This check covers its captured source snapshot; it is not a completed-tree gate or a scientific result. It supplies no cohort scoring or evaluation bridge and establishes neither runtime restoration nor causal usefulness; Issue #9 c1 remains partial and the issue remains open.
 
 ## Limits and scientific next step
 
