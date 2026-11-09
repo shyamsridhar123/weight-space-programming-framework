@@ -364,6 +364,60 @@ def test_failure_accounting_recovers_without_duplicate_commit_or_push(factory_en
     assert factory.recover_pending(env.state, publish=True) == []
 
 
+@pytest.mark.parametrize("outcome", ["descendant", "diverged", "fetch_failed"])
+def test_failure_publication_fetches_exact_remote_before_ancestry(tmp_path, outcome):
+    base, failure, remote = (letter * 40 for letter in "abc")
+    result = {"run_id": "20261109T000000Z-00000000", "issue": 2, "issue_sha256": "0" * 64,
+              "base_commit": base, "status": "failed", "error": "worker_did_not_fulfill_requirements",
+              "error_type": "RuntimeError", "commands": [], "stages": ["worker_attempted"],
+              "attempts": [{"role": "worker", "status": "completed", "cost": {"amount": None,
+                  "currency": "USD", "reason": "authenticated_CLI_subscription_not_request_pricing"}}],
+              "elapsed_seconds": 1, "failure_base_commit": base, "failure_commit": failure,
+              "failure_publication": "committed_locally", "recovery_complete": False}
+    retained = json.loads(json.dumps(result))
+    summary = tmp_path / "failure-public.json"
+    factory.write_json(summary, factory.failure_summary(result))
+    frozen_summary = summary.read_bytes()
+    calls = []
+    fetch = ["fetch", "--no-tags", "--no-write-fetch-head", "origin", remote]
+
+    def git(name, args):
+        calls.append((name, args))
+        if name == "failure_branch":
+            assert args == ["branch", "--show-current"]
+            return "main"
+        if name == "failure_base":
+            assert args == ["rev-parse", "HEAD"]
+            return failure
+        if name == "failure_remote_base":
+            assert args == ["ls-remote", "origin", "refs/heads/main"]
+            return remote + "\trefs/heads/main"
+        if name == "failure_remote_fetch":
+            assert args == fetch
+            if outcome == "fetch_failed":
+                raise RuntimeError("failure_remote_fetch:failed")
+            return ""
+        if name == "failure_remote_ancestor":
+            assert calls[-2] == ("failure_remote_fetch", fetch)
+            assert args == ["merge-base", remote, failure]
+            return failure if outcome == "descendant" else "d" * 40
+        pytest.fail("unexpected Git operation: " + name)
+
+    if outcome == "descendant":
+        factory.account_failure(tmp_path, result, git, publish=True)
+        assert result == retained | {"failure_publication": "published", "recovery_complete": True}
+    else:
+        error = factory.RecoveryPending if outcome == "diverged" else RuntimeError
+        message = "failure_publication_branch_conflict" if outcome == "diverged" else "failure_remote_fetch:failed"
+        with pytest.raises(error, match=message):
+            factory.account_failure(tmp_path, result, git, publish=True)
+        assert result == retained
+    assert calls[3] == ("failure_remote_fetch", fetch)
+    if outcome == "fetch_failed":
+        assert len(calls) == 4
+    assert summary.read_bytes() == frozen_summary
+
+
 def test_failure_accounting_does_not_push_unpublished_main_changes(factory_env):
     env = factory_env
     remote = env.git(env.remote, "rev-parse", "refs/heads/main")
