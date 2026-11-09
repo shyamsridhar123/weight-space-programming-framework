@@ -7,6 +7,24 @@ research draft.
 
 ## Unreleased
 
+- Route new accepted [factory publication](docs/research/dark-factory.md) through
+  deterministic `factory/<run_id>` branches and durably journalled pull requests.
+  Pending PRs block the queue until a separate merge is observed and fetched
+  remote `main` contains both the exact candidate and reported merge commit.
+  The factory does not merge PRs; squash/rebase merges that lose candidate
+  ancestry remain pending. Recovery reconciles branch and response loss without
+  overwriting conflicting branches or blindly repeating a PR POST. Legacy accepted
+  or failed candidates require existing containment in fetched remote `main`;
+  unpublished legacy candidates remain pending. Only runs without a checkpointed
+  candidate use the existing direct-main failure-accounting path. The separate
+  [engineering receipt](provenance/verification/factory-pr-publication-20261109.json)
+  records one local offline attempt that timed out after 300 seconds without
+  retry; completed test results, JUnit, actual import inventory and runner after
+  artifacts were unavailable. A separate post-termination source observation
+  matched all 68 guarded launch files before documentation edits. Ordinary
+  new-head hosted PR CI remains the next validation. Live GitHub recovery and
+  scientific outcomes remain unverified.
+
 - Add a [registered cohort evaluation bridge](docs/research/staged-diagnosis.md#registered-cohort-evaluation)
   after endpoint sealing. A one-shot lazy loader supplies every declared holdout;
   one aggregate registry score authorization covers their rows in plan order,
