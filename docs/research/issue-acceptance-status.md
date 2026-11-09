@@ -287,6 +287,23 @@ This November 9 engineering extension diagnoses supplied dyadic real-score syste
 
 This separate November 9 study records all thirteen configurations and eighteen fixed score-budget/margin policies for six seed/task assignments from three trained synthetic parents. Bounded exact score-equation feasibility, five numerical hard-projection cutoffs, three soft retention penalties and three decision-hinge penalties are compared under the frozen development plan. Fitting and calibration are reported separately, but all roles were designated development before the attempt and calibration participates in the gates. The earlier trained evaluations were not retuned. The finite public summary and verification record are projections of retained source evidence, not independent evaluator authentication or a fresh replay. No winning policy, population retention or business-usefulness claim is supplied.
 
+<a id="e27"></a>
+**E27 — Opt-in supplied-feature exact-score compiler guard.**
+
+- [docs/research/feature-feasibility.md](feature-feasibility.md)
+- [rlcd/weight_space/features.py](../../rlcd/weight_space/features.py)
+- [scripts/check_exact_score_admission.py](../../scripts/check_exact_score_admission.py)
+- [provenance/verification/exact-score-admission-20261109.json](../../provenance/verification/exact-score-admission-20261109.json)
+
+The November 9 standalone synthetic compiler/CLI check passed once at its
+captured uncommitted source. It exercised default approximate compilation,
+rejection of the rounded target residual, an exact accepted endpoint, and
+rejection of integer `1` as the boolean option. Infeasible, unresolved and
+protection-only rejection branches were not exercised. The copied receipt
+keeps its original source identities and does not validate later integration.
+The opt-in guard adds no useful-success, native execution or general admission
+replay guarantee; Issue #6 c4 remains partial.
+
 ## Original criteria and evidence
 
 <a id="issue-1"></a>
@@ -857,9 +874,9 @@ This separate November 9 study records all thirteen configurations and eighteen 
 
 **Status: partial.** Historical source disposition: `PARTIAL` ([E00](#e00)).
 
-**Evidence:** [E02](#e02) · [E04](#e04) · [E05](#e05) · [E25](#e25). With protection rows in R and editable coefficients in its columns, full column rank forces a zero edit under exact real-score retention. The original checkbox's full-row-rank phrase is preserved; full row rank alone does not force zero nullity for a short, wide R. Existing trained review retains rejected/conflicting sampled targets in usefulness accounting. The later bounded analyzer detects joint exact-score conflicts with checkable witnesses and preserves unresolved outputs when exact limits stop further work.
+**Evidence:** [E02](#e02) · [E04](#e04) · [E05](#e05) · [E25](#e25) · [E27](#e27). With protection rows in R and editable coefficients in its columns, full column rank forces a zero edit under exact real-score retention. The original checkbox's full-row-rank phrase is preserved; full row rank alone does not force zero nullity for a short, wide R. Existing trained review retains rejected/conflicting sampled targets in usefulness accounting. The bounded analyzer detects joint exact-score conflicts and preserves unresolved judgments. The opt-in compiler guard rejects infeasible or unresolved score equations and nonexact stored target/protected residuals; its recorded standalone check exercised the stated subset at the captured source.
 
-**Remaining requirement / scope limit:** A generic exact-target admission/useful-success gate remains incomplete. The compiler reports exact consistency while still emitting numerical ridge/nullspace proposals; it supplies neither an exact rational executable proposal nor a general conflict-rejection policy. Real-system infeasibility does not rule out every alternative argmax-useful edit, and exact feasibility does not certify a stored endpoint. The mathematical orientation is full column rank of the row-oriented editable protection design, including a bias column only when editable.
+**Remaining requirement / scope limit:** c4 remains partial. `require_exact_scores=True` enforces a supplied-feature score contract at compilation, but the default numerical compiler, trained/prospective usefulness gates and general `AdmissionRequest` replay retain their declared separate scopes. The guard constructs no exact rational executable proposal and adds no replayable general target binding or useful-success guarantee. Real-system infeasibility does not rule out every alternative argmax-useful edit, and exact feasibility does not certify a stored endpoint. The mathematical orientation is full column rank of the row-oriented editable protection design, including a bias column only when editable.
 
 #### #6 c5
 

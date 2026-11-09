@@ -44,10 +44,10 @@
   "source": {
     "inventory": {
       "path": "provenance/source-files.json",
-      "bytes": 2483433,
-      "sha256": "57168f8a4668036e3408c038c0d2f5fd79da21afb7517e505b7308ba625cb382"
+      "bytes": 2483503,
+      "sha256": "45169cd9aa2422e9ac7b624b0e4c15e364beb5a4a2e257ff43f15f6e1109e3f3"
     },
-    "identity_policy": "Original source paths, SHA-256 values, byte lengths, order and all other source-index fields remain unchanged. The earlier six preservation destinations remain under provenance/original-files/. The registered data-role update archives two exact workflow/test originals under artifacts/research/source-preservation/; the bounded feature-feasibility update separately archives the exact feature compiler original there. The pre-research inventory preserves earlier mapping bytes. Privacy derivatives remain separately disclosed in the sanitation ledger.",
+    "identity_policy": "Original source paths, SHA-256 values, byte lengths, order and all other source-index fields remain unchanged. The earlier six preservation destinations remain under provenance/original-files/. The registered data-role update archives two exact workflow/test originals under artifacts/research/source-preservation/; the bounded feature-feasibility update separately archives the exact feature compiler original there. The pre-research inventory preserves earlier mapping bytes. Privacy derivatives remain separately disclosed in the sanitation ledger. The exact-score admission update archives the unchanged CLI original separately from its later opt-in interface.",
     "sanitization": {
       "path": "provenance/public-sanitization.json",
       "bytes": 110282,
@@ -156,6 +156,22 @@
       ],
       "original_identities_changed": false,
       "interpretation": "Exact original source bytes are archived separately from the later tested diagnostics; not a scientific rerun or redaction."
+    },
+    "exact_score_admission_preservation_update": {
+      "review_date": "2026-11-09",
+      "source_commit": "30a0399c0bb7cbc54fa23ce52517f71b0c0544e5",
+      "records": [
+        {
+          "original_path": "rlcd/weight_space/__main__.py",
+          "preserved": {
+            "path": "artifacts/research/source-preservation/exact-score-admission-20261109/rlcd/weight_space/__main__.py",
+            "bytes": 17017,
+            "sha256": "658fde770befb592cd110ef5ea83ef9a39d3d97137b65e2f29b9028ed50a5377"
+          }
+        }
+      ],
+      "original_identities_changed": false,
+      "interpretation": "Corrects the CLI preservation destination after the first exact-score publication check failed; exact original source bytes are archived separately from the later opt-in interface, not a scientific rerun or redaction."
     }
   },
   "core_documentation": {
@@ -562,8 +578,8 @@
   },
   "verification_archive": {
     "path": "provenance/verification/index.json",
-    "bytes": 140734,
-    "sha256": "c6d09861855a1845c4f7c36a865071b2fd7d685f9151f8686d199d4700321895"
+    "bytes": 141563,
+    "sha256": "ff054a98fb57fddd2b171c55d97cd699c96f514929bf29f4ce0f1010f962a1fd"
   },
   "public_npm_lock_review": {
     "path": "provenance/public-npm-lock.json",
@@ -960,5 +976,61 @@
       "open": 1
     },
     "study_or_scalar_check_reexecuted_for_publication": false
+  },
+  "exact_score_admission_update_20261109": {
+    "review_date": "2026-11-09",
+    "integration_base_main_commit": "30a0399c0bb7cbc54fa23ce52517f71b0c0544e5",
+    "integration_base_manifest_sha256": "15da075451dfad93edae83893979ef08e0b1b31f8cbd4bd77d50bb6d7a6b0a21",
+    "private_integration_script_identity": {
+      "bytes": 32756,
+      "sha256": "28668d753eb5b7d46c61d974e8933440fe3c81b8b752f27ab2065671b9a67b2f"
+    },
+    "compiler": {
+      "path": "rlcd/weight_space/features.py",
+      "bytes": 34083,
+      "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+    },
+    "cli": {
+      "path": "rlcd/weight_space/__main__.py",
+      "bytes": 17060,
+      "sha256": "0a6992e119665a25bae8ad5392a21dfa35d73ba738523e5f2795675f8dd4336c"
+    },
+    "standalone_check": {
+      "path": "scripts/check_exact_score_admission.py",
+      "bytes": 3431,
+      "sha256": "81d58eea7983b3d41cd3648b2bf85b3d007bec563f7914ad09041f39a0437b91"
+    },
+    "verification": {
+      "path": "provenance/verification/exact-score-admission-20261109.json",
+      "bytes": 8245,
+      "sha256": "cc863af32c2c3e9311751137c7ecc773636e8cf3ccefe9fdc09386cfc28f5381"
+    },
+    "guide": {
+      "path": "docs/research/feature-feasibility.md",
+      "bytes": 12337,
+      "sha256": "009d6cd74036c60f1591541af772e5f28f90518439952dc92e914a0a58cf2275"
+    },
+    "issue_assessment": {
+      "path": "docs/research/issue-acceptance-status.md",
+      "bytes": 147160,
+      "sha256": "d16c34cc0870c38254a89bc6eb16caf9f9147664cd3dda27f0524b2cb538b3ed"
+    },
+    "scope": "Opt-in supplied-feature exact-score compiler contract; no general useful-success or AdmissionRequest replay guarantee",
+    "check_source_base_commit": "4b8a5352383f5ecd9dab6b638620458433aabfe5",
+    "frozen_receipt_copied_unchanged": true,
+    "three_checked_code_files_copied_unchanged": true,
+    "captured_named_code_dependency_identities_match": true,
+    "complete_checkout_equivalence_to_check_claimed": false,
+    "check_time_documentation_identity_preserved_as_historical": true,
+    "issue6_c1_supported_assessment_preserved": true,
+    "issue6_c4_status": "partial",
+    "acceptance_counts_unchanged": true,
+    "retention_publication_metadata_preserved": true,
+    "historical_outcomes_superseded": false,
+    "later_integration_verified": false,
+    "new_check_execution": false,
+    "new_scientific_study": false,
+    "new_provider_calls": 0,
+    "hosted_success_inferred": false
   }
 }

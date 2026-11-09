@@ -7,6 +7,14 @@ research draft.
 
 ## Unreleased
 
+- Added an opt-in [supplied-feature exact-score compiler guard](docs/research/feature-feasibility.md)
+  and CLI field. It rejects infeasible or unresolved score equations and
+  nonexact stored target/protected residuals. The default numerical path remains
+  available. The [recorded standalone check](provenance/verification/exact-score-admission-20261109.json)
+  covered approximate compilation, rounded-target rejection, exact acceptance
+  and rejection of integer `1` as the boolean option once. The frozen receipt
+  does not verify later integration; Issue #6 c4 remains partial.
+
 - Published the November 9 [synthetic trained-development retention comparison](docs/research/retention-development.md),
   its [finite summary](reports/research/retention-development-20261109/summary.json)
   and [verification receipt](provenance/verification/retention-development-20261109.json).

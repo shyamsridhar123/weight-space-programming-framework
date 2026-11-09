@@ -195,6 +195,7 @@ fresh confirmation needs untouched units and a newly frozen protocol.
 | --- | --- |
 | The motivation and original research | [Framework guide](docs/weight-space/v2/README.md) · [Source review](docs/weight-space/v2/source-review.md) |
 | How to represent and check an edit | [Architecture and API](docs/weight-space/v2/architecture.md) · [Task workflow](docs/weight-space/v2/workflow.md) |
+| How to require exact supplied-feature scores | [Compiler guard and limits](docs/research/feature-feasibility.md) · [Recorded check](provenance/verification/exact-score-admission-20261109.json) |
 | How to freeze a diagnosis before repair | [Staged diagnosis](docs/research/staged-diagnosis.md) |
 | How retention settings affect trained edits | [Development comparison](docs/research/retention-development.md) |
 | The guarantees and their premises | [Formal explanation](docs/weight-space/v2/formal.md) · [Proof reproduction](PROOFS.md) |

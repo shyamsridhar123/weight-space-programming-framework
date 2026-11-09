@@ -145,7 +145,8 @@ def _features(args: argparse.Namespace) -> dict[str, Any]:
     head = ReadoutHead(**spec["head"])
     if args.command == "compile-features":
         allowed = {"head", "target_features", "desired_delta", "retain_features", "retention",
-                   "retention_weight", "ridge", "edit_bias", "nullspace_rtol", "native_dtypes", "cast", "intent"}
+                   "retention_weight", "ridge", "edit_bias", "nullspace_rtol", "require_exact_scores",
+                   "native_dtypes", "cast", "intent"}
         if set(spec) - allowed:
             raise ValueError("Unknown frozen-feature compilation fields")
         result = compile_feature_edit(base, head, **{k: v for k, v in spec.items() if k != "head"})

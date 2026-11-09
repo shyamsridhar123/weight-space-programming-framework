@@ -133,8 +133,9 @@ native representability or alternative argmax goals.
 
 The exact diagnostic does not select an exact rational executable proposal.
 `compile_feature_edit` still fits its declared `none`, `soft` or `nullspace`
-numerical ridge objective and lowers the resulting proposal. It can therefore
-emit an approximate proposal even when the specified exact score equations
+numerical ridge objective and lowers the resulting proposal. With the default
+`require_exact_scores=False`, it can emit an approximate proposal even when
+the specified exact score equations
 are infeasible. SVD may truncate a tiny nonzero protected direction; exact
 analysis can establish a zero-only edit space while the numerical compiler
 still proposes a change. `optimizer_uses_numerical_nullspace` identifies that
@@ -151,15 +152,33 @@ is consistent with minimum squared norm `1/9`, but the focused float32
 realization has exact target residual `1/33554432`. A feasible real system or
 passing numerical tolerance does not make that residual zero.
 
-No generic exact-target admission/useful-success gate was added. The trained
-nullspace caller separately requires exact zero protected residuals on its
-realized endpoint and its frozen behavior gates; the prospective support
-runner applies structural and development behavior gates. Neither path turns
-`consistency_status` into a general rejection policy for every exact target
-conflict. A caller seeking the exact score contract must separately check the
-stored target/protected residuals, realization and declared usefulness; an
-unresolved exact judgment cannot authorize that exact claim. This remaining
-requirement keeps [Issue #6 c4 partial](issue-acceptance-status.md#issue-6).
+`compile_feature_edit(..., require_exact_scores=True)` opts into a strict
+supplied-feature score contract. The same boolean field is accepted in a
+`compile-features` JSON specification. Infeasible or unresolved exact equations
+are rejected before fitting. After lowering, the stored endpoint must exactly
+realize every requested target change and have exact zero protected residuals
+when protected rows were supplied, regardless of the numerical retention mode.
+Failures have distinct feasibility, target-realization and protection errors;
+the CLI rejects before creating its output directory. Successful opted-in
+diagnostics record `require_exact_scores: true`. The default remains false and
+preserves the existing numerical objectives and diagnostics.
+
+The [source-bound standalone check](../../provenance/verification/exact-score-admission-20261109.json)
+passed once on November 9, 2026: it covered default approximate compilation,
+rounded target-residual rejection, exact acceptance and strict boolean validation.
+It did not exercise infeasible, unresolved or protection-only rejection. Its
+sanitized receipt identifies the unchanged check-time source snapshot, which
+predates this verification paragraph and later integration; it adds no native
+execution, use-case, proof or replay guarantee, and c4 remains partial.
+
+This guard does not construct an exact rational executable proposal or add
+target bindings to general `AdmissionRequest` replay. A feasible real system
+can still be rejected because ridge fitting or endpoint rounding leaves a
+nonzero residual. A zero requested change can yield an exact no-op; `no_op`
+remains explicit and does not establish useful success. Trained and prospective
+callers retain their existing declared behavior gates. Application usefulness
+and replayable general admission remain separate requirements, so
+[Issue #6 c4 remains partial](issue-acceptance-status.md#issue-6).
 
 The supplied-feature scope remains explicit: no proof of a raw-input encoder,
 native floating execution, unseen/domain coverage, business benefit or useful
