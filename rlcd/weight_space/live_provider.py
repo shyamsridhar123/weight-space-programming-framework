@@ -122,12 +122,12 @@ def parse_events(output: str) -> tuple[Any, dict[str, Any], list[str], list[str]
                 usage = event.get("usage", {})
             if event.get("type") in ("error", "turn.failed"):
                 errors.append(event["type"])
-        except (ValueError, TypeError):
+        except (ValueError, TypeError, RecursionError):
             errors.append("invalid_event")
     try:
         response = json.loads(final) if isinstance(final, str) else None
         canonical_bytes(response)
-    except ValueError:
+    except (ValueError, RecursionError):
         response = None
         errors.append("invalid_final_response")
     return response, usage, unapproved, errors, diagnostics
@@ -314,7 +314,7 @@ def run_brokered(provider: CodexProvider, broker: Any, *, prompt: str,
                     break
             if broker.is_sealed:
                 break
-        except (ValueError, KeyError, TypeError):
+        except (ValueError, KeyError, TypeError, RecursionError):
             status = "invalid"
             break
     if not broker.is_sealed:

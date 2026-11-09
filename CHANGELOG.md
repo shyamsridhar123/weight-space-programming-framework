@@ -7,6 +7,15 @@ research draft.
 
 ## Unreleased
 
+- Retain provider attempts and brokered trials when deeply nested JSON exceeds
+  the interpreter's recursion limit. Event and final-response parsing use their
+  existing failure paths; an over-nested action preserves provider completion
+  and charged usage while making the trial invalid and sealing by abstention.
+  The [scoped offline receipt](provenance/verification/provider-json-depth-20261109.json)
+  records the mocked-transport regression. Historical results, unknown usage and
+  charges, and provider-attestation limits remain unchanged; Issue #5 c2 and
+  #8 c6 remain partial.
+
 - Add a [prospective scientific compatibility companion](docs/research/staged-scientific-compatibility.md)
   mapping seven engineering slots to eleven scientific entries, with separate
   operational fallback and benchmark-specific analysis rules. This documentation

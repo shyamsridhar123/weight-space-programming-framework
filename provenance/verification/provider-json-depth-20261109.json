@@ -1,0 +1,840 @@
+{
+  "assembled_utc": "2026-11-09T21:56:16.680044+00:00",
+  "automatic_retry_performed": false,
+  "base_commit": "bc193ac4f2a98e71c57d9005572fc682f7a9776d",
+  "captures": [
+    {
+      "automatic_retry_performed": false,
+      "completed_utc": "2026-11-09T21:50:13.4885100Z",
+      "execution_count": 1,
+      "exit_code": 1,
+      "fixture_revision": 1,
+      "observed_fixtures": [
+        {
+          "attempt_error": null,
+          "attempt_status": "completed",
+          "event_errors": [],
+          "fixture": "envelope",
+          "monetary_cost_amount": null,
+          "raw_events": {
+            "bytes": 4403,
+            "path": "events.jsonl",
+            "sha256": "6cebd1fe9cd1f151069e2cbce19528bd6d341e977a5b183d6c38c29263a35699"
+          },
+          "reported_usage": {
+            "input_tokens": 12,
+            "output_tokens": 3
+          },
+          "saved_attempt": {
+            "bytes": 3125,
+            "path": "receipt.json",
+            "sha256": "d66a40553645a7e4b3ca93994ad2cb67061b4ba5c68952d4eaf242918e690654"
+          },
+          "saved_trial": {
+            "bytes": 5385,
+            "path": "trial.json",
+            "sha256": "9f11ff5792fc0f05686958cf8e4ad1c8c5fbebbeeb949852ae9ef94f20777003"
+          },
+          "trial_status": "sealed"
+        }
+      ],
+      "private_record_identities": [
+        {
+          "bytes": 2568,
+          "path": "execution-launch.json",
+          "sha256": "01e8704a2917e90320abd499f9552d75194c64af302d6e99777706a4ba614885"
+        },
+        {
+          "bytes": 1523,
+          "path": "execution-result.json",
+          "sha256": "4f660fcf8b577df472aec30f97ee0fcfc1f14297695daff97bca7ddcbf961fa4"
+        },
+        {
+          "bytes": 1460,
+          "path": "runner-launch.json",
+          "sha256": "4f7a5732e24782f06ead9b3e838b575dcc5ec8c9e138592a240724348bd693b1"
+        },
+        {
+          "bytes": 11205,
+          "path": "before-source-hashes.json",
+          "sha256": "a7d6bf33b76f9905a241673874bef133f294712c8963966ec87288472b695f43"
+        },
+        {
+          "bytes": 11205,
+          "path": "after-source-hashes.json",
+          "sha256": "a7d6bf33b76f9905a241673874bef133f294712c8963966ec87288472b695f43"
+        },
+        {
+          "bytes": 484,
+          "path": "before-state.json",
+          "sha256": "7c0ef8c097a7f2ecaa12133569220902019c2805f0ed9f7d00cc64d6c8f388b5"
+        },
+        {
+          "bytes": 483,
+          "path": "after-state.json",
+          "sha256": "09266242c4001180c7ec053e68786988e4bbad9e4c39b89d051af855949de0f4"
+        },
+        {
+          "bytes": 11965,
+          "path": "before-diff.patch",
+          "sha256": "35de7302fbebfa65bc08596cbf36b65b66f02c8043cc420e0c58fc8f2b802ba8"
+        },
+        {
+          "bytes": 11965,
+          "path": "after-diff.patch",
+          "sha256": "35de7302fbebfa65bc08596cbf36b65b66f02c8043cc420e0c58fc8f2b802ba8"
+        },
+        {
+          "bytes": 4982,
+          "path": "execution-source-index.json",
+          "sha256": "d1e6b20e3ee29ae52788e2f7550e856f84170874ffe9e49ec57e6c3dc2b9d75a"
+        },
+        {
+          "bytes": 579,
+          "path": "execution-verification.json",
+          "sha256": "78c1c99596f546d87fdff15d4c3972fc5fbc7f040af639a479c29bc555dbac72"
+        },
+        {
+          "bytes": 3742,
+          "path": "stdout.log",
+          "sha256": "10081d96721a3647d3553ff1341101c3f5429e6fc22585b03f84d1c34fbe636c"
+        },
+        {
+          "bytes": 0,
+          "path": "stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 3806,
+          "path": "pytest.xml",
+          "sha256": "6da968196380cce790ef531abd259b8f5350ab89a0e6d10294a5afd25640e2b0"
+        }
+      ],
+      "pytest_summary": "1 failed in 1.79s",
+      "source_evidence": {
+        "before_and_after_guarded_snapshots_equal": true,
+        "before_and_after_tracked_diffs_equal": true,
+        "guarded_snapshot_entries": 71,
+        "imported_sources": [
+          {
+            "bytes": 71,
+            "modules": [
+              "rlcd"
+            ],
+            "path": "rlcd/__init__.py",
+            "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+          },
+          {
+            "bytes": 2969,
+            "modules": [
+              "rlcd.weight_space"
+            ],
+            "path": "rlcd/weight_space/__init__.py",
+            "sha256": "9d8cf6bd79b66b9946e50428af4b091f99f870bf68403126682f600b0715ea27"
+          },
+          {
+            "bytes": 7735,
+            "modules": [
+              "rlcd.weight_space.artifact"
+            ],
+            "path": "rlcd/weight_space/artifact.py",
+            "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+          },
+          {
+            "bytes": 15038,
+            "modules": [
+              "rlcd.weight_space.broker"
+            ],
+            "path": "rlcd/weight_space/broker.py",
+            "sha256": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+          },
+          {
+            "bytes": 3928,
+            "modules": [
+              "rlcd.weight_space.compiler"
+            ],
+            "path": "rlcd/weight_space/compiler.py",
+            "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+          },
+          {
+            "bytes": 43906,
+            "modules": [
+              "rlcd.weight_space.contracts"
+            ],
+            "path": "rlcd/weight_space/contracts.py",
+            "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+          },
+          {
+            "bytes": 29559,
+            "modules": [
+              "rlcd.weight_space.data_roles"
+            ],
+            "path": "rlcd/weight_space/data_roles.py",
+            "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+          },
+          {
+            "bytes": 34083,
+            "modules": [
+              "rlcd.weight_space.features"
+            ],
+            "path": "rlcd/weight_space/features.py",
+            "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+          },
+          {
+            "bytes": 19024,
+            "modules": [
+              "rlcd.weight_space.live_provider"
+            ],
+            "path": "rlcd/weight_space/live_provider.py",
+            "sha256": "16d69b20b9ee0c515c784e82fed5d48fcae03e3e9b4a5fdcc3cfb2412e277f09"
+          },
+          {
+            "bytes": 9944,
+            "modules": [
+              "rlcd.weight_space.model"
+            ],
+            "path": "rlcd/weight_space/model.py",
+            "sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+          },
+          {
+            "bytes": 6317,
+            "modules": [
+              "rlcd.weight_space.program"
+            ],
+            "path": "rlcd/weight_space/program.py",
+            "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+          },
+          {
+            "bytes": 6727,
+            "modules": [
+              "rlcd.weight_space.semantics"
+            ],
+            "path": "rlcd/weight_space/semantics.py",
+            "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+          },
+          {
+            "bytes": 9106,
+            "modules": [
+              "rlcd.weight_space.sequential"
+            ],
+            "path": "rlcd/weight_space/sequential.py",
+            "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+          },
+          {
+            "bytes": 26202,
+            "modules": [
+              "rlcd.weight_space.structured"
+            ],
+            "path": "rlcd/weight_space/structured.py",
+            "sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+          },
+          {
+            "bytes": 6034,
+            "modules": [
+              "rlcd.weight_space.symmetry"
+            ],
+            "path": "rlcd/weight_space/symmetry.py",
+            "sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+          },
+          {
+            "bytes": 54271,
+            "modules": [
+              "rlcd.weight_space.workflow"
+            ],
+            "path": "rlcd/weight_space/workflow.py",
+            "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+          },
+          {
+            "bytes": 28869,
+            "modules": [
+              "test_research_broker"
+            ],
+            "path": "tests/test_research_broker.py",
+            "sha256": "13375fbbeff915da45ec7a5fce8603b56554d73ff1d7d226038c599453f9b711"
+          }
+        ],
+        "original_preexecution_raw_input_copies": [
+          {
+            "bytes": 28869,
+            "path": "tests/test_research_broker.py",
+            "sha256": "13375fbbeff915da45ec7a5fce8603b56554d73ff1d7d226038c599453f9b711"
+          },
+          {
+            "bytes": 19024,
+            "path": "rlcd/weight_space/live_provider.py",
+            "sha256": "16d69b20b9ee0c515c784e82fed5d48fcae03e3e9b4a5fdcc3cfb2412e277f09"
+          },
+          {
+            "bytes": 2593,
+            "path": "scripts/audit_public_content.py",
+            "sha256": "b5d4bfed042eaeffd040657ea23ab60b95e0826d89a1de15bc26e278ae4e3b3d"
+          },
+          {
+            "bytes": 37714,
+            "path": "scripts/verify_publication.py",
+            "sha256": "e8658f9880310431dfc7ea9b7a57ac738f5615d73d6e8cbb2389b8afeda95f66"
+          },
+          {
+            "bytes": 1295,
+            "path": "pytest-engineering.ini",
+            "sha256": "d417cae6977081655172f7a2ac94b5c9d9f654bc797649294c99baf4cee47880"
+          },
+          {
+            "bytes": 1136,
+            "path": "pyproject.toml",
+            "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+          },
+          {
+            "bytes": 9228,
+            "path": "private-capture/run_check.py",
+            "sha256": "8834a81b6b938a2b79f9e6cb56b60ba52385ceb2ae721b7f38606ef7f77a4341"
+          },
+          {
+            "bytes": 8024,
+            "path": "private-capture/launch_once.ps1",
+            "sha256": "c0ec80531e93744f5bcb74bdee1bb9b249a9776966d1915adb0285019aeafa4e"
+          }
+        ],
+        "private_scripts_unchanged": true,
+        "runner_integrity_checks": {
+          "diff_check_passed": true,
+          "expected_test_and_provider_imported": true,
+          "git_state_unchanged": true,
+          "guarded_imported_sources_match_before": true,
+          "source_config_and_private_scripts_unchanged": true
+        },
+        "tracked_diff_sha256": "35de7302fbebfa65bc08596cbf36b65b66f02c8043cc420e0c58fc8f2b802ba8",
+        "unguarded_imported_sources": []
+      },
+      "started_utc": "2026-11-09T21:50:06.8162341Z",
+      "status": "fixture_assumption_failed",
+      "timed_out": false
+    },
+    {
+      "automatic_retry_performed": false,
+      "completed_utc": "2026-11-09T21:54:20.4165475Z",
+      "execution_count": 1,
+      "exit_code": 0,
+      "fixture_revision": 2,
+      "observed_fixtures": [
+        {
+          "attempt_error": "transport_or_response_failed",
+          "attempt_status": "failed",
+          "event_errors": [
+            "invalid_event"
+          ],
+          "fixture": "envelope",
+          "monetary_cost_amount": null,
+          "raw_events": {
+            "bytes": 200403,
+            "path": "events.jsonl",
+            "sha256": "7ea9f857ac956844d62fd02f1f04445299b38df3ccb7344d64dde901193eaa04"
+          },
+          "reported_usage": {
+            "input_tokens": 12,
+            "output_tokens": 3
+          },
+          "saved_attempt": {
+            "bytes": 3172,
+            "path": "receipt.json",
+            "sha256": "0c058e303155761530bf76dd3636cb834a8819ab7597409756b68f374c114a1e"
+          },
+          "saved_trial": {
+            "bytes": 4906,
+            "path": "trial.json",
+            "sha256": "7dd2211a3a9c2a7b8660a939ae69e9e9a5ce5079430ed817d429f8e4a233d2c7"
+          },
+          "trial_status": "failed"
+        },
+        {
+          "attempt_error": "transport_or_response_failed",
+          "attempt_status": "failed",
+          "event_errors": [
+            "invalid_final_response"
+          ],
+          "fixture": "final",
+          "monetary_cost_amount": null,
+          "raw_events": {
+            "bytes": 200199,
+            "path": "events.jsonl",
+            "sha256": "47bc8e1431819b7db31f2ac512939a951c852a371ee53394bc60622b394dc7ae"
+          },
+          "reported_usage": {
+            "input_tokens": 12,
+            "output_tokens": 3
+          },
+          "saved_attempt": {
+            "bytes": 2988,
+            "path": "receipt.json",
+            "sha256": "77c4c6ee58644647a3d6358534afee2608f3c62011b2d5ca8b87701f0daee885"
+          },
+          "saved_trial": {
+            "bytes": 4698,
+            "path": "trial.json",
+            "sha256": "19aed677bfb257a738f7a41a96718a50a214eb76ff33f243758adcd2c54e7c47"
+          },
+          "trial_status": "failed"
+        },
+        {
+          "attempt_error": null,
+          "attempt_status": "completed",
+          "event_errors": [],
+          "fixture": "action",
+          "monetary_cost_amount": null,
+          "raw_events": {
+            "bytes": 200253,
+            "path": "events.jsonl",
+            "sha256": "fe8c261b43142e5ea7e5ca97320d054633cd73c63a9f38284b6361ecbccb9ee8"
+          },
+          "reported_usage": {
+            "input_tokens": 12,
+            "output_tokens": 3
+          },
+          "saved_attempt": {
+            "bytes": 203000,
+            "path": "receipt.json",
+            "sha256": "185ba80154c8a89d1aec48a7c0a04cfe8e01084a23874600512cb58af21d85da"
+          },
+          "saved_trial": {
+            "bytes": 404868,
+            "path": "trial.json",
+            "sha256": "c8342ad602f1644d48b4c3405110decbb28a185d204772611dba5ed9c0940adf"
+          },
+          "trial_status": "invalid"
+        },
+        {
+          "attempt_error": null,
+          "attempt_status": "completed",
+          "event_errors": [],
+          "fixture": "shallow",
+          "monetary_cost_amount": null,
+          "raw_events": {
+            "bytes": 407,
+            "path": "events.jsonl",
+            "sha256": "fe44b0a209258bbf9367d77c8efcd243095d2f2cbc801f8fdd42a3c6c55615ee"
+          },
+          "reported_usage": {
+            "input_tokens": 12,
+            "output_tokens": 3
+          },
+          "saved_attempt": {
+            "bytes": 3126,
+            "path": "receipt.json",
+            "sha256": "694c5b962a156debecb865d22786ea818fb0434a0fe8d547001926b168c26fe0"
+          },
+          "saved_trial": {
+            "bytes": 5386,
+            "path": "trial.json",
+            "sha256": "aac540acc41c3c742c43812e5c2c08bb48291fd58a50960fb6e7b48e0284dd1f"
+          },
+          "trial_status": "sealed"
+        }
+      ],
+      "private_record_identities": [
+        {
+          "bytes": 2589,
+          "path": "execution-launch.json",
+          "sha256": "48006043bcf4c06e960bd309833ba9204aad51ee178cc051a917313e6c3869c0"
+        },
+        {
+          "bytes": 1535,
+          "path": "execution-result.json",
+          "sha256": "e885baf6df18fe1adb80d5d605b96da3bc1994b035e162fe9430fae99c9b7731"
+        },
+        {
+          "bytes": 1472,
+          "path": "runner-launch.json",
+          "sha256": "195711b73930a2934481cb378134d39047dc493adbdf6960d13580f41ef18a40"
+        },
+        {
+          "bytes": 11205,
+          "path": "before-source-hashes.json",
+          "sha256": "afbbf7ee8f258cf321b4fead8b163a7af3e2aafbcecd67c0fa3583e0ab07282b"
+        },
+        {
+          "bytes": 11205,
+          "path": "after-source-hashes.json",
+          "sha256": "afbbf7ee8f258cf321b4fead8b163a7af3e2aafbcecd67c0fa3583e0ab07282b"
+        },
+        {
+          "bytes": 484,
+          "path": "before-state.json",
+          "sha256": "3926f44ef953dbd394e6de5dd6f805c5ee8a7ea7a9e84ea5a573411664a4155c"
+        },
+        {
+          "bytes": 483,
+          "path": "after-state.json",
+          "sha256": "d59a4314e00db86fb3b3932bfab09abbd8eb760bc48d40847b0c1ae8c4a6da9e"
+        },
+        {
+          "bytes": 12092,
+          "path": "before-diff.patch",
+          "sha256": "e3f29fb1a303553b25d0b801d3c6285e6eeba5d827c5935b1401f5fd3380798a"
+        },
+        {
+          "bytes": 12092,
+          "path": "after-diff.patch",
+          "sha256": "e3f29fb1a303553b25d0b801d3c6285e6eeba5d827c5935b1401f5fd3380798a"
+        },
+        {
+          "bytes": 4988,
+          "path": "execution-source-index.json",
+          "sha256": "79c750e8626c8980107b6f4667e0597fa0443b7b3de6a56928f62d1981d00f1b"
+        },
+        {
+          "bytes": 578,
+          "path": "execution-verification.json",
+          "sha256": "96efae79fbbff72aa3b11a2fa4a5c5c1a29209a5f3e5cf171f6946d70c6a2a96"
+        },
+        {
+          "bytes": 100,
+          "path": "stdout.log",
+          "sha256": "b966cf4a360784bb7630c4949d55125394c0dd51f5df2c4913a4314b6ab40b50"
+        },
+        {
+          "bytes": 0,
+          "path": "stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 388,
+          "path": "pytest.xml",
+          "sha256": "b2609995649c945ca730bb80a1d6ac1fdaa42274f291c954493170e8d74a4ff2"
+        }
+      ],
+      "pytest_summary": "1 passed in 1.01s",
+      "source_evidence": {
+        "before_and_after_guarded_snapshots_equal": true,
+        "before_and_after_tracked_diffs_equal": true,
+        "guarded_snapshot_entries": 71,
+        "imported_sources": [
+          {
+            "bytes": 71,
+            "modules": [
+              "rlcd"
+            ],
+            "path": "rlcd/__init__.py",
+            "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+          },
+          {
+            "bytes": 2969,
+            "modules": [
+              "rlcd.weight_space"
+            ],
+            "path": "rlcd/weight_space/__init__.py",
+            "sha256": "9d8cf6bd79b66b9946e50428af4b091f99f870bf68403126682f600b0715ea27"
+          },
+          {
+            "bytes": 7735,
+            "modules": [
+              "rlcd.weight_space.artifact"
+            ],
+            "path": "rlcd/weight_space/artifact.py",
+            "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+          },
+          {
+            "bytes": 15038,
+            "modules": [
+              "rlcd.weight_space.broker"
+            ],
+            "path": "rlcd/weight_space/broker.py",
+            "sha256": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+          },
+          {
+            "bytes": 3928,
+            "modules": [
+              "rlcd.weight_space.compiler"
+            ],
+            "path": "rlcd/weight_space/compiler.py",
+            "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+          },
+          {
+            "bytes": 43906,
+            "modules": [
+              "rlcd.weight_space.contracts"
+            ],
+            "path": "rlcd/weight_space/contracts.py",
+            "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+          },
+          {
+            "bytes": 29559,
+            "modules": [
+              "rlcd.weight_space.data_roles"
+            ],
+            "path": "rlcd/weight_space/data_roles.py",
+            "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+          },
+          {
+            "bytes": 34083,
+            "modules": [
+              "rlcd.weight_space.features"
+            ],
+            "path": "rlcd/weight_space/features.py",
+            "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+          },
+          {
+            "bytes": 19024,
+            "modules": [
+              "rlcd.weight_space.live_provider"
+            ],
+            "path": "rlcd/weight_space/live_provider.py",
+            "sha256": "16d69b20b9ee0c515c784e82fed5d48fcae03e3e9b4a5fdcc3cfb2412e277f09"
+          },
+          {
+            "bytes": 9944,
+            "modules": [
+              "rlcd.weight_space.model"
+            ],
+            "path": "rlcd/weight_space/model.py",
+            "sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+          },
+          {
+            "bytes": 6317,
+            "modules": [
+              "rlcd.weight_space.program"
+            ],
+            "path": "rlcd/weight_space/program.py",
+            "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+          },
+          {
+            "bytes": 6727,
+            "modules": [
+              "rlcd.weight_space.semantics"
+            ],
+            "path": "rlcd/weight_space/semantics.py",
+            "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+          },
+          {
+            "bytes": 9106,
+            "modules": [
+              "rlcd.weight_space.sequential"
+            ],
+            "path": "rlcd/weight_space/sequential.py",
+            "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+          },
+          {
+            "bytes": 26202,
+            "modules": [
+              "rlcd.weight_space.structured"
+            ],
+            "path": "rlcd/weight_space/structured.py",
+            "sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+          },
+          {
+            "bytes": 6034,
+            "modules": [
+              "rlcd.weight_space.symmetry"
+            ],
+            "path": "rlcd/weight_space/symmetry.py",
+            "sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+          },
+          {
+            "bytes": 54271,
+            "modules": [
+              "rlcd.weight_space.workflow"
+            ],
+            "path": "rlcd/weight_space/workflow.py",
+            "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+          },
+          {
+            "bytes": 28993,
+            "modules": [
+              "test_research_broker"
+            ],
+            "path": "tests/test_research_broker.py",
+            "sha256": "9c919b6367c9e254615925087859e3691905ad792d68e431531565ad7d9331d9"
+          }
+        ],
+        "original_preexecution_raw_input_copies": [
+          {
+            "bytes": 28993,
+            "path": "tests/test_research_broker.py",
+            "sha256": "9c919b6367c9e254615925087859e3691905ad792d68e431531565ad7d9331d9"
+          },
+          {
+            "bytes": 19024,
+            "path": "rlcd/weight_space/live_provider.py",
+            "sha256": "16d69b20b9ee0c515c784e82fed5d48fcae03e3e9b4a5fdcc3cfb2412e277f09"
+          },
+          {
+            "bytes": 2593,
+            "path": "scripts/audit_public_content.py",
+            "sha256": "b5d4bfed042eaeffd040657ea23ab60b95e0826d89a1de15bc26e278ae4e3b3d"
+          },
+          {
+            "bytes": 37714,
+            "path": "scripts/verify_publication.py",
+            "sha256": "e8658f9880310431dfc7ea9b7a57ac738f5615d73d6e8cbb2389b8afeda95f66"
+          },
+          {
+            "bytes": 1295,
+            "path": "pytest-engineering.ini",
+            "sha256": "d417cae6977081655172f7a2ac94b5c9d9f654bc797649294c99baf4cee47880"
+          },
+          {
+            "bytes": 1136,
+            "path": "pyproject.toml",
+            "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+          },
+          {
+            "bytes": 9228,
+            "path": "private-capture/run_check.py",
+            "sha256": "8834a81b6b938a2b79f9e6cb56b60ba52385ceb2ae721b7f38606ef7f77a4341"
+          },
+          {
+            "bytes": 8024,
+            "path": "private-capture/launch_once.ps1",
+            "sha256": "c0ec80531e93744f5bcb74bdee1bb9b249a9776966d1915adb0285019aeafa4e"
+          }
+        ],
+        "private_scripts_unchanged": true,
+        "runner_integrity_checks": {
+          "diff_check_passed": true,
+          "expected_test_and_provider_imported": true,
+          "git_state_unchanged": true,
+          "guarded_imported_sources_match_before": true,
+          "source_config_and_private_scripts_unchanged": true
+        },
+        "tracked_diff_sha256": "e3f29fb1a303553b25d0b801d3c6285e6eeba5d827c5935b1401f5fd3380798a",
+        "unguarded_imported_sources": []
+      },
+      "started_utc": "2026-11-09T21:54:15.3480161Z",
+      "status": "passed",
+      "timed_out": false
+    }
+  ],
+  "covered_behaviors": [
+    "The revised fixture asserts that its directly constructed deep JSON string actually raises RecursionError on this interpreter before exercising broker paths.",
+    "Malformed event envelopes and final-response JSON persist a failed provider attempt and failed trial, retain later reported usage without admitting a usage charge, and seal the broker through abstention.",
+    "An over-nested action string preserves provider completion and its valid usage charge, persists an invalid trial, executes no proposal, and seals through abstention.",
+    "A shallow control charges valid usage, submits one proposal and seals normally. Each case makes one mocked provider call despite a three-round limit.",
+    "The test checks exact raw event bytes and their SHA-256 commitments, saved receipt/trial identity, charged token totals, proposer counts and broker trace operations. Monetary costs remain unknown."
+  ],
+  "execution_count": 2,
+  "execution_policy": {
+    "automatic_retry_performed": false,
+    "bytecode_and_user_site_disabled": true,
+    "inherited_pytest_addopts_removed": true,
+    "offline_flags_enabled": true,
+    "per_capture_execution_count": 1,
+    "provider_discovery_version_and_process_transport_mocked": true,
+    "pytest_plugin_autoload_conftest_and_cache_disabled": true,
+    "timeout_seconds": 600
+  },
+  "limitations": [
+    "These synthetic mocked-transport engineering cases establish neither live-study results nor independent provider-origin attestation.",
+    "The fixture does not establish a universal JSON depth threshold across supported interpreters, a general JSON resource limit, memory-exhaustion protection or public derivative sanitation.",
+    "Existing historical failed-request usage, monetary charges, deployment revisions and scientific outcomes remain unchanged; Issue #5 c2 and #8 c6 remain partial.",
+    "Raw logs, fixture directories, workstation paths and receipt/trial payloads remain private. Published hashes identify retained records; they do not prove provider authenticity or disclose unknown costs.",
+    "Publication/content verification is a separate final capture and is not claimed as executed by either engineering capture."
+  ],
+  "manual_followup": "The first capture stopped at an envelope-status assertion: its nesting at twice sys.getrecursionlimit() did not trigger this installed decoder's guard, so the trial sealed. Production source was unchanged. After source review, the revised fixture used 100,000-level serialized lists and an explicit real-json.loads RecursionError precondition. A separate fresh capture was then invoked once. Neither original capture was rerun or overwritten.",
+  "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "schema": "wsp-local-engineering-verification/1",
+  "scope": "Prospective JSON-depth failure accounting in provider event/final-response parsing and common broker action decoding; CLI discovery, version probe and process transport are mocked.",
+  "status": "revised_fixture_passed_after_recorded_fixture_failure",
+  "supplementary_postexecution_source_archive": {
+    "files": [
+      {
+        "bytes": 1136,
+        "path": "pyproject.toml",
+        "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+      },
+      {
+        "bytes": 1295,
+        "path": "pytest-engineering.ini",
+        "sha256": "d417cae6977081655172f7a2ac94b5c9d9f654bc797649294c99baf4cee47880"
+      },
+      {
+        "bytes": 71,
+        "path": "rlcd/__init__.py",
+        "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+      },
+      {
+        "bytes": 2969,
+        "path": "rlcd/weight_space/__init__.py",
+        "sha256": "9d8cf6bd79b66b9946e50428af4b091f99f870bf68403126682f600b0715ea27"
+      },
+      {
+        "bytes": 7735,
+        "path": "rlcd/weight_space/artifact.py",
+        "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+      },
+      {
+        "bytes": 15038,
+        "path": "rlcd/weight_space/broker.py",
+        "sha256": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+      },
+      {
+        "bytes": 3928,
+        "path": "rlcd/weight_space/compiler.py",
+        "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+      },
+      {
+        "bytes": 43906,
+        "path": "rlcd/weight_space/contracts.py",
+        "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+      },
+      {
+        "bytes": 29559,
+        "path": "rlcd/weight_space/data_roles.py",
+        "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+      },
+      {
+        "bytes": 34083,
+        "path": "rlcd/weight_space/features.py",
+        "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+      },
+      {
+        "bytes": 19024,
+        "path": "rlcd/weight_space/live_provider.py",
+        "sha256": "16d69b20b9ee0c515c784e82fed5d48fcae03e3e9b4a5fdcc3cfb2412e277f09"
+      },
+      {
+        "bytes": 9944,
+        "path": "rlcd/weight_space/model.py",
+        "sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+      },
+      {
+        "bytes": 6317,
+        "path": "rlcd/weight_space/program.py",
+        "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+      },
+      {
+        "bytes": 6727,
+        "path": "rlcd/weight_space/semantics.py",
+        "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+      },
+      {
+        "bytes": 9106,
+        "path": "rlcd/weight_space/sequential.py",
+        "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+      },
+      {
+        "bytes": 26202,
+        "path": "rlcd/weight_space/structured.py",
+        "sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+      },
+      {
+        "bytes": 6034,
+        "path": "rlcd/weight_space/symmetry.py",
+        "sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+      },
+      {
+        "bytes": 54271,
+        "path": "rlcd/weight_space/workflow.py",
+        "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+      },
+      {
+        "bytes": 28993,
+        "path": "tests/test_research_broker.py",
+        "sha256": "9c919b6367c9e254615925087859e3691905ad792d68e431531565ad7d9331d9"
+      }
+    ],
+    "revised_tracked_diff_matches_capture_at_assembly": true,
+    "timing_limit": "These imported/config byte copies were made during assembly after the revised execution and match its guarded before/after hashes. The captures separately retained their eight input byte copies before pytest.main. Issue-status documentation relies on the separate final publication capture."
+  },
+  "test_nodes": [
+    "tests/test_research_broker.py::test_deeply_nested_provider_json_retains_failed_attempt_and_trial"
+  ]
+}

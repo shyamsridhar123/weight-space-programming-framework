@@ -814,6 +814,8 @@ Historical records and criterion statuses are unchanged.
 
 **Later event-type supplement, November 9, 2026:** The [event-type engineering receipt](../../provenance/verification/provider-event-type-20261109.json) records prospective rejection of present nonstring event types with failed-attempt/trial accounting and broker abstention. Missing types and unknown string types retain their prior behavior. This mocked-transport regression supplies no live-study evidence and does not broaden earlier receipts' captured source scope or resolve historical usage, charges, deployment revision or provider-origin attestation. #5 c2 and #8 c6 remain partial.
 
+**Later JSON-depth supplement, November 9, 2026:** The [JSON-depth engineering receipt](../../provenance/verification/provider-json-depth-20261109.json) records prospective handling of recursion-limit failures in event, final-response and broker-action decoding. Event/final failures retain failed attempts and trials without admitting usage; action failure retains the completed provider attempt and its usage charge, then persists an invalid trial and abstains. The mocked fixtures establish no general JSON resource limit or public derivative sanitation. Historical evidence and unknown usage/costs remain unchanged; #5 c2 and #8 c6 stay partial.
+
 #### #5 c3
 
 - [ ] Add leak/adversarial cases for hidden exact-parent extraction, private evaluator access, unauthorized network/files, reconstructed forward calls through allowed tools, and off-ledger attempts.
