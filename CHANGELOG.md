@@ -17,9 +17,16 @@ research draft.
   materialization, structure and matching outcomes. `verify_study_endpoints()`
   rechecks the saved seal and live retained endpoints without reconstruction;
   integrity or persistence failure permanently closes the originating owner.
-  Add one focused synthetic regression. This accounting seal supplies no final
+  Add one focused synthetic regression and an
+  [engineering receipt](provenance/verification/staged-study-seal-20261109.json)
+  preserving its initial strict-JSON tuple-key failure and the passing invocation
+  after a direct ordered-key comparison fixed production code. Each invocation
+  records unchanged before/after source identities and no automatic retry or
+  timeout. This accounting seal supplies no final
   scientific study seal, runtime restoration, holdouts or scoring. Prospective
-  scientific conditions remain required before preparation. Historical results
+  scientific conditions remain required before preparation. The seven-slot,
+  absent-selection fallback plan still needs a prospective decision reconciling
+  the earlier eleven-slot design and its usability-based fallback. Historical results
   and receipt scopes and #2/#6/#9 limitations are unchanged; #9 c1 stays partial
   and open.
 
