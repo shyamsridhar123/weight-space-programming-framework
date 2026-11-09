@@ -1,0 +1,855 @@
+{
+  "assembly": {
+    "all_four_raw_source_snapshots_match_guarded_inventory": true,
+    "all_recorded_imported_sources_match_guarded_inventory": true,
+    "assembled_utc": "2026-11-09T20:33:42.900564+00:00",
+    "assembler_python_flags": [
+      "-I",
+      "-S",
+      "-B"
+    ],
+    "evidence_source": "Saved evidence from both recorded invocations only; standard-library JSON/XML parsing, source AST parsing, byte comparisons and SHA-256 hashing.",
+    "execution_limit": "No project imports, tests, studies, gates, providers, scoring, arrays, retention artifacts, replay, projections or cohort/receipt reconstructions were invoked by receipt assembly.",
+    "framework_format_pin_count": 9,
+    "framework_format_pins": {
+      "rlcd/weight_space/artifact.py": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500",
+      "rlcd/weight_space/broker.py": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c",
+      "rlcd/weight_space/data_roles.py": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851",
+      "rlcd/weight_space/model.py": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af",
+      "rlcd/weight_space/program.py": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd",
+      "rlcd/weight_space/staged_cohort.py": "2501fc968878cd3894646745dd6ce5986f4ffc808e8e6bf5567ca5688cd36687",
+      "rlcd/weight_space/staged_diagnosis.py": "ff3449c6392d8fca2af2114ff36c3760a207eff5b7bd667f0939bdaf1ef74dd5",
+      "rlcd/weight_space/structured.py": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab",
+      "rlcd/weight_space/workflow.py": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+    },
+    "guarded_inventory_count_per_invocation": 69,
+    "imported_project_source_count_per_invocation": 19,
+    "later_changes": "The public receipt was assembled afterward. Any later documentation, manifest, publication or integration changes are outside the captured executions and do not inherit their results.",
+    "native_dtypes_from_saved_helper": {
+      "head.bias": "float32",
+      "head.weight": "float32"
+    },
+    "nine_framework_format_pins_match_guarded_inventory": true,
+    "private_content_excluded": [
+      "workstation paths",
+      "hostname",
+      "process IDs",
+      "raw logs",
+      "raw JUnit XML",
+      "SQLite",
+      "registry rows",
+      "study rows",
+      "credentials"
+    ],
+    "raw_input_source_snapshot_count_per_invocation": 4,
+    "source_identity_limit": "Inventories hash on-disk files before and after each check; each import index records module paths and hashes their on-disk bytes at collection time. These records do not establish loaded-code identity, an absence of transient races, sandboxing or independent process tracing.",
+    "source_pin_scope": "reviewed_disk_format_compatibility_only"
+  },
+  "attempts": [
+    {
+      "automatic_retry_performed": false,
+      "before_after_comparison": {
+        "after_captured_utc": "2026-11-09T20:27:14.634435+00:00",
+        "all_four_raw_source_snapshots_match_guarded_inventory": true,
+        "all_imported_sources_match_guarded_inventory": true,
+        "before_captured_utc": "2026-11-09T20:27:07.978718+00:00",
+        "nine_framework_format_pins_match_guarded_inventory": true,
+        "saved_diff_check_exit_code": 0,
+        "source_inventory_bytes_equal": true,
+        "source_inventory_equal": true,
+        "state_equal_excluding_capture_time_and_phase": true,
+        "tracked_diff_bytes_equal": true,
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "captured_source_identities": [
+        {
+          "bytes": 46245,
+          "path": "tests/test_staged_diagnosis_selection.py",
+          "sha256": "2fcfbb25a5de7a95655393723480ceddfb03420edb3bbd2081b0c02d80eadfbf"
+        },
+        {
+          "bytes": 78226,
+          "path": "scripts/staged_diagnosis_selection.py",
+          "sha256": "5ac9c6bd7c16b4de8001cd615891cc92c055f455eb341da8c3eb64abee68d3a5"
+        },
+        {
+          "bytes": 1295,
+          "path": "pytest-engineering.ini",
+          "sha256": "d417cae6977081655172f7a2ac94b5c9d9f654bc797649294c99baf4cee47880"
+        },
+        {
+          "bytes": 1136,
+          "path": "pyproject.toml",
+          "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+        },
+        {
+          "bytes": 2483503,
+          "path": "provenance/source-files.json",
+          "sha256": "45169cd9aa2422e9ac7b624b0e4c15e364beb5a4a2e257ff43f15f6e1109e3f3"
+        },
+        {
+          "bytes": 58888,
+          "path": "docs/research/staged-diagnosis.md",
+          "sha256": "2585d88828ac17eb60f4c5d0d70a0b42bb111b3357e83c583c941c52da2d267d"
+        },
+        {
+          "bytes": 36362,
+          "path": "CHANGELOG.md",
+          "sha256": "159ced3b4a3c84e497605791006647110f22f0ae9a52942ef7c881f1e844b2f5"
+        }
+      ],
+      "classification": "failed",
+      "completed_utc": "2026-11-09T20:27:16.0806330Z",
+      "deselected_tests": 3,
+      "execution_count": 1,
+      "execution_id": "staged-study-seal-check-20261109",
+      "exit_code": 1,
+      "failure_accounting": {
+        "exception_message": "Expected strict finite JSON",
+        "exception_type": "ValueError",
+        "mechanism": "The ordered retained-control roster contains tuple keys; the strict finite JSON comparator rejects a tuple before the endpoint seal returns.",
+        "remaining_test_assertions": "The failed invocation stopped at the first successful-seal call; later assertions are not credited to that invocation.",
+        "saved_helper_failure_line": 1131,
+        "saved_test_failure_line": 573
+      },
+      "guarded_inventory_categories": {
+        "explicit_other_guards": 7,
+        "framework_files_under_rlcd_weight_space": 32,
+        "script_files_under_scripts": 30
+      },
+      "guarded_inventory_count": 69,
+      "imported_project_source_count": 19,
+      "imported_sources": [
+        {
+          "bytes": 71,
+          "modules": [
+            "rlcd"
+          ],
+          "path": "rlcd/__init__.py",
+          "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+        },
+        {
+          "bytes": 2969,
+          "modules": [
+            "rlcd.weight_space"
+          ],
+          "path": "rlcd/weight_space/__init__.py",
+          "sha256": "9d8cf6bd79b66b9946e50428af4b091f99f870bf68403126682f600b0715ea27"
+        },
+        {
+          "bytes": 7735,
+          "modules": [
+            "rlcd.weight_space.artifact"
+          ],
+          "path": "rlcd/weight_space/artifact.py",
+          "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+        },
+        {
+          "bytes": 15038,
+          "modules": [
+            "rlcd.weight_space.broker"
+          ],
+          "path": "rlcd/weight_space/broker.py",
+          "sha256": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+        },
+        {
+          "bytes": 3928,
+          "modules": [
+            "rlcd.weight_space.compiler"
+          ],
+          "path": "rlcd/weight_space/compiler.py",
+          "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+        },
+        {
+          "bytes": 43906,
+          "modules": [
+            "rlcd.weight_space.contracts"
+          ],
+          "path": "rlcd/weight_space/contracts.py",
+          "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+        },
+        {
+          "bytes": 29559,
+          "modules": [
+            "rlcd.weight_space.data_roles"
+          ],
+          "path": "rlcd/weight_space/data_roles.py",
+          "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+        },
+        {
+          "bytes": 34083,
+          "modules": [
+            "rlcd.weight_space.features"
+          ],
+          "path": "rlcd/weight_space/features.py",
+          "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+        },
+        {
+          "bytes": 9944,
+          "modules": [
+            "rlcd.weight_space.model"
+          ],
+          "path": "rlcd/weight_space/model.py",
+          "sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+        },
+        {
+          "bytes": 6317,
+          "modules": [
+            "rlcd.weight_space.program"
+          ],
+          "path": "rlcd/weight_space/program.py",
+          "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+        },
+        {
+          "bytes": 6727,
+          "modules": [
+            "rlcd.weight_space.semantics"
+          ],
+          "path": "rlcd/weight_space/semantics.py",
+          "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+        },
+        {
+          "bytes": 9106,
+          "modules": [
+            "rlcd.weight_space.sequential"
+          ],
+          "path": "rlcd/weight_space/sequential.py",
+          "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+        },
+        {
+          "bytes": 58359,
+          "modules": [
+            "rlcd.weight_space.staged_cohort"
+          ],
+          "path": "rlcd/weight_space/staged_cohort.py",
+          "sha256": "2501fc968878cd3894646745dd6ce5986f4ffc808e8e6bf5567ca5688cd36687"
+        },
+        {
+          "bytes": 28539,
+          "modules": [
+            "rlcd.weight_space.staged_diagnosis"
+          ],
+          "path": "rlcd/weight_space/staged_diagnosis.py",
+          "sha256": "ff3449c6392d8fca2af2114ff36c3760a207eff5b7bd667f0939bdaf1ef74dd5"
+        },
+        {
+          "bytes": 26202,
+          "modules": [
+            "rlcd.weight_space.structured"
+          ],
+          "path": "rlcd/weight_space/structured.py",
+          "sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+        },
+        {
+          "bytes": 6034,
+          "modules": [
+            "rlcd.weight_space.symmetry"
+          ],
+          "path": "rlcd/weight_space/symmetry.py",
+          "sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+        },
+        {
+          "bytes": 54271,
+          "modules": [
+            "rlcd.weight_space.workflow"
+          ],
+          "path": "rlcd/weight_space/workflow.py",
+          "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+        },
+        {
+          "bytes": 78226,
+          "modules": [
+            "scripts.staged_diagnosis_selection"
+          ],
+          "path": "scripts/staged_diagnosis_selection.py",
+          "sha256": "5ac9c6bd7c16b4de8001cd615891cc92c055f455eb341da8c3eb64abee68d3a5"
+        },
+        {
+          "bytes": 46245,
+          "modules": [
+            "test_staged_diagnosis_selection"
+          ],
+          "path": "tests/test_staged_diagnosis_selection.py",
+          "sha256": "2fcfbb25a5de7a95655393723480ceddfb03420edb3bbd2081b0c02d80eadfbf"
+        }
+      ],
+      "junit_accounting": {
+        "classname": "tests.test_staged_diagnosis_selection",
+        "duration_seconds": "3.809",
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "testcase": "test_staged_study_endpoint_seal_retains_actual_slots_without_regeneration",
+        "testcase_duration_seconds": "2.648",
+        "tests": 1
+      },
+      "raw_input_source_snapshots": [
+        {
+          "bytes": 2593,
+          "path": "scripts/audit_public_content.py",
+          "sha256": "b5d4bfed042eaeffd040657ea23ab60b95e0826d89a1de15bc26e278ae4e3b3d"
+        },
+        {
+          "bytes": 78226,
+          "path": "scripts/staged_diagnosis_selection.py",
+          "sha256": "5ac9c6bd7c16b4de8001cd615891cc92c055f455eb341da8c3eb64abee68d3a5"
+        },
+        {
+          "bytes": 37714,
+          "path": "scripts/verify_publication.py",
+          "sha256": "e8658f9880310431dfc7ea9b7a57ac738f5615d73d6e8cbb2389b8afeda95f66"
+        },
+        {
+          "bytes": 46245,
+          "path": "tests/test_staged_diagnosis_selection.py",
+          "sha256": "2fcfbb25a5de7a95655393723480ceddfb03420edb3bbd2081b0c02d80eadfbf"
+        }
+      ],
+      "recorded_pytest_result": "1 failed, 3 deselected in 3.90s",
+      "saved_checkout": {
+        "branch": "research/staged-study-seal-20261109",
+        "head": "e79494ac3b2374b35eb1021ab32f7992343001db",
+        "status_lines": []
+      },
+      "saved_raw_artifact_commitments": [
+        {
+          "bytes": 1114,
+          "name": "execution-launch.json",
+          "sha256": "3e20645e4a01b849b109e630cb60ac1bd23faab6ffadef34024805dad89ff534"
+        },
+        {
+          "bytes": 212,
+          "name": "execution-result.json",
+          "sha256": "71e2b8892ddd3c5f7fbf022e1917b87a4eecdeaa7f9072f40f3f55e6e3bb9faa"
+        },
+        {
+          "bytes": 3942,
+          "name": "run_check.py",
+          "sha256": "29d98029c2a4204b1e3e903062ff57d773a2d90fa885d27eca107e896882e423"
+        },
+        {
+          "bytes": 2711,
+          "name": "launch_once.ps1",
+          "sha256": "e7645b9b12d3b5f7dc1a27ee46bfad3563701b75ec92994f57265ea4eee61828"
+        },
+        {
+          "bytes": 321,
+          "name": "before-state.json",
+          "sha256": "9a469215d7343f405a3fa34a689073b893355aefb1ad75cf7f24840e74a1ec98"
+        },
+        {
+          "bytes": 320,
+          "name": "after-state.json",
+          "sha256": "a392eaadfd1f3a007564dd1b5ecf5a8f7d8ae6ec1c7587cf57b47dd4149d415b"
+        },
+        {
+          "bytes": 10907,
+          "name": "before-source-hashes.json",
+          "sha256": "80890a28ea888e97daae1dabcd5f07e54d1efa40e2a52e4b5b42abecf501bd69"
+        },
+        {
+          "bytes": 10907,
+          "name": "after-source-hashes.json",
+          "sha256": "80890a28ea888e97daae1dabcd5f07e54d1efa40e2a52e4b5b42abecf501bd69"
+        },
+        {
+          "bytes": 0,
+          "name": "before-diff.patch",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 0,
+          "name": "after-diff.patch",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 4856,
+          "name": "execution-source-index.json",
+          "sha256": "3ed963f269ae6ba95be4cf18b99bb12bbcf7f8d95cc5f5954888d10410006a48"
+        },
+        {
+          "bytes": 6513,
+          "name": "stdout.log",
+          "sha256": "053270c9da971cbc8b776f5f17513e28e1621b96749f73deb8f982f4c919c050"
+        },
+        {
+          "bytes": 0,
+          "name": "stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 6518,
+          "name": "pytest.xml",
+          "sha256": "6896cd72b3afd8791f701d6b6a598146c16918f91fb6cb2203b29eaabbe51273"
+        }
+      ],
+      "source_index_schema": "wsp-local-check-imported-sources/1",
+      "started_utc": "2026-11-09T20:27:05.3629042Z",
+      "timed_out": false
+    },
+    {
+      "automatic_retry_performed": false,
+      "before_after_comparison": {
+        "after_captured_utc": "2026-11-09T20:30:08.992435+00:00",
+        "all_four_raw_source_snapshots_match_guarded_inventory": true,
+        "all_imported_sources_match_guarded_inventory": true,
+        "before_captured_utc": "2026-11-09T20:29:57.944456+00:00",
+        "nine_framework_format_pins_match_guarded_inventory": true,
+        "saved_diff_check_exit_code": 0,
+        "source_inventory_bytes_equal": true,
+        "source_inventory_equal": true,
+        "state_equal_excluding_capture_time_and_phase": true,
+        "tracked_diff_bytes_equal": true,
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "captured_source_identities": [
+        {
+          "bytes": 46245,
+          "path": "tests/test_staged_diagnosis_selection.py",
+          "sha256": "2fcfbb25a5de7a95655393723480ceddfb03420edb3bbd2081b0c02d80eadfbf"
+        },
+        {
+          "bytes": 78276,
+          "path": "scripts/staged_diagnosis_selection.py",
+          "sha256": "7ce3ae543b8da77d87b73f0f4fdd307df448996fe8a42f880abb2548bbc3251f"
+        },
+        {
+          "bytes": 1295,
+          "path": "pytest-engineering.ini",
+          "sha256": "d417cae6977081655172f7a2ac94b5c9d9f654bc797649294c99baf4cee47880"
+        },
+        {
+          "bytes": 1136,
+          "path": "pyproject.toml",
+          "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+        },
+        {
+          "bytes": 2483503,
+          "path": "provenance/source-files.json",
+          "sha256": "45169cd9aa2422e9ac7b624b0e4c15e364beb5a4a2e257ff43f15f6e1109e3f3"
+        },
+        {
+          "bytes": 58888,
+          "path": "docs/research/staged-diagnosis.md",
+          "sha256": "2585d88828ac17eb60f4c5d0d70a0b42bb111b3357e83c583c941c52da2d267d"
+        },
+        {
+          "bytes": 36362,
+          "path": "CHANGELOG.md",
+          "sha256": "159ced3b4a3c84e497605791006647110f22f0ae9a52942ef7c881f1e844b2f5"
+        }
+      ],
+      "classification": "passed",
+      "completed_utc": "2026-11-09T20:30:10.1276255Z",
+      "deselected_tests": 3,
+      "execution_count": 1,
+      "execution_id": "staged-study-seal-check-corrected-20261109",
+      "exit_code": 0,
+      "guarded_inventory_categories": {
+        "explicit_other_guards": 7,
+        "framework_files_under_rlcd_weight_space": 32,
+        "script_files_under_scripts": 30
+      },
+      "guarded_inventory_count": 69,
+      "imported_project_source_count": 19,
+      "imported_sources": [
+        {
+          "bytes": 71,
+          "modules": [
+            "rlcd"
+          ],
+          "path": "rlcd/__init__.py",
+          "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+        },
+        {
+          "bytes": 2969,
+          "modules": [
+            "rlcd.weight_space"
+          ],
+          "path": "rlcd/weight_space/__init__.py",
+          "sha256": "9d8cf6bd79b66b9946e50428af4b091f99f870bf68403126682f600b0715ea27"
+        },
+        {
+          "bytes": 7735,
+          "modules": [
+            "rlcd.weight_space.artifact"
+          ],
+          "path": "rlcd/weight_space/artifact.py",
+          "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+        },
+        {
+          "bytes": 15038,
+          "modules": [
+            "rlcd.weight_space.broker"
+          ],
+          "path": "rlcd/weight_space/broker.py",
+          "sha256": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+        },
+        {
+          "bytes": 3928,
+          "modules": [
+            "rlcd.weight_space.compiler"
+          ],
+          "path": "rlcd/weight_space/compiler.py",
+          "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+        },
+        {
+          "bytes": 43906,
+          "modules": [
+            "rlcd.weight_space.contracts"
+          ],
+          "path": "rlcd/weight_space/contracts.py",
+          "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+        },
+        {
+          "bytes": 29559,
+          "modules": [
+            "rlcd.weight_space.data_roles"
+          ],
+          "path": "rlcd/weight_space/data_roles.py",
+          "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+        },
+        {
+          "bytes": 34083,
+          "modules": [
+            "rlcd.weight_space.features"
+          ],
+          "path": "rlcd/weight_space/features.py",
+          "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+        },
+        {
+          "bytes": 9944,
+          "modules": [
+            "rlcd.weight_space.model"
+          ],
+          "path": "rlcd/weight_space/model.py",
+          "sha256": "fbb742d5f4a83055ff88609bb6de82b3cf9334b089b2eb8b7a47aa846ae9d5af"
+        },
+        {
+          "bytes": 6317,
+          "modules": [
+            "rlcd.weight_space.program"
+          ],
+          "path": "rlcd/weight_space/program.py",
+          "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+        },
+        {
+          "bytes": 6727,
+          "modules": [
+            "rlcd.weight_space.semantics"
+          ],
+          "path": "rlcd/weight_space/semantics.py",
+          "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+        },
+        {
+          "bytes": 9106,
+          "modules": [
+            "rlcd.weight_space.sequential"
+          ],
+          "path": "rlcd/weight_space/sequential.py",
+          "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+        },
+        {
+          "bytes": 58359,
+          "modules": [
+            "rlcd.weight_space.staged_cohort"
+          ],
+          "path": "rlcd/weight_space/staged_cohort.py",
+          "sha256": "2501fc968878cd3894646745dd6ce5986f4ffc808e8e6bf5567ca5688cd36687"
+        },
+        {
+          "bytes": 28539,
+          "modules": [
+            "rlcd.weight_space.staged_diagnosis"
+          ],
+          "path": "rlcd/weight_space/staged_diagnosis.py",
+          "sha256": "ff3449c6392d8fca2af2114ff36c3760a207eff5b7bd667f0939bdaf1ef74dd5"
+        },
+        {
+          "bytes": 26202,
+          "modules": [
+            "rlcd.weight_space.structured"
+          ],
+          "path": "rlcd/weight_space/structured.py",
+          "sha256": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab"
+        },
+        {
+          "bytes": 6034,
+          "modules": [
+            "rlcd.weight_space.symmetry"
+          ],
+          "path": "rlcd/weight_space/symmetry.py",
+          "sha256": "36f56fdf9199110cd9e78dc436ba7fc92b12836038da73fd4aab89919c7f1623"
+        },
+        {
+          "bytes": 54271,
+          "modules": [
+            "rlcd.weight_space.workflow"
+          ],
+          "path": "rlcd/weight_space/workflow.py",
+          "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+        },
+        {
+          "bytes": 78276,
+          "modules": [
+            "scripts.staged_diagnosis_selection"
+          ],
+          "path": "scripts/staged_diagnosis_selection.py",
+          "sha256": "7ce3ae543b8da77d87b73f0f4fdd307df448996fe8a42f880abb2548bbc3251f"
+        },
+        {
+          "bytes": 46245,
+          "modules": [
+            "test_staged_diagnosis_selection"
+          ],
+          "path": "tests/test_staged_diagnosis_selection.py",
+          "sha256": "2fcfbb25a5de7a95655393723480ceddfb03420edb3bbd2081b0c02d80eadfbf"
+        }
+      ],
+      "junit_accounting": {
+        "classname": "tests.test_staged_diagnosis_selection",
+        "duration_seconds": "8.963",
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "testcase": "test_staged_study_endpoint_seal_retains_actual_slots_without_regeneration",
+        "testcase_duration_seconds": "8.293",
+        "tests": 1
+      },
+      "raw_input_source_snapshots": [
+        {
+          "bytes": 2593,
+          "path": "scripts/audit_public_content.py",
+          "sha256": "b5d4bfed042eaeffd040657ea23ab60b95e0826d89a1de15bc26e278ae4e3b3d"
+        },
+        {
+          "bytes": 78276,
+          "path": "scripts/staged_diagnosis_selection.py",
+          "sha256": "7ce3ae543b8da77d87b73f0f4fdd307df448996fe8a42f880abb2548bbc3251f"
+        },
+        {
+          "bytes": 37714,
+          "path": "scripts/verify_publication.py",
+          "sha256": "e8658f9880310431dfc7ea9b7a57ac738f5615d73d6e8cbb2389b8afeda95f66"
+        },
+        {
+          "bytes": 46245,
+          "path": "tests/test_staged_diagnosis_selection.py",
+          "sha256": "2fcfbb25a5de7a95655393723480ceddfb03420edb3bbd2081b0c02d80eadfbf"
+        }
+      ],
+      "recorded_pytest_result": "1 passed, 3 deselected in 9.03s",
+      "saved_checkout": {
+        "branch": "research/staged-study-seal-20261109",
+        "head": "a47419008aeafa0f8518b53f8628f4e128ab5e5e",
+        "status_lines": []
+      },
+      "saved_raw_artifact_commitments": [
+        {
+          "bytes": 1144,
+          "name": "execution-launch.json",
+          "sha256": "0b8a549f933acff9a18de67dd00eb26769756af88b6f72cefbf90fc008cd6e2f"
+        },
+        {
+          "bytes": 212,
+          "name": "execution-result.json",
+          "sha256": "f305e1de36650780d3d0f4b771904853e8d1807b28618ef51e5720ea4c8c4b1d"
+        },
+        {
+          "bytes": 3942,
+          "name": "run_check.py",
+          "sha256": "29d98029c2a4204b1e3e903062ff57d773a2d90fa885d27eca107e896882e423"
+        },
+        {
+          "bytes": 2711,
+          "name": "launch_once.ps1",
+          "sha256": "e7645b9b12d3b5f7dc1a27ee46bfad3563701b75ec92994f57265ea4eee61828"
+        },
+        {
+          "bytes": 321,
+          "name": "before-state.json",
+          "sha256": "81cfd773225772f43f3e0722baf3c6b51c13a91e939e38a6cf435c9195543cfc"
+        },
+        {
+          "bytes": 320,
+          "name": "after-state.json",
+          "sha256": "7fceb037cdc422fb197902a38d8fa8f2d43d683b2bcc4000cfff58d24bc76f93"
+        },
+        {
+          "bytes": 10907,
+          "name": "before-source-hashes.json",
+          "sha256": "b8b9b7b2b8c23d8ed9f4f8f9bba4872bde81fc33c0ecc89a2021610f465451bb"
+        },
+        {
+          "bytes": 10907,
+          "name": "after-source-hashes.json",
+          "sha256": "b8b9b7b2b8c23d8ed9f4f8f9bba4872bde81fc33c0ecc89a2021610f465451bb"
+        },
+        {
+          "bytes": 0,
+          "name": "before-diff.patch",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 0,
+          "name": "after-diff.patch",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 4856,
+          "name": "execution-source-index.json",
+          "sha256": "13f4c7448627eb5963c6d54d5044d65705cbef80aff5844693fb046f5b2de21a"
+        },
+        {
+          "bytes": 114,
+          "name": "stdout.log",
+          "sha256": "6a59a2a7566ff6e9ec46f2e060c6c955ff4493668d58915c78bcf14f0b503814"
+        },
+        {
+          "bytes": 0,
+          "name": "stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 407,
+          "name": "pytest.xml",
+          "sha256": "036c5728255466b90e740d79d3064f4de37a301f1a7621a893ab612ab3957cdd"
+        }
+      ],
+      "source_index_schema": "wsp-local-check-imported-sources/1",
+      "started_utc": "2026-11-09T20:29:57.5409430Z",
+      "timed_out": false
+    }
+  ],
+  "automatic_retry_performed": false,
+  "causal_usefulness_established": false,
+  "control_matching_established": false,
+  "covered_behaviors": {
+    "basis": "These summaries describe assertions in the saved source of the selected test that passed in the corrected invocation. The first invocation failed at the initial successful-seal call; subsequent assertions are not credited to that invocation. Assembly does not reconstruct endpoint seals or publish registry rows.",
+    "coverage_limit": "One focused literal fixture test passed after correction. The result does not establish exhaustive inputs, scientific control matching, random sampling, random assignment, prospective registration, evaluation or final scientific study sealing.",
+    "fixture_scope": "Literal synthetic artifacts use genuine public DataRoleRegistry, StagedCohort, SelectionAdmission, PreparedMember and TensorArtifact objects with no registered batches.",
+    "plan_and_identity_binding": [
+      "Missing native-control recipes and an unknown fallback are rejected before the successful seal fixture.",
+      "The endpoint seal binds the original admission, exact study plan, controls, assignments, run/roster/protocol/barrier/source identities, structural report and native-control report with their digests.",
+      "The original admission remains equal and its receipt_files list excludes the new endpoint-seal file; preexisting evidence bytes remain unchanged."
+    ],
+    "retained_endpoint_accounting": [
+      "All original fixture members remain in order. Each has seven ordered logical slots: main, parent, random, shuffled_1, shuffled_2, shuffled_3 and opposite.",
+      "A selected repair retains its Candidate identity separately from its artifact hash and its actual submission payload. A selected native no-op remains selected and structurally unusable even when its artifact equals the parent.",
+      "Materialized native controls retain actual proposal, program, lowering receipt and artifact payloads and matching/structure statuses with verified hashes. Unavailable controls retain null artifact and construction fields.",
+      "Equal artifact hashes do not collapse distinct slots. The rounded fixture retains control deltas 2, 2, 0, 4 and -4, including a mismatch and a native no-op.",
+      "Diagnosis abstention and denied repair use parent fallback only when no repair Candidate was returned. A denied-seal attempted repair artifact remains distinct from the main fallback endpoint.",
+      "The unavailable-parent member retains unavailable slots. An explicit unavailable fallback leaves main unavailable while separately retaining available parent slots."
+    ],
+    "saved_test_source_lines": {
+      "first": 511,
+      "last": 671
+    },
+    "verification_and_lifetime": [
+      "Mutating returned artifact and construction copies does not change retained evidence. Repeated endpoint verification, post-seal native-control checking and original admission checking succeed while public lowering, lowering verification and program application are patched to raise.",
+      "Replacing a retained control is detected and permanently rejects the owner; restoring the object does not revive endpoint verification or admission.",
+      "The successful seal persists exact JSON bytes, checks its own digest and invokes fsync once. A second seal rejects without overwriting and closes the owner.",
+      "An fsync KeyboardInterrupt permanently rejects the owner; durable-looking bytes do not supply a missing successful live return, and later verification/sealing rejects without changing those bytes."
+    ]
+  },
+  "evaluation_available": false,
+  "execution_count_total": 2,
+  "execution_policy": {
+    "deselected_test_nodes": [
+      "tests/test_staged_diagnosis_selection.py::test_staged_selection_admits_only_live_normal_phase_returns",
+      "tests/test_staged_diagnosis_selection.py::test_staged_repair_usability_native_structure_and_live_binding",
+      "tests/test_staged_diagnosis_selection.py::test_staged_native_controls_bind_recipes_and_separate_native_matching"
+    ],
+    "environment_sanitized": {
+      "HF_DATASETS_OFFLINE": "1",
+      "HF_HUB_OFFLINE": "1",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONNOUSERSITE": "1",
+      "PYTHONPATH": "<checked-worktree>",
+      "TEMP": "<private-fixture-temp>",
+      "TMP": "<private-fixture-temp>",
+      "TRANSFORMERS_OFFLINE": "1",
+      "WANDB_MODE": "offline"
+    },
+    "execution_accounting_limit": "Each saved launch/result pair reports one invocation and no automatic retry. The saved runner contains one pytest.main call and the saved launcher refuses an existing launch/result record. Two distinct evidence directories preserve the failed and corrected invocations; these records are not independent operating-system process tracing.",
+    "full_test_module_execution_performed": false,
+    "launcher_commitment": {
+      "bytes": 2711,
+      "name": "launch_once.ps1",
+      "sha256": "e7645b9b12d3b5f7dc1a27ee46bfad3563701b75ec92994f57265ea4eee61828"
+    },
+    "offline_configuration_limit": "Offline environment flags record configuration; they do not establish a network sandbox.",
+    "offline_environment_flags_recorded": [
+      "HF_HUB_OFFLINE",
+      "TRANSFORMERS_OFFLINE",
+      "HF_DATASETS_OFFLINE",
+      "WANDB_MODE"
+    ],
+    "publication_script_scope": "The audit and publication scripts were saved as raw source snapshots and are absent from both imported-project-source indices. Their saved bytes are source commitments, not results from running those scripts.",
+    "pytest_addopts_override": "",
+    "pytest_arguments_sanitized": [
+      "-c",
+      "pytest-engineering.ini",
+      "-o",
+      "addopts=",
+      "-p",
+      "no:cacheprovider",
+      "--noconftest",
+      "-q",
+      "--basetemp",
+      "<private-pytest-temp>",
+      "--junitxml",
+      "<private-junit-xml>",
+      "tests/test_staged_diagnosis_selection.py",
+      "-k",
+      "staged_study_endpoint_seal_retains_actual_slots_without_regeneration"
+    ],
+    "pytest_automatic_plugins_disabled": true,
+    "pytest_cache_provider_disabled": true,
+    "pytest_configuration": "pytest-engineering.ini",
+    "pytest_conftest_loading_disabled": true,
+    "python_arguments_sanitized": [
+      "-B",
+      "-s",
+      "<private-evidence-directory>/run_check.py"
+    ],
+    "python_flags": [
+      "-B",
+      "-s"
+    ],
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "runner_commitment": {
+      "bytes": 3942,
+      "name": "run_check.py",
+      "sha256": "29d98029c2a4204b1e3e903062ff57d773a2d90fa885d27eca107e896882e423"
+    },
+    "temporary_paths_private": true,
+    "timeout_seconds_per_execution": 600
+  },
+  "final_study_seal": false,
+  "interpretation_limit": "The corrected pass covers captured engineering source and the selected literal endpoint-retention, payload-binding and sealing-lifetime assertions. The engineering endpoint seal does not establish study success, trained ancestry, holdout scoring, final study sealing, causal usefulness or enterprise impact.",
+  "literal_fixture_endpoint_retention_checked": true,
+  "prospective_registration_established": false,
+  "randomization_established": false,
+  "registered_batches_used": false,
+  "research_evaluation_performed": false,
+  "schema": "wsp-local-engineering-verification/1",
+  "scientific_freezes": "Scientific freezes remain in place. Issues #2, #6 and #9 remain open; #9 c1 remains partial/open.",
+  "scope": "Two focused local engineering invocations of study endpoint retention and sealing: the first source failed, and an explicitly corrected source passed. No study execution or registered scoring.",
+  "source_correction": {
+    "after": "_require(list(self._study_controls) == retained, \"The retained study control roster changed\")",
+    "before": "_same(list(self._study_controls), retained)",
+    "changed_guarded_paths_between_captures": [
+      "scripts/staged_diagnosis_selection.py"
+    ],
+    "helper_source_change_count": 1,
+    "helper_source_line": 1131,
+    "interpretation": "The second saved invocation used a committed one-line correction that compares the ordered tuple-key roster directly. It is an explicit corrected-source invocation, not an automatic retry of unchanged source.",
+    "launcher_bytes_unchanged": true,
+    "runner_bytes_unchanged": true,
+    "test_source_unchanged": true
+  },
+  "test_node": "tests/test_staged_diagnosis_selection.py::test_staged_study_endpoint_seal_retains_actual_slots_without_regeneration",
+  "trained_ancestry_established": false
+}

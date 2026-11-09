@@ -506,3 +506,166 @@ def test_staged_native_controls_bind_recipes_and_separate_native_matching():
         path.write_bytes(raw)
         rejected(admission.admit)
         rejected(admission.check_native_controls)
+
+
+def test_staged_study_endpoint_seal_retains_actual_slots_without_regeneration():
+    def rejected(action, expected=ValueError):
+        try:
+            action()
+        except BaseException as error:
+            assert isinstance(error, expected), repr(error)
+            return error
+        raise AssertionError("Expected permanent admission rejection")
+
+    assignments = [
+        {"member_id": "rounded", "policy": "metadata-uniform", "metadata_choice": {"row": 0, "direction": "bias_down"}},
+        {"member_id": "main-no-op", "policy": "metadata-uniform", "metadata_choice": {"row": 2, "direction": "bias_down"}},
+        {"member_id": "abstained", "policy": "bias-outlier", "metadata_choice": None},
+        {"member_id": "denied-repair", "policy": "metadata-uniform", "metadata_choice": {"row": 0, "direction": "bias_down"}},
+        {"member_id": "unavailable", "policy": "bias-outlier", "metadata_choice": None},
+    ]
+    shuffles = [[1, 2, 3, 4, 5, 6, 7, 0], [2, 3, 4, 5, 6, 7, 0, 1], [3, 4, 5, 6, 7, 0, 1, 2]]
+    controls = {"schema": "wsp-native-control-recipes/1", "members": [
+        {"member_index": index, "member_id": item["member_id"], "random": {"row": 1, "direction": "bias_down"},
+         "shuffles": shuffles} for index, item in enumerate(assignments)]}
+    metadata = {"encoder_sha256": "1" * 64, "preprocessing_sha256": "2" * 64, "feature_id": "3" * 64}
+    weights = [[0.0] * 32 for _ in range(9)]
+    parent = TensorArtifact("trained-frozen-readout/1", {"head.weight": weights,
+        "head.bias": [33554436.0, 0.0, 33554432.0, 33554436.0, 0.0, 0.0, 0.0, 0.0, -64.0]}, metadata)
+    quiet = TensorArtifact("trained-frozen-readout/1", {"head.weight": weights, "head.bias": [0.0] * 8 + [-64.0]}, metadata)
+    driver_hash = hashlib.sha256(Path(selection.__file__).read_bytes()).hexdigest()
+
+    def prepare(row):
+        if row["member_id"] == "unavailable":
+            raise RuntimeError("Literal unavailable parent")
+        return PreparedMember(quiet if row["member_id"] == "abstained" else parent, row["member_id"],
+                              "Check endpoint accounting without scoring", {"fixture": row["member_id"]})
+
+    broker_init = ProposerBroker.__init__
+
+    def denied_seal(owner, task, **kwargs):
+        if task.mode == "edit" and task.task_id == "denied-repair/diagnosis/repair":
+            kwargs["max_requests"] = 1
+        broker_init(owner, task, **kwargs)
+
+    with TemporaryDirectory(prefix="wsp-study-endpoint-seal-") as temporary:
+        root = Path(temporary)
+        registry = DataRoleRegistry(root / "roles.sqlite")  # Deliberately register no batches.
+
+        def fresh(name, fallback="parent", supplied_controls=controls):
+            protocol = {"purpose": "literal endpoint accounting; no scientific registration",
+                "study_plan": {"schema": "wsp-staged-study-endpoint-plan/1", "selected_fallback": fallback}}
+            directory = root / name
+            cohort = StagedCohort(directory, member_ids=[item["member_id"] for item in assignments], protocol=protocol,
+                                  controls=supplied_controls, evaluator_id="literal-evaluator", registry=registry, attempt_id=name)
+            owner = selection.SelectionAdmission(cohort, directory, assignments=assignments, protocol=protocol,
+                registry_id=registry.registry_id, evaluator_id="literal-evaluator", attempt_id=name,
+                driver_sha256=driver_hash, controls=supplied_controls)
+            with patch.object(ProposerBroker, "__init__", denied_seal):
+                return directory, owner, owner.run(prepare)
+
+        rejected(lambda: fresh("missing-recipes", supplied_controls={}))
+        rejected(lambda: fresh("unknown-fallback", fallback="repair"))
+        directory, admission, evidence = fresh("sealed")
+        structure = admission.check_repair_usability()
+        original_files = {path.relative_to(directory): path.read_bytes() for path in directory.rglob("*") if path.is_file()}
+        with patch.object(selection.os, "fsync", wraps=selection.os.fsync) as fsync:
+            sealed = admission.seal_study_endpoints()
+            assert fsync.call_count == 1
+        path = directory / "study-endpoint-seal.json"
+        assert path.read_bytes() == selection._json_bytes(sealed) + b"\n"
+        assert sealed["sha256"] == digest({key: value for key, value in sealed.items() if key != "sha256"})
+        assert sealed["schema"] == "wsp-staged-study-endpoint-seal/1"
+        assert sealed["selection_admission_sha256"] == digest(evidence)
+        assert admission.admit() == evidence and "study-endpoint-seal.json" not in [row["path"] for row in evidence["receipt_files"]]
+        assert sealed["study_plan"] == json.loads((directory / "protocol.json").read_bytes())["protocol"]["study_plan"]
+        assert sealed["study_plan_sha256"] == digest(sealed["study_plan"])
+        assert sealed["controls_sha256"] == digest(controls)
+        assert sealed["assignments"] == assignments and sealed["assignments_sha256"] == digest(assignments)
+        for key in ("attempt_id", "registry_id", "evaluator_id", "roster_sha256", "cohort_protocol_sha256",
+                    "diagnosis_barrier_sha256", "repair_barrier_sha256", "source_sha256", "source_pin_scope"):
+            assert sealed[key] == evidence[key]
+        for key in ("evaluation_available", "final_study_seal", "trained_ancestry_established", "causal_usefulness_established"):
+            assert sealed[key] is False
+        assert sealed["repair_structure"] == structure and sealed["repair_structure_sha256"] == structure["sha256"]
+        native = sealed["native_controls"]
+        assert sealed["native_controls_sha256"] == native["sha256"] == digest({key: value for key, value in native.items() if key != "sha256"})
+        assert native["selection_admission_sha256"] == digest(evidence) and native["repair_structure_sha256"] == structure["sha256"]
+        assert [row["member_id"] for row in sealed["members"]] == [row["member_id"] for row in assignments]
+        for member, selected, report in zip(sealed["members"], evidence["members"], native["members"]):
+            index, slots = member["member_index"], member["slots"]
+            assert [slot["slot_index"] for slot in slots] == list(range(7))
+            assert [slot["slot_id"] for slot in slots] == ["main", "parent", "random", "shuffled_1", "shuffled_2", "shuffled_3", "opposite"]
+            assert member["diagnosis_candidate"] == selected["diagnosis_candidate"]
+            assert slots[0]["selected_candidate"] == selected["repair_candidate"]
+            if selected["repair_candidate"] is not None:
+                assert slots[0]["resolution"] == "selected" and slots[0]["materialized"] is True
+                assert slots[0]["selected_candidate_sha256"] == selected["repair_candidate"]["sha256"] != slots[0]["artifact_sha256"]
+                assert slots[0]["construction"] == json.loads((directory / f"member-{index:06d}" / "repair.json").read_bytes())["submission"]
+            for slot in slots:
+                assert slot["artifact_sha256"] == (digest(slot["artifact"]) if slot["artifact"] is not None else None)
+            for slot, control in zip(slots[2:], report["controls"]):
+                assert slot["selected_candidate"] is slot["selected_candidate_sha256"] is None
+                assert slot["structure"] == control["structure"] and slot["matching"] == control["matching"]
+                assert slot["materialized"] is control["materialized"]
+                assert slot["resolution"] == ("materialized" if control["materialized"] else "unavailable")
+                assert slot["unavailable_reason"] == control["unavailable_reason"]
+                if slot["materialized"]:
+                    construction = slot["construction"]
+                    for key in ("proposal", "program"):
+                        assert digest(construction[key]) == control[key + "_sha256"] == construction["lowering"][key + "_sha256"]
+                    lowering = construction["lowering"]
+                    assert lowering["sha256"] == control["lowering_sha256"] == digest({key: value for key, value in lowering.items() if key != "sha256"})
+                    assert slot["artifact_sha256"] == control["artifact_sha256"] == lowering["candidate_sha256"]
+                else:
+                    assert slot["artifact"] is slot["artifact_sha256"] is slot["construction"] is None
+        rounded, no_op, abstained, denied, unavailable = sealed["members"]
+        assert rounded["slots"][2]["artifact_sha256"] == rounded["slots"][3]["artifact_sha256"]
+        assert [slot["structure"]["realized_native_delta"] for slot in rounded["slots"][2:]] == [2.0, 2.0, 0.0, 4.0, -4.0]
+        assert rounded["slots"][2]["matching"]["status"] == "mismatched" and rounded["slots"][4]["structure"]["reason"] == "no_op"
+        assert no_op["slots"][0]["resolution"] == "selected" and no_op["slots"][0]["structure"]["status"] == "unusable"
+        assert no_op["slots"][0]["artifact_sha256"] == no_op["slots"][1]["artifact_sha256"]
+        assert all(slot["matching"]["reason"] == "no_usable_main_reference" for slot in no_op["slots"][2:])
+        for member in (abstained, denied):
+            assert member["slots"][0]["resolution"] == "parent_fallback" and member["slots"][0]["selected_candidate"] is None
+            assert member["slots"][0]["artifact_sha256"] == member["slots"][1]["artifact_sha256"]
+        assert 3 in admission._artifacts and admission._artifacts[3].sha256 != denied["slots"][0]["artifact_sha256"]
+        assert abstained["slots"][2]["materialized"] is True and all(not slot["materialized"] for slot in abstained["slots"][3:])
+        assert all(slot["resolution"] == "unavailable" and slot["artifact"] is None for slot in unavailable["slots"])
+        frozen = json.loads(json.dumps(sealed, allow_nan=False))
+        sealed["members"][0]["slots"][2]["artifact"]["tensors"]["head.bias"][1] = 999.0
+        sealed["members"][0]["slots"][2]["construction"]["proposal"]["intent"] = "changed caller copy"
+        with patch.object(selection, "lower_structured", side_effect=AssertionError("No relowering")), \
+             patch.object(selection, "verify_lowering", side_effect=AssertionError("No reconstruction")), \
+             patch.object(selection, "apply_program", side_effect=AssertionError("No reapplication")):
+            assert admission.verify_study_endpoints() == admission.verify_study_endpoints() == frozen
+            assert admission.check_native_controls() == frozen["native_controls"]
+            assert admission.admit() == evidence
+        assert {name: (directory / name).read_bytes() for name in original_files} == original_files
+        assert set(admission._saved) == {str(name).replace("\\", "/") for name in original_files} | {"study-endpoint-seal.json"}
+        key = (0, "random")
+        original = admission._study_controls[key]
+        admission._study_controls[key] = (quiet, original[1])
+        rejected(admission.verify_study_endpoints)
+        admission._study_controls[key] = original
+        rejected(admission.verify_study_endpoints)
+        rejected(admission.admit)
+
+        directory, owner, _ = fresh("unavailable-fallback", fallback="unavailable")
+        sealed = owner.seal_study_endpoints()
+        assert all(sealed["members"][index]["slots"][0]["resolution"] == "unavailable" for index in (2, 3, 4))
+        assert all(sealed["members"][index]["slots"][1]["resolution"] == "parent" for index in (2, 3))
+        raw = (directory / "study-endpoint-seal.json").read_bytes()
+        rejected(owner.seal_study_endpoints)  # A second seal closes the successful owner without overwriting.
+        assert (directory / "study-endpoint-seal.json").read_bytes() == raw
+        rejected(owner.verify_study_endpoints)
+
+        directory, owner, _ = fresh("interrupted-persistence")
+        signal = KeyboardInterrupt("Literal fsync interruption")
+        with patch.object(selection.os, "fsync", side_effect=signal):
+            assert rejected(owner.seal_study_endpoints, KeyboardInterrupt) is signal
+        raw = (directory / "study-endpoint-seal.json").read_bytes()
+        assert owner._study_seal is None  # Durable-looking bytes cannot supply a missing successful live return.
+        rejected(owner.verify_study_endpoints)
+        rejected(owner.seal_study_endpoints)
+        assert (directory / "study-endpoint-seal.json").read_bytes() == raw
