@@ -350,3 +350,159 @@ def test_staged_repair_usability_native_structure_and_live_binding():
         path.write_bytes(raw)
         rejected(receipt_owner.admit)
         rejected(receipt_owner.check_repair_usability)
+
+
+def test_staged_native_controls_bind_recipes_and_separate_native_matching():
+    def rejected(action):
+        try:
+            action()
+        except ValueError:
+            return
+        raise AssertionError("Expected permanent admission rejection")
+
+    assignments = [
+        {"member_id": "rounded", "policy": "metadata-uniform", "metadata_choice": {"row": 0, "direction": "bias_down"}},
+        {"member_id": "main-no-op", "policy": "metadata-uniform", "metadata_choice": {"row": 2, "direction": "bias_down"}},
+        {"member_id": "abstained", "policy": "bias-outlier", "metadata_choice": None},
+        {"member_id": "unavailable", "policy": "bias-outlier", "metadata_choice": None},
+    ]
+    shuffles = [[1, 2, 3, 4, 5, 6, 7, 0], [2, 3, 4, 5, 6, 7, 0, 1], [3, 4, 5, 6, 7, 0, 1, 2]]
+    frozen_controls = {"schema": "wsp-native-control-recipes/1", "members": [
+        {"member_index": index, "member_id": item["member_id"], "random": {"row": 1, "direction": "bias_down"},
+         "shuffles": [list(mapping) for mapping in shuffles]} for index, item in enumerate(assignments)]}
+    metadata = {"encoder_sha256": "1" * 64, "preprocessing_sha256": "2" * 64, "feature_id": "3" * 64}
+    weights = [[0.0] * 32 for _ in range(9)]
+    parent = TensorArtifact("trained-frozen-readout/1", {
+        "head.weight": weights, "head.bias": [33554436.0, 0.0, 33554432.0, 33554436.0, 0.0, 0.0, 0.0, 0.0, -64.0]}, metadata)
+    quiet = TensorArtifact("trained-frozen-readout/1", {"head.weight": weights, "head.bias": [0.0] * 8 + [-64.0]}, metadata)
+    driver_hash = hashlib.sha256(Path(selection.__file__).read_bytes()).hexdigest()
+
+    def prepare(row):
+        if row["member_id"] == "unavailable":
+            raise RuntimeError("Literal unavailable parent")
+        return PreparedMember(quiet if row["member_id"] == "abstained" else parent, row["member_id"],
+                              "Check prebound native controls without scoring", {"fixture": row["member_id"]})
+
+    with TemporaryDirectory(prefix="wsp-native-controls-") as temporary:
+        root = Path(temporary)
+        registry = DataRoleRegistry(root / "roles.sqlite")  # Deliberately register no batches.
+        protocol = {"purpose": "literal native-control engineering check; no randomness or registration claim"}
+
+        def fresh(name, supplied_controls):
+            directory = root / name
+            cohort = StagedCohort(directory, member_ids=[item["member_id"] for item in assignments], protocol=protocol,
+                                  controls=frozen_controls, evaluator_id="literal-evaluator", registry=registry, attempt_id=name)
+            admission = selection.SelectionAdmission(cohort, directory, assignments=assignments, protocol=protocol,
+                registry_id=registry.registry_id, evaluator_id="literal-evaluator", attempt_id=name,
+                driver_sha256=driver_hash, controls=supplied_controls)
+            return directory, admission
+
+        mismatch = json.loads(json.dumps(frozen_controls))
+        mismatch["members"][0]["random"]["row"] = 7
+        rejected(lambda: fresh("different-prebound-recipe", mismatch))
+        invalid = json.loads(json.dumps(frozen_controls))
+        invalid["members"][0]["shuffles"][0] = list(range(8))
+        rejected(lambda: fresh("not-a-derangement", invalid))
+        rejected(lambda: fresh("default-cannot-admit-opt-in-protocol", None))
+
+        supplied = json.loads(json.dumps(frozen_controls))
+        directory, admission = fresh("native-controls", supplied)
+        protocol_raw = (directory / "protocol.json").read_bytes()
+        assert json.loads(protocol_raw)["controls"] == frozen_controls
+        assert json.loads(protocol_raw)["controls_sha256"] == digest(frozen_controls)
+        supplied["members"][0]["random"]["row"] = 7
+        supplied["members"][0]["shuffles"][0][0] = 7  # Caller mutations cannot change the captured recipe.
+        evidence = admission.run(prepare)
+        structure = admission.check_repair_usability()
+        files = {path.relative_to(directory): path.read_bytes() for path in directory.rglob("*") if path.is_file()}
+        lower = selection.lower_structured
+        observed = []
+
+        def observe_lowering(base, proposal, **kwargs):
+            lowered = lower(base, proposal, **kwargs)
+            observed.append((proposal.to_dict(), lowered.program.to_dict(), lowered.receipt))
+            return lowered
+
+        with patch.object(selection, "lower_structured", observe_lowering):
+            report = admission.check_native_controls()
+        assert report["schema"] == "wsp-native-control-matching/1"
+        assert report["sha256"] == digest({key: value for key, value in report.items() if key != "sha256"})
+        assert report["selection_admission_sha256"] == digest(evidence)
+        assert report["repair_structure_sha256"] == structure["sha256"]
+        assert report["controls_sha256"] == digest(frozen_controls)
+        for key in ("attempt_id", "registry_id", "evaluator_id", "roster_sha256", "cohort_protocol_sha256",
+                    "diagnosis_barrier_sha256", "repair_barrier_sha256", "source_sha256", "source_pin_scope"):
+            assert report[key] == evidence[key]
+        assert report["construction"] == {"recipe_schema": "wsp-native-control-recipes/1", "intent": "common-repair-v1",
+            "prescribed_magnitude": 2.0, "native_dtypes": {"head.weight": "float32", "head.bias": "float32"}, "cast": "round"}
+        assert report["norm_matching"] == {"reference": "usable_selected_main", "atol": 1e-5, "rtol": 1e-5,
+                                           "rule": "abs(control-main)<=atol+rtol*abs(main)"}
+        assert report["evaluation_available"] is report["final_study_seal"] is report["causal_usefulness_established"] is False
+        assert [member["member_id"] for member in report["members"]] == [item["member_id"] for item in assignments]
+        assert [member["member_index"] for member in report["members"]] == list(range(len(assignments)))
+        for checked, main, member in zip(report["members"], structure["members"], evidence["members"]):
+            assert checked["main"] == main
+            assert checked["diagnosis_candidate_sha256"] == (
+                member["diagnosis_candidate"]["sha256"] if member["diagnosis_candidate"] is not None else None)
+            assert [control["control_id"] for control in checked["controls"]] == [
+                "random", "shuffled_1", "shuffled_2", "shuffled_3", "opposite"]
+        materialized = [control for member in report["members"] for control in member["controls"] if control["materialized"]]
+        assert len(materialized) == len(observed)
+        for control, (proposal, program, receipt) in zip(materialized, observed):
+            assert control["unavailable_reason"] is None and "candidate_sha256" not in control
+            assert proposal["intent"] == "common-repair-v1" and proposal["commands"] == [{
+                "op": "add", "tensor": "head.bias", "block": [[control["intended_row"], control["intended_row"] + 1]],
+                "values": [control["prescribed_delta"]]}]
+            assert abs(control["prescribed_delta"]) == 2.0  # No tuning after native rounding or mismatch.
+            assert control["proposal_sha256"] == digest(proposal) == receipt["proposal_sha256"]
+            assert control["program_sha256"] == digest(program) == receipt["program_sha256"]
+            assert control["lowering_sha256"] == receipt["sha256"]
+            assert control["artifact_sha256"] == receipt["candidate_sha256"]
+
+        rounded, no_op, abstained, unavailable = report["members"]
+        assert rounded["main"]["realized_native_delta"] == rounded["main_reference_norm"] == 4.0
+        assert rounded["main"]["selected_repair_candidate_sha256"] != rounded["main"]["selected_repair_artifact_sha256"]
+        assert [control["structure"]["realized_native_delta"] for control in rounded["controls"]] == [2.0, 2.0, 0.0, 4.0, -4.0]
+        assert [control["structure"]["status"] for control in rounded["controls"]] == ["usable", "usable", "unusable", "usable", "usable"]
+        assert [control["matching"]["status"] for control in rounded["controls"]] == [
+            "mismatched", "mismatched", "unavailable", "matched", "matched"]
+        assert [control["matching"]["norm_difference"] for control in rounded["controls"]] == [2.0, 2.0, None, 0.0, 0.0]
+        assert rounded["controls"][2]["structure"]["reason"] == "no_op"
+        assert rounded["controls"][2]["matching"]["reason"] == "control_unusable"
+        assert rounded["controls"][0]["artifact_sha256"] == rounded["controls"][1]["artifact_sha256"]
+        assert no_op["main"]["status"] == "unusable" and no_op["main"]["realized_native_norm"] == 0.0
+        assert no_op["main_reference_norm"] is None and all(control["materialized"] for control in no_op["controls"])
+        assert all(control["matching"] == {"status": "unavailable", "reason": "no_usable_main_reference",
+                                           "norm_difference": None} for control in no_op["controls"])
+        assert abstained["main"]["diagnosis_outcome"] == "abstained" and abstained["main_reference_norm"] is None
+        assert abstained["controls"][0]["materialized"] is True
+        assert abstained["controls"][0]["structure"]["status"] == "usable"
+        assert abstained["controls"][0]["matching"]["reason"] == "no_usable_main_reference"
+        for control in abstained["controls"][1:]:
+            assert control["materialized"] is False and control["unavailable_reason"] == "no_selected_diagnosis"
+            assert control["intended_row"] is control["direction"] is control["prescribed_delta"] is None
+        assert unavailable["main"]["parent_sha256"] is None and unavailable["main_reference_norm"] is None
+        for control in unavailable["controls"]:
+            assert control["materialized"] is False and control["unavailable_reason"] == "no_parent"
+            assert all(control[key] is None for key in ("proposal_sha256", "program_sha256", "lowering_sha256", "artifact_sha256"))
+            assert control["structure"] == {"status": "unavailable", "reason": "not_materialized",
+                                             "realized_native_delta": None, "realized_native_norm": None}
+        frozen_report = json.loads(json.dumps(report, allow_nan=False))
+        report["members"][0]["controls"][0]["structure"]["status"] = "changed caller copy"
+        assert admission.check_native_controls() == frozen_report and admission.admit() == evidence
+        assert (directory / "protocol.json").read_bytes() == protocol_raw
+        assert {path.relative_to(directory): path.read_bytes() for path in directory.rglob("*") if path.is_file()} == files
+
+        path = directory / "repair-barrier.json"
+        raw = path.read_bytes()
+
+        def mutate_after_lowering(*args, **kwargs):
+            lowered = lower(*args, **kwargs)
+            path.write_bytes(raw + b" ")
+            return lowered
+
+        with patch.object(selection, "lower_structured", mutate_after_lowering):
+            rejected(admission.check_native_controls)  # Final admission catches mutation during control construction.
+        path.write_bytes(raw)
+        rejected(admission.admit)
+        rejected(admission.check_native_controls)
