@@ -7,6 +7,17 @@ research draft.
 
 ## Unreleased
 
+- Added a November 8, 2026 primary-source research review and actionable GitHub
+  roadmap. The plan specifies a trained public support-routing study against
+  rules, routing overlays, and retraining; feasibility and abstention; candidate
+  and proof binding; numerical execution; brokered live access; causal audits;
+  cumulative edits; a second trained domain; cost; source repetition; and gated
+  transfer, no-fitting construction, and synthetic unlearning. Published a source
+  register with acquired-byte hashes, reviewed methods and limitations, and a
+  versioned issue index/body snapshot with dependencies and falsification criteria.
+  New studies remain proposed; historical results and requirement statuses are
+  unchanged. See [the research review](docs/weight-space/v2/research-roadmap-2026-11.md).
+
 - Rebuilt the enterprise explanation around one outage ticket using STE-Pro-Max
   storytelling and original SVG mathematical animations. The 90-second story
   explains queue scores, feature contributions, the target/protection tradeoff,

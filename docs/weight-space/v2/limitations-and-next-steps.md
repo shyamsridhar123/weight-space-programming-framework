@@ -1,5 +1,11 @@
 # Limitations and a prioritized research program
 
+The [November 8, 2026 research review](research-roadmap-2026-11.md) builds on this
+plan with primary-source findings, a trained support-routing protocol, stop/go
+decisions, and [published work issues](research-issues-2026-11.md). It maps every
+package below to executable work and preserves the distinction between a
+proposed experiment and completed evidence.
+
 A useful weight-space edit has several obligations. It must refer to the
 intended model, survive realization into stored parameters, obey the declared
 access rules, and produce the requested behavior while retaining what the

@@ -11,7 +11,7 @@ conditions, and evaluation records. Explicit adapters define execution semantics
 and the conditions for behavioral guarantees. RTS is one historical application.
 
 [Worked example](#one-edit-two-obligations) · [Enterprise use case](#an-enterprise-policy-change) · [Quick start](#try-the-example) ·
-[Evidence](#what-the-evidence-shows) · [Documentation](#explore-the-framework)
+[Evidence](#what-the-evidence-shows) · [Research roadmap](docs/weight-space/v2/research-roadmap-2026-11.md) · [Documentation](#explore-the-framework)
 
 ## One edit, two obligations
 
@@ -145,6 +145,14 @@ the remaining limits to concrete success and failure criteria:
 - General behavioral admission and automatic binding of new candidates to proofs.
 - Verified floating-point execution and an isolated live-provider harness.
 - Evidence of useful large-model editing and stronger cumulative edit contracts.
+
+The [November 2026 research review](docs/weight-space/v2/research-roadmap-2026-11.md)
+turns those gaps and the original report's future directions into
+[work issues](docs/weight-space/v2/research-issues-2026-11.md). The next milestone
+is a trained support-routing study against rules, a routing overlay, and
+retraining, with explicit feasibility, retained-behavior, abstention, and cost
+criteria. A second trained non-text task tests the shared framework afterward.
+All new work remains proposed.
 
 All published study seeds have been observed. Replaying them is reproduction;
 fresh confirmation needs untouched units and a newly frozen protocol.

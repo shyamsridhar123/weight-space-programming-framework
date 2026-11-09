@@ -1,5 +1,12 @@
 # Research and engineering roadmap
 
+The [November 8, 2026 research review](docs/weight-space/v2/research-roadmap-2026-11.md)
+adds primary-literature findings, a trained enterprise study protocol, evidence
+gates, and [published work issues](docs/weight-space/v2/research-issues-2026-11.md).
+Start with a trained support router and compare edits with rules, an ownership
+overlay, and retraining. The existing limitations below remain the foundation;
+the new review translates them into executable work without marking it complete.
+
 The next work must connect a declared task to an exact candidate, a justified
 guarantee, and a useful measured outcome. The framework already has generic
 artifact and workflow interfaces, real-valued proofs for explicit semantic

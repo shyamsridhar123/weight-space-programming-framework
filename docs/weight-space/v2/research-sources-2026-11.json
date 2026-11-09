@@ -1,0 +1,515 @@
+{
+  "schema": "wspf-research-source-review/1",
+  "review_date_local": "2026-11-08",
+  "timezone": "America/Chicago",
+  "scope": "Targeted primary-source review and repository audit; not an exhaustive systematic review or external implementation audit. PDF page indices refer to file pages. Acquisition timestamps may be November 9 UTC while the review date remains November 8 locally.",
+  "copyright": "Only original analysis and metadata are published. Downloaded PDFs, full extracted text, and inspection images are private working material.",
+  "sources": [
+    {
+      "id": "sparks",
+      "title": "Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights",
+      "publication_note": "Author report/blog, November 2026",
+      "acquired_url": "https://rikiyat.github.io/blog/weight-space-programming/",
+      "resolved_url_at_acquisition": "https://rikiyat.github.io/blog/weight-space-programming/",
+      "version_url": "https://rikiyat.github.io/blog/weight-space-programming/",
+      "retrieved_at_utc": "2026-11-09T00:50:14.283633+00:00",
+      "sha256": "a326bc5b34b3152a93bf38013f412bb140c9e0a299c72491d27fb17b1b7d9cbb",
+      "bytes": 85874,
+      "pdf_pages": null,
+      "reviewed_pdf_pages": [],
+      "reviewed_sections": "What Comes Next?; access protocols and released-source boundaries through the repository source review",
+      "finding": "The report motivates direct reading, writing, auditing, creation, cost reduction, unlearning, recursive improvement, and circuit grafting.",
+      "limitation": "Selected demonstrations and author hypotheses do not establish population-level reliability, causal interpretability, universal preservation, or efficiency at matched outcomes.",
+      "framework_implication": "Use its future directions as hypotheses with separate access, intervention, retention, and cost tests; preserve source reproduction tiers."
+    },
+    {
+      "id": "alphaedit",
+      "title": "AlphaEdit: Null-Space Constrained Knowledge Editing for Language Models",
+      "publication_note": "ICLR 2025",
+      "acquired_url": "https://arxiv.org/pdf/2410.02355v4",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2410.02355v4",
+      "version_url": "https://arxiv.org/pdf/2410.02355v4",
+      "retrieved_at_utc": "2026-11-09T00:50:13.900549+00:00",
+      "sha256": "1b99c31b28f5e5e069f111beaf286258092bd0fac1e81ff9bacbd936259736cc",
+      "bytes": 17400593,
+      "pdf_pages": 32,
+      "reviewed_pdf_pages": [
+        2,
+        4,
+        5,
+        10
+      ],
+      "reviewed_sections": "Nullspace projection, sequential-edit objective, eigenvalue cutoff, limitations",
+      "finding": "Projecting an update against retained linear keys reduces interference under the specified representation. The practical method uses an eigenvalue threshold of 1e-2.",
+      "limitation": "A numerical near-nullspace over sampled keys is not exact preservation of every input or every downstream decision. Transfer to reasoning and multimodal models remains outside its experiments.",
+      "framework_implication": "Measure rank, conditioning, threshold sensitivity, exact endpoint residuals, and held-out behavior instead of calling a tolerance pass an exact guarantee."
+    },
+    {
+      "id": "rome",
+      "title": "Locating and Editing Factual Associations in GPT",
+      "publication_note": "Primary research paper, 2022",
+      "acquired_url": "https://arxiv.org/pdf/2202.05262v5",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2202.05262v5",
+      "version_url": "https://arxiv.org/pdf/2202.05262v5",
+      "retrieved_at_utc": "2026-11-09T00:50:14.038063+00:00",
+      "sha256": "d7c17f896cca512fb258261421b073baa6f4e6e44b6bb7ada5c90185f423054a",
+      "bytes": 8262403,
+      "pdf_pages": 35,
+      "reviewed_pdf_pages": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "reviewed_sections": "Causal tracing and intervention method",
+      "finding": "Localization is tested through interventions and subsequent factual edits, providing a model for testing a diagnosis rather than accepting a plausible explanation.",
+      "limitation": "Evidence for a particular factual-association setting does not establish a universal causal circuit or cross-architecture transfer.",
+      "framework_implication": "Freeze predicted repair locations and effects, then compare with sham, random, and matched interventions on independent cases."
+    },
+    {
+      "id": "memit",
+      "title": "Mass-Editing Memory in a Transformer",
+      "publication_note": "ICLR 2023",
+      "acquired_url": "https://arxiv.org/pdf/2210.07229",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2210.07229",
+      "version_url": "https://arxiv.org/pdf/2210.07229v2",
+      "retrieved_at_utc": "2026-11-09T00:50:13.900549+00:00",
+      "sha256": "d7c0c76e55db1c053b31bcf2ce7f7aaee3c0846efd69c80f86ce8174b301c5bd",
+      "bytes": 2819320,
+      "pdf_pages": 21,
+      "reviewed_pdf_pages": [
+        1,
+        2,
+        3
+      ],
+      "reviewed_sections": "Batch editing method and evaluation setting",
+      "finding": "Multiple factual associations can be edited jointly in the studied transformer models.",
+      "limitation": "Batch insertion performance is different from preservation across a long adaptive sequence; knowledge editing is different from enterprise queue routing.",
+      "framework_implication": "Use as a relevant editing control where architecture/task fit; retain all previously inserted targets in sequential evaluation."
+    },
+    {
+      "id": "mirage",
+      "title": "The Mirage of Model Editing: Revisiting Evaluation in the Wild",
+      "publication_note": "ACL 2025",
+      "acquired_url": "https://aclanthology.org/2025.acl-long.745.pdf",
+      "resolved_url_at_acquisition": "https://aclanthology.org/2025.acl-long.745.pdf",
+      "version_url": "https://aclanthology.org/2025.acl-long.745.pdf",
+      "retrieved_at_utc": "2026-11-09T00:50:14.267748+00:00",
+      "sha256": "138efa011ea338ab5e291bf81c900599eeeb5a4674e249a67bd42c3bd187e5fd",
+      "bytes": 983866,
+      "pdf_pages": 19,
+      "reviewed_pdf_pages": [
+        2,
+        4,
+        9,
+        10
+      ],
+      "reviewed_sections": "WILD evaluation modules, limitations",
+      "finding": "Teacher forcing, target-length truncation, context-free prompts, and permissive matching can inflate reported editing success; natural decoding exposes failures.",
+      "limitation": "The study examines representative methods and models; its findings do not establish universal failure of every future editor.",
+      "framework_implication": "For generated-output tasks freeze autoregressive decoding, natural termination, prompt/context variation, and explicit scoring. For routing, evaluate complete predictions on independent text."
+    },
+    {
+      "id": "edit-generalization",
+      "title": "Benchmarking and Rethinking Knowledge Editing for Large Language Models",
+      "publication_note": "2025 preprint version reviewed",
+      "acquired_url": "https://arxiv.org/pdf/2505.18690",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2505.18690",
+      "version_url": "https://arxiv.org/pdf/2505.18690v1",
+      "retrieved_at_utc": "2026-11-09T00:50:14.267748+00:00",
+      "sha256": "30585e76466b89ec4182a6918f33cb2bb7e82c6e95232142b9c0fd6f73e765dd",
+      "bytes": 792644,
+      "pdf_pages": 22,
+      "reviewed_pdf_pages": [
+        1,
+        2,
+        3
+      ],
+      "reviewed_sections": "Task/access comparison and contextual reasoning alternative",
+      "finding": "Evaluation spans fact, event, and more general tasks, with reliability, generalization, locality, and portability; a contextual reasoning baseline tests whether weight changes are needed.",
+      "limitation": "Reported comparisons depend on task, prompt, compute, and model choices; a context baseline is not proven best for every application.",
+      "framework_implication": "Compare weight edits with rules, a routing overlay, and context/retrieval methods when task-compatible, using the same allowed evidence and full costs."
+    },
+    {
+      "id": "forgetbench-verified",
+      "title": "ForgetBench: Benchmarking Forgetting Dynamics of Long-Term Parametric Memory in Language Models",
+      "publication_note": "July 2026 preprint",
+      "acquired_url": "https://arxiv.org/pdf/2607.26455",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2607.26455",
+      "version_url": "https://arxiv.org/pdf/2607.26455v2",
+      "retrieved_at_utc": "2026-11-09T00:50:15.480645+00:00",
+      "sha256": "d91d671aa40dd48b92c3440e7f5ae14a6f7c6bbbd99780f1857101c7f122e489",
+      "bytes": 1121205,
+      "pdf_pages": 18,
+      "reviewed_pdf_pages": [
+        1,
+        5,
+        9,
+        13,
+        14
+      ],
+      "reviewed_sections": "Time-indexed retention evaluation and limitations",
+      "finding": "An accuracy matrix indexed by edit time and memory age separates insertion success from later decay and variability.",
+      "limitation": "Synthetic and semi-synthetic knowledge-edit streams do not establish production retention or arbitrary continual learning performance.",
+      "framework_implication": "Evaluate whole edit lineages, original-baseline retention, old targets, conflicts, and task order; report retention curves with sequence-level uncertainty."
+    },
+    {
+      "id": "recovery-forecast",
+      "title": "Measure, Don’t Optimize: Forecasting Recovery in LLM Unlearning",
+      "publication_note": "August 2026 preprint",
+      "acquired_url": "https://arxiv.org/pdf/2608.11408",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2608.11408",
+      "version_url": "https://arxiv.org/pdf/2608.11408v1",
+      "retrieved_at_utc": "2026-11-09T00:50:15.137906+00:00",
+      "sha256": "c0867a4c558c93d63e722d78e5be4df39794ab4ce2dbd6ba1aa18f9c2779850f",
+      "bytes": 666713,
+      "pdf_pages": 9,
+      "reviewed_pdf_pages": [
+        1,
+        2
+      ],
+      "reviewed_sections": "Recovery forecasting rationale and audit/optimization distinction",
+      "finding": "Internal accessibility measurements can predict recovery in the studied settings; optimizing an audit signal can obscure the robustness it was intended to measure.",
+      "limitation": "A scoped empirical audit is not a universal test of information erasure or an implementation we have reproduced.",
+      "framework_implication": "Keep blinded recovery tests independent of the edit objective and disclose exactly which recovery attacks and budgets were evaluated."
+    },
+    {
+      "id": "muse",
+      "title": "MUSE: Machine Unlearning Six-Way Evaluation for Language Models",
+      "publication_note": "2024 primary paper version reviewed",
+      "acquired_url": "https://arxiv.org/pdf/2407.06460",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2407.06460",
+      "version_url": "https://arxiv.org/pdf/2407.06460v2",
+      "retrieved_at_utc": "2026-11-09T00:50:14.467876+00:00",
+      "sha256": "6de23fb357085a9dd386a872e1d3db70db5b3d16876c7524c116887c6f7ae060",
+      "bytes": 1526356,
+      "pdf_pages": 22,
+      "reviewed_pdf_pages": [
+        1,
+        2,
+        3
+      ],
+      "reviewed_sections": "Six evaluation endpoints",
+      "finding": "Verbatim memorization, knowledge memorization, privacy leakage, utility, scalability, and repeated requests are separate unlearning outcomes.",
+      "limitation": "Passing one endpoint or benchmark is insufficient for general erasure or privacy guarantees.",
+      "framework_implication": "Use distinct forget/retain/extraction/privacy/cost/repetition endpoints and a retain-only reference in a gated synthetic unlearning study."
+    },
+    {
+      "id": "tofu",
+      "title": "TOFU: A Task of Fictitious Unlearning for LLMs",
+      "publication_note": "2024 primary paper version reviewed",
+      "acquired_url": "https://arxiv.org/pdf/2401.06121",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2401.06121",
+      "version_url": "https://arxiv.org/pdf/2401.06121v1",
+      "retrieved_at_utc": "2026-11-09T00:50:14.604623+00:00",
+      "sha256": "b747069131e44f1f07b8984dc2762ecc0c2e84ddf25af029a0ca3c1476b61a4b",
+      "bytes": 1693823,
+      "pdf_pages": 24,
+      "reviewed_pdf_pages": [
+        3,
+        7,
+        8
+      ],
+      "reviewed_sections": "Synthetic identities, retain-only reference, truth-ratio evaluation",
+      "finding": "Fictitious data permits a controlled reference trained without forget examples and distributional comparison of forgetting behavior.",
+      "limitation": "Synthetic author identities and benchmark behavior do not demonstrate deletion of real confidential data from arbitrary pretrained models.",
+      "framework_implication": "Begin with synthetic forget data; distinguish refusal or suppression from residual accessibility and preserve retain utility."
+    },
+    {
+      "id": "relearning",
+      "title": "Catastrophic Failure of LLM Unlearning via Quantization",
+      "publication_note": "ICLR 2025",
+      "acquired_url": "https://arxiv.org/pdf/2410.16454",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2410.16454",
+      "version_url": "https://arxiv.org/pdf/2410.16454v3",
+      "retrieved_at_utc": "2026-11-09T00:50:14.787498+00:00",
+      "sha256": "5b5288c399c3b69f9f6209211fd608630631c9dfe7114da01fabcebd49516025",
+      "bytes": 909546,
+      "pdf_pages": 24,
+      "reviewed_pdf_pages": [
+        1,
+        6
+      ],
+      "reviewed_sections": "Quantization recovery experiments",
+      "finding": "Deployment quantization can recover knowledge suppressed by the evaluated unlearning methods.",
+      "limitation": "The result is scoped to studied models, methods, and transforms; it is not a universal mathematical impossibility result.",
+      "framework_implication": "Evaluate forgetting after deployed numerical transforms and bounded recovery attempts; do not infer erasure from the original full-precision output."
+    },
+    {
+      "id": "torchlean",
+      "title": "TorchLean: Formalizing Neural Networks in Lean",
+      "publication_note": "May 2026 v2 preprint",
+      "acquired_url": "https://arxiv.org/pdf/2602.22631v2",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2602.22631v2",
+      "version_url": "https://arxiv.org/pdf/2602.22631v2",
+      "retrieved_at_utc": "2026-11-09T00:50:15.029504+00:00",
+      "sha256": "dd8b7ce74b70d6a5bd928bf32f5caaeaf9354b56902d8f9a47f6f14f77c0c4d3",
+      "bytes": 7762633,
+      "pdf_pages": 55,
+      "reviewed_pdf_pages": [
+        6,
+        8,
+        19,
+        54,
+        55
+      ],
+      "reviewed_sections": "Shared graph semantics; Table 3 scope; finite Float32 refinement and external boundaries",
+      "finding": "Shared SSA/DAG semantics connect execution and analysis. The scope table distinguishes proved, checked, and external components; finite-path IEEE32Exec refinement is explicitly restricted.",
+      "limitation": "The paper does not discharge the target CPU/CUDA kernel and hardware link universally. Repository code was not built or audited in this review.",
+      "framework_implication": "Evaluate reuse of explicit semantic/proof subsets; keep serializer, compiler, backend, nonfinite values, and unsupported operators visible in the trust boundary."
+    },
+    {
+      "id": "crown",
+      "title": "Efficient Neural Network Robustness Certification with General Activation Functions",
+      "publication_note": "2018 primary paper version reviewed",
+      "acquired_url": "https://arxiv.org/pdf/1811.00866v1",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/1811.00866v1",
+      "version_url": "https://arxiv.org/pdf/1811.00866v1",
+      "retrieved_at_utc": "2026-11-09T00:50:15.096074+00:00",
+      "sha256": "7b57198bb3693c7a32c1000f2585b7772b5e76c6954614d8d3392c7a1a32ad32",
+      "bytes": 976200,
+      "pdf_pages": 17,
+      "reviewed_pdf_pages": [
+        1,
+        3
+      ],
+      "reviewed_sections": "Activation relaxations and certified bounds",
+      "finding": "Activation envelopes yield conservative bounds for a specified input domain and supported network.",
+      "limitation": "Loose bounds can reject safe candidates; absence of a passing bound is different from an observed violation. The paper is not a proof of this repository runtime.",
+      "framework_implication": "Compare current sequential drift bounds with tighter validated relaxations using coverage, width, time, and memory under identical domains."
+    },
+    {
+      "id": "provable-repair",
+      "title": "Provable Repair of Deep Neural Networks",
+      "publication_note": "2021 primary paper version reviewed",
+      "acquired_url": "https://arxiv.org/pdf/2104.04413v2",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2104.04413v2",
+      "version_url": "https://arxiv.org/pdf/2104.04413v2",
+      "retrieved_at_utc": "2026-11-09T00:50:15.443094+00:00",
+      "sha256": "948b259ed6e359ad7926182ebce4f62a5a3c0c3c431f660687460abbdf8d2302",
+      "bytes": 1188602,
+      "pdf_pages": 20,
+      "reviewed_pdf_pages": [
+        2,
+        4
+      ],
+      "reviewed_sections": "Decoupled architecture and one-layer linear-program repair",
+      "finding": "Separating activation and value paths permits a one-layer repair problem to be expressed as an LP in the specified setting.",
+      "limitation": "This tractability does not extend automatically to arbitrary ordinary networks, unknown activation regions, or a general editor.",
+      "framework_implication": "Explore a narrowly supported repair adapter and benchmark certificate coverage before promising arbitrary nonlinear repair."
+    },
+    {
+      "id": "deepalign",
+      "title": "Equivariant Deep Weight Space Alignment",
+      "publication_note": "2024 v4 primary paper version reviewed",
+      "acquired_url": "https://arxiv.org/pdf/2310.13397v4",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2310.13397v4",
+      "version_url": "https://arxiv.org/pdf/2310.13397v4",
+      "retrieved_at_utc": "2026-11-09T00:50:15.540241+00:00",
+      "sha256": "9882f534572d8cc420c363c68be7bf5109ec0a4b3c2c1b91d660a5ca7124c889",
+      "bytes": 5753705,
+      "pdf_pages": 20,
+      "reviewed_pdf_pages": [
+        3,
+        13
+      ],
+      "reviewed_sections": "Permutation-equivariant matching and scope",
+      "finding": "Symmetry-aware alignment helps compare or merge compatible parameterizations.",
+      "limitation": "Alignment is not proof of a causally transferable circuit between unrelated architectures.",
+      "framework_implication": "Test known same-function permutations first, then independent trained lineages; compare raw, aligned, and matched controls before circuit-grafting claims."
+    },
+    {
+      "id": "scalegmn",
+      "title": "Scale Equivariant Graph Metanetworks",
+      "publication_note": "2024 primary paper version reviewed",
+      "acquired_url": "https://arxiv.org/pdf/2406.10685v2",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2406.10685v2",
+      "version_url": "https://arxiv.org/pdf/2406.10685v2",
+      "retrieved_at_utc": "2026-11-09T00:50:15.540241+00:00",
+      "sha256": "4425b55bc760977e91c0de9e7ee301bc334cea8e8fa4b9f0b413ab66b0b11957",
+      "bytes": 1343101,
+      "pdf_pages": 34,
+      "reviewed_pdf_pages": [
+        1,
+        2
+      ],
+      "reviewed_sections": "Scaling and permutation symmetry assumptions",
+      "finding": "Weight processing can incorporate valid scaling and permutation symmetries for supported model families.",
+      "limitation": "Scaling symmetry depends on activation and graph structure; positive rescaling is not an unrestricted equivalence for tanh or arbitrary models.",
+      "framework_implication": "Declare symmetry groups per adapter and include function-preservation positive controls and unsupported-family rejection."
+    },
+    {
+      "id": "nfn",
+      "title": "Permutation Equivariant Neural Functionals",
+      "publication_note": "2023 primary paper version reviewed",
+      "acquired_url": "https://arxiv.org/pdf/2302.14040v3",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2302.14040v3",
+      "version_url": "https://arxiv.org/pdf/2302.14040v3",
+      "retrieved_at_utc": "2026-11-09T00:50:15.939643+00:00",
+      "sha256": "068640b6b12e90ad82729aa82759131cca400e1bbb2d4839c7c895be33e55a2a",
+      "bytes": 5183219,
+      "pdf_pages": 25,
+      "reviewed_pdf_pages": [
+        1,
+        2
+      ],
+      "reviewed_sections": "Weight/gradient processing architecture and tasks",
+      "finding": "Permutation-equivariant processing provides a learned alternative to raw coordinate interpretation for weights and gradients.",
+      "limitation": "Success on the evaluated neural-functional tasks is not a general-purpose language model understanding arbitrary weights.",
+      "framework_implication": "Compare symmetry-aware summaries/learned readers with raw weights and context-only readers on held-out training lineages."
+    },
+    {
+      "id": "dws",
+      "title": "Equivariant Architectures for Learning in Deep Weight Spaces",
+      "publication_note": "2023 primary paper version reviewed",
+      "acquired_url": "https://arxiv.org/pdf/2301.12780v2",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2301.12780v2",
+      "version_url": "https://arxiv.org/pdf/2301.12780v2",
+      "retrieved_at_utc": "2026-11-09T00:50:15.977454+00:00",
+      "sha256": "a685648be137c17bf20d0cd71317f08f24240d40ace17bfbb85992473f684f6e",
+      "bytes": 5291953,
+      "pdf_pages": 27,
+      "reviewed_pdf_pages": [
+        1,
+        2,
+        9
+      ],
+      "reviewed_sections": "MLP symmetry and implementation/training limits",
+      "finding": "Architectures that respect MLP parameter symmetries support functions over a collection of trained networks.",
+      "limitation": "Architecture specificity, initialization, training difficulty, and implementation complexity constrain generalization.",
+      "framework_implication": "Hold out model lineages and architecture families; charge reader training and model-zoo construction in cost claims."
+    },
+    {
+      "id": "sane",
+      "title": "Towards Scalable and Versatile Weight Space Learning",
+      "publication_note": "2024 primary paper version reviewed",
+      "acquired_url": "https://arxiv.org/pdf/2406.09997v1",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2406.09997v1",
+      "version_url": "https://arxiv.org/pdf/2406.09997v1",
+      "retrieved_at_utc": "2026-11-09T00:50:15.977454+00:00",
+      "sha256": "fb61a31819d7dc0defc4c8d48a576eb438fdff468aa392a8bc59a5f21998ea22",
+      "bytes": 2507891,
+      "pdf_pages": 20,
+      "reviewed_pdf_pages": [
+        1,
+        3,
+        4
+      ],
+      "reviewed_sections": "Token/subsequence processing of trained-model collections",
+      "finding": "Subsequence processing and learned representations can make model-zoo weight analysis scalable.",
+      "limitation": "Compression, conditioning, data collection, reader training, and reconstruction create costs and information losses.",
+      "framework_implication": "Profile dense weight access first; evaluate summaries/chunks at matched downstream performance and include amortization assumptions."
+    },
+    {
+      "id": "lora",
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "publication_note": "2021 v2 primary paper version reviewed",
+      "acquired_url": "https://arxiv.org/pdf/2106.09685v2",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2106.09685v2",
+      "version_url": "https://arxiv.org/pdf/2106.09685v2",
+      "retrieved_at_utc": "2026-11-09T00:50:16.093306+00:00",
+      "sha256": "e9a0d3128767db616085dc0f4e6e455e672e89af823e8ed1282793682787395a",
+      "bytes": 1609513,
+      "pdf_pages": 26,
+      "reviewed_pdf_pages": [
+        1,
+        2
+      ],
+      "reviewed_sections": "Low-rank adaptation baseline",
+      "finding": "Low-rank fitting is an established adaptation route and a useful comparator when architecture and task permit.",
+      "limitation": "Low parameter count or rank does not establish retained behavior, cheap total workflow, or no-fitting construction.",
+      "framework_implication": "Include head retraining and appropriate low-rank/full-training controls with tuned development budgets and retention/cost measurements."
+    },
+    {
+      "id": "clinc",
+      "title": "An Evaluation Dataset for Intent Classification and Out-of-Scope Prediction",
+      "publication_note": "2019 primary paper",
+      "acquired_url": "https://arxiv.org/pdf/1909.02027",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/1909.02027",
+      "version_url": "https://arxiv.org/pdf/1909.02027v1",
+      "retrieved_at_utc": "2026-11-09T00:50:16.210369+00:00",
+      "sha256": "dea6cf0bdf4cd9cd06a048e5f5aac7b2165f8788ad9793593af885511c871497",
+      "bytes": 222706,
+      "pdf_pages": 6,
+      "reviewed_pdf_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "reviewed_sections": "Dataset task and out-of-scope evaluation; author repository README/LICENSE",
+      "finding": "A public English single-intent dataset includes explicit in-scope and out-of-scope queries for text routing experiments.",
+      "limitation": "Crowdsourced single-intent queries are not multi-intent tickets, live customer telemetry, or our existing outage policy.",
+      "framework_implication": "Use as a cross-dataset/OOD routing extension; freeze a derived queue mapping and retain its synthetic-policy provenance."
+    },
+    {
+      "id": "banking77",
+      "title": "Efficient Intent Detection with Dual Sentence Encoders",
+      "publication_note": "2020 primary paper",
+      "acquired_url": "https://arxiv.org/pdf/2003.04807",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/2003.04807",
+      "version_url": "https://arxiv.org/pdf/2003.04807v1",
+      "retrieved_at_utc": "2026-11-09T00:50:16.212383+00:00",
+      "sha256": "044e77e070f1895ebdfa05c2d7e34c941df87fe5494b17827fce9fce849e708e",
+      "bytes": 160168,
+      "pdf_pages": 8,
+      "reviewed_pdf_pages": [
+        1,
+        3
+      ],
+      "reviewed_sections": "Fine-grained banking intent task; author repository README/LICENSE",
+      "finding": "Public fine-grained banking service intents provide a tractable trained text-classification starting point.",
+      "limitation": "The dataset supplies intents, not enterprise operational queues or a telemetry-outage policy. Queue assignment is a task derived by this project.",
+      "framework_implication": "Train a real text head, derive and freeze an ownership-change policy, and compare with an overlay operating on the unchanged intent predictions."
+    },
+    {
+      "id": "selective",
+      "title": "Selective Classification for Deep Neural Networks",
+      "publication_note": "2017 primary paper version reviewed",
+      "acquired_url": "https://arxiv.org/pdf/1705.08500",
+      "resolved_url_at_acquisition": "https://arxiv.org/pdf/1705.08500",
+      "version_url": "https://arxiv.org/pdf/1705.08500v2",
+      "retrieved_at_utc": "2026-11-09T00:50:16.210369+00:00",
+      "sha256": "91899dfcbc41553f571f7a491839733e4d16f81d82e9274278e8f06ffc42022b",
+      "bytes": 614365,
+      "pdf_pages": 12,
+      "reviewed_pdf_pages": [
+        1,
+        2
+      ],
+      "reviewed_sections": "Risk/coverage formulation and assumptions",
+      "finding": "Abstention trades coverage for conditional prediction risk under the studied evaluation setting.",
+      "limitation": "Calibration and in-distribution bounds do not establish arbitrary OOD correctness, and low risk can conceal near-zero coverage.",
+      "framework_implication": "Report all-trial useful success, admission/coverage, conditional harm, and abstention reasons together; freeze thresholds on development data."
+    }
+  ],
+  "dataset_repository_checks": [
+    {
+      "repository": "clinc/oos-eval",
+      "readme_url": "https://github.com/clinc/oos-eval/blob/master/README.md",
+      "license_url": "https://github.com/clinc/oos-eval/blob/master/LICENSE",
+      "observed_license_label": "CC BY 3.0",
+      "scope": "Repository README and license text inspected; execution must pin a commit, dataset bytes, and notices."
+    },
+    {
+      "repository": "PolyAI-LDN/task-specific-datasets",
+      "readme_url": "https://github.com/PolyAI-LDN/task-specific-datasets/blob/master/README.md",
+      "license_url": "https://github.com/PolyAI-LDN/task-specific-datasets/blob/master/LICENSE",
+      "observed_license_label": "CC BY 4.0",
+      "scope": "Root README and license text inspected; banking_data/README.md was absent. Execution must pin a commit, dataset bytes, and notices."
+    }
+  ],
+  "rejected_search_leads": [
+    {
+      "url": "https://aclanthology.org/2026.findings-acl.87/",
+      "reason": "Actual document is Understanding Generalization in Role-Playing Models via Information Theory, not the claimed editing paper."
+    },
+    {
+      "url": "https://arxiv.org/abs/2602.02975",
+      "reason": "Actual document is Where Norms and References Collide: Evaluating LLMs on Normative Reasoning, not ForgetBench."
+    }
+  ]
+}
