@@ -1,0 +1,358 @@
+"""Frozen cohort preparation and diagnosis-before-repair selection only.
+
+This trusted cooperative controller owns its lanes and retains failed preparation,
+failed selection and abstention in the complete ordered roster. A proposer gets
+only a member row and the lane's JSON query function. This is not a Python sandbox
+or a study result. There is deliberately no cohort scoring/evaluation method;
+public per-lane evaluation is denied pending a separate evaluation bridge.
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass
+import json
+import os
+from pathlib import Path
+import threading
+from typing import Any, Callable
+
+from .broker import WeightView
+from .data_roles import DataRoleRegistry
+from .model import canonical_bytes, digest
+from .staged_diagnosis import StagedDiagnosisRepair
+from .workflow import Artifact, BudgetLimits, WorkflowError, _json
+
+
+@dataclass(frozen=True)
+class PreparedMember:
+    """Trusted preparation result; the controller constructs the lane itself."""
+
+    base: Artifact
+    task_id: str
+    objective: str
+    preparation: dict[str, Any]
+    view: WeightView = WeightView()
+    limits: BudgetLimits | None = None
+    native_dtypes: dict[str, str] | None = None
+
+
+class StagedCohort:
+    def __init__(self, run_dir: str | Path, *, member_ids: list[str] | tuple[str, ...],
+                 protocol: dict[str, Any], controls: dict[str, Any], evaluator_id: str,
+                 registry: DataRoleRegistry, attempt_id: str):
+        if (type(member_ids) not in (list, tuple) or not member_ids
+                or any(type(value) is not str or not value.strip() for value in member_ids)
+                or len(set(member_ids)) != len(member_ids)):
+            raise ValueError("Freeze a nonempty ordered unique member-ID roster")
+        if (type(registry) is not DataRoleRegistry
+                or any(type(value) is not str or not value.strip()
+                       for value in (evaluator_id, attempt_id))):
+            raise ValueError("Use a trusted registry and explicit evaluator/attempt identities")
+        protocol, controls = _json(protocol), _json(controls)
+        if type(protocol) is not dict or type(controls) is not dict:
+            raise ValueError("Protocol and controls must be finite JSON objects")
+        rows = [{"member_index": index, "member_id": identifier}
+                for index, identifier in enumerate(member_ids)]
+        self._rows_bytes = canonical_bytes(rows)
+        self._registry, self._owner = registry, object()
+        self._lanes: list[StagedDiagnosisRepair | None] = [None] * len(rows)
+        self._records: dict[str, bytes] = {}
+        self._invalidated, self._prepared = False, False
+        self._started = {"preparation": False, "diagnosis": False, "repair": False}
+        # ponytail: serialize one cohort; use separate controllers for parallel cohorts.
+        self._lock = threading.RLock()
+        body = {"schema": "wsp-staged-cohort-protocol/1", "attempt_id": attempt_id,
+                "registry_id": registry.registry_id, "evaluator_id": evaluator_id,
+                "members": rows, "roster_sha256": digest(rows), "protocol": protocol,
+                "controls": controls, "controls_sha256": digest(controls),
+                "selection_rule": "all_durable_terminal_diagnoses_before_any_repair_construction",
+                "evaluation_available": False, "causal_usefulness_established": False}
+        canonical_bytes(body)  # Validate encodability before creating the exclusive run.
+        self._directory = Path(run_dir).resolve()
+        self._directory.mkdir(parents=True, exist_ok=False)
+        try:
+            self._save("protocol", body)
+        except BaseException:
+            self._invalidate()
+            raise
+
+    def _rows(self) -> list[dict[str, Any]]:
+        return json.loads(self._rows_bytes)
+
+    @staticmethod
+    def _name(stage: str, index: int) -> str:
+        return f"{stage}-{index:06d}"
+
+    def _invalidate(self) -> None:
+        self._invalidated = True
+        for lane in self._lanes:
+            if lane is not None:
+                lane._invalidated = True
+
+    def _require(self, condition: bool) -> None:
+        if not condition:
+            self._invalidate()
+            raise WorkflowError("Cohort evidence changed; the attempt is invalidated")
+
+    def _write(self, name: str, body: dict[str, Any]) -> bytes:
+        raw = canonical_bytes(body | {"sha256": digest(body)}) + b"\n"
+        path = self._directory / (name + ".json")
+        with path.open("xb") as stream:
+            stream.write(raw)
+            stream.flush()
+            os.fsync(stream.fileno())
+        if path.read_bytes() != raw:
+            raise WorkflowError("Durable cohort receipt verification failed")
+        return raw
+
+    def _save(self, name: str, body: dict[str, Any]) -> dict[str, Any]:
+        self._records[name] = self._write(name, body)
+        return self._read(name)
+
+    def _read(self, name: str) -> dict[str, Any]:
+        if self._invalidated:
+            raise WorkflowError("Cohort attempt is invalidated")
+        try:
+            raw = self._records[name]
+            self._require((self._directory / (name + ".json")).read_bytes() == raw)
+            document = json.loads(raw)
+            self._require(digest({key: value for key, value in document.items()
+                                  if key != "sha256"}) == document["sha256"])
+            return document
+        except BaseException as error:
+            self._invalidate()
+            if isinstance(error, (OSError, ValueError, KeyError, TypeError)):
+                raise WorkflowError("Cohort evidence is unavailable or changed") from None
+            raise
+
+    def _check(self) -> dict[str, Any]:
+        protocol = self._read("protocol")
+        self._require(protocol["members"] == self._rows()
+                      and protocol["registry_id"] == self._registry.registry_id)
+        return protocol
+
+    def _body(self, stage: str, row: dict[str, Any], outcome: str,
+              **fields: Any) -> dict[str, Any]:
+        protocol = self._check()
+        return {"schema": "wsp-staged-cohort-disposition/1", "stage": stage, **row,
+                "cohort_protocol_sha256": protocol["sha256"],
+                "roster_sha256": protocol["roster_sha256"], "outcome": outcome, **fields}
+
+    def _member_binding(self, index: int) -> dict[str, Any]:
+        protocol = self._check()
+        return {"cohort_protocol_sha256": protocol["sha256"],
+                "cohort_roster_sha256": protocol["roster_sha256"],
+                "cohort_member_index": index, "cohort_member_id": self._rows()[index]["member_id"]}
+
+    def _lane_snapshot(self, lane: StagedDiagnosisRepair, index: int) -> dict[str, Any]:
+        self._require(lane._owner is self._owner and lane._registry is self._registry
+                      and not lane._invalidated
+                      and (lane._directory / "protocol.json").read_bytes() == lane._protocol)
+        protocol = json.loads(lane._protocol)
+        self._require(protocol["cohort_binding"] == self._member_binding(index))
+        return {"lane_protocol_sha256": protocol["sha256"],
+                "parent_sha256": lane._base.sha256,
+                "diagnosis_task_sha256": lane._tasks["diagnosis"].sha256,
+                "diagnosis_session_sha256": lane._brokers["diagnosis"]._session.sha256,
+                "configuration": lane._brokers["diagnosis"]._session.configuration}
+
+    def _preparation(self, index: int) -> dict[str, Any]:
+        preparation = self._read(self._name("preparation", index))
+        lane = self._lanes[index]
+        self._require((preparation["outcome"] == "prepared") == (lane is not None))
+        if lane is not None:
+            self._require(preparation["lane"] == self._lane_snapshot(lane, index))
+        return preparation
+
+    def prepare(self, prepare_member: Callable[[dict[str, Any]], PreparedMember]) -> list[dict[str, Any]]:
+        with self._lock:
+            self._check()
+            if self._started["preparation"] or not callable(prepare_member):
+                raise WorkflowError("Cohort preparation is available once")
+            self._started["preparation"] = True
+            try:
+                for row in self._rows():
+                    self._check()
+                    index = row["member_index"]
+                    try:
+                        prepared = prepare_member(dict(row))
+                        if type(prepared) is not PreparedMember:
+                            raise ValueError("Preparation must return PreparedMember")
+                        output = _json(prepared.preparation)
+                        if type(output) is not dict:
+                            raise ValueError("Preparation output must be a finite JSON object")
+                        StagedDiagnosisRepair._configuration(
+                            prepared.task_id, prepared.objective, prepared.base, self._registry,
+                            prepared.view, prepared.limits, prepared.native_dtypes)
+                    except BaseException as error:
+                        try:
+                            self._save(self._name("preparation", index), self._body(
+                                "preparation", row, "unavailable", lane=None,
+                                exception_type=type(error).__name__))
+                        except BaseException:
+                            self._invalidate()
+                            raise error
+                        if not isinstance(error, Exception):
+                            raise
+                        continue
+                    try:
+                        lane = StagedDiagnosisRepair(self._directory / f"member-{index:06d}",
+                            task_id=prepared.task_id, objective=prepared.objective,
+                            base=prepared.base, registry=self._registry, view=prepared.view,
+                            limits=prepared.limits, native_dtypes=prepared.native_dtypes,
+                            _owner=self._owner, _cohort_binding=self._member_binding(index))
+                        self._lanes[index] = lane
+                    except BaseException as error:
+                        try:
+                            self._save(self._name("preparation", index), self._body(
+                                "preparation", row, "unavailable", lane=None,
+                                exception_type=type(error).__name__, failure_phase="lane_setup"))
+                        except BaseException:
+                            pass
+                        raise error
+                    self._save(self._name("preparation", index), self._body(
+                        "preparation", row, "prepared", preparation=output,
+                        lane=self._lane_snapshot(lane, index)))
+                self._prepared = True
+                return [self._preparation(row["member_index"]) for row in self._rows()]
+            except BaseException:
+                self._invalidate()
+                raise
+
+    def _select(self, stage: str, row: dict[str, Any], selector: Callable[..., Any],
+                cohort_binding: dict[str, Any] | None = None) -> dict[str, Any]:
+        index, error = row["member_index"], None
+        preparation = self._preparation(index)
+        lane = self._lanes[index]
+        try:
+            if stage == "diagnosis":
+                lane._select_diagnosis(lambda query: selector(dict(row), query), self._owner)
+            else:
+                lane._select_repair(lambda diagnosis, query: selector(dict(row), diagnosis, query),
+                                    self._owner, cohort_binding)
+        except BaseException as caught:
+            error = caught
+        try:
+            # The raised selector error alone cannot attest successful finalization.
+            actual = lane._verify(stage)
+            self._preparation(index)
+            diagnosis_binding = {}
+            if stage == "repair":
+                barrier = self._verify_barrier()
+                self._require(barrier["sha256"] == cohort_binding["cohort_diagnosis_barrier_sha256"])
+                member = barrier["members"][index]
+                diagnosis_binding = {key: member[key] for key in (
+                    "diagnosis_disposition_sha256", "diagnosis_receipt_sha256")}
+                diagnosis_binding.update(diagnosis_outcome=member["outcome"],
+                                         diagnosis_barrier_sha256=barrier["sha256"])
+            disposition = self._save(self._name(stage, index), self._body(
+                stage, row, actual["outcome"], preparation_receipt_sha256=preparation["sha256"],
+                **{stage + "_receipt_sha256": actual["sha256"]},
+                **diagnosis_binding,
+                exception_type=type(error).__name__ if error is not None else None))
+        except BaseException:
+            self._invalidate()
+            if error is not None:
+                raise error
+            raise
+        if error is not None and not isinstance(error, Exception):
+            self._invalidate()
+            raise error
+        return disposition
+
+    def _diagnoses(self) -> list[dict[str, Any]]:
+        members = []
+        for row in self._rows():
+            index = row["member_index"]
+            preparation = self._preparation(index)
+            disposition = self._read(self._name("diagnosis", index))
+            lane = self._lanes[index]
+            actual = lane._verify("diagnosis") if lane is not None else None
+            actual_hash = actual["sha256"] if actual is not None else None
+            outcome = actual["outcome"] if actual is not None else "unavailable"
+            self._require(disposition["outcome"] == outcome
+                          and disposition["diagnosis_receipt_sha256"] == actual_hash
+                          and disposition["preparation_receipt_sha256"] == preparation["sha256"])
+            members.append({**row, "preparation_receipt_sha256": preparation["sha256"],
+                            "diagnosis_disposition_sha256": disposition["sha256"],
+                            "diagnosis_receipt_sha256": actual_hash, "outcome": outcome})
+        return members
+
+    def _barrier_body(self) -> dict[str, Any]:
+        protocol = self._check()
+        return {"schema": "wsp-staged-cohort-diagnosis-barrier/1",
+                "cohort_protocol_sha256": protocol["sha256"],
+                "roster_sha256": protocol["roster_sha256"],
+                "attempt_id": protocol["attempt_id"], "registry_id": protocol["registry_id"],
+                "evaluator_id": protocol["evaluator_id"], "members": self._diagnoses(),
+                "evaluation_available": False}
+
+    def _verify_barrier(self) -> dict[str, Any]:
+        try:
+            barrier = self._read("diagnosis-barrier")
+            self._require(canonical_bytes({key: value for key, value in barrier.items()
+                                           if key != "sha256"}) == canonical_bytes(self._barrier_body()))
+            return barrier
+        except BaseException:
+            self._invalidate()
+            raise
+
+    def select_diagnoses(self, selector: Callable[..., Any]) -> dict[str, Any]:
+        with self._lock:
+            self._check()
+            if not self._prepared or self._started["diagnosis"] or not callable(selector):
+                raise WorkflowError("All preparation must finish before the single diagnosis pass")
+            self._started["diagnosis"] = True
+            try:
+                for row in self._rows():
+                    index = row["member_index"]
+                    preparation = self._preparation(index)
+                    if self._lanes[index] is None:
+                        self._save(self._name("diagnosis", index), self._body(
+                            "diagnosis", row, "unavailable",
+                            preparation_receipt_sha256=preparation["sha256"],
+                            diagnosis_receipt_sha256=None))
+                    else:
+                        self._select("diagnosis", row, selector)
+                self._save("diagnosis-barrier", self._barrier_body())
+                return self._verify_barrier()
+            except BaseException:
+                self._invalidate()
+                raise
+
+    def select_repairs(self, selector: Callable[..., Any]) -> list[dict[str, Any]]:
+        with self._lock:
+            self._check()
+            if (self._started["repair"] or "diagnosis-barrier" not in self._records
+                    or not callable(selector)):
+                raise WorkflowError("The complete durable diagnosis barrier is required once")
+            self._started["repair"] = True
+            try:
+                results = []
+                for row in self._rows():
+                    barrier = self._verify_barrier()
+                    index = row["member_index"]
+                    member = barrier["members"][index]
+                    if member["outcome"] != "selected":
+                        results.append(self._save(self._name("repair", index), self._body(
+                            "repair", row, "unavailable", **{key: member[key] for key in (
+                                "preparation_receipt_sha256", "diagnosis_disposition_sha256",
+                                "diagnosis_receipt_sha256")}, repair_receipt_sha256=None,
+                            diagnosis_outcome=member["outcome"],
+                            diagnosis_barrier_sha256=barrier["sha256"])))
+                        continue
+                    binding = {**self._member_binding(index),
+                               "cohort_diagnosis_barrier_sha256": barrier["sha256"],
+                               "cohort_preparation_receipt_sha256": member["preparation_receipt_sha256"],
+                               "cohort_diagnosis_disposition_sha256": member["diagnosis_disposition_sha256"]}
+                    results.append(self._select("repair", row, selector, binding))
+                self._verify_barrier()
+                for row, disposition in zip(self._rows(), results):
+                    index = row["member_index"]
+                    self._require(self._read(self._name("repair", index)) == disposition)
+                    if disposition["repair_receipt_sha256"] is not None:
+                        self._require(self._lanes[index]._verify("repair")["sha256"]
+                                      == disposition["repair_receipt_sha256"])
+                return results
+            except BaseException:
+                self._invalidate()
+                raise

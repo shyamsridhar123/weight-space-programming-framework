@@ -57,6 +57,35 @@ Tensor names come from the captured artifact. The integer prefix must be in boun
 
 `evaluate_candidate(frozen_diagnosis, candidate, rows)` is a trusted harness callback. Proposer callbacks receive neither the coordinator nor a broker, candidate endpoint, evaluation rows or evaluator through this API. The registered broker performs the existing data-role authorization and records its evaluator attempt. The returned receipt binds the diagnosis and repair receipt identities to that audit.
 
+## Cohort preparation and selection
+
+[`StagedCohort`](../../rlcd/weight_space/staged_cohort.py) owns the lanes for a fixed, nonempty ordered roster of unique member IDs. Its constructor records that complete roster, protocol, controls, registry identity and evaluator/attempt identities before any preparation callback runs. The trusted `prepare_member(row)` callback receives `member_index` and `member_id` and returns `PreparedMember` with the captured `base`, `task_id`, `objective` and JSON `preparation` record; optional `view`, `limits` and `native_dtypes` use the existing lane controls. The controller constructs each lane itself.
+
+```python
+from rlcd.weight_space.staged_cohort import PreparedMember, StagedCohort
+
+cohort = StagedCohort(
+    "runs/staged-cohort-001",
+    member_ids=("case-001", "case-002"),
+    protocol=protocol,
+    controls=controls,
+    evaluator_id="registered-evaluator-v1",
+    registry=registry,
+    attempt_id="staged-cohort-001",
+)
+preparation_dispositions = cohort.prepare(prepare_member)
+diagnosis_barrier = cohort.select_diagnoses(choose_member_diagnosis)
+repair_dispositions = cohort.select_repairs(choose_member_repair)
+```
+
+This is a selection-only integration sketch. The harness supplies the protocol, controls and callbacks. `choose_member_diagnosis(row, query)` uses the diagnosis schema above; `choose_member_repair(row, frozen_diagnosis, query)` uses the repair schema above.
+
+Preparation finishes across the roster before diagnosis selection begins. Before constructing a lane or broker, the controller validates the supplied task and configuration, including subset coordinates against the captured tensors. A supplied native-format mapping must cover every captured tensor exactly with supported formats, and the base must already be representable in those formats. Ordinary preparation callback and configuration-preflight failures remain assigned as `unavailable`. A later lane-setup failure invalidates the cohort attempt. The diagnosis pass records every original member's disposition and verifies each prepared lane's terminal diagnosis receipt before writing and verifying the complete diagnosis barrier. No repair task or broker is constructed before that barrier exists. The controller rechecks the full barrier before each repair and binds the repair to the cohort, roster, member, preparation and diagnosis evidence.
+
+Only a `selected` diagnosis can proceed to repair. Unavailable preparation, diagnosis abstention, invalid submissions and selector failures remain in the ordered dispositions and receive an unavailable repair disposition without a fabricated repair receipt. Repair selections retain their own terminal outcomes. These records preserve the assigned denominator; they do not supply scored endpoints or turn a conditional selection rate into all-assigned success.
+
+Each phase is available once. An ordinary selector exception permits continuation only when its terminal receipt verifies; missing or changed evidence, persistence failure and cancellation invalidate the cohort attempt. Cohort-owned lanes reject direct public diagnosis/repair selection, so an individual lane cannot bypass the full-cohort barrier. Their public evaluation method is also denied: this API has no cohort scoring bridge and adds no study evidence. It is a trusted cooperative controller, not a Python sandbox, crash-recovery mechanism or independent execution attestation.
+
 ## Receipt and rejection behavior
 
 A run writes private `protocol.json`, `diagnosis.json`, `repair.json` and, following the registered evaluation path, `evaluation.json`. Selection receipts contain configuration, candidate and trace details and should remain under the trusted harness's control. They are separate from the sanitized [public guard receipt](../../provenance/verification/staged-diagnosis-guard-20261109.json).
@@ -108,10 +137,12 @@ The initial failing test's raw bytes were not saved; the untracked test was abse
 
 The synthetic check exercises terminal outcome classification and failure receipts, exact original `RuntimeError`/`KeyboardInterrupt`/`SystemExit` propagation, trusted abstention after capped seal denial, and invalidation without overwrite or retry for seal, persistence and pre-broker repair setup failures. No provider, training or scientific study ran; this focused check was not a completed-tree gate. These are engineering behaviors, not evidence of useful causal repair; Issue #9 c1 remains partial and the issue remains open.
 
+A separate [cohort selection engineering receipt](../../provenance/verification/staged-cohort-selection-20261109.json) records one fresh regression invocation on November 9, 2026, from `16:12:27.1106180Z` to `16:12:31.8024243Z`: exit 0, `1 passed in 3.52s`, with no retry. The production/test source audit passed. The exact 37-source inventories and recorded diff/state were unchanged before and after the invocation, and the raw affected source and test snapshots were saved. This is a focused selection regression at its recorded source snapshot, not a completed-tree gate or evidence of useful causal repair. It supplies no cohort scoring bridge or new study evidence.
+
 ## Limits and scientific next step
 
 This is a cooperative trusted coordinator. It enforces sequencing at its JSON interface and checks exact recorded evidence. It does not sandbox Python callbacks or attest a proposer's private reasoning, prior knowledge, provenance, independent decision-making or storage hardware. The caller must control the receipt directory and shared registry. File flush and `fsync` are persistence steps; the literal guard is not a crash-recovery or adversarial-filesystem study.
 
-The older public guard receipt covers its recorded source snapshot and guard execution; the terminal failure receipt covers its separately recorded snapshots. Neither verifies later source changes or integrated revisions. Their private-receipt hashes are commitments to retained evidence, not publicly reproducible raw evidence.
+The older public guard receipt covers its recorded source snapshot and guard execution; the terminal failure and cohort selection receipts each cover their separately recorded snapshots. None verifies later source changes or integrated revisions. Their private-receipt hashes are commitments to retained evidence, not publicly reproducible raw evidence.
 
 A future preregistered study must use separate prospective diagnosis and repair selections, an appropriate evaluator and fresh authorized data to assess whether the frozen diagnosis predicts a useful intervention. That study must preserve the historical joint-selection result and report uncertainty and abstentions. Until such evidence satisfies the acceptance criterion, #9 c1 remains partial.
