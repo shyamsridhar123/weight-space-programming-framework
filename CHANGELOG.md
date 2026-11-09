@@ -7,6 +7,17 @@ research draft.
 
 ## Unreleased
 
+- Add an opt-in [cohort evaluation-plan declaration](docs/research/staged-diagnosis.md#optional-evaluation-plan-declaration)
+  with exact roster/order, holdout/control references, execution declarations and
+  immutable capture. Control payloads receive schema-label checks; full parsing
+  and materialization remain deferred. Existing arbitrary finite-JSON controls
+  remain supported without a plan. The separate [engineering receipt](provenance/verification/staged-cohort-evaluation-plan-20261109.json)
+  records one passing focused declaration regression with no retry and no runtime
+  availability claim; the permitted case with no selected-source slots was not
+  directly exercised. Cohort scoring and evaluation remain disabled, with the
+  endpoint/control seal and single-score bridge pending. Issue #9 c1 remains
+  partial and the issue remains open; historical results are unchanged.
+
 - Add a [complete ordered repair barrier](docs/research/staged-diagnosis.md#complete-repair-barrier)
   after all cohort repair dispositions, binding diagnosis, preparation,
   disposition and lane evidence. Selected candidates and live artifacts are

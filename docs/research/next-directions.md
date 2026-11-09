@@ -406,6 +406,14 @@ adds engineering evidence only. The endpoint/control seal and single-score bridg
 remain pending; no scoring or evaluation is enabled, and #9 c1 remains partial
 with the issue open.
 
+An opt-in [evaluation-plan declaration](staged-diagnosis.md#optional-evaluation-plan-declaration)
+now freezes roster order, holdout/control references, execution declarations and
+result keys. Its [focused regression receipt](../../provenance/verification/staged-cohort-evaluation-plan-20261109.json)
+covers declaration validation and immutable capture, without establishing runtime
+availability. Full endpoint/control parsing and materialization, the endpoint/control
+seal and the single-score bridge remain pending. Cohort scoring and evaluation
+remain disabled; #9 c1 is partial and the issue remains open.
+
 The evaluator should sample defect location and strength using a private,
 prespecified intervention generator. The proposer should receive the declared
 context/access arm without the injection record. Freeze the diagnosis before
