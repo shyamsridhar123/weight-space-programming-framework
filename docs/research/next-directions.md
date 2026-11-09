@@ -402,17 +402,32 @@ The subsequent [complete repair barrier](staged-diagnosis.md#complete-repair-bar
 durably binds every assigned member's terminal disposition and lane evidence,
 including the actual selected candidate and live artifact. Its separate
 [literal regression receipt](../../provenance/verification/staged-cohort-repair-barrier-20261109.json)
-adds engineering evidence only. The endpoint/control seal and single-score bridge
-remain pending; no scoring or evaluation is enabled, and #9 c1 remains partial
-with the issue open.
+adds engineering evidence only. At that receipt's source snapshot, the endpoint
+seal and single-score bridge remained pending. No scoring or evaluation is enabled,
+and #9 c1 remains partial with the issue open.
 
 An opt-in [evaluation-plan declaration](staged-diagnosis.md#optional-evaluation-plan-declaration)
 now freezes roster order, holdout/control references, execution declarations and
 result keys. Its [focused regression receipt](../../provenance/verification/staged-cohort-evaluation-plan-20261109.json)
 covers declaration validation and immutable capture, without establishing runtime
-availability. Full endpoint/control parsing and materialization, the endpoint/control
-seal and the single-score bridge remain pending. Cohort scoring and evaluation
-remain disabled; #9 c1 is partial and the issue remains open.
+availability. That declaration-only receipt does not cover the later endpoint
+seal. Cohort scoring and evaluation remain disabled; #9 c1 is partial and the
+issue remains open.
+
+The explicit [endpoint seal](staged-diagnosis.md#endpoint-seal) now materializes
+referenced origins once after the complete repair barrier, preserving all logical
+slots, unavailable members and declared parent fallbacks. Selected endpoints
+verify saved literal replay; structured controls reproduce the complete supplied
+lowering receipt. Saved capture dtype/device/alias declarations remain distinct
+from construction native maps and establish no runtime restoration. Unused controls
+remain declarations, and selected no-ops do not become fallbacks. Its separate
+[engineering receipt](../../provenance/verification/staged-cohort-endpoint-seal-20261109.json)
+records one focused regression: exit 0, `1 passed in 4.30s`, with no retry or
+timeout and unchanged before/after source inventory and tracked diff. This covers
+its captured source snapshot, not a completed-tree gate or scientific result.
+Evaluation, runtime-restoration verification and causal-usefulness flags remain
+false; the single-score bridge remains pending, #9 c1 remains partial and the
+issue remains open.
 
 The evaluator should sample defect location and strength using a private,
 prespecified intervention generator. The proposer should receive the declared

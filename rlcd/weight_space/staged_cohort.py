@@ -1,4 +1,4 @@
-"""Frozen cohort preparation and diagnosis-before-repair selection only.
+"""Frozen cohort preparation, diagnosis-before-repair selection and endpoint seals.
 
 This trusted cooperative controller owns its lanes and retains failed preparation,
 failed selection and abstention in the complete ordered roster. A proposer gets
@@ -15,12 +15,69 @@ from pathlib import Path
 import threading
 from typing import Any, Callable
 
+import numpy as np
+
+from .artifact import TensorArtifact
 from .broker import WeightView
 from .data_roles import DataRoleRegistry
-from .model import canonical_bytes, digest
+from .model import Network, canonical_bytes, digest
+from .program import Program, apply_program
 from .staged_diagnosis import StagedDiagnosisRepair
-from .structured import ExecutionSpec
+from .structured import ExecutionSpec, StructuredProgram, lower_structured
 from .workflow import Artifact, BudgetLimits, Candidate, WorkflowError, _json
+
+
+def _captured_interface(endpoint: Artifact) -> dict[str, Any] | None:
+    """Validate saved bridge declarations without importing or executing a module."""
+    metadata = endpoint.metadata if type(endpoint) is TensorArtifact else {}
+    if "torch_bridge" not in metadata:
+        return None
+    bridge = metadata["torch_bridge"]
+    fields = {"schema", "torch_version", "module_type", "module_repr", "forward_signature",
+              "modules", "state", "alias_groups", "execution_scope"}
+    if (type(bridge) is not dict or set(bridge) != fields
+            or bridge["schema"] != "wsp-torch-bridge/1"
+            or any(type(bridge[key]) is not str for key in (
+                "torch_version", "module_type", "module_repr", "forward_signature", "execution_scope"))
+            or not bridge["module_type"].strip()):
+        raise ValueError("Malformed captured Torch interface")
+    modules, state, tensors = bridge["modules"], bridge["state"], endpoint.tensors
+    if (type(modules) is not dict or "" not in modules
+            or any(type(name) is not str or type(module) is not dict
+                   or set(module) != {"type", "training"}
+                   or type(module["type"]) is not str or not module["type"].strip()
+                   or type(module["training"]) is not bool for name, module in modules.items())
+            or modules[""]["type"] != bridge["module_type"]
+            or type(state) is not dict or set(state) != set(tensors)):
+        raise ValueError("Captured modules/state do not match the endpoint interface")
+    dtypes = {"torch." + name: name for name in ("float16", "bfloat16", "float32", "float64")}
+    for name, record in state.items():
+        if (type(record) is not dict
+                or set(record) != {"dtype", "shape", "device", "role", "requires_grad"}
+                or type(record["dtype"]) is not str or record["dtype"] not in dtypes
+                or type(record["shape"]) is not list
+                or any(type(size) is not int or size <= 0 for size in record["shape"])
+                or record["shape"] != list(tensors[name].shape)
+                or type(record["device"]) is not str or not record["device"].strip()
+                or type(record["role"]) is not str or record["role"] not in ("parameter", "buffer", "state")
+                or type(record["requires_grad"]) is not bool):
+            raise ValueError("Malformed captured state declaration")
+    groups, seen = bridge["alias_groups"], set()
+    if type(groups) is not list:
+        raise ValueError("Captured aliases must be an ordered list")
+    for group in groups:
+        if (type(group) is not list or len(group) < 2
+                or any(type(name) is not str or name not in state for name in group)
+                or len(set(group)) != len(group) or seen.intersection(group)):
+            raise ValueError("Captured aliases must be disjoint groups of distinct state names")
+        first = group[0]
+        if any(any(state[name][key] != state[first][key] for key in ("shape", "dtype", "device"))
+               or not np.array_equal(tensors[first], tensors[name]) for name in group[1:]):
+            raise ValueError("Captured alias declarations disagree with endpoint data")
+        seen.update(group)
+    return {"native_dtypes": {name: dtypes[record["dtype"]] for name, record in state.items()},
+            "devices": {name: record["device"] for name, record in state.items()},
+            "alias_groups": groups}
 
 
 def _validate_evaluation_plan(plan: Any, controls: dict[str, Any],
@@ -157,7 +214,8 @@ class StagedCohort:
         self._lanes: list[StagedDiagnosisRepair | None] = [None] * len(rows)
         self._records: dict[str, bytes] = {}
         self._invalidated, self._prepared = False, False
-        self._started = {"preparation": False, "diagnosis": False, "repair": False}
+        self._started = {"preparation": False, "diagnosis": False, "repair": False, "endpoints": False}
+        self._endpoints: dict[tuple[int, str, str | None], dict[str, Any]] = {}
         # ponytail: serialize one cohort; use separate controllers for parallel cohorts.
         self._lock = threading.RLock()
         body = {"schema": "wsp-staged-cohort-protocol/1", "attempt_id": attempt_id,
@@ -459,6 +517,199 @@ class StagedCohort:
         except BaseException:
             self._invalidate()
             raise
+
+    def _verify_endpoint_configuration(self, lane: StagedDiagnosisRepair) -> None:
+        # Inspect the frozen/live declarations directly: configuration preflight lowers.
+        frozen = json.loads(lane._protocol)
+        self._require(lane._base.sha256 == frozen["parent_sha256"]
+                      and type(lane._view) is WeightView and type(lane._limits) is BudgetLimits
+                      and canonical_bytes(lane._native_dtypes) == canonical_bytes(frozen["native_dtypes"])
+                      and canonical_bytes(lane._view.to_dict()) == canonical_bytes(frozen["parameter_view"])
+                      and canonical_bytes(lane._limits.to_dict()) == canonical_bytes(frozen["limits"]))
+        for broker in lane._brokers.values():
+            session = broker._session
+            self._require(broker._base is lane._base and session._base is lane._base
+                          and session._data_registry is self._registry
+                          and type(broker._view) is WeightView
+                          and canonical_bytes(broker._native_dtypes) == canonical_bytes(frozen["native_dtypes"])
+                          and canonical_bytes(broker._view.to_dict()) == canonical_bytes(frozen["parameter_view"])
+                          and canonical_bytes(session.limits.to_dict()) == canonical_bytes(frozen["limits"])
+                          and canonical_bytes(session.access.to_dict()) == canonical_bytes(session.configuration["access"]))
+
+    @staticmethod
+    def _endpoint_key(index: int, slot: dict[str, Any], outcome: str
+                      ) -> tuple[tuple[int, str, str | None], str]:
+        source = slot["source"]
+        if source["kind"] == "control":
+            return (index, "control", source["control_id"]), "control"
+        if outcome != "selected" and source["fallback_control_id"] is not None:
+            return (index, "control", source["fallback_control_id"]), "parent_fallback"
+        return (index, "selected", None), "selected"
+
+    @staticmethod
+    def _origin(key: tuple[int, str, str | None]) -> dict[str, Any]:
+        return {"kind": key[1], **({"control_id": key[2]} if key[1] == "control" else {})}
+
+    def _materialize_endpoint(self, key: tuple[int, str, str | None],
+                              protocol: dict[str, Any], repair: dict[str, Any]) -> None:
+        if key in self._endpoints:
+            return
+        index, kind, control_id = key
+        lane = self._lanes[index]
+        parent = lane._base if lane is not None else None
+        endpoint = candidate = proposal = program = lowering = construction = None
+        if parent is not None:
+            _captured_interface(parent)
+            if kind == "selected" and repair["members"][index]["outcome"] == "selected":
+                selection = lane._verify("repair")
+                candidate = lane._brokers["repair"]._session._selected
+                endpoint = candidate.artifact
+                submission = selection["submission"]
+                submitted = submission["submitted"]
+                self._require(set(submitted) == {"op", "commands", "intent"}
+                              and submitted["op"] == "submit" and submission["status"] == "lowered")
+                proposal = StructuredProgram(parent.sha256, submitted["commands"], submitted["intent"])
+                program = Program.from_dict(submission["program"])
+                lowering = canonical_bytes(submission["lowering"])
+                receipt = json.loads(lowering)
+                native = lane._native_dtypes
+                native = {name: "float64" for name in parent.tensors} if native is None else native
+                self._require(receipt["schema"] == "wsp-lowering/1"
+                              and receipt["sha256"] == digest({k: v for k, v in receipt.items() if k != "sha256"})
+                              and receipt["proposal_sha256"] == proposal.sha256
+                              and receipt["base_sha256"] == program.base_sha256 == parent.sha256
+                              and receipt["program_sha256"] == program.sha256
+                              and receipt["candidate_sha256"] == endpoint.sha256
+                              and receipt["command_count"] == len(submitted["commands"])
+                              and receipt["effective_edits"] == len(program.edits)
+                              and receipt["cast"] == "round"
+                              and canonical_bytes(receipt["native_dtypes"]) == canonical_bytes(native)
+                              and canonical_bytes(program.to_dict()) == canonical_bytes(submission["program"]))
+                reproduced = apply_program(parent, program)
+                self._require(canonical_bytes(reproduced.to_dict()) == canonical_bytes(endpoint.to_dict()))
+                construction = {"native_dtypes": receipt["native_dtypes"], "cast": receipt["cast"],
+                                "verification": "saved_literal_replay_only; structured_lowering_is_broker_provenance"}
+            elif kind == "control":
+                definition = protocol["controls"][self._rows()[index]["member_id"]][control_id]
+                if definition["kind"] == "parent":
+                    endpoint = parent
+                elif definition["kind"] == "reference":
+                    data = definition["artifact"]
+                    endpoint = (Network.from_dict(data) if data["schema"] == "wsp-network/1"
+                                else TensorArtifact.from_dict(data))
+                else:
+                    proposal = StructuredProgram.from_dict(definition["proposal"])
+                    receipt = definition["lowering"]
+                    lowered = lower_structured(parent, proposal, native_dtypes=receipt["native_dtypes"],
+                                               cast=receipt["cast"])
+                    self._require(canonical_bytes(lowered.receipt) == canonical_bytes(receipt))
+                    program, lowering = lowered.program, canonical_bytes(receipt)
+                    endpoint = apply_program(parent, program)
+                    construction = {"native_dtypes": receipt["native_dtypes"], "cast": receipt["cast"],
+                                    "verification": "complete_lowering_receipt_reproduced_once"}
+            if endpoint is not None:
+                self._require(parent.compatible(endpoint))
+                _captured_interface(endpoint)
+        self._endpoints[key] = {"parent": parent, "endpoint": endpoint, "candidate": candidate,
+                                "proposal": proposal, "program": program, "lowering": lowering,
+                                "construction": canonical_bytes(construction)}
+
+    def _endpoint_body(self, key: tuple[int, str, str | None]) -> dict[str, Any]:
+        index = key[0]
+        retained, lane = self._endpoints[key], self._lanes[index]
+        parent, endpoint, candidate = (retained[name] for name in ("parent", "endpoint", "candidate"))
+        self._require(parent is (lane._base if lane is not None else None))
+        if candidate is not None:
+            self._require(key[1] == "selected" and candidate is lane._brokers["repair"]._session._selected
+                          and endpoint is candidate.artifact)
+        if endpoint is not None:
+            self._require(parent is not None and parent.compatible(endpoint))
+        captured = _captured_interface(endpoint) if endpoint is not None else None
+        construction = json.loads(retained["construction"])
+        agreement = ("absent" if captured is None else "not_applicable" if construction is None else
+                     "agree" if construction["native_dtypes"] == captured["native_dtypes"] else "mismatch")
+        return {**self._rows()[index], "origin": self._origin(key),
+                "status": "materialized" if endpoint is not None else "unavailable",
+                "parent_sha256": parent.sha256 if parent is not None else None,
+                "endpoint_sha256": endpoint.sha256 if endpoint is not None else None,
+                "artifact": endpoint.to_dict() if endpoint is not None else None,
+                "candidate_sha256": candidate.sha256 if candidate is not None else None,
+                "proposal": retained["proposal"].to_dict() if retained["proposal"] is not None else None,
+                "program": retained["program"].to_dict() if retained["program"] is not None else None,
+                "lowering": json.loads(retained["lowering"]) if retained["lowering"] is not None else None,
+                "construction": construction,
+                "captured_native_dtypes": captured["native_dtypes"] if captured is not None else None,
+                "captured_devices": captured["devices"] if captured is not None else None,
+                "captured_alias_groups": captured["alias_groups"] if captured is not None else None,
+                "construction_capture_agreement": agreement}
+
+    def _endpoint_seal_body(self) -> dict[str, Any]:
+        protocol, repair = self._check(), self._verify_repair_barrier()
+        plan = protocol["protocol"]["evaluation_plan"]
+        members, origins, unused = [], {}, []
+        for row, declared, disposition in zip(self._rows(), plan["members"], repair["members"]):
+            index, slots = row["member_index"], []
+            lane = self._lanes[index]
+            if lane is not None:
+                self._verify_endpoint_configuration(lane)
+            for slot_index, slot in enumerate(declared["slots"]):
+                key, resolution = self._endpoint_key(index, slot, disposition["outcome"])
+                if key not in origins:
+                    origins[key] = self._endpoint_body(key)
+                origin = origins[key]
+                slots.append({"slot_index": slot_index, "slot_id": slot["slot_id"],
+                              "source": slot["source"], "resolved_origin": self._origin(key),
+                              "resolution": resolution if origin["status"] == "materialized" else "unavailable",
+                              "endpoint_sha256": origin["endpoint_sha256"],
+                              "candidate_sha256": origin["candidate_sha256"],
+                              "execution": slot["execution"], "result_keys": slot["result_keys"]})
+            members.append({**row, "holdout_id": declared["holdout_id"],
+                            "repair_outcome": disposition["outcome"], "slots": slots})
+            unused.append({**row, "control_ids": [control_id for control_id in protocol["controls"][row["member_id"]]
+                           if (index, "control", control_id) not in origins]})
+        self._require(set(self._endpoints) == set(origins))
+        return {"schema": "wsp-staged-cohort-endpoint-seal/1",
+                "cohort_protocol_sha256": protocol["sha256"], "roster_sha256": protocol["roster_sha256"],
+                "evaluation_plan_sha256": digest(plan), "controls_sha256": protocol["controls_sha256"],
+                "attempt_id": protocol["attempt_id"], "registry_id": protocol["registry_id"],
+                "evaluator_id": protocol["evaluator_id"],
+                "diagnosis_barrier_sha256": repair["diagnosis_barrier_sha256"],
+                "repair_barrier_sha256": repair["sha256"], "origins": list(origins.values()), "members": members,
+                "unused_controls": unused, "evaluation_available": False,
+                "runtime_restoration_verified": False, "causal_usefulness_established": False}
+
+    def _verify_endpoint_seal(self) -> dict[str, Any]:
+        try:
+            seal = self._read("endpoint-seal")
+            self._require(canonical_bytes({key: value for key, value in seal.items() if key != "sha256"})
+                          == canonical_bytes(self._endpoint_seal_body()))
+            return seal
+        except BaseException:
+            self._invalidate()
+            raise
+
+    def seal_endpoints(self) -> dict[str, Any]:
+        """Materialize referenced origins once; retain every declared comparison slot."""
+        with self._lock:
+            protocol = self._check()
+            if ("evaluation_plan" not in protocol["protocol"] or self._started["endpoints"]
+                    or "repair-barrier" not in self._records):
+                raise WorkflowError("A declared evaluation plan and complete repair barrier are required once")
+            self._started["endpoints"] = True
+            try:
+                repair = self._verify_repair_barrier()
+                for index, member in enumerate(protocol["protocol"]["evaluation_plan"]["members"]):
+                    lane = self._lanes[index]
+                    if lane is not None:
+                        self._verify_endpoint_configuration(lane)
+                    for slot in member["slots"]:
+                        key, _ = self._endpoint_key(index, slot, repair["members"][index]["outcome"])
+                        self._materialize_endpoint(key, protocol, repair)
+                self._save("endpoint-seal", self._endpoint_seal_body())
+                return self._verify_endpoint_seal()
+            except BaseException:
+                self._invalidate()
+                raise
 
     def select_diagnoses(self, selector: Callable[..., Any]) -> dict[str, Any]:
         with self._lock:
