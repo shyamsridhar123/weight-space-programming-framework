@@ -136,6 +136,35 @@ def test_invalid_output_limits_are_rejected_before_launch(tmp_path, monkeypatch,
     assert ledger == [] and not run.exists()
 
 
+@pytest.mark.parametrize("timeout", [
+    pytest.param(True, id="true"), pytest.param(False, id="false"),
+    pytest.param(0, id="zero-int"), pytest.param(-1, id="negative-int"),
+    pytest.param(0.0, id="zero-float"), pytest.param(-0.5, id="negative-float"),
+    pytest.param(float("nan"), id="nan"), pytest.param(float("inf"), id="positive-inf"),
+    pytest.param(float("-inf"), id="negative-inf"), pytest.param(10**400, id="oversized-int"),
+    pytest.param(None, id="none"), pytest.param("1", id="string"),
+])
+def test_invalid_timeouts_are_rejected_before_launch(tmp_path, monkeypatch, timeout):
+    def unexpected_launch(*args, **kwargs):
+        pytest.fail("Invalid timeouts must be rejected before process launch")
+
+    monkeypatch.setattr(factory.subprocess, "Popen", unexpected_launch)
+    with pytest.raises(ValueError, match="Invalid live-provider configuration"):
+        live_provider.CodexProvider(timeout_seconds=timeout)
+    ledger, run = [], tmp_path / "uncreated-run"
+    with pytest.raises(ValueError, match="finite deadline"):
+        factory.command("authored", ["authored-emitter"], cwd=tmp_path, run=run,
+                        ledger=ledger, timeout=timeout)
+    with pytest.raises(ValueError, match="finite deadline"):
+        live_provider._communicate_bounded(None, timeout=timeout)
+    assert ledger == [] and not run.exists()
+
+
+def test_provider_timeout_retains_integer_contract():
+    with pytest.raises(ValueError, match="Invalid live-provider configuration"):
+        live_provider.CodexProvider(timeout_seconds=1.0)
+
+
 @pytest.mark.parametrize("stdout,stderr,limits,parallel,overflow", [
     pytest.param(b"normal\n", b"diagnostic\n", (64, 64), False, [], id="normal"),
     pytest.param(b"a" * 4096, b"b" * 3072, (4096, 3072), False, [], id="exact-both"),

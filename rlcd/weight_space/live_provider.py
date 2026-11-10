@@ -88,11 +88,20 @@ def _kill_tree(process: subprocess.Popen, *, timeout: float = 5) -> None:
         pass
 
 
+def _positive_finite_timeout(value: Any) -> bool:
+    if type(value) not in (int, float) or value <= 0:
+        return False
+    try:
+        return math.isfinite(value)
+    except OverflowError:
+        return False
+
+
 def _communicate_bounded(process: subprocess.Popen, *, timeout: float, input: bytes | None = None,
                          max_stdout_bytes: int = DEFAULT_MAX_STDOUT_BYTES,
                          max_stderr_bytes: int = DEFAULT_MAX_STDERR_BYTES):
     """Capture finite raw prefixes; process/pipe completion never attests descendants."""
-    if (type(timeout) not in (int, float) or not math.isfinite(timeout) or timeout <= 0
+    if (not _positive_finite_timeout(timeout)
             or any(type(limit) is not int or limit <= 0
                    for limit in (max_stdout_bytes, max_stderr_bytes))
             or (input is not None and not isinstance(input, bytes))
@@ -290,7 +299,7 @@ class CodexProvider:
 
     def __post_init__(self) -> None:
         if (not isinstance(self.model, str) or not self.model.strip()
-                or type(self.timeout_seconds) is not int or self.timeout_seconds <= 0
+                or type(self.timeout_seconds) is not int or not _positive_finite_timeout(self.timeout_seconds)
                 or type(self.tool_free) is not bool
                 or any(type(limit) is not int or limit <= 0
                        for limit in (self.max_stdout_bytes, self.max_stderr_bytes))

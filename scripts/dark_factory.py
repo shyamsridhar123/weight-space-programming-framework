@@ -11,7 +11,6 @@ import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
-import math
 import os
 from pathlib import Path, PurePosixPath
 import re
@@ -24,7 +23,7 @@ import uuid
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from rlcd.weight_space.live_provider import (CodexProvider, DEFAULT_MAX_STDOUT_BYTES,
-    DEFAULT_MAX_STDERR_BYTES, _communicate_bounded, publish_attempt, write_json)
+    DEFAULT_MAX_STDERR_BYTES, _communicate_bounded, _positive_finite_timeout, publish_attempt, write_json)
 from rlcd.weight_space.model import digest
 from scripts.audit_public_content import audit
 from scripts.verify_publication import publication_files, verify
@@ -173,7 +172,7 @@ def refresh_manifest(root):
 
 def command(name, argv, *, cwd, run, ledger, timeout=120, env=None,
             max_stdout_bytes=DEFAULT_MAX_STDOUT_BYTES, max_stderr_bytes=DEFAULT_MAX_STDERR_BYTES):
-    if (type(timeout) not in (int, float) or not math.isfinite(timeout) or timeout <= 0
+    if (not _positive_finite_timeout(timeout)
             or any(type(limit) is not int or limit <= 0
                    for limit in (max_stdout_bytes, max_stderr_bytes))):
         raise ValueError("Commands require positive output limits and a finite deadline")
