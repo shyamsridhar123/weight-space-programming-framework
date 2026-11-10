@@ -7,6 +7,19 @@ research draft.
 
 ## Unreleased
 
+- Catch `UnicodeError` from the strict UTF-8 CLI version probe in the existing
+  startup handler, retaining a failed attempt/trial and normal broker abstention.
+  The [authored offline receipt](provenance/verification/provider-version-utf8-20261109.json)
+  records one passing regression that injects `UnicodeDecodeError` at mocked
+  `subprocess.run`; actual CLI decoding is not exercised. Its assertions cover
+  one probe, no workers or retries despite `max_rounds=3`, empty streams,
+  null version/response/returncode and unknown usage/cost, with no usage admission
+  or proposal before sealing. Zero admission
+  does not establish zero consumption. No historical stream was inspected,
+  repaired or rerun; the 90 failures' unknown usage, charges and deployment
+  revision, absence of a finite total-cost bound and provider-origin attestation
+  remain unresolved. Issue #5 c2 and #8 c6 remain partial and open.
+
 - Reject duplicate JSON object keys in provider events, final responses, encoded
   broker actions and event publication. Retain failed attempts/trials and broker
   abstention; ambiguous usage stays unknown while separately valid usage remains
