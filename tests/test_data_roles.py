@@ -661,6 +661,64 @@ def test_attempt_id_collision_cannot_replace_binding_or_consume_unrelated_scope(
                     binding=replacement_binding, result=independent_result)
 
 
+@pytest.mark.parametrize("status", ["succeeded", "failed"])
+@pytest.mark.parametrize("count", [True, 1.0], ids=["boolean", "float"])
+def test_durable_terminal_callback_count_requires_plain_integer(tmp_path, status, count):
+    path = tmp_path / "roles.sqlite"
+    registry = DataRoleRegistry(path)
+    batch = registry.register_batch([[1]], source_id="control", family_id="control-family")
+    binding = {"protocol": "synthetic-terminal-count"}
+    callbacks = []
+
+    def scorer(rows):
+        callbacks.append(rows)
+        if status == "failed":
+            raise RuntimeError("synthetic scorer failure")
+        return {"metric": 1}
+
+    if status == "failed":
+        with pytest.raises(DataRoleError) as failed:
+            registry.score(batch, scorer, attempt_id="terminal", binding=binding)
+        assert failed.value.decision["status"] == "failed"
+    else:
+        registry.score(batch, scorer, attempt_id="terminal", binding=binding)
+    attempt = _assert_attempt(registry, "terminal", status=status, callback_invocations=1,
+                              binding=binding, result={"metric": 1} if status == "succeeded" else None)
+    assert callbacks == [[[1]]]
+    assert type(attempt["callback_invocations"]) is int
+
+    # Keep every other field and the reservation commitment; rehash the changed lifecycle.
+    corrupted = {**attempt, "callback_invocations": count}
+    corrupted["lifecycle_sha256"] = hashlib.sha256(_bytes({
+        key: value for key, value in corrupted.items() if key != "lifecycle_sha256"
+    })).hexdigest()
+    corrupted_bytes = _bytes(corrupted)
+    with sqlite3.connect(path) as connection:
+        consumed_before = connection.execute("SELECT * FROM consumed ORDER BY kind, key").fetchall()
+        revision_before = connection.execute("SELECT value FROM meta WHERE key = 'revision'").fetchone()[0]
+        connection.execute("UPDATE attempts SET attempt_json = ? WHERE attempt_id = ?",
+                           (corrupted_bytes, "terminal"))
+
+    restarted = DataRoleRegistry(path)
+    with pytest.raises(DataRoleError) as caught:
+        restarted.get_attempt("terminal")
+    assert caught.value.decision["reason"] == "registry_unavailable"
+    assert caught.value.decision["status"] == "rejected"
+    assert caught.value.decision["scoring_started"] is False
+    for attempt_id, reason in (("terminal", "attempt_record_invalid"),
+                               ("cannot-retry", "observed_development_consumption")):
+        rejected = _rejects_before_scoring(restarted, batch, attempt_id=attempt_id,
+                                           binding=binding, reason=reason)
+        _assert_binding(path, rejected)
+    assert restarted.get_attempt("cannot-retry") is None
+    with sqlite3.connect(path) as connection:
+        assert connection.execute("SELECT attempt_json FROM attempts WHERE attempt_id = ?",
+                                  ("terminal",)).fetchone()[0] == corrupted_bytes
+        assert connection.execute("SELECT * FROM consumed ORDER BY kind, key").fetchall() == consumed_before
+        assert connection.execute("SELECT value FROM meta WHERE key = 'revision'").fetchone()[0] == revision_before
+    assert callbacks == [[[1]]]
+
+
 @pytest.mark.parametrize("failure", ["commit", "reservation_value_error"])
 def test_reservation_failure_never_enters_scorer_or_consumes_scope(tmp_path, monkeypatch, failure):
     path = tmp_path / "roles.sqlite"

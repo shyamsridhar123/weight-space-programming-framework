@@ -7,6 +7,12 @@ research draft.
 
 ## Unreleased
 
+- Require exact integer callback counts in durable terminal attempts, rejecting
+  rehashed JSON booleans and floats at the shared reader. A focused synthetic
+  SQLite regression checks success/failure records, inspection and rejection
+  before retry callbacks while preserving reservation identity and consumed
+  scope. This adds no scientific evidence or owner authority.
+
 - Bind each validated development-consumption purpose into the durable decision,
   including repeated consumption of an already consumed scope. Distinct purpose
   commitments no longer collapse into the same audit decision; consumed-key

@@ -424,6 +424,18 @@ reservation with that identity exists. Its status meanings are:
 | `succeeded` | One cooperating scorer callback invocation, finite-JSON result and result hash finalized against the reservation | The reserved observed scope remains consumed |
 | `failed` | One cooperating scorer callback invocation and sanitized terminal failure finalized, with no successful result | The reserved observed scope remains consumed |
 
+The durable callback-count invariant requires `None` for
+`authorized_outcome_unknown` and the built-in Python `int` value `1` for
+`succeeded` or `failed`. JSON booleans and floating-point values are invalid
+even when they compare equal to `1` and all hashes are recomputed. With every
+existing canonical-byte, reservation, binding, result and false-flag check
+retained, adding this type predicate only narrows malformed-record acceptance:
+reservation creation already writes `None`, and terminal finalization already
+writes integer `1`, so valid producer bytes and reservation identities remain
+unchanged. Rejecting a malformed stored count does not repair or resume an
+attempt, release consumed scope, change owner authority, or establish
+provenance, semantic independence, scientific freshness or evaluator execution.
+
 Cancellation preserves the original `KeyboardInterrupt` or `SystemExit` and
 attempts to persist a failed terminal record. If that finalization cannot be
 committed, the previously committed record remains

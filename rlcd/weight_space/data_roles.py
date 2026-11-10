@@ -404,6 +404,8 @@ class DataRoleRegistry:
             if _sha(_bytes(reservation)) != record["reservation_sha256"]:
                 raise ValueError
             status = record["status"]
+            if status in ("succeeded", "failed") and type(record["callback_invocations"]) is not int:
+                raise ValueError
             if status == "succeeded":
                 if record["callback_invocations"] != 1 or _sha(_bytes(record["result"])) != record["result_sha256"]:
                     raise ValueError
