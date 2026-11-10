@@ -151,6 +151,58 @@ def test_effective_request_limits_are_recorded_and_enforced():
             previous = event["sha256"]
 
 
+@pytest.mark.parametrize("error_policy", ("warn", "raise"))
+@pytest.mark.parametrize("values,decimals,expected", [
+    ([[1e308, 1e308]], 3, (1e308, 1e308, 1e308, 1e308)),
+    ([[-1e308, -1e308]], 3, (-1e308, -1e308, -1e308, 1e308)),
+    ([[1e308, -1e308]], 3, (-1e308, 1e308, 0.0, 1e308)),
+    ([[sys.float_info.max, sys.float_info.max]], 15,
+     (sys.float_info.max, sys.float_info.max, sys.float_info.max, sys.float_info.max)),
+    ([[-sys.float_info.max, -sys.float_info.max]], 15,
+     (-sys.float_info.max, -sys.float_info.max, -sys.float_info.max, sys.float_info.max)),
+    ([[1e308, 1e308, -1e308, -1e308]], 15, (-1e308, 1e308, 0.0, 1e308)),
+    ([[0.0, 0.0]], 15, (0.0, 0.0, 0.0, 0.0)),
+    (-2.5, 3, (-2.5, -2.5, -2.5, 2.5)),
+    ([[5e-324, 0.0]], 15, (0.0, 0.0, 0.0, 0.0)),
+    ([[-1.23456, 2.34567]], 3, (-1.235, 2.346, 0.556, 1.79)),
+    ([[2.675, 2.675]], 2, (2.67, 2.67, 2.67, 2.67)),
+    ([[1e308, -1e308, 0.0045]], 3,
+     (-1e308, 1e308, round(0.0045 / 3, 3), 1e308 * (2 / 3))),
+])
+def test_summary_keeps_finite_statistics_accounting_and_hash_trace(values, decimals, expected, error_policy):
+    import math
+    import numpy as np
+    from rlcd.weight_space.model import digest
+
+    base = TensorArtifact("affine/1", {"W": values})
+    task = TaskSpec("finite-summary", "edit", "Summarize synthetic finite weights",
+                    base.architecture, base.sha256)
+    broker = ProposerBroker(task, base=base, view=WeightView("summary", decimals))
+    request = {"op": "weights", "tensor": "W"}
+    explicit_full = request | {"indices": None}
+    denied = [request | {"indices": []}, request | {"indices": [[0, 0]]}]
+    expected = dict(zip(("min", "max", "mean", "mean_abs"), expected))
+    with np.errstate(all=error_policy):
+        caller_policy = np.geterr()
+        assert broker.request(request) == {"status": "ok", "values": expected}
+        assert broker._session.usage.weight_values == base.parameter_count
+        for indexed in denied:
+            assert broker.request(indexed) == {"status": "denied"}
+        assert broker._session.usage.weight_values == base.parameter_count
+        assert broker.request(explicit_full) == {"status": "ok", "values": expected}
+        assert np.geterr() == caller_policy
+    assert broker._session.usage.weight_values == 2 * base.parameter_count
+    trace = broker.public_trace
+    assert [event["request"] for event in trace] == [request, *denied, explicit_full]
+    previous = None
+    for sequence, event in enumerate(trace):
+        assert event["sequence"] == sequence and event["previous_sha256"] == previous
+        assert event["sha256"] == digest({k: v for k, v in event.items() if k != "sha256"})
+        if event["response"]["status"] == "ok":
+            assert all(math.isfinite(v) for v in event["response"]["values"].values())
+        previous = event["sha256"]
+
+
 def test_subset_and_invalid_selection_do_not_release_endpoint_state():
     base = TensorArtifact("affine/1", {"W": [[1., 2.]]})
     task = TaskSpec("subset", "edit", "Subset control", base.architecture, base.sha256)
