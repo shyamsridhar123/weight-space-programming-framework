@@ -1429,11 +1429,41 @@ publication edits retain separate validation scope.
 This establishes no arbitrary original-module restoration, aliases, buffers,
 caches, random state or deployment effects; no formal floating-point theorem,
 all-input or cross-backend guarantee, useful causal repair, provider run or
-scientific holdout/study. The adapter adds no cohort integration or automatic
+scientific holdout/study. That captured adapter change added no cohort integration or automatic
 runtime-receipt binding. Generic cohort `runtime_restoration_verified` and
 `causal_usefulness_established` remain `false`. Original criteria, earlier receipt
 scopes and historical outcomes remain unchanged; c1 stays partial and Issue #9
 stays open.
+
+**Sequential slot evaluator engineering supplement, November 9, 2026:** The
+[optional helper](../weight-space/sequential-runtime.md#registered-sequential-slot-evaluation)
+connects the owned NumPy/float64/CPU, left-to-right sequential runtime to the
+registered cohort bridge. It restores against the retained slot endpoint hash,
+passes the execution declaration unchanged, validates every row before one
+batched forward, and returns predictions, full-row and ordered-input hashes and
+a detached restoration receipt. The cohort's existing slot, terminal and durable
+registry commitments retain that result; callers must trust the context and seal.
+
+The separate [engineering receipt](../../provenance/verification/sequential-slot-evaluator-20261109.json)
+records one passing authored integration fixture at its captured source snapshot,
+with no warnings, retry or timeout and unchanged captured source, runner, Git and
+runtime identities. Two literal layers produce parent outputs `[3, 8, 1]` and
+repaired outputs `[0, 5, -2]` on three authored inputs. The +3 head-bias diagnosis
+and -3 repair are prescribed, with diagnosis frozen before separate repair
+selection. This is no discovery or evidence of useful causal repair. The check
+covers repaired and parent slots, receipt/seal/registry bindings, exact input
+ordering, malformed inputs and declarations, overflow before ReLU, and validation
+failure that consumes authorization and leaves later slots `not_run`.
+
+Registered literal rows supply no scientific holdout evidence. The fixture does
+not exercise all seven engineering slots or implement the eleven-entry native
+float32 scientific companion, encoder/head scorer, scientific fallback, count
+receipts or final scientific seal. Documentation snippets remain unexecuted;
+later publication edits retain separate validation scope. Counts and elapsed time
+are execution bookkeeping. Generic restoration/usefulness and registry provenance,
+independence, freshness and attestation flags remain false. Original criteria,
+earlier receipt scopes and historical outcomes remain unchanged; c1 stays partial
+and Issue #9 stays open.
 
 #### #9 c2
 
