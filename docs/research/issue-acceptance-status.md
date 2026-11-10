@@ -834,6 +834,21 @@ Historical records and criterion statuses are unchanged.
 
 **Later completion-lifecycle supplement, November 9, 2026:** The [scoped offline receipt](../../provenance/verification/provider-completion-lifecycle-20261109.json) records one synthetic common provider/broker regression covering duplicate completions, completed agent messages after completion and an accepted preterminal-message control. Ambiguous cases retain failed attempts/trials and parsed responses, preserve unknown usage and abstain before provider charges or proposed actions. Future shared-parser revalidation of ambiguous prior streams can differ or fail; no historical stream was inspected or occurrence inferred. Earlier identities and snapshots remain scoped to their capture. This supplies no live evidence and recovers no historical usage, monetary charges, deployment revision or provider-origin attestation; #5 c2 and #8 c6 remain partial.
 
+**Later duplicate-key supplement, November 9, 2026:** The
+[authored offline receipt](../../provenance/verification/provider-duplicate-json-20261109.json)
+records one passing mocked provider/broker regression rejecting duplicate object
+keys in events, final responses, encoded actions and publication event decoding.
+Ambiguous usage stays unknown; separately valid usage is recorded once before
+failure abstention. A duplicate action retains its completed attempt and usage
+but rejects before dispatch, persisting an invalid trial. Public copies omit
+ambiguous event lines through a disclosed nonobject marker, preserving fixture
+parse failures and raw/public identity separation. The exact existing publication
+metadata shape and transform remain compatible. This establishes no general
+confidentiality or JSON resource guarantee, live evidence, historical repair or
+provider-origin attestation. Earlier receipts retain their source scope; the 90
+historical failures' usage, charges and deployment revision remain unknown, with
+no finite total-cost bound. #5 c2 and #8 c6 remain partial and open.
+
 #### #5 c3
 
 - [ ] Add leak/adversarial cases for hidden exact-parent extraction, private evaluator access, unauthorized network/files, reconstructed forward calls through allowed tools, and off-ledger attempts.
@@ -1161,6 +1176,22 @@ repairing historical trials. It establishes consistency under current semantics,
 not provider regeneration, origin attestation, real charges or an independent
 live editor. The 90 historical failures' usage and costs remain unknown, with no
 finite total-cost bound; this criterion remains partial and open.
+
+**Later duplicate-key supplement, November 9, 2026:** The
+[same authored offline receipt](../../provenance/verification/provider-duplicate-json-20261109.json)
+covers strict duplicate-key decoding, retained attempts/trials, abstention and
+separate raw/public event identities with mocked transport and version probing.
+Ambiguous usage remains unknown; separately valid reported usage is recorded
+once. The disclosed whole-line JSON string marker preserves fixture parse
+failures while omitting escaped synthetic profile paths; publication metadata
+keeps its exact existing shape and transform. This supplies no independent live
+editor, provider-origin attestation or general confidentiality guarantee. Future
+shared-parser validation of ambiguous saved streams can differ or reject; no
+historical stream was inspected or repaired, and no earlier completed capture
+was rerun. The 90
+historical failures' missing usage and costs, unknown deployment revision and
+absence of a finite total-cost bound remain unchanged. This criterion and #5 c2
+remain partial and open.
 
 #### #8 c7
 
