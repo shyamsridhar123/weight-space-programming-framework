@@ -7,6 +7,16 @@ research draft.
 
 ## Unreleased
 
+- Rework the README around the enterprise routing example, generic task
+  architecture, explicit proof obligations, and the optional Distro review.
+  Retain negative results and review limits in a shorter evidence map. Add four
+  coordinated OpenAI-generated illustrations: a hero, generic framework
+  architecture, the smaller routing fixture, and Distro's independent human
+  review boundary. Preserve the [exact prompts](docs/images/readme/README.md),
+  [generation provenance](provenance/readme-artwork-20261110.json), accessible
+  explanations, and existing media attribution. These are conceptual artwork,
+  not new scientific or proof evidence.
+
 - Add a workspace-bound Distro companion with four official-SDK MCP tools for
   inspecting changes, preparing reviews, checking eligibility and exporting
   complete history. The [integration contract](docs/governance/distro-integration.md)

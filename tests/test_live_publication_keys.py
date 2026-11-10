@@ -60,19 +60,17 @@ def test_publication_redacts_json_keys_and_omits_collisions(tmp_path):
     publish_attempt = bindings["publish_attempt"]
 
     marker = "public event omitted: JSON object key collision after profile redaction"
-    before_raw = r'{"type":"synthetic.before","message":"/home/synthetic-before/kept"}'
-    after_raw = r'{"type":"synthetic.after","message":"/Users/synthetic-after/kept"}'
+    before_raw = r'{"type":"synthetic.before","message":"/home/private-person/kept"}'
+    after_raw = r'{"type":"synthetic.after","message":"/Users/private-person/kept"}'
     before_public = {"type": "synthetic.before", "message": "[USER_PROFILE]/kept"}
     after_public = {"type": "synthetic.after", "message": "[USER_PROFILE]/kept"}
+    # Approved fictional profile labels remain distinct before redaction.
     synthetic_identities = (
-        b"synthetic-before",
-        b"synthetic-after",
-        b"synthetic-alice",
-        b"synthetic-bob",
-        b"synthetic-win",
-        b"synthetic-legacy",
-        b"synthetic-value",
-        b"synthetic-discarded",
+        b"private-person",
+        b"user",
+        b"owner",
+        b"example",
+        b"username",
     )
 
     # Every case gets independent metadata/events. The first and last events each
@@ -80,7 +78,7 @@ def test_publication_redacts_json_keys_and_omits_collisions(tmp_path):
     cases = (
         (
             "nested_posix_unicode_and_surrogates",
-            r'{"type":"synthetic.posix","details":[{"outer":{"/home/synthetic-alice/private.txt":"from /Users/synthetic-bob/payload.txt","café":"雪","\ud800":"\udfff","[USER_PROFILE]/literal":"[USER_PROFILE]/value"}}]}',
+            r'{"type":"synthetic.posix","details":[{"outer":{"/home/user/private.txt":"from /Users/owner/payload.txt","café":"雪","\ud800":"\udfff","[USER_PROFILE]/literal":"[USER_PROFILE]/value"}}]}',
             {
                 "type": "synthetic.posix",
                 "details": [{"outer": {
@@ -94,7 +92,7 @@ def test_publication_redacts_json_keys_and_omits_collisions(tmp_path):
         ),
         (
             "escaped_windows_nested_keys_and_value",
-            r'{"type":"synthetic.windows","details":[{"\u0043:\u005cUsers\u005csynthetic-win\u005csecret.txt":{"D:\\Documents and Settings\\synthetic-legacy\\note":"E:\\Users\\synthetic-value\\payload.txt"}}]}',
+            r'{"type":"synthetic.windows","details":[{"\u0043:\u005cUsers\u005cuser\u005csecret.txt":{"D:\\Documents and Settings\\owner\\note":"E:\\Users\\example\\payload.txt"}}]}',
             {
                 "type": "synthetic.windows",
                 "details": [{"[USER_PROFILE]\\secret.txt": {
@@ -105,37 +103,37 @@ def test_publication_redacts_json_keys_and_omits_collisions(tmp_path):
         ),
         (
             "two_profiles_collide_after_earlier_value_redactions",
-            r'{"type":"synthetic.collision","before":["/home/synthetic-discarded/one",{"note":"C:\\Users\\synthetic-discarded\\two"}],"details":{"/home/synthetic-alice/x":"first","/home/synthetic-bob/x":"second"}}',
+            r'{"type":"synthetic.collision","before":["/home/username/one",{"note":"C:\\Users\\username\\two"}],"details":{"/home/user/x":"first","/home/owner/x":"second"}}',
             marker,
             2,
         ),
         (
             "transformed_key_precedes_existing_marker",
-            r'{"type":"synthetic.collision","before":["/home/synthetic-discarded/one",{"note":"C:\\Users\\synthetic-discarded\\two"}],"details":{"/home/synthetic-alice/x":"first","[USER_PROFILE]/x":"second"}}',
+            r'{"type":"synthetic.collision","before":["/home/username/one",{"note":"C:\\Users\\username\\two"}],"details":{"/home/user/x":"first","[USER_PROFILE]/x":"second"}}',
             marker,
             2,
         ),
         (
             "existing_marker_precedes_transformed_key",
-            r'{"type":"synthetic.collision","before":["/home/synthetic-discarded/one",{"note":"C:\\Users\\synthetic-discarded\\two"}],"details":{"[USER_PROFILE]/x":"first","/home/synthetic-alice/x":"second"}}',
+            r'{"type":"synthetic.collision","before":["/home/username/one",{"note":"C:\\Users\\username\\two"}],"details":{"[USER_PROFILE]/x":"first","/home/user/x":"second"}}',
             marker,
             2,
         ),
         (
             "escaped_windows_two_profiles_collide",
-            r'{"type":"synthetic.collision","before":["/home/synthetic-discarded/one",{"note":"C:\\Users\\synthetic-discarded\\two"}],"details":{"\u0043:\u005cUsers\u005csynthetic-win\u005cx":"first","D:\\Users\\synthetic-legacy\\x":"second"}}',
+            r'{"type":"synthetic.collision","before":["/home/username/one",{"note":"C:\\Users\\username\\two"}],"details":{"\u0043:\u005cUsers\u005cuser\u005cx":"first","D:\\Users\\owner\\x":"second"}}',
             marker,
             2,
         ),
         (
             "two_profiles_collide_in_reverse_insertion_order",
-            r'{"type":"synthetic.collision","before":["/home/synthetic-discarded/one",{"note":"C:\\Users\\synthetic-discarded\\two"}],"details":{"/home/synthetic-bob/x":"second","/home/synthetic-alice/x":"first"}}',
+            r'{"type":"synthetic.collision","before":["/home/username/one",{"note":"C:\\Users\\username\\two"}],"details":{"/home/owner/x":"second","/home/user/x":"first"}}',
             marker,
             2,
         ),
         (
             "equal_redacted_keys_in_separate_objects_are_allowed",
-            r'{"type":"synthetic.separate","details":[{"/home/synthetic-alice/x":"first"},{"/home/synthetic-bob/x":"second"}]}',
+            r'{"type":"synthetic.separate","details":[{"/home/user/x":"first"},{"/home/owner/x":"second"}]}',
             {
                 "type": "synthetic.separate",
                 "details": [{"[USER_PROFILE]/x": "first"}, {"[USER_PROFILE]/x": "second"}],
@@ -150,9 +148,9 @@ def test_publication_redacts_json_keys_and_omits_collisions(tmp_path):
         destination = case_root / "public"
         source.mkdir(parents=True, exist_ok=False)
         metadata = {
-            "request.json": b'{"synthetic_request":"/home/synthetic-metadata/request"}\n',
+            "request.json": b'{"synthetic_request":"/home/private-person/request"}\n',
             "response-schema.json": b'{ "type": "object", "synthetic": true }\n',
-            "receipt.json": br'{"synthetic_receipt":"C:\\Users\\synthetic-metadata\\receipt"}' + b"\n",
+            "receipt.json": br'{"synthetic_receipt":"C:\\Users\\private-person\\receipt"}' + b"\n",
         }
         raw = ("\n".join((before_raw, middle_raw, after_raw)) + "\n").encode("utf-8")
         originals = {**metadata, "events.jsonl": raw}
