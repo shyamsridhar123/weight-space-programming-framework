@@ -1132,12 +1132,16 @@ def analyze_study(public_root: Path, domain: str) -> dict:
             "candidate_diagnostic_only": True, "deployed": indexed[record["trial_id"]].get("result", {}).get("primary_novel")})
         for i, option in enumerate(record["options"]):
             metrics = option["calibration"]
+            calibration_available = metrics is not None
             calibration.append({"trial_id": record["trial_id"], "lineage_id": identity, "arm": record["arm"],
                 "case": case, "configuration": option["configuration"], "option": i,
                 "selected_before_test": i == record["selected_option"], "candidate_sha256": option["candidate_sha256"],
-                "target_gain": metrics["target_gain"], "protected_harm": metrics["protected_harm"],
-                "behavioral_calibration_pass": metrics["target_gain"] >= MARGINS["minimum_target_gain"]
-                                                   and metrics["protected_harm"] <= MARGINS["maximum_protected_harm"],
+                "calibration_available": calibration_available,
+                "target_gain": metrics["target_gain"] if calibration_available else None,
+                "protected_harm": metrics["protected_harm"] if calibration_available else None,
+                "behavioral_calibration_pass": (metrics["target_gain"] >= MARGINS["minimum_target_gain"]
+                                                and metrics["protected_harm"] <= MARGINS["maximum_protected_harm"])
+                                               if calibration_available else None,
                 "fit_seconds": option["fit_seconds"]})
     arm_costs, case_results, frontiers = [], [], []
     cost_keys = sorted({key for row in outcomes for key in row.get("cost", {})})
@@ -1162,12 +1166,14 @@ def analyze_study(public_root: Path, domain: str) -> dict:
             options = [row for row in calibration if row["arm"] == arm and row["case"]["case_id"] == case["case_id"]]
             for config in sorted({json.dumps(row["configuration"], sort_keys=True) for row in options}):
                 rows = [row for row in options if json.dumps(row["configuration"], sort_keys=True) == config]
+                calibrated = [row for row in rows if row["calibration_available"]]
                 frontiers.append({"arm": arm, "case": case, "configuration": json.loads(config),
-                    "available_lineages": len(rows), "assigned_lineages": len(selected),
+                    "available_lineages": len(calibrated), "assigned_lineages": len(selected),
+                    "missing_calibration_lineages": len(selected)-len(calibrated),
                     "selected_lineages": sum(row["selected_before_test"] for row in rows),
-                    "mean_calibration_target_gain": float(np.mean([row["target_gain"] for row in rows])),
-                    "mean_calibration_protected_harm": float(np.mean([row["protected_harm"] for row in rows])),
-                    "behavioral_calibration_pass_fraction_all_assigned": sum(row["behavioral_calibration_pass"] for row in rows)/len(selected)})
+                    "mean_calibration_target_gain": float(np.mean([row["target_gain"] for row in calibrated])) if calibrated else None,
+                    "mean_calibration_protected_harm": float(np.mean([row["protected_harm"] for row in calibrated])) if calibrated else None,
+                    "behavioral_calibration_pass_fraction_all_assigned": sum(row["behavioral_calibration_pass"] for row in calibrated)/len(selected)})
     result = {"schema": "wsp-trained-posthoc-analysis/1", "domain": domain, "created_at_utc": now(),
         "source_sha256": {"runner": sha(Path(__file__)), "research_tasks": sha(SOURCE_ROOT/"rlcd/weight_space/research_tasks.py")},
         "input_file_sha256": inputs, "assigned_trials": len(outcomes), "analyzable_sealed_trials": len(trials),
