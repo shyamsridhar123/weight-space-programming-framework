@@ -33,6 +33,47 @@ definitions. Keep the question and its evidence together.
 [PROOFS.md](PROOFS.md) gives the theorem scope and proof procedure.
 [REPRODUCING.md](REPRODUCING.md) gives installation and replay commands.
 
+## November 10 Distro companion checks
+
+The optional [Distro companion](docs/governance/distro-usage.md) passed its
+explicit governance and integration selection on November 10, 2026. The
+[dated receipt](provenance/verification/distro-integration-20261110.json)
+records the source and configuration identities, command outcomes and retained
+private-output commitments. Captured inputs remained unchanged during the
+successful focused run. An earlier capture passed its tests but failed the
+wheel comparison because the helper omitted an existing packaged module;
+the receipt preserves that failure and the corrected comparison.
+
+The identified wheel's Python sources, packaged skill and normalized README
+metadata matched the captured inputs. A separate clean installation passed its
+dependency check and isolated official-SDK initialization, discovery and calls
+of all four MCP operations. The synthetic routing example changed the intended
+queue while preserving the supplied protected scores. Invalid pins were
+rejected and exported history preserved the bundle bytes. The review remained
+requested and ineligible; no human decision, scientific study or historical
+replay ran.
+
+Claude's native plugin validation succeeded and its management command reported
+the MCP server connected. Copilot discovered the plugin, but its installed
+version predates the documented fix for management commands honoring
+`--plugin-dir`; its omitted server listing does not determine live session
+loading. No live Distro-launched model session or native model tool invocation
+was exercised. The [usage guide](docs/governance/distro-usage.md) records the
+exact observed versions and limits.
+
+The adapter follows the [reviewed contract](docs/governance/distro-integration.md)
+and reuses the unchanged checked governance model. These implementation checks
+add no formal statement, Lean execution, Python-to-Lean refinement proof,
+production authority or scientific acceptance. The first pushed integration
+workflow failed before jobs started; the receipt retains that attempt and the
+subsequent matrix-context correction. The next hosted attempt started jobs but
+failed because the Linux pytest temporary directory's parent was absent and
+Windows Git checkout exceeded its path-length limit. The workflow now creates
+the parent directory and enables Git's long-path support before checkout.
+The receipt retains both job failures. Hosted and merge results must be
+inspected against the actual publishing PR and commit; this local receipt
+does not supply a passing hosted result or merge attestation.
+
 ## November 8 studies and November 9 review
 
 Study dates use America/Chicago. Some saved executions have November 9 UTC

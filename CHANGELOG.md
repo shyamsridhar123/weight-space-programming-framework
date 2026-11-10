@@ -7,6 +7,23 @@ research draft.
 
 ## Unreleased
 
+- Add a workspace-bound Distro companion with four official-SDK MCP tools for
+  inspecting changes, preparing reviews, checking eligibility and exporting
+  complete history. The [integration contract](docs/governance/distro-integration.md)
+  precedes implementation and reuses the checked governance model; it introduces
+  no decision transition or additional authority. Every status/export operation
+  reconstructs the complete current request, hashes actual evidence bytes and
+  requires both independently retained pins. Setup generates native Claude and
+  Copilot plugin manifests plus a proof-first skill in excluded local output.
+  The optional `distro` extra preserves the core dependency boundary.
+  A [fresh routing demo](docs/governance/distro-usage.md) checks exact application,
+  structural policy and supplied-feature retention before offering a draft for
+  review. The example supplies no raw-text, generalization, enterprise-savings
+  or production claim. Human authority, latest-head storage and concurrent
+  decision serialization remain external responsibilities. The
+  [verification receipt](provenance/verification/distro-integration-20261110.json)
+  records source, wheel and native-host observations with their limits.
+
 - Require exact integer callback counts in durable terminal attempts, rejecting
   rehashed JSON booleans and floats at the shared reader. A focused synthetic
   SQLite regression checks success/failure records, inspection and rejection
