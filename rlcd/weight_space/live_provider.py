@@ -96,13 +96,26 @@ def _communicate_bounded(process: subprocess.Popen, *, timeout: float, input=Non
         return (*output, True, True)
 
 
+class _DuplicateJSONKey(ValueError):
+    pass
+
+
+def _unique_json_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise _DuplicateJSONKey("Duplicate JSON object key")
+        result[key] = value
+    return result
+
+
 def parse_events(output: str) -> tuple[Any, dict[str, Any], list[str], list[str], list[dict[str, Any]]]:
     """Parse the final message, and inspect tool events at every lifecycle stage."""
     final, usage, unapproved, errors, diagnostics = None, {}, [], [], []
     completion_seen = False
     for line in output.splitlines():
         try:
-            event = json.loads(line)
+            event = json.loads(line, object_pairs_hook=_unique_json_object)
             if type(event) is not dict:
                 raise ValueError("Event must be an object")
             canonical_bytes(event)
@@ -132,7 +145,7 @@ def parse_events(output: str) -> tuple[Any, dict[str, Any], list[str], list[str]
         except (ValueError, TypeError, RecursionError):
             errors.append("invalid_event")
     try:
-        response = json.loads(final) if isinstance(final, str) else None
+        response = json.loads(final, object_pairs_hook=_unique_json_object) if isinstance(final, str) else None
         canonical_bytes(response)
     except (ValueError, RecursionError):
         response = None
@@ -314,7 +327,7 @@ def run_brokered(provider: CodexProvider, broker: Any, *, prompt: str,
             for action in actions:
                 if type(action) is not str:
                     raise ValueError("Action must be encoded as a JSON string")
-                result = broker.request(json.loads(action))
+                result = broker.request(json.loads(action, object_pairs_hook=_unique_json_object))
                 history.append({"role": "broker", "data": result})
                 if broker.is_sealed:
                     status = "sealed"
@@ -336,7 +349,7 @@ def run_brokered(provider: CodexProvider, broker: Any, *, prompt: str,
 
 
 def publish_attempt(source: Path, destination: Path) -> dict[str, Any]:
-    """Publish a disclosed event derivative; raw transport bytes stay private."""
+    """Publish a derivative; duplicate-key events become disclosed nonobject markers."""
     source, destination = Path(source), Path(destination)
     destination.mkdir(parents=True, exist_ok=False)
     for name in ("request.json", "response-schema.json", "receipt.json"):
@@ -363,8 +376,11 @@ def publish_attempt(source: Path, destination: Path) -> dict[str, Any]:
     for line in raw.decode("utf-8").splitlines():
         previous_redactions = redactions
         try:
-            value = json.loads(line)
+            value = json.loads(line, object_pairs_hook=_unique_json_object)
             lines.append(json.dumps(sanitize(value), ensure_ascii=False, allow_nan=False))
+        except _DuplicateJSONKey:
+            # Raw fallback cannot safely sanitize arbitrary JSON escape spellings.
+            lines.append(json.dumps("public event omitted: duplicate JSON object key"))
         except (ValueError, RecursionError):
             # Retain malformed or overnested lines as disclosed derivatives,
             # redacting escaped profile prefixes without counting abandoned work.
