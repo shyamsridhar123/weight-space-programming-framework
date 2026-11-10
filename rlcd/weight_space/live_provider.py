@@ -126,7 +126,9 @@ def parse_events(output: str) -> tuple[Any, dict[str, Any], list[str], list[str]
             if not isinstance(event.get("type", ""), str):
                 raise ValueError("Event type must be a string")
             item = event.get("item")
-            if isinstance(item, dict) and event.get("type", "").startswith("item."):
+            if event.get("type", "").startswith("item."):
+                if not isinstance(item, dict):
+                    raise ValueError("Event item must be an object")
                 kind = item.get("type", "unknown")
                 if kind == "error":
                     # CLI warnings use error items too; a failed turn/exit is

@@ -7,6 +7,18 @@ research draft.
 
 ## Unreleased
 
+- Require an object `item` on each provider event whose string `type` begins
+  `item.`. Missing or nonobject items follow the existing `invalid_event` path;
+  the common broker route retains the failed attempt/trial, considers independently
+  valid supplied usage before failure abstention, and admits no proposer actions.
+  The [scoped offline receipt](provenance/verification/provider-item-envelope-20261110.json)
+  records two named checks passing in one invocation at source
+  `9295d4aa382a66cb5df132eb8276908a1443c30e`. This envelope check is not full
+  event-schema or lifecycle validation. Current-source replay of older malformed
+  envelopes can differ or fail; preserve frozen source bindings. Historical
+  unknown usage/costs and attestation limits remain unresolved; #5 c2 and #8 c6
+  remain partial, and Issues #5 and #8 stay open.
+
 - Record effective broker request-count and canonical-JSON byte limits in
   successful metadata and trusted audits as `wsp-broker-request-limits/1`.
   The [control inventory](docs/research/broker-control-inventory.md) distinguishes
