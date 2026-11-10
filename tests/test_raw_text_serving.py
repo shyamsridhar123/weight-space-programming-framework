@@ -3,6 +3,7 @@ import copy
 import hashlib
 import io
 import json
+import math
 from pathlib import Path
 import subprocess
 
@@ -108,6 +109,40 @@ def test_native_raw_text_calls_bind_original_rows_and_deployed_selection(serving
     expected_features = np.array([[0, 2], [1, 0], [0, 0], [0, 0]], dtype=np.float32)
     transforms, encoded, heads = [], [], []
     real_transform, real_encode, real_head = TextPreprocessing.transform, runner.encode_inputs, runner.evaluate_head
+    real_validate, real_snapshot, real_clock = runner._validate_record, runner._snapshot, runner.time.perf_counter
+    first_validations, first_output_spans, validation_clock_positions = [], {}, {}
+    clock_calls = 0
+
+    def clock():
+        nonlocal clock_calls
+        clock_calls += 1
+        return real_clock()
+
+    def validate(value, job_id, binding, sources, *, complete):
+        first_output = value["active_stage"] == "output_validation" and value["active_call"] == 0
+        if first_output:
+            assert complete is False and value["load_to_first_output_seconds"] is None
+            assert type(value["environment"]["torch"]) is str
+            first = value["calls"][0]
+            assert first["status"] == "running"
+            assert [row["request_id"] for row in first["outputs"]["rows"]] == [
+                row["request_id"] for row in case["rows"]]
+        problem = real_validate(value, job_id, binding, sources, complete=complete)
+        if first_output:
+            assert problem is None
+            first_validations.append(job_id)
+            validation_clock_positions[job_id] = clock_calls
+        return problem
+
+    def snapshot(path, value):
+        if value["schema"] == "wsp-raw-text-serving-job/2" and value["calls"][0]["status"] == "succeeded":
+            span = value["load_to_first_output_seconds"]
+            assert math.isfinite(span) and span >= 0
+            if value["job_id"] not in first_output_spans:
+                assert all(call["status"] == "pending" for call in value["calls"][1:])
+                assert clock_calls > validation_clock_positions[value["job_id"]]
+            assert span == first_output_spans.setdefault(value["job_id"], span)
+        return real_snapshot(path, value)
 
     def transform(preprocessing, texts):
         assert texts == [row["text"] for row in case["rows"]]
@@ -133,6 +168,9 @@ def test_native_raw_text_calls_bind_original_rows_and_deployed_selection(serving
     monkeypatch.setattr(TextPreprocessing, "transform", transform)
     monkeypatch.setattr(runner, "encode_inputs", encode)
     monkeypatch.setattr(runner, "evaluate_head", head)
+    monkeypatch.setattr(runner, "_validate_record", validate)
+    monkeypatch.setattr(runner, "_snapshot", snapshot)
+    monkeypatch.setattr(runner.time, "perf_counter", clock)
     assert case["candidate"].tensors[HEAD_WEIGHT][2, 1] == 35.1
     assert float(np.float32(35.1)) != 35.1
     normalized_rows = [{**row, "text": research_tasks.normalized_text(row["text"])} for row in case["rows"]]
@@ -144,6 +182,10 @@ def test_native_raw_text_calls_bind_original_rows_and_deployed_selection(serving
         record = runner.worker(package["path"], package["pin"], case["batch"], case["batch_pin"],
                                case["root"] / (selection + "-job"), job_id=selection, warmup=1, repeats=2)
         assert record["status"] == "succeeded", record
+        assert record["schema"] == "wsp-raw-text-serving-job/2"
+        span = record["load_to_first_output_seconds"]
+        assert span == first_output_spans[selection]
+        assert span + 1e-12 >= record["load_seconds"]["load"] + record["calls"][0]["seconds"]["raw_call"]
         identities = record["identities"]
         assert identities["ordered_rows_sha256"] == digest(case["rows"])
         assert identities["ordered_rows_sha256"] != digest(normalized_rows)
@@ -166,15 +208,22 @@ def test_native_raw_text_calls_bind_original_rows_and_deployed_selection(serving
         assert all(record[key] is False for key in runner.FLAGS)
     assert len(transforms) == len(encoded) == len(heads) == 12
     assert len({id(values) for values in transforms}) == len({id(values) for values in encoded}) == 12
+    assert first_validations == ["baseline", "admitted", "rejected"]
 
     # One authored fresh process exercises the CLI boundary, without a cache or benchmark claim.
     baseline = case["packages"]["baseline"]
     report = runner.run(baseline["path"], baseline["pin"], case["batch"], case["batch_pin"],
                         case["root"] / "native-child", timeout_seconds=30., warmup=0, repeats=1)
+    assert report["schema"] == "wsp-raw-text-serving-run/2"
     job = report["jobs"][0]
     assert job["status"] == "succeeded", job
     assert job["returncode"] == 0 and job["receipt_validation"] == "accepted"
     receipt = job["receipt"]
+    assert receipt["schema"] == "wsp-raw-text-serving-job/2"
+    span = receipt["load_to_first_output_seconds"]
+    assert math.isfinite(span) and span >= 0
+    assert span + 1e-12 >= receipt["load_seconds"]["load"] + receipt["calls"][0]["seconds"]["raw_call"]
+    assert span <= job["process_seconds"] + 1e-12
     assert receipt["environment"]["numeric_lane"] == "Torch CPU float32"
     assert receipt["environment"]["device"] == "cpu" and receipt["environment"]["threads"] == 1
     assert receipt["identities"]["manifest_sha256"] == baseline["pin"]
@@ -194,6 +243,10 @@ def test_native_raw_text_calls_bind_original_rows_and_deployed_selection(serving
     assert report["summary"]["successful_jobs"] == 1
     assert report["summary"]["measured_calls_excluded_from_success_samples"] == 0
     assert len(report["summary"]["conditional_success_samples"]) == 1
+    assert report["summary"]["load_to_first_output_samples_assigned"] == 1
+    assert report["summary"]["load_to_first_output_samples_excluded_from_success_samples"] == 0
+    assert report["summary"]["conditional_success_load_to_first_output_samples"] == [
+        {"job_id": job["job_id"], "seconds": span}]
     assert len(transforms) == len(encoded) == len(heads) == 12
 
 
@@ -274,26 +327,50 @@ def test_loader_uses_captured_bytes_without_historical_reads(serving_case, monke
     assert all(not values.flags.writeable for values in loaded["encoder"].values())
 
 
-def test_worker_failure_keeps_partial_stage_evidence_and_refuses_reuse(serving_case, monkeypatch):
+@pytest.mark.parametrize("failure_call", [0, 1])
+def test_worker_failure_keeps_partial_stage_evidence_and_refuses_reuse(serving_case, monkeypatch, failure_call):
     case, package = serving_case, serving_case["packages"]["baseline"]
+    real_encode, real_snapshot = runner.encode_inputs, runner._snapshot
+    encoder_calls, first_output_spans = 0, []
 
     def failed_encoder(*args, **kwargs):
-        raise RuntimeError("private failure detail must not be copied into receipts")
+        nonlocal encoder_calls
+        index = encoder_calls
+        encoder_calls += 1
+        if index == failure_call:
+            raise RuntimeError("private failure detail must not be copied into receipts")
+        return real_encode(*args, **kwargs)
+
+    def snapshot(path, value):
+        if value["calls"][0]["status"] == "succeeded":
+            first_output_spans.append(value["load_to_first_output_seconds"])
+        return real_snapshot(path, value)
 
     monkeypatch.setattr(runner, "encode_inputs", failed_encoder)
+    monkeypatch.setattr(runner, "_snapshot", snapshot)
     output = case["root"] / "failed-worker"
     record = runner.worker(package["path"], package["pin"], case["batch"], case["batch_pin"],
                            output, job_id="failed-worker", warmup=1, repeats=2)
     assert record["status"] == "failed" and record["failure"] == {"type": "RuntimeError"}
-    assert record["active_stage"] == "encoder" and record["active_call"] == 0
-    assert record["calls"][0]["status"] == "failed" and record["calls"][0]["outputs"] is None
-    assert record["calls"][0]["seconds"]["preprocessing"] >= 0
-    assert all(record["calls"][0]["seconds"][key] is None for key in ("encoder", "head_and_policy", "raw_call"))
-    assert all(call["status"] == "pending" for call in record["calls"][1:])
+    assert record["active_stage"] == "encoder" and record["active_call"] == failure_call
+    failed = record["calls"][failure_call]
+    assert failed["status"] == "failed" and failed["outputs"] is None
+    assert failed["seconds"]["preprocessing"] >= 0
+    assert all(failed["seconds"][key] is None for key in ("encoder", "head_and_policy", "raw_call"))
+    assert all(call["status"] == "succeeded" for call in record["calls"][:failure_call])
+    assert all(call["status"] == "pending" for call in record["calls"][failure_call + 1:])
+    span = record["load_to_first_output_seconds"]
+    if failure_call == 0:
+        assert span is None and not first_output_spans
+    else:
+        assert math.isfinite(span) and span >= 0
+        assert first_output_spans and all(value == span for value in first_output_spans)
     receipt = (output / "receipt.json").read_bytes()
     assert b"private failure detail" not in receipt
-    assert json.loads(receipt) == json.loads((output / "progress.json").read_bytes())
-    assert runner._validate_record(json.loads(receipt), "failed-worker", record["binding"],
+    serialized = json.loads(receipt)
+    assert serialized["load_to_first_output_seconds"] == span
+    assert serialized == json.loads((output / "progress.json").read_bytes())
+    assert runner._validate_record(serialized, "failed-worker", record["binding"],
                                    record["sources"], complete=False) is None
     with pytest.raises(FileExistsError):
         runner.worker(package["path"], package["pin"], case["batch"], case["batch_pin"],
@@ -317,6 +394,9 @@ def test_supervisor_accounts_for_every_assignment_and_isolates_bad_receipts(serv
              ("evidence", "malformed_receipt"), ("request_ids", "malformed_receipt"),
              ("policy", "malformed_receipt"), ("timing", "malformed_receipt"),
              ("null_timing", "malformed_receipt"), ("output", "malformed_receipt"),
+             ("missing_first_output", "malformed_receipt"), ("null_first_output", "malformed_receipt"),
+             ("non_enclosing_first_output", "malformed_receipt"),
+             ("nonzero_success_receipt", "nonzero_exit"),
              ("later_success", "succeeded")]
     output, launches = case["root"] / "supervised", []
 
@@ -380,12 +460,20 @@ def test_supervisor_accounts_for_every_assignment_and_isolates_bad_receipts(serv
             record["calls"][0]["seconds"]["raw_call"] = 0.
         elif kind == "null_timing":
             record["calls"][0]["seconds"]["encoder"] = None
+        elif kind == "missing_first_output":
+            del record["load_to_first_output_seconds"]
+        elif kind == "null_first_output":
+            record["load_to_first_output_seconds"] = None
+        elif kind == "non_enclosing_first_output":
+            record["load_seconds"]["load"] = 1.
+            record["load_to_first_output_seconds"] = .5
         elif kind == "output":
             outputs = record["calls"][0]["outputs"]
             outputs["rows"][0]["queue"] = 5
             outputs["sha256"] = digest({key: value for key, value in outputs.items() if key != "sha256"})
         (child_output / "receipt.json").write_bytes(_bytes(record))
-        return subprocess.CompletedProcess(command, 7 if kind == "nonzero" else 0, b"child stdout", b"child stderr")
+        return subprocess.CompletedProcess(command, 7 if kind in ("nonzero", "nonzero_success_receipt") else 0,
+                                           b"child stdout", b"child stderr")
 
     monkeypatch.setattr(runner.subprocess, "run", controlled_child)
     report = runner.run(package["path"], package["pin"], case["batch"], case["batch_pin"], output,
@@ -394,7 +482,14 @@ def test_supervisor_accounts_for_every_assignment_and_isolates_bad_receipts(serv
     assert [job["status"] for job in report["jobs"]] == [status for _, status in cases]
     assert all(job["process_seconds"] is not None and job["process_seconds"] >= 0 for job in report["jobs"])
     assert report["jobs"][1]["progress_validation"] == report["jobs"][2]["progress_validation"] == "accepted_partial"
+    assert report["jobs"][1]["receipt_validation"] == "accepted"
     assert report["jobs"][1]["receipt"]["calls"][1]["status"] == "succeeded"
+    assert report["jobs"][1]["receipt"]["load_to_first_output_seconds"] == template["load_to_first_output_seconds"]
+    assert all(report["jobs"][index]["progress"]["load_to_first_output_seconds"] == template["load_to_first_output_seconds"]
+               for index in (1, 2))
+    assert report["jobs"][-2]["returncode"] == 7
+    assert report["jobs"][-2]["receipt_validation"] == "accepted"
+    assert report["jobs"][-2]["receipt"]["status"] == "succeeded"
     assert (output / "job-000002.stdout.log").read_bytes() == b"started"
     summary = report["summary"]
     assert summary["assigned_jobs"] == len(cases) and summary["successful_jobs"] == 2
@@ -405,6 +500,11 @@ def test_supervisor_accounts_for_every_assignment_and_isolates_bad_receipts(serv
     assert len(summary["conditional_success_samples"]) == 4
     assert {sample["job_id"] for sample in summary["conditional_success_samples"]} == {
         "job-000000", f"job-{len(cases) - 1:06d}"}
+    assert summary["load_to_first_output_samples_assigned"] == len(cases)
+    assert summary["load_to_first_output_samples_excluded_from_success_samples"] == len(cases) - 2
+    assert summary["conditional_success_load_to_first_output_samples"] == [
+        {"job_id": job["job_id"], "seconds": job["receipt"]["load_to_first_output_seconds"]}
+        for job in (report["jobs"][0], report["jobs"][-1])]
     assert json.loads((output / "run.json").read_bytes()) == report
     pending = copy.deepcopy(template)
     pending["status"] = "running"

@@ -7,6 +7,15 @@ research draft.
 
 ## Unreleased
 
+- Normalize Torch version metadata to a built-in string before in-memory
+  raw-text receipt validation. Focused native fixtures now check first-output
+  timing order, retention after failure, malformed spans, and supervisor summary
+  eligibility, including an actual CLI child. The initial failed invocation and
+  the corrected passing invocation are recorded in the
+  [native validation receipt](provenance/verification/serving-first-output-native-20261110.json).
+  These are authored engineering checks; #14 c1/c5 remain partial/open, with no
+  serving-performance or business-impact claim.
+
 - Add first-output timing through complete-batch in-memory
   receipt validation and six selected stdlib helper cases in
   `tests/test_serving_metrics.py`; isolated literal checks passed with a
