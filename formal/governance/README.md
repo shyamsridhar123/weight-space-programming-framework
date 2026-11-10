@@ -11,14 +11,58 @@ execution.
 
 ## Verification status
 
-**Hosted check failed on November 10, 2026; the corrected source awaits a
-successful check.** Hosted Lean 4.24.0 run `42827681264`, job `129869167142`,
+**Hosted direct check passed on November 10, 2026.**
+[Run `42828945211`](https://github.com/shyamsridhar123/weight-space-programming-framework/actions/runs/42828945211),
+job `129873557794`, completed successfully, including the direct compiler
+invocation, every axiom report, the final transitive audit and source-byte
+verification. This checks the abstract model; it does not verify a Python
+runtime or discharge organizational or scientific obligations.
+
+| Observed identity | Value |
+| --- | --- |
+| PR head associated with the run | `c131ff0437e344938038075624b9899f7cd70394` |
+| Actual checked PR merge commit | `e72d9da64efae72cc5b797cd6fc26ea69ccf0d3e` |
+| `Governance.lean` SHA-256 | `19d9d9de98f64672d0d1b49b6eb3cf058fb10123749369737ff183ee6a83178f` |
+| Compiler | Lean `4.24.0`, `x86_64-unknown-linux-gnu`, release commit `797c613eb9b6d4ec95db23e3e00af9ac6657f24b` |
+| Direct command | `lean +leanprover/lean4:v4.24.0 formal/governance/Governance.lean` |
+| Compiler and audit outcome | Exit 0; namespace transitive axiom audit passed |
+| Retained hosted artifact | `governance-proof-42828945211-1`, artifact `13768959809` |
+| Downloaded artifact ZIP SHA-256 | `fad4db884a6cd8e5f6fbe842e7f4bc65c05661ab4fc168ff634cd28221de355d` |
+
+The artifact's `commit.txt`, `source.sha256`, `lean-version.txt` and complete
+`governance-proof.log` were downloaded and inspected. Its archive identity
+matches the upload log, and its source identity matches the published source.
+The complete compiler proof output was:
+
+```text
+'Governance.step_preserves_request' does not depend on any axioms
+'Governance.step_is_bound' does not depend on any axioms
+'Governance.mismatched_pins_cannot_step' does not depend on any axioms
+'Governance.path_preserves_request' does not depend on any axioms
+'Governance.reachable_preserves_request' does not depend on any axioms
+'Governance.reachable_step_binds_original' does not depend on any axioms
+'Governance.step_approval_is_separate_and_bound' does not depend on any axioms
+'Governance.reachable_approval_invariant' does not depend on any axioms
+'Governance.reachable_approval_is_separate_and_bound' does not depend on any axioms
+'Governance.terminal_no_step' does not depend on any axioms
+'Governance.terminal_path_stays' does not depend on any axioms
+'Governance.revoked_path_stays' does not depend on any axioms
+'Governance.authorized_pins_and_context' does not depend on any axioms
+'Governance.authorized_approval_is_separate_and_bound' does not depend on any axioms
+'Governance.authorized_is_local' does not depend on any axioms
+'Governance.production_authorization_impossible' does not depend on any axioms
+'Governance.scientific_authorization_impossible' does not depend on any axioms
+'Governance.terminal_cannot_authorize' does not depend on any axioms
+Governance transitive axiom audit passed.
+```
+
+**Earlier hosted failure retained.** Lean 4.24.0 run `42827681264`, job `129869167142`,
 failed because `prefix` was used as a binder and induction-pattern identifier,
 but is reserved syntax. The resulting parse errors caused cascading `Path`
 failures, and the final transitive axiom audit rejected `sorryAx`. The binder
-and affected patterns now use `history`. This source correction is not a
-successful compiler or axiom-audit result. Runtime implementation remains
-gated on an observed successful direct Lean check and transitive axiom audit.
+and affected patterns now use `history`. The successful check above applies
+to that corrected source; it does not change the earlier failed result. The
+contract and checked model are published before runtime implementation.
 
 **UNCHECKED locally as of November 10, 2026.** No installed Lean executable
 was found on PATH or in the existing user/tool locations checked. No local
@@ -47,7 +91,8 @@ The command stopped before invoking a compiler. No toolchain was installed,
 no historical proof wrapper was run, and no scientific artifact or receipt was
 used. A static source review is not a Lean kernel check.
 
-**Local axiom reports and audit result: unavailable. The hosted audit failed.**
+**Local axiom reports and audit result remain unavailable; the hosted result
+is retained above.**
 Every named theorem retains a corresponding `#print axioms` command. The
 source finishes with a transitive
 axiom audit of every declaration in the `Governance` namespace, including
@@ -67,11 +112,9 @@ lean formal/governance/Governance.lean
 ```
 
 The direct Lean invocation checks the source, emits each `#print axioms`
-report, and runs the final namespace audit. These are verification
-instructions, not a record of a successful run. Retain the actual version,
-compiler exit status, complete `#print axioms` output and audit result when
-this check is performed. A hosted workflow result also must be observed
-before it can be reported as passing.
+report, and runs the final namespace audit. These commands are reproduction
+instructions; the observed hosted run above is the retained successful
+result. Any changed source needs its own observed compiler and audit result.
 
 ## Model and obligations
 
@@ -104,9 +147,10 @@ status value alone does not satisfy this predicate.
 | Authorization is confined to local use in every state | `authorized_is_local`, `production_authorization_impossible`, `scientific_authorization_impossible` |
 | Terminal states cannot authorize any use | `terminal_cannot_authorize` |
 
-These are proposed theorem statements with proof terms, pending compiler
-verification. Their number is not evidence that the implementation is correct
-or that a candidate has scientific or operational value.
+The hosted check above verified these theorem statements and proof terms,
+including their axiom reports and the namespace-wide transitive audit. This
+does not verify a Python implementation or establish that a candidate has
+scientific or operational value.
 
 ## Assumptions and correspondence limits
 
@@ -147,6 +191,6 @@ The following links to the runtime remain unproved:
   behavior or scientific validity. Callers must honor the result. Unmodeled
   execution and deployment routes are not governed by these definitions.
 
-A future successful Lean check would validate the abstract implications under
-these definitions. It would not discharge these correspondence assumptions
+The successful hosted Lean check validates the abstract implications under
+these definitions. It does not discharge these correspondence assumptions
 or replace the separate synthetic runtime checks.

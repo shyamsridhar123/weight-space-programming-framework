@@ -29,13 +29,15 @@ request/head pins, terminal rejection and revocation, and authorization confined
 to local-pilot use. It is separate from the historical weight-semantics library
 and its saved evidence.
 
-**The governance model is locally UNCHECKED as of November 10, 2026.** The
-[model guide](formal/governance/README.md) records the failed tool-discovery
-attempt, proposed obligations, exact direct verification command, and unavailable
-axiom report. The [standalone CI workflow](.github/workflows/governance-proof.yml)
-is pending; no passing hosted result is established here. Its source contains
-proof terms and a transitive axiom audit, but neither has been checked locally.
-The historical reproduction commands below do not check this model.
+**The standalone governance model passed hosted Lean verification on November
+10, 2026.** The [model guide](formal/governance/README.md) records run
+`42828945211`, actual checked merge commit, source SHA-256, Lean 4.24.0 release
+identity, direct command, complete axiom reports and successful transitive
+namespace audit. Every reported theorem has no axiom dependencies. The
+[standalone CI workflow](.github/workflows/governance-proof.yml) checks the
+model directly. The guide preserves the earlier failed hosted check and the
+local preflight exit 127; no local compiler was available. The historical
+reproduction commands below do not check this model.
 
 The model uses arbitrary encoding functions without a collision-resistance or
 injectivity axiom. It does not verify JSON parsing, canonical serialization,
@@ -45,8 +47,8 @@ authenticate actors, serialize decisions, and honor the result. Matching stale
 pins cannot establish freshness; unequal labels cannot establish organizational
 independence. The contract and model guide state these correspondence limits.
 
-A future successful Lean check would establish conditional mathematical claims
-about these definitions. Synthetic implementation checks, authenticated
+The successful Lean check establishes conditional mathematical claims about
+these definitions. Synthetic implementation checks, authenticated
 organizational authority, and scientific evidence of useful behavior remain
 separate obligations. The optional [Distro handoff](docs/governance/distro-handoff.md)
 supplies an authoring and review procedure, not evidence that these obligations
