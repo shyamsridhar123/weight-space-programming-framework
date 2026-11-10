@@ -60,7 +60,7 @@ def write_json(path: Path, value: Any) -> None:
 
 
 def _kill_tree(process: subprocess.Popen) -> None:
-    """Timeout the entire local transport/worker tree, not just its wrapper."""
+    """Best-effort termination of the local transport/worker process tree."""
     if process.poll() is not None:
         return
     try:
@@ -76,7 +76,7 @@ def _kill_tree(process: subprocess.Popen) -> None:
 
 
 def _communicate_bounded(process: subprocess.Popen, *, timeout: float, input=None):
-    """Retain partial output even if descendants keep a pipe open after timeout."""
+    """Retain bounded output; drained timeout pipes do not attest descendant exit."""
     try:
         return (*process.communicate(input, timeout=timeout), False, True)
     except subprocess.TimeoutExpired as expired:
@@ -93,7 +93,7 @@ def _communicate_bounded(process: subprocess.Popen, *, timeout: float, input=Non
             except subprocess.TimeoutExpired as incomplete:
                 return (incomplete.output or expired.output or b"",
                         incomplete.stderr or expired.stderr or b"", True, False)
-        return (*output, True, True)
+        return (*output, True, None)
 
 
 class _DuplicateJSONKey(ValueError):
