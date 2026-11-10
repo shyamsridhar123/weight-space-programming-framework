@@ -1929,6 +1929,19 @@ execution. Schema/provenance wiring is a source contract, not execution evidence
 The producer's pre-return fit undercount remains deferred to a separate PR; no
 historical cost is recovered and the criterion remains partial and open.
 
+**November 9 producer fit-cost follow-up:** `fit_seconds_all_options` now
+remains unknown until eager `fit_options` returns, including when partial
+internal fitting precedes a pre-return exception. Returned options retain their
+summed cost through later calibration failure, and returned explicit no-fit
+options retain observed zero. The [resource contract](../weight-space/resource-accounting.md)
+and [engineering receipt](../../provenance/verification/fit-failure-cost-20261109.json)
+describe one passing regression of selected AST-extracted statements with
+stdlib fakes and literal costs. This is not full `fit_case_arm` execution,
+fitting, timer measurement, scientific execution or historical cost recovery.
+Earlier receipts retain their source snapshots and execution scopes; their
+producer deferrals describe those earlier snapshots. Existing timer boundaries
+and nesting are unchanged. Criterion c0 remains partial and open.
+
 #### #14 c1
 
 - [ ] Measure wall time, memory, bytes, tokens, available energy/compute proxies and inference overhead across pinned model sizes/devices with warm/cold and repeated-use assumptions.
@@ -2005,6 +2018,19 @@ Historical `/1` analyses and earlier receipt scopes remain unchanged. Pair
 completeness does not supply omitted preparation or maintenance costs, make
 nested timers additive, or repair producer undercount. That producer repair
 remains deferred to a separate PR; this criterion remains partial and open.
+
+**November 9 producer fit-cost follow-up:** Pre-return failures now mark
+`fit_seconds_all_options` unknown (`None` / JSON `null`), including failures
+after partial internal fitting. Unreturned work remains unrecovered. A later
+calibration failure retains the sum from returned options, and returned explicit
+no-fit options retain observed zero. The [engineering receipt](../../provenance/verification/fit-failure-cost-20261109.json)
+records one passing regression of selected AST-extracted statements with
+stdlib fakes and literal costs; it supplies no full `fit_case_arm` execution,
+fitting, timer measurement, scientific result or historical cost recovery.
+Historical `/1` artifacts and earlier receipts retain their source snapshots
+and execution scopes. Timer nesting, incomplete lifecycle coverage and the
+limits on total-cost or cost-advantage claims remain unchanged. Criterion c5
+remains partial and open.
 
 #### #14 c6
 

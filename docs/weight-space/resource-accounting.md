@@ -124,8 +124,9 @@ The current metrics source hash is
 Geometry continues to use the unchanged `measured_distribution` helper.
 Historical `/1` analyses retain their recorded schema and values. This change
 performs no historical re-analysis, failed-work recovery or scientific execution.
-The producer's early-fit undercount described below remains deferred to a
-separate PR; #14 c0/c5 remain partial and open.
+The producer deferral recorded in this posthoc receipt describes its earlier
+source snapshot. The producer follow-up below changes pre-return cost
+availability; #14 c0/c5 remain partial and open.
 
 The [posthoc engineering receipt](../../provenance/verification/posthoc-resource-coverage-20261109.json)
 records one passing authored scalar check of four AST-extracted functions:
@@ -149,15 +150,38 @@ nested within heldout workflow elapsed. Adding these nested quantities to
 their enclosing timers counts some work twice. The named verification timer
 does not establish an exact raw-input or whole-pipeline numerical guarantee.
 
-There is a known producer limit before resource aggregation: `fit_options`
-may perform fitting before returning its list. If it raises before return,
-the caller's local `options` remains empty and `fit_seconds_all_options` can
-report zero despite attempted fitting. The broad fit/selection/materialization
-timer retains enclosing elapsed time when the fallback completes, but cannot
-recover the missing option timings or isolate fitting. A later calibration
-failure can retain the already returned option records. Availability counts
-cannot detect or repair this underreporting; even complete fields remain
-subject to their instrumentation limits.
+In the source snapshots covered by the earlier receipts, eager `fit_options`
+could perform fitting and then raise before returning its list. The caller's
+local `options` remained empty, allowing `fit_seconds_all_options` to report
+zero despite attempted fitting. Those receipts retain their original source
+snapshots and execution scopes.
+
+The producer follow-up tracks whether eager `fit_options` returned, setting
+`fit_options_returned` immediately after its return. Any failure before return
+now records `fit_seconds_all_options` as unknown (`None` / JSON `null`),
+including a failure after partial internal fitting. It does not recover
+unreturned option timings. Once options have returned, a later calibration
+failure retains their existing summed cost; returned explicit no-fit options
+retain observed zero.
+
+Existing enclosing timer boundaries and nesting are unchanged. The broad
+fit/selection/materialization timer retains enclosing elapsed time when the
+fallback completes, but cannot recover missing option timings or isolate
+fitting. Availability counts cannot recover those timings, and complete fields
+remain subject to their instrumentation limits.
+
+The [fit-failure engineering receipt](../../provenance/verification/fit-failure-cost-20261109.json)
+records one passing regression using AST-extracted initializers, the
+proposal/calibration `try`/`except` block and the `fit_seconds_all_options`
+record-field expression, with stdlib fakes and literal costs. It captures source
+commit `5a07d74a4464bdd57e81bab110419b0d1ed8a7ae` and integrated main
+`24790faf7f705b7563c00390829055f10e5848f6`. It does not execute full
+`fit_case_arm`, perform fitting, measure timers, run scientific studies or
+recover historical costs. Captured runtime strings and installed version
+metadata were unchanged; executable/package-content identity and agreement with
+the lockfile were not established. The recorded test does not verify later
+documentation/publication edits. Fixture values are not measured research costs;
+#14 c0/c5 remain partial and open.
 
 The [historical cost report](../research/trained-applications.md#cost-measured-stages-and-their-limits)
 retains its own measurement boundaries. Complete cold acquisition,

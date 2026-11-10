@@ -1,0 +1,253 @@
+{
+  "verification_kind": "focused_authored_fit_failure_cost",
+  "scope": "One selected authored regression of AST-extracted initializers, the proposal/calibration try/except block and the fit_seconds_all_options record-field expression, using stdlib fakes and literal costs; no full fit_case_arm, fitting, timer measurement, scientific execution, study replay or historical cost recovery.",
+  "base_commit": "5a07d74a4464bdd57e81bab110419b0d1ed8a7ae",
+  "ordered_parents": [
+    "24790faf7f705b7563c00390829055f10e5848f6"
+  ],
+  "integrated_main_commit": "24790faf7f705b7563c00390829055f10e5848f6",
+  "recorded_execution_started_at_utc": "2026-11-10T05:03:42.690161+00:00",
+  "recorded_execution_completed_at_utc": "2026-11-10T05:03:44.353120+00:00",
+  "command_argv": [
+    "<project-python>",
+    "-s",
+    "-B",
+    "-m",
+    "pytest",
+    "-c",
+    "pytest-engineering.ini",
+    "--noconftest",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "<capture>/fixtures",
+    "--junitxml",
+    "<capture>/pytest.xml",
+    "-q",
+    "tests/test_trained_fit_failure_cost.py::test_fit_failures_keep_cost_unknown_until_options_return"
+  ],
+  "working_directory": "<authored-worktree>",
+  "environment_overrides": {
+    "PYTEST_ADDOPTS": "",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0",
+    "PYTHONNOUSERSITE": "1",
+    "PYTHONUTF8": "1"
+  },
+  "inherited_python_and_pytest_options_removed": true,
+  "timeout_seconds": 60,
+  "git_probe_timeout_seconds": 10,
+  "runtime": {
+    "python_version": "3.12.10",
+    "sys_platform": "win32",
+    "pytest_version": "9.1.1",
+    "numpy_version": "2.5.3"
+  },
+  "runtime_identity_scope": "Captured interpreter/version/platform strings and installed distribution version metadata only; no executable or package-content identity, and no agreement with the lockfile was enforced.",
+  "runtime_executable_content_identity_captured": false,
+  "installed_package_content_identity_captured": false,
+  "runtime_lockfile_agreement_enforced": false,
+  "recorded_execution_status": "passed",
+  "recorded_exit_code": 0,
+  "execution_count": 1,
+  "automatic_retry_performed": false,
+  "timed_out": false,
+  "launch_error": null,
+  "recorded_tests": 1,
+  "recorded_failures": 0,
+  "recorded_errors": 0,
+  "recorded_skipped": 0,
+  "reported_warning_count": 0,
+  "pytest_summary": "1 passed in 0.22s",
+  "junit_suite_seconds": 0.141,
+  "junit_testcase_seconds": 0.04,
+  "counts_and_timing_scope": "Execution bookkeeping; no measured research fit cost, impact or performance evidence.",
+  "captured_source_and_configuration_identities": [
+    {
+      "path": "scripts/run_trained_research.py",
+      "bytes": 97674,
+      "sha256": "96316059c7ae23c5f397798e21404c915fa2d0c1a6119f1a349f3c82475279a5"
+    },
+    {
+      "path": "tests/test_trained_fit_failure_cost.py",
+      "bytes": 6199,
+      "sha256": "0ecc1a7c9bec900965483e192f00df88042c3c9c9f9594b6663301e23e51bb57"
+    },
+    {
+      "path": "pytest-engineering.ini",
+      "bytes": 1795,
+      "sha256": "bc0ffa56b0d9203f9df5afc5f5a1723c2bc5bceda6d6f98a90bb5eaf2da8e7af"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 1136,
+      "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+    },
+    {
+      "path": "requirements.lock.txt",
+      "bytes": 1021,
+      "sha256": "3cc022d0c8d11ad2ed72bd2a247c8e249b3bd9570f356260aa0c0f2fa3319755"
+    }
+  ],
+  "captured_source_and_configuration_identity_count": 5,
+  "captured_source_before_after_equal": true,
+  "current_captured_source_and_configuration_match_capture": true,
+  "runner_identity_unchanged": true,
+  "git_state_unchanged": true,
+  "runtime_unchanged": true,
+  "source_identity_scope": "Five authored source/test/configuration/dependency-declaration files; not a project import closure or installed package-content inventory.",
+  "execution_seam": {
+    "method": "AST-extract and execute only the options/fit_options_returned/error initializers and proposal/calibration try/except; evaluate the fit_seconds_all_options record-field expression with stdlib fakes.",
+    "source_function": "scripts/run_trained_research.py::fit_case_arm",
+    "selected_test_node": "tests/test_trained_fit_failure_cost.py::test_fit_failures_keep_cost_unknown_until_options_return",
+    "full_fit_case_arm_executed": false,
+    "fit_options_implementation_executed": false,
+    "enclosing_timers_executed": false,
+    "study_setup_or_persistence_executed": false
+  },
+  "resource_contract": {
+    "field": "fit_seconds_all_options",
+    "return_boundary_flag": "fit_options_returned",
+    "flag_boundary": "Set true immediately after eager fit_options returns its list.",
+    "pre_return_exception": "Unknown: None / JSON null, including partial internal fitting before an exception.",
+    "post_return_calibration_exception": "Retain the sum of all returned option fit_seconds values.",
+    "successful_return": "Retain the existing sum of returned option fit_seconds values.",
+    "returned_explicit_no_fit": "Observed zero.",
+    "unreturned_timing_recovery": "None; the flag records availability without reconstructing missing work.",
+    "enclosing_timer_boundaries_and_nesting": "Unchanged; nested costs remain nonadditive to enclosing timers."
+  },
+  "authored_fixture": {
+    "modes": [
+      "immediate",
+      "partial",
+      "calibration",
+      "success",
+      "no-fit"
+    ],
+    "literal_returned_fit_seconds": [
+      0.125,
+      0.25,
+      0.5
+    ],
+    "post_return_observed_sum": 0.875,
+    "explicit_no_fit_observed_sum": 0.0,
+    "partial_fake_completion_marker": 0.125,
+    "pre_return_cost_result": null,
+    "fixture_costs_are_measured_research_costs": false
+  },
+  "captured_regression_coverage": [
+    "Immediate and synthetic partial pre-return failures keep the cost unknown and the caller options list empty.",
+    "A synthetic calibration failure after return retains all returned option costs while selecting fallback state.",
+    "Successful returned options retain their sum; explicit returned no-fit options retain observed zero.",
+    "Selected statements preserve synthetic error/fallback, calibration, ranking and choice behavior in the authored cases."
+  ],
+  "limitations": [
+    "Only selected AST-extracted statements and one record-field expression execute; full fit_case_arm and the real fit_options implementation do not.",
+    "The partial mode records a synthetic fake marker before raising; no fitting or measured fit timing occurs.",
+    "Pre-return work remains unknown and unrecovered; enclosing elapsed time cannot isolate missing fitting work.",
+    "Timer boundaries and nesting are unchanged; nested clocks cannot be added to their enclosing clocks.",
+    "No study setup, full producer, full analysis, schema/provenance wiring, scientific study, replay or historical re-analysis executes.",
+    "Earlier receipts retain their source snapshots and execution scopes; historical costs/outcomes and /1 analyses remain unchanged.",
+    "Cold acquisition/preparation/encoding, memory/energy, model/device coverage and full inference maintenance remain incomplete.",
+    "Runtime continuity concerns captured strings and installed version metadata, not interpreter executable or package-content identity or lockfile agreement.",
+    "No measured research cost, lifecycle total, amortization crossover, cost advantage, causal usefulness or business-impact claim.",
+    "The recorded test does not verify later documentation/publication edits or hosted CI."
+  ],
+  "project_modules_imported": false,
+  "full_fit_case_arm_executed": false,
+  "fit_options_implementation_executed": false,
+  "fitting_performed": false,
+  "timer_measurement_performed": false,
+  "producer_timer_boundaries_changed": false,
+  "pre_return_fit_cost_missingness_source_changed": true,
+  "full_analysis_executed": false,
+  "schema_and_provenance_wiring_executed": false,
+  "study_replay_executed": false,
+  "scientific_study_executed": false,
+  "live_provider_request_made": false,
+  "historical_resummary_performed": false,
+  "historical_posthoc_v1_analyses_rewritten": false,
+  "missing_historical_work_recovered": false,
+  "new_research_cost_measured": false,
+  "full_lifecycle_cost_established": false,
+  "cost_advantage_established": false,
+  "documentation_snippets_executed": false,
+  "issue14_c0_status": "partial",
+  "issue14_c5_status": "partial",
+  "issue14_kept_open": true,
+  "original_criteria_earlier_receipt_scopes_and_historical_outcomes_unchanged": true,
+  "original_source_inventory_identity": {
+    "path": "provenance/source-files.json",
+    "bytes": 2483787,
+    "sha256": "2b3386a2f5e08175c2b7598642e8fefa2e5395dc1b14b117707271a5797849fc"
+  },
+  "private_capture": {
+    "identities": [
+      {
+        "path": "run_check.py",
+        "bytes": 9109,
+        "sha256": "b2f797b6cb3b8b3e4d07d0fb9ef16fb51595768cfce2f271074c5f7a3561bc8d"
+      },
+      {
+        "path": "execution-launch.json",
+        "bytes": 2214,
+        "sha256": "b4616541d158cde0851582e5e8396e9cab1867230b246e0a743046ec375a04c0"
+      },
+      {
+        "path": "execution-result.json",
+        "bytes": 1901,
+        "sha256": "199c5ce31805155089b228117b74ebc9d2412891a56ecdb573be60e1e3cea800"
+      },
+      {
+        "path": "before-source-identities.json",
+        "bytes": 755,
+        "sha256": "861859c000d37b96b934e0f286893521494fb2a84cdf628cb3e2b7cd98f11ef3"
+      },
+      {
+        "path": "after-source-identities.json",
+        "bytes": 755,
+        "sha256": "861859c000d37b96b934e0f286893521494fb2a84cdf628cb3e2b7cd98f11ef3"
+      },
+      {
+        "path": "stdout.log",
+        "bytes": 100,
+        "sha256": "04b5920db66f102066227aaf163735208769e10c8ff47d8d6e76b73a85efc3cb"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "pytest.xml",
+        "bytes": 388,
+        "sha256": "d36ec7795227fa04a1b4a7ec4658b1593472d211df55898be6059b38798d38f3"
+      },
+      {
+        "path": "publish.py",
+        "bytes": 37962,
+        "sha256": "2bb461f0aa5a70780bd7143ec3e6990d924a711c9ffd978fe86ff790fe85895f"
+      },
+      {
+        "path": "publication-source-identities.json",
+        "bytes": 755,
+        "sha256": "861859c000d37b96b934e0f286893521494fb2a84cdf628cb3e2b7cd98f11ef3"
+      },
+      {
+        "path": "publication-observation.json",
+        "bytes": 3464,
+        "sha256": "18308e93f0826724e129d8cbcebf2819ffdc3bb15e62f3bbe708477f27cdf416"
+      }
+    ],
+    "raw_records_published": false,
+    "full_local_paths_build_identifiers_and_hostname_published": false
+  },
+  "publication": {
+    "observed_at_utc": "2026-11-10T05:08:57.441731+00:00",
+    "receipt_and_documentation_finalized_after_execution": true,
+    "publication_bookkeeping_reran_test": false,
+    "later_publication_verified_by_recorded_test": false,
+    "scope": "Retained identities and publication baselines checked with stdlib and read-only Git; no project execution."
+  }
+}
