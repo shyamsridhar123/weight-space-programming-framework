@@ -32,6 +32,7 @@ import numpy as np
 
 from rlcd.weight_space.artifact import StructuralPolicy, TensorArtifact
 from rlcd.weight_space.features import certify_feature_retention, verify_feature_retention
+from rlcd.weight_space.metrics import observed_resource_summary
 from rlcd.weight_space.model import digest
 from rlcd.weight_space.program import Program, apply_program, rollback
 from rlcd.weight_space.research_tasks import (
@@ -716,6 +717,42 @@ def mean_interval(values: list[float]) -> dict:
             "scope": "Descriptive paired full-lineage means conditional on shared fixed request sample; small-lineage interval is not a confirmatory editor-population claim"}
 
 
+def summarize_resource_measurements(assigned: list[dict]) -> dict:
+    """Retain per-field cost availability across every assigned outcome."""
+    costs = []
+    for row in assigned:
+        cost = row.get("cost")
+        if cost is None:
+            cost = {}
+        if not isinstance(cost, dict):
+            raise ValueError("Assigned cost must be a dictionary or None")
+        storage = cost.get("storage_bytes_pre_outcome")
+        if storage is not None and type(storage) is not int:
+            raise ValueError("Storage bytes must be a Python integer or None")
+        costs.append(cost)
+    measurements = {
+        field: observed_resource_summary(cost.get(field) for cost in costs)
+        for field in (
+            "fit_seconds_all_options",
+            "fit_selection_materialization_seconds",
+            "native_head_evaluation_seconds",
+            "binary64_head_evaluation_seconds",
+            "exact_application_rollback_verification_seconds",
+            "heldout_export_seconds",
+            "heldout_workflow_seconds",
+            "storage_bytes_pre_outcome",
+        )
+    }
+    aliases = {
+        "total_fit_seconds_all_options": "fit_seconds_all_options",
+        "total_fit_selection_materialization_seconds": "fit_selection_materialization_seconds",
+        "total_heldout_workflow_seconds": "heldout_workflow_seconds",
+        "total_storage_bytes": "storage_bytes_pre_outcome",
+    }
+    return {"resource_measurements": measurements,
+            **{alias: measurements[field]["total_if_complete"] for alias, field in aliases.items()}}
+
+
 def summarize_main(public_root: Path, domain: str, protocol: dict, outcomes: list[dict], lineages: list[dict], test: dict) -> dict:
     experiment_root, artifact_root = study_paths(public_root, domain)
     indexed = {(row["lineage_id"], row["case"]["case_id"], row["arm"]): row for row in outcomes}
@@ -748,10 +785,7 @@ def summarize_main(public_root: Path, domain: str, protocol: dict, outcomes: lis
             "missing": len(assigned)-len(valid), "lineages": by_lineage,
             "missingness_policy": "Means use zero for missing outcomes; lineage sensitivity bounds retain gain/harm [-1,1] and success [0,1]",
             "target_gain": mean_interval(gains), "protected_harm": mean_interval(harms), "useful_coverage": mean_interval(coverage),
-            "total_fit_seconds_all_options": sum(row.get("cost", {}).get("fit_seconds_all_options", 0.) for row in assigned),
-            "total_fit_selection_materialization_seconds": sum(row.get("cost", {}).get("fit_selection_materialization_seconds", 0.) for row in assigned),
-            "total_heldout_workflow_seconds": sum(row.get("cost", {}).get("heldout_workflow_seconds", 0.) for row in assigned),
-            "total_storage_bytes": sum(row.get("cost", {}).get("storage_bytes_pre_outcome", 0.) for row in assigned)})
+            **summarize_resource_measurements(assigned)})
     target_contrasts, harm_contrasts, primary_missing_bounds = [], [], []
     recognition = [case for case in protocol["cases"] if case["type"] == "recognition"]
     for seed in MAIN_SEEDS[domain]:
@@ -777,7 +811,7 @@ def summarize_main(public_root: Path, domain: str, protocol: dict, outcomes: lis
         primary["crossed_exact_group_bootstrap"] = crossed_bootstrap(public_root, domain, protocol, test)
     else:
         primary["crossed_exact_group_bootstrap"] = {"status": "not_computed", "reason": "At least one required lineage or primary paired evaluation is missing"}
-    summary = {"schema": "wsp-trained-study-summary/1", "domain": domain, "created_at_utc": now(),
+    summary = {"schema": "wsp-trained-study-summary/2", "domain": domain, "created_at_utc": now(),
         "designation": protocol["designation"], "protocol_sha256": sha(experiment_root/"protocol.json"),
         "global_seal_sha256": sha(experiment_root/"global-seal.json"), "pilot_excluded": True,
         "independent_full_training_lineages": len(lineages), "assigned_full_training_lineages": 6,

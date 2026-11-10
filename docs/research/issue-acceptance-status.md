@@ -1900,6 +1900,18 @@ its original snapshot and scope. Fixture timings and metrics are not measured
 research costs. No missing historical costs are recovered; full lifecycle
 measurement and this criterion's partial status remain unchanged.
 
+**November 9 resource-summary follow-up:** Fresh trained-study summaries use
+`wsp-trained-study-summary/2` and preserve per-field assigned/observed/missing
+counts, observed sums and nullable complete totals across all assigned outcomes,
+including known costs when evaluation is missing. The
+[resource accounting contract](../weight-space/resource-accounting.md) separates
+availability from instrumentation coverage and discloses unchanged timer
+nesting and the early `fit_options` failure path that can report zero option
+fit time despite attempted fitting. Engineering receipt capture is pending;
+this follow-up claims no passing check, new measured cost, historical
+re-summary or recovered failed work. The original criterion remains partial
+and open.
+
 #### #14 c1
 
 - [ ] Measure wall time, memory, bytes, tokens, available energy/compute proxies and inference overhead across pinned model sizes/devices with warm/cold and repeated-use assumptions.
@@ -1953,6 +1965,15 @@ measurement and this criterion's partial status remain unchanged.
 **Remaining requirement / scope limit:** Complete cold acquisition/preparation/encoding and full inference maintenance remain unmeasured rather than free. Nested supplements must not be added to broad historical timers.
 
 **Prospective engineering evidence (November 9, 2026):** The [raw-text serving check](../../provenance/verification/raw-text-serving-20261109.json) verifies durable all-job assignment records and separate failure dispositions, preserving interrupted stages as null and completed stage evidence. Success timing samples exclude failed jobs while retaining their denominators. Raw-call wall includes intervening progress writes and excludes output hashing; nested timers are not additive. This authored regression recovers no historical failed work and measures no complete cold acquisition or inference maintenance. This criterion remains partial and open.
+
+**November 9 resource-summary follow-up:** The
+[fresh summary contract](../weight-space/resource-accounting.md) retains known
+costs on assigned outcomes with missing evaluations and distinguishes observed
+sums from complete totals. Unknown costs are not imputed as free work. Field
+completeness does not repair producer underreporting, make nested timers
+additive or supply omitted cold preparation and maintenance costs. Verification
+capture is pending; historical summaries and this partial/open status remain
+unchanged.
 
 #### #14 c6
 
