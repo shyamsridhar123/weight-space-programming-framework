@@ -1,0 +1,277 @@
+{
+  "verification_kind": "focused_authored_resource_coverage_summary",
+  "scope": "One authored scalar resource-accounting seam check of two AST-extracted functions; no project imports, full study summary, analysis or scientific replay.",
+  "base_commit": "78d6eeef59bfe97bc3202fd1660e357b67051d00",
+  "ordered_parents": [
+    "ba2bf994a8f0688e61d27d3b438360e44ebf1e24"
+  ],
+  "integrated_main_commit": "ba2bf994a8f0688e61d27d3b438360e44ebf1e24",
+  "recorded_execution_started_at_utc": "2026-11-10T04:08:16.504677+00:00",
+  "recorded_execution_completed_at_utc": "2026-11-10T04:08:18.205709+00:00",
+  "command_argv": [
+    "<project-python>",
+    "-s",
+    "-B",
+    "-m",
+    "pytest",
+    "-c",
+    "pytest-engineering.ini",
+    "--noconftest",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "<capture>/fixtures",
+    "--junitxml",
+    "<capture>/pytest.xml",
+    "-q",
+    "tests/test_resource_coverage_summary.py::test_resource_coverage_preserves_unknown_cost_and_exact_integer_totals"
+  ],
+  "working_directory": "<authored-worktree>",
+  "environment_overrides": {
+    "PYTEST_ADDOPTS": "",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0",
+    "PYTHONNOUSERSITE": "1",
+    "PYTHONUTF8": "1"
+  },
+  "inherited_python_and_pytest_options_removed": true,
+  "timeout_seconds": 60,
+  "git_probe_timeout_seconds": 10,
+  "runtime": {
+    "python_version": "3.12.10",
+    "sys_platform": "win32",
+    "pytest_version": "9.1.1",
+    "numpy_version": "2.5.3"
+  },
+  "runtime_identity_scope": "Captured interpreter/version/platform strings and installed distribution version metadata only; no executable or package-content identity, and no agreement with the lockfile was enforced.",
+  "runtime_executable_content_identity_captured": false,
+  "installed_package_content_identity_captured": false,
+  "runtime_lockfile_agreement_enforced": false,
+  "recorded_execution_status": "passed",
+  "recorded_exit_code": 0,
+  "execution_count": 1,
+  "automatic_retry_performed": false,
+  "timed_out": false,
+  "launch_error": null,
+  "recorded_tests": 1,
+  "recorded_failures": 0,
+  "recorded_errors": 0,
+  "recorded_skipped": 0,
+  "reported_warning_count": 0,
+  "pytest_summary": "1 passed in 0.22s",
+  "junit_suite_seconds": 0.143,
+  "counts_and_timing_scope": "Execution bookkeeping; no measured research cost, impact or performance evidence.",
+  "captured_source_and_configuration_identities": [
+    {
+      "path": "rlcd/weight_space/metrics.py",
+      "bytes": 3552,
+      "sha256": "3cf3061c0a6f1676066ef15649ac5877ba8161d11a5a3d24c4b0f06ecaea77ad"
+    },
+    {
+      "path": "scripts/run_trained_research.py",
+      "bytes": 95908,
+      "sha256": "b061c0a82ec2e80b694dd94a54922cf83ff033e38191e6045ea1d0c5daee6ccd"
+    },
+    {
+      "path": "tests/test_resource_coverage_summary.py",
+      "bytes": 6080,
+      "sha256": "62c4a7b93979368f38f6a49794d02a1ea473f2273107e03710eb7a7bc2897490"
+    },
+    {
+      "path": "pytest-engineering.ini",
+      "bytes": 1709,
+      "sha256": "57f3572c20c4969055c5f9b6cb01b989d2d1fb5f2389b3fdd0d1fad7ecdd944b"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 1136,
+      "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+    },
+    {
+      "path": "requirements.lock.txt",
+      "bytes": 1021,
+      "sha256": "3cc022d0c8d11ad2ed72bd2a247c8e249b3bd9570f356260aa0c0f2fa3319755"
+    }
+  ],
+  "captured_source_and_configuration_identity_count": 6,
+  "captured_source_before_after_equal": true,
+  "current_captured_source_and_configuration_match_capture": true,
+  "runner_identity_unchanged": true,
+  "git_state_unchanged": true,
+  "runtime_unchanged": true,
+  "source_identity_scope": "Six authored source/test/configuration/dependency-declaration files; not a project import closure or installed package-content inventory.",
+  "execution_seam": {
+    "method": "AST-extract and execute two function definitions using stdlib-only bindings; no project module imports.",
+    "functions": [
+      "rlcd/weight_space/metrics.py::observed_resource_summary",
+      "scripts/run_trained_research.py::summarize_resource_measurements"
+    ],
+    "full_summarize_main_executed": false,
+    "study_json_persistence_exercised": false,
+    "analyze_study_executed": false,
+    "producer_timers_executed_or_repaired": false
+  },
+  "resource_contract": {
+    "unknown": "None is unknown; zero is observed.",
+    "returned_keys": [
+      "assigned",
+      "observed",
+      "missing",
+      "observed_sum",
+      "complete_for_assigned",
+      "total_if_complete"
+    ],
+    "accepted_values": "Exactly native nonnegative int or finite float values, excluding bool and subclasses; storage bytes require int.",
+    "sum_policy": "Integer-only sums remain exact; any float uses math.fsum with binary64 precision and conversion/overflow limits.",
+    "empty_input": {
+      "assigned": 0,
+      "observed": 0,
+      "missing": 0,
+      "observed_sum": null,
+      "complete_for_assigned": true,
+      "total_if_complete": null
+    },
+    "trained_cost_fields": [
+      "fit_seconds_all_options",
+      "fit_selection_materialization_seconds",
+      "native_head_evaluation_seconds",
+      "binary64_head_evaluation_seconds",
+      "exact_application_rollback_verification_seconds",
+      "heldout_export_seconds",
+      "heldout_workflow_seconds",
+      "storage_bytes_pre_outcome"
+    ],
+    "legacy_alias_policy": "Four existing aliases read total_if_complete and remain null if any assigned value is unknown.",
+    "fresh_summary_schema": "wsp-trained-study-summary/2",
+    "schema_scope": "Fresh producer source contract only; full summary construction and persistence were not executed by this check.",
+    "evaluation_missing_cost_policy": "Include known costs from every assigned outcome, including evaluation_missing rows."
+  },
+  "authored_fixture": {
+    "mixed_values": [
+      null,
+      0,
+      2.5
+    ],
+    "mixed_summary": {
+      "assigned": 3,
+      "observed": 2,
+      "missing": 1,
+      "observed_sum": 2.5,
+      "complete_for_assigned": false,
+      "total_if_complete": null
+    },
+    "adapter_assigned": 5,
+    "adapter_fit_observed": 2,
+    "adapter_fit_missing": 3,
+    "adapter_fit_observed_sum": 2.5,
+    "adapter_fit_total_if_complete": null,
+    "storage_exact_integer_example": "2**60 + 1",
+    "fixture_costs_are_measured_research_costs": false
+  },
+  "captured_regression_coverage": [
+    "Unknown, known-zero, all-unknown, empty and iterator inputs retain distinct counts and nullable totals.",
+    "Large integer-only totals remain exact; float summation, mixed conversion overflow and finite-range overflow are checked.",
+    "Native numeric type boundary rejects bool, subclasses, spoofed type equality, strings, containers, negative and nonfinite values.",
+    "Eight-field adapter retains known costs on evaluation_missing assignments, missing dictionaries/fields and per-field coverage.",
+    "Four complete-total aliases, integer-only storage bytes, malformed cost rejection, ignored extra keys and input immutability."
+  ],
+  "limitations": [
+    "Availability covers supplied assignments and recorded values only; it does not establish complete instrumentation or lifecycle coverage.",
+    "If fit_options raises before returning, local options remains empty and fit_seconds_all_options can report zero despite attempted fitting; unchanged by this patch.",
+    "Option timers are nested in fit/selection/materialization; native, binary64, verification and export timers are nested in heldout workflow and are not additive to enclosing timers.",
+    "Current timer samples exclude some later persistence, scans and hashing; storage is an immediate-file scan before the current outcome write.",
+    "No producer execution, full summarize_main, JSON persistence, analyze_study, lineage loading, study replay or scientific artifact execution.",
+    "analyze_study remains deferred; no historical summaries, failed work, scientific outcomes or earlier receipt scopes are recovered or rewritten.",
+    "Cold acquisition/preparation/encoding, memory/energy, model/device coverage and full inference maintenance remain incomplete.",
+    "Runtime continuity concerns captured strings and installed version metadata, not interpreter executable or package-content identity or lockfile agreement.",
+    "No measured research cost, full lifecycle total, amortization crossover, cost advantage, causal usefulness or business-impact claim.",
+    "Documentation snippets remain unexecuted; recorded test does not verify later documentation/publication edits or hosted CI."
+  ],
+  "project_modules_imported": false,
+  "full_trained_summary_executed": false,
+  "analyze_study_executed": false,
+  "analyze_study_deferred": true,
+  "study_replay_executed": false,
+  "scientific_study_executed": false,
+  "live_provider_request_made": false,
+  "historical_resummary_performed": false,
+  "missing_historical_work_recovered": false,
+  "producer_timers_changed": false,
+  "new_research_cost_measured": false,
+  "full_lifecycle_cost_established": false,
+  "cost_advantage_established": false,
+  "documentation_snippets_executed": false,
+  "issue14_c0_status": "partial",
+  "issue14_c5_status": "partial",
+  "issue14_kept_open": true,
+  "original_criteria_earlier_receipt_scopes_and_historical_outcomes_unchanged": true,
+  "private_capture": {
+    "identities": [
+      {
+        "path": "run_check.py",
+        "bytes": 8404,
+        "sha256": "d9ffd73daec14fd8764c2f6c182fca3b03c6cf7d3330e4dd4add2f69107af0cc"
+      },
+      {
+        "path": "execution-launch.json",
+        "bytes": 2265,
+        "sha256": "d9d13b07863cddb1e28223ce6f7e3084f77e6819134cfd1a7621a9d5d4bdfa98"
+      },
+      {
+        "path": "execution-result.json",
+        "bytes": 1901,
+        "sha256": "9f50522a2685190de7ff651503567d930cae80d8ca49be604b6dfc0e717bb1a0"
+      },
+      {
+        "path": "before-source-identities.json",
+        "bytes": 909,
+        "sha256": "36c2dbe541bb8be87cb90490d382c455c12f1c92c73f8773b48b3cbf84f0d19c"
+      },
+      {
+        "path": "after-source-identities.json",
+        "bytes": 909,
+        "sha256": "36c2dbe541bb8be87cb90490d382c455c12f1c92c73f8773b48b3cbf84f0d19c"
+      },
+      {
+        "path": "stdout.log",
+        "bytes": 100,
+        "sha256": "04b5920db66f102066227aaf163735208769e10c8ff47d8d6e76b73a85efc3cb"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "pytest.xml",
+        "bytes": 403,
+        "sha256": "ba21f338edb08c01e306a7ffdf5b44d86210ce87e4926dfd5a58c10185b87e84"
+      },
+      {
+        "path": "publish.py",
+        "bytes": 31600,
+        "sha256": "d3e9fbdab13fa8750537d05b3cd8bf28fb9d001ca1bc6e48146453aea8d5b9ac"
+      },
+      {
+        "path": "publication-source-identities.json",
+        "bytes": 909,
+        "sha256": "36c2dbe541bb8be87cb90490d382c455c12f1c92c73f8773b48b3cbf84f0d19c"
+      },
+      {
+        "path": "publication-observation.json",
+        "bytes": 3490,
+        "sha256": "37f6e3e6c3d7134bcea2a891cc7097acde3ebaaea1a61725629dc9ec23596734"
+      }
+    ],
+    "raw_records_published": false,
+    "full_local_paths_build_identifiers_and_hostname_published": false
+  },
+  "publication": {
+    "observed_at_utc": "2026-11-10T04:17:25.567243+00:00",
+    "receipt_and_documentation_finalized_after_execution": true,
+    "publication_bookkeeping_reran_test": false,
+    "later_publication_verified_by_recorded_test": false,
+    "scope": "Retained identities and publication baselines checked with stdlib and read-only Git; no project execution."
+  }
+}

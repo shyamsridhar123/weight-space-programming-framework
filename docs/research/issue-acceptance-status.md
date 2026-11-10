@@ -1907,10 +1907,14 @@ including known costs when evaluation is missing. The
 [resource accounting contract](../weight-space/resource-accounting.md) separates
 availability from instrumentation coverage and discloses unchanged timer
 nesting and the early `fit_options` failure path that can report zero option
-fit time despite attempted fitting. Engineering receipt capture is pending;
-this follow-up claims no passing check, new measured cost, historical
-re-summary or recovered failed work. The original criterion remains partial
-and open.
+fit time despite attempted fitting. The
+[engineering receipt](../../provenance/verification/resource-coverage-summary-20261109.json)
+records one passing authored scalar seam check of the AST-extracted helper and
+adapter, without project imports, scientific execution or study replay. Runtime
+identity was captured and unchanged; agreement with the lockfile was not
+enforced. No new research cost is measured or failed work recovered;
+`analyze_study` remains deferred. The original criterion remains partial and
+open.
 
 #### #14 c1
 
@@ -1971,9 +1975,11 @@ and open.
 costs on assigned outcomes with missing evaluations and distinguishes observed
 sums from complete totals. Unknown costs are not imputed as free work. Field
 completeness does not repair producer underreporting, make nested timers
-additive or supply omitted cold preparation and maintenance costs. Verification
-capture is pending; historical summaries and this partial/open status remain
-unchanged.
+additive or supply omitted cold preparation and maintenance costs. The
+[engineering receipt](../../provenance/verification/resource-coverage-summary-20261109.json)
+records one passing authored scalar seam check, without scientific execution or
+study replay. Historical summaries remain unchanged, `analyze_study` remains
+deferred, and this criterion remains partial and open.
 
 #### #14 c6
 

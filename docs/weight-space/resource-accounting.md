@@ -77,7 +77,7 @@ The four existing total aliases now read the corresponding
 Fresh `summarize_main` output uses `wsp-trained-study-summary/2` for this
 changed total contract. Historical summaries retain their recorded schema and
 values. This change performs no historical re-summary, failed-work recovery or
-scientific execution, and does not change `analyze_study`.
+scientific execution, and leaves `analyze_study` deferred.
 
 ## Timer nesting and remaining gaps
 
@@ -103,6 +103,13 @@ preparation/encoding, memory/energy, model/device coverage and inference
 maintenance remain incomplete. This API establishes no lifecycle total,
 amortization crossover or cost advantage, and #14 c0/c5 remain partial and open.
 
-The planned engineering receipt is
-`provenance/verification/resource-coverage-summary-20261109.json`. Capture is
-pending; this document claims no passing verification run.
+The [engineering receipt](../../provenance/verification/resource-coverage-summary-20261109.json)
+records one passing authored scalar seam check of the AST-extracted helper and
+trained-resource adapter. It captures source commit
+`78d6eeef59bfe97bc3202fd1660e357b67051d00` and integrated main
+`ba2bf994a8f0688e61d27d3b438360e44ebf1e24`. Runtime identity was captured and
+unchanged across the check; agreement with the lockfile was not enforced.
+The check uses literal costs without project imports, scientific execution or
+study replay. It does not execute `summarize_main`, persist study summaries or
+verify later documentation/publication edits. Fixture values are not measured
+research costs; #14 c0/c5 remain partial and open.
