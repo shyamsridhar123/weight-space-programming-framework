@@ -1387,6 +1387,8 @@ stays partial and Issue #9 stays open.
 
 **Prospective scientific compatibility note, November 9, 2026:** The [companion](staged-scientific-compatibility.md) proposes a benchmark-specific reconciliation of the seven engineering slots with eleven scientific entries and separate scientific fallback. This documentation adds no implementation, protocol freeze, execution or scientific admission. Original criteria, engineering receipt scopes and historical outcomes remain unchanged; c1 stays partial and Issue #9 stays open.
 
+**Draft admission-package note, November 9, 2026:** The companion's [draft field table and ordered gates](staged-scientific-compatibility.md#draft-admission-package) identify the unresolved native evaluator/scientific owner, complete evidence and one-shot observation requirements for a future study. The study remains unselected and unexecuted; no freeze or admission follows. Original criteria, historical outcomes and prior evidence scopes are unchanged; c1 remains partial and Issue #9 remains open.
+
 **Saved cohort success verification supplement, November 9, 2026:** The
 [verification-only helper](staged-diagnosis.md#saved-cohort-success-verification)
 checks the saved successful terminal, complete result, binding and durable
