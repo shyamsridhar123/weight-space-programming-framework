@@ -231,7 +231,7 @@ class CodexProvider:
         except subprocess.TimeoutExpired:
             # The bounded version probe timed out before a worker was started.
             status, error = "timeout", "provider_deadline"
-        except (OSError, subprocess.CalledProcessError) as failure:
+        except (OSError, subprocess.CalledProcessError, UnicodeError) as failure:
             error = "transport_startup_failed:" + type(failure).__name__
         elapsed = time.perf_counter() - tick
         output = output.decode("utf-8", errors="replace") if isinstance(output, bytes) else output
