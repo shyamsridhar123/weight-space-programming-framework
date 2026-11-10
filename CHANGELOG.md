@@ -26,6 +26,15 @@ research draft.
   organizational and scientific evidence remain separate; no scientific
   acceptance status is promoted.
 
+- Implement the optional local-pilot governance API and CLI after proof-only
+  PR #87 merged. The [runtime guide](docs/governance/runtime.md) records a passing
+  focused synthetic check on November 10, 2026, with exit 0 and unchanged
+  before/after source identities. Hosted results are tracked against the
+  publishing PR's exact commit; the walkthrough has not been executed.
+  Static correspondence review and these checks supply no Python-to-Lean
+  refinement proof, reviewer authentication,
+  production authority or scientific evidence.
+
 - Bind each validated development-consumption purpose into the durable decision,
   including repeated consumption of an already consumed scope. Distinct purpose
   commitments no longer collapse into the same audit decision; consumed-key
