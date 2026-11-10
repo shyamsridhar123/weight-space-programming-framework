@@ -1131,6 +1131,19 @@ Historical records and criterion statuses are unchanged.
 
 **Later completion-lifecycle supplement, November 9, 2026:** The [same scoped offline receipt](../../provenance/verification/provider-completion-lifecycle-20261109.json) covers synthetic completion ambiguity and an accepted control, not an independent live editor. Failed attempts/trials retain parsed responses and unknown usage before broker charges or proposed actions. Future shared-parser revalidation of ambiguous prior streams can differ or fail; no historical stream was inspected. Earlier identities and snapshots keep their scope. The 90 historical failures' missing usage, unknown monetary charges, deployment revision and provider-origin attestation remain unresolved; this criterion and #5 c2 remain partial.
 
+**Later failed-response usage supplement, November 9, 2026:** The
+[scoped offline receipt](../../provenance/verification/provider-failed-response-usage-20261109.json)
+records one execution of six synthetic provider/broker cases. Valid, unambiguous
+reported counters receive one budget-accounting attempt before failure abstention;
+failure status, attempt and trial records persist. Missing, invalid or ambiguous
+usage stays unknown. Denied events preserve requested counters separately from
+admitted totals, which do not measure total consumption or monetary charges.
+Timeout status shares the source guard but has no separately asserted fixture.
+Existing public broker replay does not reconstruct or compare usage accounting.
+This supplies no independent live editor or provider-origin attestation. The 90
+historical failures' usage, charges and deployment revision remain unknown, with
+no finite total-cost bound; this criterion remains partial and open.
+
 #### #8 c7
 
 - [ ] A rounded/subset editing arm cannot retrieve exact hidden parent values via candidate feedback.
@@ -1987,6 +2000,15 @@ measurement and this criterion's partial status remain unchanged.
 
 **Remaining requirement / scope limit:** The literal independent held-out task-family and independently trained-lineage requirements remain unmet. Failed-call usage and hidden provider work have unknown amounts with no finite upper bounds; complete hidden-work accounting is absent.
 
+**Later failed-response usage supplement, November 9, 2026:** The
+[same scoped offline receipt](../../provenance/verification/provider-failed-response-usage-20261109.json)
+adds synthetic evidence for one accounting attempt on valid failed-response
+usage, preserving denied requested counters separately from admitted totals.
+Missing, invalid or ambiguous usage remains unknown. It supplies no independent
+held-out families, trained lineages, live attestation or historical hidden-work
+recovery; no finite total-cost bound follows. This criterion remains partial and
+open.
+
 #### #17 c3
 
 - [ ] Evaluate construction validity, behavior, retained obligations, utility/coverage and cost; no examples does not imply no task information.
@@ -1996,6 +2018,14 @@ measurement and this criterion's partial status remain unchanged.
 **Evidence:** [E21](#e21). Offline evaluation records completion 0/12 and successful-artifact coverage 0/12 as separate endpoints. All twelve candidates are missing; target/protected errors are null. Controls were scored separately and the full canonical outcomes and 22 deterministic files matched the one replay.
 
 **Remaining requirement / scope limit:** Live construction validity, behavior and retained obligations cannot be measured without artifacts. Every usage/cost amount is unknown and has no finite upper bound. No examples still does not mean no supplied task information; the usefulness of a completed live artifact cannot be assessed.
+
+**Later failed-response usage supplement, November 9, 2026:** The
+[same scoped offline receipt](../../provenance/verification/provider-failed-response-usage-20261109.json)
+supplies no new live artifacts or construction-validity, behavior, retention or
+utility evidence. Its admitted counters are budget bookkeeping, not total
+consumption or monetary charges. Historical usage and costs remain unknown; no
+finite total-cost bound or replay usage reconstruction follows. This criterion
+remains partial and open.
 
 #### #17 c4
 

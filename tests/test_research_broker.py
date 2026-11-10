@@ -272,12 +272,10 @@ def test_malformed_provider_event_type_retains_failed_attempt_and_trial(tmp_path
             ["metadata", "submit", "seal"] if valid else ["metadata", "harness_deadline_seal"])
         charges = [event.to_dict() for event in broker._session.trace
                    if event.to_dict()["action"] == "provider_usage"]
-        assert len(charges) == int(valid)
-        expected = {key: usage[key] if valid else 0 for key in ("input_tokens", "output_tokens")}
-        assert {key: getattr(broker._session.usage, key) for key in expected} == expected
+        assert len(charges) == 1
+        assert {key: getattr(broker._session.usage, key) for key in usage} == usage
         assert broker._session.usage.proposals == int(valid)
-        if valid:
-            assert charges[0]["status"] == "succeeded" and charges[0]["charges"] == expected
+        assert charges[0]["status"] == "succeeded" and charges[0]["charges"] == usage
 
 
 def test_provider_usage_is_complete_before_broker_actions(tmp_path, monkeypatch):
@@ -400,9 +398,45 @@ def test_nonfinite_provider_json_retains_failed_attempt_and_trial(tmp_path, monk
             assert attempt["events_sha256"] == hashlib.sha256(raw.encode("utf-8")).hexdigest()
             assert broker.is_sealed and [event["request"]["op"] for event in broker.public_trace] == [
                 "metadata", "harness_deadline_seal"]
-            assert not any(event.to_dict()["action"] == "provider_usage" for event in broker._session.trace)
-            assert broker._session.usage.input_tokens == broker._session.usage.output_tokens == 0
+            charges = [event.to_dict() for event in broker._session.trace
+                       if event.to_dict()["action"] == "provider_usage"]
+            assert len(charges) == int(field == "final")
+            expected = {key: valid_usage[key] if field == "final" else 0 for key in valid_usage}
+            assert {key: getattr(broker._session.usage, key) for key in expected} == expected
             assert broker._session.usage.proposals == 0
+            if field == "final":
+                assert charges[0]["status"] == "succeeded" and charges[0]["charges"] == valid_usage
+
+
+def test_failed_provider_usage_over_budget_retains_attempt_and_abstains(tmp_path):
+    from types import SimpleNamespace
+    from unittest.mock import Mock
+    from rlcd.weight_space.live_provider import run_brokered
+
+    base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
+    task = TaskSpec("failed-usage-budget", "edit", "Retain an over-budget failed attempt",
+                    base.architecture, base.sha256)
+    usage = {"input_tokens": 12, "output_tokens": 3}
+    attempt = {"status": "failed", "usage": usage, "response": None}
+    provider = SimpleNamespace(tool_free=True, call=Mock(return_value=attempt))
+    broker = ProposerBroker(task, base=base, limits=BudgetLimits(input_tokens=11))
+    directory = tmp_path / "trial"
+    trial = run_brokered(provider, broker, prompt="Return the fixed offline actions",
+                         directory=directory, max_rounds=3)
+
+    provider.call.assert_called_once()
+    assert trial["status"] == attempt["status"] == "failed"
+    assert trial["attempts"] == [attempt] and trial["assigned_trials"] == 1
+    assert json.loads((directory / "trial.json").read_text(encoding="utf-8")) == trial
+    assert broker.is_sealed and [event["request"]["op"] for event in broker.public_trace] == [
+        "metadata", "harness_deadline_seal"]
+    charges = [event.to_dict() for event in broker._session.trace
+               if event.to_dict()["action"] == "provider_usage"]
+    assert len(charges) == 1 and charges[0]["status"] == "denied"
+    assert charges[0]["requested_charges"] == usage and charges[0]["charges"] == {}
+    assert charges[0]["error"]["type"] == "BudgetExceeded"
+    assert broker._session.usage.input_tokens == broker._session.usage.output_tokens == 0
+    assert broker._session.usage.proposals == 0
 
 
 def test_deeply_nested_provider_json_retains_failed_attempt_and_trial(tmp_path, monkeypatch):
@@ -467,12 +501,10 @@ def test_deeply_nested_provider_json_retains_failed_attempt_and_trial(tmp_path, 
             ["metadata", "submit", "seal"] if valid else ["metadata", "harness_deadline_seal"])
         charges = [event.to_dict() for event in broker._session.trace
                    if event.to_dict()["action"] == "provider_usage"]
-        assert len(charges) == int(completed)
-        expected = {key: usage[key] if completed else 0 for key in ("input_tokens", "output_tokens")}
-        assert {key: getattr(broker._session.usage, key) for key in expected} == expected
+        assert len(charges) == 1
+        assert {key: getattr(broker._session.usage, key) for key in usage} == usage
         assert broker._session.usage.proposals == int(valid)
-        if completed:
-            assert charges[0]["status"] == "succeeded" and charges[0]["charges"] == expected
+        assert charges[0]["status"] == "succeeded" and charges[0]["charges"] == usage
 
 
 def test_public_event_derivative_retains_raw_identity_without_private_path(tmp_path):

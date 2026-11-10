@@ -1,0 +1,252 @@
+{
+  "schema": "wsp-local-engineering-verification/1",
+  "assembled_utc": "2026-11-10T00:37:06.691572+00:00",
+  "status": "passed",
+  "base_commit": "121aecb81c33e574cecc485ee80e27966eaf57c5",
+  "local_review_date": "2026-11-09",
+  "scope": "One scoped offline engineering execution of six explicit common provider/broker nodes with authored synthetic transport events and receipts; no live provider call, study, training, lineage load or historical replay.",
+  "execution_count": 1,
+  "automatic_retry_performed": false,
+  "test_nodes": [
+    "tests/test_research_broker.py::test_provider_completion_lifecycle_is_unambiguous_before_broker_actions",
+    "tests/test_research_broker.py::test_malformed_provider_event_type_retains_failed_attempt_and_trial",
+    "tests/test_research_broker.py::test_provider_usage_is_complete_before_broker_actions",
+    "tests/test_research_broker.py::test_nonfinite_provider_json_retains_failed_attempt_and_trial",
+    "tests/test_research_broker.py::test_failed_provider_usage_over_budget_retains_attempt_and_abstains",
+    "tests/test_research_broker.py::test_deeply_nested_provider_json_retains_failed_attempt_and_trial"
+  ],
+  "python_version": "3.12.10",
+  "capture": {
+    "started_utc": "2026-11-10T00:36:16.329497+00:00",
+    "completed_utc": "2026-11-10T00:36:22.490562+00:00",
+    "exit_code": 0,
+    "timed_out": false,
+    "source_identities_unchanged": true,
+    "command_argv": [
+      "<existing-python-3.12.10>",
+      "-s",
+      "-B",
+      "-m",
+      "pytest",
+      "-c",
+      "pytest.ini",
+      "--noconftest",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "<private-capture>\\tmp",
+      "--junitxml",
+      "<private-capture>\\pytest.xml",
+      "-q",
+      "tests/test_research_broker.py::test_provider_completion_lifecycle_is_unambiguous_before_broker_actions",
+      "tests/test_research_broker.py::test_malformed_provider_event_type_retains_failed_attempt_and_trial",
+      "tests/test_research_broker.py::test_provider_usage_is_complete_before_broker_actions",
+      "tests/test_research_broker.py::test_nonfinite_provider_json_retains_failed_attempt_and_trial",
+      "tests/test_research_broker.py::test_failed_provider_usage_over_budget_retains_attempt_and_abstains",
+      "tests/test_research_broker.py::test_deeply_nested_provider_json_retains_failed_attempt_and_trial"
+    ],
+    "working_directory": "<worktree>",
+    "environment_overrides": {
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONNOUSERSITE": "1",
+      "PYTHONUTF8": "1",
+      "PYTEST_ADDOPTS": ""
+    },
+    "inherited_pytest_options_and_python_path_removed": true,
+    "timeout_seconds": 45,
+    "junit": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "private_record_identities": [
+      {
+        "path": "run_check.py",
+        "bytes": 3793,
+        "sha256": "8eac26078ade86213b7b736e800b382e2ec8688f8f4902afb0933ca24a8720e0"
+      },
+      {
+        "path": "execution-launch.json",
+        "bytes": 1742,
+        "sha256": "51096fe9219807eb987fdcba467737503f8d638729289a43a41a65483b8ba4ef"
+      },
+      {
+        "path": "execution-result.json",
+        "bytes": 143,
+        "sha256": "5c90c2671ad373b7d186e2d1d043d07327b58042e6f8fae5f6b470fc31e27279"
+      },
+      {
+        "path": "before-source-identities.json",
+        "bytes": 1707,
+        "sha256": "0c4176af551da2c92a2f658349b580206d214c2d0aaaa4fd401cfbd0947dabdf"
+      },
+      {
+        "path": "after-source-identities.json",
+        "bytes": 1707,
+        "sha256": "0c4176af551da2c92a2f658349b580206d214c2d0aaaa4fd401cfbd0947dabdf"
+      },
+      {
+        "path": "stdout.log",
+        "bytes": 100,
+        "sha256": "de9dff3b1f1cad0d965cdbf9c29923819ad6f52e8f510b25f579f193993d92e8"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "pytest.xml",
+        "bytes": 1067,
+        "sha256": "06d39090663ec6ab5e470048df51d975e9f17b2b7fe63fd89c7dc11def4e4902"
+      }
+    ]
+  },
+  "source_evidence": {
+    "captured_source_before": [
+      {
+        "path": "rlcd/weight_space/live_provider.py",
+        "bytes": 19674,
+        "sha256": "37cf61d7ad196c470862dba74ccc412c76896e40ad5813f614d3a49211a534d2"
+      },
+      {
+        "path": "tests/test_research_broker.py",
+        "bytes": 39206,
+        "sha256": "d6bd53e7f2197c2acf0493bcac0d266e5e48a4338762e1210c8f5c9f8940729f"
+      },
+      {
+        "path": "rlcd/weight_space/broker.py",
+        "bytes": 15038,
+        "sha256": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+      },
+      {
+        "path": "rlcd/weight_space/workflow.py",
+        "bytes": 54271,
+        "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+      },
+      {
+        "path": "rlcd/weight_space/artifact.py",
+        "bytes": 7735,
+        "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+      },
+      {
+        "path": "rlcd/weight_space/program.py",
+        "bytes": 6317,
+        "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+      },
+      {
+        "path": "rlcd/weight_space/model.py",
+        "bytes": 10004,
+        "sha256": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba"
+      },
+      {
+        "path": "rlcd/weight_space/__init__.py",
+        "bytes": 3053,
+        "sha256": "6add2899c26aabf2f542cc27dce468d528cb658153f0ecc7457e1df85ff0e50a"
+      },
+      {
+        "path": "rlcd/__init__.py",
+        "bytes": 71,
+        "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+      },
+      {
+        "path": "pytest.ini",
+        "bytes": 27,
+        "sha256": "c809c969ec7e11b9ff37784e9c6fcc0b7c5148d168e18b05aed797e03fbd6ead"
+      },
+      {
+        "path": "pyproject.toml",
+        "bytes": 1136,
+        "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+      }
+    ],
+    "captured_source_after": [
+      {
+        "path": "rlcd/weight_space/live_provider.py",
+        "bytes": 19674,
+        "sha256": "37cf61d7ad196c470862dba74ccc412c76896e40ad5813f614d3a49211a534d2"
+      },
+      {
+        "path": "tests/test_research_broker.py",
+        "bytes": 39206,
+        "sha256": "d6bd53e7f2197c2acf0493bcac0d266e5e48a4338762e1210c8f5c9f8940729f"
+      },
+      {
+        "path": "rlcd/weight_space/broker.py",
+        "bytes": 15038,
+        "sha256": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+      },
+      {
+        "path": "rlcd/weight_space/workflow.py",
+        "bytes": 54271,
+        "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+      },
+      {
+        "path": "rlcd/weight_space/artifact.py",
+        "bytes": 7735,
+        "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+      },
+      {
+        "path": "rlcd/weight_space/program.py",
+        "bytes": 6317,
+        "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+      },
+      {
+        "path": "rlcd/weight_space/model.py",
+        "bytes": 10004,
+        "sha256": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba"
+      },
+      {
+        "path": "rlcd/weight_space/__init__.py",
+        "bytes": 3053,
+        "sha256": "6add2899c26aabf2f542cc27dce468d528cb658153f0ecc7457e1df85ff0e50a"
+      },
+      {
+        "path": "rlcd/__init__.py",
+        "bytes": 71,
+        "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+      },
+      {
+        "path": "pytest.ini",
+        "bytes": 27,
+        "sha256": "c809c969ec7e11b9ff37784e9c6fcc0b7c5148d168e18b05aed797e03fbd6ead"
+      },
+      {
+        "path": "pyproject.toml",
+        "bytes": 1136,
+        "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+      }
+    ],
+    "source_identities_unchanged": true
+  },
+  "captured_regression_assertions": [
+    "Valid unambiguous reported input/output counters from a failed response reach one budget-accounting attempt before failure abstention; failure status, attempt, trusted seal and persisted trial remain.",
+    "A denied accounting event retains requested input/output counters separately from empty admitted charges and zero admitted totals.",
+    "Missing, malformed, partial, boolean, negative and ambiguous completion usage is not admitted as zero or interpreted as valid actions.",
+    "Malformed event types, nonfinite final payloads and deeply nested payloads retain available valid counters while failed attempts persist.",
+    "Complete valid response behavior and duplicate/postcompletion-message ambiguity checks remain covered."
+  ],
+  "execution_policy": {
+    "explicit_nodes_only": true,
+    "inherited_pytest_plugins_disabled": true,
+    "conftest_disabled": true,
+    "pytest_cache_disabled": true,
+    "bytecode_disabled": true,
+    "user_site_disabled": true,
+    "private_temporary_directory": true,
+    "new_dependency_installed": false,
+    "original_studies_or_completed_captures_replayed": false
+  },
+  "limitations": [
+    "This capture verifies authored offline engineering cases only. The source identity list is scoped and is not a complete dependency/environment fingerprint or an OS/network sandbox.",
+    "The production guard also covers noncompleted timeout status, but this selected regression has no separate synthetic timeout receipt assertion.",
+    "Reported counters are not provider-origin attestation. Admitted totals are budget admission bookkeeping, not a measurement of total consumed resources. Denied requested counters do not establish monetary charges.",
+    "Provider-usage accounting is not reconstructed or compared by existing public broker replay.",
+    "No historical failed request is rerun or repaired. Usage, charges and deployment revision for the historical 90 failures remain unknown; no finite total-cost upper bound is established.",
+    "Issue #8 c6 and #17 c2/c3 remain partial and open. No construction, behavior, retention, utility, live-editor or scientific criterion is upgraded.",
+    "Raw capture records, fixture payloads and workstation paths remain private; the hashes identify records and provide no independent attestation.",
+    "Hosted CI, packaging/publication checks and subsequent documentation are separate from this execution. Any later integration must compare captured source/config identities before claiming a match."
+  ]
+}

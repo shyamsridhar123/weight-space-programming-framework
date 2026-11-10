@@ -302,11 +302,11 @@ def run_brokered(provider: CodexProvider, broker: Any, *, prompt: str,
         attempt = provider.call(request_prompt, directory=directory / f"provider-{round_number}",
                                 cwd=directory / "proposer-cwd", schema=ACTION_SCHEMA)
         attempts.append(attempt)
-        if attempt["status"] != "completed":
-            status = attempt["status"]
-            break
         try:
             broker.record_usage(*_usage_counts(attempt["usage"]))
+            if attempt["status"] != "completed":
+                status = attempt["status"]
+                break
             actions = attempt["response"]["actions"]
             if not isinstance(actions, list) or not actions or len(actions) > 8:
                 raise ValueError("Invalid action batch")
@@ -322,7 +322,7 @@ def run_brokered(provider: CodexProvider, broker: Any, *, prompt: str,
             if broker.is_sealed:
                 break
         except (ValueError, KeyError, TypeError, RecursionError):
-            status = "invalid"
+            status = attempt["status"] if attempt["status"] != "completed" else "invalid"
             break
     if not broker.is_sealed:
         broker.abstain()
