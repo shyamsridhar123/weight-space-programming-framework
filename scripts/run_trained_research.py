@@ -292,9 +292,11 @@ def fit_case_arm(lineage: dict, data: dict, case: dict, arm: str, artifact_root:
     directory = artifact_root/phase/lineage["id"]/"attempts"/case["case_id"].replace("/", "-")/arm
     directory.mkdir(parents=True, exist_ok=True)
     options = []
+    fit_options_returned = False
     error = None
     try:
         options = fit_options(lineage, data, case, arm)
+        fit_options_returned = True
         for option in options:
             prediction = external_codes(option["artifact"], features[calibration], case, arm, option["config"], features[target_rows])
             option["calibration"] = behavior_metrics(parent_cal, prediction, data["labels"][calibration],
@@ -350,7 +352,7 @@ def fit_case_arm(lineage: dict, data: dict, case: dict, arm: str, artifact_root:
                            "candidate_sha256": option["artifact"].sha256, "fit_seconds": option["fit_seconds"],
                            "diagnostics": option["diagnostics"]} for option in options],
               "structural_admission": structural, "fit_selection_materialization_seconds": time.perf_counter()-started,
-              "fit_seconds_all_options": sum(option["fit_seconds"] for option in options),
+              "fit_seconds_all_options": sum(option["fit_seconds"] for option in options) if fit_options_returned else None,
               "fitting_execution_accounting": "Torch/NumPy work outside cooperative session tools, explicitly timed; not a no-fitting interpreter",
               "parent_sha256": base.sha256, "candidate_artifact_sha256": chosen["artifact"].sha256,
               "program_sha256": chosen["program"].sha256, "task_sha256": task.sha256,
