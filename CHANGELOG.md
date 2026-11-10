@@ -7,6 +7,16 @@ research draft.
 
 ## Unreleased
 
+- Leave descendant cleanup unknown (`None`/JSON `null`) when pipes drain after
+  a timeout; retain `False` when cleanup waits are exhausted and preserve
+  ordinary completion. The
+  [authored offline receipt](provenance/verification/provider-timeout-cleanup-20261109.json)
+  records one passing regression with four mocked communication sequences,
+  retained output and exact requested wait/kill calls. This establishes no
+  native cleanup, containment, output-size bound, provider or scientific
+  attestation. Earlier evidence and historical outcomes remain unchanged;
+  #5 c1 stays partial and open, and #5 c2/#8 c6 remain partial/open.
+
 - Serialize decoded, sanitized provider events with ASCII-safe JSON escapes so
   a lone surrogate cannot prevent writing the public UTF-8 derivative. The
   [authored offline receipt](provenance/verification/provider-surrogate-publication-20261109.json)
