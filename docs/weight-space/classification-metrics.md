@@ -54,7 +54,15 @@ This utility adds no scoring callback, score decoder, missing-study outcome,
 eligibility rule, uncertainty estimate or success decision. Existing queue
 metrics and their callers retain their behavior. The [authored engineering
 check](../../tests/test_correctness_transition_counts.py) exercises the literal
-example and input boundary. Documentation snippets are not separately executed.
+example and input boundary. Its separate
+[verification receipt](../../provenance/verification/correctness-transition-counts-20261109.json)
+records one passing invocation at the captured source snapshot, with no reported
+warnings, retry or timeout and unchanged source, runner, Git and runtime
+identities. It checks net cancellation, wrong-to-wrong decisions, native integer
+counts, the transition partition, empty Boolean inputs, Boolean sequences and
+invalid inputs in all three argument positions. Execution counts and elapsed
+time are bookkeeping. Documentation snippets are not separately executed, and
+the captured check does not verify later documentation or publication edits.
 
 The helper is available to future explicitly decoded classification callers.
 It is not integrated into the [prospective scientific
