@@ -145,9 +145,10 @@ JSON escapes. A lone surrogate therefore remains escaped in the public UTF-8
 file while ordinary Unicode survives JSON decoding. The
 [authored offline receipt](../../provenance/verification/provider-surrogate-publication-20261109.json)
 checks a handcrafted escaped synthetic profile path, one high surrogate and
-ordinary accented, Greek and emoji text. Raw and public streams yield the same
-parser result: the surrogate event retains `invalid_event`, and the following
-final response and usage remain readable. Raw bytes and three synthetic inert
+ordinary accented, Greek and emoji text. In that captured surrogate fixture,
+raw and public streams yielded the same parser result: the surrogate event
+retained `invalid_event`, and the following final response and usage remained
+readable. Raw bytes and three synthetic inert
 metadata copies stay unchanged; raw/public hashes and the strict seven-field
 publication record remain separate and exact. This does not exercise a live
 CLI, malformed raw UTF-8, exhaustive Unicode, broker usage admission or the
@@ -157,6 +158,51 @@ receipts keep their captured scope; the 90 failures' missing usage, unknown
 charges and deployment revision, absence of a finite total-cost bound and
 provider-origin attestation remain unresolved. Issue #5 c2 and #8 c6 remain
 partial and open.
+
+**Prospective JSON-key sanitation supplement, November 9, 2026.** The shared
+[publisher](../../rlcd/weight_space/live_provider.py) recursively sanitizes
+decoded JSON object keys and string values using the existing profile-prefix
+regular expressions. JSON escapes in keys are decoded before sanitation. If
+two keys in the same object become equal after sanitation, the whole event is
+omitted and its public line is exactly the following JSON string:
+
+```json
+"public event omitted: JSON object key collision after profile redaction"
+```
+
+All redactions accumulated for that omitted event are rolled back; counts from
+preceding retained events remain, and following shallow events continue to be
+published. Equal redacted keys in separate objects are allowed. Omission may
+replace a valid raw JSON object with a public JSON string, so raw/public parser
+equivalence is not claimed for collision events: the public marker may yield
+`invalid_event`.
+
+Raw event bytes remain unchanged. `request.json`, `response-schema.json` and
+`receipt.json` are copied verbatim. The existing seven-field publication-record
+shape and `JSON_reserialization_and_user_profile_prefix_redaction` transform
+are unchanged; hashes and counts describe the resulting derivative. The
+existing regular expressions, malformed/overnested fallback and strict raw
+UTF-8 limitations are unchanged. This behavior establishes no general
+confidentiality or metadata-sanitation guarantee.
+
+The [authored offline receipt](../../provenance/verification/provider-public-event-keys-20261109.json)
+records one passing regression with eight new synthetic cases, using
+AST-extracted `publish_attempt` and its three JSON-key helpers, stdlib bindings
+and a disclosed test-local `write_json` substitute. Its cases cover nested
+POSIX and escaped Windows profile keys/values, ordinary Unicode, lone
+surrogates, pre-existing marker keys, collision and insertion-order count
+rollback, and allowed equal keys across separate objects. The check imports no
+project modules and does not execute the production JSON writer, replay a
+raw/public parser, contact a provider or run a scientific study. It does not
+verify the later documentation/publication edits. Captured runtime continuity
+concerns Python/platform strings and the installed pytest version, not
+executable/package-content identity or agreement with the lockfile.
+
+This is a prospective publisher change, with no historical stream inspection,
+repair or replay. Earlier receipts retain their captured scope. The 90
+historical failures' missing usage, unknown charges and deployment revision,
+absence of a finite total-cost bound and provider-origin attestation remain
+unresolved. Issue #5 c2 and #8 c6 remain partial and open.
 
 **Prospective timeout-cleanup supplement, November 9, 2026.** The communication
 helper now leaves descendant cleanup unknown (`None`, represented as JSON

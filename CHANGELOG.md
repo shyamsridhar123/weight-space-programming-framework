@@ -7,6 +7,15 @@ research draft.
 
 ## Unreleased
 
+- Sanitize decoded JSON keys as well as string values in public event derivatives.
+  Same-object profile-redaction collisions omit the whole event and roll back
+  its count; the public string marker may yield `invalid_event`, with no claimed
+  raw/public parser equivalence. The [publication contract](docs/research/live-studies.md)
+  and [authored offline receipt](provenance/verification/provider-public-event-keys-20261109.json)
+  describe one passing synthetic AST regression with a disclosed test-local
+  JSON sink. Production writer, live-provider and historical-repair evidence
+  remain outside its scope; #5 c2 and #8 c6 remain partial/open.
+
 - Correct pre-return [fit-cost missingness](docs/weight-space/resource-accounting.md):
   `fit_seconds_all_options` remains unknown (`None` / JSON `null`) until eager
   `fit_options` returns, including failures after partial internal fitting.
@@ -93,7 +102,8 @@ research draft.
   a lone surrogate cannot prevent writing the public UTF-8 derivative. The
   [authored offline receipt](provenance/verification/provider-surrogate-publication-20261109.json)
   checks escaped synthetic profile redaction, retained ordinary Unicode, the
-  same raw/public parser result and later response/usage, unchanged raw bytes
+  same raw/public parser result for that surrogate fixture and later
+  response/usage, unchanged raw bytes
   and inert copied metadata, separate hashes and the exact existing publication
   record. This handcrafted fixture does not establish exhaustive Unicode,
   malformed raw UTF-8 or arbitrary-data confidentiality coverage. No live CLI
