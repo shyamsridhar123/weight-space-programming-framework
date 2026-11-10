@@ -744,7 +744,12 @@ def test_public_event_derivative_retains_raw_identity_without_private_path(tmp_p
     assert record["redactions"] == 1 and not record["raw_bytes_published"]
 
 
-def test_public_event_derivative_handles_lone_surrogate_without_losing_replay_identity(tmp_path):
+@pytest.mark.parametrize("separator", ["", "\u0085", "\u2028", "\u2029"],
+                         ids=["ordinary_unicode", "next_line", "line_separator", "paragraph_separator"])
+@pytest.mark.parametrize("delimiter", ["\n", "\r\n"], ids=["lf", "crlf"])
+@pytest.mark.parametrize("layout", ["unterminated", "terminated", "interior_blank", "trailing_blank"])
+def test_public_event_derivative_handles_lone_surrogate_without_losing_replay_identity(
+        tmp_path, separator, delimiter, layout):
     import hashlib
     from rlcd.weight_space import live_provider
 
@@ -752,14 +757,25 @@ def test_public_event_derivative_handles_lone_surrogate_without_losing_replay_id
     # Redact decoded profile spellings while keeping lone surrogates escaped.
     surrogate_event = {"type": "diagnostic", "message": custom_home + r"\log", "note": "\ud800"}
     surrogate_line = json.dumps(surrogate_event).replace("Users", r"U\u0073ers")
-    unicode_event = {"type": "diagnostic", "message": "caf\u00e9 \u03bb \U0001f680"}
+    unicode_event = {"type": "diagnostic", "message": "caf\u00e9 \u03bb \U0001f680 before" + separator + "after"}
     response = {"actions": [], "reason": "offline fixture"}
     usage = {"input_tokens": 17, "output_tokens": 7}
     lines = [surrogate_line, json.dumps(unicode_event, ensure_ascii=False),
              json.dumps({"type": "item.completed", "item": {
                  "type": "agent_message", "text": json.dumps(response)}}),
              json.dumps({"type": "turn.completed", "usage": usage})]
-    raw = ("\n".join(lines) + "\n").encode("utf-8")
+    framed_lines = list(lines)
+    expected_public_lines = [
+        json.dumps(surrogate_event | {"message": r"[USER_PROFILE]\log"}),
+        json.dumps(unicode_event), *lines[2:]]
+    if layout == "interior_blank":
+        framed_lines.insert(2, "")
+        expected_public_lines.insert(2, "")
+    elif layout == "trailing_blank":
+        framed_lines.append("")
+        expected_public_lines.append("")
+    raw_text = delimiter.join(framed_lines) + ("" if layout == "unterminated" else delimiter)
+    raw = raw_text.encode("utf-8")
     source, destination = tmp_path / "private", tmp_path / "public"
     source.mkdir()
     metadata = {name: (json.dumps({"synthetic": name}) + "\n").encode("utf-8")
@@ -771,15 +787,22 @@ def test_public_event_derivative_handles_lone_surrogate_without_losing_replay_id
     record = live_provider.publish_attempt(source, destination)
 
     public = (destination / "events.jsonl").read_bytes()
-    public_lines = public.decode("utf-8").splitlines()
+    # Independent byte-derived framing: never call the production helper here.
+    public_lines = public.decode("utf-8").removesuffix("\n").split("\n")
+    assert public_lines == expected_public_lines
+    assert len(public_lines) == len(framed_lines)
+    assert public == ("\n".join(expected_public_lines) + "\n").encode("utf-8")
     assert (source / "events.jsonl").read_bytes() == raw
     assert r"U\u0073ers" in lines[0] and json.loads(lines[0]) == surrogate_event
-    assert public_lines[0] == json.dumps(surrogate_event | {"message": r"[USER_PROFILE]\log"})
-    assert r"\ud800" in public_lines[0] and "surrogate-fixture" not in public_lines[0]
+    assert r"\ud800" in public_lines[0] and "surrogate-fixture" not in public.decode("utf-8")
     assert json.loads(public_lines[1]) == unicode_event
-    assert public_lines[2:] == lines[2:]
-    assert live_provider.parse_events(public.decode("utf-8")) == live_provider.parse_events(raw.decode("utf-8")) == (
-        response, usage, [], ["invalid_event"], [])
+    if separator:
+        assert separator in lines[1] and separator.encode("utf-8") in raw
+    assert live_provider.parse_events(lines[0]) == (None, {}, [], ["invalid_event"], [])
+    assert live_provider.parse_events(lines[1]) == (None, {}, [], [], [])
+    expected_errors = ["invalid_event"] * (1 + int(layout in ("interior_blank", "trailing_blank")))
+    assert live_provider.parse_events(public.decode("utf-8")) == live_provider.parse_events(raw_text) == (
+        response, usage, [], expected_errors, [])
     for name, content in metadata.items():
         assert (source / name).read_bytes() == (destination / name).read_bytes() == content
     assert record == {"schema": "wsp-public-event-derivative/1",
@@ -790,6 +813,41 @@ def test_public_event_derivative_handles_lone_surrogate_without_losing_replay_id
                       "raw_bytes_published": False,
                       "scope": "public_derivative_replay;_raw_identity_disclosed_not_publicly_replayed"}
     assert record["raw_events_sha256"] != record["public_events_sha256"]
+    assert json.loads((destination / "event-publication.json").read_text(encoding="utf-8")) == record
+
+
+@pytest.mark.parametrize("case", ["empty", "standalone_cr"])
+def test_public_event_derivative_preserves_empty_and_lone_cr_framing(tmp_path, case):
+    import hashlib
+    from rlcd.weight_space import live_provider
+
+    final_line = json.dumps({"type": "item.completed", "item": {
+        "type": "agent_message", "text": json.dumps({"actions": [], "reason": "offline fixture"})}})
+    usage_line = json.dumps({"type": "turn.completed", "usage": {"input_tokens": 17, "output_tokens": 7}})
+    # A standalone CR is JSON whitespace, not a JSONL record delimiter.
+    raw_text = "" if case == "empty" else final_line + "\r" + usage_line
+    raw = raw_text.encode("utf-8")
+    source, destination = tmp_path / "private", tmp_path / "public"
+    source.mkdir()
+    metadata = {name: b"{}\n" for name in ("request.json", "response-schema.json", "receipt.json")}
+    for name, content in metadata.items():
+        (source / name).write_bytes(content)
+    (source / "events.jsonl").write_bytes(raw)
+
+    record = live_provider.publish_attempt(source, destination)
+
+    public = (destination / "events.jsonl").read_bytes()
+    public_lines = public.decode("utf-8").removesuffix("\n").split("\n") if public else []
+    assert public_lines == ([raw_text] if raw else [])
+    assert public == (raw + b"\n" if raw else b"")
+    expected = (None, {}, [], ["invalid_event"] if raw else [], [])
+    assert live_provider.parse_events(raw_text) == live_provider.parse_events(public.decode("utf-8")) == expected
+    assert (source / "events.jsonl").read_bytes() == raw
+    for name, content in metadata.items():
+        assert (source / name).read_bytes() == (destination / name).read_bytes() == content
+    assert record["raw_events_sha256"] == hashlib.sha256(raw).hexdigest()
+    assert record["public_events_sha256"] == hashlib.sha256(public).hexdigest()
+    assert record["redactions"] == 0 and record["raw_bytes_published"] is False
     assert json.loads((destination / "event-publication.json").read_text(encoding="utf-8")) == record
 
 

@@ -113,11 +113,16 @@ def _unique_json_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return result
 
 
+def _jsonl_lines(text: str) -> list[str]:
+    """Split LF/CRLF records, preserving blanks and ignoring one final delimiter."""
+    return text.replace("\r\n", "\n").removesuffix("\n").split("\n") if text else []
+
+
 def parse_events(output: str) -> tuple[Any, dict[str, Any], list[str], list[str], list[dict[str, Any]]]:
     """Parse the final message, and inspect tool events at every lifecycle stage."""
     final, usage, unapproved, errors, diagnostics = None, {}, [], [], []
     completion_seen = False
-    for line in output.splitlines():
+    for line in _jsonl_lines(output):
         try:
             event = json.loads(line, object_pairs_hook=_unique_json_object)
             if type(event) is not dict:
@@ -386,7 +391,7 @@ def publish_attempt(source: Path, destination: Path) -> dict[str, Any]:
         return value
 
     lines = []
-    for line in raw.decode("utf-8").splitlines():
+    for line in _jsonl_lines(raw.decode("utf-8")):
         previous_redactions = redactions
         try:
             value = json.loads(line, object_pairs_hook=_unique_json_object)
