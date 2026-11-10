@@ -81,6 +81,21 @@ behavior remains missing, rather than being imputed as a measured failure. If a
 deployed fallback is evaluated, report that system outcome separately and name
 the fallback rule; do not credit fallback performance to a missing proposal.
 
+The prospective support runner reports a narrower engineering measure named
+**sample-threshold accounting**, described in the
+[data-role account](evaluation-data-roles.md). Its artifact numerator counts
+frozen admitted proposals; candidate-file existence alone does not qualify.
+For example, six assigned proposals with two admitted artifacts, both retaining
+complete scored endpoints and one passing the frozen sample thresholds, have
+artifact coverage `2/6`, all-assigned sample-threshold success `1/6` and
+conditional sample-threshold success `1/2`. The other four hypothetical
+endpoints remain missing. Conditional endpoint means require the corresponding
+endpoint for every admitted artifact; an incomplete set yields `null` rather
+than an observed-only mean. Preparation and outcome-unknown records have no
+terminal rates. These counts do not supply a scientific useful-effect margin,
+complete cost accounting, a fresh cohort or the remaining Issue #2 c2/c7
+evidence. The full rubric requirements above and below still apply.
+
 Freeze reason-specific sensitivity analyses. For bounded endpoints, publish
 worst/best case bounds for all missing assigned outcomes using the declared
 endpoint support; for unbounded costs/losses, define justified bounds or retain

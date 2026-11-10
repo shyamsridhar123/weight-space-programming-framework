@@ -142,6 +142,203 @@ def _forbid_prediction_replay(monkeypatch):
         monkeypatch.setattr(runner, name, forbidden)
 
 
+def _sample_threshold_case():
+    statuses = ["admitted", "admitted", "admitted", "abstained", "rejected", "failed"]
+    protocol = {"configuration": {"admission": {
+        "minimum_target_gain": .25, "maximum_protected_harm": 0.}},
+        "assignments": [{"assignment_id": f"assigned-{index}", "proposal_status": status,
+                         "reason": "synthetic-" + status} for index, status in enumerate(statuses)]}
+    outcomes = runner._outcomes(protocol, "succeeded")
+    for outcome, (gain, harm, passed) in zip(outcomes, [(.25, 0., True), (.5, .25, False),
+                                                      (None, -.25, False)]):
+        outcome.update(metrics={"target_gain": gain, "protected_harm": harm},
+                       meets_frozen_sample_thresholds=passed)
+    return protocol, outcomes
+
+
+def _assert_terminal_accounting(run, protocol, report):
+    accounting = report["sample_threshold_accounting"]
+    reduced = runner._sample_threshold_accounting(protocol, report["assignments"], report["status"])
+    assert canonical_bytes(accounting) == canonical_bytes(reduced)
+    manifest = runner.read_json(run / "manifest.json")
+    assert manifest["schema"] == "wsp-prospective-support-manifest/2"
+    assert report["schema"] == "wsp-prospective-support-evaluation/2"
+    assert canonical_bytes(manifest["sample_threshold_accounting"]) == canonical_bytes(accounting)
+    if report["result"] is not None:
+        assert report["result"]["schema"] == "wsp-prospective-support-result/2"
+        assert report["result"]["evaluator_id"] == "prospective-support-native-readout/2"
+        assert canonical_bytes(report["result"]["sample_threshold_accounting"]) == canonical_bytes(accounting)
+    return accounting
+
+
+def _assert_unobserved_accounting(accounting, assigned, admitted):
+    assert accounting == {
+        "schema": "wsp-prospective-support-sample-threshold-accounting/1",
+        "assigned_count": assigned, "admitted_count": admitted, "scored_count": 0,
+        "target_gain_observed_count": 0, "protected_harm_observed_count": 0,
+        "complete_endpoint_count": 0, "missing_endpoint_count": assigned,
+        "admitted_missing_endpoint_count": admitted, "sample_threshold_success_count": 0,
+        "artifact_coverage": admitted / assigned, "all_assigned_sample_threshold_success_rate": 0.,
+        "conditional_sample_threshold_success_rate": 0. if admitted else None,
+        "conditional_target_gain_mean": None, "conditional_protected_harm_mean": None}
+
+
+@pytest.mark.parametrize(("last_endpoints", "target_count", "harm_count", "target_mean", "harm_mean"), [
+    ((None, -.25), 2, 3, None, 0.), ((-.25, None), 3, 2, 1 / 6, None)])
+def test_sample_threshold_accounting_preserves_assignment_and_endpoint_denominators(
+        last_endpoints, target_count, harm_count, target_mean, harm_mean):
+    protocol, outcomes = _sample_threshold_case()
+    outcomes[2]["metrics"] = dict(zip(("target_gain", "protected_harm"), last_endpoints))
+    assert runner._sample_threshold_accounting(protocol, outcomes, "succeeded") == {
+        "schema": "wsp-prospective-support-sample-threshold-accounting/1",
+        "assigned_count": 6, "admitted_count": 3, "scored_count": 3,
+        "target_gain_observed_count": target_count, "protected_harm_observed_count": harm_count,
+        "complete_endpoint_count": 2, "missing_endpoint_count": 4,
+        "admitted_missing_endpoint_count": 1, "sample_threshold_success_count": 1,
+        "artifact_coverage": .5, "all_assigned_sample_threshold_success_rate": 1 / 6,
+        "conditional_sample_threshold_success_rate": 1 / 3,
+        "conditional_target_gain_mean": target_mean, "conditional_protected_harm_mean": harm_mean}
+
+
+def test_sample_threshold_accounting_preserves_small_terms_in_conditional_means():
+    protocol, outcomes = _sample_threshold_case()
+    protocol["configuration"]["admission"]["minimum_target_gain"] = -1.
+    for outcome, gain in zip(outcomes, [1., 1e-16, -1.]):
+        outcome.update(metrics={"target_gain": gain, "protected_harm": 0.},
+                       meets_frozen_sample_thresholds=True)
+    accounting = runner._sample_threshold_accounting(protocol, outcomes, "succeeded")
+    assert accounting["conditional_target_gain_mean"] == 1e-16 / 3
+    assert accounting["conditional_protected_harm_mean"] == 0.
+
+
+@pytest.mark.parametrize(("minimum", "maximum", "gain", "harm", "passed"), [
+    (.25, 0., .25, 0., True), (0., 0., 0, 0, True),
+    (-.25, -.25, -.25, -.25, True), (-.25, -.25, -.5, -.25, False),
+    (-.25, -.25, -.25, 0., False), (-1., 1., -1., 1., True),
+    (.25, 0., .125, 0., False), (.25, 0., .25, .125, False),
+    (0., 0., None, 0., False), (0., 0., 0., None, False), (0., 0., None, None, False)])
+def test_sample_threshold_accounting_keeps_inclusive_zero_and_negative_thresholds(
+        minimum, maximum, gain, harm, passed):
+    protocol, outcomes = _sample_threshold_case()
+    protocol["assignments"] = protocol["assignments"][:1]
+    protocol["configuration"]["admission"].update(minimum_target_gain=minimum, maximum_protected_harm=maximum)
+    outcome = outcomes[0]
+    outcome.update(metrics={"target_gain": gain, "protected_harm": harm},
+                   meets_frozen_sample_thresholds=passed)
+    accounting = runner._sample_threshold_accounting(protocol, [outcome], "succeeded")
+    assert accounting["sample_threshold_success_count"] == int(passed)
+    assert accounting["all_assigned_sample_threshold_success_rate"] == float(passed)
+    assert accounting["conditional_sample_threshold_success_rate"] == float(passed)
+    assert accounting["complete_endpoint_count"] == int(gain is not None and harm is not None)
+    assert accounting["conditional_target_gain_mean"] == gain
+    assert accounting["conditional_protected_harm_mean"] == harm
+
+
+@pytest.mark.parametrize("change", ["missing", "extra", "reordered", "duplicate_frozen", "duplicate_recorded"])
+def test_sample_threshold_accounting_requires_exact_frozen_assignment_sequence(change):
+    protocol, outcomes = _sample_threshold_case()
+    if change == "missing":
+        outcomes.pop()
+    elif change == "extra":
+        outcomes.append(copy.deepcopy(outcomes[-1]))
+    elif change == "reordered":
+        outcomes[0], outcomes[1] = outcomes[1], outcomes[0]
+    elif change == "duplicate_frozen":
+        protocol["assignments"][1]["assignment_id"] = protocol["assignments"][0]["assignment_id"]
+    else:
+        outcomes[1]["assignment_id"] = outcomes[0]["assignment_id"]
+    with pytest.raises(ValueError):
+        runner._sample_threshold_accounting(protocol, outcomes, "succeeded")
+
+
+@pytest.mark.parametrize(("path", "replacement"), [
+    (("protocol", "assignments", 0, "proposal_status"), "pending"),
+    (("outcomes", 0, "assignment_id"), "unfrozen-assignment"),
+    (("outcomes", 0, "proposal_status"), "abstained"),
+    (("outcomes", 0, "reason"), "different-frozen-reason"),
+    (("outcomes", 0, "evaluation_status"), "not_scored"),
+    (("outcomes", 3, "evaluation_status"), "succeeded"),
+    (("outcomes", 3, "metrics"), {}),
+    (("outcomes", 3, "meets_frozen_sample_thresholds"), True),
+    (("outcomes", 0, "meets_frozen_sample_thresholds"), 1),
+    (("outcomes", 0, "meets_frozen_sample_thresholds"), False),
+    (("outcomes", 1, "meets_frozen_sample_thresholds"), True),
+    (("outcomes", 2, "meets_frozen_sample_thresholds"), True)])
+def test_sample_threshold_accounting_rejects_changed_or_unscored_assignment_fields(path, replacement):
+    protocol, outcomes = _sample_threshold_case()
+    target = {"protocol": protocol, "outcomes": outcomes}
+    for key in path[:-1]:
+        target = target[key]
+    target[path[-1]] = replacement
+    with pytest.raises(ValueError):
+        runner._sample_threshold_accounting(protocol, outcomes, "succeeded")
+
+
+@pytest.mark.parametrize("field", ["assignment_id", "proposal_status", "evaluation_status", "reason",
+                                  "metrics", "meets_frozen_sample_thresholds"])
+def test_sample_threshold_accounting_requires_successful_outcome_fields(field):
+    protocol, outcomes = _sample_threshold_case()
+    del outcomes[0][field]
+    with pytest.raises(ValueError):
+        runner._sample_threshold_accounting(protocol, outcomes, "succeeded")
+
+
+@pytest.mark.parametrize("endpoint", ["target_gain", "protected_harm"])
+@pytest.mark.parametrize(("value", "target_passes", "harm_passes"), [
+    (True, True, False), (False, False, True), (float("nan"), False, False),
+    (float("inf"), True, False), (-float("inf"), False, True),
+    (1.01, True, False), (-1.01, False, True), ("0", False, False)])
+def test_sample_threshold_accounting_rejects_invalid_endpoints(endpoint, value, target_passes, harm_passes):
+    protocol, outcomes = _sample_threshold_case()
+    outcomes[0]["metrics"][endpoint] = value
+    # Keep the flag consistent with comparisons wherever defined, so numeric
+    # validation cannot pass solely by detecting a contradictory threshold flag.
+    outcomes[0]["meets_frozen_sample_thresholds"] = target_passes if endpoint == "target_gain" else harm_passes
+    with pytest.raises(ValueError):
+        runner._sample_threshold_accounting(protocol, outcomes, "succeeded")
+
+
+@pytest.mark.parametrize("endpoint", ["target_gain", "protected_harm"])
+def test_sample_threshold_accounting_requires_both_endpoint_keys(endpoint):
+    protocol, outcomes = _sample_threshold_case()
+    del outcomes[0]["metrics"][endpoint]
+    outcomes[0]["meets_frozen_sample_thresholds"] = False
+    with pytest.raises(ValueError):
+        runner._sample_threshold_accounting(protocol, outcomes, "succeeded")
+
+
+@pytest.mark.parametrize("status", ["failed", "rejected", "abstained"])
+def test_sample_threshold_accounting_retains_admissions_without_retained_scores(status):
+    protocol, _ = _sample_threshold_case()
+    if status == "abstained":
+        protocol["assignments"] = protocol["assignments"][3:]
+    accounting = runner._sample_threshold_accounting(protocol, runner._outcomes(protocol, status), status)
+    _assert_unobserved_accounting(accounting, 3 if status == "abstained" else 6,
+                                 0 if status == "abstained" else 3)
+    if status == "abstained":
+        with pytest.raises(ValueError):
+            runner._sample_threshold_accounting(protocol, runner._outcomes(protocol, "succeeded"), "succeeded")
+
+
+@pytest.mark.parametrize(("status", "admitted_status"), [
+    ("succeeded", "failed"), ("failed", "rejected"), ("rejected", "failed"),
+    ("abstained", "not_scored"), ("outcome_unknown", "outcome_unknown")])
+def test_sample_threshold_accounting_rejects_terminal_state_contradictions(status, admitted_status):
+    protocol, _ = _sample_threshold_case()
+    with pytest.raises(ValueError):
+        runner._sample_threshold_accounting(protocol, runner._outcomes(protocol, admitted_status), status)
+
+
+@pytest.mark.parametrize("status", ["failed", "rejected"])
+def test_sample_threshold_accounting_rejects_metrics_retained_after_failure(status):
+    protocol, _ = _sample_threshold_case()
+    outcomes = runner._outcomes(protocol, status)
+    outcomes[0].update(metrics={"target_gain": None, "protected_harm": None},
+                       meets_frozen_sample_thresholds=False)
+    with pytest.raises(ValueError):
+        runner._sample_threshold_accounting(protocol, outcomes, status)
+
+
 def test_real_pipeline_commits_aliases_and_attempt_before_native_callback(support_case, monkeypatch):
     case = support_case
     config = copy.deepcopy(case["config"])
@@ -162,6 +359,9 @@ def test_real_pipeline_commits_aliases_and_attempt_before_native_callback(suppor
         patch.setattr(TextPreprocessing, "transform", development_transform)
         run, protocol = _prepare(case, config=config)
     assert len(development_calls) == 3
+    assert protocol["schema"] == "wsp-prospective-support-protocol/1"
+    assert protocol["evaluator"]["id"] == "prospective-support-native-readout/2"
+    assert "sample_threshold_accounting" not in runner.read_json(run / "manifest.json")
     assert all(record["proposal_status"] == "admitted" for record in protocol["assignments"])
     assert protocol["configuration"]["assignments"][0]["configuration"] == runner.FIT
     assert all(_sha(run / name) == expected for name, expected in protocol["files"].items())
@@ -184,6 +384,9 @@ def test_real_pipeline_commits_aliases_and_attempt_before_native_callback(suppor
             pending = _attempt(case["registry"], protocol["attempt_id"])
             consumed = set(_query(case["registry"], "SELECT kind, key FROM consumed"))
             assert set(map(tuple, pending["consumed_scope"])) <= consumed
+            manifest = runner.read_json(run / "manifest.json")
+            assert manifest["phase"] == "evaluation_requested"
+            assert "sample_threshold_accounting" not in manifest
             captured.append(pending)
             active.append(True)
             try:
@@ -226,9 +429,17 @@ def test_real_pipeline_commits_aliases_and_attempt_before_native_callback(suppor
     assert terminal["lifecycle_sha256"] != pending["lifecycle_sha256"]
     assert terminal == report["evidence"]["attempt"]
     assert terminal["result"] == report["result"]
+    assert terminal["binding"]["schema"] == "wsp-prospective-support-binding/1"
     assert report["result"]["parent_codes"] == [0, 1]
     assert all(row["metrics"]["target_rows"] == row["metrics"]["protected_rows"] == 1
                for row in report["assignments"])
+    accounting = _assert_terminal_accounting(run, protocol, report)
+    assert all(accounting[key] == 2 for key in (
+        "assigned_count", "admitted_count", "scored_count", "target_gain_observed_count",
+        "protected_harm_observed_count", "complete_endpoint_count", "sample_threshold_success_count"))
+    assert accounting["missing_endpoint_count"] == accounting["admitted_missing_endpoint_count"] == 0
+    assert accounting["artifact_coverage"] == accounting["all_assigned_sample_threshold_success_rate"] == 1.
+    assert accounting["conditional_sample_threshold_success_rate"] == 1.
     documents = [protocol, report, report["result"], report["evidence"], terminal, *report["inputs"].values()]
     assert all(document[key] is False for document in documents for key in runner.FLAGS)
     assert runner.verify_result(run, case["registry"])
@@ -262,6 +473,7 @@ def test_observed_development_aliases_reject_before_forward(support_case, monkey
     assert report["evidence"]["consumed_matches"]
     assert DataRoleRegistry(case["registry"]).get_attempt(protocol["attempt_id"]) is None
     assert report["assignments"][0]["evaluation_status"] == "rejected"
+    _assert_unobserved_accounting(_assert_terminal_accounting(run, protocol, report), 1, 1)
 
 
 def test_success_cannot_be_retried_or_reused_under_new_experiment(support_case, monkeypatch):
@@ -304,6 +516,7 @@ def test_every_assignment_survives_abstention_rejection_and_compiler_failure(sup
     statuses = ["admitted", "abstained", "rejected", "failed", "abstained", "admitted"]
     assert [row["proposal_status"] for row in protocol["assignments"]] == statuses
     assert protocol["assignments"][4]["calibration"]["target_gain"] == 0.
+    assert "artifact_directory" in protocol["assignments"][4]
     assert "SYNTHETIC-COMPILER-PRIVATE-TEXT" not in json.dumps(protocol)
     report = _evaluate(case, run)
     assert report["status"] == "succeeded"
@@ -314,6 +527,14 @@ def test_every_assignment_survives_abstention_rejection_and_compiler_failure(sup
     for row in report["assignments"]:
         assert ("metrics" in row) is (row["proposal_status"] == "admitted")
     assert runner.read_json(run / "manifest.json")["assignments"] == report["assignments"]
+    accounting = _assert_terminal_accounting(run, protocol, report)
+    assert accounting["assigned_count"] == 6 and accounting["admitted_count"] == 2
+    assert all(accounting[key] == 2 for key in (
+        "scored_count", "target_gain_observed_count", "protected_harm_observed_count", "complete_endpoint_count"))
+    assert accounting["missing_endpoint_count"] == 4 and accounting["admitted_missing_endpoint_count"] == 0
+    assert accounting["artifact_coverage"] == 2 / 6
+    assert accounting["all_assigned_sample_threshold_success_rate"] == accounting["sample_threshold_success_count"] / 6
+    assert accounting["conditional_sample_threshold_success_rate"] == accounting["sample_threshold_success_count"] / 2
     assert runner.verify_result(run, case["registry"])
 
 
@@ -328,6 +549,7 @@ def test_all_abstentions_never_open_holdout_or_authorize_attempt(support_case, m
     assert report["result"] is report["evidence"] is report["inputs"] is None
     assert report["assignments"][0]["evaluation_status"] == "not_scored"
     assert DataRoleRegistry(case["registry"]).get_attempt(protocol["attempt_id"]) is None
+    _assert_unobserved_accounting(_assert_terminal_accounting(run, protocol, report), 1, 0)
     with pytest.raises(ValueError):
         runner.verify_result(run, case["registry"])
 
@@ -360,6 +582,7 @@ def test_scorer_failure_or_cancellation_is_durable_and_sanitized(support_case, m
     assert terminal["result"] is terminal["result_sha256"] is None
     assert "SYNTHETIC-SCORER-PRIVATE-TEXT" not in json.dumps([report, terminal])
     assert runner.read_json(run / "manifest.json")["assignments"] == report["assignments"]
+    _assert_unobserved_accounting(_assert_terminal_accounting(run, protocol, report), 1, 1)
     with pytest.raises(ValueError):
         runner.verify_result(run, case["registry"])
     retry, retry_protocol = _prepare(case, "retry", experiment_id="synthetic-after-failure")
@@ -367,6 +590,57 @@ def test_scorer_failure_or_cancellation_is_durable_and_sanitized(support_case, m
     rejected = _evaluate(case, retry)
     assert rejected["status"] == "rejected" and rejected["evidence"]["scoring_started"] is False
     assert DataRoleRegistry(case["registry"]).get_attempt(retry_protocol["attempt_id"]) is None
+
+
+def test_late_scorer_failure_discards_partial_endpoint_accounting(support_case, monkeypatch):
+    case = support_case
+    config = copy.deepcopy(case["config"])
+    config["assignments"].append({"assignment_id": "repair-soft", "target_label": 0,
+                                  "desired_code": 2, "mode": "soft"})
+    run, protocol = _prepare(case, config=config)
+    real_metrics, completed_metrics = runner.behavior_metrics, []
+
+    def fail_after_one_metric(*args, **kwargs):
+        if completed_metrics:
+            raise RuntimeError("SYNTHETIC-LATE-SCORER-PRIVATE-TEXT")
+        metrics = real_metrics(*args, **kwargs)
+        completed_metrics.append(metrics)
+        return metrics
+
+    monkeypatch.setattr(runner, "behavior_metrics", fail_after_one_metric)
+    report = _evaluate(case, run)
+    assert len(completed_metrics) == 1 and report["status"] == "failed"
+    assert report["result"] is None
+    assert all(row["evaluation_status"] == "failed" and "metrics" not in row
+               and "meets_frozen_sample_thresholds" not in row for row in report["assignments"])
+    terminal = DataRoleRegistry(case["registry"]).get_attempt(protocol["attempt_id"])
+    assert terminal["status"] == "failed" and terminal["callback_invocations"] == 1
+    assert terminal["result"] is terminal["result_sha256"] is None
+    assert "SYNTHETIC-LATE-SCORER-PRIVATE-TEXT" not in json.dumps([report, terminal])
+    _assert_unobserved_accounting(_assert_terminal_accounting(run, protocol, report), 2, 2)
+
+
+def test_verification_failure_reduces_the_final_failed_report_again(support_case, monkeypatch):
+    case = support_case
+    run, protocol = _prepare(case)
+
+    def reject_report(*args, **kwargs):
+        raise ValueError("synthetic_report_verification_failure")
+
+    with monkeypatch.context() as patch:
+        patch.setattr(runner, "_verify_report", reject_report)
+        report = _evaluate(case, run)
+    terminal = DataRoleRegistry(case["registry"]).get_attempt(protocol["attempt_id"])
+    assert terminal["status"] == "succeeded" and terminal["callback_invocations"] == 1
+    assert terminal["result"]["sample_threshold_accounting"]["scored_count"] == 1
+    assert report["evidence"]["attempt"] == terminal
+    assert report["status"] == "failed" and report["result"] is None
+    assert report["assignments"][0]["evaluation_status"] == "failed"
+    assert "metrics" not in report["assignments"][0]
+    _assert_unobserved_accounting(_assert_terminal_accounting(run, protocol, report), 1, 1)
+    _forbid_prediction_replay(monkeypatch)
+    with pytest.raises(ValueError):
+        runner.verify_result(run, case["registry"])
 
 
 def _rehash(document, key):
@@ -397,7 +671,11 @@ def test_consumer_rejects_missing_opaque_rehashed_and_contradictory_evidence(sup
     assert runner.verify_result(run, case["registry"])
     mutations = [
         (("evidence",), None), (("evidence",), {"status": "succeeded", "result_sha256": digest(valid["result"])}),
-        (("schema",), "legacy-report/1"), (("status",), "abstained"),
+        (("schema",), "wsp-prospective-support-evaluation/1"), (("status",), "abstained"),
+        (("sample_threshold_accounting",), None),
+        (("sample_threshold_accounting", "assigned_count"), True),
+        (("sample_threshold_accounting", "sample_threshold_success_count"), 0),
+        (("sample_threshold_accounting", "conditional_target_gain_mean"), None),
         (("evidence", "attempt_id"), "another-attempt"),
         (("evidence", "schema"), "legacy-decision/1"), (("evidence", "operation"), "consume"),
         (("evidence", "verdict"), "unverified"), (("evidence", "reason"), "not_resolved"),
@@ -407,7 +685,9 @@ def test_consumer_rejects_missing_opaque_rehashed_and_contradictory_evidence(sup
         (("evidence", "registry_state_sha256_after"), "0" * 64),
         (("evidence", "consumed_matches"), [{"kind": "family", "key": "contradiction"}]),
         (("evidence", "reservation_sha256"), "0" * 64), (("evidence", "lifecycle_sha256"), "0" * 64),
-        (("result", "schema"), "legacy-result/1"), (("result", "parent_codes"), [1, 0]),
+        (("result", "schema"), "wsp-prospective-support-result/1"), (("result", "parent_codes"), [1, 0]),
+        (("result", "evaluator_id"), "prospective-support-native-readout/1"),
+        (("result", "sample_threshold_accounting"), None),
         (("assignments", 0, "metrics", "target_gain"), -1.), (("assignments",), []),
         (("inputs", "raw", "parents"), []), (("inputs", "normalized", "source_id"), "false-alias"),
         (("inputs", "normalized", "family_id"), "false-family"),
@@ -429,7 +709,14 @@ def test_consumer_rejects_missing_opaque_rehashed_and_contradictory_evidence(sup
         with pytest.raises(ValueError):
             runner.verify_result(run, case["registry"], altered)
 
-    for change in ("attempt", "binding", "result", "assurance"):
+    for location in (None, "result"):
+        altered = copy.deepcopy(valid)
+        document = altered if location is None else altered[location]
+        del document["sample_threshold_accounting"]
+        with pytest.raises(ValueError):
+            runner.verify_result(run, case["registry"], altered)
+
+    for change in ("attempt", "binding", "result", "accounting", "assurance"):
         altered = copy.deepcopy(valid)
         attempt = altered["evidence"]["attempt"]
         if change == "attempt":
@@ -438,6 +725,12 @@ def test_consumer_rejects_missing_opaque_rehashed_and_contradictory_evidence(sup
             attempt["binding"]["protocol_sha256"] = "0" * 64
         elif change == "result":
             altered["result"]["parent_codes"] = [1, 0]
+            attempt["result"] = copy.deepcopy(altered["result"])
+        elif change == "accounting":
+            accounting = copy.deepcopy(altered["sample_threshold_accounting"])
+            accounting["all_assigned_sample_threshold_success_rate"] = 0.
+            altered["sample_threshold_accounting"] = accounting
+            altered["result"]["sample_threshold_accounting"] = copy.deepcopy(accounting)
             attempt["result"] = copy.deepcopy(altered["result"])
         else:
             attempt["evaluator_execution_attested"] = True
