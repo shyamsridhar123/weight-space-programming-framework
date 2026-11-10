@@ -335,8 +335,12 @@ def test_malformed_provider_event_type_retains_failed_attempt_and_trial(tmp_path
              for event_type in malformed_types]
     # Rejection belongs to the event boundary, including events without an item.
     cases.extend(({"type": event_type}, False) for event_type in malformed_types)
+    for stage in ("item.started", "item.updated", "item.completed"):
+        cases.append(({"type": stage}, False))
+        cases.extend(({"type": stage, "item": item}, False)
+                     for item in (None, False, 0, "", "malformed", [], ["malformed"]))
     cases.extend(({"type": event_type, "item": reasoning_item}, True)
-                 for event_type in ("item.started", "provider.extension", ""))
+                 for event_type in ("item.started", "item.updated", "item.completed", "provider.extension", ""))
     cases.append(({"item": reasoning_item}, True))
 
     for index, (leading_event, valid) in enumerate(cases):
