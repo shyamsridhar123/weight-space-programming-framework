@@ -7,6 +7,16 @@ research draft.
 
 ## Unreleased
 
+- Clarify a proposed [study runner using the existing APIs](docs/research/staged-scientific-compatibility.md):
+  prebound forecast-eligibility rules use genuine diagnosis-barrier evidence;
+  complete slot counts are written inside the authorized callback; attributed
+  joins follow return/unwind, stopped workers and a checked public registry
+  baseline. Distinguish newly observed durable evidence from original returns
+  and preserve rejection, failure, unknown outcomes and alias attribution.
+  This source-reviewed ordering adds no API, implemented runner, protocol freeze
+  or study execution. Scientific identities remain unset and Issue #9 c1 stays
+  partial/open.
+
 - Add local, slot-attributed persistence for post-unwind
   [count/reservation correspondence](scripts/staged_scientific_count_receipts.py).
   Attribution uses caller-retained assignment/slot labels; it authenticates no
