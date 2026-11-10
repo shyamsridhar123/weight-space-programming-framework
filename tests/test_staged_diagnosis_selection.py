@@ -23,7 +23,7 @@ def reviewed_engineering_source_pins():
     assert frozen_pins["rlcd/weight_space/broker.py"] == "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
     fixture_pins = frozen_pins | {
         "rlcd/weight_space/broker.py": "18affe0acfc1e8f6a434aaca3e462530d0b1a05369b05a3a25be1d0b1090359b",
-        "rlcd/weight_space/data_roles.py": "75e4f552f9040493079132494e8c12d1403bf5167beb08b8b3c9eab102af1b2a"}
+        "rlcd/weight_space/data_roles.py": "e85efb8dded2045d255701392daf488fdb34c516a450775cd45ea3374789e06a"}
     with patch.object(selection, "SOURCE_PINS", fixture_pins):
         yield frozen_pins
     assert selection.SOURCE_PINS is frozen_pins and frozen_pins == frozen_snapshot

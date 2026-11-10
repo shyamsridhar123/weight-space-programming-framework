@@ -7,6 +7,12 @@ research draft.
 
 ## Unreleased
 
+- Require exact integer callback counts in durable terminal attempts, rejecting
+  rehashed JSON booleans and floats at the shared reader. A focused synthetic
+  SQLite regression checks success/failure records, inspection and rejection
+  before retry callbacks while preserving reservation identity and consumed
+  scope. This adds no scientific evidence or owner authority.
+
 - Add a generic [local-pilot governance contract](docs/governance/contract.md),
   [standalone Lean state-machine source](formal/governance/README.md), and
   [direct proof CI workflow](.github/workflows/governance-proof.yml), with
