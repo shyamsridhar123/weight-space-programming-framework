@@ -1389,6 +1389,8 @@ stays partial and Issue #9 stays open.
 
 **Draft admission-package note, November 9, 2026:** The companion's [draft field table and ordered gates](staged-scientific-compatibility.md#draft-admission-package) identify the unresolved native evaluator/scientific owner, complete evidence and one-shot observation requirements for a future study. The study remains unselected and unexecuted; no freeze or admission follows. Original criteria, historical outcomes and prior evidence scopes are unchanged; c1 remains partial and Issue #9 remains open.
 
+**Generic counting utility, November 9, 2026:** [Correctness-transition counts](../weight-space/classification-metrics.md) preserve corrections and newly incorrect rows separately for caller-defined Boolean groups. They add no score decoder, scientific callback, whole-slot receipt or admission rule. Existing queue metrics and historical source locks remain unchanged; c1 remains partial and Issue #9 remains open.
+
 **Saved cohort success verification supplement, November 9, 2026:** The
 [verification-only helper](staged-diagnosis.md#saved-cohort-success-verification)
 checks the saved successful terminal, complete result, binding and durable
