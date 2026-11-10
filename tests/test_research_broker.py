@@ -142,6 +142,53 @@ def test_provider_failure_accounting_and_started_tool_detection(tmp_path, monkey
     assert json.loads((tmp_path / "attempt" / "receipt.json").read_text())["sha256"] == receipt["sha256"]
 
 
+def test_provider_version_decode_failure_retains_failed_attempt_and_trial(tmp_path, monkeypatch):
+    import hashlib
+    from unittest.mock import Mock
+    from rlcd.weight_space.live_provider import CodexProvider, run_brokered
+
+    cli = tmp_path / "fake-codex"
+    cli.write_bytes(b"offline transport placeholder; never executed")
+    monkeypatch.setattr("rlcd.weight_space.live_provider.shutil.which", lambda _: str(cli))
+    probe = Mock(side_effect=UnicodeDecodeError("utf-8", b"\xff", 0, 1, "invalid start byte"))
+    worker = Mock(side_effect=AssertionError("Worker must not start"))
+    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.run", probe)
+    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.Popen", worker)
+    base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
+    task = TaskSpec("version-decode", "edit", "Retain a failed offline version probe",
+                    base.architecture, base.sha256)
+    broker = ProposerBroker(task, base=base)
+    charge = Mock(wraps=broker.record_usage)
+    monkeypatch.setattr(broker, "record_usage", charge)
+    directory = tmp_path / "trial"
+    trial = run_brokered(CodexProvider(), broker, prompt="Return JSON actions",
+                         directory=directory, max_rounds=3)
+
+    probe.assert_called_once_with([str(cli), "--version"], capture_output=True, text=True,
+                                  encoding="utf-8", timeout=15, check=True)
+    worker.assert_not_called()
+    assert trial["assigned_trials"] == 1 and len(trial["attempts"]) == 1
+    attempt = trial["attempts"][0]
+    assert trial["status"] == attempt["status"] == "failed"
+    assert attempt["error"] == "transport_startup_failed:UnicodeDecodeError"
+    assert attempt["usage"] == {} and attempt["cost"]["amount"] is None
+    assert attempt["response"] is None and attempt["returncode"] is None
+    assert attempt["invocation"]["cli_version"] is None
+    assert attempt["invocation"]["executable_sha256"] == hashlib.sha256(cli.read_bytes()).hexdigest()
+    charge.assert_not_called()
+    assert not [event for event in broker._session.trace if event.to_dict()["action"] == "provider_usage"]
+    assert broker._session.usage.input_tokens == broker._session.usage.output_tokens == 0
+    assert broker._session.usage.proposals == 0
+    assert broker.is_sealed and broker._session.is_sealed
+    assert [event["request"]["op"] for event in broker.public_trace] == ["metadata", "harness_deadline_seal"]
+    folder = directory / "provider-0"
+    assert json.loads((folder / "receipt.json").read_text(encoding="utf-8")) == attempt
+    assert json.loads((directory / "trial.json").read_text(encoding="utf-8")) == trial
+    assert (folder / "events.jsonl").read_bytes() == b""
+    assert (folder / "transport.stderr.private").read_bytes() == b""
+    assert attempt["events_sha256"] == hashlib.sha256(b"").hexdigest()
+
+
 def test_provider_completion_lifecycle_is_unambiguous_before_broker_actions(tmp_path, monkeypatch):
     import hashlib
     from types import SimpleNamespace
@@ -641,6 +688,55 @@ def test_public_event_derivative_retains_raw_identity_without_private_path(tmp_p
     assert record["raw_events_sha256"] == hashlib.sha256(raw).hexdigest()
     assert record["public_events_sha256"] == hashlib.sha256(public).hexdigest()
     assert record["redactions"] == 1 and not record["raw_bytes_published"]
+
+
+def test_public_event_derivative_handles_lone_surrogate_without_losing_replay_identity(tmp_path):
+    import hashlib
+    from rlcd.weight_space import live_provider
+
+    custom_home = r"C:\Users\surrogate-fixture"
+    # Redact decoded profile spellings while keeping lone surrogates escaped.
+    surrogate_event = {"type": "diagnostic", "message": custom_home + r"\log", "note": "\ud800"}
+    surrogate_line = json.dumps(surrogate_event).replace("Users", r"U\u0073ers")
+    unicode_event = {"type": "diagnostic", "message": "caf\u00e9 \u03bb \U0001f680"}
+    response = {"actions": [], "reason": "offline fixture"}
+    usage = {"input_tokens": 17, "output_tokens": 7}
+    lines = [surrogate_line, json.dumps(unicode_event, ensure_ascii=False),
+             json.dumps({"type": "item.completed", "item": {
+                 "type": "agent_message", "text": json.dumps(response)}}),
+             json.dumps({"type": "turn.completed", "usage": usage})]
+    raw = ("\n".join(lines) + "\n").encode("utf-8")
+    source, destination = tmp_path / "private", tmp_path / "public"
+    source.mkdir()
+    metadata = {name: (json.dumps({"synthetic": name}) + "\n").encode("utf-8")
+                for name in ("request.json", "response-schema.json", "receipt.json")}
+    for name, content in metadata.items():
+        (source / name).write_bytes(content)
+    (source / "events.jsonl").write_bytes(raw)
+
+    record = live_provider.publish_attempt(source, destination)
+
+    public = (destination / "events.jsonl").read_bytes()
+    public_lines = public.decode("utf-8").splitlines()
+    assert (source / "events.jsonl").read_bytes() == raw
+    assert r"U\u0073ers" in lines[0] and json.loads(lines[0]) == surrogate_event
+    assert public_lines[0] == json.dumps(surrogate_event | {"message": r"[USER_PROFILE]\log"})
+    assert r"\ud800" in public_lines[0] and "surrogate-fixture" not in public_lines[0]
+    assert json.loads(public_lines[1]) == unicode_event
+    assert public_lines[2:] == lines[2:]
+    assert live_provider.parse_events(public.decode("utf-8")) == live_provider.parse_events(raw.decode("utf-8")) == (
+        response, usage, [], ["invalid_event"], [])
+    for name, content in metadata.items():
+        assert (source / name).read_bytes() == (destination / name).read_bytes() == content
+    assert record == {"schema": "wsp-public-event-derivative/1",
+                      "raw_events_sha256": hashlib.sha256(raw).hexdigest(),
+                      "public_events_sha256": hashlib.sha256(public).hexdigest(),
+                      "redactions": 1,
+                      "transform": "JSON_reserialization_and_user_profile_prefix_redaction",
+                      "raw_bytes_published": False,
+                      "scope": "public_derivative_replay;_raw_identity_disclosed_not_publicly_replayed"}
+    assert record["raw_events_sha256"] != record["public_events_sha256"]
+    assert json.loads((destination / "event-publication.json").read_text(encoding="utf-8")) == record
 
 
 @pytest.mark.parametrize("custom_home", [r"D:\SyntheticProfiles\synthetic-local-home", r"C:\Users\user name"])

@@ -244,7 +244,7 @@ class CodexProvider:
         except subprocess.TimeoutExpired:
             # The bounded version probe timed out before a worker was started.
             status, error = "timeout", "provider_deadline"
-        except (OSError, subprocess.CalledProcessError) as failure:
+        except (OSError, subprocess.CalledProcessError, UnicodeError) as failure:
             error = "transport_startup_failed:" + type(failure).__name__
         elapsed = time.perf_counter() - tick
         output = output.decode("utf-8", errors="replace") if isinstance(output, bytes) else output
@@ -377,7 +377,7 @@ def publish_attempt(source: Path, destination: Path) -> dict[str, Any]:
         previous_redactions = redactions
         try:
             value = json.loads(line, object_pairs_hook=_unique_json_object)
-            lines.append(json.dumps(sanitize(value), ensure_ascii=False, allow_nan=False))
+            lines.append(json.dumps(sanitize(value), ensure_ascii=True, allow_nan=False))
         except _DuplicateJSONKey:
             # Raw fallback cannot safely sanitize arbitrary JSON escape spellings.
             lines.append(json.dumps("public event omitted: duplicate JSON object key"))
