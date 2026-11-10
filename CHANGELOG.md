@@ -7,6 +7,17 @@ research draft.
 
 ## Unreleased
 
+- Correct pre-return [fit-cost missingness](docs/weight-space/resource-accounting.md):
+  `fit_seconds_all_options` remains unknown (`None` / JSON `null`) until eager
+  `fit_options` returns, including failures after partial internal fitting.
+  Returned options retain their summed cost through later calibration failure;
+  returned explicit no-fit options retain observed zero. Existing timer
+  boundaries and nesting are unchanged. The [engineering receipt](provenance/verification/fit-failure-cost-20261109.json)
+  records one passing regression of selected AST-extracted statements with
+  stdlib fakes and literal costs, without full `fit_case_arm` execution, fitting,
+  timer measurement, scientific execution or historical cost recovery.
+  #14 c0/c5 remain partial/open.
+
 - Extend fresh posthoc [resource accounting](docs/weight-space/resource-accounting.md)
   with coverage and stage statistics for eight fields, retaining known costs on
   missing evaluations. Pair the two enclosing incremental timings within each
