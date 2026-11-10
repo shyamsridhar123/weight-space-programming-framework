@@ -79,6 +79,68 @@ changed total contract. Historical summaries retain their recorded schema and
 values. This change performs no historical re-summary, failed-work recovery or
 scientific execution, and leaves `analyze_study` deferred.
 
+## Fresh posthoc resource analysis
+
+The preceding `analyze_study` deferral records the scope of the earlier
+summary-only patch. This later consumer update adds
+[`resource_distribution` and `summarize_posthoc_resources`](../../scripts/run_trained_research.py)
+for fresh posthoc analysis source. Each arm retains `resource_measurements`
+coverage for the same fixed eight fields above, across every supplied assignment,
+including known costs on outcomes marked `evaluation_missing`. The numeric and
+cost-container validation rules remain those of the trained-resource adapter.
+
+Each field also has a `stages` entry. `observations` counts its known values;
+`mean`, `minimum`, `maximum`, `p50` and `p95` describe those observations in
+approximate binary64, with linear interpolation at ranks `(n - 1) * p` for the
+quantiles. Empty observations leave these statistics `None`. `sum_observed`
+copies the coverage summary's observed sum, and `missing_assigned` copies its
+missing count. Integer-only accounting sums stay exact: for example, byte
+observations `2**60` and `1` sum to the integer `2**60 + 1`, independently of the
+rounded float statistics. Statistics require finite binary64 conversion and
+results; an integer accepted by the exact coverage helper can still be too large
+for a posthoc distribution, causing the posthoc helper to raise `ValueError`.
+These statistics do not make a partial sum a complete total.
+
+`paired_top_level_seconds` is a six-field coverage summary, not a distribution.
+For each assignment it observes the sum of
+`fit_selection_materialization_seconds` and `heldout_workflow_seconds` only when
+both are present. Either missing value makes that assignment's pair unknown.
+`observed_incremental_top_level_seconds` aliases this summary's `observed_sum`;
+it is `None` when no complete pair is observed and is not a lifecycle total.
+For authored rows `(2, None)` and `(None, 3)`, the separate field sums are `2`
+and `3`, but paired coverage is assigned `2`, observed `0`, missing `2`,
+`observed_sum=None`, `complete_for_assigned=False` and `total_if_complete=None`.
+The alias is therefore `None`, never `5`. A known `(0, 0)` is an observed zero
+pair. Pair completeness concerns only the two enclosing clocks, not all eight
+fields or full instrumentation. Binary64 pairing happens within each row before
+aggregation and can round differently from separately summing field totals.
+Nested option/evaluation/export timings are not added to these enclosing clocks.
+
+Fresh `analyze_study` source emits `wsp-trained-posthoc-analysis/2`, adds the
+current metrics source hash at `source_sha256.metrics`, and replaces arm-level
+`timing_records` and `timing_missing` with the field-specific coverage above.
+The current metrics source hash is
+`3cf3061c0a6f1676066ef15649ac5877ba8161d11a5a3d24c4b0f06ecaea77ad`.
+Geometry continues to use the unchanged `measured_distribution` helper.
+Historical `/1` analyses retain their recorded schema and values. This change
+performs no historical re-analysis, failed-work recovery or scientific execution.
+The producer's early-fit undercount described below remains deferred to a
+separate PR; #14 c0/c5 remain partial and open.
+
+The [posthoc engineering receipt](../../provenance/verification/posthoc-resource-coverage-20261109.json)
+records one passing authored scalar check of four AST-extracted functions:
+`observed_resource_summary`, `summarize_resource_measurements`,
+`resource_distribution` and `summarize_posthoc_resources`. It captures source
+commit `1f78ffc8efe4f14190435dead249b4a7ec5d7207` and integrated main
+`cc8190cf92c66820033c130929fbba5fd76ab2b1`. The check uses literal costs and
+stdlib bindings without project imports. It does not execute `analyze_study`,
+its schema/provenance wiring, geometry, study loading, JSON persistence or replay,
+and does not verify later documentation/publication edits. Captured runtime
+strings and installed version metadata were unchanged; executable/package-content
+identity and agreement with the lockfile were not established. Fixture values
+are not measured research costs. The earlier summary receipt below retains its
+original snapshot and scope.
+
 ## Timer nesting and remaining gaps
 
 Option fit times are nested within fit/selection/materialization elapsed.

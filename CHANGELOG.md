@@ -7,6 +7,18 @@ research draft.
 
 ## Unreleased
 
+- Extend fresh posthoc [resource accounting](docs/weight-space/resource-accounting.md)
+  with coverage and stage statistics for eight fields, retaining known costs on
+  missing evaluations. Pair the two enclosing incremental timings within each
+  assignment only when both are observed; complementary partial rows never
+  manufacture a pair. Exact byte sums remain separate from approximate
+  binary64 statistics. Fresh source output uses `wsp-trained-posthoc-analysis/2`
+  with the current metrics hash; historical `/1` analyses and geometry
+  distributions remain unchanged. The [engineering receipt](provenance/verification/posthoc-resource-coverage-20261109.json)
+  records one passing scalar check of four AST-extracted helpers, without full
+  analysis, persistence, study replay or scientific execution. Producer early-fit
+  undercount remains deferred to a separate PR, and #14 c0/c5 remain partial/open.
+
 - Preserve per-field [resource availability](docs/weight-space/resource-accounting.md)
   across all assigned trained outcomes, including known costs on missing
   evaluations. Fresh `/2` study summaries expose observed sums and counts;
