@@ -11,7 +11,7 @@ conditions, and evaluation records. Explicit adapters define execution semantics
 and the conditions for behavioral guarantees. RTS is one historical application.
 
 [Worked example](#one-edit-two-obligations) · [Enterprise use case](#an-enterprise-policy-change) · [Quick start](#try-the-example) ·
-[Evidence](#what-the-evidence-shows) · [Research roadmap](docs/weight-space/v2/research-roadmap-2026-11.md) · [Documentation](#explore-the-framework)
+[Distro integration](#review-a-change-in-distro) · [Evidence](#what-the-evidence-shows) · [Research roadmap](docs/weight-space/v2/research-roadmap-2026-11.md) · [Documentation](#explore-the-framework)
 
 ## One edit, two obligations
 
@@ -100,6 +100,33 @@ quiet cinematic music. [Read the timed transcript](artifacts/explanations/enterp
 
 [![The visual explanation: outages reach Platform Operations while sampled protected scores stay unchanged. Avoiding a transfer is potential value, not measured savings.](artifacts/enterprise/support-routing/demo/poster.jpg)](artifacts/enterprise/support-routing/demo/walkthrough.mp4)
 
+## Review a change in Distro
+
+Use the optional companion to inspect a weight edit, prepare a review, follow a
+human decision, and export its complete history from Distro's coding host:
+
+```bash
+python -m pip install ".[distro]"
+python -m rlcd.weight_space distro demo --workspace .runs/distro-routing
+cd .runs/distro-routing
+distro claude --plugin-dir .runs/distro-plugin
+```
+
+The demo creates a fresh synthetic routing change and checks its supplied-feature
+retention certificate. Ask the host: “Inspect `change.json`. Explain which queue
+changes, which supplied scores stay the same, and what the evidence does not
+prove.” Copilot uses the same plugin with `distro copilot --plugin-dir`.
+
+Four MCP tools connect the host to the existing governance runtime. Approval
+stays with an independently authorized human; status and export require the
+original request identity and current history head retained separately from
+received bundles. The adapter commits evidence without automatically verifying
+its claims. Production and scientific authority remain false.
+
+Follow the [Distro usage guide](docs/governance/distro-usage.md) for existing
+workspaces, human decisions, and the complete workflow. The core framework
+remains usable without Distro or the optional MCP dependency.
+
 ## What the evidence shows
 
 The historical synthetic study found a **target–retention tradeoff**. Soft
@@ -187,8 +214,11 @@ not verify the Python implementation, authenticate reviewers or establish
 scientific evidence. Independent current request/head identities and external
 actor authentication remain caller obligations;
 production and scientific authority remain false. The
-[Distro handoff](docs/governance/distro-handoff.md) describes an optional authoring
-and review aid; the framework does not depend on Distro.
+[Distro companion](docs/governance/distro-usage.md) exposes the same runtime
+through workspace-bound tools. Its [integration contract](docs/governance/distro-integration.md)
+states the proof obligations and engineering boundaries; the
+[enterprise handoff](docs/governance/distro-handoff.md) covers organizational
+responsibilities beyond the local review.
 
 ## What remains open
 
@@ -225,7 +255,7 @@ fresh confirmation needs untouched units and a newly frozen protocol.
 | How retention settings affect trained edits | [Development comparison](docs/research/retention-development.md) |
 | Symmetry fixtures and family boundaries | [Engineering report](docs/research/symmetry-family-boundary-check.md) · [Verification receipt](provenance/verification/symmetry-family-boundary-20261109.json) |
 | The guarantees and their premises | [Formal explanation](docs/weight-space/v2/formal.md) · [Proof reproduction](PROOFS.md) |
-| The optional governance workflow and its limits | [Contract](docs/governance/contract.md) · [Checked formal model](formal/governance/README.md) · [Runtime walkthrough](docs/governance/runtime.md) · [Distro handoff](docs/governance/distro-handoff.md) |
+| The optional governance workflow and its limits | [Contract](docs/governance/contract.md) · [Checked formal model](formal/governance/README.md) · [Runtime walkthrough](docs/governance/runtime.md) · [Distro usage](docs/governance/distro-usage.md) · [Enterprise handoff](docs/governance/distro-handoff.md) |
 | The study and its outcomes | [Methods](docs/weight-space/v2/methods.md) · [Results](docs/weight-space/v2/results.md) |
 | The gaps and next research decisions | [Limitations and next steps](docs/weight-space/v2/limitations-and-next-steps.md) · [Requirements](docs/weight-space/v2/requirements.md) |
 | The supporting records | [Evidence map](EVIDENCE.md) · [Verification scope](VERIFICATION.md) |

@@ -10,19 +10,24 @@ and operate the change is a separate obligation.
 November 10, 2026, describes a coding-agent plugin that bundles customer context,
 examples, tools, connections and skills, with a workflow for prototypes, review
 and publishing. The page says Distro does not replace the coding agent or
-complete a production handoff. This supports considering Distro as an optional
-authoring and handoff tool; it does not establish a verified governance
-integration. No Distro governance API, authentication mechanism, enforced
-separation of roles, production audit
-facility or license suitability has been verified for this pilot. Do not infer
-those capabilities from its authoring workflow.
+complete a production handoff. The framework now implements a local
+[companion integration](distro-integration.md): a packaged governance skill,
+generated Claude/Copilot plugin manifests and a workspace-bound MCP server with
+four review tools. The companion delegates to the existing framework governance
+runtime. Decisions remain with an independently authorized human operating its
+CLI. Native-host discovery and live model sessions require separate validation.
+No Distro governance API, authentication mechanism, enforced separation of
+organizational roles, production audit facility or license suitability has been
+verified for this pilot. Do not infer those capabilities from its authoring
+workflow or the local companion.
 
-The recommended first step is the generic local
-[governance contract](contract.md), using synthetic records. It has no Distro
-dependency or installation requirement. A Distro-assisted draft, a manually
-prepared draft and a draft from another tool should enter the same review
-boundary. This document proposes a handoff; it does not report a deployed
-integration, an authenticated organizational approval or a completed production
+Start with the [practical Distro guide](distro-usage.md), which generates fresh
+synthetic support-routing artifacts and supplied-feature evidence. The generic
+local [governance contract](contract.md) remains available without Distro or its
+optional dependency. A Distro-assisted draft, a manually prepared draft and a
+draft from another tool enter the same review boundary. This document describes
+the organizational handoff around the implemented local integration; it does
+not report an authenticated organizational approval or a completed production
 change.
 
 ## Establish what each evidence layer means
@@ -107,8 +112,12 @@ remain visible when an authoring tool summarizes the project.
 
 The handoff packet should let a reviewer locate each of those records without
 opening unrelated customer material. Use the local contract's actual record
-format and supported transitions. This proposal defines no Distro endpoint,
-SDK call, webhook or token format.
+format and supported transitions. The companion exposes inspection,
+preparation, status and byte-preserving export through MCP. It supplies no
+decision tool or organizational governance endpoint. Both independently retained
+pins are required for status and export; evidence hashes and opaque constraints
+commit content without automatically checking its claims. See the
+[integration contract](distro-integration.md) for the exact bindings and limits.
 
 ## Resolve access, cost, data and reuse before an enterprise pilot
 
@@ -129,6 +138,6 @@ does not discharge them.
 
 A local synthetic pilot can make the review record and its failure cases
 inspectable while those checks remain open. It cannot grant enterprise access,
-complete a vendor assessment or change the scientific evidence. Any later
-integration should retain this pilot's source and results as a separate record
-and report its own verified scope.
+complete a vendor assessment or change the scientific evidence. An enterprise
+deployment must retain this pilot's source and results as a separate record and
+report its own verified scope.

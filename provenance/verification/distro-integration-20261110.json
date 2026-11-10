@@ -1,0 +1,546 @@
+{
+  "schema": "wsp-distro-integration-verification/1",
+  "recorded_at_utc": "2026-11-10T15:19:02.776299+00:00",
+  "base_commit": "31d90e69de4eab30dff6b93d0a064749def5f94c",
+  "scope": "Fresh synthetic engineering checks, wheel/source correspondence, isolated installed-wheel MCP smoke and native management-command observations. No scientific study or historical replay.",
+  "runtime": {
+    "python": "3.12.10",
+    "os_family": "Windows",
+    "packages": {
+      "pytest": "9.2.0",
+      "numpy": "2.5.4",
+      "mcp": "2.3.0"
+    }
+  },
+  "focused_check": {
+    "command": [
+      "<source-python>",
+      "-m",
+      "pytest",
+      "-q",
+      "-c",
+      "pytest-engineering.ini",
+      "tests/test_governance.py",
+      "tests/test_distro_integration.py",
+      "tests/test_distro_plugin.py",
+      "tests/test_distro_demo.py",
+      "--basetemp",
+      "<new-capture>/tmp",
+      "--junitxml",
+      "<new-capture>/pytest.xml"
+    ],
+    "exit_code": 0,
+    "junit": {
+      "tests": 249,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_before_after_equal": true,
+    "environment": {
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONNOUSERSITE": "1",
+      "inherited_PYTEST_ADDOPTS_and_PYTHONPATH_removed": true
+    },
+    "private_output_commitments": [
+      {
+        "path": "before.json",
+        "bytes": 8676,
+        "sha256": "1e28885ea7ab192034370b2614a2cf760b98cfe2cb96afe5c67fc37775154a8c"
+      },
+      {
+        "path": "after.json",
+        "bytes": 8676,
+        "sha256": "1e28885ea7ab192034370b2614a2cf760b98cfe2cb96afe5c67fc37775154a8c"
+      },
+      {
+        "path": "command.json",
+        "bytes": 924,
+        "sha256": "2fc08e9a7e099dc8164fc6c5da22b076cab1d34b2969fd480699330219117f8b"
+      },
+      {
+        "path": "stdout.log",
+        "bytes": 346,
+        "sha256": "3591fccf95f7a7905da61f3bb1ae38b6b8c8e644ee1488c82c7bb07fb4a0a39a"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "pytest.xml",
+        "bytes": 37195,
+        "sha256": "1c4d86723677d16bee4cf07031b81dc31cec8e5967707a463bd93ea9838b391e"
+      }
+    ]
+  },
+  "captured_source_and_configuration_identities": [
+    {
+      "path": ".github/workflows/distro-integration.yml",
+      "bytes": 3540,
+      "sha256": "a1e4d110e6ce812c4ec5c96233454e5dd812f52206ae55423336586b13cc7cbb"
+    },
+    {
+      "path": "README.md",
+      "bytes": 17044,
+      "sha256": "a343b4d89d0d7066b99c6cda9e84fcfcc61ef0e975e14d930e140d7990af066d"
+    },
+    {
+      "path": "docs/governance/distro-integration.md",
+      "bytes": 7761,
+      "sha256": "12851d860266c8e07fcbcb17fccd5cdd87091eb3f9cf6e81128fd4a1e37875ba"
+    },
+    {
+      "path": "docs/governance/distro-usage.md",
+      "bytes": 7595,
+      "sha256": "da840c6af9615cbd9e9c563b9b82da6be453aca6b0632254e16f092613ed6c1d"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 1235,
+      "sha256": "c6bf8f061819d40457e0238921b2a2ad91cb75187c3374216048dd137a425dd3"
+    },
+    {
+      "path": "pytest-engineering.ini",
+      "bytes": 2263,
+      "sha256": "a911c1370a0be1271496a48411fc5ffd509c21896649f9e22b2a3aa26679106c"
+    },
+    {
+      "path": "rlcd/__init__.py",
+      "bytes": 71,
+      "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+    },
+    {
+      "path": "rlcd/serving_metrics.py",
+      "bytes": 2885,
+      "sha256": "f62c0e7b174adcb30d0f84041859c796cbc44f15a78d98aa8e571b7454fbf16f"
+    },
+    {
+      "path": "rlcd/weight_space/__init__.py",
+      "bytes": 3053,
+      "sha256": "6add2899c26aabf2f542cc27dce468d528cb658153f0ecc7457e1df85ff0e50a"
+    },
+    {
+      "path": "rlcd/weight_space/__main__.py",
+      "bytes": 20670,
+      "sha256": "7b8eba9841aa77f4c5a775f2dda6f72f3c37b19e63b887e23b8f08da848fcda6"
+    },
+    {
+      "path": "rlcd/weight_space/adapters.py",
+      "bytes": 2631,
+      "sha256": "87cc20844b8be1354255c2bdb21130911439f60c3cc268cbce54211a29624dd4"
+    },
+    {
+      "path": "rlcd/weight_space/artifact.py",
+      "bytes": 7735,
+      "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+    },
+    {
+      "path": "rlcd/weight_space/benchmarks.py",
+      "bytes": 15545,
+      "sha256": "3edb4f2120572aa8da92078d19c45a2d4cd494191468a893cef46a410e419983"
+    },
+    {
+      "path": "rlcd/weight_space/bound_research.py",
+      "bytes": 64648,
+      "sha256": "814fafa6da869e15f7e0066f04e878df037d43f05f40bf32517db96781466917"
+    },
+    {
+      "path": "rlcd/weight_space/broker.py",
+      "bytes": 15820,
+      "sha256": "52251eec40605972c00779c7d890c74c4de3d8c67d7677b01239066aae1fcede"
+    },
+    {
+      "path": "rlcd/weight_space/compiler.py",
+      "bytes": 3928,
+      "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+    },
+    {
+      "path": "rlcd/weight_space/contracts.py",
+      "bytes": 43906,
+      "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+    },
+    {
+      "path": "rlcd/weight_space/cumulative_research.py",
+      "bytes": 56668,
+      "sha256": "31abbef4e162779ef684295e33564cf78d5b2081c5ed537fd11814558a83a796"
+    },
+    {
+      "path": "rlcd/weight_space/data_roles.py",
+      "bytes": 29771,
+      "sha256": "e85efb8dded2045d255701392daf488fdb34c516a450775cd45ea3374789e06a"
+    },
+    {
+      "path": "rlcd/weight_space/demo.py",
+      "bytes": 4776,
+      "sha256": "26b12f4b19e1656faec2377cb2a7725f4847f37a3633d762a8e1f45f5ac5a0b6"
+    },
+    {
+      "path": "rlcd/weight_space/distro.py",
+      "bytes": 8653,
+      "sha256": "b551f8c02c25488e89b45106b5dfe2950c3f43fc58ab1ad518c549cb8b03560b"
+    },
+    {
+      "path": "rlcd/weight_space/distro_demo.py",
+      "bytes": 6129,
+      "sha256": "f0ed2b488cba277f93d85f67a172c9047eaddafdf9721278e1c816e389fbeeb6"
+    },
+    {
+      "path": "rlcd/weight_space/distro_mcp.py",
+      "bytes": 6214,
+      "sha256": "e2af24cde53ca95420f7eeb18b0e18f8eb2a7fae166d867aab7d7eb66863a1be"
+    },
+    {
+      "path": "rlcd/weight_space/distro_plugin.py",
+      "bytes": 3850,
+      "sha256": "921ccf52c0fd7282f8d2c9b452a50c141205de8a1bdb563ab5e773846d25be25"
+    },
+    {
+      "path": "rlcd/weight_space/distro_skill.md",
+      "bytes": 4884,
+      "sha256": "b9da6d42b388d847a2d4f6653b72493fcd0397fd79531087fc3fa2126d883f16"
+    },
+    {
+      "path": "rlcd/weight_space/evidence.py",
+      "bytes": 8003,
+      "sha256": "69c5e8479ce7797de7ef182a4fd1229124c83bfb4fc86ccbfbb14edc1984420d"
+    },
+    {
+      "path": "rlcd/weight_space/experiments.py",
+      "bytes": 14118,
+      "sha256": "72135f830bd7d662bbdf7a9b254712105ff70b00a253ea08a90238f08989ff0a"
+    },
+    {
+      "path": "rlcd/weight_space/features.py",
+      "bytes": 34083,
+      "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+    },
+    {
+      "path": "rlcd/weight_space/governance.py",
+      "bytes": 12612,
+      "sha256": "23021f2c88883c2ccc41870582e49cb70f5b5804f2d460ac865d3bbf525fc8f1"
+    },
+    {
+      "path": "rlcd/weight_space/live_provider.py",
+      "bytes": 28756,
+      "sha256": "efd6b52407f63dcceaa18b5f00d22b6e3ae19c3dd9c22b6b7ed7d9b65b5e31a1"
+    },
+    {
+      "path": "rlcd/weight_space/metrics.py",
+      "bytes": 3552,
+      "sha256": "3cf3061c0a6f1676066ef15649ac5877ba8161d11a5a3d24c4b0f06ecaea77ad"
+    },
+    {
+      "path": "rlcd/weight_space/model.py",
+      "bytes": 10004,
+      "sha256": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba"
+    },
+    {
+      "path": "rlcd/weight_space/program.py",
+      "bytes": 6317,
+      "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+    },
+    {
+      "path": "rlcd/weight_space/proof_bridge.py",
+      "bytes": 27469,
+      "sha256": "642ec0869208d59f1641b31d5887cb5f16b199787418e0b7789aa979ad04a93b"
+    },
+    {
+      "path": "rlcd/weight_space/research_tasks.py",
+      "bytes": 31221,
+      "sha256": "52102a2403298f536b1bafb3a8638dce2abba8acb3c58d606c882c8ff87e7b8f"
+    },
+    {
+      "path": "rlcd/weight_space/rts_study.py",
+      "bytes": 17923,
+      "sha256": "a284b4e77e4bb57b704271ca170f7b29e7139e333d8dc17a663d4096fabaa476"
+    },
+    {
+      "path": "rlcd/weight_space/runtime_research.py",
+      "bytes": 15940,
+      "sha256": "6b961bba8b396fdc9343da5e57beb610f8c25450291f513de58102cb36a7a951"
+    },
+    {
+      "path": "rlcd/weight_space/semantics.py",
+      "bytes": 6727,
+      "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+    },
+    {
+      "path": "rlcd/weight_space/sequential.py",
+      "bytes": 9106,
+      "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+    },
+    {
+      "path": "rlcd/weight_space/sequential_runtime.py",
+      "bytes": 6320,
+      "sha256": "0f06469393d4c8cc5f2a16529ca648dbb439e42df7b559077a3ec706d6a3302f"
+    },
+    {
+      "path": "rlcd/weight_space/sequential_slot_evaluator.py",
+      "bytes": 3084,
+      "sha256": "a17d2cab18dd3fc0387b70904eb34a0506872b716755b97eb453ed50c9b0fcbe"
+    },
+    {
+      "path": "rlcd/weight_space/staged_cohort.py",
+      "bytes": 67239,
+      "sha256": "b7b45c55955932dc92f4b5196ae9e9eadee472eccbc380145d81a5f4c39fdd80"
+    },
+    {
+      "path": "rlcd/weight_space/staged_diagnosis.py",
+      "bytes": 28539,
+      "sha256": "ff3449c6392d8fca2af2114ff36c3760a207eff5b7bd667f0939bdaf1ef74dd5"
+    },
+    {
+      "path": "rlcd/weight_space/structured.py",
+      "bytes": 26854,
+      "sha256": "8c2be636b812158de5df1cb6bad9615274f2dfcd7b3d6701f3843e19a3513f24"
+    },
+    {
+      "path": "rlcd/weight_space/study_tasks_v2.py",
+      "bytes": 20140,
+      "sha256": "cf944710cce88a70c400b713b76b699446b1ba47747121ac58f31316fbb01233"
+    },
+    {
+      "path": "rlcd/weight_space/study_v2.py",
+      "bytes": 46314,
+      "sha256": "a1ffd5840d4beb4d7b8f827552a38ae192f300e32809233a1b58681c147bdb3e"
+    },
+    {
+      "path": "rlcd/weight_space/symmetry.py",
+      "bytes": 12162,
+      "sha256": "c459d7e7317d89eda6d8a99c98606bb73b4ccad3a80f77f81f3272646173035d"
+    },
+    {
+      "path": "rlcd/weight_space/torch_bridge.py",
+      "bytes": 9678,
+      "sha256": "b532de9574bb13c4c918656cba21ff2e9da61ea2c9aca1a6394376bb64696cda"
+    },
+    {
+      "path": "rlcd/weight_space/workflow.py",
+      "bytes": 54271,
+      "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+    },
+    {
+      "path": "scripts/check_distro_install.py",
+      "bytes": 4988,
+      "sha256": "418cea2fba01b4228d257488ba489ccbd25e0c06698e5a445c1caaefc2460481"
+    },
+    {
+      "path": "tests/test_distro_demo.py",
+      "bytes": 4013,
+      "sha256": "c0a86ebe9a10aeb5fb5c7bf94a6914f9089a8f9b645360a6a5144e72ad9faa87"
+    },
+    {
+      "path": "tests/test_distro_integration.py",
+      "bytes": 26589,
+      "sha256": "a430a06364bd09e405238a05492e855ca24a2d97e2c86a5ee6331833e8c7f1a0"
+    },
+    {
+      "path": "tests/test_distro_plugin.py",
+      "bytes": 5989,
+      "sha256": "4ecf106386f8f95df1442bf3db933bb83b83d36a8e2cb67d6d7b9b4b87f4f404"
+    },
+    {
+      "path": "tests/test_governance.py",
+      "bytes": 29265,
+      "sha256": "36b476cbcc715fb2c07aff196622b5dd79cee1a2e29cf7562b9668a362b33ceb"
+    }
+  ],
+  "identity_scope": "Recorded current files before and after the focused check; not a complete import/file-access attestation or installed dependency-content identity.",
+  "earlier_verification_attempt": {
+    "stage": "wheel-source-correspondence",
+    "result": "failed",
+    "reason": "The helper expected-member set omitted existing rlcd/serving_metrics.py. Its focused tests and captured-source comparison passed before this assertion. The helper now captures both packaged Python directories; implementation and wheel bytes were unchanged.",
+    "private_commitments": [
+      {
+        "path": "capture-original.py",
+        "bytes": 10760,
+        "sha256": "f5ef65bdb052d9966e26d6e621574e7cc8f019e14d2ab489f9c37753d9ed4717"
+      },
+      {
+        "path": "before.json",
+        "bytes": 8523,
+        "sha256": "8fb09721c6b1d55e231a54e41a63619d71247ff30fe06756c704c684e867b168"
+      },
+      {
+        "path": "after.json",
+        "bytes": 8523,
+        "sha256": "8fb09721c6b1d55e231a54e41a63619d71247ff30fe06756c704c684e867b168"
+      },
+      {
+        "path": "command.json",
+        "bytes": 920,
+        "sha256": "127a9363c3aed6002fe9a35c1cf8d8a0150dfe56217f1acbf9ce728d9596d9d2"
+      },
+      {
+        "path": "stdout.log",
+        "bytes": 346,
+        "sha256": "6041519f85e903d8161fa77236afecbbebd0fae2eb2927e9039d0efb4e16af1d"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "pytest.xml",
+        "bytes": 37195,
+        "sha256": "da29d8123563cebb1f5f464a8c23a45e103f2d53a87b3d5241bef9b4fde39408"
+      },
+      {
+        "path": "wheel-comparison-failure.json",
+        "bytes": 305,
+        "sha256": "b8066b0d8d67242db8afc400ade183f77532b693eacdb79cdb0cc72faf9a3954"
+      }
+    ]
+  },
+  "wheel": {
+    "path": "weight_space_programming_framework-0.2.0.dev4-py3-none-any.whl",
+    "bytes": 232638,
+    "sha256": "c0e66453b279e389272a3a14ab2762c77af966786fe22245d59472f36e8430d2",
+    "packaged_source_and_skill_match": true,
+    "readme_matches_normalized_text": true,
+    "license": "MIT",
+    "optional_mcp_extra": "mcp>=2.3,<3",
+    "dependency_check_exit_code": 0,
+    "private_output_commitments": [
+      {
+        "path": "wheel-pip-check.stdout",
+        "bytes": 31,
+        "sha256": "672aec65a45bed50e70229c70934a7eebf0462595c459b83023027645d57cccf"
+      },
+      {
+        "path": "wheel-pip-check.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "installed_wheel_check": {
+    "command": [
+      "<clean-installed-python>",
+      "-I",
+      "<source>/scripts/check_distro_install.py",
+      "--workspace",
+      "<new-workspace-outside-checkout>"
+    ],
+    "result": {
+      "schema": "wsp-distro-installed-check/1",
+      "status": "passed",
+      "distribution_version": "0.2.0.dev4",
+      "mcp_version": "2.3.0",
+      "isolated_python": true,
+      "tools": [
+        "wsp_export_review",
+        "wsp_inspect_change",
+        "wsp_prepare_review",
+        "wsp_review_status"
+      ],
+      "before_queue": "ordinary-support",
+      "after_queue": "platform-operations",
+      "supplied_protected_scores_unchanged": true,
+      "review_status": "requested",
+      "local_pilot_eligible": false,
+      "production_authorized": false,
+      "scientific_authorized": false,
+      "native_host_discovery_checked": false,
+      "live_host_model_session_checked": false
+    },
+    "raw_receipt_commitment": {
+      "path": "installed-wheel-smoke.json",
+      "bytes": 625,
+      "sha256": "d230579ed8f23de70e364d1bd42160fe591ec0423bbdfd660cd26198ac5e5702"
+    },
+    "interpretation": "Official SDK initialize/list/call of all four operations, matching text and structured results, invalid-pin rejection and byte-preserving export. Synthetic review remains requested and ineligible; no human decision or host model call."
+  },
+  "native_management_checks": {
+    "observed_at_utc": "2026-11-10T15:15:05.169681+00:00",
+    "claude_version": "2.1.317",
+    "copilot_version": "1.0.99-2",
+    "plugin_file_commitments": {
+      ".claude-plugin/plugin.json": "318497b476d3c938778ae4a95bf0931d24f4cb3b858e0ad9c641a290d30916aa",
+      ".github/plugin/plugin.json": "d827b3c5e58c901fcf42fe6af1a15d352644bf7718342445a3f81999f0c4a4d9",
+      ".mcp.json": "0b140abbfc38ba2c1ac9cf85ffeda6319c1ead175c72b549a8e68d53e2ad7179",
+      "skills/weight-space-governance/SKILL.md": "b9da6d42b388d847a2d4f6653b72493fcd0397fd79531087fc3fa2126d883f16"
+    },
+    "commands": [
+      {
+        "name": "claude-version",
+        "exit_code": 0,
+        "stdout_sha256": "f884de22791011a02bebcc6f35f253083da2451366f71bd8fea31fe5515c31fb",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "copilot-version",
+        "exit_code": 0,
+        "stdout_sha256": "c7037c4208e6ceab1b32ef5f00b5ff153d59aff3aec222d072176b01880329bd",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "claude-validate",
+        "exit_code": 0,
+        "stdout_sha256": "38d77b607272f550e34f58763e8f48d45ff2b228df147dccfefbc232ab4d1218",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "claude-mcp-get",
+        "exit_code": 0,
+        "stdout_sha256": "19697a3e4ed5b141141d11cf80bca4ab36697a53e8e77b977b83f3913cae6a68",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "copilot-plugin-list",
+        "exit_code": 0,
+        "stdout_sha256": "99104f3476497317af67022256e71a9a123ead75c8fd7a8899c8d5a7c2e64457",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "contains_plugin_name": true
+      },
+      {
+        "name": "copilot-mcp-list",
+        "exit_code": 0,
+        "stdout_sha256": "58c1f9a707aa3027a36d1f0a59a767c6a4469e388477af3d1dee00a31c3e191d",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "contains_weight_space": false
+      }
+    ],
+    "claude_plugin_validation_succeeded": true,
+    "claude_mcp_reported_connected": true,
+    "copilot_plugin_discovered": true,
+    "copilot_management_mcp_server_listed": false,
+    "copilot_management_limit": "Installed Copilot predates 1.0.109-0's documented fix for mcp list/get honoring --plugin-dir. Absence from the older management output is inconclusive about live session loading.",
+    "official_release_source": "https://github.com/github/copilot-cli/releases/tag/v1.0.109-0",
+    "raw_receipt_commitment": {
+      "path": "native-host-receipt.json",
+      "bytes": 7258,
+      "sha256": "2603e5b0efd138ce0a61d63a527fdd32b58ce7990061fb52a51414b1c311a5f9"
+    },
+    "raw_machine_paths_and_configuration_published": false
+  },
+  "proof_boundary": {
+    "unchanged_existing_model": {
+      "path": "formal/governance/Governance.lean",
+      "bytes": 15119,
+      "sha256": "19d9d9de98f64672d0d1b49b6eb3cf058fb10123749369737ff183ee6a83178f"
+    },
+    "model_guide": "formal/governance/README.md",
+    "adapter_contract": "docs/governance/distro-integration.md",
+    "new_formal_statement": false,
+    "new_lean_execution": false,
+    "python_to_lean_refinement_proved": false
+  },
+  "preserved_prior_receipt": {
+    "path": "provenance/verification/provider-output-capture-20261110.json",
+    "bytes": 30504,
+    "sha256": "85ddf3ef84e7fd5642aeaa79a2f03dee48ac317339e08d8a54fd486c0cfae6bb"
+  },
+  "limits": [
+    "Counts are verification bookkeeping, not capability or business impact.",
+    "Native management observations are separate from SDK tool calls. No live Distro-launched model session or native model tool invocation was exercised.",
+    "Human decisions require external authorization. Labels, pins and file validation do not authenticate users or provide a trusted current-head store, concurrent-decision serialization or a filesystem sandbox.",
+    "Production and scientific authority remain false. The example verifies only supplied fixed-feature effects, not text recognition, unseen tickets or customer savings.",
+    "This local record supplies no hosted-CI result or publication/merge attestation. Those outcomes are identified by their actual PR and hosted run.",
+    "The retained installed-wheel smoke predates this source-bound capture; the wheel's packaged source and skill were compared byte-for-byte to this capture. No claim is made about complete earlier process history."
+  ]
+}

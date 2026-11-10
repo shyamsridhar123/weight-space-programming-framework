@@ -246,6 +246,12 @@ def parser() -> argparse.ArgumentParser:
             command.add_argument("certificate")
     demo = sub.add_parser("demo", help="Run a generic convolution/Tanh example and a proved ReLU specialization")
     demo.add_argument("--out", required=True)
+    distro = sub.add_parser("distro", help="Set up the workspace-bound Distro review companion")
+    distro_sub = distro.add_subparsers(dest="distro_command", required=True)
+    for name in ("setup", "demo"):
+        command = distro_sub.add_parser(name, help=("Generate native host manifests and the review skill"
+                                                   if name == "setup" else "Create a fresh synthetic support-routing workspace and plugin"))
+        command.add_argument("--workspace", required=True, type=Path)
     governance = sub.add_parser("governance", help="Optional local review; no production or scientific authority")
     governance_sub = governance.add_subparsers(dest="governance_command", required=True)
     for name in ("request", "decide", "check", "export"):
@@ -313,6 +319,14 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command in ("compile-features", "certify-retention", "verify-retention"): result = _features(args)
         elif args.command in ("certify", "verify"): result = _certificate(args, args.command == "verify")
         elif args.command == "governance": result = _governance(args)
+        elif args.command == "distro":
+            from .distro_plugin import setup_plugin
+            if args.distro_command == "demo":
+                from .distro_demo import create_demo
+                result = create_demo(args.workspace)
+                result["plugin"] = setup_plugin(args.workspace)
+            else:
+                result = setup_plugin(args.workspace)
         elif args.command == "demo":
             from .demo import run_demo
             result = run_demo(args.out)

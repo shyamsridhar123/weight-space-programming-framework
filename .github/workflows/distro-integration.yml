@@ -1,0 +1,102 @@
+name: Distro integration
+
+"on":
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: distro-integration-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  distro-integration:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    env:
+      RUN_ROOT: .runs/ci-distro-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTEST_DISABLE_PLUGIN_AUTOLOAD: "1"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+    steps:
+      - name: Preserve checked-out file bytes
+        run: git config --global core.autocrlf false
+
+      - name: Check out publication
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Install the optional MCP integration and engineering tools
+        run: |
+          python -m pip install ".[distro]" "pytest>=8,<10" build
+          python -m pip check
+
+      - name: Check fresh synthetic governance and Distro fixtures
+        run: |
+          python -m pytest -q -c pytest-engineering.ini \
+            tests/test_governance.py \
+            tests/test_distro_integration.py \
+            tests/test_distro_plugin.py \
+            tests/test_distro_demo.py \
+            --basetemp "$RUN_ROOT/pytest-tmp" \
+            --junitxml="$RUN_ROOT/pytest.xml"
+
+      - name: Build the wheel
+        run: python -m build --wheel --outdir "$RUN_ROOT/wheel"
+
+      - name: Validate a clean installed wheel outside the checkout
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          import subprocess
+          import sys
+          import tempfile
+
+          root = Path(os.environ["GITHUB_WORKSPACE"]).resolve()
+          runner_temp = Path(os.environ["RUNNER_TEMP"]).resolve()
+          isolated = Path(tempfile.mkdtemp(prefix="wsp-distro-", dir=runner_temp)).resolve()
+          assert not isolated.is_relative_to(root), isolated
+          wheels = sorted((root / os.environ["RUN_ROOT"] / "wheel").glob("*.whl"))
+          assert len(wheels) == 1, wheels
+          environment = isolated / "venv"
+          subprocess.run([sys.executable, "-m", "venv", str(environment)], check=True, cwd=isolated)
+          python = environment / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+          subprocess.run(
+              [str(python), "-I", "-m", "pip", "install", f"{wheels[0]}[distro]"],
+              check=True, cwd=isolated,
+          )
+          subprocess.run([str(python), "-I", "-m", "pip", "check"], check=True, cwd=isolated)
+          subprocess.run(
+              [str(python), "-I", str(root / "scripts/check_distro_install.py"),
+               "--workspace", str(isolated / "workspace")],
+              check=True, cwd=isolated,
+          )
+          PY
+
+      - name: Upload integration checks and wheel
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: distro-integration-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.RUN_ROOT }}/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30

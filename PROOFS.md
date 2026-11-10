@@ -50,9 +50,11 @@ independence. The contract and model guide state these correspondence limits.
 The successful Lean check establishes conditional mathematical claims about
 these definitions. Synthetic implementation checks, authenticated
 organizational authority, and scientific evidence of useful behavior remain
-separate obligations. The optional [Distro handoff](docs/governance/distro-handoff.md)
-supplies an authoring and review procedure, not evidence that these obligations
-have been discharged.
+separate obligations. The optional [Distro adapter contract](docs/governance/distro-integration.md)
+maps its review tools to the existing model before implementation; it adds no
+decision transition. Its parser, transport, packaging and host integration need
+separate engineering checks. The [enterprise handoff](docs/governance/distro-handoff.md)
+does not discharge organizational or scientific obligations.
 
 ## What the library proves
 

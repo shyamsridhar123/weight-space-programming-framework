@@ -22,6 +22,7 @@ classifiers = [
 torch = ["torch==2.8.0"]
 test = ["pytest>=8,<10", "torch==2.8.0"]
 plots = ["matplotlib>=3.9,<4"]
+distro = ["mcp>=2.3,<3"]
 
 [project.scripts]
 weight-space = "rlcd.weight_space.__main__:main"
@@ -33,3 +34,6 @@ Documentation = "https://github.com/shyamsridhar123/weight-space-programming-fra
 [tool.setuptools]
 packages = ["rlcd", "rlcd.weight_space"]
 include-package-data = false
+
+[tool.setuptools.package-data]
+"rlcd.weight_space" = ["distro_skill.md"]
