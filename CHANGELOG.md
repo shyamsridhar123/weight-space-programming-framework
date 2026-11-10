@@ -7,6 +7,14 @@ research draft.
 
 ## Unreleased
 
+- Exclude `tests/test_raw_text_serving.py` from configured engineering CI and
+  retain it as separate opt-in validation. Its authored model/package fixtures,
+  model restoration, preprocessing, native inference and actual baseline child
+  remain in the retained module. Configured CI is narrower, not native-free;
+  a passing configured suite does not revalidate raw-text serving. This selection
+  change supplies no new serving validation or scientific result. Historical
+  receipts and counts retain their original scope; #14 c1/c5 remain partial/open.
+
 - Preserve raw U+0085, U+2028 and U+2029 inside JSON strings when parsing and
   publishing provider JSONL. Both functions now split LF/CRLF records, retain
   blank records and ignore one final delimiter; empty input has no records and
