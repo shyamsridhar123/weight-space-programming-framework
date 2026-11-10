@@ -18,6 +18,15 @@ research draft.
   organizational and scientific evidence remain separate; no scientific
   acceptance status is promoted.
 
+- Bind each validated development-consumption purpose into the durable decision,
+  including repeated consumption of an already consumed scope. Distinct purpose
+  commitments no longer collapse into the same audit decision; consumed-key
+  attribution, registry revision/state and rejection before scoring are unchanged.
+  The [invariant and assumptions](docs/research/evaluation-data-roles.md#development-consumption-purpose-binding-november-10-2026)
+  precede the implementation. A focused synthetic regression passed for raw
+  rows and registered batches; this supplies no new freshness or scientific
+  evidence and does not close Issue #2.
+
 - Add prospective support sample-threshold accounting for every saved terminal report: assigned/admitted/scored counts, explicit missing endpoints, artifact coverage, all-assigned and conditional success rates, and endpoint means over complete admitted sets. Bind successful accounting to the durable result and validate it without prediction replay. New result/evaluation/manifest schemas and evaluator use `/2`; protocol/binding remain `/1`, with no backfill or migration. This adds no scientific usefulness, complete costs or freshness evidence; Issue #2 c2/c7 remain partial.
 
 - Keep broker summary statistics finite when finite weights overflow an intermediate mean reduction. Preserve each ordinary NumPy mean when it succeeds and use scaled arithmetic only on reduction failure, with locally scoped floating-point handling. Authored synthetic regressions cover extremes, cancellation, zeros, scalar/subnormal weights, decimal rounding, full-tensor charges, coordinate rejection and hashed request retention under warning and strict error policies. A separate prospective test pin leaves frozen production and historical source identities unchanged; this adds no scientific or impact evidence.

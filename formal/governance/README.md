@@ -11,10 +11,19 @@ execution.
 
 ## Verification status
 
+**Hosted check failed on November 10, 2026; the corrected source awaits a
+successful check.** Hosted Lean 4.24.0 run `42827681264`, job `129869167142`,
+failed because `prefix` was used as a binder and induction-pattern identifier,
+but is reserved syntax. The resulting parse errors caused cascading `Path`
+failures, and the final transitive axiom audit rejected `sorryAx`. The binder
+and affected patterns now use `history`. This source correction is not a
+successful compiler or axiom-audit result. Runtime implementation remains
+gated on an observed successful direct Lean check and transitive axiom audit.
+
 **UNCHECKED locally as of November 10, 2026.** No installed Lean executable
-was found on PATH or in the existing user/tool locations checked. No compiler
-version or kernel check result is available. The following exact PowerShell
-verification command was attempted from the worktree root:
+was found on PATH or in the existing user/tool locations checked. No local
+compiler version or kernel check result is available. The following exact
+PowerShell verification command was attempted from the worktree root:
 
 ```powershell
 $governanceLean = Get-Command lean -CommandType Application -ErrorAction SilentlyContinue
@@ -38,8 +47,9 @@ The command stopped before invoking a compiler. No toolchain was installed,
 no historical proof wrapper was run, and no scientific artifact or receipt was
 used. A static source review is not a Lean kernel check.
 
-**Axiom report and audit result: unavailable.** Every named theorem retains a
-corresponding `#print axioms` command. The source finishes with a transitive
+**Local axiom reports and audit result: unavailable. The hosted audit failed.**
+Every named theorem retains a corresponding `#print axioms` command. The
+source finishes with a transitive
 axiom audit of every declaration in the `Governance` namespace, including
 private definitions and generated declarations. An empty namespace match is
 an error. The audit permits only `propext`,

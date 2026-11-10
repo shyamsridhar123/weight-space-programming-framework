@@ -134,7 +134,7 @@ inductive Path (encoding : Encoding) (start : State) : State → Prop where
   | refl : Path encoding start start
   | extend {current next : State} {expected : ExpectedPins}
       {decision : Decision}
-      (prefix : Path encoding start current)
+      (history : Path encoding start current)
       (transition : Step encoding expected current decision next) :
       Path encoding start next
 
@@ -186,7 +186,7 @@ theorem path_preserves_request
     finish.request = start.request := by
   induction path with
   | refl => rfl
-  | extend prefix transition inductionHypothesis =>
+  | extend history transition inductionHypothesis =>
       exact (step_preserves_request transition).trans inductionHypothesis
 
 theorem reachable_preserves_request
@@ -237,7 +237,7 @@ theorem reachable_approval_invariant
       intro approval approved
       change Status.requested = Status.approved approval at approved
       cases approved
-  | extend prefix transition inductionHypothesis =>
+  | extend history transition inductionHypothesis =>
       exact step_approval_is_separate_and_bound transition
 
 theorem reachable_approval_is_separate_and_bound
@@ -271,7 +271,7 @@ theorem terminal_path_stays
     finish = start := by
   induction path with
   | refl => rfl
-  | extend prefix transition inductionHypothesis =>
+  | extend history transition inductionHypothesis =>
       rw [inductionHypothesis] at transition
       exact False.elim (terminal_no_step terminal transition)
 
