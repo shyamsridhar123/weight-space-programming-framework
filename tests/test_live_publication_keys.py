@@ -1,6 +1,6 @@
 """Scoped synthetic regression of AST-extracted public event publication.
 
-The full publisher and its JSON-key helpers are extracted from public source.
+The publisher and its JSON key and framing helpers are extracted from source.
 The test-local write_json sink checks publication arguments and readback; it does
 not exercise the production writer, providers, studies, or event replay semantics.
 All inputs below are fresh synthetic literals. Copied metadata remains verbatim;
@@ -24,6 +24,7 @@ def test_publication_redacts_json_keys_and_omits_collisions(tmp_path):
         "_DuplicateJSONKey",
         "_RedactedJSONKeyCollision",
         "_unique_json_object",
+        "_jsonl_lines",
         "publish_attempt",
     )
     selected = []
