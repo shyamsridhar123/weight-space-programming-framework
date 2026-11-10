@@ -1,24 +1,111 @@
 # Weight Space Programming Framework
 
-**Read, diagnose, edit, and create neural-network weights.**
+**Read, diagnose, edit, and create neural-network weights—with explicit obligations and inspectable evidence.**
 
 A weight edit can improve one output and disturb another. This research framework
-makes that relationship inspectable: it records the model, the proposed edit, the
-candidate actually produced, and the evidence used to evaluate it.
+makes the whole change inspectable: the task, the parent model, the proposed edit,
+the candidate actually produced, and the evidence used to accept it or stop.
 
-The framework is generic. Common interfaces describe artifacts, proposals, access
-conditions, and evaluation records. Explicit adapters define execution semantics
-and the conditions for behavioral guarantees. RTS is one historical application.
+**Public research draft** · [MIT](LICENSE) · Python 3.11+
 
-[Worked example](#one-edit-two-obligations) · [Enterprise use case](#an-enterprise-policy-change) · [Quick start](#try-the-example) ·
-[Distro integration](#review-a-change-in-distro) · [Evidence](#what-the-evidence-shows) · [Research roadmap](docs/weight-space/v2/research-roadmap-2026-11.md) · [Documentation](#explore-the-framework)
+[Use case](#start-with-one-support-ticket) · [Quick start](#run-it) ·
+[Architecture](#how-the-framework-fits-together) · [Distro](#review-the-change-in-distro) ·
+[Proofs and evidence](#start-with-the-property-to-preserve) · [Documentation](#go-deeper)
+
+## Start with one support ticket
+
+A telemetry outage reaches the wrong support queue. The requested change is
+simple: **route the outage to Platform Operations while preserving billing,
+security, and ordinary-support behavior.**
+
+The framework makes both sides of that request explicit. It proposes a routing
+head edit, checks the realized candidate against the declared constraints, and
+records the result. A request can end in a useful change, an abstention, or a
+failure that explains why the change should stop.
+
+[![The support-routing walkthrough: an outage moves to Platform Operations, sampled protected scores stay unchanged, and avoiding a transfer is identified as potential value.](artifacts/enterprise/support-routing/demo/poster.jpg)](artifacts/enterprise/support-routing/demo/walkthrough.mp4)
+
+[Watch the 90-second walkthrough](artifacts/enterprise/support-routing/demo/walkthrough.mp4)
+· [Run the interactive story](demos/enterprise-routing/README.md)
+· [Read the transcript](artifacts/explanations/enterprise-story/story.md)
+
+| Situation | What the example demonstrates |
+| --- | --- |
+| A routing change is feasible | The selected candidate changes the intended route and checks protected scores. |
+| Protection rules out the change | The workflow abstains. |
+| An unseen symptom is not represented | A feature-coverage failure blocks the candidate. |
+
+The [enterprise example](docs/use-cases/enterprise-support-routing.md) uses
+synthetic structured tickets, a supplied feature extractor, and a constructed
+linear head. Preserving supplied-feature scores does not establish behavior on
+arbitrary tickets. Avoiding an extra team transfer is the operational opportunity;
+customer savings and production performance have not been measured.
+
+## Run it
+
+From a checkout, with Python 3.11 or newer:
+
+```bash
+python -m pip install -e .
+python examples/enterprise_support_routing.py
+```
+
+For the smaller mathematical example and the command-line interface:
+
+```bash
+python examples/edit_retention.py
+weight-space --help
+```
+
+The core uses NumPy and needs no external model provider. The Python import is
+`rlcd.weight_space`. [Reproducing the work](REPRODUCING.md) covers isolated
+environments, optional PyTorch support, evidence replay, and proof builds. The
+standalone package uses `pyproject.toml`; retained `requirements*.txt` files
+describe the original RLCD environment.
+
+## How the framework fits together
+
+Support routing is one application. The same task and artifact interfaces support
+four kinds of work:
+
+| Task | Submission |
+| --- | --- |
+| **Read** | An answer about a weight artifact. |
+| **Diagnose** | An answer about model behavior under the declared task. |
+| **Edit** | A literal edit, a lowered structured proposal, or a compatible complete artifact. |
+| **Create** | A complete artifact, without a parent model. |
+
+<img src="docs/images/architecture.png" width="720" alt="Framework architecture: structured proposals lower to literal edits; answers and complete artifacts enter the session directly. Caller-run checks precede sealed selection or abstention and a receipt; only selected candidates invoke held-out evaluation.">
+
+**Diagram simplification:** Only selected candidates invoke held-out evaluation.
+A sealed abstention returns a receipt without an evaluator call.
+
+**Declare the task.** Name the artifact semantics, access conditions, budgets,
+requested behavior, and protected behavior. Explicit adapters define how a
+supported model executes and which guarantees apply. Storing arbitrary tensors
+does not supply an evaluator or certificate for every architecture.
+
+**Inspect the actual candidate.** A literal edit binds an exact parent. A
+structured edit passes through lowering and native precision; projection can
+change the requested update. Preserve the proposal and the realized endpoint as
+separate records.
+
+**Run the checks, then select or abstain.** `ProgrammerSession` records candidates,
+access, budgets, selection, and evaluation. The caller must run applicable
+structural, behavioral, and certificate checks. Recording a candidate does not
+run those checks automatically. Selection is sealed before caller-owned held-out
+evaluation produces its receipt.
+
+[Architecture and API](docs/weight-space/v2/architecture.md) ·
+[Task lifecycle](docs/weight-space/v2/workflow.md)
 
 ## One edit, two obligations
 
-Start with a linear output head whose weights are `(1, 1)`. Raise its output at
-feature `(1, 1)` from **2 to 3**, while keeping its output at `(1, 0)` equal to **1**.
+The smallest example makes the central idea visible. Start with weights `(1, 1)`.
+Raise the output at feature `(1, 1)` from **2 to 3**, while keeping the output at
+feature `(1, 0)` equal to **1**.
 
-![Exact linear illustration in update coordinates. The target requires delta w1 plus delta w2 to equal 1; protection requires delta w1 to equal 0. The target-only update (0.5, 0.5) satisfies the target. Their intersection (0, 1) satisfies both conditions.](artifacts/explanations/readme-edit/edit-geometry.png)
+![Linear edit geometry: meeting the target requires delta w1 plus delta w2 to equal 1; protecting the other output requires delta w1 to equal 0. Their intersection is the update (0, 1).](artifacts/explanations/readme-edit/edit-geometry.png)
 
 | Choice | New weights | Target output | Protected output |
 | --- | --- | ---: | ---: |
@@ -26,272 +113,146 @@ feature `(1, 1)` from **2 to 3**, while keeping its output at `(1, 0)` equal to 
 | Target-only edit | `(1.5, 1.5)` | 3 | 1.5 |
 | Edit with protection | `(1, 2)` | 3 | 1 |
 
-The target-only edit has the smallest Euclidean update norm among edits that meet
-the target exactly. It changes a coefficient used by both inputs. The protected
-edit changes only the second coefficient, leaving the protected output unchanged.
-If the target itself must be preserved, the requested change becomes impossible.
+The target-only edit changes a coefficient used by both inputs. The protected edit
+changes only the second coefficient. If the target itself is protected, the
+requested change is impossible.
 
-This example uses **fixed features, no bias change, and exact arithmetic**. The
-[worked explanation](docs/weight-space/v2/worked-example.md) derives the updates
-and follows them through the API. It also explains why numerical fitting and
-native precision need further checks.
+This illustration assumes **fixed features, fixed bias, and exact arithmetic**.
+The numerical compiler uses positive ridge regularization, so a fitted edit can
+retain target error. Native precision and the actual endpoint need their own
+checks. [Follow the derivation and API](docs/weight-space/v2/worked-example.md)
+or [explore the interactive model locally](artifacts/explanations/edit-retention/index.html).
 
-[Explore the interactive model](artifacts/explanations/edit-retention/index.html)
-locally to vary the edit and protected set. The still is also available as an
-[editable SVG](artifacts/explanations/readme-edit/edit-geometry.svg), with its
-[source assumptions](artifacts/explanations/readme-edit/source.json).
+## Review the change in Distro
 
-## Try the example
-
-Use Python 3.11 or newer from this repository root:
-
-```bash
-python -m venv .venv
-# Activate .venv using the command for your shell.
-python -m pip install -e .
-python examples/edit_retention.py
-weight-space --help
-```
-
-The example reports target outputs, protected residuals, and a request blocked by
-full protection. The compiler uses positive ridge regularization, so its fitted
-edit can retain target error even when protection is exact.
-
-The core requires NumPy and no external model provider. The Python import remains
-`rlcd.weight_space`. For optional PyTorch support, environment details, evidence
-replay, and proof builds, see [Reproducing the work](REPRODUCING.md).
-
-The standalone installation uses `pyproject.toml` through the command above.
-The retained `requirements*.txt` files describe the original RLCD environment.
-
-## An enterprise policy change
-
-Route telemetry outage tickets to Platform Operations while preserving billing,
-security, and ordinary support behavior. The
-[enterprise walkthrough](docs/use-cases/enterprise-support-routing.md) uses the
-generic compiler, structural policy, retention certificates, cooperative session,
-sealed evaluation, and exact rollback:
-
-```bash
-python examples/enterprise_support_routing.py
-```
-
-The runnable example compares the unchanged parent, target-only fitting, soft
-retention, and nullspace protection. It records a successful routing change,
-abstention when protection makes the request impossible, and rejection when an
-unseen symptom exposes a feature-coverage gap.
-
-[Inspect the business reports](artifacts/enterprise/support-routing/README.md)
-and image flowchart. The records and baseline are synthetic; this example
-establishes an integration pattern, not enterprise deployment performance.
-
-[Watch the 90-second explanation](artifacts/enterprise/support-routing/demo/walkthrough.mp4)
-or [run the interactive story](demos/enterprise-routing/README.md). Start with one
-outage ticket that reaches the wrong team. Follow its queue scores, see what a
-weight contributes, and watch the framework choose an edit that leaves protected
-scores unchanged. The story ends with the operational opportunity, reasons to
-stop, and restoration of the original model.
-
-Original mathematical animations follow STE-Pro-Max's concrete-example-first
-guidance. The real browser recording includes visible English subtitles and
-quiet cinematic music. [Read the timed transcript](artifacts/explanations/enterprise-story/story.md)
-· [Download subtitles](artifacts/enterprise/support-routing/demo/subtitles.srt)
-· [Music credit](artifacts/enterprise/support-routing/demo/MUSIC.md).
-
-[![The visual explanation: outages reach Platform Operations while sampled protected scores stay unchanged. Avoiding a transfer is potential value, not measured savings.](artifacts/enterprise/support-routing/demo/poster.jpg)](artifacts/enterprise/support-routing/demo/walkthrough.mp4)
-
-## Review a change in Distro
-
-Use the optional companion to inspect a weight edit, prepare a review, follow a
-human decision, and export its complete history from Distro's coding host:
+The optional Distro companion brings the change and its evidence into a coding
+host. It connects the host to the existing governance runtime through a
+workspace-bound plugin.
 
 ```bash
 python -m pip install ".[distro]"
-python -m rlcd.weight_space distro demo --workspace .runs/distro-routing
-cd .runs/distro-routing
+python -m rlcd.weight_space distro demo --workspace ../wsp-distro-demo
+cd ../wsp-distro-demo
 distro claude --plugin-dir .runs/distro-plugin
 ```
 
-The demo creates a fresh synthetic routing change and checks its supplied-feature
-retention certificate. Ask the host: “Inspect `change.json`. Explain which queue
-changes, which supplied scores stay the same, and what the evidence does not
-prove.” Copilot uses the same plugin with `distro copilot --plugin-dir`.
+Use a **new demo directory**. The generator creates a separate, smaller synthetic
+routing fixture and checks its supplied-feature retention certificate. It changes
+one readout weight so the supplied outage feature moves from Ordinary Support to
+Platform Operations. Keep the generated plugin configuration local.
 
-Four MCP tools connect the host to the existing governance runtime. Approval
-stays with an independently authorized human; status and export require the
-original request identity and current history head retained separately from
-received bundles. The adapter commits evidence without automatically verifying
-its claims. Production and scientific authority remain false.
+Ask the host:
 
-Follow the [Distro usage guide](docs/governance/distro-usage.md) for existing
-workspaces, human decisions, and the complete workflow. The core framework
-remains usable without Distro or the optional MCP dependency.
+> Inspect `change.json`. Explain which route changes, which supplied scores stay
+> the same, and what the evidence does not prove. Prepare a review and return
+> both pins for me to retain independently. Leave the decision to the human reviewer.
 
-## What the evidence shows
-
-The historical synthetic study found a **target–retention tradeoff**. Soft
-retention reduced collateral error, while leaving more error on the requested target:
-
-| Method | Mean target NRMSE ↓ | Mean collateral NRMSE ↓ |
-| --- | ---: | ---: |
-| Target-only ridge | 0.038695 | 0.888351 |
-| Soft retention | 0.360218 | 0.199321 |
-
-**Lower is better for both metrics.** Both are dimensionless root-mean-square
-errors divided by the RMS of the requested shift `(0.6, -0.3, 0)`, `sqrt(0.15)`.
-They are not accuracy or success percentages.
-
-The study compared paired checkpoints from independently generated synthetic
-worlds, using ReLU, tanh, and convolution-plus-tanh features. Only the output heads
-were trained and edited. There was no live LLM/provider arm, so this study does
-not measure an LLM's ability to discover edits.
-
-The [results](docs/weight-space/v2/results.md) retain world-cluster uncertainty,
-family differences, baselines, precision effects, no-op outcomes, and repeated-edit
-failures. The [methods](docs/weight-space/v2/methods.md) explain the comparison.
-
-The completed [trained application studies](docs/research/trained-applications.md)
-found useful ownership-routing changes from overlays and soft head edits, but
-no useful recognition repair. Every hard protected-score candidate abstained.
-Their structural receipt retains `behavioral_status: not_checked` and
-`formal_certificate: null`; finite behavioral measurements do not supply a
-whole-network or native-execution certificate.
-
-The later [trained-development retention study](docs/research/retention-development.md)
-compares protection cutoffs, soft score budgets and decision margins. Useful
-ownership edits appeared only under its loosest score budget. The stricter
-settings produced no useful edit; the three smallest hard-projection cutoffs
-produced no-ops. This synthetic development comparison selects no winner and
-provides no untouched evaluation or deployment evidence.
-
-In the [live studies](docs/research/live-studies.md), all 80 primary
-weight-access assignments abstained, and diagnosis useful coverage fell below
-its frozen threshold. The [original-source repeat](docs/research/original-source-repeat.md)
-had four failed fresh calls and no completed response. The
-[construction and steering pilot](docs/research/construction-steering-pilot.md)
-had twelve failed assignments and no live candidate to score; the usefulness of
-a completed live artifact cannot be assessed. Successful controls and replay
-do not establish live-model success. The completed
-[synthetic unlearning study](docs/research/synthetic-unlearning.md) failed every
-edited-arm absolute and joint gate. Its finite accessibility measurements do
-not establish information erasure or privacy.
-
-The [evaluation data-role guard](docs/research/evaluation-data-roles.md) now
-rejects registered data after development use, including exact aliases and
-observed family or ancestry links. Synthetic checks cover the shared session
-and broker boundary. Scientific freshness and migration of all research
-scorers remain open requirements.
-
-The [symmetry-family check](docs/research/symmetry-family-boundary-check.md)
-passed finite exact ReLU gauge and transported-edit fixtures, raw-coordinate
-transfer negatives, and numerical and specialized-adapter family-boundary checks.
-Its [receipt](provenance/verification/symmetry-family-boundary-20261109.json)
-binds one invocation to its captured source. Issue #16 c0 remains partial:
-the frozen pilot retains 12/48 failed edited-score controls and no native replay
-success receipt.
-
-### What the proofs establish
-
-Under the stated real-valued assumptions, an edit that vanishes on protected
-feature directions also vanishes on their span. Supported sequential networks
-also admit explicit output-drift bounds.
-
-Using those results for a deployed model requires the right feature equation,
-domain, endpoint, and numerical execution argument. The [proof guide](PROOFS.md)
-makes these premises explicit.
-
-The optional local-pilot governance [contract](docs/governance/contract.md) has a
-[standalone formal model](formal/governance/README.md) that passed a direct hosted
-**Lean 4.24.0 check and transitive axiom audit**. Proof-only PR #87 merged before
-runtime implementation; the formal guide retains the source and run evidence.
-The implemented API and CLI connect those obligations to a synthetic request,
-approval, revocation and export workflow. The [runtime guide](docs/governance/runtime.md)
-records passing focused synthetic checks and their source identities; hosted
-results are tracked against the publishing PR's exact commit. Its walkthrough
-has not been executed. There is no Python-to-Lean refinement or correspondence
-proof. The abstract proof does
-not verify the Python implementation, authenticate reviewers or establish
-scientific evidence. Independent current request/head identities and external
-actor authentication remain caller obligations;
-production and scientific authority remain false. The
-[Distro companion](docs/governance/distro-usage.md) exposes the same runtime
-through workspace-bound tools. Its [integration contract](docs/governance/distro-integration.md)
-states the proof obligations and engineering boundaries; the
-[enterprise handoff](docs/governance/distro-handoff.md) covers organizational
-responsibilities beyond the local review.
-
-## What remains open
-
-The current implementation uses inspectable, dense artifacts and explicit
-semantic families. Callers must run structural and behavioral checks; submitting
-a candidate does not certify it.
-
-The [research plan](docs/weight-space/v2/limitations-and-next-steps.md) connects
-the remaining limits to concrete success and failure criteria:
-
-- General behavioral admission and automatic binding of new candidates to proofs.
-- Verified floating-point execution, enforced access restrictions, and independent
-  provider provenance.
-- Evidence of useful large-model editing and stronger cumulative edit contracts.
-
-The [November 2026 research review](docs/weight-space/v2/research-roadmap-2026-11.md)
-turns those gaps and the original report's future directions into
-[work issues](docs/weight-space/v2/research-issues-2026-11.md). The completed
-studies above narrow the next decisions: feasible recognition repair, useful
-causal diagnosis, reliable live delivery, and cumulative edits that meet their
-utility and retention criteria. Their negative results remain part of the evidence.
-
-All published study seeds have been observed. Replaying them is reproduction;
-fresh confirmation needs untouched units and a newly frozen protocol.
-
-## Explore the framework
-
-| To understand… | Read |
+| Operation | Companion tool |
 | --- | --- |
-| The motivation and original research | [Framework guide](docs/weight-space/v2/README.md) · [Source review](docs/weight-space/v2/source-review.md) |
-| How to represent and check an edit | [Architecture and API](docs/weight-space/v2/architecture.md) · [Task workflow](docs/weight-space/v2/workflow.md) |
-| How to require exact supplied-feature scores | [Compiler guard and limits](docs/research/feature-feasibility.md) · [Recorded check](provenance/verification/exact-score-admission-20261109.json) |
-| How to freeze a diagnosis before repair | [Staged diagnosis](docs/research/staged-diagnosis.md) |
-| How retention settings affect trained edits | [Development comparison](docs/research/retention-development.md) |
-| Symmetry fixtures and family boundaries | [Engineering report](docs/research/symmetry-family-boundary-check.md) · [Verification receipt](provenance/verification/symmetry-family-boundary-20261109.json) |
-| The guarantees and their premises | [Formal explanation](docs/weight-space/v2/formal.md) · [Proof reproduction](PROOFS.md) |
-| The optional governance workflow and its limits | [Contract](docs/governance/contract.md) · [Checked formal model](formal/governance/README.md) · [Runtime walkthrough](docs/governance/runtime.md) · [Distro usage](docs/governance/distro-usage.md) · [Enterprise handoff](docs/governance/distro-handoff.md) |
-| The study and its outcomes | [Methods](docs/weight-space/v2/methods.md) · [Results](docs/weight-space/v2/results.md) |
-| The gaps and next research decisions | [Limitations and next steps](docs/weight-space/v2/limitations-and-next-steps.md) · [Requirements](docs/weight-space/v2/requirements.md) |
-| The supporting records | [Evidence map](EVIDENCE.md) · [Verification scope](VERIFICATION.md) |
+| Inspect the exact change and evidence | `wsp_inspect_change` |
+| Prepare a review request | `wsp_prepare_review` |
+| Check the current review status | `wsp_review_status` |
+| Export the complete review history | `wsp_export_review` |
 
-The image flowcharts cover the [task lifecycle](docs/images/task-lifecycle.png),
-[architecture](docs/images/architecture.png), and
-[evidence branches](docs/images/evidence-branches.png).
+Approval, rejection, and revocation remain separate human actions. Status and
+export reconstruct the complete current request, hash the actual evidence bytes,
+and check the independently retained original-request and current-head pins.
+Those pins must come from a record outside the received bundle.
+
+A correctly bound human approval can confer **local-pilot eligibility only**.
+Evidence binding does not automatically verify the evidence's claims.
+Production and scientific authority remain false. Authentication, trusted
+latest-head storage, concurrent decision serialization, and operational
+deployment or revocation remain external responsibilities.
+
+The [usage guide](docs/governance/distro-usage.md) covers the Copilot launch path,
+human decisions, and native-host validation. Installed-wheel MCP operations and
+native plugin management were checked; live Distro-launched model tool invocation
+remains untested. The core framework works independently of Distro.
+
+## Start with the property to preserve
+
+Begin with the obligation, its assumptions, and the evidence needed to check the
+actual candidate. The [proof guide](PROOFS.md) connects supported mathematical
+claims to their premises:
+
+- **Fixed-feature heads:** an edit that vanishes on protected feature directions
+  also vanishes on their represented span, under the stated real-valued assumptions.
+- **Supported sequential networks:** explicit real-valued output-drift bounds
+  apply under the corresponding layer and domain assumptions.
+- **Local governance:** a checked abstract Lean state machine describes review
+  transitions and eligibility. It does not prove refinement of the Python runtime.
+
+These results do not establish feature-extractor correspondence, general
+floating-point execution correctness, or deployment readiness. Structural
+admission alone leaves `behavioral_status: not_checked` and
+`formal_certificate: null`. Each additional claim needs its own evidence.
+
+### What the research currently supports
+
+| Evidence | Finding and boundary |
+| --- | --- |
+| [Synthetic head-editing study](docs/weight-space/v2/results.md) | Soft retention reduced collateral error while leaving more target error. It establishes a target–retention tradeoff in that study. |
+| [Trained applications](docs/research/trained-applications.md) | Ownership-routing changes had utility; recognition repair did not. Hard protected candidates abstained. |
+| [Retention development comparison](docs/research/retention-development.md) | Useful ownership edits appeared only under the loosest score budget. The comparison supplies no untouched confirmation or deployment evidence. |
+| [Live studies](docs/research/live-studies.md) | Useful live weight editing was not established; diagnosis coverage missed its frozen threshold. |
+| [Original-source repeat](docs/research/original-source-repeat.md) and [construction/steering pilot](docs/research/construction-steering-pilot.md) | Delivery failures left no completed live candidate to assess. |
+| [Synthetic unlearning](docs/research/synthetic-unlearning.md) | Edited arms failed the study's acceptance gates. Finite accessibility measurements establish no erasure or privacy guarantee. |
+
+The [evidence map](EVIDENCE.md) retains the results, abstentions, failures, and
+verification limits. Published study seeds have already been observed. Fresh
+confirmation requires untouched units and a newly frozen protocol.
+
+The next research decisions concern useful large-model editing, cumulative
+changes, behavioral admission, execution guarantees, and trustworthy provenance.
+The [limitations](docs/weight-space/v2/limitations-and-next-steps.md) and
+[November research roadmap](docs/weight-space/v2/research-roadmap-2026-11.md)
+connect these gaps to concrete success and failure criteria and
+[tracked work](docs/weight-space/v2/research-issues-2026-11.md).
+
+## Go deeper
+
+| You want to… | Start here |
+| --- | --- |
+| Understand the original motivation | [Framework guide](docs/weight-space/v2/README.md) · [Source review](docs/weight-space/v2/source-review.md) |
+| Build an adapter or task | [Architecture and API](docs/weight-space/v2/architecture.md) · [Task workflow](docs/weight-space/v2/workflow.md) |
+| Reproduce the enterprise example | [Use case](docs/use-cases/enterprise-support-routing.md) · [Business reports](artifacts/enterprise/support-routing/README.md) |
+| Examine the proof obligations | [Proof guide](PROOFS.md) · [Formal explanation](docs/weight-space/v2/formal.md) · [Feasibility guard](docs/research/feature-feasibility.md) |
+| Integrate governance | [Distro usage](docs/governance/distro-usage.md) · [Integration contract](docs/governance/distro-integration.md) · [Checked model](formal/governance/README.md) · [Enterprise handoff](docs/governance/distro-handoff.md) |
+| Assess or reproduce the evidence | [Evidence map](EVIDENCE.md) · [Methods](docs/weight-space/v2/methods.md) · [Reproduction](REPRODUCING.md) · [Verification scope](VERIFICATION.md) |
 
 ## Project record
 
-**Public research draft · `v0.2.0-draft.4`.** The draft release remains unpublished.
-Project-authored code, documentation, and diagrams use the [MIT license](LICENSE).
-Retained third-party material keeps its own licenses and notices; see [RIGHTS.md](RIGHTS.md).
+**`v0.2.0-draft.4` is an unpublished research draft.** Project-authored code,
+documentation, and diagrams use the [MIT license](LICENSE). Retained third-party
+material keeps its own licenses and notices; see [RIGHTS.md](RIGHTS.md).
+The [changelog](CHANGELOG.md) and [draft notes](releases/v0.2.0-draft.4.md)
+record the project's development.
 
-The [changelog](CHANGELOG.md) records subsequent changes; the
-[draft notes](releases/v0.2.0-draft.4.md) describe the prepared snapshot.
-
-The documentation uses [STE-Pro-Max](https://github.com/shyamsridhar123/STE-Pro-Max):
-concrete examples, explicit mechanisms, and evidence with its conditions. The
-[revision record](provenance/documentation-revision.json) identifies the guidance
-used for the documentation rewrite.
+The documentation applies [STE-Pro-Max](https://github.com/shyamsridhar123/STE-Pro-Max)
+guidance: concrete examples, explicit mechanisms, and evidence with its conditions.
+The [revision record](provenance/documentation-revision.json) identifies the
+historical guidance and verification scope. Existing diagrams retain their
+[renderer provenance](docs/images/flowchart-manifest.json); the planned ChatGPT
+artwork has a separate [image brief](docs/images/readme/README.md).
 
 <details>
-<summary>Publication provenance, verification, and rights</summary>
+<summary>Publication provenance, reproduction, and media credits</summary>
 
-[PUBLICATION.md](PUBLICATION.md) records the source identities, disclosed
-redactions and omissions, and verification limits of the public snapshot.
-Original code, frozen evidence, and earlier documents retain their identities in
-the [source inventory](provenance/source-files.json). The
-[sanitation ledger](provenance/public-sanitization.json) identifies public
-derivatives and omitted files without rewriting the original hashes.
+[PUBLICATION.md](PUBLICATION.md) records source identities, disclosed redactions
+and omissions, and verification limits. The [source inventory](provenance/source-files.json)
+and [sanitation ledger](provenance/public-sanitization.json) preserve the
+distinction between retained sources and public derivatives.
 
-Run `python scripts/verify_publication.py` to check publication integrity. That
-check does not establish exact replay of a historical freeze whose inputs were
-sanitized. [VERIFICATION.md](VERIFICATION.md) explains what was checked; no new
-hosted-CI success is claimed here.
+Run `python scripts/verify_publication.py` to check publication integrity.
+[VERIFICATION.md](VERIFICATION.md) explains the scope of that check and historical
+verification. Publication checks do not establish replay of sanitized historical
+inputs or new scientific results.
+
+The walkthrough is an existing browser recording with visible English subtitles
+and quiet music. [Subtitle file](artifacts/enterprise/support-routing/demo/subtitles.srt)
+· [Music credit](artifacts/enterprise/support-routing/demo/MUSIC.md)
+· [Geometry illustration and assumptions](artifacts/explanations/readme-edit/source.json).
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for changes and [RIGHTS.md](RIGHTS.md) for
 attribution and rights.

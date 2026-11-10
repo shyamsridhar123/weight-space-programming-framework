@@ -7,6 +7,12 @@ research draft.
 
 ## Unreleased
 
+- Rework the README around the enterprise routing example, generic task
+  architecture, explicit proof obligations, and the optional Distro review.
+  Retain negative results and review limits in a shorter evidence map. Prepare a
+  separate [ChatGPT image brief](docs/images/readme/README.md); generation is
+  blocked and the draft continues to use the existing, attributed visuals.
+
 - Add a workspace-bound Distro companion with four official-SDK MCP tools for
   inspecting changes, preparing reviews, checking eligibility and exporting
   complete history. The [integration contract](docs/governance/distro-integration.md)
