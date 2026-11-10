@@ -194,16 +194,18 @@ def test_provider_failure_accounting_and_started_tool_detection(tmp_path, monkey
 
 def test_provider_version_decode_failure_retains_failed_attempt_and_trial(tmp_path, monkeypatch):
     import hashlib
+    from types import SimpleNamespace
     from unittest.mock import Mock
     from rlcd.weight_space.live_provider import CodexProvider, run_brokered
 
     cli = tmp_path / "fake-codex"
     cli.write_bytes(b"offline transport placeholder; never executed")
     monkeypatch.setattr("rlcd.weight_space.live_provider.shutil.which", lambda _: str(cli))
-    probe = Mock(side_effect=UnicodeDecodeError("utf-8", b"\xff", 0, 1, "invalid start byte"))
-    worker = Mock(side_effect=AssertionError("Worker must not start"))
-    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.run", probe)
-    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.Popen", worker)
+    process = SimpleNamespace(returncode=0)
+    probe = Mock(return_value=process)
+    capture = Mock(return_value=(b"\xff", b"", False, True, {"complete": True, "overflow": []}))
+    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.Popen", probe)
+    monkeypatch.setattr("rlcd.weight_space.live_provider._communicate_bounded", capture)
     base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
     task = TaskSpec("version-decode", "edit", "Retain a failed offline version probe",
                     base.architecture, base.sha256)
@@ -214,9 +216,11 @@ def test_provider_version_decode_failure_retains_failed_attempt_and_trial(tmp_pa
     trial = run_brokered(CodexProvider(), broker, prompt="Return JSON actions",
                          directory=directory, max_rounds=3)
 
-    probe.assert_called_once_with([str(cli), "--version"], capture_output=True, text=True,
-                                  encoding="utf-8", timeout=15, check=True)
-    worker.assert_not_called()
+    probe.assert_called_once()
+    assert probe.call_args.args == ([str(cli), "--version"],)
+    assert not probe.call_args.kwargs.get("text") and "encoding" not in probe.call_args.kwargs
+    capture.assert_called_once()
+    assert capture.call_args.args == (process,) and capture.call_args.kwargs["timeout"] == 15
     assert trial["assigned_trials"] == 1 and len(trial["attempts"]) == 1
     attempt = trial["attempts"][0]
     assert trial["status"] == attempt["status"] == "failed"
@@ -224,6 +228,8 @@ def test_provider_version_decode_failure_retains_failed_attempt_and_trial(tmp_pa
     assert attempt["usage"] == {} and attempt["cost"]["amount"] is None
     assert attempt["response"] is None and attempt["returncode"] is None
     assert attempt["invocation"]["cli_version"] is None
+    assert attempt["invocation"]["output_capture"] == {
+        "version_probe": {"complete": True, "overflow": []}, "worker": None}
     assert attempt["invocation"]["executable_sha256"] == hashlib.sha256(cli.read_bytes()).hexdigest()
     charge.assert_not_called()
     assert not [event for event in broker._session.trace if event.to_dict()["action"] == "provider_usage"]
@@ -236,6 +242,8 @@ def test_provider_version_decode_failure_retains_failed_attempt_and_trial(tmp_pa
     assert json.loads((directory / "trial.json").read_text(encoding="utf-8")) == trial
     assert (folder / "events.jsonl").read_bytes() == b""
     assert (folder / "transport.stderr.private").read_bytes() == b""
+    assert (folder / "version.stdout.private").read_bytes() == b"\xff"
+    assert (folder / "version.stderr.private").read_bytes() == b""
     assert attempt["events_sha256"] == hashlib.sha256(b"").hexdigest()
 
 
@@ -248,11 +256,11 @@ def test_provider_completion_lifecycle_is_unambiguous_before_broker_actions(tmp_
     cli = tmp_path / "fake-codex"
     cli.write_bytes(b"offline transport placeholder; never executed")
     monkeypatch.setattr("rlcd.weight_space.live_provider.shutil.which", lambda _: str(cli))
-    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.run",
-                        lambda *args, **kwargs: SimpleNamespace(stdout="offline-test\n"))
-    transport = Mock(side_effect=lambda *args, **kwargs: SimpleNamespace(returncode=0,
-        communicate=lambda *args, **kwargs: (raw, "")))
+    transport = Mock(side_effect=lambda command, **kwargs: SimpleNamespace(args=command, returncode=0))
     monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.Popen", transport)
+    monkeypatch.setattr("rlcd.weight_space.live_provider._communicate_bounded",
+        lambda process, **kwargs: (b"offline-test\n" if process.args == [str(cli), "--version"]
+            else raw.encode("utf-8"), b"", False, True, {"complete": True, "overflow": []}))
     base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
     task = TaskSpec("completion-lifecycle", "edit", "Retain ambiguous offline endings",
                     base.architecture, base.sha256)
@@ -286,7 +294,7 @@ def test_provider_completion_lifecycle_is_unambiguous_before_broker_actions(tmp_
         trial = run_brokered(CodexProvider(), broker, prompt="Return the fixed offline actions",
                              directory=directory, max_rounds=3)
         valid = not errors
-        assert transport.call_count == 1 and len(trial["attempts"]) == 1
+        assert transport.call_count == 2 and len(trial["attempts"]) == 1
         assert trial["assigned_trials"] == 1
         attempt = trial["attempts"][0]
         assert attempt["status"] == ("completed" if valid else "failed")
@@ -317,11 +325,11 @@ def test_malformed_provider_event_type_retains_failed_attempt_and_trial(tmp_path
     cli = tmp_path / "fake-codex"
     cli.write_bytes(b"offline transport placeholder; never executed")
     monkeypatch.setattr("rlcd.weight_space.live_provider.shutil.which", lambda _: str(cli))
-    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.run",
-                        lambda *args, **kwargs: SimpleNamespace(stdout="offline-test\n"))
-    transport = Mock(side_effect=lambda *args, **kwargs: SimpleNamespace(returncode=0,
-        communicate=lambda *args, **kwargs: (raw, "")))
+    transport = Mock(side_effect=lambda command, **kwargs: SimpleNamespace(args=command, returncode=0))
     monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.Popen", transport)
+    monkeypatch.setattr("rlcd.weight_space.live_provider._communicate_bounded",
+        lambda process, **kwargs: (b"offline-test\n" if process.args == [str(cli), "--version"]
+            else raw.encode("utf-8"), b"", False, True, {"complete": True, "overflow": []}))
     base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
     task = TaskSpec("event-type", "edit", "Retain a malformed offline event", base.architecture, base.sha256)
     response = {"actions": [json.dumps({"op": "submit", "commands": [], "intent": "Freeze baseline"}),
@@ -354,7 +362,7 @@ def test_malformed_provider_event_type_retains_failed_attempt_and_trial(tmp_path
         directory = tmp_path / f"case-{index}"
         trial = run_brokered(CodexProvider(), broker, prompt="Return the fixed offline actions",
                              directory=directory, max_rounds=3)
-        assert transport.call_count == 1 and len(trial["attempts"]) == 1
+        assert transport.call_count == 2 and len(trial["attempts"]) == 1
         attempt = trial["attempts"][0]
         assert trial["status"] == ("sealed" if valid else "failed")
         assert attempt["status"] == ("completed" if valid else "failed")
@@ -387,11 +395,11 @@ def test_provider_usage_is_complete_before_broker_actions(tmp_path, monkeypatch)
     cli = tmp_path / "fake-codex"
     cli.write_bytes(b"offline transport placeholder; never executed")
     monkeypatch.setattr("rlcd.weight_space.live_provider.shutil.which", lambda _: str(cli))
-    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.run",
-                        lambda *args, **kwargs: SimpleNamespace(stdout="offline-test\n"))
     monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.Popen",
-                        lambda *args, **kwargs: SimpleNamespace(returncode=0,
-                            communicate=lambda *args, **kwargs: (raw, "")))
+                        lambda command, **kwargs: SimpleNamespace(args=command, returncode=0))
+    monkeypatch.setattr("rlcd.weight_space.live_provider._communicate_bounded",
+        lambda process, **kwargs: (b"offline-test\n" if process.args == [str(cli), "--version"]
+            else raw.encode("utf-8"), b"", False, True, {"complete": True, "overflow": []}))
     base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
     task = TaskSpec("usage-admission", "edit", "Freeze the synthetic baseline", base.architecture, base.sha256)
     response = {"actions": [json.dumps({"op": "submit", "commands": [], "intent": "Freeze baseline"}),
@@ -458,11 +466,11 @@ def test_nonfinite_provider_json_retains_failed_attempt_and_trial(tmp_path, monk
     cli = tmp_path / "fake-codex"
     cli.write_bytes(b"offline transport placeholder; never executed")
     monkeypatch.setattr("rlcd.weight_space.live_provider.shutil.which", lambda _: str(cli))
-    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.run",
-                        lambda *args, **kwargs: SimpleNamespace(stdout="offline-test\n"))
-    transport = Mock(side_effect=lambda *args, **kwargs: SimpleNamespace(returncode=0,
-        communicate=lambda *args, **kwargs: (raw, "")))
+    transport = Mock(side_effect=lambda command, **kwargs: SimpleNamespace(args=command, returncode=0))
     monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.Popen", transport)
+    monkeypatch.setattr("rlcd.weight_space.live_provider._communicate_bounded",
+        lambda process, **kwargs: (b"offline-test\n" if process.args == [str(cli), "--version"]
+            else raw.encode("utf-8"), b"", False, True, {"complete": True, "overflow": []}))
     base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
     task = TaskSpec("finite-json", "edit", "Retain a malformed offline attempt", base.architecture, base.sha256)
     response = {"actions": [json.dumps({"op": "submit", "commands": [], "intent": "Freeze baseline"})],
@@ -484,7 +492,7 @@ def test_nonfinite_provider_json_retains_failed_attempt_and_trial(tmp_path, monk
             directory = tmp_path / f"{token}-{field}"
             trial = run_brokered(CodexProvider(), broker, prompt="Return the fixed offline actions",
                                  directory=directory, max_rounds=3)
-            assert transport.call_count == 1 and len(trial["attempts"]) == 1
+            assert transport.call_count == 2 and len(trial["attempts"]) == 1
             attempt = trial["attempts"][0]
             assert trial["status"] == attempt["status"] == "failed"
             assert attempt["error"] == "transport_or_response_failed"
@@ -549,11 +557,11 @@ def test_deeply_nested_provider_json_retains_failed_attempt_and_trial(tmp_path, 
     cli = tmp_path / "fake-codex"
     cli.write_bytes(b"offline transport placeholder; never executed")
     monkeypatch.setattr("rlcd.weight_space.live_provider.shutil.which", lambda _: str(cli))
-    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.run",
-                        lambda *args, **kwargs: SimpleNamespace(stdout="offline-test\n"))
-    transport = Mock(side_effect=lambda *args, **kwargs: SimpleNamespace(returncode=0,
-        communicate=lambda *args, **kwargs: (raw, "")))
+    transport = Mock(side_effect=lambda command, **kwargs: SimpleNamespace(args=command, returncode=0))
     monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.Popen", transport)
+    monkeypatch.setattr("rlcd.weight_space.live_provider._communicate_bounded",
+        lambda process, **kwargs: (b"offline-test\n" if process.args == [str(cli), "--version"]
+            else raw.encode("utf-8"), b"", False, True, {"complete": True, "overflow": []}))
     base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
     task = TaskSpec("json-depth", "edit", "Retain a malformed offline attempt", base.architecture, base.sha256)
     response = {"actions": [json.dumps({"op": "submit", "commands": [], "intent": "Freeze baseline"}),
@@ -581,7 +589,7 @@ def test_deeply_nested_provider_json_retains_failed_attempt_and_trial(tmp_path, 
                              directory=directory, max_rounds=3)
         valid = field == "shallow"
         completed = field in ("action", "shallow")
-        assert transport.call_count == 1 and len(trial["attempts"]) == trial["assigned_trials"] == 1
+        assert transport.call_count == 2 and len(trial["attempts"]) == trial["assigned_trials"] == 1
         attempt = trial["attempts"][0]
         assert trial["status"] == ("invalid" if field == "action" else "sealed" if valid else "failed")
         assert attempt["status"] == ("completed" if completed else "failed")
@@ -617,11 +625,11 @@ def test_duplicate_provider_json_keys_preserve_recovery_accounting_and_public_id
     cli = tmp_path / "fake-codex"
     cli.write_bytes(b"offline transport placeholder; never executed")
     monkeypatch.setattr("rlcd.weight_space.live_provider.shutil.which", lambda _: str(cli))
-    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.run",
-                        lambda *args, **kwargs: SimpleNamespace(stdout="offline-test\n"))
-    transport = Mock(side_effect=lambda *args, **kwargs: SimpleNamespace(returncode=0,
-        communicate=lambda *args, **kwargs: (raw, "")))
+    transport = Mock(side_effect=lambda command, **kwargs: SimpleNamespace(args=command, returncode=0))
     monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.Popen", transport)
+    monkeypatch.setattr("rlcd.weight_space.live_provider._communicate_bounded",
+        lambda process, **kwargs: (b"offline-test\n" if process.args == [str(cli), "--version"]
+            else raw.encode("utf-8"), b"", False, True, {"complete": True, "overflow": []}))
     base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
     task = TaskSpec("duplicate-json", "edit", "Reject ambiguous offline JSON",
                     base.architecture, base.sha256)
@@ -666,7 +674,7 @@ def test_duplicate_provider_json_keys_preserve_recovery_accounting_and_public_id
         valid = name == "control"
         expected_usage = {} if name == "usage" else usage
         attempt = trial["attempts"][0]
-        assert transport.call_count == len(trial["attempts"]) == trial["assigned_trials"] == 1
+        assert transport.call_count == 2 and len(trial["attempts"]) == trial["assigned_trials"] == 1
         assert attempt["status"] == ("completed" if completed else "failed")
         assert attempt["error"] == (None if completed else "transport_or_response_failed")
         assert attempt["event_errors"] == errors and attempt["usage"] == expected_usage

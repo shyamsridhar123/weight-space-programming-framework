@@ -22,7 +22,8 @@ import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from rlcd.weight_space.live_provider import CodexProvider, _communicate_bounded, publish_attempt, write_json
+from rlcd.weight_space.live_provider import (CodexProvider, DEFAULT_MAX_STDOUT_BYTES,
+    DEFAULT_MAX_STDERR_BYTES, _communicate_bounded, _positive_finite_timeout, publish_attempt, write_json)
 from rlcd.weight_space.model import digest
 from scripts.audit_public_content import audit
 from scripts.verify_publication import publication_files, verify
@@ -169,7 +170,12 @@ def refresh_manifest(root):
     (root / "MANIFEST.sha256").write_text(content, encoding="utf-8", newline="\n")
 
 
-def command(name, argv, *, cwd, run, ledger, timeout=120, env=None):
+def command(name, argv, *, cwd, run, ledger, timeout=120, env=None,
+            max_stdout_bytes=DEFAULT_MAX_STDOUT_BYTES, max_stderr_bytes=DEFAULT_MAX_STDERR_BYTES):
+    if (not _positive_finite_timeout(timeout)
+            or any(type(limit) is not int or limit <= 0
+                   for limit in (max_stdout_bytes, max_stderr_bytes))):
+        raise ValueError("Commands require positive output limits and a finite deadline")
     index = len(ledger)
     while any(run.glob(f"command-{index:03}.*")):
         index += 1
@@ -178,11 +184,18 @@ def command(name, argv, *, cwd, run, ledger, timeout=120, env=None):
     options = {"creationflags": subprocess.CREATE_NO_WINDOW} if os.name == "nt" else {"start_new_session": True}
     status, error, returncode, cleanup_complete = "completed", None, None, None
     stdout, stderr = b"", b""
+    output_capture = None
     try:
-        process = subprocess.Popen(argv, cwd=cwd, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, **options)
-        stdout, stderr, timed_out, cleanup_complete = _communicate_bounded(process, timeout=timeout)
+        process = subprocess.Popen(argv, cwd=cwd, env=env, stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=0, **options)
+        stdout, stderr, timed_out, cleanup_complete, output_capture = _communicate_bounded(process,
+            timeout=timeout, max_stdout_bytes=max_stdout_bytes, max_stderr_bytes=max_stderr_bytes)
         returncode = process.returncode
-        status = "timeout" if timed_out else "failed" if returncode else "completed"
+        status = "timeout" if timed_out else "failed" if returncode or not output_capture["complete"] else "completed"
+        if output_capture["overflow"]:
+            error = "command_output_limit_exceeded"
+        elif not output_capture["complete"] and not timed_out:
+            error = "command_capture_incomplete"
     except (OSError, ValueError) as failure:
         status, error = "startup_failed", type(failure).__name__
     destination.with_suffix(".stdout.private").write_bytes(stdout)
@@ -195,6 +208,7 @@ def command(name, argv, *, cwd, run, ledger, timeout=120, env=None):
             argument = argument.replace(private, public)
         public_argv.append(argument)
     record = {"operation": name, "argv": public_argv, "status": status, "returncode": returncode, "error": error,
+              "output_capture": output_capture,
               "timeout_cleanup_complete": cleanup_complete if status == "timeout" else None,
               "elapsed_seconds": time.perf_counter() - started, "stdout_sha256": hashlib.sha256(stdout).hexdigest(),
               "stderr_sha256": hashlib.sha256(stderr).hexdigest(), "raw_output_public": False}
@@ -219,6 +233,9 @@ def failure_summary(result):
     commands = [{k: record[k] for k in ("operation", "status", "returncode", "elapsed_seconds",
                                        "stdout_sha256", "stderr_sha256", "timeout_cleanup_complete")}
                 for record in result["commands"]]
+    for public, retained in zip(commands, result["commands"]):
+        if "output_capture" in retained:
+            public["output_capture"] = retained["output_capture"]
     payload = {"schema": "wsp-dark-factory-failure/1", "run_id": result["run_id"],
                "issue": result["issue"], "issue_sha256": result["issue_sha256"],
                "base_commit": result.get("base_commit"), "candidate_commit": result.get("candidate_commit"),

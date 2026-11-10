@@ -10,16 +10,22 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
 import shutil
 import subprocess
 import tempfile
+import threading
 import time
 from typing import Any
 
 from .model import canonical_bytes, digest
+
+
+DEFAULT_MAX_STDOUT_BYTES = 8 * 1024 * 1024
+DEFAULT_MAX_STDERR_BYTES = 1024 * 1024
 
 
 TOOL_FREE_CONFIG = {
@@ -59,41 +65,150 @@ def write_json(path: Path, value: Any) -> None:
             temporary.unlink(missing_ok=True)
 
 
-def _kill_tree(process: subprocess.Popen) -> None:
+def _kill_tree(process: subprocess.Popen, *, timeout: float = 5) -> None:
     """Best-effort termination of the local transport/worker process tree."""
-    if process.poll() is not None:
-        return
     try:
-        if __import__("os").name == "nt":
-            subprocess.run(["taskkill", "/PID", str(process.pid), "/T", "/F"],
-                           capture_output=True, timeout=15)
+        if os.name == "nt":
+            if process.poll() is not None:
+                return  # An exited Windows leader cannot attest descendant cleanup.
+            result = subprocess.run(["taskkill", "/PID", str(process.pid), "/T", "/F"],
+                stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                timeout=timeout, creationflags=subprocess.CREATE_NO_WINDOW, check=False)
+            if result.returncode == 0:
+                return
         else:
-            import os
             import signal
             os.killpg(process.pid, signal.SIGKILL)
+            return  # The group may outlive its leader.
     except (OSError, subprocess.TimeoutExpired):
-        process.kill()
-
-
-def _communicate_bounded(process: subprocess.Popen, *, timeout: float, input=None):
-    """Retain bounded output; drained timeout pipes do not attest descendant exit."""
+        pass
     try:
-        return (*process.communicate(input, timeout=timeout), False, True)
-    except subprocess.TimeoutExpired as expired:
-        _kill_tree(process)
+        process.kill()
+    except OSError:
+        pass
+
+
+def _positive_finite_timeout(value: Any) -> bool:
+    if type(value) not in (int, float) or value <= 0:
+        return False
+    try:
+        return math.isfinite(value)
+    except OverflowError:
+        return False
+
+
+def _communicate_bounded(process: subprocess.Popen, *, timeout: float, input: bytes | None = None,
+                         max_stdout_bytes: int = DEFAULT_MAX_STDOUT_BYTES,
+                         max_stderr_bytes: int = DEFAULT_MAX_STDERR_BYTES):
+    """Capture finite raw prefixes; process/pipe completion never attests descendants."""
+    if (not _positive_finite_timeout(timeout)
+            or any(type(limit) is not int or limit <= 0
+                   for limit in (max_stdout_bytes, max_stderr_bytes))
+            or (input is not None and not isinstance(input, bytes))
+            or process.stdout is None or process.stderr is None):
+        raise ValueError("Bounded capture requires binary pipes, positive limits and a finite deadline")
+    limits = (max_stdout_bytes, max_stderr_bytes)
+    buffers = [bytearray(), bytearray()]
+    eof, overflow, read_errors = [False, False], [False, False], [None, None]
+    stdin_error = None
+    failed, lock = threading.Event(), threading.Lock()
+    deadline = time.monotonic() + timeout
+
+    def read_stream(stream, index):
         try:
-            output = process.communicate(timeout=20)
-        except subprocess.TimeoutExpired:
+            while True:
+                with lock:
+                    remaining = limits[index] - len(buffers[index])
+                # The extra byte distinguishes exact-cap EOF from overflow.
+                chunk = stream.read(min(65536, remaining + 1))
+                with lock:
+                    if not chunk:
+                        eof[index] = True
+                        break
+                    buffers[index].extend(chunk[:remaining])
+                    if len(chunk) > remaining:
+                        overflow[index] = True
+                        failed.set()
+                        break
+        except (OSError, ValueError) as failure:
+            with lock:
+                read_errors[index] = type(failure).__name__
+            failed.set()
+        finally:
             try:
-                process.kill()
-            except OSError:
+                stream.close()
+            except (OSError, ValueError) as failure:
+                with lock:
+                    read_errors[index] = type(failure).__name__
+                failed.set()
+
+    def write_input():
+        nonlocal stdin_error
+        try:
+            remaining = memoryview(input or b"")
+            while remaining:
+                written = process.stdin.write(remaining[:65536])
+                if written is None or written <= 0:
+                    raise OSError("Incomplete stdin write")
+                remaining = remaining[written:]
+        except (OSError, ValueError) as failure:
+            with lock:
+                stdin_error = type(failure).__name__
+            failed.set()
+        finally:
+            try:
+                process.stdin.close()
+            except (OSError, ValueError) as failure:
+                with lock:
+                    stdin_error = type(failure).__name__
+                failed.set()
+
+    threads = [threading.Thread(target=read_stream, args=(stream, index), daemon=True)
+               for index, stream in enumerate((process.stdout, process.stderr))]
+    if process.stdin is not None:
+        threads.append(threading.Thread(target=write_input, daemon=True))
+    for thread in threads:
+        thread.start()
+    timed_out = False
+    while not failed.is_set():
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            timed_out = True
+            break
+        if process.poll() is not None and all(not thread.is_alive() for thread in threads):
+            break
+        failed.wait(min(0.02, remaining))
+    # Recheck after readers finish: an exited leader can still overflow a pipe.
+    interrupted = timed_out or failed.is_set()
+    cleanup_complete = True
+    if interrupted:
+        cleanup_deadline = time.monotonic() + 5
+        _kill_tree(process, timeout=max(0.001, cleanup_deadline - time.monotonic()))
+        remaining = cleanup_deadline - time.monotonic()
+        if process.poll() is None and remaining > 0:
+            try:
+                process.wait(timeout=remaining)
+            except subprocess.TimeoutExpired:
                 pass
-            try:
-                output = process.communicate(timeout=5)
-            except subprocess.TimeoutExpired as incomplete:
-                return (incomplete.output or expired.output or b"",
-                        incomplete.stderr or expired.stderr or b"", True, False)
-        return (*output, True, None)
+        for thread in threads:
+            thread.join(timeout=max(0, cleanup_deadline - time.monotonic()))
+        cleanup_complete = (None if process.poll() is not None
+                            and all(not thread.is_alive() for thread in threads) else False)
+    with lock:
+        stdout, stderr = (bytes(buffer) for buffer in buffers)
+        capture = {"max_stdout_bytes": max_stdout_bytes, "max_stderr_bytes": max_stderr_bytes,
+                   "stdout_bytes": len(stdout), "stderr_bytes": len(stderr),
+                   "stdout_sha256": hashlib.sha256(stdout).hexdigest(),
+                   "stderr_sha256": hashlib.sha256(stderr).hexdigest(),
+                   "stdout_eof": eof[0], "stderr_eof": eof[1],
+                   "overflow": [name for name, exceeded in zip(("stdout", "stderr"), overflow) if exceeded],
+                   "read_errors": [name + ":" + error for name, error in
+                                   zip(("stdout", "stderr"), read_errors) if error],
+                   "stdin_error": stdin_error, "returncode": process.returncode,
+                   "cleanup_complete": cleanup_complete,
+                   "complete": (not interrupted and all(eof) and not any(overflow)
+                                and not any(read_errors) and stdin_error is None)}
+    return stdout, stderr, timed_out, cleanup_complete, capture
 
 
 class _DuplicateJSONKey(ValueError):
@@ -179,11 +294,15 @@ class CodexProvider:
     tool_free: bool = True
     reasoning_effort: str = "low"
     sandbox: str | None = None
+    max_stdout_bytes: int = DEFAULT_MAX_STDOUT_BYTES
+    max_stderr_bytes: int = DEFAULT_MAX_STDERR_BYTES
 
     def __post_init__(self) -> None:
         if (not isinstance(self.model, str) or not self.model.strip()
-                or type(self.timeout_seconds) is not int or self.timeout_seconds <= 0
+                or type(self.timeout_seconds) is not int or not _positive_finite_timeout(self.timeout_seconds)
                 or type(self.tool_free) is not bool
+                or any(type(limit) is not int or limit <= 0
+                       for limit in (self.max_stdout_bytes, self.max_stderr_bytes))
                 or self.sandbox not in (None, "read-only", "workspace-write")
                 or (self.tool_free and self.sandbox == "workspace-write")
                 or self.reasoning_effort not in ("low", "medium", "high", "xhigh", "max")):
@@ -194,6 +313,7 @@ class CodexProvider:
                 "requested_model": self.model, "reasoning_effort": self.reasoning_effort,
                 "tool_free": self.tool_free, "user_config_loaded": False,
                 "ephemeral": True, "timeout_seconds": self.timeout_seconds,
+                "max_stdout_bytes": self.max_stdout_bytes, "max_stderr_bytes": self.max_stderr_bytes,
                 "configuration_overrides": TOOL_FREE_CONFIG if self.tool_free else {
                     "plugins._default.enabled": "false", "mcp_servers": "{}"},
                 "sandbox": self.sandbox or ("read-only" if self.tool_free else "workspace-write"),
@@ -232,7 +352,10 @@ class CodexProvider:
         tick = time.perf_counter()
         status, error, returncode = "failed", None, None
         cleanup_complete = None
-        output, stderr = "", ""
+        output, stderr = b"", b""
+        output_capture = {"version_probe": None, "worker": None}
+        capture_options = {"max_stdout_bytes": self.max_stdout_bytes,
+                           "max_stderr_bytes": self.max_stderr_bytes}
         options: dict[str, Any] = {}
         if __import__("os").name == "nt":
             options["creationflags"] = subprocess.CREATE_NO_WINDOW
@@ -242,28 +365,56 @@ class CodexProvider:
             if cli is None:
                 raise FileNotFoundError("Codex CLI unavailable")
             executable_sha256 = hashlib.sha256(Path(cli).read_bytes()).hexdigest()
-            version = subprocess.run([cli, "--version"], capture_output=True, text=True,
-                                     encoding="utf-8", timeout=15, check=True).stdout.strip()
-            process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                                       stderr=subprocess.PIPE, text=True, encoding="utf-8",
-                                       errors="replace", **options)
-            output, stderr, timed_out, cleanup_complete = _communicate_bounded(
-                process, input=prompt, timeout=self.timeout_seconds)
-            returncode = process.returncode
+            probe = subprocess.Popen([cli, "--version"], stdin=subprocess.DEVNULL,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=0, **options)
+            probe_stdout, probe_stderr, timed_out, cleanup_complete, capture = _communicate_bounded(
+                probe, timeout=15, **capture_options)
+            output_capture["version_probe"] = capture
+            (directory / "version.stdout.private").write_bytes(probe_stdout)
+            (directory / "version.stderr.private").write_bytes(probe_stderr)
             if timed_out:
                 status, error = "timeout", "provider_deadline"
+            elif capture["overflow"]:
+                error = "version_probe_output_limit_exceeded"
+            elif not capture["complete"]:
+                error = "version_probe_capture_incomplete"
+            elif probe.returncode != 0:
+                raise subprocess.CalledProcessError(probe.returncode, [cli, "--version"])
+            else:
+                version = probe_stdout.decode("utf-8").strip()
+                process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE, bufsize=0, **options)
+                output, stderr, timed_out, cleanup_complete, capture = _communicate_bounded(
+                    process, input=prompt.encode("utf-8"), timeout=self.timeout_seconds, **capture_options)
+                output_capture["worker"] = capture
+                returncode = process.returncode
+                if timed_out:
+                    status, error = "timeout", "provider_deadline"
+                elif capture["overflow"]:
+                    error = "provider_output_limit_exceeded"
+                elif not capture["complete"]:
+                    error = "provider_capture_incomplete"
         except subprocess.TimeoutExpired:
             # The bounded version probe timed out before a worker was started.
             status, error = "timeout", "provider_deadline"
         except (OSError, subprocess.CalledProcessError, UnicodeError) as failure:
             error = "transport_startup_failed:" + type(failure).__name__
         elapsed = time.perf_counter() - tick
-        output = output.decode("utf-8", errors="replace") if isinstance(output, bytes) else output
-        stderr = stderr.decode("utf-8", errors="replace") if isinstance(stderr, bytes) else stderr
         # Raw stderr can contain transport/environment paths. It stays private.
-        (directory / "events.jsonl").write_text(output, encoding="utf-8", newline="\n")
-        (directory / "transport.stderr.private").write_text(stderr, encoding="utf-8", newline="\n")
-        response, usage, unapproved, event_errors, diagnostics = parse_events(output)
+        (directory / "events.jsonl").write_bytes(output)
+        (directory / "transport.stderr.private").write_bytes(stderr)
+        try:
+            event_text = output.decode("utf-8")
+        except UnicodeDecodeError:
+            event_text = output.decode("utf-8", errors="replace")
+            output_capture["worker"]["text_decoding_error"] = "UnicodeDecodeError"
+            output_capture["worker"]["complete"] = False
+            if error is None:
+                error = "invalid_event_utf8"
+        response, usage, unapproved, event_errors, diagnostics = parse_events(event_text)
+        if output_capture["worker"] is None or output_capture["worker"]["complete"] is not True:
+            # A retained prefix is forensic evidence, never authority or known usage.
+            response, usage = None, {}
         if status != "timeout" and error is None:
             if self.tool_free and unapproved:
                 error = "unapproved_tool_event"
@@ -278,6 +429,7 @@ class CodexProvider:
                     status = "completed"
         invocation = {"executable_sha256": executable_sha256,
                       "cli_version": version, "configuration": self.configuration(),
+                      "output_capture": output_capture,
                       "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest(),
                       "schema_sha256": digest(schema), "cwd_role": (
                           "isolated_proposer_directory" if self.tool_free else
@@ -290,7 +442,7 @@ class CodexProvider:
                    "response": response, "usage": usage, "unapproved_events": unapproved,
                    "event_errors": event_errors,
                    "diagnostic_items": len(diagnostics),
-                   "events_sha256": hashlib.sha256(output.encode()).hexdigest(),
+                   "events_sha256": hashlib.sha256(output).hexdigest(),
                    "cost": {"currency": "USD", "amount": None,
                             "reason": "authenticated_CLI_subscription_not_request_pricing"},
                    "prompt_scope": "exact_harness_prompt;_CLI_system_scaffolding_not_exported",
@@ -366,6 +518,12 @@ def publish_attempt(source: Path, destination: Path) -> dict[str, Any]:
     for name in ("request.json", "response-schema.json", "receipt.json"):
         shutil.copyfile(source / name, destination / name)
     raw = (source / "events.jsonl").read_bytes()
+    transform = "JSON_reserialization_and_user_profile_prefix_redaction"
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError:
+        text = raw.decode("utf-8", errors="replace")
+        transform = "UTF8_replacement_then_" + transform
     redactions = 0
     profile = re.compile(
         r'(?:[A-Za-z]:[\\/]+(?:Users|Documents and Settings)[\\/]+[^\\/"\s]+'
@@ -391,7 +549,7 @@ def publish_attempt(source: Path, destination: Path) -> dict[str, Any]:
         return value
 
     lines = []
-    for line in _jsonl_lines(raw.decode("utf-8")):
+    for line in _jsonl_lines(text):
         previous_redactions = redactions
         try:
             value = json.loads(line, object_pairs_hook=_unique_json_object)
@@ -417,7 +575,7 @@ def publish_attempt(source: Path, destination: Path) -> dict[str, Any]:
               "raw_events_sha256": hashlib.sha256(raw).hexdigest(),
               "public_events_sha256": hashlib.sha256(public).hexdigest(),
               "redactions": redactions,
-              "transform": "JSON_reserialization_and_user_profile_prefix_redaction",
+              "transform": transform,
               "raw_bytes_published": False,
               "scope": "public_derivative_replay;_raw_identity_disclosed_not_publicly_replayed"}
     write_json(destination / "event-publication.json", record)

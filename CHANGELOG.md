@@ -7,6 +7,10 @@ research draft.
 
 ## Unreleased
 
+- Implemented bounded stdout/stderr capture for the [provider and factory routes](docs/research/broker-control-inventory.md#prospective-output-capture-20261110), with positive-integer byte caps defaulting to 8 MiB stdout and 1 MiB stderr, raw-prefix identities and terminal handling of incomplete worker output. The [engineering receipt](provenance/verification/provider-output-capture-20261110.json) records one failed runner attempt: its initial snapshot raised `importlib.metadata.PackageNotFoundError` for `pytest` before pytest launch. No tests ran and no retry occurred. Metadata-absent parser handling has static review only; its unexecuted fixtures target interpretation, not frozen full-replay compatibility, historical source/configuration agreement, relocking, migration or recovered usage. Default cap fields affect exact configuration comparisons; strict pins remain unchanged. Output caps do not undo earlier native activity or establish containment or descendant exit. **#5 c1 remains partial and Issue #5 stays open; all other acceptance statuses are unchanged.**
+
+- Reject nonfinite or unrepresentable subprocess timeouts before provider and factory launches, using the same validator as bounded capture. Provider timeout configuration remains integer-only. This later source fix and its authored regressions are unexecuted locally; the unchanged receipt above applies only to the earlier failed attempt. Separate publication identities record the follow-up without extending that receipt's scope.
+
 - Clarify a proposed [study runner using the existing APIs](docs/research/staged-scientific-compatibility.md):
   prebound forecast-eligibility rules use genuine diagnosis-barrier evidence;
   complete slot counts are written inside the authorized callback; attributed

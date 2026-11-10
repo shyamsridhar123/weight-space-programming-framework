@@ -632,6 +632,10 @@ def verify_attempt(folder: Path, prompt: str, schema: dict[str, Any],
             or read(folder / "response-schema.json") != schema):
         raise ValueError("Published request or response schema differs from the freeze")
     receipt = verify_receipt(read(folder / "receipt.json"), prompt, schema, configuration)
+    capture = receipt["invocation"].get("output_capture")
+    worker_capture = capture.get("worker") if type(capture) is dict else None
+    incomplete_capture = "output_capture" in receipt["invocation"] and (
+        type(worker_capture) is not dict or worker_capture.get("complete") is not True)
     publication = read(folder / "event-publication.json")
     if (set(publication) != {"schema", "raw_events_sha256", "public_events_sha256", "redactions",
                              "transform", "raw_bytes_published", "scope"}
@@ -640,11 +644,15 @@ def verify_attempt(folder: Path, prompt: str, schema: dict[str, Any],
             or publication["public_events_sha256"] != file_hash(folder / "events.jsonl")
             or type(publication["redactions"]) is not int or publication["redactions"] < 0
             or publication["raw_bytes_published"] is not False
-            or publication["transform"] != "JSON_reserialization_and_user_profile_prefix_redaction"
+            or not (publication["transform"] == "JSON_reserialization_and_user_profile_prefix_redaction"
+                    or incomplete_capture and publication["transform"] ==
+                    "UTF8_replacement_then_JSON_reserialization_and_user_profile_prefix_redaction")
             or publication["scope"] != "public_derivative_replay;_raw_identity_disclosed_not_publicly_replayed"):
         raise ValueError("Public event derivative binding differs")
     event_text = (folder / "events.jsonl").read_text(encoding="utf-8")
     response, usage, unapproved, errors, diagnostics = parse_events(event_text)
+    if incomplete_capture:
+        response, usage = None, {}
     if (response != receipt["response"] or usage != receipt["usage"]
             or unapproved != receipt["unapproved_events"] or errors != receipt["event_errors"]
             or len(diagnostics) != receipt["diagnostic_items"]):
