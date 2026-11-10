@@ -7,6 +7,19 @@ research draft.
 
 ## Unreleased
 
+- Add a separately pinned raw-text serving path through preprocessing, encoder,
+  native CPU float32 head inference and queue mapping, with exact parent fallback
+  after rejected edits. Reuse the captured-parent validator; retain all assigned
+  jobs, bounded subprocess failures and partial stage evidence. The
+  [authored engineering receipt](provenance/verification/raw-text-serving-20261109.json)
+  records one passing capture including one real baseline child. Other deployment
+  selections run in parent workers; supervisor fault cases are controlled.
+  Whole-batch stage/raw-call/process timers are nested and include disclosed
+  instrumentation boundaries. This supplies no trained-lineage benchmark,
+  controlled cold-cache result, direct load-through-first-output metric,
+  production latency, memory/energy measurement, historical cost recovery or ROI.
+  Issues #7 c3 and #14 c1/c5 remain partial and open.
+
 - Attempt budget accounting once for valid, unambiguous reported usage from
   failed provider receipts before abstention, retaining failure status and
   attempt/trial records. Missing, invalid or ambiguous usage stays unknown.
