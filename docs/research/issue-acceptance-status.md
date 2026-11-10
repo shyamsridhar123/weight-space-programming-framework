@@ -823,6 +823,30 @@ their scope. **#5 c1 remains partial and Issue #5 stays open; #5 c2 and #8 c6
 remain partial/open.** Historical usage, charges, deployment revision and the
 absence of a finite total-cost bound remain unresolved.
 
+**Later broker-control inventory and engineering supplement, November 9, 2026:**
+The [source-pinned inventory](broker-control-inventory.md) maps metadata, parameter
+views, tool/computation policy, resources, retries, proposal selection and failure
+accounting to their implementations and residual trust. Successful metadata and
+trusted audits now independently record effective request limits, including
+constructor overrides, as `wsp-broker-request-limits/1`. The
+[authored engineering receipt](../../provenance/verification/broker-request-limits-20261109.json)
+records one passing regression of actual broker/session code: exact byte-limit
+acceptance, oversized and count-limit denial, metadata mutation isolation,
+default/custom audit values, unchanged session configuration identity and event/
+audit hash integrity. Its scoring callback is never invoked; it supplies no
+provider, scientific, native-containment or business-impact evidence. Runtime
+continuity covers captured strings and package-version metadata, without
+executable/package-content identities or lockfile agreement.
+
+Request count is not a ledger-memory cap, and the canonical byte limit is checked
+after JSON conversion/serialization. CLI flags request restrictions without
+attesting their enforcement; subprocesses and best-effort termination do not
+establish containment. Older receipts leave absent limits unrecorded. New
+metadata changes response bytes and transcript/audit hashes; exact old-transcript
+replay through current source may differ or fail. No historical bytes are
+rewritten or replayed. Original criteria, earlier receipt scopes and historical
+outcomes remain unchanged; **#5 c1 remains partial and Issue #5 stays open.**
+
 #### #5 c2
 
 - [ ] Implement a real provider adapter with exact provider/model/configuration identity, prompts, tool calls, token/latency/cost usage, errors and human involvement. Keep credential material out of records.
