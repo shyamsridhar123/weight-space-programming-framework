@@ -20,7 +20,7 @@ import math
 from pathlib import Path
 import platform
 import shutil
-from statistics import NormalDist
+from statistics import NormalDist, mean
 import sys
 import time
 import zipfile
@@ -1045,6 +1045,53 @@ def measured_distribution(values) -> dict:
             "p95": float(np.quantile(values, .95)) if len(values) else None}
 
 
+def resource_distribution(values) -> dict:
+    """Describe already validated observations in approximate binary64."""
+    try:
+        values = sorted(float(value) for value in values)
+    except (OverflowError, TypeError, ValueError) as error:
+        raise ValueError("Resource observations must fit finite binary64") from error
+    if any(not math.isfinite(value) for value in values):
+        raise ValueError("Resource observations must fit finite binary64")
+    if not values:
+        return {"observations": 0, "mean": None, "minimum": None,
+                "maximum": None, "p50": None, "p95": None}
+
+    def quantile(numerator, denominator):
+        index, remainder = divmod((len(values)-1)*numerator, denominator)
+        lower, upper = values[index], values[min(index+1, len(values)-1)]
+        return lower+(upper-lower)*(remainder/denominator)
+
+    result = {"observations": len(values), "mean": mean(values),
+              "minimum": values[0], "maximum": values[-1],
+              "p50": quantile(1, 2), "p95": quantile(19, 20)}
+    if any(not math.isfinite(value) for key, value in result.items() if key != "observations"):
+        raise ValueError("Resource statistics must remain finite binary64")
+    return result
+
+
+def summarize_posthoc_resources(assigned: list[dict]) -> dict:
+    """Keep marginal measurements separate from complete per-assignment pairs."""
+    measurements = summarize_resource_measurements(assigned)["resource_measurements"]
+    costs = []
+    for row in assigned:
+        cost = row.get("cost")
+        costs.append({} if cost is None else cost)
+    stages = {
+        field: resource_distribution(cost[field] for cost in costs if cost.get(field) is not None)
+        | {"sum_observed": coverage["observed_sum"], "missing_assigned": coverage["missing"]}
+        for field, coverage in measurements.items()
+    }
+    paired = observed_resource_summary(
+        observed_resource_summary((cost.get("fit_selection_materialization_seconds"),
+                                   cost.get("heldout_workflow_seconds")))["total_if_complete"]
+        for cost in costs
+    )
+    return {"resource_measurements": measurements, "stages": stages,
+            "paired_top_level_seconds": paired,
+            "observed_incremental_top_level_seconds": paired["observed_sum"]}
+
+
 def analyze_study(public_root: Path, domain: str) -> dict:
     """Describe sealed evidence after replay; never fit, reselect, or update it."""
     experiment_root, artifact_root = study_paths(public_root, domain)
@@ -1178,17 +1225,9 @@ def analyze_study(public_root: Path, domain: str) -> dict:
                                                if calibration_available else None,
                 "fit_seconds": option["fit_seconds"]})
     arm_costs, case_results, frontiers = [], [], []
-    cost_keys = sorted({key for row in outcomes for key in row.get("cost", {})})
     for arm in protocol.get("arms", ARMS):
         assigned = [row for row in outcomes if row["arm"] == arm]
-        observed = [row for row in assigned if "cost" in row]
-        arm_costs.append({"arm": arm, "assigned": len(assigned), "timing_records": len(observed),
-            "timing_missing": len(assigned)-len(observed),
-            "stages": {key: measured_distribution(row["cost"][key] for row in observed if key in row["cost"])
-                       | {"sum_observed": sum(row["cost"][key] for row in observed if key in row["cost"]),
-                          "missing_assigned": sum(key not in row.get("cost", {}) for row in assigned)} for key in cost_keys},
-            "observed_incremental_top_level_seconds": sum(row["cost"].get("fit_selection_materialization_seconds", 0.)
-                                                          + row["cost"].get("heldout_workflow_seconds", 0.) for row in observed)})
+        arm_costs.append({"arm": arm, "assigned": len(assigned), **summarize_posthoc_resources(assigned)})
         for case in protocol["cases"]:
             selected = [row for row in assigned if row["case"]["case_id"] == case["case_id"]]
             available = [row for row in selected if not row["evaluation_missing"]]
@@ -1208,8 +1247,9 @@ def analyze_study(public_root: Path, domain: str) -> dict:
                     "mean_calibration_target_gain": float(np.mean([row["target_gain"] for row in calibrated])) if calibrated else None,
                     "mean_calibration_protected_harm": float(np.mean([row["protected_harm"] for row in calibrated])) if calibrated else None,
                     "behavioral_calibration_pass_fraction_all_assigned": sum(row["behavioral_calibration_pass"] for row in calibrated)/len(selected)})
-    result = {"schema": "wsp-trained-posthoc-analysis/1", "domain": domain, "created_at_utc": now(),
-        "source_sha256": {"runner": sha(Path(__file__)), "research_tasks": sha(SOURCE_ROOT/"rlcd/weight_space/research_tasks.py")},
+    result = {"schema": "wsp-trained-posthoc-analysis/2", "domain": domain, "created_at_utc": now(),
+        "source_sha256": {"runner": sha(Path(__file__)), "research_tasks": sha(SOURCE_ROOT/"rlcd/weight_space/research_tasks.py"),
+                          "metrics": sha(SOURCE_ROOT/"rlcd/weight_space/metrics.py")},
         "input_file_sha256": inputs, "assigned_trials": len(outcomes), "analyzable_sealed_trials": len(trials),
         "missing_trial_ids": sorted(set(indexed)-{row["trial_id"] for row in trials}),
         "scope": "Supplemental description of frozen candidates and public derived features after independent replay; no fitting, test-based reselection, replacement lineages, or change to historical results",
@@ -1219,7 +1259,7 @@ def analyze_study(public_root: Path, domain: str) -> dict:
         "abstention_reason_counts": dict(Counter(reason for row in outcomes for reason in row.get("abstention_reasons", []))),
         "costs": {"shared": read_json(experiment_root/"shared-cost.json"), "arms": arm_costs,
             "current_main_bundle_storage_bytes": sum(path.stat().st_size for path in (artifact_root/"main").rglob("*") if path.is_file()),
-            "nesting": "all-option fitting is inside fit/selection/materialization; native, binary64, exact verification and export are inside heldout workflow. Sum only the two top-level incremental timings; shared preparation/training charged once per study",
+            "nesting": "all-option fitting is inside fit/selection/materialization; native, binary64, exact verification and export are inside heldout workflow. Pair only the two top-level incremental timings within the same assignment when both are observed; shared preparation/training charged once per study",
             "unmeasured": ["network acquisition wall time", "isolated scans/copies/hashes time", "peak memory", "energy", "matched cold/warm repeated-use inference", "hardware/model-size crossover", "LoRA/learned-reader training and amortization"],
             "cost_claim": "Single-environment CPU wall times and observed bytes; no production savings or complete inference-cost frontier"}}
     write_json(experiment_root/"posthoc-analysis.json", result)
