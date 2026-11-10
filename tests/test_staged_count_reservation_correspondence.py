@@ -390,3 +390,303 @@ def test_inspected_lifecycle_requires_plain_terminal_counts_and_false_flags(tmp_
         with pytest.raises(ValueError):
             _read(case)
         assert inspections == ["synthetic-once"]
+
+
+def _join_arguments(case, **overrides):
+    return {
+        "expected_logical_slot": {
+            "assignment_id": "synthetic-assignment", "slot_id": "common_repair",
+        },
+        "registry": case["registry"],
+        **case["expectations"],
+        **overrides,
+    }
+
+
+@pytest.mark.parametrize(("status", "result"), [
+    ("succeeded", None),
+    ("succeeded", {"private_scorer_result": [None, True, 7, 1.25, {"note": "arbitrary JSON"}]}),
+    ("failed", None),
+    ("authorized_outcome_unknown", {"uncommitted_result": ["count file survived"]}),
+], ids=["success-null", "success-arbitrary-json", "failed-after-counts", "unfinalized-after-counts"])
+def test_join_round_trip_preserves_attributed_correspondence_and_lifecycle(
+        tmp_path, monkeypatch, status, result):
+    case = _prepared(tmp_path, monkeypatch, status=status, result=result)
+    correspondence = _read(case)
+    arguments = _join_arguments(case)
+    body = {
+        "schema": "wsp-staged-count-reservation-join/1",
+        "logical_slot": deepcopy(arguments["expected_logical_slot"]),
+        "correspondence": correspondence,
+    }
+    expected = body | {"sha256": digest(body)}
+    registry = case["registry"]
+    inspect = registry.get_attempt
+    before = inspect("synthetic-once")
+    inspections = []
+
+    def inspected(attempt_id):
+        inspections.append(attempt_id)
+        return inspect(attempt_id)
+
+    def unexpected_evaluation(*args, **kwargs):
+        raise AssertionError("Reading or persisting a join must not authorize evaluation")
+
+    monkeypatch.setattr(registry, "get_attempt", inspected)
+    monkeypatch.setattr(registry, "score", unexpected_evaluation)
+    monkeypatch.setattr(registry, "register_batch", unexpected_evaluation)
+    path = tmp_path / "synthetic-join.json"
+    written = receipts.write_count_reservation_join_once(path, case["path"], **arguments)
+    assert written == expected
+    assert path.read_bytes() == canonical_bytes(expected) + b"\n"
+    assert inspections == ["synthetic-once"]
+    inspections.clear()
+    reread = receipts.read_count_reservation_join(
+        path, case["path"], expected_join_sha256=expected["sha256"], **arguments)
+    assert reread == expected and inspections == ["synthetic-once"]
+    assert inspect("synthetic-once") == before
+    assert reread["correspondence"]["lifecycle"]["status"] == status
+    for flag in _FLAGS:
+        assert reread["correspondence"]["lifecycle"][flag] is False
+
+
+def test_join_rejects_relabelled_or_unretained_records(tmp_path, monkeypatch):
+    case = _prepared(tmp_path, monkeypatch)
+    arguments = _join_arguments(case)
+    path = tmp_path / "synthetic-join.json"
+    original = receipts.write_count_reservation_join_once(path, case["path"], **arguments)
+    records = [original]
+    for field, value in (("assignment_id", "another-assignment"), ("slot_id", "another-slot")):
+        slot = arguments["expected_logical_slot"] | {field: value}
+        changed_arguments = _join_arguments(case, expected_logical_slot=slot)
+        changed = receipts.write_count_reservation_join_once(
+            tmp_path / f"synthetic-join-{field}.json", case["path"], **changed_arguments)
+        records.append(changed)
+        assert changed["logical_slot"] == slot
+        assert changed["correspondence"] == original["correspondence"]
+        with pytest.raises(ValueError):
+            receipts.read_count_reservation_join(
+                path, case["path"], expected_join_sha256=original["sha256"], **changed_arguments)
+    assert len({record["sha256"] for record in records}) == 3
+    with pytest.raises(ValueError):
+        receipts.read_count_reservation_join(
+            path, case["path"], expected_join_sha256="0" * 64, **arguments)
+
+    # A self-consistent replacement still differs from independently retained attribution.
+    substituted = deepcopy(original)
+    substituted["logical_slot"]["slot_id"] = "another-slot"
+    substituted["sha256"] = digest({
+        key: value for key, value in substituted.items() if key != "sha256"
+    })
+    substituted_bytes = canonical_bytes(substituted) + b"\n"
+    path.write_bytes(substituted_bytes)
+    with pytest.raises(ValueError):
+        receipts.read_count_reservation_join(
+            path, case["path"], expected_join_sha256=original["sha256"], **arguments)
+    assert path.read_bytes() == substituted_bytes
+
+
+def test_join_read_rejects_noncanonical_bytes_and_changed_lifecycle(tmp_path, monkeypatch):
+    case = _prepared(tmp_path, monkeypatch, status="authorized_outcome_unknown")
+    arguments = _join_arguments(case)
+    path = tmp_path / "synthetic-join.json"
+    original = receipts.write_count_reservation_join_once(path, case["path"], **arguments)
+    retained_bytes = canonical_bytes(original) + b"\n"
+    path.write_bytes(retained_bytes + b"\n")
+    with pytest.raises(ValueError):
+        receipts.read_count_reservation_join(
+            path, case["path"], expected_join_sha256=original["sha256"], **arguments)
+    assert path.read_bytes() == retained_bytes + b"\n"
+    path.write_bytes(retained_bytes)
+
+    # This injected inspection is synthetic; it does not claim delayed worker completion.
+    changed_snapshot = case["registry"].get_attempt("synthetic-once")
+    changed_snapshot.update(
+        status="succeeded", reason="observed_boundary_passed",
+        callback_invocations=1, result_sha256=digest(None),
+    )
+    changed_snapshot["lifecycle_sha256"] = digest({
+        key: value for key, value in changed_snapshot.items() if key != "lifecycle_sha256"
+    })
+    inspections = []
+
+    def inspected(attempt_id):
+        inspections.append(attempt_id)
+        return deepcopy(changed_snapshot)
+
+    monkeypatch.setattr(case["registry"], "get_attempt", inspected)
+    changed_correspondence = _read(case)
+    assert changed_correspondence["lifecycle"]["status"] == "succeeded"
+    assert changed_correspondence["sha256"] != original["correspondence"]["sha256"]
+    inspections.clear()
+    with pytest.raises(ValueError, match="retained body digest"):
+        receipts.read_count_reservation_join(
+            path, case["path"], expected_join_sha256=original["sha256"], **arguments)
+    assert inspections == ["synthetic-once"]
+    assert path.read_bytes() == retained_bytes
+
+
+def test_join_propagates_upstream_rejection_and_inspection_failure(tmp_path, monkeypatch):
+    case = _prepared(tmp_path, monkeypatch)
+    arguments = _join_arguments(case)
+    path = tmp_path / "synthetic-join.json"
+    original = receipts.write_count_reservation_join_once(path, case["path"], **arguments)
+    retained_bytes = path.read_bytes()
+    rejected_path = tmp_path / "must-not-create.json"
+    shifted = deepcopy(case["expectations"]["expected_slice"])
+    shifted.update(start=4, stop=4100)
+    changed_arguments = _join_arguments(case, expected_slice=shifted)
+    with pytest.raises(ValueError, match="ordered commitment"):
+        receipts.write_count_reservation_join_once(
+            rejected_path, case["path"], **changed_arguments)
+    assert not rejected_path.exists()
+    with pytest.raises(ValueError, match="ordered commitment"):
+        receipts.read_count_reservation_join(
+            path, case["path"], expected_join_sha256=original["sha256"], **changed_arguments)
+
+    failure = OSError("synthetic unavailable inspection")
+    inspections = []
+
+    def unavailable(attempt_id):
+        inspections.append(attempt_id)
+        raise failure
+
+    monkeypatch.setattr(case["registry"], "get_attempt", unavailable)
+    with pytest.raises(OSError) as caught:
+        receipts.write_count_reservation_join_once(rejected_path, case["path"], **arguments)
+    assert caught.value is failure and inspections == ["synthetic-once"]
+    assert not rejected_path.exists()
+    inspections.clear()
+    with pytest.raises(OSError) as caught:
+        receipts.read_count_reservation_join(
+            path, case["path"], expected_join_sha256=original["sha256"], **arguments)
+    assert caught.value is failure and inspections == ["synthetic-once"]
+    assert path.read_bytes() == retained_bytes
+
+
+def test_join_invalid_slot_rejects_before_source_io(tmp_path, monkeypatch):
+    case = _prepared(tmp_path, monkeypatch)
+    path = tmp_path / "must-not-create.json"
+    invalid_slots = [
+        {"assignment_id": "synthetic-assignment"},
+        {"assignment_id": "synthetic-assignment", "slot_id": "common_repair", "extra": None},
+        {"assignment_id": 7, "slot_id": "common_repair"},
+        {"assignment_id": "synthetic-assignment", "slot_id": " \t"},
+        {"assignment_id": "synthetic-assignment", "slot_id": "\ud800"},
+    ]
+    reads = []
+
+    def unexpected_source_io(*args, **kwargs):
+        reads.append(args)
+        raise AssertionError("Invalid logical attribution must reject before source I/O")
+
+    with monkeypatch.context() as patch:
+        patch.setattr(receipts, "read_count_reservation_correspondence", unexpected_source_io)
+        patch.setattr(Path, "lstat", unexpected_source_io)
+        patch.setattr(case["registry"], "get_attempt", unexpected_source_io)
+        for slot in invalid_slots:
+            arguments = _join_arguments(case, expected_logical_slot=slot)
+            with pytest.raises(ValueError):
+                receipts.write_count_reservation_join_once(path, case["path"], **arguments)
+            with pytest.raises(ValueError):
+                receipts.read_count_reservation_join(
+                    path, case["path"], expected_join_sha256="0" * 64, **arguments)
+    assert reads == [] and not path.exists()
+
+
+def test_join_captures_logical_slot_before_source_io(tmp_path, monkeypatch):
+    case = _prepared(tmp_path, monkeypatch)
+    arguments = _join_arguments(case)
+    slot = arguments["expected_logical_slot"]
+    retained_slot = deepcopy(slot)
+    original_lstat = Path.lstat
+    first_io = []
+
+    def mutate_on_first_io(path, *args, **kwargs):
+        if not first_io:
+            first_io.append(path)
+            slot.update(assignment_id="caller-mutated-assignment", slot_id="caller-mutated-slot")
+        return original_lstat(path, *args, **kwargs)
+
+    path = tmp_path / "synthetic-join.json"
+    with monkeypatch.context() as patch:
+        patch.setattr(Path, "lstat", mutate_on_first_io)
+        written = receipts.write_count_reservation_join_once(path, case["path"], **arguments)
+    assert first_io and written["logical_slot"] == retained_slot
+    assert slot != retained_slot
+    slot.clear()
+    slot.update(retained_slot)
+    first_io.clear()
+    with monkeypatch.context() as patch:
+        patch.setattr(Path, "lstat", mutate_on_first_io)
+        reread = receipts.read_count_reservation_join(
+            path, case["path"], expected_join_sha256=written["sha256"], **arguments)
+    assert first_io and slot != retained_slot
+    assert reread == written and reread["logical_slot"] == retained_slot
+
+
+def test_join_exclusive_creation_and_fsync_failure_preserve_evidence(tmp_path, monkeypatch):
+    case = _prepared(tmp_path, monkeypatch, status="failed")
+    arguments = _join_arguments(case)
+    # Retain this expected digest independently before invoking the failed writer.
+    body = {
+        "schema": "wsp-staged-count-reservation-join/1",
+        "logical_slot": deepcopy(arguments["expected_logical_slot"]),
+        "correspondence": _read(case),
+    }
+    retained_digest = digest(body)
+    expected = body | {"sha256": retained_digest}
+    occupied = tmp_path / "occupied-join.json"
+    occupied.write_bytes(b"synthetic existing destination\n")
+    with pytest.raises(FileExistsError):
+        receipts.write_count_reservation_join_once(occupied, case["path"], **arguments)
+    assert occupied.read_bytes() == b"synthetic existing destination\n"
+
+    failed_path = tmp_path / "failed-writer-join.json"
+    failure = OSError("synthetic fsync failure after flush")
+
+    def unavailable_fsync(descriptor):
+        raise failure
+
+    with monkeypatch.context() as patch:
+        patch.setattr(receipts.os, "fsync", unavailable_fsync)
+        with pytest.raises(OSError) as caught:
+            receipts.write_count_reservation_join_once(failed_path, case["path"], **arguments)
+    assert caught.value is failure
+    assert failed_path.read_bytes() == canonical_bytes(expected) + b"\n"
+    recovered = receipts.read_count_reservation_join(
+        failed_path, case["path"], expected_join_sha256=retained_digest, **arguments)
+    assert recovered == expected
+    assert recovered["correspondence"]["lifecycle"]["status"] == "failed"
+    for flag in _FLAGS:
+        assert recovered["correspondence"]["lifecycle"][flag] is False
+
+
+@pytest.mark.parametrize("writer", ["counts", "join"], ids=["count-writer", "join-writer"])
+def test_public_writers_capture_destination_pathlike_once(tmp_path, monkeypatch, writer):
+    case = _prepared(tmp_path, monkeypatch)
+    first = tmp_path / "captured-destination.json"
+    second = tmp_path / "substituted-destination.json"
+    second.write_bytes(b"synthetic destination must remain unchanged\n")
+
+    class ChangingDestination:
+        def __init__(self):
+            self.calls = 0
+
+        def __fspath__(self):
+            self.calls += 1
+            return str(first if self.calls == 1 else second)
+
+    destination = ChangingDestination()
+    if writer == "counts":
+        declaration = {key: deepcopy(value) for key, value in case["receipt"].items()
+                       if key != "sha256"}
+        written = receipts.write_complete_slot_counts_once(
+            destination, declaration,
+            expected_binding=case["expectations"]["expected_binding"])
+    else:
+        written = receipts.write_count_reservation_join_once(
+            destination, case["path"], **_join_arguments(case))
+    assert destination.calls == 1
+    assert first.read_bytes() == canonical_bytes(written) + b"\n"
+    assert second.read_bytes() == b"synthetic destination must remain unchanged\n"

@@ -1,4 +1,4 @@
-"""Create-once byte receipts and reservation correspondence for staged counts.
+"""Create-once count receipts and slot-attributed reservation correspondence.
 
 Validation binds claimed counts to retained identities; it does not attest
 execution, provenance, independent storage, or power-loss durability.
@@ -124,12 +124,7 @@ def _plain(path: Path, *, directory: bool = False) -> None:
              "Expected an ordinary receipt directory or file")
 
 
-def read_complete_slot_counts(
-    path: str | os.PathLike[str], *, expected_binding: dict[str, str], expected_receipt_sha256: str,
-) -> dict[str, Any]:
-    """Read canonical claims against independently retained binding and body digest."""
-    binding = _binding(expected_binding)
-    _hash(expected_receipt_sha256)
+def _read_document(path: str | os.PathLike[str]) -> tuple[bytes, Any]:
     path = Path(path).absolute()
     for parent in path.parents:
         _plain(parent, directory=True)
@@ -146,14 +141,36 @@ def read_complete_slot_counts(
     def constant(value: str) -> None:
         raise ValueError("Nonfinite JSON constant: " + value)
 
-    receipt = _fields(json.loads(raw, object_pairs_hook=pairs, parse_constant=constant),
-                      _RESULT_KEYS | {"sha256"}, "Count receipt")
+    return raw, json.loads(raw, object_pairs_hook=pairs, parse_constant=constant)
+
+
+def read_complete_slot_counts(
+    path: str | os.PathLike[str], *, expected_binding: dict[str, str], expected_receipt_sha256: str,
+) -> dict[str, Any]:
+    """Read canonical claims against independently retained binding and body digest."""
+    binding = _binding(expected_binding)
+    _hash(expected_receipt_sha256)
+    raw, document = _read_document(path)
+    receipt = _fields(document, _RESULT_KEYS | {"sha256"}, "Count receipt")
     _hash(receipt["sha256"])
     body = _capture_body({key: value for key, value in receipt.items() if key != "sha256"}, binding)
     _require(raw == canonical_bytes(receipt) + b"\n", "Count receipt bytes are not canonical")
     _require(digest(body) == receipt["sha256"] == expected_receipt_sha256,
              "Count receipt differs from its retained body digest")
     return body | {"sha256": receipt["sha256"]}
+
+
+def _write_once(path: Path, raw: bytes) -> None:
+    for parent in path.parents:
+        _plain(parent, directory=True)
+    try:
+        _plain(path)
+    except FileNotFoundError:
+        pass
+    with path.open("xb") as stream:
+        _require(stream.write(raw) == len(raw), "Incomplete receipt write")
+        stream.flush()
+        os.fsync(stream.fileno())
 
 
 def write_complete_slot_counts_once(
@@ -169,16 +186,7 @@ def write_complete_slot_counts_once(
     receipt = body | {"sha256": digest(body)}
     raw = canonical_bytes(receipt) + b"\n"
     path = Path(path).absolute()
-    for parent in path.parents:
-        _plain(parent, directory=True)
-    try:
-        _plain(path)
-    except FileNotFoundError:
-        pass
-    with path.open("xb") as stream:
-        _require(stream.write(raw) == len(raw), "Incomplete count receipt write")
-        stream.flush()
-        os.fsync(stream.fileno())
+    _write_once(path, raw)
     reread = read_complete_slot_counts(path, expected_binding=binding,
                                       expected_receipt_sha256=receipt["sha256"])
     # The reader already checked that the stored bytes equal this exact encoding.
@@ -294,3 +302,81 @@ def read_count_reservation_correspondence(
         )} | {key: False for key in flags},
     }
     return body | {"sha256": digest(body)}
+
+
+def _attributed_correspondence(
+    counts_path: str | os.PathLike[str], *, expected_logical_slot: dict[str, str],
+    registry: DataRoleRegistry, expected_binding: dict[str, str], expected_receipt_sha256: str,
+    expected_attempt: dict[str, Any], expected_slice: dict[str, Any],
+) -> dict[str, Any]:
+    slot = _fields(expected_logical_slot, {"assignment_id", "slot_id"}, "Logical slot")
+    _require(all(type(value) is str and bool(value.strip()) for value in slot.values()),
+             "Logical-slot identities require plain nonblank strings")
+    try:
+        canonical_bytes(slot)
+    except UnicodeError:
+        raise ValueError("Logical-slot identities require valid Unicode") from None
+    correspondence = read_count_reservation_correspondence(
+        counts_path, registry=registry, expected_binding=expected_binding,
+        expected_receipt_sha256=expected_receipt_sha256, expected_attempt=expected_attempt,
+        expected_slice=expected_slice)
+    body = {"schema": "wsp-staged-count-reservation-join/1", "logical_slot": slot,
+            "correspondence": correspondence}
+    return body | {"sha256": digest(body)}
+
+
+def _reread_join(path: str | os.PathLike[str], expected: dict[str, Any]) -> dict[str, Any]:
+    raw, document = _read_document(path)
+    _require(raw == canonical_bytes(expected) + b"\n",
+             "Count/reservation join differs from retained expectations")
+    return document
+
+
+def write_count_reservation_join_once(
+    path: str | os.PathLike[str], counts_path: str | os.PathLike[str], *,
+    expected_logical_slot: dict[str, str], registry: DataRoleRegistry,
+    expected_binding: dict[str, str], expected_receipt_sha256: str,
+    expected_attempt: dict[str, Any], expected_slice: dict[str, Any],
+) -> dict[str, Any]:
+    """Persist one attributed post-unwind correspondence, exclusively, then reread.
+
+    Inherit the correspondence reader's independent-expectation and quiescence
+    preconditions. Capture slot identity before source I/O, inspect the registry
+    once via that reader, then create, flush, fsync and reread the exact join.
+    Slot labels are caller attribution, not verified roster membership.
+    Exclusive creation applies per destination, not globally per logical slot.
+    Keep distinct logical slots even when endpoint/count commitments coincide.
+    Failed writes are never cleaned up or retried. A surviving file proves
+    neither successful original writer return nor scientific observation.
+    """
+    expected = _attributed_correspondence(
+        counts_path, expected_logical_slot=expected_logical_slot, registry=registry,
+        expected_binding=expected_binding, expected_receipt_sha256=expected_receipt_sha256,
+        expected_attempt=expected_attempt, expected_slice=expected_slice)
+    path = Path(path).absolute()
+    _write_once(path, canonical_bytes(expected) + b"\n")
+    return _reread_join(path, expected)
+
+
+def read_count_reservation_join(
+    path: str | os.PathLike[str], counts_path: str | os.PathLike[str], *,
+    expected_logical_slot: dict[str, str], expected_join_sha256: str, registry: DataRoleRegistry,
+    expected_binding: dict[str, str], expected_receipt_sha256: str,
+    expected_attempt: dict[str, Any], expected_slice: dict[str, Any],
+) -> dict[str, Any]:
+    """Rejoin current quiescent evidence and reread against an independent digest.
+
+    Retain the logical slot, join body digest and every correspondence
+    expectation independently of either file. Exactly one registry inspection
+    rechecks the count/reservation join; changed lifecycle also rejects. This
+    operation never scores, resumes work, establishes original writer success
+    or promotes failed/unknown authorization to successful evaluation.
+    """
+    _hash(expected_join_sha256)
+    expected = _attributed_correspondence(
+        counts_path, expected_logical_slot=expected_logical_slot, registry=registry,
+        expected_binding=expected_binding, expected_receipt_sha256=expected_receipt_sha256,
+        expected_attempt=expected_attempt, expected_slice=expected_slice)
+    _require(expected["sha256"] == expected_join_sha256,
+             "Count/reservation join differs from its retained body digest")
+    return _reread_join(path, expected)

@@ -1,0 +1,428 @@
+{
+  "schema": "rlcd.staged-count-join-publication/1",
+  "date": "2026-11-10",
+  "integrated_main_base": "d809aa6504afbfeb8f022f84685ee7f6a6b6647f",
+  "issue": {
+    "number": 9,
+    "state": "open",
+    "c1": "partial"
+  },
+  "change": {
+    "purpose": "Create-once persistence and current-evidence reread of caller-attributed logical-slot correspondence, retaining the existing count/reservation validation and lifecycle boundaries.",
+    "checked_source_inputs": [
+      {
+        "path": "scripts/staged_scientific_count_receipts.py",
+        "bytes": 19339,
+        "sha256": "f956f2377f2717dcb7e42b80615f687e9fe1fc7c5f87cb2b8c7780268a8b9808"
+      },
+      {
+        "path": "tests/test_staged_count_reservation_correspondence.py",
+        "bytes": 31869,
+        "sha256": "7531f81475aae6cdd4788aec70c7ff43e796c2fc0adc6d0139fa145aceb54cd4"
+      },
+      {
+        "path": "pytest-engineering.ini",
+        "bytes": 2067,
+        "sha256": "51e51bc36f22f45c5cf93822346b1507e5bd8d6938ecb061e35b51583d4fcbd9"
+      },
+      {
+        "path": "rlcd/__init__.py",
+        "bytes": 71,
+        "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+      },
+      {
+        "path": "rlcd/weight_space/__init__.py",
+        "bytes": 3053,
+        "sha256": "6add2899c26aabf2f542cc27dce468d528cb658153f0ecc7457e1df85ff0e50a"
+      },
+      {
+        "path": "rlcd/weight_space/model.py",
+        "bytes": 10004,
+        "sha256": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba"
+      },
+      {
+        "path": "rlcd/weight_space/artifact.py",
+        "bytes": 7735,
+        "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+      },
+      {
+        "path": "rlcd/weight_space/program.py",
+        "bytes": 6317,
+        "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+      },
+      {
+        "path": "rlcd/weight_space/contracts.py",
+        "bytes": 43906,
+        "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+      },
+      {
+        "path": "rlcd/weight_space/compiler.py",
+        "bytes": 3928,
+        "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+      },
+      {
+        "path": "rlcd/weight_space/symmetry.py",
+        "bytes": 12162,
+        "sha256": "c459d7e7317d89eda6d8a99c98606bb73b4ccad3a80f77f81f3272646173035d"
+      },
+      {
+        "path": "rlcd/weight_space/semantics.py",
+        "bytes": 6727,
+        "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+      },
+      {
+        "path": "rlcd/weight_space/structured.py",
+        "bytes": 26854,
+        "sha256": "8c2be636b812158de5df1cb6bad9615274f2dfcd7b3d6701f3843e19a3513f24"
+      },
+      {
+        "path": "rlcd/weight_space/features.py",
+        "bytes": 34083,
+        "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+      },
+      {
+        "path": "rlcd/weight_space/sequential.py",
+        "bytes": 9106,
+        "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+      },
+      {
+        "path": "rlcd/weight_space/data_roles.py",
+        "bytes": 29559,
+        "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+      },
+      {
+        "path": "rlcd/weight_space/workflow.py",
+        "bytes": 54271,
+        "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+      },
+      {
+        "path": "rlcd/weight_space/broker.py",
+        "bytes": 15388,
+        "sha256": "18affe0acfc1e8f6a434aaca3e462530d0b1a05369b05a3a25be1d0b1090359b"
+      }
+    ],
+    "join_sha256_semantics": "Digest of the canonical join body excluding its own sha256 field, including caller-retained assignment/slot labels and the complete correspondence report; distinct from count-receipt-body, correspondence-body and whole-file digests.",
+    "logical_slot_attribution": "Caller-retained labels only; roster membership, mapping correctness and study-wide uniqueness are not established.",
+    "creation_scope": "Exclusive per destination, not globally per logical slot or study.",
+    "original_count_or_join_writer_return_established": false,
+    "count_receipt_result_not_equated_with_callback_result": true
+  },
+  "selection": {
+    "test_nodes": [
+      "tests/test_staged_count_reservation_correspondence.py::test_join_round_trip_preserves_attributed_correspondence_and_lifecycle[success-null]",
+      "tests/test_staged_count_reservation_correspondence.py::test_join_round_trip_preserves_attributed_correspondence_and_lifecycle[success-arbitrary-json]",
+      "tests/test_staged_count_reservation_correspondence.py::test_join_round_trip_preserves_attributed_correspondence_and_lifecycle[failed-after-counts]",
+      "tests/test_staged_count_reservation_correspondence.py::test_join_round_trip_preserves_attributed_correspondence_and_lifecycle[unfinalized-after-counts]",
+      "tests/test_staged_count_reservation_correspondence.py::test_join_rejects_relabelled_or_unretained_records",
+      "tests/test_staged_count_reservation_correspondence.py::test_join_read_rejects_noncanonical_bytes_and_changed_lifecycle",
+      "tests/test_staged_count_reservation_correspondence.py::test_join_propagates_upstream_rejection_and_inspection_failure",
+      "tests/test_staged_count_reservation_correspondence.py::test_join_invalid_slot_rejects_before_source_io",
+      "tests/test_staged_count_reservation_correspondence.py::test_join_captures_logical_slot_before_source_io",
+      "tests/test_staged_count_reservation_correspondence.py::test_join_exclusive_creation_and_fsync_failure_preserve_evidence",
+      "tests/test_staged_count_reservation_correspondence.py::test_public_writers_capture_destination_pathlike_once[count-writer]",
+      "tests/test_staged_count_reservation_correspondence.py::test_public_writers_capture_destination_pathlike_once[join-writer]"
+    ],
+    "expected_case_classname": "tests.test_staged_count_reservation_correspondence",
+    "pytest_invocation_attempts": 1,
+    "automatic_retry_performed": false,
+    "scope": "Explicitly selected synthetic-record and temporary-registry engineering fixtures. Execution counts and timestamps describe bookkeeping, not scientific accuracy or business impact."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "child_invocations": 1,
+      "status": "passed",
+      "started_at_utc": "2026-11-10T10:46:27.967122+00:00",
+      "finished_at_utc": "2026-11-10T10:46:40.386404+00:00",
+      "exit_code": 0,
+      "timed_out": false,
+      "automatic_retry_performed": false,
+      "recorded_identities_unchanged": true,
+      "source_snapshots_match_before": true,
+      "cases": {
+        "tests": 12,
+        "passed": 12,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "case_outcomes": [
+        {
+          "classname": "tests.test_staged_count_reservation_correspondence",
+          "name": "test_join_round_trip_preserves_attributed_correspondence_and_lifecycle[success-null]",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_count_reservation_correspondence",
+          "name": "test_join_round_trip_preserves_attributed_correspondence_and_lifecycle[success-arbitrary-json]",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_count_reservation_correspondence",
+          "name": "test_join_round_trip_preserves_attributed_correspondence_and_lifecycle[failed-after-counts]",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_count_reservation_correspondence",
+          "name": "test_join_round_trip_preserves_attributed_correspondence_and_lifecycle[unfinalized-after-counts]",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_count_reservation_correspondence",
+          "name": "test_join_rejects_relabelled_or_unretained_records",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_count_reservation_correspondence",
+          "name": "test_join_read_rejects_noncanonical_bytes_and_changed_lifecycle",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_count_reservation_correspondence",
+          "name": "test_join_propagates_upstream_rejection_and_inspection_failure",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_count_reservation_correspondence",
+          "name": "test_join_invalid_slot_rejects_before_source_io",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_count_reservation_correspondence",
+          "name": "test_join_captures_logical_slot_before_source_io",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_count_reservation_correspondence",
+          "name": "test_join_exclusive_creation_and_fsync_failure_preserve_evidence",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_count_reservation_correspondence",
+          "name": "test_public_writers_capture_destination_pathlike_once[count-writer]",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_count_reservation_correspondence",
+          "name": "test_public_writers_capture_destination_pathlike_once[join-writer]",
+          "outcome": "passed"
+        }
+      ],
+      "private_capture_commitments": {
+        "launch.py": {
+          "bytes": 8544,
+          "sha256": "a3ac71e29d1e20ce71263e2da45a7616b179792df281453b3450f421e6c3d7c6"
+        },
+        "execution-plan.json": {
+          "bytes": 5440,
+          "sha256": "72bea9a16e860baa9c17f5c08334f6c48007fd267fd3b6875854b5ebec2c7604"
+        },
+        "identities.before.json": {
+          "bytes": 6504,
+          "sha256": "750aa6d8d015f5dfd466ee8d8a8ec452ca94a42ddba771d78756104b9fc4690c"
+        },
+        "identities.after.json": {
+          "bytes": 6504,
+          "sha256": "750aa6d8d015f5dfd466ee8d8a8ec452ca94a42ddba771d78756104b9fc4690c"
+        },
+        "attempt.started.json": {
+          "bytes": 161,
+          "sha256": "5fa1a5b0d828c7a6adee67504d63f702c2e284202b7d1e98ab3d97769ed1603b"
+        },
+        "result.json": {
+          "bytes": 2794,
+          "sha256": "40b6b43eaadbc423b7355c0e42e4cd064d30153b109b637091f811ab42466d01"
+        },
+        "stdout.txt": {
+          "bytes": 2251,
+          "sha256": "0ae59a3456eebef8271de330d214c442b3ae9939aa20bef80ec79de9c57cc24a"
+        },
+        "stderr.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "junit.xml": {
+          "bytes": 2237,
+          "sha256": "c8d0899dbc127eabd8a213cd02e6e32230fb126351217de14f12007c36e7dc74"
+        }
+      }
+    }
+  ],
+  "checked_engineering_obligations": [
+    "Successful public join write and read each inspect the registry once, retain the exact attributed correspondence and canonical bytes, and never score or register evidence.",
+    "Caller-retained assignment and slot labels remain distinct with identical underlying counts; independently retained join digests reject coherent substitutions and alternate byte encodings.",
+    "Invalid slot inputs reject before source I/O; copied slot attribution survives caller mutation during source I/O.",
+    "Upstream ordered-slice rejection leaves no destination; registry inspection exceptions propagate. Current-evidence read rejects changed lifecycle rather than replaying a historical observation.",
+    "Exclusive creation preserves existing bytes. A failed fsync can leave a valid file; a later independently bound read does not prove original writer return or upgrade lifecycle/authority.",
+    "Both public writers capture the destination path once and reuse it for writing and rereading, including changing PathLike inputs."
+  ],
+  "methods": {
+    "source_inventory_entries": 18,
+    "runtime_inventory_entries": 7,
+    "inventory_scope": "Partial selected source/runtime inventory, not dependency or execution attestation.",
+    "recorded_before_after_identities_equal": true,
+    "every_selected_source_snapshot_matches_before_after_and_current": true,
+    "source_snapshots": [
+      {
+        "path": "scripts/staged_scientific_count_receipts.py",
+        "bytes": 19339,
+        "sha256": "f956f2377f2717dcb7e42b80615f687e9fe1fc7c5f87cb2b8c7780268a8b9808",
+        "private_snapshot_path": "source-snapshots/scripts/staged_scientific_count_receipts.py"
+      },
+      {
+        "path": "tests/test_staged_count_reservation_correspondence.py",
+        "bytes": 31869,
+        "sha256": "7531f81475aae6cdd4788aec70c7ff43e796c2fc0adc6d0139fa145aceb54cd4",
+        "private_snapshot_path": "source-snapshots/tests/test_staged_count_reservation_correspondence.py"
+      },
+      {
+        "path": "pytest-engineering.ini",
+        "bytes": 2067,
+        "sha256": "51e51bc36f22f45c5cf93822346b1507e5bd8d6938ecb061e35b51583d4fcbd9",
+        "private_snapshot_path": "source-snapshots/pytest-engineering.ini"
+      },
+      {
+        "path": "rlcd/__init__.py",
+        "bytes": 71,
+        "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418",
+        "private_snapshot_path": "source-snapshots/rlcd/__init__.py"
+      },
+      {
+        "path": "rlcd/weight_space/__init__.py",
+        "bytes": 3053,
+        "sha256": "6add2899c26aabf2f542cc27dce468d528cb658153f0ecc7457e1df85ff0e50a",
+        "private_snapshot_path": "source-snapshots/rlcd/weight_space/__init__.py"
+      },
+      {
+        "path": "rlcd/weight_space/model.py",
+        "bytes": 10004,
+        "sha256": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba",
+        "private_snapshot_path": "source-snapshots/rlcd/weight_space/model.py"
+      },
+      {
+        "path": "rlcd/weight_space/artifact.py",
+        "bytes": 7735,
+        "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500",
+        "private_snapshot_path": "source-snapshots/rlcd/weight_space/artifact.py"
+      },
+      {
+        "path": "rlcd/weight_space/program.py",
+        "bytes": 6317,
+        "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd",
+        "private_snapshot_path": "source-snapshots/rlcd/weight_space/program.py"
+      },
+      {
+        "path": "rlcd/weight_space/contracts.py",
+        "bytes": 43906,
+        "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019",
+        "private_snapshot_path": "source-snapshots/rlcd/weight_space/contracts.py"
+      },
+      {
+        "path": "rlcd/weight_space/compiler.py",
+        "bytes": 3928,
+        "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac",
+        "private_snapshot_path": "source-snapshots/rlcd/weight_space/compiler.py"
+      },
+      {
+        "path": "rlcd/weight_space/symmetry.py",
+        "bytes": 12162,
+        "sha256": "c459d7e7317d89eda6d8a99c98606bb73b4ccad3a80f77f81f3272646173035d",
+        "private_snapshot_path": "source-snapshots/rlcd/weight_space/symmetry.py"
+      },
+      {
+        "path": "rlcd/weight_space/semantics.py",
+        "bytes": 6727,
+        "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef",
+        "private_snapshot_path": "source-snapshots/rlcd/weight_space/semantics.py"
+      },
+      {
+        "path": "rlcd/weight_space/structured.py",
+        "bytes": 26854,
+        "sha256": "8c2be636b812158de5df1cb6bad9615274f2dfcd7b3d6701f3843e19a3513f24",
+        "private_snapshot_path": "source-snapshots/rlcd/weight_space/structured.py"
+      },
+      {
+        "path": "rlcd/weight_space/features.py",
+        "bytes": 34083,
+        "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398",
+        "private_snapshot_path": "source-snapshots/rlcd/weight_space/features.py"
+      },
+      {
+        "path": "rlcd/weight_space/sequential.py",
+        "bytes": 9106,
+        "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae",
+        "private_snapshot_path": "source-snapshots/rlcd/weight_space/sequential.py"
+      },
+      {
+        "path": "rlcd/weight_space/data_roles.py",
+        "bytes": 29559,
+        "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851",
+        "private_snapshot_path": "source-snapshots/rlcd/weight_space/data_roles.py"
+      },
+      {
+        "path": "rlcd/weight_space/workflow.py",
+        "bytes": 54271,
+        "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040",
+        "private_snapshot_path": "source-snapshots/rlcd/weight_space/workflow.py"
+      },
+      {
+        "path": "rlcd/weight_space/broker.py",
+        "bytes": 15388,
+        "sha256": "18affe0acfc1e8f6a434aaca3e462530d0b1a05369b05a3a25be1d0b1090359b",
+        "private_snapshot_path": "source-snapshots/rlcd/weight_space/broker.py"
+      }
+    ],
+    "startup": "Child Python -I -S -B with explicit worktree and existing venv site-packages; automatic site initialization and .pth execution suppressed. Existing package initialization and NumPy dependencies remain; existing bytecode reads are possible.",
+    "environment_cleared": true,
+    "environment_allowlist_names": [
+      "PATH",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD",
+      "SystemRoot",
+      "TEMP",
+      "TMP",
+      "WINDIR"
+    ],
+    "pytest_config": "pytest-engineering.ini",
+    "noconftest": true,
+    "cache_provider_disabled": true,
+    "plugin_autoload_disabled": true,
+    "explicit_test_nodes": true,
+    "fresh_worktree_contained_basetemp": true,
+    "parent_timeout_seconds": 45,
+    "timeout_action": "Attempt process-tree termination bounded to five seconds, then immediate-child kill if still running and a wait bounded to five seconds. Exceptional cleanup uses the same routine. These branches were source-reviewed, not fault-injected.",
+    "authoritative_outcome": "Independently parsed retained JUnit case identities and all-passing outcomes agree with result.json, exit status, retained source snapshots and equal retained before/after identities.",
+    "synthetic_temporary_registry_exercised": true,
+    "native_evaluator_executed": false,
+    "historical_dependency_lock_installed_or_changed": false,
+    "publication_verifier_executed_locally": false,
+    "broad_local_suite_executed": false
+  },
+  "scientific_boundary": {
+    "study_selected": false,
+    "study_execution": "unexecuted",
+    "scientific_identities": "null; scientific identities remain unset",
+    "selection_admission_rejects_protocol_evaluation_plan": true,
+    "study_evaluation_admission_available": false,
+    "final_study_seal": false,
+    "issue9_c1_status": "partial",
+    "issue9_kept_open": true,
+    "all_880_proposed_logical_slot_attributions_remain": true,
+    "unresolved": "Scientific ownership/API with retained original writer outcomes; complete eleven-entry seal with every training/condition/stage terminal before holdout generation, registration or forward execution; one aggregate registry attempt for eight lineages including failed parents; complete scientific slot attribution, failures, unknown outcomes and aliases."
+  },
+  "trust_and_scope_limits": [
+    "Synthetic registry and temporary-file fixtures exercise local attributed correspondence persistence and revalidation. No trained study, historical replay, data generation, scientific selection/admission or native evaluator execution is claimed.",
+    "The caller must invoke correspondence after score returns or unwinds and all evaluation/evidence-mutating workers have stopped. Quiescence is trusted harness knowledge, never inferred from registry rows.",
+    "Independently retained receipt-body, binding, reservation and ordered-slice commitments remain required. Self-consistent embedded hashes alone do not prove provenance, execution or scientific ownership.",
+    "Valid count or join bytes may survive a failed writer. A later successful read establishes current correspondence, not successful original count/join writer return, durable scientific observation ownership or power-loss durability.",
+    "Logical-slot labels are caller assertions; this helper does not authenticate roster membership, verify assignment/slot-to-endpoint mapping, enforce global uniqueness or supply scientific admission. Standalone reads revalidate current evidence and reject lifecycle changes.",
+    "Visible file/link/reparse checks do not protect against concurrent replacement or establish independently owned storage. Partial inventories and snapshot agreement do not attest a complete dependency closure, sandbox or historical lock agreement.",
+    "Private capture commitments bind retained bytes only. Absolute local paths, raw logs, environment values and per-case durations are omitted; attempt UTC start/finish timestamps are execution bookkeeping only.",
+    "Later documentation and publication bytes are not verified by earlier fixture execution. Hosted checks/review remain separate post-commit evidence; local correspondence supplies no scientific admission or business-impact claim."
+  ],
+  "later_publication": {
+    "receipt_and_documentation_finalized_after_execution": true,
+    "verified_by_recorded_fixture_execution": false,
+    "publication_bookkeeping_reran_tests": false,
+    "hosted_checks_are_separate_post_commit_evidence": true
+  }
+}
