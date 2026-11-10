@@ -201,6 +201,47 @@ def test_rejects_nonplain_artifacts_unknown_architectures_and_wrong_hashes():
             restore_sequential_runtime(endpoint, expected_endpoint_sha256=expected, execution=SCOPE)
 
 
+def test_rejects_architecture_string_subclass_spoofing_sequential_semantics():
+    class SpoofedArchitecture(str):
+        def __eq__(self, other):
+            return str.__eq__(self, other) or other == "sequential-affine-activation/1"
+
+        def __ne__(self, other):
+            return not self == other
+
+        __hash__ = str.__hash__
+
+    endpoint = _endpoint()
+    architecture = SpoofedArchitecture("caller-owned-arbitrary-module/1")
+    assert str(architecture) == "caller-owned-arbitrary-module/1"
+    assert architecture == endpoint.architecture and not (architecture != endpoint.architecture)
+    unsupported = TensorArtifact(architecture, endpoint.tensors, endpoint.metadata)
+    assert unsupported.architecture is architecture
+    with pytest.raises(ValueError, match="plain architecture"):
+        restore_sequential_runtime(unsupported, expected_endpoint_sha256=unsupported.sha256, execution=SCOPE)
+
+
+def test_rejects_tensor_name_string_subclass_spoofing_metadata_lookup():
+    class SpoofedTensorName(str):
+        def __eq__(self, other):
+            return str.__eq__(self, other) or other == "layers.0.weight"
+
+        def __hash__(self):
+            return hash("layers.0.weight")
+
+    endpoint = _endpoint()
+    spoofed = SpoofedTensorName("undeclared.weight")
+    tensors = {spoofed if name == "layers.0.weight" else name: value
+               for name, value in endpoint.tensors.items()}
+    unsupported = TensorArtifact(endpoint.architecture, tensors, endpoint.metadata)
+    assert str(spoofed) == "undeclared.weight" and spoofed == "layers.0.weight"
+    assert any(name is spoofed for name in unsupported.tensors)
+    assert "layers.0.weight" in unsupported.tensors
+    assert unsupported.sha256 != endpoint.sha256
+    with pytest.raises(ValueError, match="plain tensor name"):
+        restore_sequential_runtime(unsupported, expected_endpoint_sha256=unsupported.sha256, execution=SCOPE)
+
+
 @pytest.mark.parametrize("extra", [
     {"torch_bridge": {"state": {"w": {"dtype": "torch.float32", "device": "mps"}}}},
     {"alias_groups": []}, {"alias_groups": [["layers.0.weight", "layers.1.weight"]]},

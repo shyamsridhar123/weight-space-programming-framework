@@ -37,6 +37,10 @@ class SequentialRuntime:
                  execution: ExecutionSpec | dict[str, Any]):
         if type(endpoint) is not TensorArtifact:
             raise ValueError("Restoration requires a plain TensorArtifact")
+        if type(endpoint.architecture) is not str:
+            raise ValueError("Restoration requires a plain architecture string")
+        if any(type(name) is not str for name in endpoint.tensors):
+            raise ValueError("Restoration requires plain tensor name strings")
         if type(execution) is ExecutionSpec:
             execution = execution.to_dict()
         if type(execution) is not dict:
