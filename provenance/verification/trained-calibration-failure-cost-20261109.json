@@ -1,0 +1,87 @@
+{
+  "schema": "wspf-trained-calibration-failure-regression/1",
+  "review_date": "2026-11-09",
+  "integration_base_main_commit": "51b81386987ca3370ef53695790afb86c17ec5de",
+  "scope": "One local execution of the AST-extracted current fit_case_arm with literal stdlib fakes; no project-module import, actual training, dataset access, historical replay or scientific evaluation.",
+  "command": [
+    "python",
+    "-B",
+    "tests/test_trained_calibration_failure_cost.py"
+  ],
+  "python_version": "3.12.10",
+  "started_at_utc": "2026-11-10T00:14:32.935422+00:00",
+  "finished_at_utc": "2026-11-10T00:14:33.181558+00:00",
+  "local_execution_count": 1,
+  "automatic_retry_performed": false,
+  "status": "passed",
+  "exit_code": 0,
+  "captured_source_before": [
+    {
+      "path": "scripts/run_trained_research.py",
+      "bytes": 94216,
+      "sha256": "4b95cc70504c8a56416528f02cbaac38ff7958bb5c1f1c675ee4ca0f2b91dfa8"
+    },
+    {
+      "path": "tests/test_trained_calibration_failure_cost.py",
+      "bytes": 4803,
+      "sha256": "95830d415a01b9fe4dddefb15c83454bc0136546125cbb1be1de82c0898a9356"
+    },
+    {
+      "path": "pytest-engineering.ini",
+      "bytes": 1442,
+      "sha256": "172736ca371f10b8d14bd621e962367b095743472f8885840e19ced776b7ee8e"
+    }
+  ],
+  "captured_source_after": [
+    {
+      "path": "scripts/run_trained_research.py",
+      "bytes": 94216,
+      "sha256": "4b95cc70504c8a56416528f02cbaac38ff7958bb5c1f1c675ee4ca0f2b91dfa8"
+    },
+    {
+      "path": "tests/test_trained_calibration_failure_cost.py",
+      "bytes": 4803,
+      "sha256": "95830d415a01b9fe4dddefb15c83454bc0136546125cbb1be1de82c0898a9356"
+    },
+    {
+      "path": "pytest-engineering.ini",
+      "bytes": 1442,
+      "sha256": "172736ca371f10b8d14bd621e962367b095743472f8885840e19ced776b7ee8e"
+    }
+  ],
+  "captured_source_before_after_equal": true,
+  "source_index_before": {
+    "path": "provenance/source-files.json",
+    "bytes": 2483787,
+    "sha256": "2b3386a2f5e08175c2b7598642e8fefa2e5395dc1b14b117707271a5797849fc"
+  },
+  "source_index_after": {
+    "path": "provenance/source-files.json",
+    "bytes": 2483787,
+    "sha256": "2b3386a2f5e08175c2b7598642e8fefa2e5395dc1b14b117707271a5797849fc"
+  },
+  "source_index_unchanged": true,
+  "tested_changes_were_uncommitted": true,
+  "stdout": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "checked_behavior": [
+    "original RuntimeError retained",
+    "unchanged-parent fallback and rejected seal",
+    "successful, failed and unvisited calibration entries retained",
+    "all three synthetic option fit costs and their known sum retained",
+    "synthetic broad elapsed interval retained",
+    "attempt.json reaches captured writer"
+  ],
+  "synthetic_values_are_observed_research_costs": false,
+  "historical_occurrence_established": false,
+  "historical_missing_costs_recovered": false,
+  "complete_lifecycle_cost_measured": false,
+  "new_scientific_study": false,
+  "publication_scope": "Source, regression and engineering allowlist match the captured local execution. Later documentation, receipt and publication bookkeeping are outside this check; CI runs are separate from this local invocation."
+}

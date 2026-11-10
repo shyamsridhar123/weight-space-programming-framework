@@ -345,7 +345,7 @@ def fit_case_arm(lineage: dict, data: dict, case: dict, arm: str, artifact_root:
               "no_op_artifact": candidate.no_op, "external_intervention": arm in ("overlay", "context"),
               "abstention_reasons": reasons, "proposal_error": error,
               "selected_option": selected, "configuration": chosen["config"], "calibration": chosen["calibration"],
-              "options": [{"configuration": option["config"], "calibration": option["calibration"],
+              "options": [{"configuration": option["config"], "calibration": option.get("calibration"),
                            "candidate_sha256": option["artifact"].sha256, "fit_seconds": option["fit_seconds"],
                            "diagnostics": option["diagnostics"]} for option in options],
               "structural_admission": structural, "fit_selection_materialization_seconds": time.perf_counter()-started,

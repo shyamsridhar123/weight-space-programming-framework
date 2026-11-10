@@ -7,6 +7,11 @@ research draft.
 
 ## Unreleased
 
+- Preserve known fitted-option timings and broad fit/selection/materialization
+  elapsed when calibration fails, retaining the original error and unchanged-parent
+  fallback. A stdlib-only synthetic regression covers the captured attempt record;
+  it does not measure full lifecycle cost or recover missing historical timings.
+
 - Draft a separately scoped [recognition-repair study](docs/research/recognition-repair-next-study.md)
   with an exposure inventory, development-justified useful gain, matched ordinary
   controls, paired trained-lineage inference and complete lifecycle accounting.
