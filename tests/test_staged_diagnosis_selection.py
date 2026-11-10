@@ -28,6 +28,21 @@ def reviewed_engineering_source_pins():
     assert selection.SOURCE_PINS is frozen_pins and frozen_pins == frozen_snapshot
 
 
+@pytest.fixture
+def prospective_summary_source_pins(reviewed_engineering_source_pins):
+    frozen_fixture_pins = selection.SOURCE_PINS
+    frozen_snapshot = dict(frozen_fixture_pins)
+    assert frozen_fixture_pins["rlcd/weight_space/broker.py"] == (
+        "18affe0acfc1e8f6a434aaca3e462530d0b1a05369b05a3a25be1d0b1090359b")
+    prospective_pins = frozen_fixture_pins | {
+        "rlcd/weight_space/broker.py": "52251eec40605972c00779c7d890c74c4de3d8c67d7677b01239066aae1fcede"}
+    with patch.object(selection, "SOURCE_PINS", prospective_pins):
+        yield
+    assert selection.SOURCE_PINS is frozen_fixture_pins
+    assert frozen_fixture_pins == frozen_snapshot
+
+
+@pytest.mark.usefixtures("prospective_summary_source_pins")
 def test_staged_selection_admits_only_live_normal_phase_returns(reviewed_engineering_source_pins):
     def rejected(action, expected=ValueError):
         try:
@@ -210,6 +225,7 @@ def test_staged_selection_admits_only_live_normal_phase_returns(reviewed_enginee
             source_changed.admit()
 
 
+@pytest.mark.usefixtures("prospective_summary_source_pins")
 def test_staged_repair_usability_native_structure_and_live_binding(reviewed_engineering_source_pins):
     def rejected(action):
         try:
@@ -387,6 +403,7 @@ def test_staged_repair_usability_native_structure_and_live_binding(reviewed_engi
         rejected(receipt_owner.check_repair_usability)
 
 
+@pytest.mark.usefixtures("prospective_summary_source_pins")
 def test_staged_native_controls_bind_recipes_and_separate_native_matching(reviewed_engineering_source_pins):
     def rejected(action):
         try:
@@ -543,6 +560,7 @@ def test_staged_native_controls_bind_recipes_and_separate_native_matching(review
         rejected(admission.check_native_controls)
 
 
+@pytest.mark.usefixtures("prospective_summary_source_pins")
 def test_staged_study_endpoint_seal_retains_actual_slots_without_regeneration(reviewed_engineering_source_pins):
     def rejected(action, expected=ValueError):
         try:

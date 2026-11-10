@@ -21,6 +21,16 @@ from .workflow import (AccessPolicy, BudgetLimits, Candidate, ProgrammerSession,
                        SplitSpec, TaskSpec, _json)
 
 
+def _finite_mean(values: np.ndarray) -> float:
+    """Preserve finite reductions; rescale only when the intermediate sum overflows."""
+    with np.errstate(over="raise", invalid="raise", under="ignore"):
+        try:
+            return float(values.mean())
+        except FloatingPointError:
+            scale = float(np.abs(values).max())
+            return scale * float((values / scale).mean()) if scale else 0.0
+
+
 @dataclass(frozen=True)
 class WeightView:
     mode: str = "none"
@@ -199,8 +209,8 @@ class ProposerBroker:
                 if self._view.mode == "summary":
                     a = np.asarray(values, dtype=np.float64)
                     values = {k: round(float(v), self._view.decimals) for k, v in
-                              {"min": a.min(), "max": a.max(), "mean": a.mean(),
-                               "mean_abs": np.abs(a).mean()}.items()}
+                              {"min": a.min(), "max": a.max(), "mean": _finite_mean(a),
+                               "mean_abs": _finite_mean(np.abs(a))}.items()}
                 result = {"status": "ok", "values": values}
             elif op in ("submit", "create", "answer"):
                 result = self._submit(request)
