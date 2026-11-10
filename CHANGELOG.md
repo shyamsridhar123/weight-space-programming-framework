@@ -7,6 +7,14 @@ research draft.
 
 ## Unreleased
 
+- Add generic Boolean [correctness-transition counts](docs/weight-space/classification-metrics.md)
+  so corrections and newly incorrect cases remain visible when net accuracy
+  cancels them. The caller owns decoding, regions and rates; existing queue
+  metrics stay unchanged. The [authored engineering receipt](provenance/verification/correctness-transition-counts-20261109.json)
+  records the literal cancellation example and strict Boolean input boundary.
+  This utility is not integrated into scientific evaluation or admission, and
+  #9 c1 remains partial/open.
+
 - Specify a non-admitting draft evidence table and seven ordered gates for the
   [prospective staged study](docs/research/staged-scientific-compatibility.md#draft-admission-package).
   Native evaluation, scientific ownership, source/seed/observation evidence and
