@@ -1,0 +1,144 @@
+{
+  "schema": "wsp-local-engineering-verification/1",
+  "assembled_utc": "2026-11-10T00:38:00.568600+00:00",
+  "status": "passed",
+  "base_commit": "05724c50b893bd042807cb63f467d9e428b354b5",
+  "integration_base_main_commit": "121aecb81c33e574cecc485ee80e27966eaf57c5",
+  "local_review_date": "2026-11-09",
+  "scope": "One new stdlib-only synthetic AST regression executes only the option-summary loop and frontier aggregation statements extracted from analyze_study. It does not import the runner or project, invoke analyze_study/load_lineage, or read/write historical evidence.",
+  "execution_count": 1,
+  "automatic_retry_performed": false,
+  "python_version": "3.12.10",
+  "capture": {
+    "started_utc": "2026-11-10T00:37:26.836624+00:00",
+    "completed_utc": "2026-11-10T00:37:27.058674+00:00",
+    "exit_code": 0,
+    "timed_out": false,
+    "source_identities_unchanged": true,
+    "command_argv": [
+      "<existing-python-3.12.10>",
+      "-s",
+      "-B",
+      "tests/test_trained_calibration_analysis.py"
+    ],
+    "working_directory": "<worktree>",
+    "environment_overrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONNOUSERSITE": "1",
+      "PYTHONUTF8": "1"
+    },
+    "inherited_pytest_options_and_python_path_removed": true,
+    "timeout_seconds": 15,
+    "private_record_identities": [
+      {
+        "path": "run_check.py",
+        "bytes": 2957,
+        "sha256": "dfcc1cbf3e1462090da12c25b8688e04986802e4b5259f52b519ce43a4297f97"
+      },
+      {
+        "path": "execution-launch.json",
+        "bytes": 683,
+        "sha256": "6c6d360e3fe3a2efd2386c700dcbe012a1759f562c61b34be398d39dee737aaf"
+      },
+      {
+        "path": "execution-result.json",
+        "bytes": 143,
+        "sha256": "43fe4fe8a6e0193a7dccf63f2ecd9ceb99db91dbd55b5fe6871c1878f3a90b27"
+      },
+      {
+        "path": "before-source-identities.json",
+        "bytes": 667,
+        "sha256": "bebcd569c5f4c29ccc7516778e397ef2d40b6f031c716844909013b2f33fd470"
+      },
+      {
+        "path": "after-source-identities.json",
+        "bytes": 667,
+        "sha256": "bebcd569c5f4c29ccc7516778e397ef2d40b6f031c716844909013b2f33fd470"
+      },
+      {
+        "path": "stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "source_evidence": {
+    "captured_source_before": [
+      {
+        "path": "scripts/run_trained_research.py",
+        "bytes": 94741,
+        "sha256": "0e6e515d45c4819baea2333b03348ee07921244b85007efa333f5fe15b1a9ab6"
+      },
+      {
+        "path": "tests/test_trained_calibration_analysis.py",
+        "bytes": 4972,
+        "sha256": "64d8f3202cf0f905a98d97322de0aef1e4ca4b8a6b12e0b0c0ff96aa468566a0"
+      },
+      {
+        "path": "tests/test_trained_calibration_failure_cost.py",
+        "bytes": 4803,
+        "sha256": "95830d415a01b9fe4dddefb15c83454bc0136546125cbb1be1de82c0898a9356"
+      },
+      {
+        "path": "pytest-engineering.ini",
+        "bytes": 1489,
+        "sha256": "db72f03502d400714a5ad8a5560a02c45f73168abc3c6f614ffc3be020c81a1c"
+      }
+    ],
+    "captured_source_after": [
+      {
+        "path": "scripts/run_trained_research.py",
+        "bytes": 94741,
+        "sha256": "0e6e515d45c4819baea2333b03348ee07921244b85007efa333f5fe15b1a9ab6"
+      },
+      {
+        "path": "tests/test_trained_calibration_analysis.py",
+        "bytes": 4972,
+        "sha256": "64d8f3202cf0f905a98d97322de0aef1e4ca4b8a6b12e0b0c0ff96aa468566a0"
+      },
+      {
+        "path": "tests/test_trained_calibration_failure_cost.py",
+        "bytes": 4803,
+        "sha256": "95830d415a01b9fe4dddefb15c83454bc0136546125cbb1be1de82c0898a9356"
+      },
+      {
+        "path": "pytest-engineering.ini",
+        "bytes": 1489,
+        "sha256": "db72f03502d400714a5ad8a5560a02c45f73168abc3c6f614ffc3be020c81a1c"
+      }
+    ],
+    "source_identities_unchanged": true
+  },
+  "captured_regression_assertions": [
+    "Every authored option row retains its fit timing, identity, configuration and selected status when calibration is null.",
+    "Missing target gain, protected harm and behavioral pass remain null with calibration_available false.",
+    "Frontier available counts and conditional means use calibrated options only; missing count is all assigned minus available and all-null means are null.",
+    "Behavioral pass fraction retains the all-assigned denominator, including an assigned lineage with no record; missing calibration contributes no success.",
+    "Fully calibrated configuration arithmetic and selected counts remain preserved."
+  ],
+  "original_capture_boundary": {
+    "receipt": {
+      "path": "provenance/verification/trained-calibration-failure-cost-20261109.json",
+      "bytes": 3421,
+      "sha256": "f7be606f5b5010827586e825626155b95424ae3a31de3d131da5cc806e6dcd4a"
+    },
+    "source_base_commit_from_original_integration_field": "51b81386987ca3370ef53695790afb86c17ec5de",
+    "original_capture_rerun": false,
+    "original_receipt_changed": false,
+    "scope": "The earlier fit_case_arm capture remains evidence for its own original runner/regression/configuration snapshot. The final runner and engineering configuration differ. This new capture covers the extracted summary statements only and does not recapture fit_case_arm, full analysis, actual JSON persistence or native behavior."
+  },
+  "limitations": [
+    "Synthetic fit timings and calibration metrics are fixture constants, not measured research observations or lifecycle savings.",
+    "The regression directly compiles only the reviewed AST statements against stdlib fakes; it establishes no complete analysis or lineage-loading compatibility and performs no model forwards.",
+    "The source identity list is scoped and is not a complete dependency/environment fingerprint or OS/network sandbox. SHA-256 identifies records without independent attestation.",
+    "Private capture records and workstation paths remain private. Public command labels are sanitized; exact argv is identified by the private launch-record hash.",
+    "Costs unavailable during fitting and historical failed-call usage/charges remain unknown; successful serialization and missing-data summaries do not recover them.",
+    "Original study margins, all-assigned denominators, criteria wording/status and unknown costs remain unchanged; issue #14 remains partial and open.",
+    "Hosted CI, packaging/publication checks and subsequent documentation are separate from this execution."
+  ]
+}

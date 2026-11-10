@@ -7,6 +7,16 @@ research draft.
 
 ## Unreleased
 
+- Preserve known fitted-option timings and broad fit/selection/materialization
+  elapsed when calibration fails, retaining the original error and unchanged-parent
+  fallback. The original stdlib-only regression covers its captured attempt-writer
+  snapshot. Summaries retain fit/selection records with null calibration, report
+  unobserved metrics and means as null, and preserve the all-assigned success
+  denominator, including assigned lineages with no record. A separate
+  [synthetic summary receipt](provenance/verification/trained-calibration-analysis-20261109.json)
+  covers extracted summary statements only; the original regression was not rerun.
+  Neither check measures full lifecycle cost or recovers missing historical timings.
+
 - Draft a separately scoped [recognition-repair study](docs/research/recognition-repair-next-study.md)
   with an exposure inventory, development-justified useful gain, matched ordinary
   controls, paired trained-lineage inference and complete lifecycle accounting.

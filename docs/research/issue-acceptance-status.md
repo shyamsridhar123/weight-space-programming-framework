@@ -1674,6 +1674,34 @@ stays partial and Issue #9 stays open.
 
 **Remaining requirement / scope limit:** Cold acquisition, full data preparation and encoding are incomplete, with missing provider usage preserved. Component measurements do not supply a full lifecycle total.
 
+**November 9 engineering follow-up:** The current trained-attempt writer now
+retains the original calibration error, unchanged-parent fallback, successful and
+unevaluated option records, known fitted-option timings and broad
+fit/selection/materialization elapsed when an option's calibration fails. The
+[synthetic regression receipt](../../provenance/verification/trained-calibration-failure-cost-20261109.json)
+records one local check of the AST-extracted function using stdlib fakes, with no
+project imports, dataset access, training or scientific evaluation. Unevaluated
+calibration is `null`. Option timings are nested within the broad elapsed timer;
+they must not be added to it. No historical occurrence of this bug is established,
+no missing historical costs are recovered, and full lifecycle measurement remains
+incomplete. The original criterion and its partial status are unchanged.
+
+**November 9 consumer follow-up:** Option summaries retain fit timings, identity,
+configuration and selection records when calibration is `null`; unobserved target
+gain, protected harm and behavioral pass stay `null`. Frontier calibration counts
+distinguish available from missing assignments. Metric means use available
+calibration only and remain `null` when none is available. Existing selection
+counts and the behavioral-pass fraction's all-assigned denominator remain,
+including assigned lineages with no record. The separate
+[summary regression receipt](../../provenance/verification/trained-calibration-analysis-20261109.json)
+records one new stdlib-only AST check of the option-summary loop and frontier
+statements, without project imports, full analysis, lineage loading or actual
+JSON persistence. The final runner and engineering configuration differ from the
+original writer capture; that regression was not rerun, and its receipt retains
+its original snapshot and scope. Fixture timings and metrics are not measured
+research costs. No missing historical costs are recovered; full lifecycle
+measurement and this criterion's partial status remain unchanged.
+
 #### #14 c1
 
 - [ ] Measure wall time, memory, bytes, tokens, available energy/compute proxies and inference overhead across pinned model sizes/devices with warm/cold and repeated-use assumptions.
