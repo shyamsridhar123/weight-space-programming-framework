@@ -173,6 +173,17 @@ Using those results for a deployed model requires the right feature equation,
 domain, endpoint, and numerical execution argument. The [proof guide](PROOFS.md)
 makes these premises explicit.
 
+An optional local-pilot governance effort starts with a generic
+[contract](docs/governance/contract.md) and a
+[standalone formal model](formal/governance/README.md) before runtime
+implementation. The model passed a direct hosted **Lean 4.24.0 check and
+transitive axiom audit**; the guide retains the exact source and run evidence.
+Its assumptions keep mathematical claims, implementation checks, authenticated
+organizational approval, and scientific evidence separate. Independent current
+request/head identities and external actor authentication remain caller
+obligations. The [Distro handoff](docs/governance/distro-handoff.md) describes an
+optional authoring and review aid; the framework does not depend on Distro.
+
 ## What remains open
 
 The current implementation uses inspectable, dense artifacts and explicit
@@ -208,6 +219,7 @@ fresh confirmation needs untouched units and a newly frozen protocol.
 | How retention settings affect trained edits | [Development comparison](docs/research/retention-development.md) |
 | Symmetry fixtures and family boundaries | [Engineering report](docs/research/symmetry-family-boundary-check.md) · [Verification receipt](provenance/verification/symmetry-family-boundary-20261109.json) |
 | The guarantees and their premises | [Formal explanation](docs/weight-space/v2/formal.md) · [Proof reproduction](PROOFS.md) |
+| The optional governance contract and its limits | [Contract](docs/governance/contract.md) · [Checked formal model](formal/governance/README.md) · [Distro handoff](docs/governance/distro-handoff.md) |
 | The study and its outcomes | [Methods](docs/weight-space/v2/methods.md) · [Results](docs/weight-space/v2/results.md) |
 | The gaps and next research decisions | [Limitations and next steps](docs/weight-space/v2/limitations-and-next-steps.md) · [Requirements](docs/weight-space/v2/requirements.md) |
 | The supporting records | [Evidence map](EVIDENCE.md) · [Verification scope](VERIFICATION.md) |

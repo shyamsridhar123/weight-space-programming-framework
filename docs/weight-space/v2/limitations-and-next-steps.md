@@ -28,10 +28,20 @@ The [requirements](requirements.md), [workflow](workflow.md),
 [study runner](../../../rlcd/weight_space/study_v2.py) specify the present
 implementation and evidence. Proposed work below is not marked completed.
 
-There is **no live language-model/provider study** in the current evidence.
+The current evidence includes [live language-model/provider studies](../../research/live-studies.md).
+All 80 primary weight-access assignments abstained, and blind diagnosis fell
+below its frozen useful-coverage threshold. The
+[original-source repeat](../../research/original-source-repeat.md) retained four
+failed fresh calls and no completed response. The
+[construction and steering pilot](../../research/construction-steering-pilot.md)
+retained twelve failed live assignments and no candidate to score. Those
+delivery failures leave the usefulness of a completed live artifact unmeasured;
+successful controls and replay do not establish live-model success.
+
 All published study seeds, including worlds `7300–7311`, have been observed.
 Running them again can reproduce the recorded study; fresh confirmation needs
-new units and a protocol frozen before their outcomes are seen.
+new units and a protocol frozen before their outcomes are seen. The historical
+studies and their original conclusions remain unchanged.
 
 ## What the present work can and cannot establish
 
@@ -49,7 +59,7 @@ protection, and its utility are separate questions even in this tiny case.
 | Formal guarantees | Checked real-valued endpoint/span results and finite-depth affine/activation drift | New runtime candidates are not automatically bound to Lean instances; extractor correspondence and native execution remain unproved |
 | Realization | Supported native projection, exact endpoint residuals, and supported PyTorch state round trips | Receipts do not model intermediate rounding, kernels, accumulation order, overflow, arbitrary storage layouts, or execution equivalence |
 | Access and budgets | Capability checks and charges for work crossing session methods | Cooperative code in one process does not enforce the absence of outside fitting, forward computation, network access, private-data access, or selection |
-| Algorithmic comparison | Fixed head-editing controls, public features, fitting, and selection before private evaluation | No live proposer; the gradient arm is a fixed head optimizer, without a fully tuned or compute-matched full-network training comparison |
+| Algorithmic comparison | Historical fixed head-editing controls plus separately reported live-provider studies with retained abstentions and failures | Useful primary live editing is not established; the historical gradient arm remains a fixed head optimizer, without a fully tuned or compute-matched full-network training comparison |
 | Architecture variants | ReLU MLP, tanh MLP, and convolution-plus-tanh extractors with linear heads in shared synthetic worlds | Shared teachers and splits make paired variants; random frozen features with trained heads do not establish end-to-end learning or transformer repair |
 | Retention | Target/collateral metrics and exact residuals on supplied rows | The intervening input region is absent from the main metrics; anchors do not cover a whole domain by themselves, and real scores do not automatically measure reward |
 | Precision and feasibility | Native-format and anchor-count ablations | They reuse the main holdout and are descriptive; precision conditions also project the parent, changing the baseline |
@@ -90,6 +100,17 @@ Packages 1–4 can proceed in parallel where their artifacts and interfaces are
 independent. Packages 5–8 need frozen evaluation rules and untouched units.
 New operators and storage formats should meet the same identity and evidence
 requirements as existing ones.
+
+An organizational change decision adds a separate boundary. The optional
+[Distro handoff](../../governance/distro-handoff.md) describes how an authoring
+tool could prepare a proposed routing change for a generic local governance
+pilot. Its [contract](../../governance/contract.md) separates use-case review,
+exact change identity, evidence review, approval and revocation. A conditional
+formal invariant concerns a stated transition model; synthetic checks concern
+the implementation paths exercised. Neither authenticates an organization's
+reviewer identities, authority or production actions, nor establishes model
+usefulness. Distro integration, enterprise access and production governance
+remain unverified, and the pilot requires no Distro installation.
 
 ## Common design for the next experiments
 
@@ -290,9 +311,13 @@ none of the session callbacks recorded the prohibited work. The editor or
 another component performed it outside those callbacks. Cooperative accounting
 cannot establish the claimed restriction.
 
-Implement a live-provider adapter and, for claims that need enforcement, an
-isolated execution boundary with an explicit allowed-computation policy.
-The [workflow](workflow.md) and R09–R20 distinguish these obligations. Retain
+The [live studies](../../research/live-studies.md) now retain actual provider
+attempts through a common adapter, including abstentions, invalid responses,
+failures and incomplete cost observations. They do not establish host-wide
+isolation or complete accounting of provider work. For claims that need
+enforcement, build an isolated execution boundary with an explicit
+allowed-computation policy. The [workflow](workflow.md) and R09–R20 distinguish
+these obligations. Retain
 exact visible prompts and observations, provider/model identifiers and
 settings, requests, responses, errors, retries, token telemetry, candidate
 attempts, parser revisions, manual interventions, and selection.
@@ -316,8 +341,10 @@ reach forbidden data/tools or leak evaluator content. Independent accounting
 must reconcile with provider and target records, including abandoned attempts
 and retries. A successful bypass invalidates the corresponding enforced-access
 claim; undisclosed usage invalidates a cost-matched comparison. Passing these
-checks establishes only the documented harness boundary. Actual provider
-trials are still needed to measure a language model's task ability.
+checks establishes only the documented harness boundary. Further provider
+trials need completed artifacts and their frozen task criteria to measure
+useful proposal ability; reliable delivery, complete costs and untouched
+confirmation remain separate requirements.
 
 ## 5. Run independent task and access experiments
 

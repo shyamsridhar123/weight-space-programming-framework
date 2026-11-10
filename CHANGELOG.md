@@ -13,6 +13,19 @@ research draft.
   before retry callbacks while preserving reservation identity and consumed
   scope. This adds no scientific evidence or owner authority.
 
+- Add a generic [local-pilot governance contract](docs/governance/contract.md),
+  [standalone Lean state-machine source](formal/governance/README.md), and
+  [direct proof CI workflow](.github/workflows/governance-proof.yml), with
+  explicit encoding, identity, freshness, implementation and enforcement limits.
+  The model passed hosted Lean 4.24.0 verification and its transitive axiom audit
+  in run `42828945211`; the guide retains exact source and result evidence,
+  the earlier compiler failure and local preflight exit 127.
+  Document the optional [Distro handoff](docs/governance/distro-handoff.md) and
+  reconcile the [research limitations](docs/weight-space/v2/limitations-and-next-steps.md)
+  with retained live-study failures. Mathematical, implementation,
+  organizational and scientific evidence remain separate; no scientific
+  acceptance status is promoted.
+
 - Bind each validated development-consumption purpose into the durable decision,
   including repeated consumption of an already consumed scope. Distinct purpose
   commitments no longer collapse into the same audit decision; consumed-key
