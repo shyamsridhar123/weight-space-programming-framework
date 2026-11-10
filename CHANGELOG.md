@@ -15,6 +15,10 @@ research draft.
   records the passing boundary check. Metadata and transcript hashes change;
   older receipts without the field leave these limits unrecorded, and exact
   historical replay may require its frozen source. #5 c1 remains partial/open.
+  The separate [fixture integration receipt](provenance/verification/broker-fixture-source-binding-20261110.json)
+  records a passing check of the reviewed broker identity in literal engineering
+  fixtures. Production selection-driver pins remain frozen; default rejection,
+  subsequent source drift and permanent invalidation are checked explicitly.
 
 - Sanitize decoded JSON keys as well as string values in public event derivatives.
   Same-object profile-redaction collisions omit the whole event and roll back
