@@ -143,6 +143,49 @@ def test_raw_consumption_invalidates_per_row_aliases_after_restart(tmp_path):
     assert decision["verdict"] == "registered_cooperative"
 
 
+@pytest.mark.parametrize("registered", [False, True], ids=["raw", "registered"])
+def test_repeat_consumption_binds_each_purpose_without_changing_state(tmp_path, registered):
+    path = tmp_path / "roles.sqlite"
+    registry = DataRoleRegistry(path)
+    rows = [{"value": 1}, {"value": 2}]
+    batch = registry.register_batch(rows, source_id="development", family_id="development-family")
+    examples = batch if registered else rows
+    initial_reason = "initial-development-purpose"
+    warmed = registry.consume(examples, reason=initial_reason)
+    with sqlite3.connect(path) as connection:
+        original_consumed = connection.execute("SELECT * FROM consumed ORDER BY kind, key").fetchall()
+    assert original_consumed
+    assert all(row[2] == hashlib.sha256(_bytes(initial_reason)).hexdigest() for row in original_consumed)
+
+    # Compare two calls after warming: neither may add a new consumed key.
+    purposes = ("distinct-development-purpose-A/α", "distinct-development-purpose-B/β")
+    first = registry.consume(examples, reason=purposes[0])
+    restarted = DataRoleRegistry(path)
+    second = restarted.consume(examples, reason=purposes[1])
+    assert restarted.registry_id == registry.registry_id
+    assert first["decision_sha256"] != second["decision_sha256"]
+    omitted = {"consumption_reason_sha256", "decision_sha256"}
+    assert {key: value for key, value in first.items() if key not in omitted} == {
+        key: value for key, value in second.items() if key not in omitted}
+    for decision, purpose in ((first, purposes[0]), (second, purposes[1])):
+        assert decision["status"] == "succeeded"
+        assert decision["reason"] == "development_consumption_committed"
+        assert decision["consumption_reason_sha256"] == hashlib.sha256(_bytes(purpose)).hexdigest()
+        for suffix in ("before", "after"):
+            assert decision["registry_revision_" + suffix] == warmed["registry_revision_after"]
+            assert decision["registry_state_sha256_" + suffix] == warmed["registry_state_sha256_after"]
+        for declared in (initial_reason, *purposes):
+            assert declared.encode("utf-8") not in _bytes(decision)
+        _assert_binding(path, decision)
+    _assert_binding(path, warmed)
+    with sqlite3.connect(path) as connection:
+        assert connection.execute("SELECT * FROM consumed ORDER BY kind, key").fetchall() == original_consumed
+        assert connection.execute("SELECT value FROM meta WHERE key = 'revision'").fetchone()[0] == str(
+            warmed["registry_revision_after"])
+    rejected = _rejects_before_scoring(restarted, batch, reason="observed_development_consumption")
+    assert rejected["verdict"] == "invalidated"
+
+
 def test_observed_families_and_transitive_parents_are_monotonic(tmp_path):
     registry = DataRoleRegistry(tmp_path / "roles.sqlite")
     ancestor = registry.register_batch([[1]], source_id="ancestor", family_id="family")
