@@ -170,6 +170,31 @@ def _features(args: argparse.Namespace) -> dict[str, Any]:
     return receipt
 
 
+def _governance(args: argparse.Namespace) -> dict[str, Any]:
+    from . import governance
+
+    operation = args.governance_command
+    pins = ({} if operation == "request" else {
+        "expected_request_sha256": args.expected_request_sha256,
+        "expected_head_sha256": args.expected_head_sha256})
+    if operation == "export":
+        return governance.export_bundle(args.bundle, args.out, **pins)
+    if operation in ("request", "check"):
+        context = {name: governance.read_json(getattr(args, name))
+                   for name in ("base", "program", "candidate", "constraints", "scope")}
+    if operation == "request":
+        result = governance.create_request(
+            **context, purpose=args.purpose, evidence=governance.read_json(args.evidence),
+            requester=args.requester, approvers=args.approver)
+    elif operation == "decide":
+        result = governance.decide(governance.read_json(args.bundle), **pins,
+                                   actor=args.actor, action=args.action, reason=args.reason)
+    else:
+        return governance.check_eligibility(governance.read_json(args.bundle), **pins, **context)
+    write_json(args.out, result)
+    return result
+
+
 def parser() -> argparse.ArgumentParser:
     root = argparse.ArgumentParser(description="Generic tensor programs with explicit architecture-specific behavioral checks.")
     sub = root.add_subparsers(dest="command", required=True)
@@ -221,6 +246,30 @@ def parser() -> argparse.ArgumentParser:
             command.add_argument("certificate")
     demo = sub.add_parser("demo", help="Run a generic convolution/Tanh example and a proved ReLU specialization")
     demo.add_argument("--out", required=True)
+    governance = sub.add_parser("governance", help="Optional local review; no production or scientific authority")
+    governance_sub = governance.add_subparsers(dest="governance_command", required=True)
+    for name in ("request", "decide", "check", "export"):
+        command = governance_sub.add_parser(name)
+        if name != "request":
+            command.add_argument("bundle")
+            command.add_argument("--expected-request-sha256", required=True)
+            command.add_argument("--expected-head-sha256", required=True)
+        if name in ("request", "check"):
+            for artifact in ("base", "program", "candidate"):
+                command.add_argument(artifact)
+            command.add_argument("--constraints", required=True)
+            command.add_argument("--scope", required=True)
+        if name == "request":
+            command.add_argument("--purpose", required=True)
+            command.add_argument("--evidence", required=True)
+            command.add_argument("--requester", required=True)
+            command.add_argument("--approver", action="append", required=True)
+        if name == "decide":
+            command.add_argument("--actor", required=True)
+            command.add_argument("--action", choices=("approve", "reject", "revoke"), required=True)
+            command.add_argument("--reason", required=True)
+        if name != "check":
+            command.add_argument("--out", required=True)
     for name in ("freeze", "verify-freeze", "synthetic", "rts-prepare", "rts-select", "rts-summarize"):
         command = sub.add_parser(name)
         command.add_argument("--protocol", required=True)
@@ -263,6 +312,7 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command in ("lower", "verify-lowering"): result = _lower(args, args.command == "verify-lowering")
         elif args.command in ("compile-features", "certify-retention", "verify-retention"): result = _features(args)
         elif args.command in ("certify", "verify"): result = _certificate(args, args.command == "verify")
+        elif args.command == "governance": result = _governance(args)
         elif args.command == "demo":
             from .demo import run_demo
             result = run_demo(args.out)
