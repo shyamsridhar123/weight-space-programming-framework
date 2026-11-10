@@ -35,7 +35,7 @@ SOURCE_PINS = {
     "rlcd/weight_space/artifact.py": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500",
     "rlcd/weight_space/model.py": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba",
     "rlcd/weight_space/workflow.py": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040",
-    "rlcd/weight_space/structured.py": "36f12528efc396693f2a91d9e8be002dc0ef530c9613d9f9fa5b702af23ce4ab",
+    "rlcd/weight_space/structured.py": "8c2be636b812158de5df1cb6bad9615274f2dfcd7b3d6701f3843e19a3513f24",
     "rlcd/weight_space/program.py": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd",
     "rlcd/weight_space/broker.py": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c",
 }
