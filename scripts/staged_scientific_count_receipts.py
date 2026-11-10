@@ -1,4 +1,4 @@
-"""Create-once byte receipts for complete staged native count claims.
+"""Create-once byte receipts and reservation correspondence for staged counts.
 
 Validation binds claimed counts to retained identities; it does not attest
 execution, provenance, independent storage, or power-loss durability.
@@ -12,6 +12,7 @@ import re
 import stat
 from typing import Any
 
+from rlcd.weight_space.data_roles import DataRoleRegistry
 from rlcd.weight_space.model import canonical_bytes, digest
 
 
@@ -183,3 +184,113 @@ def write_complete_slot_counts_once(
     # The reader already checked that the stored bytes equal this exact encoding.
     _require(canonical_bytes(reread) + b"\n" == raw, "Count receipt bytes changed during reread")
     return reread
+
+
+def read_count_reservation_correspondence(
+    path: str | os.PathLike[str], *, registry: DataRoleRegistry,
+    expected_binding: dict[str, str], expected_receipt_sha256: str,
+    expected_attempt: dict[str, Any], expected_slice: dict[str, Any],
+) -> dict[str, Any]:
+    """Compare retained count claims with one durable reservation inspection.
+
+    The relevant score call must have returned or unwound, and every worker
+    capable of continuing evaluation or mutating evidence must have stopped.
+    This is a trusted harness precondition, not established by get_attempt.
+    Retain all expectations independently. The same trusted producer must retain
+    both raw-row and ordered row-hash-list commitments from the same rows;
+    neither commitment derives the other. Counts do not attest execution, prove
+    writer success, identify logical slots or supply independent replicates.
+    Failed/unknown authorization is never promoted by surviving count claims.
+    The output digest commits its body; no join is persisted by this reader.
+    """
+    _require(type(registry) is DataRoleRegistry, "A real data-role registry is required")
+    binding = _binding(expected_binding)
+    _hash(expected_receipt_sha256)
+    attempt = _fields(expected_attempt, {
+        "registry_id", "attempt_id", "source_id", "manifest_sha256", "content_sha256",
+        "binding", "reservation_sha256",
+    }, "Expected reservation")
+    selected_slice = _fields(expected_slice, {
+        "start", "stop", "rows_sha256", "row_sha256_list_sha256",
+    }, "Expected slice")
+    _require(type(attempt["binding"]) is dict, "Expected registry binding requires a plain dictionary")
+
+    def plain_json(value: Any) -> Any:
+        if value is None or type(value) in (str, bool, int, float):
+            return value
+        if type(value) is list:
+            return [plain_json(item) for item in value]
+        if type(value) is dict and all(type(key) is str for key in value):
+            return {key: plain_json(item) for key, item in value.items()}
+        raise ValueError("Expected reservation requires a plain finite JSON tree")
+
+    try:
+        attempt = json.loads(canonical_bytes(plain_json(attempt)))
+    except (ValueError, TypeError, OverflowError, RecursionError, UnicodeError):
+        raise ValueError("Expected reservation requires a plain finite JSON tree") from None
+    for key in ("registry_id", "attempt_id", "source_id"):
+        _require(type(attempt[key]) is str and bool(attempt[key].strip()),
+                 "Reservation identities require plain nonblank strings")
+    for key in ("manifest_sha256", "content_sha256", "reservation_sha256"):
+        _hash(attempt[key])
+    for key in ("rows_sha256", "row_sha256_list_sha256"):
+        _hash(selected_slice[key])
+    start, stop = selected_slice["start"], selected_slice["stop"]
+    _require(type(start) is int and type(stop) is int and start >= 0 and stop - start == 4096,
+             "A reservation slice requires exactly 4096 rows and plain integer bounds")
+    _require(attempt["registry_id"] == registry.registry_id,
+             "Expected reservation names a different registry")
+    _require(selected_slice["rows_sha256"] == binding["rows_sha256"],
+             "Expected slice and count binding name different raw rows")
+    binding_bytes = canonical_bytes(attempt["binding"])
+
+    counts = read_complete_slot_counts(
+        path, expected_binding=binding, expected_receipt_sha256=expected_receipt_sha256)
+    inspected = registry.get_attempt(attempt["attempt_id"])
+    _require(inspected is not None, "Expected reservation is missing")
+    _require(all(inspected[key] == attempt[key] for key in (
+        "registry_id", "attempt_id", "source_id", "manifest_sha256", "content_sha256",
+        "reservation_sha256",
+    )), "Registry reservation differs from retained expectations")
+    _require(canonical_bytes(inspected["binding"]) == binding_bytes
+             and inspected["binding_sha256"] == digest(attempt["binding"]),
+             "Registry binding differs from retained expectations")
+    rows = inspected["row_sha256"]
+    _require(type(rows) is list and stop <= len(rows), "Reservation slice exceeds the registered rows")
+    selected = rows[start:stop]
+    for identity in selected:
+        _hash(identity)
+    _require(digest(selected) == selected_slice["row_sha256_list_sha256"],
+             "Reservation row-hash slice differs from its retained ordered commitment")
+
+    status = inspected["status"]
+    reasons = {"authorized_outcome_unknown": "evaluation_authorization_committed",
+               "failed": "scorer_failed", "succeeded": "observed_boundary_passed"}
+    _require(type(status) is str and status in reasons and inspected["reason"] == reasons[status],
+             "Unsupported reservation lifecycle")
+    invocations = inspected["callback_invocations"]
+    _require(invocations is None if status == "authorized_outcome_unknown"
+             else type(invocations) is int and invocations == 1,
+             "Unsupported callback invocation observation")
+    if status == "succeeded":
+        _hash(inspected["result_sha256"])
+    else:
+        _require(inspected["result_sha256"] is None, "Failed or unknown attempts cannot carry a result digest")
+    _hash(inspected["lifecycle_sha256"])
+    flags = ("provenance_authenticated", "semantic_independence_verified",
+             "scientific_freshness_verified", "evaluator_execution_attested")
+    _require(inspected["evidence_role"] == "evaluation_consumed_on_authorization"
+             and all(inspected[key] is False for key in flags), "Unsupported reservation authority")
+    body = {
+        "schema": "wsp-staged-count-reservation-correspondence/1",
+        "count_receipt": counts,
+        "reservation": {key: inspected[key] for key in (
+            "registry_id", "attempt_id", "source_id", "manifest_sha256", "content_sha256",
+            "binding_sha256", "reservation_sha256",
+        )},
+        "slice": selected_slice,
+        "lifecycle": {key: inspected[key] for key in (
+            "status", "reason", "callback_invocations", "lifecycle_sha256", "result_sha256",
+        )} | {key: False for key in flags},
+    }
+    return body | {"sha256": digest(body)}
