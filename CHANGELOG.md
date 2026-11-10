@@ -7,6 +7,16 @@ research draft.
 
 ## Unreleased
 
+- Add an isolated [native whole-slot count evaluator](scripts/staged_scientific_evaluator.py)
+  and select its authored fixtures with literal expected counts in
+  `pytest-engineering.ini`.
+  The [count contract](docs/research/staged-scientific-compatibility.md#isolated-native-whole-slot-count-contract)
+  describes its input bindings, native execution and full denominators.
+  The [scoped native-fixture receipt](provenance/verification/staged-native-counts-20261110.json)
+  records five explicitly selected authored cases passing in one bounded
+  invocation. This supplies no scientific admission, study execution or
+  acceptance promotion; #9 c1 remains partial/open.
+
 - Normalize Torch version metadata to a built-in string before in-memory
   raw-text receipt validation. Focused native fixtures now check first-output
   timing order, retention after failure, malformed spans, and supervisor summary

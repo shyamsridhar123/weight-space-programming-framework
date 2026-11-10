@@ -1,0 +1,308 @@
+{
+  "schema": "rlcd.staged-native-counts-publication/1",
+  "date": "2026-11-10",
+  "integrated_main_base": "ac7d5ca6f898507273e0e061e0ddcf0e42d1102f",
+  "issue": {
+    "number": 9,
+    "state": "open",
+    "c1": "partial"
+  },
+  "change": {
+    "purpose": "Supply an isolated native float32 whole-slot count kernel for the proposed staged study, without changing scientific admission or the generic framework's scope.",
+    "checked_source_inputs": [
+      {
+        "path": "scripts/staged_scientific_evaluator.py",
+        "bytes": 10137,
+        "sha256": "fb515d6b342aba02313fa845ccf2253e616e18d9245ff4dc97b2ed5fe6cfd80c"
+      },
+      {
+        "path": "tests/test_staged_scientific_evaluator.py",
+        "bytes": 14738,
+        "sha256": "cd4b5ae57481762e203bae8be1164478e497f0c56667ae1812f61b31f211a483"
+      }
+    ],
+    "configured_engineering_selection": {
+      "path": "pytest-engineering.ini",
+      "bytes": 1958,
+      "sha256": "ce2889d6fc816891a658a50ce1e2c702d45b25313f0bccfd5d43519399ceb748",
+      "added_module": "tests/test_staged_scientific_evaluator.py",
+      "selection_change_executed_locally": false,
+      "scope": "The isolated local invocation used explicit nodes and pyproject.toml; hosted engineering selection is separate post-commit evidence."
+    }
+  },
+  "selection": {
+    "test_nodes": [
+      "tests/test_staged_scientific_evaluator.py::test_native_counts_include_relu_lowest_index_ties_and_reserved_output",
+      "tests/test_staged_scientific_evaluator.py::test_identity_shape_and_native_input_errors_reject_before_encoding",
+      "tests/test_staged_scientific_evaluator.py::test_mutating_caller_inputs_during_execution_cannot_change_captured_slot",
+      "tests/test_staged_scientific_evaluator.py::test_late_chunk_failures_and_invalid_native_outputs_produce_no_completed_result",
+      "tests/test_staged_scientific_evaluator.py::test_runtime_contexts_restore_on_return_and_unwinding_without_global_policy_setters"
+    ],
+    "pytest_invocation_attempts": 1,
+    "automatic_retry_performed": false,
+    "scope": "Only five explicitly selected authored engineering functions. Literal width-two inputs and hand-authored model parameters; no scientific dataset, training, study, selection, admission or registry execution."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "passed",
+      "started_at_utc": "2026-11-10T09:17:42.6543639+00:00",
+      "finished_at_utc": "2026-11-10T09:17:50.7303512+00:00",
+      "exit_code": 0,
+      "timed_out": false,
+      "recorded_identities_unchanged": true,
+      "cases": {
+        "tests": 5,
+        "passed": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "case_outcomes": [
+        {
+          "classname": "tests.test_staged_scientific_evaluator",
+          "name": "test_native_counts_include_relu_lowest_index_ties_and_reserved_output",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_scientific_evaluator",
+          "name": "test_identity_shape_and_native_input_errors_reject_before_encoding",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_scientific_evaluator",
+          "name": "test_mutating_caller_inputs_during_execution_cannot_change_captured_slot",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_scientific_evaluator",
+          "name": "test_late_chunk_failures_and_invalid_native_outputs_produce_no_completed_result",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_scientific_evaluator",
+          "name": "test_runtime_contexts_restore_on_return_and_unwinding_without_global_policy_setters",
+          "outcome": "passed"
+        }
+      ],
+      "private_capture_commitments": {
+        "execution-plan.json": {
+          "bytes": 3139,
+          "sha256": "8b712cac4c41707de90da9832b670c08c6b0460a42eeb504d4909d9510ce9589"
+        },
+        "identities.before.json": {
+          "bytes": 16727,
+          "sha256": "da47105987ff56c2e55121b76a7e7c00c14f93d4137f8157d8a3d477e67e6d0f"
+        },
+        "launch-native.ps1": {
+          "bytes": 7185,
+          "sha256": "abdefe6b6736e2c8a94a6871838d687cc5393a1207a1c6dbbeb8b750dfe3748c"
+        },
+        "execution-seal.json": {
+          "bytes": 768,
+          "sha256": "c83a94127007e84c1c8154b271126ded6a055b535de3c0628f589c8306954bf8"
+        },
+        "attempt.started.json": {
+          "bytes": 85,
+          "sha256": "da3b63bf6bdcfa4035d38895623e5df64087742f04e8675ae90d1678b4c3cd41"
+        },
+        "identities.after.json": {
+          "bytes": 16727,
+          "sha256": "da47105987ff56c2e55121b76a7e7c00c14f93d4137f8157d8a3d477e67e6d0f"
+        },
+        "result.json": {
+          "bytes": 268,
+          "sha256": "b1d05ffa81f99dfad4632b53cea6ff608914526a7fcb130dba0bc6ab8205a918"
+        },
+        "stdout.txt": {
+          "bytes": 100,
+          "sha256": "705b041ad4b355fbd529837ae91bc32c4f850a07f29c5138beccb8f2410c9849"
+        },
+        "stderr.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "junit.xml": {
+          "bytes": 1040,
+          "sha256": "6d0b7ae140902c47757baf0db25cfa2f982f45c226f8d9dd1880ebfad4434e2a"
+        }
+      }
+    }
+  ],
+  "authored_fixture": {
+    "scope": "Hand-authored width-two inputs and model parameters only; no scientific dataset or trained-study endpoint.",
+    "input_width": 2,
+    "rows_per_class": 512,
+    "ordered_class_patterns": [
+      [
+        64,
+        0
+      ],
+      [
+        0,
+        64
+      ],
+      [
+        64,
+        64
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        -64,
+        -64
+      ],
+      [
+        32,
+        0
+      ],
+      [
+        0,
+        32
+      ],
+      [
+        64,
+        0
+      ]
+    ],
+    "encoder": "Pass x/y into the first two of 32 ReLU units; remaining units are zero.",
+    "head": "Ordinary scores 0/1 are 2*relu(x/y)-128; remaining ordinary scores are -128; reserved score 8 is -64.",
+    "expected_prediction_per_class_pattern": [
+      0,
+      1,
+      0,
+      8,
+      8,
+      0,
+      1,
+      0
+    ],
+    "expected_counts": {
+      "correct_by_class": [
+        512,
+        512,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "denominator_by_class": [
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512
+      ],
+      "total_correct": 1024,
+      "total_denominator": 4096,
+      "reserved_output_predictions": 1024
+    },
+    "meaning": "Literal expected values check engineering semantics; they are not scientific accuracy, usefulness or business-impact results."
+  },
+  "checked_engineering_obligations": [
+    "All five expected endpoint/encoder/preprocessing/feature/ordered-row identities must match captured values before the first native forward. Row reorder and signed-zero mutations retain denominators but change raw row identity.",
+    "An authored width-two encoder performs native float32 affine then ReLU; literal expected hidden features detect missing ReLU. All nine raw head scores participate in lowest-index argmax, including ordinary/reserved ties and reserved-output wins.",
+    "Exactly sixteen contiguous 256-row chunks contribute to eight complete 512-row class denominators. Literal expected predictions and counts are asserted independently of the count kernel.",
+    "Caller-owned encoder arrays, row bodies, preprocessing and expected bindings can be changed after capture without changing the captured slot or returned binding.",
+    "Exceptions, interruption, truncated outputs, nonfinite outputs and incorrect native output dtypes partway through a slot prevent any completed result.",
+    "CPU device and disabled-autocast contexts restore on return and unwinding without global numerical setters. Wrong build/precision declarations and observable runtime drift prevent a completed result."
+  ],
+  "methods": {
+    "source_inventory_entries": 41,
+    "runtime_inventory_entries": 16,
+    "recorded_source_and_runtime_identities_before_after_equal": true,
+    "startup": "Normal existing venv startup with reviewed startup hooks; user site disabled and system site excluded. Existing bytecode reads remain possible.",
+    "environment_cleared": true,
+    "environment_allowlist_names": [
+      "SystemRoot",
+      "WINDIR",
+      "PATH",
+      "TEMP",
+      "TMP",
+      "PYTHONPATH",
+      "PYTHONNOUSERSITE",
+      "PYTHONDONTWRITEBYTECODE",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD",
+      "OMP_NUM_THREADS",
+      "MKL_NUM_THREADS",
+      "OPENBLAS_NUM_THREADS"
+    ],
+    "pytest_config": "pyproject.toml",
+    "noconftest": true,
+    "cache_provider_disabled": true,
+    "plugin_autoload_disabled": true,
+    "fresh_worktree_contained_basetemp": true,
+    "parent_timeout_seconds": 45,
+    "timeout_action": "Terminate the process tree; allow up to five seconds to establish exit.",
+    "launcher_failure_handling": "Source-reviewed catch records unexpected launcher failure, attempts started-process-tree termination, bounds cleanup and retains completed stream captures. This exceptional branch was not fault-injected.",
+    "authoritative_outcome": "Retained result.json plus exact JUnit case identities and outcomes. The launcher also propagates ordinary pytest failure as shell failure.",
+    "recorded_installation_metadata": {
+      "python": "3.12.10",
+      "numpy": "2.5.3",
+      "torch": "2.8.0+cpu",
+      "pytest": "9.1.1"
+    },
+    "historical_dependency_lock_installed_or_changed": false,
+    "publication_verifier_executed_locally": false,
+    "broad_local_suite_executed": false
+  },
+  "scientific_boundary": {
+    "study_selected": false,
+    "study_execution": "unexecuted",
+    "scientific_identities": "null in the unchanged scientific draft",
+    "selection_admission_rejects_protocol_evaluation_plan": true,
+    "seven_slot_engineering_seal": {
+      "evaluation_available": false,
+      "final_study_seal": false
+    },
+    "unresolved": [
+      "Study-owned scientific schema/API and complete eleven-entry scientific seal, including every training, condition and stage terminal.",
+      "Verification before holdout generation, registration or forward execution.",
+      "One aggregate registry attempt over all eight lineage holdouts, including failed parents.",
+      "Strict whole-slot count persistence and reread, followed by a durable reservation/observation join after callback return or unwinding.",
+      "Failure, unknown-outcome and alias accounting with all 880 proposed logical slot attributions retained."
+    ],
+    "issue9_c1": "partial/open"
+  },
+  "trust_and_scope_limits": [
+    "Only the five named authored engineering functions ran once; failures, interruption, malformed output and runtime drift were deliberately simulated within their fixtures. No scientific study, training, data generation, archived evaluation, historical replay, registry registration or live-provider request was performed.",
+    "Runtime correspondence requires the CPU build of Torch 2.8.0, highest float32 matmul precision, explicit CPU execution and disabled autocast. Observable state equality is not full floating-point-state attestation, a flush-denormal proof or bit-identical replay.",
+    "The reviewed source/runtime inventories are partial content inventories, not complete Python/native dependency attestation or an operating-system sandbox. Recorded installation metadata does not establish historical lockfile agreement.",
+    "Capture commitments bind retained private bytes; they do not independently attest execution, freshness, privacy, Git ancestry or the complete runtime.",
+    "Absolute local paths, raw logs, environment values and native timing observations are omitted from this public derivative. Counts and timestamps describe engineering execution; no performance advantage, resource saving, scientific utility or business impact is established.",
+    "Hosted CI and review outcomes are separate post-commit evidence; no hosted success is inferred from this local invocation.",
+    "Issue #9 c1 remains partial/open. This kernel owns no registry, persistence, retry, alias handling or scientific admission."
+  ],
+  "later_publication": {
+    "receipt_and_documentation_finalized_after_execution": true,
+    "published_document_identities": [
+      {
+        "path": "docs/research/staged-scientific-compatibility.md",
+        "bytes": 26148,
+        "sha256": "e396010a585975c21d1a82925a319381ce5247692cab299e9e4aae926110956c"
+      },
+      {
+        "path": "CHANGELOG.md",
+        "bytes": 60995,
+        "sha256": "85a11ad800bd8f0d9bc65845faae8b43f6d43ab6e7350bf3b1979de9de3bacf0"
+      }
+    ],
+    "original_source_inventory_identity": {
+      "path": "provenance/source-files.json",
+      "bytes": 2483787,
+      "sha256": "2b3386a2f5e08175c2b7598642e8fefa2e5395dc1b14b117707271a5797849fc"
+    },
+    "publication_manifest_supplement": "staged_native_counts_update_20261110",
+    "later_receipt_documentation_manifest_and_checksums_verified_by_recorded_native_execution": false,
+    "publication_bookkeeping_reran_tests": false,
+    "historical_publication_values_and_source_inventory_preserved": true,
+    "scope": "This sanitized receipt and the documentation/manifest/checksum updates were finalized after the retained native invocation. Their consistency is assessed separately by read-only publication review; that earlier run does not verify these later artifacts. Hosted checks and review are separate post-commit evidence."
+  }
+}
