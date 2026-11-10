@@ -7,6 +7,12 @@ research draft.
 
 ## Unreleased
 
+- Specify a non-admitting draft evidence table and seven ordered gates for the
+  [prospective staged study](docs/research/staged-scientific-compatibility.md#draft-admission-package).
+  Native evaluation, scientific ownership, source/seed/observation evidence and
+  margins remain unresolved. No protocol is frozen and no study is selected
+  or executed; #9 c1 remains partial/open and #6 c4 remains partial.
+
 - Connect the declared sequential runtime to registered cohort slot evaluation.
   The helper restores against the retained seal, validates every row before
   forwarding, and records predictions, input commitments and a detached runtime
