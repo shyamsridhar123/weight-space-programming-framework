@@ -100,6 +100,10 @@ class _DuplicateJSONKey(ValueError):
     pass
 
 
+class _RedactedJSONKeyCollision(ValueError):
+    pass
+
+
 def _unique_json_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     result = {}
     for key, value in pairs:
@@ -349,7 +353,7 @@ def run_brokered(provider: CodexProvider, broker: Any, *, prompt: str,
 
 
 def publish_attempt(source: Path, destination: Path) -> dict[str, Any]:
-    """Publish a derivative; duplicate-key events become disclosed nonobject markers."""
+    """Publish a derivative; ambiguous-key events become disclosed nonobject markers."""
     source, destination = Path(source), Path(destination)
     destination.mkdir(parents=True, exist_ok=False)
     for name in ("request.json", "response-schema.json", "receipt.json"):
@@ -369,7 +373,14 @@ def publish_attempt(source: Path, destination: Path) -> dict[str, Any]:
         if isinstance(value, list):
             return [sanitize(v) for v in value]
         if isinstance(value, dict):
-            return {k: sanitize(v) for k, v in value.items()}
+            result = {}
+            for key, item in value.items():
+                redacted_key = sanitize(key)
+                if redacted_key in result:
+                    raise _RedactedJSONKeyCollision(
+                        "JSON object key collision after profile redaction")
+                result[redacted_key] = sanitize(item)
+            return result
         return value
 
     lines = []
@@ -381,6 +392,10 @@ def publish_attempt(source: Path, destination: Path) -> dict[str, Any]:
         except _DuplicateJSONKey:
             # Raw fallback cannot safely sanitize arbitrary JSON escape spellings.
             lines.append(json.dumps("public event omitted: duplicate JSON object key"))
+        except _RedactedJSONKeyCollision:
+            redactions = previous_redactions
+            lines.append(json.dumps(
+                "public event omitted: JSON object key collision after profile redaction"))
         except (ValueError, RecursionError):
             # Retain malformed or overnested lines as disclosed derivatives,
             # redacting escaped profile prefixes without counting abandoned work.
