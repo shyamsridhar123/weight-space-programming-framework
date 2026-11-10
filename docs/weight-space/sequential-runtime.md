@@ -172,9 +172,20 @@ repaired and parent-control slots. These are hand calculations, not study result
 | `[3, 1]` | 8 | 5 |
 | `[-1, 2]` | 1 | -2 |
 
-This integration source and its authored check have not been executed as part of
-this change. They add no validation capture or scientific result. The helper
-establishes no automatic diagnosis, trained-model benefit, original-module
+The separate
+[engineering receipt](../../provenance/verification/sequential-slot-evaluator-20261109.json)
+records one passing invocation of this authored fixture at its captured source
+snapshot: `1 passed in 2.04s`, with no reported warnings, retry or timeout. The
+check verifies the prescribed prediction differences, receipt/seal/registry
+bindings, input ordering and rejection paths, overflow before ReLU, and failure
+that consumes authorization and leaves later slots `not_run`. Counts and elapsed
+time are execution bookkeeping. The fixture uses repaired and parent slots; it
+does not exercise all seven engineering slots. Registered literal rows provide no
+scientific holdout evidence. This float64 helper does not implement the proposed
+eleven-entry native-float32 scientific companion, encoder/head scorer, scientific
+fallback, count receipts or final scientific seal. The code snippets in this guide
+remain unexecuted; later publication edits retain separate validation scope. The
+helper establishes no automatic diagnosis, trained-model benefit, original-module
 restoration or evaluator attestation. Generic cohort
 `runtime_restoration_verified` and `causal_usefulness_established` flags remain
 `false`; their schemas and earlier evidence scopes are unchanged. Issue #9 c1

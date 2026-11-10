@@ -7,6 +7,16 @@ research draft.
 
 ## Unreleased
 
+- Connect the declared sequential runtime to registered cohort slot evaluation.
+  The helper restores against the retained seal, validates every row before
+  forwarding, and records predictions, input commitments and a detached runtime
+  receipt. A [focused authored fixture](provenance/verification/sequential-slot-evaluator-20261109.json)
+  checks the prescribed bias correction, receipt bindings and
+  failure that consumes authorization and stops later slots. This is engineering
+  evidence for two declared float64 slots; the proposed native-float32 scientific
+  companion remains unimplemented. Generic evidence flags stay false, earlier
+  receipt scopes and historical outcomes stay unchanged, and #9 c1 stays partial.
+
 - Add an owned runtime for declared `sequential-affine-activation/1` artifacts
   with explicit NumPy/float64/CPU execution, retained expected-hash agreement,
   finite left-to-right affine evaluation and detached state/output. The

@@ -356,10 +356,16 @@ call, and returns plain JSON predictions, full-row and ordered-input commitments
 and the detached restoration receipt under `sequential`. Unsupported declarations,
 including the generic examples' `matmul`, fail through the existing bridge path.
 The outer slot, terminal and durable registry result commitments retain that
-nested result without changing their generic evidence flags. This integration
-source and its [authored check](../../tests/test_sequential_slot_evaluator.py)
-have not been executed as part of this change; no scientific evidence or earlier
-receipt scope is extended. Issue #9 c1 remains partial and open.
+nested result without changing their generic evidence flags. The separate
+[engineering receipt](../../provenance/verification/sequential-slot-evaluator-20261109.json)
+records one passing authored fixture at its captured source snapshot, with no
+reported warnings, retry or timeout. It checks repaired and parent slots using
+prescribed diagnosis/repair and literal registered rows, including prediction
+differences, receipt bindings and failure that consumes authorization and stops
+later slots. It supplies no scientific holdout evidence or eleven-entry native
+float32 scientific evaluator. The code snippet above remains unexecuted; the
+capture does not validate later publication edits or extend earlier receipt
+scopes. Issue #9 c1 remains partial and open.
 
 Each evaluator result must be a finite JSON object with exactly the declared result keys. The bridge rechecks the start receipt, endpoint seal and prior slot receipts before and after slot work. It writes ordered private `evaluation-MEMBER-SLOT.json` dispositions using zero-padded numeric indices. Unavailable endpoints receive `outcome: unavailable`, zero evaluator invocations and no fabricated result. Available slots begin as `not_run`, become `succeeded` only after result validation and evidence verification, and become `failed` if their active work fails. A failed active slot can have zero or one evaluator invocation, depending on the failure phase. A failure stops subsequent slots; those slots retain `not_run` or their original `unavailable` state. A failed slot receipt write can leave its receipt hash null, and failed terminal persistence can leave no `evaluation.json`.
 
