@@ -7,6 +7,40 @@ research draft.
 
 ## Unreleased
 
+- Add an owned runtime for declared `sequential-affine-activation/1` artifacts
+  with explicit NumPy/float64/CPU execution, retained expected-hash agreement,
+  finite left-to-right affine evaluation and detached state/output. The
+  [focused synthetic engineering receipt](provenance/verification/sequential-runtime-restoration-20261109.json)
+  records one captured regression selection with three NumPy 2.5 deprecation
+  warnings from intentional array-header mutation checks. Coverage is limited
+  to the declared adapter; caller trust in the expected hash remains required.
+  Refresh selection-only admission's reviewed arithmetic-source pin for the
+  shared helper change, retaining its exact source checks and all earlier
+  capture and seal records. The earlier runtime receipt does not cover this
+  later source-pin update. Generic cohort restoration/usefulness flags remain
+  false. No scientific outcome or earlier receipt scope changes; #9 c1 stays
+  partial and open.
+
+- Leave descendant cleanup unknown (`None`/JSON `null`) when pipes drain after
+  a timeout; retain `False` when cleanup waits are exhausted and preserve
+  ordinary completion. The
+  [authored offline receipt](provenance/verification/provider-timeout-cleanup-20261109.json)
+  records one passing regression with four mocked communication sequences,
+  retained output and exact requested wait/kill calls. This establishes no
+  native cleanup, containment, output-size bound, provider or scientific
+  attestation. Earlier evidence and historical outcomes remain unchanged;
+  #5 c1 stays partial and open, and #5 c2/#8 c6 remain partial/open.
+
+- Serialize decoded, sanitized provider events with ASCII-safe JSON escapes so
+  a lone surrogate cannot prevent writing the public UTF-8 derivative. The
+  [authored offline receipt](provenance/verification/provider-surrogate-publication-20261109.json)
+  checks escaped synthetic profile redaction, retained ordinary Unicode, the
+  same raw/public parser result and later response/usage, unchanged raw bytes
+  and inert copied metadata, separate hashes and the exact existing publication
+  record. This handcrafted fixture does not establish exhaustive Unicode,
+  malformed raw UTF-8 or arbitrary-data confidentiality coverage. No live CLI
+  or historical replay was run; Issue #5 c2 and #8 c6 remain partial and open.
+
 - Catch `UnicodeError` from the strict UTF-8 CLI version probe in the existing
   startup handler, retaining a failed attempt/trial and normal broker abstention.
   The [authored offline receipt](provenance/verification/provider-version-utf8-20261109.json)

@@ -154,10 +154,48 @@ def test_failed_native_startup_and_deadline_leave_receipts(tmp_path):
         factory.command("deadline", [sys.executable, "-c", "import time; time.sleep(10)"], cwd=tmp_path,
                         run=tmp_path, ledger=ledger, timeout=0.05)
     assert [r["status"] for r in ledger] == ["startup_failed", "timeout"]
-    assert ledger[1]["timeout_cleanup_complete"] is True
+    assert ledger[1]["timeout_cleanup_complete"] is None
     for i, record in enumerate(ledger):
         assert json.loads((tmp_path / f"command-{i:03}.json").read_text()) == record
         assert (tmp_path / f"command-{i:03}.stdout.private").is_file()
+
+
+def test_bounded_communication_timeout_cleanup_is_not_attested(monkeypatch):
+    from unittest.mock import Mock, call
+
+    from rlcd.weight_space import live_provider
+
+    def forbid_real_processes(*args, **kwargs):
+        pytest.fail("Mocked timeout regression must not launch or terminate real processes")
+
+    for name in ("Popen", "run"):
+        monkeypatch.setattr(subprocess, name, forbid_real_processes)
+    for name in ("kill", "killpg"):
+        monkeypatch.setattr(live_provider.os, name, forbid_real_processes, raising=False)
+
+    def expired(seconds, output=None, stderr=None):
+        return subprocess.TimeoutExpired("mock-provider", seconds, output=output, stderr=stderr)
+
+    output = (b"retained stdout", b"retained stderr")
+    cases = (
+        ([output], (*output, False, True), 0, 0),
+        ([expired(1), output], (*output, True, None), 1, 0),
+        ([expired(1), expired(20), output], (*output, True, None), 1, 1),
+        ([expired(1, stderr=b"initial stderr"), expired(20), expired(5, output=b"partial stdout")],
+         (b"partial stdout", b"initial stderr", True, False), 1, 1),
+    )
+    for steps, expected, tree_kills, wrapper_kills in cases:
+        kill_tree = Mock()
+        monkeypatch.setattr(live_provider, "_kill_tree", kill_tree)
+        process = SimpleNamespace(communicate=Mock(side_effect=steps), kill=Mock())
+        result = live_provider._communicate_bounded(process, timeout=1, input=b"request")
+        assert result[:2] == expected[:2]
+        assert result[2] is expected[2]
+        assert result[3] is expected[3]
+        assert process.communicate.call_args_list == (
+            [call(b"request", timeout=1)] + [call(timeout=20), call(timeout=5)][:len(steps) - 1])
+        assert kill_tree.call_args_list == [call(process)] * tree_kills
+        assert process.kill.call_args_list == [call()] * wrapper_kills
 
 
 def test_command_preserves_raw_output_left_before_receipt_checkpoint(tmp_path):

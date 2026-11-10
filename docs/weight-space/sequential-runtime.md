@@ -93,6 +93,17 @@ modules, aliases, buffers, caches, random state and deployment effects are outsi
 its contract. Its empirical floating-point execution supplies neither a formal
 floating-point proof nor evidence of useful or causal repair.
 
+The separate
+[engineering receipt](../../provenance/verification/sequential-runtime-restoration-20261109.json)
+records one focused synthetic regression capture at its captured source snapshot:
+`63 passed, 3 warnings in 1.47s`. Counts and elapsed time are bookkeeping, not
+impact or performance evidence. The three warnings concern NumPy 2.5 array-header
+mutation deprecations triggered by the isolation fixtures. This supplies
+engineering coverage of the owned sequential adapter and adds no scientific
+result. The standalone source example above remains unexecuted; later publication
+edits retain separate validation scope. That capture does not verify the later
+selector-pin update or evaluator integration.
+
 ## Registered sequential slot evaluation
 
 [`evaluate_sequential_slot`](../../rlcd/weight_space/sequential_slot_evaluator.py)
