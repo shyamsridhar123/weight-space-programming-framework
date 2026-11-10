@@ -7,6 +7,16 @@ research draft.
 
 ## Unreleased
 
+- Serialize decoded, sanitized provider events with ASCII-safe JSON escapes so
+  a lone surrogate cannot prevent writing the public UTF-8 derivative. The
+  [authored offline receipt](provenance/verification/provider-surrogate-publication-20261109.json)
+  checks escaped synthetic profile redaction, retained ordinary Unicode, the
+  same raw/public parser result and later response/usage, unchanged raw bytes
+  and inert copied metadata, separate hashes and the exact existing publication
+  record. This handcrafted fixture does not establish exhaustive Unicode,
+  malformed raw UTF-8 or arbitrary-data confidentiality coverage. No live CLI
+  or historical replay was run; Issue #5 c2 and #8 c6 remain partial and open.
+
 - Catch `UnicodeError` from the strict UTF-8 CLI version probe in the existing
   startup handler, retaining a failed attempt/trial and normal broker abstention.
   The [authored offline receipt](provenance/verification/provider-version-utf8-20261109.json)

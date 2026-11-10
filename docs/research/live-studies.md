@@ -139,6 +139,25 @@ receipts keep their captured source scope. The 90 historical failures' usage,
 charges and deployment revision remain unknown, with no finite total-cost bound
 or independent provider-origin attestation. Issue #5 c2 and #8 c6 remain partial.
 
+**Prospective surrogate-publication supplement, November 9, 2026.** The shared
+publisher sanitizes decoded strings before serializing them with ASCII-safe
+JSON escapes. A lone surrogate therefore remains escaped in the public UTF-8
+file while ordinary Unicode survives JSON decoding. The
+[authored offline receipt](../../provenance/verification/provider-surrogate-publication-20261109.json)
+checks a handcrafted escaped synthetic profile path, one high surrogate and
+ordinary accented, Greek and emoji text. Raw and public streams yield the same
+parser result: the surrogate event retains `invalid_event`, and the following
+final response and usage remain readable. Raw bytes and three synthetic inert
+metadata copies stay unchanged; raw/public hashes and the strict seven-field
+publication record remain separate and exact. This does not exercise a live
+CLI, malformed raw UTF-8, exhaustive Unicode, broker usage admission or the
+full publication verifier, and establishes no arbitrary-data confidentiality
+guarantee. No historical stream was inspected, repaired or rerun. Earlier
+receipts keep their captured scope; the 90 failures' missing usage, unknown
+charges and deployment revision, absence of a finite total-cost bound and
+provider-origin attestation remain unresolved. Issue #5 c2 and #8 c6 remain
+partial and open.
+
 **Prospective saved-attempt broker replay, November 9, 2026.** The separate
 [broker fixture runner](../../scripts/run_broker_trial.py) now pins saved prompts,
 response schemas, embedded attempts and raw/public event-publication identities,
