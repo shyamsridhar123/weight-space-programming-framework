@@ -1,0 +1,77 @@
+name: Standalone governance proof
+
+"on":
+  pull_request:
+    paths:
+      - "formal/governance/**"
+      - ".github/workflows/governance-proof.yml"
+  push:
+    branches: [main]
+    paths:
+      - "formal/governance/**"
+      - ".github/workflows/governance-proof.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: governance-proof-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  governance-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      RUN_ROOT: .runs/ci-governance-proof-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - name: Preserve checked-out file bytes
+        run: git config --global core.autocrlf false
+
+      - name: Check out publication
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Record checked source
+        run: |
+          mkdir -p "$RUN_ROOT"
+          git rev-parse HEAD > "$RUN_ROOT/commit.txt"
+          sha256sum formal/governance/Governance.lean > "$RUN_ROOT/source.sha256"
+
+      - name: Install pinned Elan and Lean 4.24.0
+        run: |
+          curl --fail --location --retry 3 \
+            https://github.com/leanprover/elan/releases/download/v4.2.4/elan-x86_64-unknown-linux-gnu.tar.gz \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          printf '%s  %s\n' \
+            42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63 \
+            "$RUNNER_TEMP/elan.tar.gz" | sha256sum --check
+          mkdir -p "$RUNNER_TEMP/wsp-governance-elan-installer"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP/wsp-governance-elan-installer"
+          "$RUNNER_TEMP/wsp-governance-elan-installer/elan-init" -y --no-modify-path --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/elan" toolchain install leanprover/lean4:v4.24.0
+
+      - name: Check standalone model and transitive axiom audit
+        run: |
+          set -euo pipefail
+          lean +leanprover/lean4:v4.24.0 --version | tee "$RUN_ROOT/lean-version.txt"
+          lean +leanprover/lean4:v4.24.0 formal/governance/Governance.lean 2>&1 | tee "$RUN_ROOT/governance-proof.log"
+          sha256sum --check "$RUN_ROOT/source.sha256"
+          git diff --exit-code -- formal/governance
+
+      - name: Upload source identity and proof output
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: governance-proof-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.RUN_ROOT }}/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30
