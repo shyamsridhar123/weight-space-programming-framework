@@ -7,6 +7,18 @@ research draft.
 
 ## Unreleased
 
+- Add generic [count/reservation read correspondence](scripts/staged_scientific_count_receipts.py)
+  against independent count, binding, reservation and paired row commitments.
+  It reads one trusted registry attempt, preserves failed/outcome-unknown
+  lifecycle and returns evidence with a digest of its own body. The trusted
+  harness must first observe `score` return/unwinding and stop all evaluation
+  or evidence-mutating workers. This supplies no execution attestation, writer
+  success proof, durable storage or scientific admission. Scientific ownership,
+  aggregate integration and durable scientific observation joins remain
+  unresolved; Issue #9 c1 remains partial/open. The
+  [scoped verification](provenance/verification/staged-count-correspondence-20261110.json)
+  records the synthetic temporary-registry checks.
+
 - Add an isolated [complete-count receipt helper](scripts/staged_scientific_count_receipts.py)
   with exact schema/count validation, exclusive creation, flush/`fsync` and
   canonical rereading against independently retained bindings and body digest.
