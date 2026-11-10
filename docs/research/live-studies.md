@@ -97,6 +97,56 @@ The [scoped offline receipt](../../provenance/verification/publication-terminal-
 
 **Prospective completion-lifecycle supplement, November 9, 2026.** The [scoped offline receipt](../../provenance/verification/provider-completion-lifecycle-20261109.json) records one synthetic common provider/broker regression: duplicate completions and completed agent messages after completion retain failed attempts/trials and parsed responses, leave usage unknown, and abstain before provider charges or proposed actions. Multiple valid preterminal messages remain accepted. This is a narrow completion-order guard, not a general lifecycle state machine. Future revalidation through the shared parser can differ or fail for ambiguous prior streams; no historical stream was inspected or occurrence inferred. Earlier identities and receipt snapshots retain their scope. No live evidence or historical usage, monetary charges, deployment revision or provider-origin attestation is recovered; Issue #5 c2 and #8 c6 remain partial.
 
+**Prospective duplicate-key supplement, November 9, 2026.** The shared JSON
+object-pairs hook rejects duplicate keys in event envelopes and nested objects,
+final responses, encoded broker actions and publication event decoding. Duplicate
+usage remains unknown and receives no usage charge. A rejected event or final
+response retains a failed attempt/trial; separately valid reported usage is
+recorded once. A duplicate encoded action rejects before dispatch, retaining the
+completed provider attempt and its valid usage while the trial becomes invalid
+and abstains. The [authored offline receipt](../../provenance/verification/provider-duplicate-json-20261109.json)
+records one passing regression covering those boundaries and an accepted control,
+with transport and version probing mocked.
+
+Public copies replace each duplicate-key event line with the JSON string
+`"public event omitted: duplicate JSON object key"`. This omits the entire
+ambiguous line, including escaped synthetic profile paths, while preserving
+`invalid_event`, continuation and line count in the fixtures. Raw bytes remain
+private and unchanged; the disclosed raw commitment and public derivative
+identity stay separate. The original seven metadata keys and
+`JSON_reserialization_and_user_profile_prefix_redaction` transform remain exact
+for strict readers; this text and the marker disclose the omission. This is no
+general hostile-input confidentiality or JSON resource guarantee. Future shared
+parser revalidation of ambiguous saved streams can differ or reject; no
+historical stream was inspected or repaired, and no earlier completed capture
+was rerun. Earlier
+receipts keep their captured source scope. The 90 historical failures' usage,
+charges and deployment revision remain unknown, with no finite total-cost bound
+or independent provider-origin attestation. Issue #5 c2 and #8 c6 remain partial.
+
+**Prospective saved-attempt broker replay, November 9, 2026.** The separate
+[broker fixture runner](../../scripts/run_broker_trial.py) now pins saved prompts,
+response schemas, embedded attempts and raw/public event-publication identities,
+then rebuilds its shared provider/broker driver from saved receipts. A real fresh
+fixture broker receives the reconstructed actions. Checked original-to-fresh
+opaque-handle correspondence preserves exact saved prompts while every broker
+event is compared in order. All attempts and events must be consumed; the complete
+rebuilt trial and nested evaluation must match canonically, including usage
+requests, denial, admitted charges, totals and ledger order. Replay uses a fresh
+stdlib temporary directory in the same process, without constructing a live
+provider. The [authored engineering receipt](../../provenance/verification/broker-usage-replay-20261109.json)
+records one passing capture covering ordinary sealing, failed known/unknown usage,
+denied usage and re-signed corruption checks. The denied fixture requests more
+than its input allowance while admitting no charge: zero admitted totals do not
+establish zero consumption or monetary cost. This is a later consistency
+supplement to earlier source snapshots, not provider-response regeneration,
+origin attestation, an independent live editor or historical repair. Legacy
+failed-response trials may reject under current accounting semantics; no
+compatibility bypass or historical replay was performed. The 90 historical
+failures, unknown usage, charges and deployment revision, and absence of a finite
+total-cost bound remain unchanged. Issue #8 c6 and #17 c2/c3 remain partial/open;
+the separate supported publication criterion #17 c7 is unchanged.
+
 The [replay manifest](../../artifacts/research/live-studies/replay/manifest.json) records all 224 expected assignments, 224 matching original/replay deterministic hashes, and no missing evaluations. Replay recomputes the frozen public calculations from committed selections; it does not regenerate live provider responses. Timing and random opaque handles are excluded from deterministic equality. The saved independent comparison completed at `2026-11-09T04:30:17.361270+00:00`, which was **10:30:17 p.m. on November 8, 2026** in America/Chicago. Its receipt records 2,760 evaluator input files, 18 frozen source files, and 448 outcome files across evaluation and replay. Counts are inventories, not scientific confidence or additional independent trials.
 
 The released verification bundle gives a reader distinct process-capture, artifact-comparison, environment, and sanitation evidence.

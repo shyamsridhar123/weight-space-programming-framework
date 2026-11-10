@@ -7,6 +7,30 @@ research draft.
 
 ## Unreleased
 
+- Reject duplicate JSON object keys in provider events, final responses, encoded
+  broker actions and event publication. Retain failed attempts/trials and broker
+  abstention; ambiguous usage stays unknown while separately valid usage remains
+  recorded. Public copies replace ambiguous event lines with a disclosed JSON
+  string marker, retaining the existing metadata shape and transform. The
+  [authored offline receipt](provenance/verification/provider-duplicate-json-20261109.json)
+  records one passing regression with mocked transport and version probing.
+  Raw/public identities remain separate. No historical stream was inspected or
+  repaired; unknown usage, charges, deployment revision and provider origin
+  remain unresolved. Issue #5 c2 and #8 c6 remain partial and open.
+
+- Rebuild saved-attempt broker trials through the shared driver and compare the
+  complete evaluation, including usage-ledger ordering, requested counters,
+  denial, admitted charges and totals. Pin requests, schemas and publication
+  identities; translate opaque handles while checking every broker event. The
+  [authored offline receipt](provenance/verification/broker-usage-replay-20261109.json)
+  records one passing capture of ordinary sealing, failed known/unknown usage,
+  and denied usage, with re-signed corruption checks. Replay uses a fresh
+  temporary directory, not a fresh process, and never constructs a live provider.
+  Earlier failed-response evidence retains its captured scope; this later
+  supplement supplies no provider regeneration, origin attestation, historical
+  repair, real-charge measurement or finite total-cost bound. Issue #8 c6 and
+  #17 c2/c3 remain partial and open.
+
 - Add a separately pinned raw-text serving path through preprocessing, encoder,
   native CPU float32 head inference and queue mapping, with exact parent fallback
   after rejected edits. Reuse the captured-parent validator; retain all assigned
@@ -28,7 +52,7 @@ research draft.
   [scoped offline receipt](provenance/verification/provider-failed-response-usage-20261109.json)
   records one execution of six synthetic provider/broker cases. Timeout status
   shares the source guard but has no separately asserted fixture. This supplies
-  no replay usage reconstruction, live attestation, historical usage/charge or
+  no replay usage reconstruction at that snapshot, live attestation, historical usage/charge or
   deployment-revision recovery, or finite total-cost bound. Issue #8 c6 and
   #17 c2/c3 remain partial and open.
 
