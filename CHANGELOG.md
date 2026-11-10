@@ -7,6 +7,18 @@ research draft.
 
 ## Unreleased
 
+- Preserve raw U+0085, U+2028 and U+2029 inside JSON strings when parsing and
+  publishing provider JSONL. Both functions now split LF/CRLF records, retain
+  blank records and ignore one final delimiter; empty input has no records and
+  standalone CR is not a delimiter at these function boundaries. The
+  [publication contract](docs/research/live-studies.md) and
+  [scoped engineering receipt](provenance/verification/provider-jsonl-framing-20261110.json)
+  describe the fresh synthetic checks at source `7382a3de215961c411a390962b4f87b0f845b6ba`.
+  Text-mode I/O can normalize newlines before these functions; the separate
+  construction consumer remains unchanged. New prospective source bindings
+  are required. No historical repair/replay, live-provider or impact evidence
+  is added; #5 c2 and #8 c6 remain partial and their issues stay open.
+
 - Require an object `item` on each provider event whose string `type` begins
   `item.`. Missing or nonobject items follow the existing `invalid_event` path;
   the common broker route retains the failed attempt/trial, considers independently

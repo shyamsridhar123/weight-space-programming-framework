@@ -865,6 +865,20 @@ outcomes remain unchanged; **#5 c1 remains partial and Issue #5 stays open.**
 
 **Later item-envelope supplement, November 10, 2026:** At source commit `9295d4aa382a66cb5df132eb8276908a1443c30e`, events whose string type begins `item.` require an object `item`; missing/nonobject items follow `invalid_event`. For rejected envelopes, the common broker route retains the failed attempt/trial, considers independently valid supplied usage before failure abstention, and admits no proposer actions. Missing, invalid and over-budget usage retain their distinct handling. The [item-envelope engineering receipt](../../provenance/verification/provider-item-envelope-20261110.json) records two named offline targets passing in one invocation, completed at `2026-11-10T06:30:31.278210+00:00`, with 39 recorded source/configuration identities equal before/after and no retry, timeout, error or skip. The authored offline fixtures supply no live-study evidence or complete event-schema/lifecycle validation. Exact source locks need new prospective bindings; shared-parser revalidation of older malformed envelopes can differ or fail. Earlier frozen bytes, source and receipt scopes remain intact, with no historical inspection or replay for this supplement. Historical missing usage, charges, deployment revision, provider-origin attestation and containment limits remain unresolved. #5 c2 and #8 c6 remain partial; Issues #5 and #8 stay open.
 
+**Later JSONL-framing supplement, November 10, 2026:** At source
+`7382a3de215961c411a390962b4f87b0f845b6ba`, the parser and public derivative publisher preserve
+raw Unicode separators within JSON strings using shared LF/CRLF framing. The
+[scoped engineering receipt](../../provenance/verification/provider-jsonl-framing-20261110.json)
+records `passed` in one fresh synthetic invocation completed at
+`2026-11-10T07:04:59.937099Z`, with `unchanged recorded source/configuration identities` and no
+retry. The [publication contract](live-studies.md) states the blank-record,
+standalone-CR, text-mode I/O, separate construction-consumer, test-local writer
+and verbatim-metadata limits. This supplies no live-provider, historical-replay,
+confidentiality or scientific acceptance result. Prospective source bindings
+must be renewed; earlier frozen evidence stays intact. Historical missing usage,
+charges/deployment revision, provider-origin attestation and containment remain
+unresolved. #5 c2 and #8 c6 remain partial; Issues #5 and #8 stay open.
+
 **Later JSON-depth supplement, November 9, 2026:** The [JSON-depth engineering receipt](../../provenance/verification/provider-json-depth-20261109.json) records prospective handling of recursion-limit failures in event, final-response and broker-action decoding. Event/final failures retain failed attempts and trials without admitting usage; action failure retains the completed provider attempt and its usage charge, then persists an invalid trial and abstains. The mocked fixtures establish no general JSON resource limit or public derivative sanitation. Historical evidence and unknown usage/costs remain unchanged; #5 c2 and #8 c6 stay partial.
 
 **Later public-sanitation supplement, November 9, 2026:** The [public-sanitation engineering receipt](../../provenance/verification/provider-public-recursion-20261109.json) records one passing offline synthetic invocation with two parametrized home-path cases. It covers disclosed public derivatives after decoder or sanitation recursion, exact-home fallback, escaped Windows and quoted POSIX profile prefixes, retained-redaction accounting and a following shallow event, with separate raw/public identities. This publication check is distinct from the earlier JSON-depth attempt/trial accounting capture and establishes neither general confidentiality nor complete caller-specific selection terminality. It supplies no live-study evidence and leaves historical usage, charges, deployment revision and provider-origin attestation unresolved. #5 c2 and #8 c6 remain partial.
@@ -1230,6 +1244,20 @@ unresolved. #5 c2 and #8 c6 remain partial and open.
 **Later completion-lifecycle supplement, November 9, 2026:** The [same scoped offline receipt](../../provenance/verification/provider-completion-lifecycle-20261109.json) covers synthetic completion ambiguity and an accepted control, not an independent live editor. Failed attempts/trials retain parsed responses and unknown usage before broker charges or proposed actions. Future shared-parser revalidation of ambiguous prior streams can differ or fail; no historical stream was inspected. Earlier identities and snapshots keep their scope. The 90 historical failures' missing usage, unknown monetary charges, deployment revision and provider-origin attestation remain unresolved; this criterion and #5 c2 remain partial.
 
 **Later item-envelope supplement, November 10, 2026:** The same prospective object-envelope guard at source commit `9295d4aa382a66cb5df132eb8276908a1443c30e` rejects missing/nonobject `item` values on `item.*` events. The [same scoped offline receipt](../../provenance/verification/provider-item-envelope-20261110.json) records two named targets passing in one invocation completed at `2026-11-10T06:30:31.278210+00:00`, with unchanged recorded source/configuration identities and no retry, timeout, error or skip. Authored mocked-transport fixtures are not independent live editors and supply no new live/scientific acceptance evidence. Exact source bindings must be renewed for prospective runs; shared-parser revalidation of older malformed envelopes can differ or fail. Preserve historical frozen bytes and corresponding source; no historical stream was inspected or replayed for this supplement. The 90 historical failures' missing usage, unknown monetary charges and deployment revision, provider-origin attestation and containment limits remain unresolved. This criterion and #5 c2 remain partial; Issues #5 and #8 stay open.
+
+**Later JSONL-framing supplement, November 10, 2026:** The
+[same scoped engineering receipt](../../provenance/verification/provider-jsonl-framing-20261110.json)
+at source `7382a3de215961c411a390962b4f87b0f845b6ba` records `passed` in one fresh
+synthetic invocation completed at `2026-11-10T07:04:59.937099Z`. Shared
+LF/CRLF framing preserves Unicode separators inside JSON strings; the
+[publication contract](live-studies.md) retains the I/O-normalization,
+construction-consumer, test-local writer, fallback and verbatim-metadata limits.
+This supplies no independent live editor, provider-origin attestation,
+historical repair/replay or general confidentiality guarantee. Earlier frozen
+evidence retains its scope and new prospective source bindings are required.
+The 90 historical failures' missing usage, charges/deployment revision and
+containment limits remain unresolved. This criterion and #5 c2 remain partial;
+Issues #5 and #8 stay open.
 
 **Later failed-response usage supplement, November 9, 2026:** The
 [scoped offline receipt](../../provenance/verification/provider-failed-response-usage-20261109.json)

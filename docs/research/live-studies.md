@@ -89,6 +89,36 @@ Public failure evidence is sanitized. The [failed event-publication record](../.
 
 **Prospective item-envelope supplement, November 10, 2026.** At source commit `9295d4aa382a66cb5df132eb8276908a1443c30e`, the shared provider parser requires an object `item` whenever the event's string `type` begins `item.`. Missing and nonobject items follow the existing `invalid_event` path before item classification. Object-item classification remains unchanged; this is not complete event-schema validation or a full lifecycle state machine. For rejected envelopes, the common broker route retains the failed attempt/trial and admits no proposer actions; independently valid supplied usage is considered for charging before failure abstention, while missing, invalid and over-budget usage retain their existing handling. The [scoped offline engineering receipt](../../provenance/verification/provider-item-envelope-20261110.json) records one invocation of `tests/test_research_broker.py::test_malformed_provider_event_type_retains_failed_attempt_and_trial` and `tests/test_research_broker.py::test_provider_failure_accounting_and_started_tool_detection`, both passing, completed at `2026-11-10T06:30:31.278210+00:00`. There was no retry, timeout, error or skip. The 39 recorded source/configuration identities were equal before and after the capture; this inventory does not establish a complete observed import, file-access or network closure, or executable/package-content identity. These are engineering fixtures, not live/scientific acceptance evidence or an impact estimate. The authored mocked-transport regression covers missing/nonobject items at `item.started`, `item.updated` and `item.completed`, with object-item controls. The guard also applies to other `item.`-prefixed strings; types outside that prefix retain their prior treatment. Exact source locks require new prospective bindings, and shared-parser revalidation of older malformed envelopes can differ or fail. Preserve earlier frozen bytes and source; no historical stream was inspected or replayed for this supplement. Historical missing usage, unknown monetary charges and deployment revision, provider-origin attestation and containment limits remain unresolved. #5 c2 and #8 c6 remain partial; Issues #5 and #8 stay open.
 
+**Prospective JSONL-framing supplement, November 10, 2026.** At source
+`7382a3de215961c411a390962b4f87b0f845b6ba`, the shared event parser and public derivative publisher
+use LF/CRLF record boundaries. Raw U+0085, U+2028 and U+2029 inside JSON strings
+remain within their records. One final delimiter adds no record; interior or
+extra trailing blank records remain. Empty input has no records, and standalone
+CR is not a delimiter at these two function boundaries. Private raw bytes and
+public reserialized bytes retain separate identities; existing item-envelope,
+usage and sanitation rules remain in force.
+
+The [scoped engineering receipt](../../provenance/verification/provider-jsonl-framing-20261110.json)
+records `passed` for the selected synthetic checks in one fresh
+invocation completed at `2026-11-10T07:04:59.937099Z`, with no retry and
+`unchanged recorded source/configuration identities`. The checks compare public bytes/records,
+parser interpretation, redaction counts, metadata copies and event identities,
+including empty/standalone-CR controls. The publication-key module uses its
+disclosed test-local JSON writer. Counts and timing are execution bookkeeping.
+
+This contract covers strings/bytes actually presented to these functions.
+Subprocess text mode and replay `Path.read_text()` can normalize newlines first.
+The construction verifier retains its independent `event_text.splitlines()`
+loop. Valid published JSON ASCII-escapes Unicode; malformed fallback records and
+other consumers have no blanket end-to-end guarantee. Copied request/schema/
+receipt metadata remains verbatim, without a general confidentiality guarantee.
+Changed source requires new prospective bindings; earlier frozen bytes and
+receipt scopes remain intact. No historical stream was inspected, relocked,
+repaired or replayed for this supplement. Historical missing usage, unknown
+charges/deployment revision, provider-origin attestation and containment limits
+remain unresolved. No live-provider, scientific, full-suite or business-impact
+result is added. #5 c2 and #8 c6 remain partial; Issues #5 and #8 stay open.
+
 **Prospective JSON-depth supplement, November 9, 2026.** The adapter now handles recursion-limit failures while parsing event envelopes and final responses through its existing `invalid_event` and `invalid_final_response` paths. The common broker route also retains a trial when decoding an over-nested action string: the provider attempt remains completed, its valid usage stays charged, and the trial becomes invalid before normal abstention. The [scoped offline engineering receipt](../../provenance/verification/provider-json-depth-20261109.json) distinguishes those outcomes and a shallow accepted control, with raw-event commitments and saved attempt/trial records. It covers the mocked fixtures, not a general JSON resource limit or public derivative sanitation. Earlier receipts retain their source scope; historical unknown usage, monetary charges, deployment revision and provider-origin attestation remain unresolved. Issue #5 c2 and #8 c6 remain partial.
 
 **Prospective public-sanitation supplement, November 9, 2026.** The shared publication fallback now retains a disclosed derivative after recursion failure during JSON decoding, recursive sanitation or serialization. The [scoped offline engineering receipt](../../provenance/verification/provider-public-recursion-20261109.json) records one passing synthetic invocation with two parametrized home-path cases, covering exact-home fallback, escaped Windows and quoted POSIX profile prefixes, retained-redaction accounting and continuation to a shallow event. Raw and public identities remain separate. This publication check is distinct from the earlier JSON-depth attempt/trial accounting capture; it establishes neither general confidentiality nor complete caller-specific selection terminality. It adds no live evidence or historical changes. Unknown usage, monetary charges, deployment revision and provider-origin attestation remain unresolved; Issue #5 c2 and #8 c6 remain partial.
