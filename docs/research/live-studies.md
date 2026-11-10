@@ -97,6 +97,21 @@ The [scoped offline receipt](../../provenance/verification/publication-terminal-
 
 **Prospective completion-lifecycle supplement, November 9, 2026.** The [scoped offline receipt](../../provenance/verification/provider-completion-lifecycle-20261109.json) records one synthetic common provider/broker regression: duplicate completions and completed agent messages after completion retain failed attempts/trials and parsed responses, leave usage unknown, and abstain before provider charges or proposed actions. Multiple valid preterminal messages remain accepted. This is a narrow completion-order guard, not a general lifecycle state machine. Future revalidation through the shared parser can differ or fail for ambiguous prior streams; no historical stream was inspected or occurrence inferred. Earlier identities and receipt snapshots retain their scope. No live evidence or historical usage, monetary charges, deployment revision or provider-origin attestation is recovered; Issue #5 c2 and #8 c6 remain partial.
 
+**Prospective UTF-8 version-probe supplement, November 9, 2026.** A single
+`UnicodeError` addition to the existing startup handler retains a failed attempt
+and brokered trial when strict UTF-8 decoding of the CLI version probe fails.
+The [authored offline receipt](../../provenance/verification/provider-version-utf8-20261109.json)
+records one passing regression that injects `UnicodeDecodeError` at mocked
+`subprocess.run`; actual CLI decoding is not exercised. Its assertions cover
+one probe, zero workers or retries despite `max_rounds=3`, empty event/stderr
+streams, null CLI version/response/returncode and unknown usage/cost. No usage
+admission or proposal occurs; normal abstention
+seals the broker. Zero admission does not establish zero consumption. No
+historical stream was inspected, repaired or rerun. Earlier receipts retain
+their captured scope; the 90 historical failures' usage, charges and deployment
+revision remain unknown, with no finite total-cost bound or independent
+provider-origin attestation. Issue #5 c2 and #8 c6 remain partial and open.
+
 **Prospective duplicate-key supplement, November 9, 2026.** The shared JSON
 object-pairs hook rejects duplicate keys in event envelopes and nested objects,
 final responses, encoded broker actions and publication event decoding. Duplicate
