@@ -7,6 +7,16 @@ research draft.
 
 ## Unreleased
 
+- Add an isolated [complete-count receipt helper](scripts/staged_scientific_count_receipts.py)
+  with exact schema/count validation, exclusive creation, flush/`fsync` and
+  canonical rereading against independently retained bindings and body digest.
+  Literal temporary-file checks cover corruption, coherently rehashed
+  substitution and failed writes; the [scoped receipt](provenance/verification/staged-count-receipts-20261110.json)
+  retains the initial setup failure and the corrected passing invocation.
+  This adds local persistence correspondence;
+  scientific integration, execution attestation and durable registry joins
+  remain unresolved. Issue #9 c1 remains partial/open.
+
 - Add an isolated [native whole-slot count evaluator](scripts/staged_scientific_evaluator.py)
   and select its authored fixtures with literal expected counts in
   `pytest-engineering.ini`.

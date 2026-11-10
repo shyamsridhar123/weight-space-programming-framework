@@ -1,0 +1,279 @@
+{
+  "schema": "rlcd.staged-count-receipts-publication/1",
+  "date": "2026-11-10",
+  "integrated_main_base": "21acf6fe06c0018ecd3808d3ee3f47c3d06d7ba1",
+  "issue": {
+    "number": 9,
+    "state": "open",
+    "c1": "partial"
+  },
+  "change": {
+    "purpose": "Isolated create-once canonical receipts for complete native slot-count claims, against independently retained bindings and body digest.",
+    "checked_source_inputs": [
+      {
+        "path": "scripts/staged_scientific_count_receipts.py",
+        "bytes": 8627,
+        "sha256": "92e134556edcb6b035a38ab1d89f69079d54dc030370513c1974833bf866a803"
+      },
+      {
+        "path": "tests/test_staged_scientific_count_receipts.py",
+        "bytes": 13447,
+        "sha256": "7e2f9935bc8bf4e2e329131e3fffd6645407993c352326852962fc127a04cdd3"
+      },
+      {
+        "path": "pytest-engineering.ini",
+        "bytes": 2009,
+        "sha256": "7e37e0d15932e013e471f57b448a9bd841eb9fe75b29152ef7cbeb9fc328756b"
+      }
+    ],
+    "receipt_sha256_semantics": "Digest of the canonical seven-field result body, excluding the added sha256 field and storage newline; not the whole-file checksum."
+  },
+  "selection": {
+    "test_nodes": [
+      "tests/test_staged_scientific_count_receipts.py::test_canonical_roundtrip_captures_inputs_and_preserves_recorded_runtime",
+      "tests/test_staged_scientific_count_receipts.py::test_invalid_payloads_and_independent_bindings_reject_before_creation",
+      "tests/test_staged_scientific_count_receipts.py::test_strict_reread_rejects_corruption_and_coherently_rehashed_substitution",
+      "tests/test_staged_scientific_count_receipts.py::test_exclusive_creation_and_io_failures_never_recover_or_overwrite",
+      "tests/test_staged_scientific_count_receipts.py::test_ordinary_file_and_parent_checks_reject_links"
+    ],
+    "pytest_invocation_attempts": 2,
+    "automatic_retry_performed": false,
+    "scope": "Explicitly selected literal-record/temporary-file engineering fixtures only; counts and timestamps describe execution bookkeeping, not scientific accuracy or business impact."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "failed",
+      "started_at_utc": "2026-11-10T09:44:44.117122+00:00",
+      "finished_at_utc": "2026-11-10T09:44:47.030317+00:00",
+      "exit_code": 1,
+      "timed_out": false,
+      "recorded_identities_unchanged": true,
+      "cases": {
+        "tests": 5,
+        "passed": 0,
+        "failure": 0,
+        "error": 5,
+        "skipped": 0
+      },
+      "case_outcomes": [
+        {
+          "classname": "tests.test_staged_scientific_count_receipts",
+          "name": "test_canonical_roundtrip_captures_inputs_and_preserves_recorded_runtime",
+          "outcome": "error"
+        },
+        {
+          "classname": "tests.test_staged_scientific_count_receipts",
+          "name": "test_invalid_payloads_and_independent_bindings_reject_before_creation",
+          "outcome": "error"
+        },
+        {
+          "classname": "tests.test_staged_scientific_count_receipts",
+          "name": "test_strict_reread_rejects_corruption_and_coherently_rehashed_substitution",
+          "outcome": "error"
+        },
+        {
+          "classname": "tests.test_staged_scientific_count_receipts",
+          "name": "test_exclusive_creation_and_io_failures_never_recover_or_overwrite",
+          "outcome": "error"
+        },
+        {
+          "classname": "tests.test_staged_scientific_count_receipts",
+          "name": "test_ordinary_file_and_parent_checks_reject_links",
+          "outcome": "error"
+        }
+      ],
+      "private_capture_commitments": {
+        "launch.py": {
+          "bytes": 6113,
+          "sha256": "790a2edc3ddc3ebf30ed14ebf674366f38270ec07251ceb2a5471737edc27e5a"
+        },
+        "execution-plan.json": {
+          "bytes": 2382,
+          "sha256": "347c089b22d3b495f7bcf500a96cc5603f9cac934803a4d9097c10e5f77af2e0"
+        },
+        "identities.before.json": {
+          "bytes": 6369,
+          "sha256": "48feddce32768d55b4d1c1bc52b5ad7e6db9353b129cf50318b457776e615cdb"
+        },
+        "attempt.started.json": {
+          "bytes": 135,
+          "sha256": "809dbea0201ebba358873aa2862c655f923080dee5c781cf17a6a7ab6a38194a"
+        },
+        "identities.after.json": {
+          "bytes": 6369,
+          "sha256": "48feddce32768d55b4d1c1bc52b5ad7e6db9353b129cf50318b457776e615cdb"
+        },
+        "result.json": {
+          "bytes": 2614,
+          "sha256": "dd62e55c9626aaec6163248a53745941fc573f66b99322fa43a86d9bc9c2674a"
+        },
+        "stdout.txt": {
+          "bytes": 6979,
+          "sha256": "98726d6b380dc19352b3afecc605ab5c39b075199aed7744490ad3f690748405"
+        },
+        "stderr.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "junit.xml": {
+          "bytes": 5890,
+          "sha256": "f5c7e23f07c40ab69ece35dc51ffb9a467a18956808fc9e5cbba4c9bad5aeca2"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "status": "passed",
+      "started_at_utc": "2026-11-10T09:47:29.862025+00:00",
+      "finished_at_utc": "2026-11-10T09:47:31.590059+00:00",
+      "exit_code": 0,
+      "timed_out": false,
+      "recorded_identities_unchanged": true,
+      "cases": {
+        "tests": 5,
+        "passed": 5,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "case_outcomes": [
+        {
+          "classname": "tests.test_staged_scientific_count_receipts",
+          "name": "test_canonical_roundtrip_captures_inputs_and_preserves_recorded_runtime",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_scientific_count_receipts",
+          "name": "test_invalid_payloads_and_independent_bindings_reject_before_creation",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_scientific_count_receipts",
+          "name": "test_strict_reread_rejects_corruption_and_coherently_rehashed_substitution",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_scientific_count_receipts",
+          "name": "test_exclusive_creation_and_io_failures_never_recover_or_overwrite",
+          "outcome": "passed"
+        },
+        {
+          "classname": "tests.test_staged_scientific_count_receipts",
+          "name": "test_ordinary_file_and_parent_checks_reject_links",
+          "outcome": "passed"
+        }
+      ],
+      "private_capture_commitments": {
+        "launch.py": {
+          "bytes": 6148,
+          "sha256": "3427dfd8ba321a3659c63e45701710d1c29927627030ba882459fe681f882ad6"
+        },
+        "execution-plan.json": {
+          "bytes": 2402,
+          "sha256": "75c723b8ceb2c992aa99b018b0d4a28beeb0686a56056dba01827d8fe7154cbf"
+        },
+        "identities.before.json": {
+          "bytes": 6369,
+          "sha256": "48feddce32768d55b4d1c1bc52b5ad7e6db9353b129cf50318b457776e615cdb"
+        },
+        "attempt.started.json": {
+          "bytes": 135,
+          "sha256": "926101300d4cecc8667856a06062db7fa52901ee73828aa049030cc302c707b6"
+        },
+        "identities.after.json": {
+          "bytes": 6369,
+          "sha256": "48feddce32768d55b4d1c1bc52b5ad7e6db9353b129cf50318b457776e615cdb"
+        },
+        "result.json": {
+          "bytes": 1279,
+          "sha256": "eade45065c153bb87ca0d5a3efdc52c71cd4e142bea84deddb397cb038f29a6b"
+        },
+        "stdout.txt": {
+          "bytes": 1221,
+          "sha256": "33b67d17d2c9206ac09753fc107b705c292d4522e24b3e507960723ed9865cb0"
+        },
+        "stderr.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "junit.xml": {
+          "bytes": 1025,
+          "sha256": "522afed11f6e49463ab9956ab39ae7a81ce3013b0b7ddbab4de160c530702865"
+        }
+      }
+    }
+  ],
+  "setup_correction": {
+    "initial_test_bodies_reached": false,
+    "reason": "Pytest tmp_path setup could not create the supplied basetemp because its worktree .runs parent was absent.",
+    "change": "A separately retained corrected launcher creates only that parent before invoking pytest with a distinct fresh basetemp. Helper, test and configuration bytes are unchanged across attempts.",
+    "initial_capture_retained": true
+  },
+  "link_checks": {
+    "test_outcome": "passed",
+    "symlink_rejection_assertions_exercised": true,
+    "ordinary_file_and_missing_parent_assertions_precede_optional_skip": true,
+    "scope": "Local symlink cases ran."
+  },
+  "checked_engineering_obligations": [
+    "Exact plain-container/scalar types and keys; all five independent binding identities; fixed supported execution declaration; complete class and total count arithmetic, including reserved predictions bounded by incorrect predictions.",
+    "Recorded runtime observation validation without querying or changing current numerical runtime; caller inputs captured before opening, fresh returned dictionaries and count boundary cases.",
+    "Canonical finite JSON plus one newline; independent body commitment rejects corruption and coherently rehashed substitutions.",
+    "Exclusive creation; short write, write, flush, fsync and reread failures propagate; existing or failed destinations remain without overwrite, cleanup or automatic recovery."
+  ],
+  "methods": {
+    "source_inventory_entries": 18,
+    "runtime_inventory_entries": 7,
+    "recorded_identities_before_after_and_between_attempts_equal": true,
+    "startup": "Child Python -I -S -B, explicit worktree and existing venv site-packages paths; automatic site initialization and .pth execution suppressed. Existing package initialization and NumPy dependencies remain; existing bytecode reads are possible.",
+    "environment_cleared": true,
+    "environment_allowlist_names": [
+      "PATH",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD",
+      "SystemRoot",
+      "TEMP",
+      "TMP",
+      "WINDIR"
+    ],
+    "pytest_config": "pytest-engineering.ini",
+    "noconftest": true,
+    "cache_provider_disabled": true,
+    "plugin_autoload_disabled": true,
+    "explicit_test_nodes": true,
+    "fresh_worktree_contained_basetemp": true,
+    "parent_timeout_seconds": 45,
+    "timeout_action": "Attempt process-tree termination, bounded to five seconds, then wait up to five seconds; exceptional cleanup kills the immediate child with a bounded wait. These branches were source-reviewed, not fault-injected.",
+    "authoritative_outcome": "Retained result.json with exact JUnit case identities and outcomes, exit status and before/after content identities; ordinary pytest failure propagates as shell failure.",
+    "historical_dependency_lock_installed_or_changed": false,
+    "native_evaluator_or_registry_executed": false,
+    "publication_verifier_executed_locally": false,
+    "broad_local_suite_executed": false
+  },
+  "scientific_boundary": {
+    "study_selected": false,
+    "study_execution": "unexecuted",
+    "scientific_identities": "null in the unchanged scientific draft",
+    "selection_admission_rejects_protocol_evaluation_plan": true,
+    "evaluation_available": false,
+    "final_study_seal": false,
+    "issue9_c1_status": "partial",
+    "issue9_kept_open": true,
+    "unresolved": "Scientific ownership/API and complete eleven-entry seal with every training/condition/stage terminal; verification before holdout generation/registration/forward; one aggregate registry attempt for eight lineages including failed parents; integration of full-slot persistence and durable reservation/observation joins after callback return or unwinding; failures, unknown outcomes, aliases and all 880 proposed logical slot attributions."
+  },
+  "trust_and_scope_limits": [
+    "Literal engineering records and temporary files supply persistence checks only; no trained study, historical replay, data generation, scientific selection/admission, native evaluator or registry authorization was run.",
+    "The body digest must be independently retained; embedded hashes alone do not reject a coherently rehashed substitution. Recorded runtime declarations and valid bytes do not attest execution or provenance.",
+    "A complete canonical file can remain after flush/fsync/reread failure. A later successful reader establishes byte/schema/commitment correspondence, not that the original writer returned successfully.",
+    "Pre-open lstat/link/reparse checks do not protect against concurrent filesystem replacement, establish independently owned storage or guarantee power-loss durability.",
+    "Source/runtime identities are partial inventories, not complete dependency or execution attestation, a sandbox, historical lock agreement, a performance advantage, scientific utility or business impact.",
+    "Private capture commitments bind retained bytes only. Absolute local paths, raw logs, environment values and per-case durations are omitted. UTC attempt start/finish timestamps are retained solely as execution bookkeeping.",
+    "Local execution does not verify later documentation/publication edits. Hosted checks/review are separate post-commit evidence; the receipt helper does not establish scientific admission or a durable registry join."
+  ],
+  "later_publication": {
+    "receipt_and_documentation_finalized_after_execution": true,
+    "verified_by_recorded_fixture_execution": false,
+    "publication_bookkeeping_reran_tests": false,
+    "hosted_checks_are_separate_post_commit_evidence": true
+  }
+}
