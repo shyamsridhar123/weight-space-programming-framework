@@ -4063,5 +4063,43 @@
     "publication_bookkeeping_reran_test": false,
     "later_publication_verified_by_recorded_test": false,
     "publication_scope": "Distinct supplement; previous manifest entry bytes/values/order, source-files.json, earlier receipt scopes, historical outcomes and unrelated checksum lines preserved. No completed capture or scientific study rerun."
+  },
+  "raw_text_serving_ci_selection_update_20261110": {
+    "review_date": "2026-11-10",
+    "base_commit": "f0c23c6ae4a6ba6a93722cc26a4576a08453e5cc",
+    "published_file_identities": [
+      {
+        "path": "pytest-engineering.ini",
+        "bytes": 1878,
+        "sha256": "dceafffac246b97835dcc470e02f828b744f4e2ab31e0da43c4e7bb40964e1c7"
+      },
+      {
+        "path": "CONTRIBUTING.md",
+        "bytes": 7634,
+        "sha256": "694df2b4c662eb3021b8c27bb5ba86d77366932f0fcd5ec857ef0443c52d19d7"
+      },
+      {
+        "path": "REPRODUCING.md",
+        "bytes": 19685,
+        "sha256": "06cb5e3ae3bfe8b7018358d7f27073c3c92f921043a1f66127226f2ee743bad8"
+      },
+      {
+        "path": "CHANGELOG.md",
+        "bytes": 59132,
+        "sha256": "2fb129abe6d72d7bd1e518b42c39cafa0f131e2d78f6204cf4883f7158405a8a"
+      }
+    ],
+    "scope": "Source-only configuration and documentation supplement separating tests/test_raw_text_serving.py from the configured engineering selection. The retained module remains available for explicitly selected opt-in validation; a passing configured engineering suite does not revalidate raw-text serving.",
+    "hosted_workflow_scope": "The unchanged .github/workflows/publication-python.yml still installs and imports CPU Torch, runs the remaining engineering selection with native and numerical checks, builds the wheel and executes installed-wheel examples. Removing this module does not make hosted CI source-only. Push and pull-request triggers remain configured; subsequent hosted outcomes are separate evidence.",
+    "local_regression_rerun_performed": false,
+    "raw_text_serving_execution_performed_for_this_supplement": false,
+    "publication_verifier_executed_for_this_supplement": false,
+    "historical_source_bindings_rewritten": false,
+    "earlier_runtime_capture_verifies_this_change": false,
+    "hosted_success_inferred": false,
+    "issue14_c1_status": "partial",
+    "issue14_c5_status": "partial",
+    "issue14_kept_open": true,
+    "publication_scope": "Distinct source-only supplement appended without changing previous publication entry values or order. Original source inventory, earlier receipts and captured configuration identities, original criteria and historical outcomes retain their recorded scope. Earlier snapshot-specific match flags do not verify this later configuration/documentation change. No new serving, timing, resource-cost, scientific or business-impact observation is supplied. Subsequent hosted validation is recorded separately without a test or verifier pass inferred from this review."
   }
 }

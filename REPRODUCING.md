@@ -107,6 +107,8 @@ In PowerShell, set `$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD = "1"` first, then run t
 
 Use this selection to check edit algebra, certificate boundaries, tensor/adaptor compatibility, lowering, native precision, feature editing, sequential bounds, workflow state, factory behavior, publication sanitation, and the proof bridge. [pytest-engineering.ini](pytest-engineering.ini) selects the engineering files and deselects three generic study tests. The independent-auditor fixtures and other research suites are outside this selection. The historical `pytest.ini` remains unchanged; omitting `-c pytest-engineering.ini` uses its broader collection.
 
+The configured suite excludes [tests/test_raw_text_serving.py](tests/test_raw_text_serving.py). This retained module is separate opt-in validation: selecting it constructs authored model/package fixtures, restores model bytes, runs preprocessing and native CPU inference, and launches one actual baseline child. Select it only when that execution is within the agreed validation scope. A passing configured engineering suite therefore does not revalidate raw-text serving. The remaining selection still includes native and numerical work; configured CI is narrower, not native-free. Explicit test paths can select files outside this whitelist; omitting the engineering config uses broader collection.
+
 Keep `--basetemp` inside this checkout and choose an unused `.runs/` directory for each invocation: pytest clears that directory before use.
 
 For focused work, choose files listed in `pytest-engineering.ini`. Explicit test paths override its `testpaths` list:
