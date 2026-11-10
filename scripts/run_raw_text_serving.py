@@ -14,7 +14,6 @@ import time
 _IMPORT_STARTED = time.perf_counter()
 
 import argparse
-from collections import Counter
 import os
 from pathlib import Path
 import platform
@@ -29,6 +28,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from rlcd.serving_metrics import summarize_serving_jobs, validate_first_output_timing
 from rlcd.weight_space.artifact import TensorArtifact
 from rlcd.weight_space.model import canonical_bytes, digest
 from rlcd.weight_space.research_tasks import (
@@ -47,9 +47,14 @@ TIMING_SCOPE = {
     "load": "Source hashes and captured package/batch read, hash, parse, restore, and validation.",
     "exclusive_stages": "Preprocessing; encoder including copies/validation; native head, argmax, and queue mapping.",
     "raw_call": "Independent wall around all three stages, including intervening durable progress writes; output hashing is excluded.",
+    "load_to_first_output": (
+        "Worker wall from immediately before measured load after native setup until complete first-batch receipt validation returns; "
+        "includes source/package/batch loading and validation, durable progress writes, first raw call, payload hashing, and first-batch validation. "
+        "Excludes imports, native setup, interpreter/launch time, and final progress/receipt writes after the endpoint. "
+        "Complete batch, not first token or row; overlaps load and first raw call and is never additive."),
     "process": "Parent wall from before launch until exit or timeout kill/reap; includes imports, load, all calls and child output writes.",
     "cache": "Fresh process per job, with no claim of cold operating-system file caches.",
-    "failures": "An interrupted stage has null duration; failed jobs never contribute success latency samples.",
+    "failures": "An interrupted stage has null duration; first-output observations survive later failure; unsuccessful assignments never contribute success latency samples.",
     "memory": "Not measured; memory usage is unknown.",
     "energy": "Not measured; energy use is unknown.",
 }
@@ -81,7 +86,8 @@ def _snapshot(path: Path, value: dict) -> None:
 
 
 def _source_identity() -> dict:
-    paths = [Path(__file__).resolve(), *sorted((ROOT / "rlcd/weight_space").glob("*.py")),
+    paths = [Path(__file__).resolve(), ROOT / "rlcd/__init__.py", ROOT / "rlcd/serving_metrics.py",
+             *sorted((ROOT / "rlcd/weight_space").glob("*.py")),
              ROOT / "pyproject.toml", ROOT / "requirements.lock.txt"]
     return {path.relative_to(ROOT).as_posix(): _sha(path.read_bytes()) for path in paths}
 
@@ -236,12 +242,13 @@ def worker(package: Path, manifest_sha256: str, batch: Path, batch_sha256: str,
         raise ValueError("job_identity_required")
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
-    record = {"schema": "wsp-raw-text-serving-job/1", "job_id": job_id, "status": "running",
+    record = {"schema": "wsp-raw-text-serving-job/2", "job_id": job_id, "status": "running",
               "binding": {"manifest_sha256": manifest_sha256, "batch_sha256": batch_sha256,
                           "warmup": warmup, "repeats": repeats},
               "sources": None, "environment": None, "identities": None,
               "initialization_seconds": {"imports": _IMPORT_SECONDS, "native_setup": None},
-              "load_seconds": {"load": None}, "active_stage": None, "active_call": None,
+              "load_seconds": {"load": None}, "load_to_first_output_seconds": None,
+              "active_stage": None, "active_call": None,
               "calls": [{"index": i, "phase": phase, "status": "pending",
                          "seconds": dict.fromkeys(STAGES), "outputs": None}
                         for i, phase in enumerate(phases)],
@@ -264,6 +271,7 @@ def worker(package: Path, manifest_sha256: str, batch: Path, batch_sha256: str,
 
     try:
         record["environment"] = measured("native_setup", record["initialization_seconds"], _native_environment)
+        load_started = time.perf_counter()
         loaded = measured("load", record["load_seconds"], load)
         record["identities"] = loaded["identities"]
         rows, encoder = loaded["rows"], loaded["encoder"]
@@ -297,6 +305,11 @@ def worker(package: Path, manifest_sha256: str, batch: Path, batch_sha256: str,
             if expected_digest is not None and call["outputs"]["sha256"] != expected_digest:
                 raise ValueError("repeated_output_mismatch")
             expected_digest = call["outputs"]["sha256"]
+            if call["phase"] == "first":
+                problem = _validate_record(record, job_id, record["binding"], record["sources"], complete=False)
+                if problem is not None:
+                    raise ValueError(problem)
+                record["load_to_first_output_seconds"] = time.perf_counter() - load_started
             call["status"] = "succeeded"
             record["active_stage"], record["active_call"] = None, None
             _snapshot(output / "progress.json", record)
@@ -316,8 +329,9 @@ def _validate_record(value: Any, job_id: str, binding: dict, sources: dict, *, c
     try:
         if (type(value) is not dict or set(value) != {
                 "schema", "job_id", "status", "binding", "sources", "environment", "identities",
-                "initialization_seconds", "load_seconds", "active_stage", "active_call", "calls",
-                "failure", "timing_scope", *FLAGS} or value["schema"] != "wsp-raw-text-serving-job/1"):
+                "initialization_seconds", "load_seconds", "load_to_first_output_seconds",
+                "active_stage", "active_call", "calls", "failure", "timing_scope", *FLAGS}
+                or value["schema"] != "wsp-raw-text-serving-job/2"):
             return "malformed_receipt"
         if value["job_id"] != job_id or canonical_bytes(value["binding"]) != canonical_bytes(binding):
             return "identity_mismatch"
@@ -474,6 +488,11 @@ def _validate_record(value: Any, job_id: str, binding: dict, sources: dict, *, c
                 or (value["load_seconds"]["load"] is not None and value["initialization_seconds"]["native_setup"] is None)
                 or (identities is not None and (environment is None or value["sources"] is None or value["load_seconds"]["load"] is None))):
             return "malformed_receipt"
+        validate_first_output_timing(
+            value["load_to_first_output_seconds"],
+            first_succeeded=value["calls"][0]["status"] == "succeeded",
+            load_seconds=value["load_seconds"]["load"],
+            first_raw_seconds=value["calls"][0]["seconds"]["raw_call"])
         return None
     except (KeyError, TypeError, ValueError, IndexError, OverflowError, RecursionError):
         return "malformed_receipt"
@@ -509,7 +528,7 @@ def run(package: Path, manifest_sha256: str, batch: Path, batch_sha256: str,
                  "returncode": None, "receipt": None, "receipt_sha256": None,
                  "receipt_validation": None, "progress": None, "progress_validation": None,
                  "failure": None} for i in range(jobs)]
-    record = {"schema": "wsp-raw-text-serving-run/1", "binding": binding,
+    record = {"schema": "wsp-raw-text-serving-run/2", "binding": binding,
               "timeout_seconds": timeout_seconds, "jobs": assigned, "sources": None,
               "summary": None, "timing_scope": TIMING_SCOPE, **FLAGS}
     # Every job is durable before source reads or the first child is launched.
@@ -553,15 +572,7 @@ def run(package: Path, manifest_sha256: str, batch: Path, batch_sha256: str,
                 job_output / "progress.json", job["job_id"], binding, record["sources"], complete=False)
             job["progress_validation"] = problem or "accepted_partial"
         _snapshot(output / "run.json", record)
-    successful = [job for job in assigned if job["status"] == "succeeded"]
-    samples = [{"job_id": job["job_id"], "call_index": call["index"], "seconds": call["seconds"]}
-               for job in successful for call in job["receipt"]["calls"] if call["phase"] == "measured"]
-    record["summary"] = {"assigned_jobs": jobs, "successful_jobs": len(successful),
-                         "unsuccessful_jobs": jobs - len(successful),
-                         "dispositions": dict(Counter(job["status"] for job in assigned)),
-                         "measured_calls_assigned": jobs * repeats,
-                         "measured_calls_excluded_from_success_samples": jobs * repeats - len(samples),
-                         "conditional_success_samples": samples}
+    record["summary"] = summarize_serving_jobs(assigned, repeats)
     _snapshot(output / "run.json", record)
     return record
 

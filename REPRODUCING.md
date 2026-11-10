@@ -107,7 +107,13 @@ In PowerShell, set `$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD = "1"` first, then run t
 
 Use this selection to check edit algebra, certificate boundaries, tensor/adaptor compatibility, lowering, native precision, feature editing, sequential bounds, workflow state, factory behavior, publication sanitation, and the proof bridge. [pytest-engineering.ini](pytest-engineering.ini) selects the engineering files and deselects three generic study tests. The independent-auditor fixtures and other research suites are outside this selection. The historical `pytest.ini` remains unchanged; omitting `-c pytest-engineering.ini` uses its broader collection.
 
+The selection includes [tests/test_serving_metrics.py](tests/test_serving_metrics.py), with six literal `unittest` cases for helper scalar/lifecycle validation and supplied-job summary accounting. An isolated literal invocation passed these cases; its [receipt](provenance/verification/serving-first-output-literal-20261110.json) binds the checked parent initializer, helper, and test bytes. These helper checks cannot establish timer placement, worker lifecycle, native serving, measured latency, performance improvement, or impact.
+
 The configured suite excludes [tests/test_raw_text_serving.py](tests/test_raw_text_serving.py). This retained module is separate opt-in validation: selecting it constructs authored model/package fixtures, restores model bytes, runs preprocessing and native CPU inference, and launches one actual baseline child. Select it only when that execution is within the agreed validation scope. A passing configured engineering suite therefore does not revalidate raw-text serving. The remaining selection still includes native and numerical work; configured CI is narrower, not native-free. Explicit test paths can select files outside this whitelist; omitting the engineering config uses broader collection.
+
+The authored `load_to_first_output_seconds` starts once after native setup, immediately before measured load, and stops after successful in-memory receipt validation for the complete first batch. It measures a complete batch, not the first token or row. It is null before first-call success, finite and nonnegative afterward, and retained after later failure. It overlaps load and the first raw call and stays outside additive totals.
+
+Conditional summaries use supervisor-assigned job status and exclude unsuccessful assignments even when a finite observation exists. Job/run schemas advance to `/2`; package/policy/batch remain `/1`. #14 remains partial/open.
 
 Keep `--basetemp` inside this checkout and choose an unused `.runs/` directory for each invocation: pytest clears that directory before use.
 
