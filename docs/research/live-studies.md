@@ -219,6 +219,18 @@ failures' missing usage, unknown charges and deployment revision, absence of a
 finite total-cost bound and provider-origin attestation remain unresolved.
 Issue #5 c1 stays partial and open; #5 c2 and #8 c6 remain partial/open.
 
+**Prospective broker-control inventory, November 9, 2026.** The
+[source-pinned inventory](broker-control-inventory.md) distinguishes declared
+policy, enforced broker checks and residual host trust. Successful metadata and
+trusted audits now record effective request limits as
+`wsp-broker-request-limits/1`; the [authored engineering receipt](../../provenance/verification/broker-request-limits-20261109.json)
+covers the new synthetic boundary regression. Older absent fields mean
+unrecorded limits. New metadata changes response bytes and transcript/audit
+hashes; the exact-response replay below may differ or fail for older transcripts
+under current source. Preserve their bytes and frozen source context. This
+adds no historical replay, stronger containment, live evidence or cost recovery;
+Issue #5 c1 remains partial and open.
+
 **Prospective saved-attempt broker replay, November 9, 2026.** The separate
 [broker fixture runner](../../scripts/run_broker_trial.py) now pins saved prompts,
 response schemas, embedded attempts and raw/public event-publication identities,
