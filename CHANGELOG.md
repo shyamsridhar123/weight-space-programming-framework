@@ -7,6 +7,14 @@ research draft.
 
 ## Unreleased
 
+- Draft a separately scoped [recognition-repair study](docs/research/recognition-repair-next-study.md)
+  with an exposure inventory, development-justified useful gain, matched ordinary
+  controls, paired trained-lineage inference and complete lifecycle accounting.
+  Freeze and execution gates retain failed assignments and unknown costs.
+  This source-only proposal preserves historical criteria and negative results;
+  measured complete lifecycle cost is still required for Issue #7 c3, which
+  remains partial and open alongside the unresolved Issue #14 and #11 scopes.
+
 - Reject duplicate provider completions and completed agent messages after
   completion through the existing failed-attempt/trial path, retaining the
   parsed response and unknown usage before broker charges or proposed actions.

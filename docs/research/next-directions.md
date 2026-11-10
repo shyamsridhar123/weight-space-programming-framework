@@ -324,6 +324,12 @@ frontier, recommend it for that case and use recognition repair to identify
 the remaining research question. This sharpens #7 rather than replacing its
 frozen design.
 
+The [prospective recognition-repair companion](recognition-repair-next-study.md)
+specifies the separate exposure, development, comparison, uncertainty and cost
+decisions needed before freezing a new study. Its go/no-go gates retain all
+assigned failures and abstentions. It is a source-only design, with complete
+lifecycle measurement still outstanding for #7 and the broader #14 cost scope.
+
 ### 2. Test a fixed editor with accumulating feedback
 
 After the trained-task evidence permits a new study, introduce a small,
