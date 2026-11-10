@@ -93,10 +93,78 @@ modules, aliases, buffers, caches, random state and deployment effects are outsi
 its contract. Its empirical floating-point execution supplies neither a formal
 floating-point proof nor evidence of useful or causal repair.
 
-The [staged diagnosis guide](../research/staged-diagnosis.md#registered-cohort-evaluation)
-describes the separate generic cohort evaluation path. This adapter supplies no
-cohort integration or automatic runtime receipt binding. Generic cohort
+## Registered sequential slot evaluation
+
+[`evaluate_sequential_slot`](../../rlcd/weight_space/sequential_slot_evaluator.py)
+is an optional trusted evaluator for the
+[registered cohort bridge](../research/staged-diagnosis.md#registered-cohort-evaluation).
+Freeze every applicable slot with exactly `result_keys: ["sequential"]` and the
+six-field execution declaration above before constructing the cohort. For example,
+this selected slot uses the earlier `execution` object:
+
+```python
+slot = {
+    "slot_id": "repaired",
+    "source": {"kind": "selected", "fallback_control_id": None},
+    "execution": execution.to_dict(),
+    "result_keys": ["sequential"],
+}
+```
+
+After the separate diagnosis and repair passes, complete repair barrier and
+endpoint seal, supply the helper directly:
+
+```python
+from rlcd.weight_space.sequential_slot_evaluator import evaluate_sequential_slot
+
+evaluation_receipt = cohort.evaluate_registered(load_holdouts, evaluate_sequential_slot)
+```
+
+Each supplied row is a plain JSON object containing an `inputs` object with
+exactly the runtime's input names. Other finite JSON row fields are allowed and
+remain part of the full-row commitment. The helper validates the context and
+every row as plain finite JSON, restores against
+`context["slot"]["endpoint_sha256"]`, and passes
+`context["slot"]["execution"]` unchanged to the runtime. That endpoint hash comes
+from the cohort's verified retained seal; the helper does not derive its expected
+hash from the supplied endpoint. A caller outside the cohort must establish its
+own independent trust basis for the context.
+
+The helper orders inputs by `runtime.input_names`, converts each value exactly
+with `finite_binary64`, and prepares all rows before one batched `forward` call.
+Booleans, strings, nonfinite or inexact numeric inputs, missing or extra input
+names, tuples, NumPy values and subclasses received at this boundary are rejected.
+Earlier providers or cohort APIs may already have normalized some types into
+JSON; this helper does not attest those pre-normalization types. The generic
+cohort examples' `accumulation: "matmul"` declaration is unsupported here and
+fails; it is never silently changed to `left_to_right`.
+
+The sole result key `sequential` contains schema
+`wsp-sequential-slot-evaluation/1`, the detached `restoration` receipt,
+`rows_sha256` for the complete ordered rows, `ordered_inputs_sha256` for
+`{"input_names": [...], "inputs": [...]}` using the normalized binary64 floats,
+and plain JSON `predictions` in `[row][output]` shape, including a one-row batch.
+The existing cohort slot, terminal and durable registry result commitments retain
+this nested result. Errors propagate through the bridge's existing failure path:
+later slots stay unrun and committed scoring authorization remains consumed.
+
+The [authored integration check](../../tests/test_sequential_slot_evaluator.py)
+uses two literal layers with
+`score = 2 * relu(left) - relu(right) + 3`. Its separate diagnosis names the
+authored `layers.1.bias` offset and predicts that subtracting three from that bias
+lowers every output by three. The repair selects that literal edit before sealing
+repaired and parent-control slots. These are hand calculations, not study results:
+
+| Inputs `[left, right]` | Parent | Repaired |
+| --- | --- | --- |
+| `[1, 2]` | 3 | 0 |
+| `[3, 1]` | 8 | 5 |
+| `[-1, 2]` | 1 | -2 |
+
+This integration source and its authored check have not been executed as part of
+this change. They add no validation capture or scientific result. The helper
+establishes no automatic diagnosis, trained-model benefit, original-module
+restoration or evaluator attestation. Generic cohort
 `runtime_restoration_verified` and `causal_usefulness_established` flags remain
-`false`; their receipt schemas and earlier evidence scopes are unchanged.
-Issue #9 c1 remains partial, and the historical diagnosis/repair result is
-unchanged. This guide adds no validation capture or scientific result.
+`false`; their schemas and earlier evidence scopes are unchanged. Issue #9 c1
+remains partial and open, and the historical diagnosis/repair result is unchanged.

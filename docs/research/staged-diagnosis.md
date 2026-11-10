@@ -327,7 +327,31 @@ evaluation_receipt = cohort.evaluate_registered(load_holdouts, evaluate_slot)
 
 `load_holdouts()` is a lazy trusted callback returning a dictionary from exactly every declared holdout ID to an exact `RegisteredBatch` handle from the cohort's registry. The bridge writes and verifies `evaluation-start.json` before invoking that loader once. It checks each handle's registry, source/family declaration, row count, content hash and ordered row hashes. It concatenates every declared holdout in plan order, including holdouts unused by any member, and registers one aggregate with every child batch as a parent. A loader or validation failure stops before scoring; otherwise the bridge requests `registry.score` once under the frozen attempt ID, binding the protocol, roster, plan, evaluator, endpoint seal, start receipt and child/aggregate manifests.
 
-The registry's existing authorization consumes the aggregate's declared scope before entering its one scoring callback. Inside that callback, the bridge verifies the exact authorized aggregate and child row slices, then visits every member and logical slot in frozen order. Each available slot reached calls `evaluate_slot(context, endpoint, rows)` once. `endpoint` is the retained sealed artifact object; evaluation does not reconstruct, relower or reapply its program. `context` is a JSON copy of the member record plus the sealed slot declaration, including its execution specification; `rows` is a fresh JSON copy of that member's declared holdout slice. Repeated slots remain separate evaluator invocations even when they share an origin or endpoint hash. The trusted evaluator is responsible for honoring the declared execution specification; the bridge does not supply a model adapter, restore a runtime module or establish backend/device support.
+The registry's existing authorization consumes the aggregate's declared scope before entering its one scoring callback. Inside that callback, the bridge verifies the exact authorized aggregate and child row slices, then visits every member and logical slot in frozen order. Each available slot reached calls `evaluate_slot(context, endpoint, rows)` once. `endpoint` is the retained sealed artifact object; evaluation does not reconstruct, relower or reapply its program. `context` is a JSON copy of the member record plus the sealed slot declaration, including its execution specification; `rows` is a fresh JSON copy of that member's declared holdout slice. Repeated slots remain separate evaluator invocations even when they share an origin or endpoint hash. The trusted evaluator is responsible for honoring the declared execution specification; the generic bridge itself does not restore a runtime module or establish backend/device support.
+
+For the narrow declared sequential execution scope, the trusted harness may use
+the optional [sequential slot evaluator](../weight-space/sequential-runtime.md#registered-sequential-slot-evaluation):
+
+```python
+from rlcd.weight_space.sequential_slot_evaluator import evaluate_sequential_slot
+
+evaluation_receipt = cohort.evaluate_registered(load_holdouts, evaluate_sequential_slot)
+```
+
+Before cohort construction, freeze each such slot with exactly
+`result_keys: ["sequential"]` and the runtime's explicit NumPy CPU float64,
+`left_to_right`, `reject`, `empirical` execution declaration. Rows contain an
+`inputs` object keyed by exactly the declared input names. The helper restores
+against the sealed slot's independently retained endpoint hash, forwards its
+execution declaration unchanged, validates every row before one batched forward
+call, and returns plain JSON predictions, full-row and ordered-input commitments,
+and the detached restoration receipt under `sequential`. Unsupported declarations,
+including the generic examples' `matmul`, fail through the existing bridge path.
+The outer slot, terminal and durable registry result commitments retain that
+nested result without changing their generic evidence flags. This integration
+source and its [authored check](../../tests/test_sequential_slot_evaluator.py)
+have not been executed as part of this change; no scientific evidence or earlier
+receipt scope is extended. Issue #9 c1 remains partial and open.
 
 Each evaluator result must be a finite JSON object with exactly the declared result keys. The bridge rechecks the start receipt, endpoint seal and prior slot receipts before and after slot work. It writes ordered private `evaluation-MEMBER-SLOT.json` dispositions using zero-padded numeric indices. Unavailable endpoints receive `outcome: unavailable`, zero evaluator invocations and no fabricated result. Available slots begin as `not_run`, become `succeeded` only after result validation and evidence verification, and become `failed` if their active work fails. A failed active slot can have zero or one evaluator invocation, depending on the failure phase. A failure stops subsequent slots; those slots retain `not_run` or their original `unavailable` state. A failed slot receipt write can leave its receipt hash null, and failed terminal persistence can leave no `evaluation.json`.
 
