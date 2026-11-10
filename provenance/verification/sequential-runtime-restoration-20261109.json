@@ -1,0 +1,322 @@
+{
+  "verification_kind": "focused_synthetic_sequential_runtime_restoration",
+  "recorded_execution_status": "passed",
+  "base_commit": "8743436da3c744282881966340c9e9fa709ea9aa",
+  "ordered_parents": [
+    "278b6113ed38f3e839440c9dd49d5a5a66c1338c",
+    "f9eaef4953447e25c0b87fcefd74fc3a947b25fa"
+  ],
+  "integrated_main_commit": "f9eaef4953447e25c0b87fcefd74fc3a947b25fa",
+  "started_at_utc": "2026-11-10T02:43:10.408317+00:00",
+  "completed_at_utc": "2026-11-10T02:43:13.251655+00:00",
+  "selected_test_modules": [
+    "tests/test_sequential_runtime_restoration.py"
+  ],
+  "command_argv": [
+    "<project-python>",
+    "-s",
+    "-B",
+    "-m",
+    "pytest",
+    "-c",
+    "pytest-engineering.ini",
+    "--noconftest",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "<capture>/tmp-14glgmnk/fixtures",
+    "--junitxml",
+    "<capture>/tmp-14glgmnk/pytest.xml",
+    "-q",
+    "tests/test_sequential_runtime_restoration.py"
+  ],
+  "working_directory": "<sequential-runtime-worktree>",
+  "environment_overrides": {
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1",
+    "PYTHONUTF8": "1",
+    "PYTHONHASHSEED": "0",
+    "PYTEST_ADDOPTS": ""
+  },
+  "inherited_python_and_pytest_options_removed": true,
+  "timeout_seconds": 60,
+  "git_probe_timeout_seconds": 10,
+  "execution_count": 1,
+  "automatic_retry_performed": false,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_error": null,
+  "runtime_summary": {
+    "python": "3.12.10",
+    "sys_platform": "win32",
+    "operating_system": "Windows",
+    "pytest": "9.1.1",
+    "numpy": "2.5.3"
+  },
+  "recorded_result": {
+    "pytest_summary": "63 passed, 3 warnings in 1.47s",
+    "tests": 63,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "warning_count": 3,
+    "warnings": [
+      {
+        "category": "DeprecationWarning",
+        "source": "tests/test_sequential_runtime_restoration.py",
+        "line": 84,
+        "operation": "header.shape = (2, 1)",
+        "detail": "Setting a NumPy array shape is deprecated in NumPy 2.5."
+      },
+      {
+        "category": "DeprecationWarning",
+        "source": "tests/test_sequential_runtime_restoration.py",
+        "line": 85,
+        "operation": "header.dtype = np.uint8",
+        "detail": "Setting a NumPy array dtype is deprecated in NumPy 2.5."
+      },
+      {
+        "category": "DeprecationWarning",
+        "source": "tests/test_sequential_runtime_restoration.py",
+        "line": 86,
+        "operation": "header.base.shape = (1, 2)",
+        "detail": "Setting a NumPy array shape is deprecated in NumPy 2.5."
+      }
+    ],
+    "warning_context": "Intentional array-header mutation checks in the isolation fixture.",
+    "pytest_elapsed_seconds": 1.47,
+    "junit_elapsed_seconds": 1.471,
+    "counts_and_timing_scope": "Execution bookkeeping only; no impact or performance evidence."
+  },
+  "captured_source_and_configuration_identities": [
+    {
+      "path": "rlcd/__init__.py",
+      "bytes": 71,
+      "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+    },
+    {
+      "path": "rlcd/weight_space/__init__.py",
+      "bytes": 3053,
+      "sha256": "6add2899c26aabf2f542cc27dce468d528cb658153f0ecc7457e1df85ff0e50a"
+    },
+    {
+      "path": "rlcd/weight_space/model.py",
+      "bytes": 10004,
+      "sha256": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba"
+    },
+    {
+      "path": "rlcd/weight_space/artifact.py",
+      "bytes": 7735,
+      "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+    },
+    {
+      "path": "rlcd/weight_space/program.py",
+      "bytes": 6317,
+      "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+    },
+    {
+      "path": "rlcd/weight_space/contracts.py",
+      "bytes": 43906,
+      "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+    },
+    {
+      "path": "rlcd/weight_space/compiler.py",
+      "bytes": 3928,
+      "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+    },
+    {
+      "path": "rlcd/weight_space/symmetry.py",
+      "bytes": 12162,
+      "sha256": "c459d7e7317d89eda6d8a99c98606bb73b4ccad3a80f77f81f3272646173035d"
+    },
+    {
+      "path": "rlcd/weight_space/semantics.py",
+      "bytes": 6727,
+      "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+    },
+    {
+      "path": "rlcd/weight_space/structured.py",
+      "bytes": 26854,
+      "sha256": "8c2be636b812158de5df1cb6bad9615274f2dfcd7b3d6701f3843e19a3513f24"
+    },
+    {
+      "path": "rlcd/weight_space/features.py",
+      "bytes": 34083,
+      "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+    },
+    {
+      "path": "rlcd/weight_space/sequential.py",
+      "bytes": 9106,
+      "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+    },
+    {
+      "path": "rlcd/weight_space/data_roles.py",
+      "bytes": 29559,
+      "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+    },
+    {
+      "path": "rlcd/weight_space/workflow.py",
+      "bytes": 54271,
+      "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+    },
+    {
+      "path": "rlcd/weight_space/broker.py",
+      "bytes": 15038,
+      "sha256": "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+    },
+    {
+      "path": "rlcd/weight_space/evidence.py",
+      "bytes": 8003,
+      "sha256": "69c5e8479ce7797de7ef182a4fd1229124c83bfb4fc86ccbfbb14edc1984420d"
+    },
+    {
+      "path": "rlcd/weight_space/sequential_runtime.py",
+      "bytes": 6320,
+      "sha256": "0f06469393d4c8cc5f2a16529ca648dbb439e42df7b559077a3ec706d6a3302f"
+    },
+    {
+      "path": "tests/test_sequential_runtime_restoration.py",
+      "bytes": 16119,
+      "sha256": "f3eaf6e5d5b61bcc74575a2e0fe101e00239167093720067c79eaab83ee43661"
+    },
+    {
+      "path": "pytest-engineering.ini",
+      "bytes": 1573,
+      "sha256": "cd824193d9c505a9c9b2b63279cc78b74be2f8373dd69c3bd3e9bd9bb05b3654"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 1136,
+      "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+    },
+    {
+      "path": "requirements.lock.txt",
+      "bytes": 1021,
+      "sha256": "3cc022d0c8d11ad2ed72bd2a247c8e249b3bd9570f356260aa0c0f2fa3319755"
+    }
+  ],
+  "captured_source_before_after_equal": true,
+  "captured_source_and_configuration_identity_count": 21,
+  "current_captured_source_and_configuration_match_capture": true,
+  "runner_identity_unchanged": true,
+  "git_state_unchanged": true,
+  "runtime_unchanged": true,
+  "restoration_scope": {
+    "artifact_type": "TensorArtifact",
+    "architecture": "sequential-affine-activation/1",
+    "execution": {
+      "backend": "numpy",
+      "dtype": "float64",
+      "device": "cpu",
+      "accumulation": "left_to_right",
+      "endpoint_cast": "reject",
+      "error_model": "empirical"
+    },
+    "activations": [
+      "identity",
+      "relu",
+      "abs"
+    ],
+    "caller_retained_expected_endpoint_hash_required": true,
+    "fresh_owned_snapshot_hash_agreement_required": true,
+    "independent_trust_basis_for_expected_hash_required": true,
+    "operator_order": "Serial binary64 left-to-right multiply/add, then explicit bias, then activation.",
+    "finite_input_and_intermediate_rejection": "Before activation, including negative overflow hidden by ReLU."
+  },
+  "captured_regression_coverage": [
+    "Owned declared endpoint restoration and expected endpoint/fresh snapshot hash agreement.",
+    "Supported vector and batch evaluation with declared ordering and activations.",
+    "Finite input and intermediate rejection, including negative overflow before ReLU.",
+    "Detached state, snapshots, receipts and outputs; caller-array isolation.",
+    "Unsupported execution, metadata, shape, interface, hash and subclass-spoofing rejection fixtures."
+  ],
+  "existing_native_execution_default_behavior_preserved": true,
+  "limitations": [
+    "Hash agreement does not authenticate provenance; the expected hash needs independent caller trust.",
+    "No arbitrary original-module restoration, aliases, buffers, caches, random state or deployment effects.",
+    "No formal floating-point theorem, all-input or cross-backend guarantee, causal or task usefulness.",
+    "No provider run, scientific holdout/study, cohort integration or automatic runtime receipt binding.",
+    "The standalone guide example remains unexecuted; this capture does not validate later publication edits."
+  ],
+  "generic_cohort_flags": {
+    "runtime_restoration_verified": false,
+    "causal_usefulness_established": false
+  },
+  "authenticated_provenance_established": false,
+  "live_provider_request_made": false,
+  "scientific_study_executed": false,
+  "standalone_guide_example_executed": false,
+  "issue9_c1_status": "partial",
+  "issue9_kept_open": true,
+  "original_criteria_earlier_receipt_scopes_and_historical_outcomes_unchanged": true,
+  "private_capture": {
+    "directory_basename": "sequential-runtime-restoration-authored-check-20261109",
+    "identities": [
+      {
+        "path": "run_check.py",
+        "bytes": 10643,
+        "sha256": "dee2da9e0a1e2f5a964916d1fb1f465ce905388c22213777bd0f207ae5d67b34"
+      },
+      {
+        "path": "execution-launch.json",
+        "bytes": 2270,
+        "sha256": "6b3951e0b1de87b631c6bf82967a58eea6cb2ebb461b8b266473c14e068e9534"
+      },
+      {
+        "path": "execution-result.json",
+        "bytes": 2004,
+        "sha256": "940c4b7cddf4f1af97ce252b7db83f87be28d1a5fe63951acc2dee42d370e954"
+      },
+      {
+        "path": "before-source-identities.json",
+        "bytes": 3228,
+        "sha256": "a465960b8b2d7590884481b9193917e27830b51c28bba5642278b11f758bbdfb"
+      },
+      {
+        "path": "after-source-identities.json",
+        "bytes": 3228,
+        "sha256": "a465960b8b2d7590884481b9193917e27830b51c28bba5642278b11f758bbdfb"
+      },
+      {
+        "path": "stdout.log",
+        "bytes": 1692,
+        "sha256": "dc99cb76af2c05355dc60924d3928e2ff709df291f2a06986216213bc5d8ff35"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "pytest.xml",
+        "bytes": 10465,
+        "sha256": "14b8c5d3431f8088b6e6fd4899a067f0066052a4b50e84b928f6270039dc328c"
+      },
+      {
+        "path": "publish.py",
+        "bytes": 30843,
+        "sha256": "b6fe361c487e9521c12f1cb1c62a5a8c28dc1179dbea2c8dfe86918f28982e2d"
+      },
+      {
+        "path": "publication-source-identities.json",
+        "bytes": 3228,
+        "sha256": "a465960b8b2d7590884481b9193917e27830b51c28bba5642278b11f758bbdfb"
+      },
+      {
+        "path": "publication-observation.json",
+        "bytes": 3628,
+        "sha256": "84a69a8d0dfead4c059f1b273040f5331ad5bf6eb946e70c1b040916e0df951a"
+      }
+    ],
+    "raw_records_published": false,
+    "full_local_paths_build_identifiers_and_hostname_published": false
+  },
+  "publication": {
+    "observed_at_utc": "2026-11-10T02:55:08.919038+00:00",
+    "receipt_and_documentation_finalized_after_execution": true,
+    "publication_bookkeeping_reran_test": false,
+    "later_publication_verified_by_recorded_test": false,
+    "scope": "The later observation checks retained identities and publication baselines using stdlib and read-only Git probes; it executes no tests or project code."
+  }
+}

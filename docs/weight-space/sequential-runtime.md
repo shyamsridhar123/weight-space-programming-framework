@@ -99,4 +99,12 @@ cohort integration or automatic runtime receipt binding. Generic cohort
 `runtime_restoration_verified` and `causal_usefulness_established` flags remain
 `false`; their receipt schemas and earlier evidence scopes are unchanged.
 Issue #9 c1 remains partial, and the historical diagnosis/repair result is
-unchanged. This guide adds no validation capture or scientific result.
+unchanged. The separate
+[engineering receipt](../../provenance/verification/sequential-runtime-restoration-20261109.json)
+records one focused synthetic regression capture at its captured source snapshot:
+`63 passed, 3 warnings in 1.47s`. Counts and elapsed time are bookkeeping, not
+impact or performance evidence. The three warnings concern NumPy 2.5 array-header
+mutation deprecations triggered by the isolation fixtures. This supplies
+engineering coverage of the owned sequential adapter and adds no scientific
+result. The standalone source example above remains unexecuted; later publication
+edits retain separate validation scope.

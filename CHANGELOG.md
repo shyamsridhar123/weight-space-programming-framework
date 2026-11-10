@@ -7,6 +7,16 @@ research draft.
 
 ## Unreleased
 
+- Add an owned runtime for declared `sequential-affine-activation/1` artifacts
+  with explicit NumPy/float64/CPU execution, retained expected-hash agreement,
+  finite left-to-right affine evaluation and detached state/output. The
+  [focused synthetic engineering receipt](provenance/verification/sequential-runtime-restoration-20261109.json)
+  records one captured regression selection with three NumPy 2.5 deprecation
+  warnings from intentional array-header mutation checks. Coverage is limited
+  to the declared adapter; caller trust in the expected hash remains required.
+  Generic cohort restoration/usefulness flags remain false. No scientific
+  outcome or earlier receipt scope changes; #9 c1 stays partial and open.
+
 - Leave descendant cleanup unknown (`None`/JSON `null`) when pipes drain after
   a timeout; retain `False` when cleanup waits are exhausted and preserve
   ordinary completion. The

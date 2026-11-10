@@ -1401,6 +1401,38 @@ authenticated provenance, scientific freshness or useful causal repair. Original
 criteria, earlier receipt scopes and historical outcomes remain unchanged; c1
 stays partial and Issue #9 stays open.
 
+**Owned sequential runtime engineering supplement, November 9, 2026:** The
+[adapter guide](../weight-space/sequential-runtime.md) describes restoration of
+an owned declared `sequential-affine-activation/1` `TensorArtifact` under the exact
+six-field NumPy/float64/CPU, left-to-right, reject-cast, empirical execution
+declaration. Construction checks both the retained endpoint and a fresh owned
+snapshot against the caller's expected hash. That hash needs an independent
+trust basis; agreement does not authenticate provenance. Supported activations
+are `identity`, `relu` and `abs`; serial binary64 multiply/add precedes explicit
+bias and activation. Nonfinite inputs and intermediates are rejected before
+activation, including negative overflow that ReLU could otherwise hide.
+
+The separate [engineering receipt](../../provenance/verification/sequential-runtime-restoration-20261109.json)
+records one focused synthetic regression capture at its captured source snapshot,
+with no retry or timeout and unchanged captured source, runner, Git and runtime
+identities. Three NumPy 2.5 deprecation warnings arise from intentional array-header
+mutation checks. The recorded coverage includes detached state, snapshots,
+receipts, outputs and caller-array isolation, plus unsupported execution,
+metadata, shape, interface, hash and subclass-spoofing rejection fixtures.
+Counts and elapsed time are bookkeeping, not impact or performance evidence.
+The optional finite-intermediate guard preserves existing native execution
+defaults. The guide's standalone source example remains unexecuted, and later
+publication edits retain separate validation scope.
+
+This establishes no arbitrary original-module restoration, aliases, buffers,
+caches, random state or deployment effects; no formal floating-point theorem,
+all-input or cross-backend guarantee, useful causal repair, provider run or
+scientific holdout/study. The adapter adds no cohort integration or automatic
+runtime-receipt binding. Generic cohort `runtime_restoration_verified` and
+`causal_usefulness_established` remain `false`. Original criteria, earlier receipt
+scopes and historical outcomes remain unchanged; c1 stays partial and Issue #9
+stays open.
+
 #### #9 c2
 
 - [ ] Compare sham, random, support/norm-matched and context-only controls, then measure target effect, collateral behavior and held-out generalization.
