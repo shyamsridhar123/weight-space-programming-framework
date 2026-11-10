@@ -606,6 +606,13 @@ hard, decision, and appropriate retraining comparisons. A negative result
 remains admissible evidence; an editor should not need to win against a simple
 policy configuration to make the framework useful.
 
+The November 9 [prospective recognition-repair design](recognition-repair-next-study.md)
+develops this next question with explicit data-exposure, attainable-gain,
+matched-comparison, uncertainty and complete lifecycle-cost gates. It remains
+a source-only proposal; the historical criteria and results above keep their
+original scope. Issue #7 c3 remains partial until the missing lifecycle costs
+are measured, and the broader Issue #14 and #11 scopes remain unresolved.
+
 | Research issue | Evidence now delivered | Remaining work within the issue's scope |
 | --- | --- | --- |
 | #6: retention geometry | Trained exact rank, residual, inactive-column, unseen-row, out-of-scope, and abstention analysis; later [bounded supplied-feature score-consistency diagnostics](feature-feasibility.md) with conflict witnesses and exact minimum norms; separate [synthetic trained-development cutoff/budget/margin sweep](retention-development.md) | Generic exact-target admission policy; general alternative decision-feasibility conditions; unfinished exact judgments remain unresolved; no heldout or population-retention claim from the development sweep |
