@@ -292,13 +292,20 @@ def _exact_execution(layers: list[tuple[np.ndarray, np.ndarray, str]],
 
 
 def _native_execution(layers: list[tuple[np.ndarray, np.ndarray, str]],
-                      inputs: np.ndarray, spec: ExecutionSpec) -> np.ndarray:
+                      inputs: np.ndarray, spec: ExecutionSpec, *,
+                      finite_intermediates: bool = False) -> np.ndarray:
+    """Keep nonfinite observations by default; restoration can opt into rejection."""
+    if finite_intermediates and spec.backend != "numpy":
+        raise ValueError("Finite-intermediate checking requires NumPy execution")
     if spec.backend == "numpy":
         if spec.dtype == "bfloat16" or spec.device != "cpu":
             raise ValueError("NumPy execution requires CPU float64/float32/float16")
         dtype = np.dtype(spec.dtype)
         values = inputs.astype(dtype)
-        with np.errstate(over="ignore", invalid="ignore", under="ignore"):
+        if finite_intermediates and not np.isfinite(values).all():
+            raise ValueError("Native execution received nonfinite inputs")
+        errors = "raise" if finite_intermediates else "ignore"
+        with np.errstate(over=errors, invalid=errors, under="ignore"):
             for weights, bias, activation in layers:
                 weight, offset = weights.astype(dtype), bias.astype(dtype)
                 if spec.accumulation == "matmul":
@@ -311,6 +318,8 @@ def _native_execution(layers: list[tuple[np.ndarray, np.ndarray, str]],
                     for j in order:
                         summed = summed + values[:, j:j+1]*weight[:, j]
                     values = summed + offset
+                if finite_intermediates and not np.isfinite(values).all():
+                    raise ValueError("Native execution produced nonfinite intermediates")
                 if activation == "relu":
                     values = np.maximum(values, dtype.type(0))
                 elif activation == "abs":
