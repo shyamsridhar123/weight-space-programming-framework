@@ -1916,6 +1916,19 @@ enforced. No new research cost is measured or failed work recovered;
 `analyze_study` remains deferred. The original criterion remains partial and
 open.
 
+**November 9 posthoc resource follow-up:** This later consumer update follows
+that earlier summary-only deferral. Fresh `analyze_study` source now uses
+`wsp-trained-posthoc-analysis/2`, retains eight-field resource coverage and stage
+statistics, and pairs the two enclosing incremental timings only within an
+assignment with both values observed. Complementary partial rows cannot supply
+a complete pair. The [resource contract](../weight-space/resource-accounting.md)
+and [engineering receipt](../../provenance/verification/posthoc-resource-coverage-20261109.json)
+describe one passing scalar check of four AST-extracted helpers, without project
+imports, full analysis, persistence, geometry, study replay or scientific
+execution. Schema/provenance wiring is a source contract, not execution evidence.
+The producer's pre-return fit undercount remains deferred to a separate PR; no
+historical cost is recovered and the criterion remains partial and open.
+
 #### #14 c1
 
 - [ ] Measure wall time, memory, bytes, tokens, available energy/compute proxies and inference overhead across pinned model sizes/devices with warm/cold and repeated-use assumptions.
@@ -1980,6 +1993,18 @@ additive or supply omitted cold preparation and maintenance costs. The
 records one passing authored scalar seam check, without scientific execution or
 study replay. Historical summaries remain unchanged, `analyze_study` remains
 deferred, and this criterion remains partial and open.
+
+**November 9 posthoc resource follow-up:** The later
+[consumer contract](../weight-space/resource-accounting.md) keeps exact observed
+byte sums separate from approximate binary64 stage statistics and exposes
+per-field missing counts. `paired_top_level_seconds` is a coverage summary:
+`(2, None)` and `(None, 3)` yield no observed pair and a null sum, never `5`.
+The [engineering receipt](../../provenance/verification/posthoc-resource-coverage-20261109.json)
+records one scalar helper check, without full analysis or scientific execution.
+Historical `/1` analyses and earlier receipt scopes remain unchanged. Pair
+completeness does not supply omitted preparation or maintenance costs, make
+nested timers additive, or repair producer undercount. That producer repair
+remains deferred to a separate PR; this criterion remains partial and open.
 
 #### #14 c6
 

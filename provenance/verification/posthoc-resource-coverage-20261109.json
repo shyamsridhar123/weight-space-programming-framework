@@ -1,0 +1,324 @@
+{
+  "verification_kind": "focused_authored_posthoc_resource_coverage",
+  "scope": "One authored scalar posthoc resource-accounting check of four AST-extracted functions; no project imports, full analysis, persistence, geometry, study replay or scientific execution.",
+  "base_commit": "1f78ffc8efe4f14190435dead249b4a7ec5d7207",
+  "ordered_parents": [
+    "cc8190cf92c66820033c130929fbba5fd76ab2b1"
+  ],
+  "integrated_main_commit": "cc8190cf92c66820033c130929fbba5fd76ab2b1",
+  "recorded_execution_started_at_utc": "2026-11-10T04:32:50.408094+00:00",
+  "recorded_execution_completed_at_utc": "2026-11-10T04:32:52.231973+00:00",
+  "command_argv": [
+    "<project-python>",
+    "-s",
+    "-B",
+    "-m",
+    "pytest",
+    "-c",
+    "pytest-engineering.ini",
+    "--noconftest",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "<capture>/fixtures",
+    "--junitxml",
+    "<capture>/pytest.xml",
+    "-q",
+    "tests/test_resource_posthoc_summary.py::test_posthoc_resources_preserve_coverage_pairs_and_exact_totals"
+  ],
+  "working_directory": "<authored-worktree>",
+  "environment_overrides": {
+    "PYTEST_ADDOPTS": "",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0",
+    "PYTHONNOUSERSITE": "1",
+    "PYTHONUTF8": "1"
+  },
+  "inherited_python_and_pytest_options_removed": true,
+  "timeout_seconds": 60,
+  "git_probe_timeout_seconds": 10,
+  "runtime": {
+    "python_version": "3.12.10",
+    "sys_platform": "win32",
+    "pytest_version": "9.1.1",
+    "numpy_version": "2.5.3"
+  },
+  "runtime_identity_scope": "Captured interpreter/version/platform strings and installed distribution version metadata only; no executable or package-content identity, and no agreement with the lockfile was enforced.",
+  "runtime_executable_content_identity_captured": false,
+  "installed_package_content_identity_captured": false,
+  "runtime_lockfile_agreement_enforced": false,
+  "recorded_execution_status": "passed",
+  "recorded_exit_code": 0,
+  "execution_count": 1,
+  "automatic_retry_performed": false,
+  "timed_out": false,
+  "launch_error": null,
+  "recorded_tests": 1,
+  "recorded_failures": 0,
+  "recorded_errors": 0,
+  "recorded_skipped": 0,
+  "reported_warning_count": 0,
+  "pytest_summary": "1 passed in 0.25s",
+  "junit_suite_seconds": 0.19,
+  "counts_and_timing_scope": "Execution bookkeeping; no measured research cost, impact or performance evidence.",
+  "captured_source_and_configuration_identities": [
+    {
+      "path": "rlcd/weight_space/metrics.py",
+      "bytes": 3552,
+      "sha256": "3cf3061c0a6f1676066ef15649ac5877ba8161d11a5a3d24c4b0f06ecaea77ad"
+    },
+    {
+      "path": "scripts/run_trained_research.py",
+      "bytes": 97571,
+      "sha256": "a9dd21e838ba1362fbec2110bf42cee73350278ed21931718d8b8d4f3d7f6f61"
+    },
+    {
+      "path": "tests/test_resource_posthoc_summary.py",
+      "bytes": 15416,
+      "sha256": "812c8dc8bf69e881d66d59b5d94586d7377106bbec05672de0a9d697471796a7"
+    },
+    {
+      "path": "pytest-engineering.ini",
+      "bytes": 1752,
+      "sha256": "627cb4525e26742addee650c3622513ed1608995923fcb59ef4ebdd750efe20e"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 1136,
+      "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+    },
+    {
+      "path": "requirements.lock.txt",
+      "bytes": 1021,
+      "sha256": "3cc022d0c8d11ad2ed72bd2a247c8e249b3bd9570f356260aa0c0f2fa3319755"
+    }
+  ],
+  "captured_source_and_configuration_identity_count": 6,
+  "captured_source_before_after_equal": true,
+  "current_captured_source_and_configuration_match_capture": true,
+  "runner_identity_unchanged": true,
+  "git_state_unchanged": true,
+  "runtime_unchanged": true,
+  "source_identity_scope": "Six authored source/test/configuration/dependency-declaration files; not a project import closure or installed package-content inventory.",
+  "execution_seam": {
+    "method": "AST-extract and execute four function definitions using stdlib-only bindings; no project module imports or analyze_study statements.",
+    "functions": [
+      "rlcd/weight_space/metrics.py::observed_resource_summary",
+      "scripts/run_trained_research.py::summarize_resource_measurements",
+      "scripts/run_trained_research.py::resource_distribution",
+      "scripts/run_trained_research.py::summarize_posthoc_resources"
+    ],
+    "full_summarize_main_executed": false,
+    "full_analyze_study_executed": false,
+    "posthoc_schema_and_provenance_wiring_executed": false,
+    "study_json_persistence_exercised": false,
+    "geometry_measured_distribution_executed": false,
+    "producer_timers_executed_or_repaired": false
+  },
+  "resource_contract": {
+    "unknown": "None is unknown; zero is observed; known costs on evaluation_missing assignments are retained.",
+    "coverage_keys": [
+      "assigned",
+      "observed",
+      "missing",
+      "observed_sum",
+      "complete_for_assigned",
+      "total_if_complete"
+    ],
+    "accepted_values": "Exactly native nonnegative int or finite float values, excluding bool and subclasses; storage bytes require int.",
+    "accounting_sum_policy": "Integer-only sums remain exact; any float uses math.fsum with binary64 precision and conversion/overflow limits.",
+    "trained_cost_fields": [
+      "fit_seconds_all_options",
+      "fit_selection_materialization_seconds",
+      "native_head_evaluation_seconds",
+      "binary64_head_evaluation_seconds",
+      "exact_application_rollback_verification_seconds",
+      "heldout_export_seconds",
+      "heldout_workflow_seconds",
+      "storage_bytes_pre_outcome"
+    ],
+    "stage_keys": [
+      "observations",
+      "mean",
+      "minimum",
+      "maximum",
+      "p50",
+      "p95",
+      "sum_observed",
+      "missing_assigned"
+    ],
+    "stage_statistics_scope": "Already validated observations converted to finite binary64; approximate mean/extrema and linearly interpolated quantiles at ranks (n - 1) * p. Empty statistics are null.",
+    "stage_accounting_scope": "sum_observed and missing_assigned copy the corresponding coverage observed_sum and missing; exact integer byte sums are separate from approximate statistics.",
+    "posthoc_binary64_boundary": "The complete posthoc helper rejects nonfinite conversion/statistics even when a huge integer is valid in exact coverage alone.",
+    "paired_top_level_seconds": {
+      "kind": "six-field coverage summary; not a distribution",
+      "fields": [
+        "fit_selection_materialization_seconds",
+        "heldout_workflow_seconds"
+      ],
+      "rule": "Sum the two enclosing clocks within each assignment only when both are known, then summarize those per-assignment pairs.",
+      "alias": "observed_incremental_top_level_seconds reads paired_top_level_seconds.observed_sum, null when no complete pair is observed.",
+      "rounding": "Rowwise binary64 pair sums can round differently from separately summed marginal fields.",
+      "scope": "Two recorded enclosing incremental timers only; no nested timers, shared costs or lifecycle completeness."
+    },
+    "fresh_posthoc_schema": "wsp-trained-posthoc-analysis/2",
+    "current_metrics_source_identity": {
+      "path": "rlcd/weight_space/metrics.py",
+      "bytes": 3552,
+      "sha256": "3cf3061c0a6f1676066ef15649ac5877ba8161d11a5a3d24c4b0f06ecaea77ad"
+    },
+    "metrics_hash_location": "source_sha256.metrics",
+    "removed_arm_fields": [
+      "timing_records",
+      "timing_missing"
+    ],
+    "schema_and_wiring_scope": "Fresh producer source contract only; full analyze_study construction, schema/provenance wiring and persistence were not executed by this check.",
+    "geometry_measured_distribution_policy": "Existing geometry measured_distribution source unchanged; geometry pipeline not executed.",
+    "historical_posthoc_analysis_policy": "Existing /1 records remain unchanged; no historical re-analysis."
+  },
+  "authored_fixture": {
+    "assigned": 5,
+    "paired_observed": 2,
+    "paired_missing": 3,
+    "paired_observed_sum": 10.0,
+    "paired_total_if_complete": null,
+    "complementary_partial_rows": [
+      [
+        2,
+        null
+      ],
+      [
+        null,
+        3
+      ]
+    ],
+    "complementary_marginal_sums": [
+      2,
+      3
+    ],
+    "complementary_paired_summary": {
+      "assigned": 2,
+      "observed": 0,
+      "missing": 2,
+      "observed_sum": null,
+      "complete_for_assigned": false,
+      "total_if_complete": null
+    },
+    "complementary_incremental_alias": null,
+    "complementary_marginals_combined_as_five": false,
+    "storage_exact_integer_example": "2**60 + 1",
+    "fixture_costs_are_measured_research_costs": false
+  },
+  "captured_regression_coverage": [
+    "Fixed eight-field coverage/stage shape, counts, nullable totals, retained known costs on evaluation_missing assignments and immutable inputs.",
+    "Complete, incomplete, complementary partial and mixed pairs; unknown, known-zero, all-unknown, empty and top-only/nested-only cases.",
+    "Exact large integer byte sums separate from approximate statistics; finite binary64 statistics, quantile interpolation, overflow and subnormal examples.",
+    "math.fsum accounting and rowwise pair rounding; per-pair and aggregate overflow rejection.",
+    "Native numeric and cost-container type boundaries, integer-only storage, malformed cost rejection and ignored extra keys."
+  ],
+  "limitations": [
+    "Availability covers supplied assignments and recorded values only; it does not establish complete instrumentation or lifecycle coverage.",
+    "If fit_options raises before returning, local options remains empty and fit_seconds_all_options can report zero despite attempted fitting; producer repair remains deferred to a separate PR.",
+    "Option timers are nested in fit/selection/materialization; native, binary64, verification and export timers are nested in heldout workflow and are not additive to enclosing timers.",
+    "Current timer samples exclude some later persistence, scans and hashing; storage is an immediate-file scan before the current outcome write.",
+    "Stage statistics are approximate binary64 and can reject huge integer observations accepted by exact coverage; finite rowwise pairs can round differently from marginal totals.",
+    "Paired completeness concerns only the two recorded enclosing clocks within supplied assignments, not all eight fields, shared preparation or full lifecycle cost.",
+    "No producer execution, full summarize_main, full analyze_study, schema/provenance wiring, geometry, JSON persistence, lineage loading, study replay or scientific artifact execution.",
+    "Historical /1 analyses, failed work, scientific outcomes and earlier receipt scopes are not recovered, rewritten or broadened.",
+    "Cold acquisition/preparation/encoding, memory/energy, model/device coverage and full inference maintenance remain incomplete.",
+    "Runtime continuity concerns captured strings and installed version metadata, not interpreter executable or package-content identity or lockfile agreement.",
+    "No measured research cost, full lifecycle total, amortization crossover, cost advantage, causal usefulness or business-impact claim.",
+    "Documentation snippets remain unexecuted; recorded test does not verify later documentation/publication edits or hosted CI."
+  ],
+  "project_modules_imported": false,
+  "full_trained_summary_executed": false,
+  "analyze_study_executed": false,
+  "posthoc_schema_and_provenance_wiring_executed": false,
+  "geometry_executed": false,
+  "geometry_measured_distribution_changed": false,
+  "study_replay_executed": false,
+  "scientific_study_executed": false,
+  "live_provider_request_made": false,
+  "historical_resummary_performed": false,
+  "historical_posthoc_v1_analyses_rewritten": false,
+  "missing_historical_work_recovered": false,
+  "producer_timers_changed": false,
+  "producer_early_fit_undercount_repair_deferred": true,
+  "new_research_cost_measured": false,
+  "full_lifecycle_cost_established": false,
+  "cost_advantage_established": false,
+  "documentation_snippets_executed": false,
+  "issue14_c0_status": "partial",
+  "issue14_c5_status": "partial",
+  "issue14_kept_open": true,
+  "original_criteria_earlier_receipt_scopes_and_historical_outcomes_unchanged": true,
+  "private_capture": {
+    "identities": [
+      {
+        "path": "run_check.py",
+        "bytes": 8405,
+        "sha256": "02734b87920af2e6a6cd45018892804c04851fbdca15931a460e576eb4342c17"
+      },
+      {
+        "path": "execution-launch.json",
+        "bytes": 2257,
+        "sha256": "4a868c0953af1489153246f2221b716f69c804b77e7ebf9946efdef606f5988c"
+      },
+      {
+        "path": "execution-result.json",
+        "bytes": 1901,
+        "sha256": "e80f8abe3f1bf4bf1613ca8e8be3724f77073354cb534924a6e23c0a41c9ff3f"
+      },
+      {
+        "path": "before-source-identities.json",
+        "bytes": 909,
+        "sha256": "c05e9f6adc9570f135dbb97c8a15d08afe0f3421c9ea0355db53608b83c9e49b"
+      },
+      {
+        "path": "after-source-identities.json",
+        "bytes": 909,
+        "sha256": "c05e9f6adc9570f135dbb97c8a15d08afe0f3421c9ea0355db53608b83c9e49b"
+      },
+      {
+        "path": "stdout.log",
+        "bytes": 100,
+        "sha256": "d821f20c04a12f9d1bd510aef0cb4b1ab9c00a29682deb7187f6986b6fb8ecfe"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "pytest.xml",
+        "bytes": 395,
+        "sha256": "3f14538fadc764153153b4bcbebd429474775790faa1e750d33957d35cd501a9"
+      },
+      {
+        "path": "publish.py",
+        "bytes": 38695,
+        "sha256": "dc8d150c21d411b7f887f2fdddbd12b1e6daec33e0d8f76742820251e5a0a3d5"
+      },
+      {
+        "path": "publication-source-identities.json",
+        "bytes": 909,
+        "sha256": "c05e9f6adc9570f135dbb97c8a15d08afe0f3421c9ea0355db53608b83c9e49b"
+      },
+      {
+        "path": "publication-observation.json",
+        "bytes": 3490,
+        "sha256": "7caf8fd959e9682321ba06f0e8c5ababb1d2a3720541ffb41355b6188e1517a2"
+      }
+    ],
+    "raw_records_published": false,
+    "full_local_paths_build_identifiers_and_hostname_published": false
+  },
+  "publication": {
+    "observed_at_utc": "2026-11-10T04:45:29.372163+00:00",
+    "receipt_and_documentation_finalized_after_execution": true,
+    "publication_bookkeeping_reran_test": false,
+    "later_publication_verified_by_recorded_test": false,
+    "scope": "Retained identities and publication baselines checked with stdlib and read-only Git; no project execution."
+  }
+}
