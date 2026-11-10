@@ -810,6 +810,19 @@ Historical records and criterion statuses are unchanged.
 
 **Remaining requirement / scope limit:** General OS/container/network containment is not established. CLI, JSON and tool limits must not be promoted to complete host isolation.
 
+**Later prospective timeout-cleanup supplement, November 9, 2026:** The
+[authored offline receipt](../../provenance/verification/provider-timeout-cleanup-20261109.json)
+records one passing helper regression with four mocked process outcomes and
+kill calls. After a timeout, subsequently drained pipes yield cleanup `None`
+(`null` in JSON), leaving descendant exit unknown, including after wrapper-kill
+fallback. Exhausted cleanup waits retain `False` and available partial streams;
+ordinary completion retains its prior result. This establishes no native
+cleanup, OS/container/network containment, output-size bound, provider-origin
+or scientific attestation. Earlier evidence and historical outcomes retain
+their scope. **#5 c1 remains partial and Issue #5 stays open; #5 c2 and #8 c6
+remain partial/open.** Historical usage, charges, deployment revision and the
+absence of a finite total-cost bound remain unresolved.
+
 #### #5 c2
 
 - [ ] Implement a real provider adapter with exact provider/model/configuration identity, prompts, tool calls, token/latency/cost usage, errors and human involvement. Keep credential material out of records.
@@ -862,6 +875,20 @@ does not establish zero consumption. No historical stream was inspected,
 repaired or rerun. The 90 failures' usage, charges and deployment revision remain
 unknown, with no finite total-cost bound or independent provider-origin
 attestation. #5 c2 and #8 c6 remain partial and open.
+
+**Later surrogate-publication supplement, November 9, 2026:** The
+[authored offline receipt](../../provenance/verification/provider-surrogate-publication-20261109.json)
+checks ASCII-safe JSON serialization after decoded-string sanitation. One
+handcrafted high-surrogate event remains escaped while a synthetic escaped
+profile prefix is redacted and ordinary Unicode survives decoding. Raw/public
+parser results agree, retaining `invalid_event` and later response/usage. Raw
+bytes, three inert copied metadata files, separate hashes and the exact
+seven-field publication record are checked. This supplies no live CLI evidence,
+broker usage admission, exhaustive Unicode, malformed raw UTF-8, full verifier
+or arbitrary-data confidentiality coverage. Historical streams were not
+inspected, repaired or rerun; the 90 failures' unknown usage, charges and
+deployment revision, absence of a finite total-cost bound and provider-origin
+attestation remain unresolved. #5 c2 and #8 c6 remain partial and open.
 
 #### #5 c3
 
@@ -1221,6 +1248,20 @@ inspected, repaired or rerun. The 90 failures' missing usage and charges, unknow
 deployment revision, absence of a finite total-cost bound and independent
 provider-origin attestation remain unresolved. This criterion and #5 c2 remain
 partial and open.
+
+**Later surrogate-publication supplement, November 9, 2026:** The
+[same authored offline receipt](../../provenance/verification/provider-surrogate-publication-20261109.json)
+checks decoded synthetic profile redaction followed by ASCII-safe JSON escaping.
+The public UTF-8 derivative retains a lone surrogate as an escape and preserves
+ordinary Unicode on decoding; its parser result matches raw input, including
+`invalid_event` and the later response/usage. Raw bytes and inert copied metadata
+remain unchanged, with separate hashes and the exact seven-field publication
+record. This fixture supplies no independent live editor, usage-admission,
+exhaustive Unicode, malformed raw UTF-8, full verifier or general confidentiality
+evidence. Earlier receipts retain their source scope; no historical stream was
+inspected, repaired or rerun. Missing historical usage and charges, unknown
+deployment revision, the absent finite total-cost bound and provider-origin
+attestation remain unresolved. This criterion and #5 c2 remain partial and open.
 
 #### #8 c7
 

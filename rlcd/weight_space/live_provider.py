@@ -60,7 +60,7 @@ def write_json(path: Path, value: Any) -> None:
 
 
 def _kill_tree(process: subprocess.Popen) -> None:
-    """Timeout the entire local transport/worker tree, not just its wrapper."""
+    """Best-effort termination of the local transport/worker process tree."""
     if process.poll() is not None:
         return
     try:
@@ -76,7 +76,7 @@ def _kill_tree(process: subprocess.Popen) -> None:
 
 
 def _communicate_bounded(process: subprocess.Popen, *, timeout: float, input=None):
-    """Retain partial output even if descendants keep a pipe open after timeout."""
+    """Retain bounded output; drained timeout pipes do not attest descendant exit."""
     try:
         return (*process.communicate(input, timeout=timeout), False, True)
     except subprocess.TimeoutExpired as expired:
@@ -93,7 +93,7 @@ def _communicate_bounded(process: subprocess.Popen, *, timeout: float, input=Non
             except subprocess.TimeoutExpired as incomplete:
                 return (incomplete.output or expired.output or b"",
                         incomplete.stderr or expired.stderr or b"", True, False)
-        return (*output, True, True)
+        return (*output, True, None)
 
 
 class _DuplicateJSONKey(ValueError):
@@ -377,7 +377,7 @@ def publish_attempt(source: Path, destination: Path) -> dict[str, Any]:
         previous_redactions = redactions
         try:
             value = json.loads(line, object_pairs_hook=_unique_json_object)
-            lines.append(json.dumps(sanitize(value), ensure_ascii=False, allow_nan=False))
+            lines.append(json.dumps(sanitize(value), ensure_ascii=True, allow_nan=False))
         except _DuplicateJSONKey:
             # Raw fallback cannot safely sanitize arbitrary JSON escape spellings.
             lines.append(json.dumps("public event omitted: duplicate JSON object key"))
