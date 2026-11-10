@@ -1141,10 +1141,26 @@ failure status, attempt and trial records persist. Missing, invalid or ambiguous
 usage stays unknown. Denied events preserve requested counters separately from
 admitted totals, which do not measure total consumption or monetary charges.
 Timeout status shares the source guard but has no separately asserted fixture.
-Existing public broker replay does not reconstruct or compare usage accounting.
+The public broker replay at that receipt's source snapshot did not reconstruct
+or compare usage accounting.
 This supplies no independent live editor or provider-origin attestation. The 90
 historical failures' usage, charges and deployment revision remain unknown, with
 no finite total-cost bound; this criterion remains partial and open.
+
+**Later saved-attempt replay supplement, November 9, 2026:** The
+[authored offline receipt](../../provenance/verification/broker-usage-replay-20261109.json)
+records one passing capture that rebuilds ordinary sealing, failed known/unknown
+usage and denied-usage trials through the shared driver in fresh temporary
+directories. Exact prompts, schemas, attempt order, opaque-handle correspondence,
+broker events, complete rebuilt trials and nested evaluation/accounting are
+compared; re-signed corruption checks exercise rejection beyond self-consistent
+hashes. No live provider is constructed. Requested counters, denied events and
+admitted totals remain distinct; zero admission does not establish zero
+consumption. This supplements the prior source snapshot without rerunning or
+repairing historical trials. It establishes consistency under current semantics,
+not provider regeneration, origin attestation, real charges or an independent
+live editor. The 90 historical failures' usage and costs remain unknown, with no
+finite total-cost bound; this criterion remains partial and open.
 
 #### #8 c7
 
@@ -2015,6 +2031,15 @@ held-out families, trained lineages, live attestation or historical hidden-work
 recovery; no finite total-cost bound follows. This criterion remains partial and
 open.
 
+**Later saved-attempt replay supplement, November 9, 2026:** The
+[same authored offline receipt](../../provenance/verification/broker-usage-replay-20261109.json)
+adds reconstruction and complete canonical comparison of synthetic broker trials
+and nested usage accounting under current semantics, including failed and denied
+attempts. It supplies no independent held-out families, trained lineages, live
+editor or complete hidden-work accounting. No historical trial was replayed or
+repaired; unknown usage, real charges and deployment revision remain unresolved,
+and this criterion remains partial and open.
+
 #### #17 c3
 
 - [ ] Evaluate construction validity, behavior, retained obligations, utility/coverage and cost; no examples does not imply no task information.
@@ -2030,8 +2055,18 @@ open.
 supplies no new live artifacts or construction-validity, behavior, retention or
 utility evidence. Its admitted counters are budget bookkeeping, not total
 consumption or monetary charges. Historical usage and costs remain unknown; no
-finite total-cost bound or replay usage reconstruction follows. This criterion
-remains partial and open.
+finite total-cost bound or replay usage reconstruction followed from that
+receipt's source snapshot. This criterion remains partial and open.
+
+**Later saved-attempt replay supplement, November 9, 2026:** The
+[same authored offline receipt](../../provenance/verification/broker-usage-replay-20261109.json)
+records comparison of complete synthetic evaluation and budget-ledger state,
+including requested counters, denial, admitted charges and ordering. These
+checks establish no live construction artifact, behavior, retention, utility or
+monetary cost. Zero admitted usage does not establish zero resource consumption.
+Historical costs remain unknown with no finite total-cost bound; this criterion
+remains partial and open. The separate supported publication status of #17 c7
+is unchanged.
 
 #### #17 c4
 
