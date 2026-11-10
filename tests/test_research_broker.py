@@ -101,6 +101,56 @@ def test_recursive_request_is_denied_and_counted_before_trusted_sealing():
     assert broker.public_trace == trace
 
 
+def test_effective_request_limits_are_recorded_and_enforced():
+    from rlcd.weight_space.model import canonical_bytes, digest
+
+    base = TensorArtifact("affine/1", {"W": [[1.]]})
+    task = TaskSpec("request-limits", "edit", "Record effective broker limits",
+                    base.architecture, base.sha256)
+    request = {"op": "weights", "tensor": "W", "indices": [[0, 0]]}
+    byte_limit = len(canonical_bytes(request))
+    limits = {"schema": "wsp-broker-request-limits/1", "max_requests": 3,
+              "max_request_bytes": byte_limit}
+    broker = ProposerBroker(task, base=base, view=WeightView("exact"),
+                            max_requests=3, max_request_bytes=byte_limit)
+    metadata = broker.request({"op": "metadata"})
+    assert metadata["status"] == "ok" and metadata["request_limits"] == limits
+    metadata["request_limits"]["max_requests"] = 999
+    assert broker.public_trace[0]["response"]["request_limits"] == limits
+    assert broker.request(request) == {"status": "ok", "values": [1.]}
+    oversized = request | {"indices": [[0, 0], [0, 0]]}
+    assert len(canonical_bytes(oversized)) > byte_limit
+    assert broker.request(oversized) == {"status": "denied"}
+    assert broker.request({"op": "metadata"}) == {"status": "denied"}
+    assert [event["request"] for event in broker.public_trace] == [
+        {"op": "metadata"}, request, {"op": "malformed"}, {"op": "metadata"}]
+
+    def no_evaluation(candidate):
+        raise AssertionError("Abstention must not invoke the evaluator")
+
+    broker.abstain()
+    audit = broker.evaluate(no_evaluation, evaluator_id="authored-no-evaluation")
+    assert audit["request_limits"] == limits
+    assert audit["public_trace"][-1]["request"] == {"op": "harness_deadline_seal"}
+
+    # An audit records effective defaults even when no metadata was requested.
+    default = ProposerBroker(task, base=base, view=WeightView("exact"))
+    default.abstain()
+    default_audit = default.evaluate(no_evaluation, evaluator_id="authored-no-evaluation")
+    assert default_audit["request_limits"] == {
+        "schema": "wsp-broker-request-limits/1", "max_requests": 100,
+        "max_request_bytes": 1_000_000}
+    assert audit["evaluation"]["session_sha256"] == default_audit["evaluation"]["session_sha256"]
+    for record in (audit, default_audit):
+        assert record["status"] == record["evaluation"]["status"] == "abstained"
+        assert record["sha256"] == digest({k: v for k, v in record.items() if k != "sha256"})
+        previous = None
+        for sequence, event in enumerate(record["public_trace"]):
+            assert event["sequence"] == sequence and event["previous_sha256"] == previous
+            assert event["sha256"] == digest({k: v for k, v in event.items() if k != "sha256"})
+            previous = event["sha256"]
+
+
 def test_subset_and_invalid_selection_do_not_release_endpoint_state():
     base = TensorArtifact("affine/1", {"W": [[1., 2.]]})
     task = TaskSpec("subset", "edit", "Subset control", base.architecture, base.sha256)

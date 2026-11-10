@@ -117,6 +117,11 @@ class ProposerBroker:
     def public_trace(self) -> list[dict[str, Any]]:
         return json.loads(canonical_bytes(self._events))
 
+    def _request_limits(self) -> dict[str, Any]:
+        return {"schema": "wsp-broker-request-limits/1",
+                "max_requests": self._max_requests,
+                "max_request_bytes": self._max_request_bytes}
+
     def _record(self, request: Any, result: dict[str, Any]) -> dict[str, Any]:
         event = {"schema": "wsp-broker-event/1", "sequence": len(self._events),
                  "previous_sha256": self._events[-1]["sha256"] if self._events else None,
@@ -174,6 +179,7 @@ class ProposerBroker:
                 result = {"status": "ok", "schema": "wsp-proposer-metadata/1",
                           "task": self._task, "tensors": tensors, "context": self._public_context,
                           "parameter_view": self._view.to_dict(),
+                          "request_limits": self._request_limits(),
                           "candidate_feedback": "none_before_or_after_seal",
                           "submission": "data_only_commands_with_opaque_handles",
                           "execution": "no_broker_forward_or_activation_route",
@@ -254,6 +260,7 @@ class ProposerBroker:
             status = receipt["status"]
         payload = {"schema": "wsp-broker-audit/1", "status": status,
                    "selected_handle": self._selected, "parameter_view": self._view.to_dict(),
+                   "request_limits": self._request_limits(),
                    "attempted_submissions": len(self._handles),
                    "proposal_limit": self._session.limits.proposals,
                    "attempts": [{"candidate_handle": h, **p,
