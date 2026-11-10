@@ -9,6 +9,7 @@ from __future__ import annotations
 from collections import Counter
 from dataclasses import dataclass
 import hashlib
+import io
 import json
 import math
 from pathlib import Path
@@ -20,13 +21,14 @@ import numpy as np
 
 from .artifact import TensorArtifact
 from .features import ReadoutHead, _analyze_feature_constraints, _editable_design, compile_feature_edit
-from .model import _TensorData, digest
+from .model import _TensorData, canonical_bytes, digest
 from .program import Program, apply_program, difference
 from .semantics import SemanticsAdapter, SemanticsRegistry
 
 
 ARCHITECTURE = "trained-frozen-readout/1"
 HEAD_WEIGHT, HEAD_BIAS = "head.weight", "head.bias"
+PARENT_FILES = ("head.json", "encoder.npz", "preprocessing.json", "lineage.json")
 ROLE_FRACTIONS = (("train", .60), ("development", .10), ("target", .10),
                   ("protected", .10), ("calibration", .10))
 
@@ -94,6 +96,81 @@ class TextPreprocessing:
                     matrix[row, index] = math.log1p(count)*idf[index]
         norms = np.linalg.norm(matrix, axis=1, keepdims=True)
         return matrix / np.maximum(norms, np.finfo(np.float32).tiny)
+
+
+def _sha(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def _object(pairs: list[tuple[str, Any]]) -> dict:
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("duplicate_json_field")
+        result[key] = value
+    return result
+
+
+def _json(data: bytes) -> Any:
+    value = json.loads(data, object_pairs_hook=_object)
+    canonical_bytes(value)  # Reject NaN and infinity, including overflowed numbers.
+    return value
+
+
+def _number(value: Any) -> float:
+    if type(value) not in (int, float) or not math.isfinite(value):
+        raise ValueError("finite_number_required")
+    return float(value)
+
+
+def parent_from_bytes(captured: dict[str, bytes]) -> dict:
+    """Restore the four captured text-parent files without historical features."""
+    head = TensorArtifact.from_dict(_json(captured["head.json"]))
+    preprocessing = _json(captured["preprocessing.json"])
+    lineage = _json(captured["lineage.json"])
+    with np.load(io.BytesIO(captured["encoder.npz"]), allow_pickle=False) as archive:
+        if set(archive.files) != {"weight", "bias"}:
+            raise ValueError("unsupported_encoder")
+        encoder = {name: archive[name].copy() for name in archive.files}
+    text = TextPreprocessing(tuple(preprocessing["vocabulary"]), tuple(preprocessing["idf"]))
+    weight, bias = encoder["weight"], encoder["bias"]
+    if (text.to_dict() != preprocessing or not text.vocabulary
+            or len(set(text.vocabulary)) != len(text.vocabulary)
+            or any(type(term) is not str or not term for term in text.vocabulary)
+            or len(text.idf) != len(text.vocabulary)
+            or any(_number(value) <= 0 for value in text.idf)
+            or weight.ndim != 2 or weight.shape[1] != len(text.vocabulary)
+            or weight.shape[0] < 1 or bias.shape != (weight.shape[0],)
+            or any(value.dtype != np.float32 or not np.isfinite(value).all() for value in encoder.values())
+            or head.architecture != ARCHITECTURE or set(head.tensors) != {HEAD_WEIGHT, HEAD_BIAS}
+            or head.tensors[HEAD_WEIGHT].ndim != 2
+            or head.tensors[HEAD_WEIGHT].shape[1] != weight.shape[0]
+            or head.tensors[HEAD_BIAS].shape != (head.tensors[HEAD_WEIGHT].shape[0],)
+            or head.metadata.get("native_dtype") != "float32"):
+        raise ValueError("parent_semantics_mismatch")
+    with np.errstate(over="raise", invalid="raise"):
+        if any(not np.array_equal(value, value.astype(np.float32).astype(np.float64))
+               for value in head.tensors.values()):
+            raise ValueError("parent_native_dtype_mismatch")
+    encoder_sha = digest({name: value.tolist() for name, value in encoder.items()})
+    preprocessing_sha = digest(preprocessing)
+    feature_id = digest({"encoder_sha256": encoder_sha, "preprocessing_sha256": preprocessing_sha,
+                         "native": "Torch CPU float32 affine then ReLU",
+                         "feature_order": list(range(weight.shape[0]))})
+    identities = {"head_sha256": head.sha256, "encoder_sha256": encoder_sha,
+                  "preprocessing_sha256": preprocessing_sha, "feature_id": feature_id}
+    if (lineage.get("schema") != "wsp-trained-lineage/1"
+            or any(lineage.get(key) != value for key, value in identities.items())
+            or any(head.metadata.get(key) != value for key, value in identities.items() if key != "head_sha256")
+            or len(head.metadata.get("output_names", [])) != head.tensors[HEAD_BIAS].shape[0]
+            or head.metadata.get("feature_names") != [f"h{i:03d}" for i in range(weight.shape[0])]):
+        raise ValueError("parent_identity_mismatch")
+    for name in PARENT_FILES[:-1]:
+        record = lineage["files"][name]
+        if record["sha256"] != _sha(captured[name]) or record["bytes"] != len(captured[name]):
+            raise ValueError("parent_file_identity_mismatch")
+    return {"head": head, "encoder": encoder, "preprocessing": text,
+            "identities": identities, "captured": captured}
 
 
 def train_encoder(inputs: np.ndarray, labels: np.ndarray, train: np.ndarray,

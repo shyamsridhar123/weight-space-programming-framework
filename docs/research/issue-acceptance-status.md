@@ -1008,6 +1008,8 @@ Historical records and criterion statuses are unchanged.
 
 **Remaining requirement / scope limit:** The serving supplement adds cached-head/import/input/export/copy/hash costs, but complete acquisition, encoding, memory, energy and lifecycle costs remain unmeasured.
 
+**Prospective engineering evidence (November 9, 2026):** The separately scoped [raw-text serving receipt](../../provenance/verification/raw-text-serving-20261109.json) records one passing authored check of raw preprocessing, encoding, native float32 inference and queue routing, including a real unchanged-baseline child. Parent-process checks cover admitted and rejected deployment; controlled supervisor failures retain all assignments and partial evidence. This does not measure historical encoding or full lifecycle cost, train/evaluate a lineage or establish operational benefit. Memory, energy, matched crossovers and real queue costs remain unknown. This criterion remains partial and open.
+
 #### #7 c4
 
 - [ ] All primary gain/harm/coverage/cost margins and selection rules are frozen before unseen evaluation; paired units and missingness follow benchmark.
@@ -1725,6 +1727,8 @@ measurement and this criterion's partial status remain unchanged.
 
 **Remaining requirement / scope limit:** Peak memory, energy, encoder/preprocessing, transformer scale, multiple model sizes/devices and complete matched crossovers remain absent. Process repeats are engineering units, not lineages.
 
+**Prospective engineering evidence (November 9, 2026):** The [authored raw-text serving check](../../provenance/verification/raw-text-serving-20261109.json) exercises separate initialization/load, whole-batch preprocessing/encoding/native-head/policy timers and enclosing process wall on a pinned CPU float32 package, including one actual baseline child. It adds a future measurement path rather than a trained serving benchmark. Fresh processes do not imply cold file caches; no direct load-through-first-output metric, memory/energy result, model/device generalization, speedup or matched crossover is established. The historical exclusions and this partial/open status remain unchanged.
+
 #### #14 c2
 
 - [ ] Compare overlays/retraining/appropriate LoRA and learned-reader alternatives. Include reader training/model-zoo cost and amortization separately.
@@ -1764,6 +1768,8 @@ measurement and this criterion's partial status remain unchanged.
 **Evidence:** [E04](#e04) · [E06](#e06) · [E15](#e15) · [E16](#e16). Failures, selection/verification and separately measured import/startup/first/warm/repeated serving costs are retained; shared preparation and omitted quantities are disclosed.
 
 **Remaining requirement / scope limit:** Complete cold acquisition/preparation/encoding and full inference maintenance remain unmeasured rather than free. Nested supplements must not be added to broad historical timers.
+
+**Prospective engineering evidence (November 9, 2026):** The [raw-text serving check](../../provenance/verification/raw-text-serving-20261109.json) verifies durable all-job assignment records and separate failure dispositions, preserving interrupted stages as null and completed stage evidence. Success timing samples exclude failed jobs while retaining their denominators. Raw-call wall includes intervening progress writes and excludes output hashing; nested timers are not additive. This authored regression recovers no historical failed work and measures no complete cold acquisition or inference maintenance. This criterion remains partial and open.
 
 #### #14 c6
 
