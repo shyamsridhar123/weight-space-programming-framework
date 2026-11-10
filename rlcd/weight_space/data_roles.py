@@ -369,6 +369,7 @@ class DataRoleRegistry:
                 records, consumed, revision, _ = snapshot
                 self._before(decision, snapshot)
                 _name(reason)
+                decision["consumption_reason_sha256"] = _sha(_bytes(reason))
                 batch = self._known(examples, records) if type(examples) is RegisteredBatch else None
                 payload = batch._payload_bytes if batch is not None else _capture(examples)
                 self._details(decision, payload, batch)

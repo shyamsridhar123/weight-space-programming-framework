@@ -235,10 +235,13 @@ the cooperating exposure callback. A callback failure does not undo that
 commit. `score(batch, scorer)` resolves the current consumption state before
 calling `scorer(materialized_json)`, normalizes its result to finite JSON, and
 persists the decision. Known development consumption rejects the scoring
-request before scorer entry. SQLite's `BEGIN IMMEDIATE` transaction spans that
-decision, scorer execution and result/decision commit. Writers are serialized
-with a two-second busy timeout; long scorers can therefore prevent another
-operation from acquiring the registry. Same-thread scorer reentry is rejected.
+request before scorer entry. The earlier guard implementation held SQLite's
+`BEGIN IMMEDIATE` transaction across scorer execution and result/decision commit.
+The current [durable lifecycle](#durable-lifecycle-supplement-november-9-2026)
+instead commits reservation and observed consumption in a short transaction,
+closes that transaction before calling the scorer, and finalizes its outcome in
+a separate transaction. Writer transactions use a two-second busy timeout;
+same-thread scorer reentry remains rejected.
 
 `ProgrammerSession` and `ProposerBroker` accept optional `data_registry`
 configuration supplied by the trusted harness. The broker passes that registry
@@ -625,3 +628,45 @@ Issue #2 c2 and c7 remain partial, with 6 supported criteria, 2 partial criteria
 and a keep-open recommendation. All historical outcomes, dates and the earlier
 13-route c7 failure, two development controls and six working guards remain
 unchanged.
+
+## Development consumption purpose binding: November 10, 2026
+
+The current `consume(examples_or_batch, reason=...)` decision binds the caller's
+validated purpose in `consumption_reason_sha256`, the SHA-256 digest of the
+reason's canonical finite-JSON bytes. The field is included in the canonical
+decision body committed by `decision_sha256`. The generic outcome reason remains
+`development_consumption_committed`; the supplied purpose text is not copied
+into the decision.
+
+The invariant is that changing a valid declared purpose changes its decision
+commitment even when the scope was already consumed. The precise assumptions
+are a trusted, valid registry; successful transactions; the same captured rows
+and observed registered scope; no intervening registration or consumption;
+and every key reachable by conservative scope propagation already consumed.
+Purpose and decision identity separation additionally assume no SHA-256
+collision for the compared canonical bytes. The registry does not normalize a
+valid purpose string before committing it.
+
+Under these assumptions, `_consume_keys` has no new keys to insert, so it leaves
+the original consumed-key reasons, their revisions and the registry revision
+unchanged. The registry state hash covers registrations and consumed keys, not
+the decisions table, so recording either decision leaves that state hash
+unchanged too. Two different purpose commitments nevertheless give different
+canonical decision bodies and, under the collision assumption, different
+decision identities. Both decisions can therefore persist through
+`INSERT OR IGNORE` without rewriting consumption history. Repeating the same
+purpose at the same state may still return the same decision identity; this
+contract does not assign a unique identity to every invocation.
+
+The focused regression warms consumption first and then supplies two different
+purposes for the same scope, separately for raw rows and a `RegisteredBatch`.
+It checks exact purpose commitments, canonical decision binding and durable
+storage after reopening the registry, unchanged state and consumed-key history,
+absence of the purpose text from decisions, and continued scoring rejection
+before callback entry. These are synthetic engineering checks, not a new
+scientific study or a retrospective extension of the November 9 receipts.
+
+The purpose is still a caller declaration. Its hash is neither encryption nor
+authenticated provenance. This additive decision field does not establish
+freshness, semantic independence or evaluator execution, change the false
+authority flags, migrate earlier decisions, or close Issue #2 c2/c7.
