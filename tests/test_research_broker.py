@@ -142,6 +142,75 @@ def test_provider_failure_accounting_and_started_tool_detection(tmp_path, monkey
     assert json.loads((tmp_path / "attempt" / "receipt.json").read_text())["sha256"] == receipt["sha256"]
 
 
+def test_provider_completion_lifecycle_is_unambiguous_before_broker_actions(tmp_path, monkeypatch):
+    import hashlib
+    from types import SimpleNamespace
+    from unittest.mock import Mock
+    from rlcd.weight_space.live_provider import CodexProvider, run_brokered
+
+    cli = tmp_path / "fake-codex"
+    cli.write_bytes(b"offline transport placeholder; never executed")
+    monkeypatch.setattr("rlcd.weight_space.live_provider.shutil.which", lambda _: str(cli))
+    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.run",
+                        lambda *args, **kwargs: SimpleNamespace(stdout="offline-test\n"))
+    transport = Mock(side_effect=lambda *args, **kwargs: SimpleNamespace(returncode=0,
+        communicate=lambda *args, **kwargs: (raw, "")))
+    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.Popen", transport)
+    base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
+    task = TaskSpec("completion-lifecycle", "edit", "Retain ambiguous offline endings",
+                    base.architecture, base.sha256)
+    response = {"actions": [json.dumps({"op": "submit", "commands": [], "intent": "Freeze baseline"}),
+                            json.dumps({"op": "seal", "candidate_handle": None})],
+                "reason": "offline fixture"}
+    usage = {"input_tokens": 17, "output_tokens": 7}
+    later_response = dict(response, reason="Response after completion")
+    prefix = [
+        {"type": "item.completed", "item": {"type": "agent_message", "text": "Thinking about the request."}},
+        {"type": "item.completed", "item": {"type": "agent_message", "text": json.dumps(response)}},
+    ]
+    completed = {"type": "turn.completed", "usage": usage}
+    cases = [
+        ("commentary", prefix + [completed], [], response, usage),
+        ("duplicate", prefix + [completed, {"type": "turn.completed",
+                                           "usage": {"input_tokens": 1, "output_tokens": 0}}],
+         ["duplicate_turn_completed"], response, {}),
+        ("later_message", prefix + [completed, {"type": "item.completed",
+            "item": {"type": "agent_message", "text": json.dumps(later_response)}}],
+         ["agent_message_after_turn_completed"], later_response, {}),
+    ]
+
+    for name, events, errors, expected_response, expected_usage in cases:
+        raw = "\n".join(json.dumps(event) for event in events) + "\n"
+        transport.reset_mock()
+        broker = ProposerBroker(task, base=base)
+        charge = Mock(wraps=broker.record_usage)
+        monkeypatch.setattr(broker, "record_usage", charge)
+        directory = tmp_path / name
+        trial = run_brokered(CodexProvider(), broker, prompt="Return the fixed offline actions",
+                             directory=directory, max_rounds=3)
+        valid = not errors
+        assert transport.call_count == 1 and len(trial["attempts"]) == 1
+        assert trial["assigned_trials"] == 1
+        attempt = trial["attempts"][0]
+        assert attempt["status"] == ("completed" if valid else "failed")
+        assert attempt["error"] == (None if valid else "transport_or_response_failed")
+        assert attempt["event_errors"] == errors
+        assert attempt["response"] == expected_response and attempt["usage"] == expected_usage
+        assert attempt["cost"]["amount"] is None
+        folder = directory / "provider-0"
+        assert json.loads((folder / "receipt.json").read_text(encoding="utf-8")) == attempt
+        assert json.loads((directory / "trial.json").read_text(encoding="utf-8")) == trial
+        assert (folder / "events.jsonl").read_bytes() == raw.encode("utf-8")
+        assert attempt["events_sha256"] == hashlib.sha256(raw.encode("utf-8")).hexdigest()
+        assert trial["status"] == ("sealed" if valid else "failed") and broker.is_sealed
+        assert [event["request"]["op"] for event in broker.public_trace] == (
+            ["metadata", "submit", "seal"] if valid else ["metadata", "harness_deadline_seal"])
+        if valid:
+            charge.assert_called_once_with(17, 7)
+        else:
+            charge.assert_not_called()
+
+
 def test_malformed_provider_event_type_retains_failed_attempt_and_trial(tmp_path, monkeypatch):
     import hashlib
     from types import SimpleNamespace
