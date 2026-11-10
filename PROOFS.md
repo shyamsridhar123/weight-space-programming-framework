@@ -1,6 +1,6 @@
 # Proof scope, provenance, and reproduction
 
-The formal library proves preservation and drift results for explicit
+The weight-semantics library proves preservation and drift results for explicit
 real-valued model semantics. Its two generic families are linear heads over
 fixed feature maps and finite affine/activation chains. Input and output
 meanings are application parameters. The RTS certificate is a preserved
@@ -18,6 +18,39 @@ The saved successful v2 verification was recorded at
 time. It is evidence of that historical run. A fresh verification needs its
 own successful commands and new output under `.proof-runs/`. Revising the
 explanatory documentation does not create a new proof run.
+
+## Separate local-pilot governance model
+
+The generic [governance contract](docs/governance/contract.md) fixes the intended
+invariants before runtime implementation. Its
+[standalone Lean source](formal/governance/Governance.lean) models immutable
+requests, approval by a configured label distinct from the requester, explicit
+request/head pins, terminal rejection and revocation, and authorization confined
+to local-pilot use. It is separate from the historical weight-semantics library
+and its saved evidence.
+
+**The governance model is locally UNCHECKED as of November 10, 2026.** The
+[model guide](formal/governance/README.md) records the failed tool-discovery
+attempt, proposed obligations, exact direct verification command, and unavailable
+axiom report. The [standalone CI workflow](.github/workflows/governance-proof.yml)
+is pending; no passing hosted result is established here. Its source contains
+proof terms and a transitive axiom audit, but neither has been checked locally.
+The historical reproduction commands below do not check this model.
+
+The model uses arbitrary encoding functions without a collision-resistance or
+injectivity axiom. It does not verify JSON parsing, canonical serialization,
+SHA-256, Python refinement, file I/O, export, or the candidate's application
+relation. Callers must obtain independent current request/head identities,
+authenticate actors, serialize decisions, and honor the result. Matching stale
+pins cannot establish freshness; unequal labels cannot establish organizational
+independence. The contract and model guide state these correspondence limits.
+
+A future successful Lean check would establish conditional mathematical claims
+about these definitions. Synthetic implementation checks, authenticated
+organizational authority, and scientific evidence of useful behavior remain
+separate obligations. The optional [Distro handoff](docs/governance/distro-handoff.md)
+supplies an authoring and review procedure, not evidence that these obligations
+have been discharged.
 
 ## What the library proves
 
