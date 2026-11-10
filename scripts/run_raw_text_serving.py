@@ -98,7 +98,7 @@ def _native_environment() -> dict:
     torch.set_num_threads(1)
     torch.use_deterministic_algorithms(True)
     return {"python": platform.python_version(), "platform": sys.platform,
-            "machine": platform.machine(), "numpy": np.__version__, "torch": torch.__version__,
+            "machine": platform.machine(), "numpy": np.__version__, "torch": str(torch.__version__),
             "numeric_lane": "Torch CPU float32", "threads": torch.get_num_threads(),
             "interop_threads": torch.get_num_interop_threads(),
             "deterministic_algorithms": torch.are_deterministic_algorithms_enabled(),

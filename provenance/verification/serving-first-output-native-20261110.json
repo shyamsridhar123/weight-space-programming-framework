@@ -1,0 +1,276 @@
+{
+  "schema": "rlcd.serving-first-output-native-publication/1",
+  "date": "2026-11-10",
+  "integrated_main_base": "42ea31a0a0146649c715268489dd9e8504e5765b",
+  "issue": {
+    "number": 14,
+    "state": "open",
+    "c1": "partial",
+    "c5": "partial"
+  },
+  "accounting": {
+    "job": 2,
+    "run": 2,
+    "package": 1,
+    "policy": 1,
+    "batch": 1,
+    "meaning": "schema revision numbers only"
+  },
+  "change": {
+    "problem": "The new in-memory first-output validation rejects Torch's TorchVersion string subclass because environment metadata requires an exact built-in str. Earlier JSON round-tripping normalized the value before validation.",
+    "fix": "Normalize torch.__version__ with str(...) in the shared environment producer; preserve strict receipt validation.",
+    "checked_source_inputs": [
+      {
+        "path": "scripts/run_raw_text_serving.py",
+        "bytes": 34847,
+        "sha256": "4d535393da7593ed6854db67b0727ac97aa73dab6d91f7b5b32ce4531189d970"
+      },
+      {
+        "path": "tests/test_raw_text_serving.py",
+        "bytes": 30465,
+        "sha256": "e50289115f046cfad422904ff8c10c38c4c81561c4ac3c31caf15187b1e43916"
+      }
+    ]
+  },
+  "selection": {
+    "test_nodes": [
+      "tests/test_raw_text_serving.py::test_native_raw_text_calls_bind_original_rows_and_deployed_selection",
+      "tests/test_raw_text_serving.py::test_worker_failure_keeps_partial_stage_evidence_and_refuses_reuse",
+      "tests/test_raw_text_serving.py::test_supervisor_accounts_for_every_assignment_and_isolates_bad_receipts"
+    ],
+    "expected_case_names": [
+      "test_native_raw_text_calls_bind_original_rows_and_deployed_selection",
+      "test_worker_failure_keeps_partial_stage_evidence_and_refuses_reuse[0]",
+      "test_worker_failure_keeps_partial_stage_evidence_and_refuses_reuse[1]",
+      "test_supervisor_accounts_for_every_assignment_and_isolates_bad_receipts"
+    ],
+    "pytest_invocation_attempts": 2,
+    "automatic_retry_performed": false,
+    "scope": "Three explicitly selected authored native-serving functions; failure-call parameterization yields four cases per invocation. No broad suite or scientific execution."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "failed",
+      "started_at_utc": "2026-11-10T08:24:12.0654676+00:00",
+      "finished_at_utc": "2026-11-10T08:24:21.7233711+00:00",
+      "exit_code": 1,
+      "timed_out": false,
+      "recorded_identities_unchanged": true,
+      "cases": {
+        "tests": 4,
+        "passed": 1,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0
+      },
+      "source_inputs": [
+        {
+          "path": "scripts/run_raw_text_serving.py",
+          "bytes": 34842,
+          "sha256": "942cd34e4d66c9d8387e1437250e24e49e53c484e1c3e2997f3b3038f8c98a7b"
+        },
+        {
+          "path": "tests/test_raw_text_serving.py",
+          "bytes": 30403,
+          "sha256": "d34739aa3f2aa3ed748d10285a759f6150ef5600d02b5b19334610c57e57392f"
+        }
+      ],
+      "observation": "The success fixture and supervisor-template fixture failed at first-output in-memory validation; the later-failure case encountered ValueError before its intended encoder RuntimeError. The first-call encoder-failure case passed.",
+      "actual_cli_child_reached": false,
+      "private_capture_commitments": {
+        "execution-plan.json": {
+          "bytes": 3329,
+          "sha256": "3fd3daf5b3960c3b422c8bc59cbf7a1619ba5d0743915b82a089ba1d76c854d0"
+        },
+        "identities.before.json": {
+          "bytes": 16981,
+          "sha256": "2d81544e2aa7597b46bb42eef52e6d311fb2bcca49dcb64bfff5e56841e2d583"
+        },
+        "identities.after.json": {
+          "bytes": 16981,
+          "sha256": "2d81544e2aa7597b46bb42eef52e6d311fb2bcca49dcb64bfff5e56841e2d583"
+        },
+        "launch-native.ps1": {
+          "bytes": 4703,
+          "sha256": "87b55471666e4b45c184c7cb734fcebc3d4d342a6244035b361fc8083081453b"
+        },
+        "execution-seal.json": {
+          "bytes": 750,
+          "sha256": "e7d4beb5fe861ed8fc5cb16e55e474e9cfcb4b4674a69487fea34aa645696d92"
+        },
+        "result.json": {
+          "bytes": 262,
+          "sha256": "a53ba9d2ed9aaaf35ef66f0a46aff47fa00c5f292f42816055f4886fefa39b43"
+        },
+        "stdout.txt": {
+          "bytes": 9278,
+          "sha256": "3b405e6a1b71b0c1a237fae0ad825f35b887823f943d438373668011bd8e0d17"
+        },
+        "stderr.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "junit.xml": {
+          "bytes": 10073,
+          "sha256": "8d5e280edc16107a2a07a98cbe1fbef437709558a163df42a7a88cf33f1a127c"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "status": "passed",
+      "started_at_utc": "2026-11-10T08:29:41.8114416+00:00",
+      "finished_at_utc": "2026-11-10T08:29:54.6474298+00:00",
+      "exit_code": 0,
+      "timed_out": false,
+      "recorded_identities_unchanged": true,
+      "cases": {
+        "tests": 4,
+        "passed": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "source_inputs": "The corrected runner and test identities in change.checked_source_inputs.",
+      "observation": "A distinct corrected invocation passed all expected cases and reached the actual baseline CLI child. Both invocation results and their original captures are retained.",
+      "actual_cli_child_reached": true,
+      "actual_cli_child": {
+        "count": 1,
+        "run_schema": "wsp-raw-text-serving-run/2",
+        "job_schema": "wsp-raw-text-serving-job/2",
+        "assigned_jobs": 1,
+        "successful_jobs": 1,
+        "returncode": 0,
+        "receipt_validation": "accepted",
+        "conditional_success_first_output_samples": 1,
+        "private_run_commitment": {
+          "bytes": 17153,
+          "sha256": "42361f93042cded45c1b93ee0178174f93114a51ff44f371986fafe1aee5dcd8"
+        }
+      },
+      "controlled_supervisor_fixture": {
+        "subprocess_launches_monkeypatched": true,
+        "assigned_jobs": 25,
+        "successful_jobs": 2,
+        "load_to_first_output_samples_excluded_from_success_samples": 23,
+        "conditional_success_first_output_samples": 2,
+        "scope": "Controlled supervisor assignments are not real child processes. The excluded count covers unsuccessful assignment slots, including absent or malformed observations. Native in-process code prepares the template; the single real CLI child is accounted for separately.",
+        "private_run_commitment": {
+          "bytes": 80060,
+          "sha256": "32ca9ce7f326066ec177e56d2163b8b4a1deea6f9f50fd98027dfeb9dda7d2a5"
+        }
+      },
+      "private_capture_commitments": {
+        "execution-plan.json": {
+          "bytes": 3329,
+          "sha256": "2130fb70f2e48b98b1cbc4cb76498b6e30099a5144d81f04b06538fc5da256b8"
+        },
+        "identities.before.json": {
+          "bytes": 16981,
+          "sha256": "cdcb5db304d0996beb9bfef0c389ec0a4d45d071700f4f0089f03700d66bba67"
+        },
+        "identities.after.json": {
+          "bytes": 16981,
+          "sha256": "cdcb5db304d0996beb9bfef0c389ec0a4d45d071700f4f0089f03700d66bba67"
+        },
+        "launch-native.ps1": {
+          "bytes": 4703,
+          "sha256": "7f216e1bf25d29821f2e689385fbf4fc1a0f03570bff2e45752286630087f4c5"
+        },
+        "execution-seal.json": {
+          "bytes": 750,
+          "sha256": "bcc6ff198edb56daeb8ba763262aba00677e458bf84ea31bee1d87852d935a7a"
+        },
+        "result.json": {
+          "bytes": 262,
+          "sha256": "3627c7f0c6276225e0bf5a273e29fe2dc5bbe4b481d72e64c5272e7cf8582509"
+        },
+        "stdout.txt": {
+          "bytes": 101,
+          "sha256": "68a769242ea7cf77907a5d3b4caf6e57b799a3b4ba0a466c76a5cf8d3d5273b0"
+        },
+        "stderr.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "junit.xml": {
+          "bytes": 821,
+          "sha256": "a40f4fb5d97f5a105e25815593a288b8c6cac40df446e0639c653da9ce603f94"
+        }
+      }
+    }
+  ],
+  "checked_engineering_obligations": [
+    "The complete ordered first batch undergoes real in-memory validation while its cumulative first-output span is still null and the call is running.",
+    "The clock observer returns actual perf_counter values and confirms sampling after successful validation. Finite, nonnegative first-output spans remain unchanged through later snapshots and the final receipt.",
+    "The cumulative span encloses measured load plus the first raw call. The actual CLI child's parent process duration encloses its cumulative span.",
+    "Failure before first output leaves the span null; failure on the subsequent warmup call preserves the first-output observation.",
+    "Missing, null and non-enclosing first-output spans are rejected. An accepted successful receipt paired with exit code 7 is excluded from successful-assignment samples.",
+    "Job and run schema revisions are /2; package, policy and batch revisions remain /1."
+  ],
+  "methods": {
+    "source_inventory_entries_per_attempt": 41,
+    "runtime_inventory_entries_per_attempt": 16,
+    "source_and_runtime_identities_before_after_equal": true,
+    "inventory_changes_between_attempts": "Only the corrected runner and test source pins changed. The other reviewed source inputs and runtime inventory remained equal.",
+    "startup": "Normal existing venv startup, including reviewed hooks in the parent and actual CLI child.",
+    "environment_cleared": true,
+    "environment_allowlist_names": [
+      "SystemRoot",
+      "WINDIR",
+      "PATH",
+      "TEMP",
+      "TMP",
+      "PYTHONPATH",
+      "PYTHONNOUSERSITE",
+      "PYTHONDONTWRITEBYTECODE",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD",
+      "OMP_NUM_THREADS",
+      "MKL_NUM_THREADS",
+      "OPENBLAS_NUM_THREADS"
+    ],
+    "pytest_config": "pyproject.toml",
+    "noconftest": true,
+    "cache_provider_disabled": true,
+    "plugin_autoload_disabled": true,
+    "fresh_worktree_contained_basetemp_per_attempt": true,
+    "parent_timeout_seconds": 45,
+    "timeout_action": "Kill the process tree.",
+    "authoritative_outcome": "Retained result.json plus JUnit case identities and outcomes; the PowerShell launcher does not propagate pytest failure as its shell status.",
+    "recorded_installation_metadata": {
+      "python": "3.12.10",
+      "numpy": "2.5.3",
+      "torch": "2.8.0+cpu",
+      "pytest": "9.1.1"
+    },
+    "historical_dependency_lock_installed_or_changed": false,
+    "configured_hosted_engineering_selection_excludes_native_module": true
+  },
+  "later_publication": {
+    "documentation_identity": {
+      "path": "CHANGELOG.md",
+      "bytes": 60323,
+      "sha256": "09a8e25a7c4e10dab32282d290e8a259071e0f43967d97dd265beced03a5517b"
+    },
+    "receipt_documentation_and_manifest_finalized_after_execution": true,
+    "publication_bookkeeping_reran_tests": false,
+    "later_publication_verified_by_recorded_native_execution": false,
+    "original_source_inventory_identity": {
+      "path": "provenance/source-files.json",
+      "bytes": 2483787,
+      "sha256": "2b3386a2f5e08175c2b7598642e8fefa2e5395dc1b14b117707271a5797849fc"
+    }
+  },
+  "trust_and_scope_limits": [
+    "These are authored local engineering fixtures, including native CPU inference and one actual baseline CLI child after correction. They do not establish production behavior or a serving performance advantage.",
+    "Observers add overhead. Counts and timestamps identify execution attempts and outcomes; no measured latency is published as a performance result, resource saving or business impact.",
+    "The reviewed source/runtime inventories are partial content inventories, not a complete Python/native dependency attestation or operating-system sandbox. Existing bytecode reads remain possible.",
+    "Recorded installation metadata does not establish historical lockfile agreement.",
+    "Capture commitments bind retained private bytes; they do not independently attest execution, freshness, privacy, Git ancestry or the complete runtime.",
+    "Absolute local paths, raw logs, environment values and native timing observations are omitted from this public derivative.",
+    "No scientific study, training, archived evaluation, historical replay or live provider request was performed.",
+    "Hosted CI and review outcomes are separate post-commit evidence. The configured engineering selection does not revalidate the opt-in raw-text-serving module.",
+    "Issue #14 c1/c5 remain partial/open; controlled OS cold-cache behavior, memory/energy savings and ROI remain unsupported."
+  ]
+}
