@@ -37,7 +37,8 @@ All six execution fields are fixed:
 Supply either an exact `ExecutionSpec` or a plain `dict` with exactly these plain
 string keys and values. Missing, extra, implicit or different settings are
 rejected, as are string subclasses and declaration subclasses. The endpoint must
-be an exact `TensorArtifact`. Its metadata contains only `layers`, `input_names`
+be an exact `TensorArtifact` with plain architecture and tensor-name strings.
+Its metadata contains only `layers`, `input_names`
 and `output_names`; each ordered layer contains only `weight`, `bias` and
 `activation`. Every tensor must be used exactly once, layer widths must connect,
 and labels must be unique and match the declared dimensions. Native dtype,
