@@ -7,6 +7,17 @@ research draft.
 
 ## Unreleased
 
+- Reject duplicate JSON object keys in provider events, final responses, encoded
+  broker actions and event publication. Retain failed attempts/trials and broker
+  abstention; ambiguous usage stays unknown while separately valid usage remains
+  recorded. Public copies replace ambiguous event lines with a disclosed JSON
+  string marker, retaining the existing metadata shape and transform. The
+  [authored offline receipt](provenance/verification/provider-duplicate-json-20261109.json)
+  records one passing regression with mocked transport and version probing.
+  Raw/public identities remain separate. No historical stream was inspected or
+  repaired; unknown usage, charges, deployment revision and provider origin
+  remain unresolved. Issue #5 c2 and #8 c6 remain partial and open.
+
 - Rebuild saved-attempt broker trials through the shared driver and compare the
   complete evaluation, including usage-ledger ordering, requested counters,
   denial, admitted charges and totals. Pin requests, schemas and publication

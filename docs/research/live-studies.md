@@ -97,6 +97,33 @@ The [scoped offline receipt](../../provenance/verification/publication-terminal-
 
 **Prospective completion-lifecycle supplement, November 9, 2026.** The [scoped offline receipt](../../provenance/verification/provider-completion-lifecycle-20261109.json) records one synthetic common provider/broker regression: duplicate completions and completed agent messages after completion retain failed attempts/trials and parsed responses, leave usage unknown, and abstain before provider charges or proposed actions. Multiple valid preterminal messages remain accepted. This is a narrow completion-order guard, not a general lifecycle state machine. Future revalidation through the shared parser can differ or fail for ambiguous prior streams; no historical stream was inspected or occurrence inferred. Earlier identities and receipt snapshots retain their scope. No live evidence or historical usage, monetary charges, deployment revision or provider-origin attestation is recovered; Issue #5 c2 and #8 c6 remain partial.
 
+**Prospective duplicate-key supplement, November 9, 2026.** The shared JSON
+object-pairs hook rejects duplicate keys in event envelopes and nested objects,
+final responses, encoded broker actions and publication event decoding. Duplicate
+usage remains unknown and receives no usage charge. A rejected event or final
+response retains a failed attempt/trial; separately valid reported usage is
+recorded once. A duplicate encoded action rejects before dispatch, retaining the
+completed provider attempt and its valid usage while the trial becomes invalid
+and abstains. The [authored offline receipt](../../provenance/verification/provider-duplicate-json-20261109.json)
+records one passing regression covering those boundaries and an accepted control,
+with transport and version probing mocked.
+
+Public copies replace each duplicate-key event line with the JSON string
+`"public event omitted: duplicate JSON object key"`. This omits the entire
+ambiguous line, including escaped synthetic profile paths, while preserving
+`invalid_event`, continuation and line count in the fixtures. Raw bytes remain
+private and unchanged; the disclosed raw commitment and public derivative
+identity stay separate. The original seven metadata keys and
+`JSON_reserialization_and_user_profile_prefix_redaction` transform remain exact
+for strict readers; this text and the marker disclose the omission. This is no
+general hostile-input confidentiality or JSON resource guarantee. Future shared
+parser revalidation of ambiguous saved streams can differ or reject; no
+historical stream was inspected or repaired, and no earlier completed capture
+was rerun. Earlier
+receipts keep their captured source scope. The 90 historical failures' usage,
+charges and deployment revision remain unknown, with no finite total-cost bound
+or independent provider-origin attestation. Issue #5 c2 and #8 c6 remain partial.
+
 **Prospective saved-attempt broker replay, November 9, 2026.** The separate
 [broker fixture runner](../../scripts/run_broker_trial.py) now pins saved prompts,
 response schemas, embedded attempts and raw/public event-publication identities,

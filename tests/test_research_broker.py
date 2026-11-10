@@ -507,6 +507,125 @@ def test_deeply_nested_provider_json_retains_failed_attempt_and_trial(tmp_path, 
         assert charges[0]["status"] == "succeeded" and charges[0]["charges"] == usage
 
 
+def test_duplicate_provider_json_keys_preserve_recovery_accounting_and_public_identity(tmp_path, monkeypatch):
+    import hashlib
+    from types import SimpleNamespace
+    from unittest.mock import Mock
+    from rlcd.weight_space.live_provider import CodexProvider, parse_events, publish_attempt, run_brokered
+
+    cli = tmp_path / "fake-codex"
+    cli.write_bytes(b"offline transport placeholder; never executed")
+    monkeypatch.setattr("rlcd.weight_space.live_provider.shutil.which", lambda _: str(cli))
+    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.run",
+                        lambda *args, **kwargs: SimpleNamespace(stdout="offline-test\n"))
+    transport = Mock(side_effect=lambda *args, **kwargs: SimpleNamespace(returncode=0,
+        communicate=lambda *args, **kwargs: (raw, "")))
+    monkeypatch.setattr("rlcd.weight_space.live_provider.subprocess.Popen", transport)
+    base = TensorArtifact("affine/1", {"W": [[1.]], "b": [0.]})
+    task = TaskSpec("duplicate-json", "edit", "Reject ambiguous offline JSON",
+                    base.architecture, base.sha256)
+    response = {"actions": [json.dumps({"op": "submit", "commands": [], "intent": "Freeze baseline"}),
+                            json.dumps({"op": "seal", "candidate_handle": None})],
+                "reason": "offline fixture"}
+    usage = {"input_tokens": 17, "output_tokens": 7}
+    prefix = '{"type":"provider.extension","message":"/home/duplicate-fixture/log"}'
+    completion = '{"type":"turn.completed","usage":{"input_tokens":17,"output_tokens":7}}'
+    duplicate_action = '{"op":"metadata","op":"submit","commands":[],"intent":"Freeze baseline"}'
+    action_response = response | {"actions": [duplicate_action, response["actions"][1]]}
+    escaped_posix = r"\u002fhome\u002fduplicate-posix\u002fsecret"
+    escaped_windows = r"C:\u005cUsers\u005cduplicate-windows\u005csecret"
+    cases = [
+        ("control", prefix, json.dumps(response), completion, []),
+        ("usage", prefix, json.dumps(response),
+         '{"type":"turn.completed","usage":{"input_tokens":999,"input_tokens":17,"output_tokens":7}}',
+         ["invalid_event"]),
+        ("event_type", '{"type":"item.started","type":"provider.extension",'
+         '"message":"' + escaped_posix + '","item":{"type":"command_execution"}}',
+         json.dumps(response), completion, ["invalid_event"]),
+        ("item_type", '{"type":"item.started","item":{"type":"command_execution",'
+         '"type":"reasoning","text":"' + escaped_windows + '"}}',
+         json.dumps(response), completion, ["invalid_event"]),
+        ("final", prefix, '{"actions":' + json.dumps(response["actions"])
+         + ',"reason":"first","reason":"offline fixture"}', completion, ["invalid_final_response"]),
+        ("action", prefix, json.dumps(action_response), completion, []),
+    ]
+
+    for name, first, final, last, errors in cases:
+        lines = [first, json.dumps({"type": "item.completed", "item": {
+            "type": "agent_message", "text": final}}, separators=(",", ":")), last]
+        raw = "\n".join(lines) + "\n"
+        transport.reset_mock()
+        broker = ProposerBroker(task, base=base)
+        charge = Mock(wraps=broker.record_usage)
+        monkeypatch.setattr(broker, "record_usage", charge)
+        directory = tmp_path / name
+        trial = run_brokered(CodexProvider(), broker, prompt="Return the fixed offline actions",
+                             directory=directory, max_rounds=3)
+        completed = name in ("control", "action")
+        valid = name == "control"
+        expected_usage = {} if name == "usage" else usage
+        attempt = trial["attempts"][0]
+        assert transport.call_count == len(trial["attempts"]) == trial["assigned_trials"] == 1
+        assert attempt["status"] == ("completed" if completed else "failed")
+        assert attempt["error"] == (None if completed else "transport_or_response_failed")
+        assert attempt["event_errors"] == errors and attempt["usage"] == expected_usage
+        assert attempt["response"] == (None if name == "final" else action_response if name == "action" else response)
+        assert attempt["unapproved_events"] == [] and attempt["diagnostic_items"] == 0
+        assert attempt["cost"]["amount"] is None
+        assert trial["status"] == ("sealed" if valid else "invalid" if name == "action" else "failed")
+        assert broker.is_sealed
+        assert [event["request"]["op"] for event in broker.public_trace] == (
+            ["metadata", "submit", "seal"] if valid else ["metadata", "harness_deadline_seal"])
+        charges = [event.to_dict() for event in broker._session.trace
+                   if event.to_dict()["action"] == "provider_usage"]
+        if name == "usage":
+            charge.assert_not_called()
+            assert charges == []
+            assert broker._session.usage.input_tokens == broker._session.usage.output_tokens == 0
+        else:
+            charge.assert_called_once_with(17, 7)
+            assert len(charges) == 1 and charges[0]["status"] == "succeeded"
+            assert charges[0]["requested_charges"] == charges[0]["charges"] == usage
+            assert {key: getattr(broker._session.usage, key) for key in usage} == usage
+        assert broker._session.usage.proposals == int(valid)
+        folder, public_folder = directory / "provider-0", tmp_path / (name + "-public")
+        assert json.loads((folder / "receipt.json").read_text(encoding="utf-8")) == attempt
+        assert json.loads((directory / "trial.json").read_text(encoding="utf-8")) == trial
+        raw_bytes = raw.encode("utf-8")
+        assert (folder / "events.jsonl").read_bytes() == raw_bytes
+        assert attempt["events_sha256"] == hashlib.sha256(raw_bytes).hexdigest()
+        record = publish_attempt(folder, public_folder)
+        public = (public_folder / "events.jsonl").read_bytes()
+        expected_lines = [
+            (json.dumps("public event omitted: duplicate JSON object key")
+             if (name in ("event_type", "item_type") and index == 0)
+             or (name == "usage" and index == 2) else json.dumps(json.loads(line), ensure_ascii=False))
+            .replace("/home/duplicate-fixture", "[USER_PROFILE]")
+            for index, line in enumerate(lines)]
+        assert public == ("\n".join(expected_lines) + "\n").encode("utf-8")
+        assert parse_events(public.decode("utf-8")) == parse_events(raw)
+        if name in ("event_type", "item_type"):
+            escaped = escaped_posix if name == "event_type" else escaped_windows
+            assert escaped.encode("utf-8") in raw_bytes
+            assert escaped.encode("utf-8") not in public
+            assert b"duplicate-posix" not in public and b"duplicate-windows" not in public
+            assert json.loads(public.splitlines()[0]) == "public event omitted: duplicate JSON object key"
+            assert len(public.splitlines()) == len(lines)
+            assert json.loads(public.splitlines()[1])["item"]["text"] == final
+        assert (folder / "events.jsonl").read_bytes() == raw_bytes
+        assert record["raw_events_sha256"] == attempt["events_sha256"]
+        assert record["public_events_sha256"] == hashlib.sha256(public).hexdigest()
+        assert record["raw_events_sha256"] != record["public_events_sha256"]
+        assert record["redactions"] == (0 if name in ("event_type", "item_type") else 1)
+        assert set(record) == {"schema", "raw_events_sha256", "public_events_sha256", "redactions",
+                               "transform", "raw_bytes_published", "scope"}
+        assert record["transform"] == "JSON_reserialization_and_user_profile_prefix_redaction"
+        assert record["raw_bytes_published"] is False
+        assert json.loads((public_folder / "event-publication.json").read_text(encoding="utf-8")) == record
+        for filename in ("request.json", "response-schema.json", "receipt.json"):
+            assert (public_folder / filename).read_bytes() == (folder / filename).read_bytes()
+
+
 def test_public_event_derivative_retains_raw_identity_without_private_path(tmp_path):
     import hashlib
     from rlcd.weight_space.live_provider import publish_attempt
