@@ -1,0 +1,711 @@
+{
+  "schema": "wsp-provider-output-capture-engineering/1",
+  "date": "2026-11-10",
+  "recorded_execution_status": "runner_failed_before_pytest_launch",
+  "runner_invocation_attempts": 1,
+  "runner_exit_code": 1,
+  "pytest_invocation_attempts": 0,
+  "pytest_returncode": null,
+  "automatic_retry_performed": false,
+  "failure_stage": "Initial snapshot runtime inventory, before snapshot persistence and source/Git admission gates.",
+  "reported_exception": {
+    "type": "importlib.metadata.PackageNotFoundError",
+    "package": "pytest"
+  },
+  "failure_interpretation": "pytest distribution metadata was not discoverable in the selected runner environment; NumPy metadata was not queried. Exception/exit details are from the completed tool result transcribed by root, not a runner-produced result file.",
+  "runner_command_public_view": [
+    "<bound-python>",
+    "-B",
+    "-s",
+    "<private-capture>/run_check.py"
+  ],
+  "exact_command_in_private_observation": true,
+  "started_at_utc": null,
+  "completed_at_utc": null,
+  "timestamp_scope": "Exact process timestamps were not retained; publication observation time is separate.",
+  "reported_shell_wall_seconds": 2.5,
+  "outer_shell_timeout_seconds": 90,
+  "prospective_pytest_timeout_seconds": 55,
+  "pytest_timeout_applied": false,
+  "counts_and_timing_scope": "Bookkeeping only; no capability, performance, containment, cost or business-impact evidence.",
+  "planned_selection": {
+    "nodes": [
+      "tests/test_provider_capture.py",
+      "tests/test_capture_replay.py",
+      "tests/test_live_publication_keys.py",
+      "tests/test_research_broker.py::test_provider_failure_accounting_and_started_tool_detection",
+      "tests/test_research_broker.py::test_provider_version_decode_failure_retains_failed_attempt_and_trial",
+      "tests/test_research_broker.py::test_provider_completion_lifecycle_is_unambiguous_before_broker_actions",
+      "tests/test_research_broker.py::test_malformed_provider_event_type_retains_failed_attempt_and_trial",
+      "tests/test_research_broker.py::test_provider_usage_is_complete_before_broker_actions",
+      "tests/test_research_broker.py::test_nonfinite_provider_json_retains_failed_attempt_and_trial",
+      "tests/test_research_broker.py::test_failed_provider_usage_over_budget_retains_attempt_and_abstains",
+      "tests/test_research_broker.py::test_deeply_nested_provider_json_retains_failed_attempt_and_trial",
+      "tests/test_research_broker.py::test_duplicate_provider_json_keys_preserve_recovery_accounting_and_public_identity",
+      "tests/test_research_broker.py::test_public_event_derivative_retains_raw_identity_without_private_path",
+      "tests/test_research_broker.py::test_public_event_derivative_handles_lone_surrogate_without_losing_replay_identity",
+      "tests/test_research_broker.py::test_public_event_derivative_preserves_empty_and_lone_cr_framing",
+      "tests/test_research_broker.py::test_public_event_derivative_handles_decode_and_sanitation_recursion",
+      "tests/test_dark_factory.py::test_failed_native_startup_and_deadline_leave_receipts",
+      "tests/test_dark_factory.py::test_command_timeout_retains_capture_without_attesting_cleanup",
+      "tests/test_dark_factory.py::test_command_preserves_raw_output_left_before_receipt_checkpoint"
+    ],
+    "expected_case_counts": {
+      "tests.test_provider_capture::test_invalid_output_limits_are_rejected_before_launch": 8,
+      "tests.test_provider_capture::test_capture_retains_exact_raw_prefixes": 7,
+      "tests.test_provider_capture::test_capture_advances_after_short_stdin_writes": 1,
+      "tests.test_provider_capture::test_deadline_covers_process_and_unread_stdin": 2,
+      "tests.test_provider_capture::test_exited_leader_does_not_end_deadline_with_inherited_pipe": 1,
+      "tests.test_provider_capture::test_cleanup_budget_reports_lingering_process_and_pipes": 1,
+      "tests.test_provider_capture::test_version_overflow_prevents_worker_launch": 2,
+      "tests.test_provider_capture::test_invalid_version_utf8_prevents_worker_launch": 1,
+      "tests.test_provider_capture::test_provider_capture_controls_authority_and_raw_receipts": 5,
+      "tests.test_provider_capture::test_overflowed_valid_completion_never_reaches_broker_actions": 1,
+      "tests.test_provider_capture::test_factory_rejects_overflow_after_zero_exit": 2,
+      "tests.test_capture_replay::test_capture_publication_and_construction_replay": 4,
+      "tests.test_live_publication_keys::test_publication_redacts_json_keys_and_omits_collisions": 1,
+      "tests.test_research_broker::test_provider_failure_accounting_and_started_tool_detection": 1,
+      "tests.test_research_broker::test_provider_version_decode_failure_retains_failed_attempt_and_trial": 1,
+      "tests.test_research_broker::test_provider_completion_lifecycle_is_unambiguous_before_broker_actions": 1,
+      "tests.test_research_broker::test_malformed_provider_event_type_retains_failed_attempt_and_trial": 1,
+      "tests.test_research_broker::test_provider_usage_is_complete_before_broker_actions": 1,
+      "tests.test_research_broker::test_nonfinite_provider_json_retains_failed_attempt_and_trial": 1,
+      "tests.test_research_broker::test_failed_provider_usage_over_budget_retains_attempt_and_abstains": 1,
+      "tests.test_research_broker::test_deeply_nested_provider_json_retains_failed_attempt_and_trial": 1,
+      "tests.test_research_broker::test_duplicate_provider_json_keys_preserve_recovery_accounting_and_public_identity": 1,
+      "tests.test_research_broker::test_public_event_derivative_retains_raw_identity_without_private_path": 1,
+      "tests.test_research_broker::test_public_event_derivative_handles_lone_surrogate_without_losing_replay_identity": 32,
+      "tests.test_research_broker::test_public_event_derivative_preserves_empty_and_lone_cr_framing": 2,
+      "tests.test_research_broker::test_public_event_derivative_handles_decode_and_sanitation_recursion": 2,
+      "tests.test_dark_factory::test_failed_native_startup_and_deadline_leave_receipts": 1,
+      "tests.test_dark_factory::test_command_timeout_retains_capture_without_attesting_cleanup": 1,
+      "tests.test_dark_factory::test_command_preserves_raw_output_left_before_receipt_checkpoint": 1
+    },
+    "expected_total": 85,
+    "timeout_seconds": 55,
+    "automatic_retry": false
+  },
+  "planned_selection_executed": false,
+  "junit": null,
+  "test_outcome_counts": null,
+  "runner_runtime_inventory_completed": false,
+  "runner_source_git_gates_completed": false,
+  "before_after_equal": null,
+  "absent_runner_outputs": [
+    "before.json",
+    "execution-launch.json",
+    "execution-result.json",
+    "stdout.log",
+    "stderr.log",
+    "temporary",
+    "pytest.xml",
+    "after-snapshot",
+    "after.json"
+  ],
+  "retained_source_and_configuration_identities": [
+    {
+      "path": "rlcd/__init__.py",
+      "bytes": 71,
+      "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+    },
+    {
+      "path": "rlcd/weight_space/__init__.py",
+      "bytes": 3053,
+      "sha256": "6add2899c26aabf2f542cc27dce468d528cb658153f0ecc7457e1df85ff0e50a"
+    },
+    {
+      "path": "rlcd/weight_space/__main__.py",
+      "bytes": 17060,
+      "sha256": "0a6992e119665a25bae8ad5392a21dfa35d73ba738523e5f2795675f8dd4336c"
+    },
+    {
+      "path": "rlcd/weight_space/adapters.py",
+      "bytes": 2631,
+      "sha256": "87cc20844b8be1354255c2bdb21130911439f60c3cc268cbce54211a29624dd4"
+    },
+    {
+      "path": "rlcd/weight_space/artifact.py",
+      "bytes": 7735,
+      "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+    },
+    {
+      "path": "rlcd/weight_space/benchmarks.py",
+      "bytes": 15545,
+      "sha256": "3edb4f2120572aa8da92078d19c45a2d4cd494191468a893cef46a410e419983"
+    },
+    {
+      "path": "rlcd/weight_space/bound_research.py",
+      "bytes": 64648,
+      "sha256": "814fafa6da869e15f7e0066f04e878df037d43f05f40bf32517db96781466917"
+    },
+    {
+      "path": "rlcd/weight_space/broker.py",
+      "bytes": 15388,
+      "sha256": "18affe0acfc1e8f6a434aaca3e462530d0b1a05369b05a3a25be1d0b1090359b"
+    },
+    {
+      "path": "rlcd/weight_space/compiler.py",
+      "bytes": 3928,
+      "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+    },
+    {
+      "path": "rlcd/weight_space/contracts.py",
+      "bytes": 43906,
+      "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+    },
+    {
+      "path": "rlcd/weight_space/cumulative_research.py",
+      "bytes": 56668,
+      "sha256": "31abbef4e162779ef684295e33564cf78d5b2081c5ed537fd11814558a83a796"
+    },
+    {
+      "path": "rlcd/weight_space/data_roles.py",
+      "bytes": 29559,
+      "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+    },
+    {
+      "path": "rlcd/weight_space/demo.py",
+      "bytes": 4776,
+      "sha256": "26b12f4b19e1656faec2377cb2a7725f4847f37a3633d762a8e1f45f5ac5a0b6"
+    },
+    {
+      "path": "rlcd/weight_space/evidence.py",
+      "bytes": 8003,
+      "sha256": "69c5e8479ce7797de7ef182a4fd1229124c83bfb4fc86ccbfbb14edc1984420d"
+    },
+    {
+      "path": "rlcd/weight_space/experiments.py",
+      "bytes": 14118,
+      "sha256": "72135f830bd7d662bbdf7a9b254712105ff70b00a253ea08a90238f08989ff0a"
+    },
+    {
+      "path": "rlcd/weight_space/features.py",
+      "bytes": 34083,
+      "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+    },
+    {
+      "path": "rlcd/weight_space/live_provider.py",
+      "bytes": 28554,
+      "sha256": "d392b364f5eeb44ea5d9a189f98bfc19d2391e7a031aa0ba8e323bff23c29ce7"
+    },
+    {
+      "path": "rlcd/weight_space/metrics.py",
+      "bytes": 3552,
+      "sha256": "3cf3061c0a6f1676066ef15649ac5877ba8161d11a5a3d24c4b0f06ecaea77ad"
+    },
+    {
+      "path": "rlcd/weight_space/model.py",
+      "bytes": 10004,
+      "sha256": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba"
+    },
+    {
+      "path": "rlcd/weight_space/program.py",
+      "bytes": 6317,
+      "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+    },
+    {
+      "path": "rlcd/weight_space/proof_bridge.py",
+      "bytes": 27469,
+      "sha256": "642ec0869208d59f1641b31d5887cb5f16b199787418e0b7789aa979ad04a93b"
+    },
+    {
+      "path": "rlcd/weight_space/research_tasks.py",
+      "bytes": 31221,
+      "sha256": "52102a2403298f536b1bafb3a8638dce2abba8acb3c58d606c882c8ff87e7b8f"
+    },
+    {
+      "path": "rlcd/weight_space/rts_study.py",
+      "bytes": 17923,
+      "sha256": "a284b4e77e4bb57b704271ca170f7b29e7139e333d8dc17a663d4096fabaa476"
+    },
+    {
+      "path": "rlcd/weight_space/runtime_research.py",
+      "bytes": 15940,
+      "sha256": "6b961bba8b396fdc9343da5e57beb610f8c25450291f513de58102cb36a7a951"
+    },
+    {
+      "path": "rlcd/weight_space/semantics.py",
+      "bytes": 6727,
+      "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+    },
+    {
+      "path": "rlcd/weight_space/sequential.py",
+      "bytes": 9106,
+      "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+    },
+    {
+      "path": "rlcd/weight_space/sequential_runtime.py",
+      "bytes": 6320,
+      "sha256": "0f06469393d4c8cc5f2a16529ca648dbb439e42df7b559077a3ec706d6a3302f"
+    },
+    {
+      "path": "rlcd/weight_space/sequential_slot_evaluator.py",
+      "bytes": 3084,
+      "sha256": "a17d2cab18dd3fc0387b70904eb34a0506872b716755b97eb453ed50c9b0fcbe"
+    },
+    {
+      "path": "rlcd/weight_space/staged_cohort.py",
+      "bytes": 67239,
+      "sha256": "b7b45c55955932dc92f4b5196ae9e9eadee472eccbc380145d81a5f4c39fdd80"
+    },
+    {
+      "path": "rlcd/weight_space/staged_diagnosis.py",
+      "bytes": 28539,
+      "sha256": "ff3449c6392d8fca2af2114ff36c3760a207eff5b7bd667f0939bdaf1ef74dd5"
+    },
+    {
+      "path": "rlcd/weight_space/structured.py",
+      "bytes": 26854,
+      "sha256": "8c2be636b812158de5df1cb6bad9615274f2dfcd7b3d6701f3843e19a3513f24"
+    },
+    {
+      "path": "rlcd/weight_space/study_tasks_v2.py",
+      "bytes": 20140,
+      "sha256": "cf944710cce88a70c400b713b76b699446b1ba47747121ac58f31316fbb01233"
+    },
+    {
+      "path": "rlcd/weight_space/study_v2.py",
+      "bytes": 46314,
+      "sha256": "a1ffd5840d4beb4d7b8f827552a38ae192f300e32809233a1b58681c147bdb3e"
+    },
+    {
+      "path": "rlcd/weight_space/symmetry.py",
+      "bytes": 12162,
+      "sha256": "c459d7e7317d89eda6d8a99c98606bb73b4ccad3a80f77f81f3272646173035d"
+    },
+    {
+      "path": "rlcd/weight_space/torch_bridge.py",
+      "bytes": 9678,
+      "sha256": "b532de9574bb13c4c918656cba21ff2e9da61ea2c9aca1a6394376bb64696cda"
+    },
+    {
+      "path": "rlcd/weight_space/workflow.py",
+      "bytes": 54271,
+      "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+    },
+    {
+      "path": "scripts/audit_public_content.py",
+      "bytes": 2593,
+      "sha256": "b5d4bfed042eaeffd040657ea23ab60b95e0826d89a1de15bc26e278ae4e3b3d"
+    },
+    {
+      "path": "scripts/check_weight_space_bridge.py",
+      "bytes": 35887,
+      "sha256": "04fb387ce392ed1b938ff2c566120103f23d11b56af6037ef12aa9d0ea5eb576"
+    },
+    {
+      "path": "scripts/dark_factory.py",
+      "bytes": 48495,
+      "sha256": "25ae5bbe4294eca53dcc0cdf9fa8c9649d801a2aa80a7bc399151dcaa6a54ce5"
+    },
+    {
+      "path": "scripts/run_construction_steering_pilot.py",
+      "bytes": 98670,
+      "sha256": "62f172e964d0162e2b35cffae86647dedc03b12f3bde69e7c4738c979970b8f0"
+    },
+    {
+      "path": "scripts/run_original_source_repeat.py",
+      "bytes": 44069,
+      "sha256": "2c485763e3821f73b456c70889bfc4757ebb7c6eeb8503e36ac2257ec98b546b"
+    },
+    {
+      "path": "scripts/verify_publication.py",
+      "bytes": 37714,
+      "sha256": "e8658f9880310431dfc7ea9b7a57ac738f5615d73d6e8cbb2389b8afeda95f66"
+    },
+    {
+      "path": "tests/test_provider_capture.py",
+      "bytes": 22665,
+      "sha256": "cc3a159f0079aac1fca28a6f690fd4f1c84afa66a06c05e894a50eb80cdac95b"
+    },
+    {
+      "path": "tests/test_capture_replay.py",
+      "bytes": 7075,
+      "sha256": "32826875debb34fe6668a65b657ef6c2b5c77843a7d4d8e0028623ce9a435055"
+    },
+    {
+      "path": "tests/test_research_broker.py",
+      "bytes": 72472,
+      "sha256": "95c103a3f81648aa928df77f67b592036f0885fb34d5844e29842f7b8f06fa2e"
+    },
+    {
+      "path": "tests/test_live_publication_keys.py",
+      "bytes": 10414,
+      "sha256": "ab07939a7d16020f3de6d7a11cd9e481b65ded2671cd6ce38d6003e70e469cbb"
+    },
+    {
+      "path": "tests/test_dark_factory.py",
+      "bytes": 49931,
+      "sha256": "303fce8ee5997129c34510210bd64cea3094b0bca62573455abccd9c2c7927fb"
+    },
+    {
+      "path": "pytest-engineering.ini",
+      "bytes": 2135,
+      "sha256": "3eee79d1812f94cef7841ed927054d5ccf6f2b1a7977181f9a13ad290c5e85b2"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 1136,
+      "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+    }
+  ],
+  "retained_preparation_inputs_match_reviewed_bytes": true,
+  "post_failure_source_bytes_match_bindings_and_retained_copies": true,
+  "post_failure_read_only_git_observation": {
+    "head": "d9caa46be8f3cc75d58357afe6bfb2b6d37fdd29",
+    "tree": "8116c9bdd26314a5ed29de05e9af25bc917bec64",
+    "parents": [
+      "4c466d3a7c9e98f8f0f2dce0e19108adff3cf91f"
+    ],
+    "branch": "fix/live-provider-output-limits-20261110",
+    "status": ""
+  },
+  "git_observation_scope": "Separate read-only publication-time observation of clean source HEAD; not a persisted runner snapshot or execution-time gate attestation.",
+  "runtime_public_view": {
+    "publication_interpreter_version": [
+      3,
+      12,
+      10
+    ],
+    "os_family": "Windows"
+  },
+  "runtime_scope": "Publication-interpreter observation only. The failed runner persisted no completed runtime inventory or executable/package-content identity; no before/after runtime equality or lockfile agreement is claimed.",
+  "implementation": {
+    "default_max_stdout_bytes": 8388608,
+    "default_max_stderr_bytes": 1048576,
+    "limits": "Positive integer bytes, booleans rejected; version probe, provider worker and factory command use shared bounded capture.",
+    "incomplete_worker": "Retain exact forensic byte prefixes, suppress response/usage authority and broker actions, terminate without retry.",
+    "cleanup": "One cleanup deadline; complete capture does not attest descendant exit or OS/container/network containment."
+  },
+  "static_review_scope": "Production capture/provider/factory and both replay consumers were statically reviewed. Authored local-provider checks target the production writer. Authored AST replay fixtures use a test-local JSON writer and extract only construction-verifier functions; original-repeat changes have no runtime coverage from this attempt.",
+  "compatibility_scope": "Metadata-absent authored fixtures target parser interpretation only, not historical frozen full replay. New default cap fields affect exact configuration comparisons. Strict source/runtime/request/configuration equality and pins remain unchanged; no relocking, migration or recovered usage.",
+  "test_or_fixture_executed": false,
+  "project_modules_imported_by_runner": false,
+  "live_provider_request_made": false,
+  "provider_cli_transport_executed": false,
+  "scientific_study_executed": false,
+  "historical_replay_executed": false,
+  "publication_verifier_executed_locally": false,
+  "native_containment_validated": false,
+  "financial_or_business_impact_established": false,
+  "issue5_c1_status": "partial",
+  "issue5_kept_open": true,
+  "other_acceptance_statuses_changed": false,
+  "interpretation_limits": [
+    "No runtime result for any selected authored test, provider writer, replay verifier or finite emitter.",
+    "Retained copies establish current source/input byte identities, not completed runner Git/runtime gates, transitive import closure or all process history.",
+    "Output limits cannot undo earlier native activity; capture completeness does not attest descendant exit or general containment.",
+    "Historical captures, absent fields and source inventories remain unchanged; historical missing usage and costs remain unknown.",
+    "Hosted CI is separate post-commit evidence and is not included in this receipt."
+  ],
+  "private_evidence": {
+    "method": "Allowlisted summaries and byte/hash commitments; raw records and private paths are not published.",
+    "commitments": [
+      {
+        "path": "before-snapshot/sources/rlcd/__init__.py",
+        "bytes": 71,
+        "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/__init__.py",
+        "bytes": 3053,
+        "sha256": "6add2899c26aabf2f542cc27dce468d528cb658153f0ecc7457e1df85ff0e50a"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/__main__.py",
+        "bytes": 17060,
+        "sha256": "0a6992e119665a25bae8ad5392a21dfa35d73ba738523e5f2795675f8dd4336c"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/adapters.py",
+        "bytes": 2631,
+        "sha256": "87cc20844b8be1354255c2bdb21130911439f60c3cc268cbce54211a29624dd4"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/artifact.py",
+        "bytes": 7735,
+        "sha256": "127621e5bb523c7d0f8104b3e398921dae9cbd59c3140147976ccb377c996500"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/benchmarks.py",
+        "bytes": 15545,
+        "sha256": "3edb4f2120572aa8da92078d19c45a2d4cd494191468a893cef46a410e419983"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/bound_research.py",
+        "bytes": 64648,
+        "sha256": "814fafa6da869e15f7e0066f04e878df037d43f05f40bf32517db96781466917"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/broker.py",
+        "bytes": 15388,
+        "sha256": "18affe0acfc1e8f6a434aaca3e462530d0b1a05369b05a3a25be1d0b1090359b"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/compiler.py",
+        "bytes": 3928,
+        "sha256": "c207c1e19072e2f170de086937fecfbf93ececbfb22a774179f7ca2aff28c8ac"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/contracts.py",
+        "bytes": 43906,
+        "sha256": "6167b89038690d6d3389d0ae2314d09ebabbf94a1a1eac71a3d35444b9210019"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/cumulative_research.py",
+        "bytes": 56668,
+        "sha256": "31abbef4e162779ef684295e33564cf78d5b2081c5ed537fd11814558a83a796"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/data_roles.py",
+        "bytes": 29559,
+        "sha256": "da2cffdd0774634a10877c5182f77f2fbb9cf402a0d6c495cde10722a8a6d851"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/demo.py",
+        "bytes": 4776,
+        "sha256": "26b12f4b19e1656faec2377cb2a7725f4847f37a3633d762a8e1f45f5ac5a0b6"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/evidence.py",
+        "bytes": 8003,
+        "sha256": "69c5e8479ce7797de7ef182a4fd1229124c83bfb4fc86ccbfbb14edc1984420d"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/experiments.py",
+        "bytes": 14118,
+        "sha256": "72135f830bd7d662bbdf7a9b254712105ff70b00a253ea08a90238f08989ff0a"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/features.py",
+        "bytes": 34083,
+        "sha256": "cdcbbfb118aed311147147a1e227f3a11b356e826417cad3c794d792955f9398"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/live_provider.py",
+        "bytes": 28554,
+        "sha256": "d392b364f5eeb44ea5d9a189f98bfc19d2391e7a031aa0ba8e323bff23c29ce7"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/metrics.py",
+        "bytes": 3552,
+        "sha256": "3cf3061c0a6f1676066ef15649ac5877ba8161d11a5a3d24c4b0f06ecaea77ad"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/model.py",
+        "bytes": 10004,
+        "sha256": "36ad9553de3c6f5b2353a10e973612a70968b954a5df17d71e1c015caf4dd3ba"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/program.py",
+        "bytes": 6317,
+        "sha256": "cb42326989d3bcec9c52405e578f0cc58de9a3fa8835fd7d517321e230003bfd"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/proof_bridge.py",
+        "bytes": 27469,
+        "sha256": "642ec0869208d59f1641b31d5887cb5f16b199787418e0b7789aa979ad04a93b"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/research_tasks.py",
+        "bytes": 31221,
+        "sha256": "52102a2403298f536b1bafb3a8638dce2abba8acb3c58d606c882c8ff87e7b8f"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/rts_study.py",
+        "bytes": 17923,
+        "sha256": "a284b4e77e4bb57b704271ca170f7b29e7139e333d8dc17a663d4096fabaa476"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/runtime_research.py",
+        "bytes": 15940,
+        "sha256": "6b961bba8b396fdc9343da5e57beb610f8c25450291f513de58102cb36a7a951"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/semantics.py",
+        "bytes": 6727,
+        "sha256": "a80d10e78c7f9e7012b8de8eb6cc9346f8bf5be381670bf34948b08ab54b06ef"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/sequential.py",
+        "bytes": 9106,
+        "sha256": "b6ddeddae87239e54c40d2e7135c6b2fec77205bc397a4dd732e91683247fcae"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/sequential_runtime.py",
+        "bytes": 6320,
+        "sha256": "0f06469393d4c8cc5f2a16529ca648dbb439e42df7b559077a3ec706d6a3302f"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/sequential_slot_evaluator.py",
+        "bytes": 3084,
+        "sha256": "a17d2cab18dd3fc0387b70904eb34a0506872b716755b97eb453ed50c9b0fcbe"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/staged_cohort.py",
+        "bytes": 67239,
+        "sha256": "b7b45c55955932dc92f4b5196ae9e9eadee472eccbc380145d81a5f4c39fdd80"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/staged_diagnosis.py",
+        "bytes": 28539,
+        "sha256": "ff3449c6392d8fca2af2114ff36c3760a207eff5b7bd667f0939bdaf1ef74dd5"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/structured.py",
+        "bytes": 26854,
+        "sha256": "8c2be636b812158de5df1cb6bad9615274f2dfcd7b3d6701f3843e19a3513f24"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/study_tasks_v2.py",
+        "bytes": 20140,
+        "sha256": "cf944710cce88a70c400b713b76b699446b1ba47747121ac58f31316fbb01233"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/study_v2.py",
+        "bytes": 46314,
+        "sha256": "a1ffd5840d4beb4d7b8f827552a38ae192f300e32809233a1b58681c147bdb3e"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/symmetry.py",
+        "bytes": 12162,
+        "sha256": "c459d7e7317d89eda6d8a99c98606bb73b4ccad3a80f77f81f3272646173035d"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/torch_bridge.py",
+        "bytes": 9678,
+        "sha256": "b532de9574bb13c4c918656cba21ff2e9da61ea2c9aca1a6394376bb64696cda"
+      },
+      {
+        "path": "before-snapshot/sources/rlcd/weight_space/workflow.py",
+        "bytes": 54271,
+        "sha256": "6fb43a315c3c5068a796e6df909b0fdfa9c0f7166ececd3d6f390eb7974c1040"
+      },
+      {
+        "path": "before-snapshot/sources/scripts/audit_public_content.py",
+        "bytes": 2593,
+        "sha256": "b5d4bfed042eaeffd040657ea23ab60b95e0826d89a1de15bc26e278ae4e3b3d"
+      },
+      {
+        "path": "before-snapshot/sources/scripts/check_weight_space_bridge.py",
+        "bytes": 35887,
+        "sha256": "04fb387ce392ed1b938ff2c566120103f23d11b56af6037ef12aa9d0ea5eb576"
+      },
+      {
+        "path": "before-snapshot/sources/scripts/dark_factory.py",
+        "bytes": 48495,
+        "sha256": "25ae5bbe4294eca53dcc0cdf9fa8c9649d801a2aa80a7bc399151dcaa6a54ce5"
+      },
+      {
+        "path": "before-snapshot/sources/scripts/run_construction_steering_pilot.py",
+        "bytes": 98670,
+        "sha256": "62f172e964d0162e2b35cffae86647dedc03b12f3bde69e7c4738c979970b8f0"
+      },
+      {
+        "path": "before-snapshot/sources/scripts/run_original_source_repeat.py",
+        "bytes": 44069,
+        "sha256": "2c485763e3821f73b456c70889bfc4757ebb7c6eeb8503e36ac2257ec98b546b"
+      },
+      {
+        "path": "before-snapshot/sources/scripts/verify_publication.py",
+        "bytes": 37714,
+        "sha256": "e8658f9880310431dfc7ea9b7a57ac738f5615d73d6e8cbb2389b8afeda95f66"
+      },
+      {
+        "path": "before-snapshot/sources/tests/test_provider_capture.py",
+        "bytes": 22665,
+        "sha256": "cc3a159f0079aac1fca28a6f690fd4f1c84afa66a06c05e894a50eb80cdac95b"
+      },
+      {
+        "path": "before-snapshot/sources/tests/test_capture_replay.py",
+        "bytes": 7075,
+        "sha256": "32826875debb34fe6668a65b657ef6c2b5c77843a7d4d8e0028623ce9a435055"
+      },
+      {
+        "path": "before-snapshot/sources/tests/test_research_broker.py",
+        "bytes": 72472,
+        "sha256": "95c103a3f81648aa928df77f67b592036f0885fb34d5844e29842f7b8f06fa2e"
+      },
+      {
+        "path": "before-snapshot/sources/tests/test_live_publication_keys.py",
+        "bytes": 10414,
+        "sha256": "ab07939a7d16020f3de6d7a11cd9e481b65ded2671cd6ce38d6003e70e469cbb"
+      },
+      {
+        "path": "before-snapshot/sources/tests/test_dark_factory.py",
+        "bytes": 49931,
+        "sha256": "303fce8ee5997129c34510210bd64cea3094b0bca62573455abccd9c2c7927fb"
+      },
+      {
+        "path": "before-snapshot/sources/pytest-engineering.ini",
+        "bytes": 2135,
+        "sha256": "3eee79d1812f94cef7841ed927054d5ccf6f2b1a7977181f9a13ad290c5e85b2"
+      },
+      {
+        "path": "before-snapshot/sources/pyproject.toml",
+        "bytes": 1136,
+        "sha256": "37851ab3b5d157c3ac101c95b186ae4e4478cd97d35ccf07258ac1cc6100cfc5"
+      },
+      {
+        "path": "run_check.py",
+        "bytes": 19482,
+        "sha256": "d5544aa9118426dae0d547a1fe725c2474c15a41c5930c618e118d6a49bdfc2b"
+      },
+      {
+        "path": "before-snapshot/inputs/run_check.py",
+        "bytes": 19482,
+        "sha256": "d5544aa9118426dae0d547a1fe725c2474c15a41c5930c618e118d6a49bdfc2b"
+      },
+      {
+        "path": "expected-bindings.json",
+        "bytes": 10975,
+        "sha256": "480980836dd837ba445f6af8f0c41b6f1721e391f2c515da785faf06d5db42f2"
+      },
+      {
+        "path": "before-snapshot/inputs/expected-bindings.json",
+        "bytes": 10975,
+        "sha256": "480980836dd837ba445f6af8f0c41b6f1721e391f2c515da785faf06d5db42f2"
+      },
+      {
+        "path": "post_failure_observation.json",
+        "bytes": 12030,
+        "sha256": "a5003944b73acf405d3d74f2c2784b07076a4e4693be64bc4e258972113466cc"
+      },
+      {
+        "path": "publish_failure.py",
+        "bytes": 24045,
+        "sha256": "36f5ee5eb0a7548703f5e4884e7edd6eb8c742bbca3a8a0330603eb1a203342f"
+      }
+    ],
+    "observation_is_post_failure_transcription": true,
+    "runner_raw_stdout_stderr_retained": false
+  },
+  "publication": {
+    "observed_at_utc": "2026-11-10T11:59:08.075590+00:00",
+    "finalized_after_failed_attempt": true,
+    "publication_bookkeeping_reran_tests": false,
+    "published_document_identities": [
+      {
+        "path": "CHANGELOG.md",
+        "bytes": 66460,
+        "sha256": "4964cbec32ce31bb85a03292294e40f08dc15638c566eb3045735c2be6ed68f6"
+      },
+      {
+        "path": "docs/research/broker-control-inventory.md",
+        "bytes": 24316,
+        "sha256": "6ef90a12f171e5ae7d73c1e396e207aa3d1700ae8eabb0ace01868c7c300221d"
+      },
+      {
+        "path": "docs/research/issue-acceptance-status.md",
+        "bytes": 202573,
+        "sha256": "c77313e2345f29e3532d2139a596e92661bf9177ee8bf90f7aa691521c2b7e1d"
+      }
+    ],
+    "original_source_inventory_identity": {
+      "path": "provenance/source-files.json",
+      "bytes": 2483787,
+      "sha256": "2b3386a2f5e08175c2b7598642e8fefa2e5395dc1b14b117707271a5797849fc"
+    },
+    "scope": "Current-source and publication bookkeeping only; original source inventory and historical scientific records remain unopened."
+  }
+}
