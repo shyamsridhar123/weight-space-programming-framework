@@ -219,6 +219,39 @@ def test_content_audit_reports_locations_without_values(tmp_path):
     assert audit(tmp_path)["ok"]
 
 
+@pytest.mark.parametrize("profile_root", [
+    "/home/",
+    "/Users/",
+    "C:/Users/",
+    "C:/Documents and Settings/",
+    "C:" + "\\Users\\",
+    "C:" + "\\Documents and Settings\\",
+])
+def test_content_audit_checks_fixture_paths_and_tokens(tmp_path, profile_root):
+    relative = "tests/test_research_broker.py"
+    source = tmp_path / relative
+    source.parent.mkdir()
+    cases = [
+        ("private-person", "", []),
+        ("fixture" + "_person", "", [
+            {"path": relative, "kind": "private_user_path"},
+        ]),
+        ("private-person", "ghp_" + "A" * 40, [
+            {"path": relative, "kind": "github_token"},
+        ]),
+    ]
+    for person, token, expected in cases:
+        profile = profile_root + person + profile_root[-1] + "events.jsonl"
+        source.write_text(
+            f"profile = {profile!r}\ntoken = {token!r}\n",
+            encoding="utf-8",
+        )
+        result = audit(tmp_path)
+        assert result["files_scanned"] == 1
+        assert result["findings"] == expected
+        assert result["ok"] is (not expected)
+
+
 def test_ci_service_path_exception_is_limited_to_known_public_logs(tmp_path):
     log = tmp_path / next(iter(PUBLIC_CI_LOGS))
     log.parent.mkdir(parents=True)

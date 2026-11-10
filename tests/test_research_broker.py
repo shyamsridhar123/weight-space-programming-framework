@@ -637,7 +637,7 @@ def test_duplicate_provider_json_keys_preserve_recovery_accounting_and_public_id
                             json.dumps({"op": "seal", "candidate_handle": None})],
                 "reason": "offline fixture"}
     usage = {"input_tokens": 17, "output_tokens": 7}
-    prefix = '{"type":"provider.extension","message":"/home/duplicate-fixture/log"}'
+    prefix = '{"type":"provider.extension","message":"/home/private-person/log"}'
     completion = '{"type":"turn.completed","usage":{"input_tokens":17,"output_tokens":7}}'
     duplicate_action = '{"op":"metadata","op":"submit","commands":[],"intent":"Freeze baseline"}'
     action_response = response | {"actions": [duplicate_action, response["actions"][1]]}
@@ -709,7 +709,7 @@ def test_duplicate_provider_json_keys_preserve_recovery_accounting_and_public_id
             (json.dumps("public event omitted: duplicate JSON object key")
              if (name in ("event_type", "item_type") and index == 0)
              or (name == "usage" and index == 2) else json.dumps(json.loads(line), ensure_ascii=False))
-            .replace("/home/duplicate-fixture", "[USER_PROFILE]")
+            .replace("/home/private-person", "[USER_PROFILE]")
             for index, line in enumerate(lines)]
         assert public == ("\n".join(expected_lines) + "\n").encode("utf-8")
         assert parse_events(public.decode("utf-8")) == parse_events(raw)
@@ -761,7 +761,7 @@ def test_public_event_derivative_handles_lone_surrogate_without_losing_replay_id
     import hashlib
     from rlcd.weight_space import live_provider
 
-    custom_home = r"C:\Users\surrogate-fixture"
+    custom_home = r"C:\Users\private-person"
     # Redact decoded profile spellings while keeping lone surrogates escaped.
     surrogate_event = {"type": "diagnostic", "message": custom_home + r"\log", "note": "\ud800"}
     surrogate_line = json.dumps(surrogate_event).replace("Users", r"U\u0073ers")
@@ -802,7 +802,7 @@ def test_public_event_derivative_handles_lone_surrogate_without_losing_replay_id
     assert public == ("\n".join(expected_public_lines) + "\n").encode("utf-8")
     assert (source / "events.jsonl").read_bytes() == raw
     assert r"U\u0073ers" in lines[0] and json.loads(lines[0]) == surrogate_event
-    assert r"\ud800" in public_lines[0] and "surrogate-fixture" not in public.decode("utf-8")
+    assert r"\ud800" in public_lines[0] and "private-person" not in public.decode("utf-8")
     assert json.loads(public_lines[1]) == unicode_event
     if separator:
         assert separator in lines[1] and separator.encode("utf-8") in raw
