@@ -5,6 +5,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
+import pytest
+
 from rlcd.weight_space.artifact import TensorArtifact
 from rlcd.weight_space.broker import ProposerBroker
 from rlcd.weight_space.data_roles import DataRoleRegistry
@@ -13,7 +15,20 @@ from rlcd.weight_space.staged_cohort import PreparedMember, StagedCohort
 from scripts import staged_diagnosis_selection as selection
 
 
-def test_staged_selection_admits_only_live_normal_phase_returns():
+@pytest.fixture
+def reviewed_engineering_source_pins():
+    # Prospective literal fixtures only; production's frozen source gate stays unchanged.
+    frozen_pins = selection.SOURCE_PINS
+    frozen_snapshot = dict(frozen_pins)
+    assert frozen_pins["rlcd/weight_space/broker.py"] == "58a2bbb99b2dc3240e1cf7790528d85ab9b401bdee4c52eff73fdd2fe310c56c"
+    fixture_pins = frozen_pins | {
+        "rlcd/weight_space/broker.py": "18affe0acfc1e8f6a434aaca3e462530d0b1a05369b05a3a25be1d0b1090359b"}
+    with patch.object(selection, "SOURCE_PINS", fixture_pins):
+        yield frozen_pins
+    assert selection.SOURCE_PINS is frozen_pins and frozen_pins == frozen_snapshot
+
+
+def test_staged_selection_admits_only_live_normal_phase_returns(reviewed_engineering_source_pins):
     def rejected(action, expected=ValueError):
         try:
             action()
@@ -54,6 +69,10 @@ def test_staged_selection_admits_only_live_normal_phase_returns():
                              evaluator_id="literal-evaluator", attempt_id=name, driver_sha256=driver_hash)
             return directory, cohort, selection.SelectionAdmission(cohort, directory, **arguments), arguments
 
+        with patch.object(selection, "SOURCE_PINS", reviewed_engineering_source_pins):
+            with pytest.raises(ValueError, match="^Reviewed source bytes changed$"):
+                fresh("frozen-default-rejected")
+
         directory, cohort, admission, arguments = fresh("accepted")
         rejected(lambda: selection.SelectionAdmission(cohort, directory, **arguments))
         evidence = admission.run(prepare)
@@ -72,6 +91,8 @@ def test_staged_selection_admits_only_live_normal_phase_returns():
         assert abstained["diagnosis_candidate"]["answer"]["abstain"] is True
         assert unavailable["diagnosis_candidate"] is None and unavailable["parent"] is None
         assert set(evidence["phase_return_sha256"]) == {"preparation", "diagnosis", "repair"}
+        assert evidence["source_sha256"] == selection.SOURCE_PINS | {
+            "scripts/staged_diagnosis_selection.py": driver_hash}
         assert not any("evaluation" in item["path"] for item in evidence["receipt_files"])
         rejected(lambda: selection.SelectionAdmission(cohort, directory, **arguments))
         path = directory / "member-000000" / "diagnosis.json"
@@ -174,8 +195,22 @@ def test_staged_selection_admits_only_live_normal_phase_returns():
                 assert (directory / receipt).is_file()
                 rejected(interrupted.admit)
 
+        _, _, source_changed, _ = fresh("prospective-source-drift")
+        source_changed.run(prepare)
+        broker_path = Path(selection.__file__).absolute().parents[1] / "rlcd/weight_space/broker.py"
+        broker_bytes, read_bytes = broker_path.read_bytes(), Path.read_bytes
 
-def test_staged_repair_usability_native_structure_and_live_binding():
+        def changed_bytes(path):
+            return broker_bytes + b" " if path == broker_path else read_bytes(path)
+
+        with patch.object(Path, "read_bytes", changed_bytes):
+            with pytest.raises(ValueError, match="^Reviewed source bytes changed$"):
+                source_changed.admit()
+        with pytest.raises(ValueError, match="^This live admission is irreversibly ineligible$"):
+            source_changed.admit()
+
+
+def test_staged_repair_usability_native_structure_and_live_binding(reviewed_engineering_source_pins):
     def rejected(action):
         try:
             action()
@@ -352,7 +387,7 @@ def test_staged_repair_usability_native_structure_and_live_binding():
         rejected(receipt_owner.check_repair_usability)
 
 
-def test_staged_native_controls_bind_recipes_and_separate_native_matching():
+def test_staged_native_controls_bind_recipes_and_separate_native_matching(reviewed_engineering_source_pins):
     def rejected(action):
         try:
             action()
@@ -508,7 +543,7 @@ def test_staged_native_controls_bind_recipes_and_separate_native_matching():
         rejected(admission.check_native_controls)
 
 
-def test_staged_study_endpoint_seal_retains_actual_slots_without_regeneration():
+def test_staged_study_endpoint_seal_retains_actual_slots_without_regeneration(reviewed_engineering_source_pins):
     def rejected(action, expected=ValueError):
         try:
             action()
