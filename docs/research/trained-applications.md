@@ -506,6 +506,65 @@ frozen cost-improvement margin nor enterprise ROI is established. Nested
 timers and supplementary counters must not be added to broad historical
 totals.
 
+## Prospective raw-text serving engineering
+
+The separate [raw-text runner](../../scripts/run_raw_text_serving.py) adds a
+prospective path from original text to queue routing. It does not extend or rerun
+the historical head-only supplement. The caller supplies independent SHA-256
+pins for a package manifest and a raw JSON batch. The package captures exactly
+`head.json`, `encoder.npz`, `preprocessing.json`, `lineage.json`,
+`deployed-head.json` and `policy.json`; its manifest pins each file's size and raw
+bytes. The batch contains ordered `request_id` and `text` rows. Both the raw batch
+hash and an ordered-row digest retain original punctuation, text, IDs and order.
+
+The shared captured-parent validator restores preprocessing, encoder and original
+head independently of the deployed head. It does not follow the historical
+feature-file references in lineage metadata. Only unchanged and edited-readout
+policies are supported. An admitted edit must match the candidate identity;
+rejection deploys the exact parent. The rejected candidate identity remains a
+declaration because those candidate bytes are not supplied. Admission is also a
+declaration here: this runner does not independently establish admission,
+scientific freshness, source authentication or evaluator execution attestation.
+
+Each worker call starts again with raw text, including first, warmup and measured
+calls: `TextPreprocessing.transform`, native encoder execution, native head
+execution, argmax and the declared queue map. The numeric lane is deterministic
+Torch CPU float32 with one compute thread. Artifacts retain binary64 storage;
+finite edited values are cast to float32 for native inference. Parent, candidate,
+deployed endpoint and policy identities remain distinct in receipts.
+
+The supervisor durably records all job assignments before launching a fresh
+process for each job, imposes a timeout, and retains launch, timeout, nonzero-exit
+and receipt failures. Interrupted stages retain null durations alongside already
+completed stages. Success latency samples condition on successful jobs; failed
+jobs, including their completed calls, remain visible in assignment totals and
+the excluded-sample count. Existing output directories cannot be reused.
+
+Instrumentation reports imports, native setup and package/batch load separately
+from first/warmup/measured calls and enclosing process wall. Stage timers cover
+preprocessing, encoding, and native head plus policy. Raw-call wall covers the
+whole batch and intervening durable progress writes, excluding output hashing.
+It therefore includes instrumentation overhead. Nested timers are not additive.
+There is no direct load-through-first-output metric, per-request percentile or
+controlled cold-cache claim; fresh processes do not imply cold operating-system
+file caches. Memory and energy remain unknown.
+
+The [November 9 authored engineering receipt](../../provenance/verification/raw-text-serving-20261109.json)
+records one passing bounded capture. It checks original/empty/OOV text,
+unchanged/admitted/rejected deployment, captured-byte isolation, failure evidence
+and complete assignment accounting. One actual baseline child exercises the CLI
+boundary with first and measured calls; admitted and rejected selection are
+checked in parent-process workers. The other supervisor outcomes are controlled
+fixtures, and the checks are not exhaustive. Two existing prospective-loader
+nodes check the shared extraction without historical features or lineage loads.
+
+This establishes an engineering path for a future separately sealed serving
+study. It supplies no trained-lineage evidence, historical cost recovery,
+production latency, speedup, throughput, matched crossover or enterprise ROI.
+Queue policy is authored, with no measured waits, transfers or resolution costs.
+The historical exclusions above retain their scope, and Issue #7 c3 and
+#14 c1/c5 remain partial and open.
+
 ## Independent replay and publication provenance
 
 Before reading heldout comparisons, independent review authenticated the global

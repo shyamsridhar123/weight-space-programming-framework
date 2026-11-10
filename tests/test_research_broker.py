@@ -766,3 +766,224 @@ def test_broker_malformed_registered_handle_has_private_rejection_receipt(tmp_pa
     assert broker.public_trace == public_before
     with pytest.raises(ValueError):
         broker.evaluate_registered(RegisteredBatch(), lambda c, rows: {}, evaluator_id="retry/1")
+
+
+@pytest.mark.parametrize("case", ["sealed", "failed_known", "failed_unknown", "denied"])
+def test_saved_attempt_replay_reconciles_usage_and_trial(tmp_path, monkeypatch, case):
+    import hashlib
+    from scripts import run_broker_trial
+    from rlcd.weight_space import live_provider
+    from rlcd.weight_space.model import digest
+    from rlcd.weight_space.workflow import verify_trace
+
+    def forbidden_live_provider(*args, **kwargs):
+        raise AssertionError("Saved-attempt replay must not instantiate a live provider")
+
+    monkeypatch.setattr(run_broker_trial, "CodexProvider", forbidden_live_provider)
+    monkeypatch.setattr(live_provider, "CodexProvider", forbidden_live_provider)
+
+    def resign(document):
+        document["sha256"] = digest({key: value for key, value in document.items() if key != "sha256"})
+        return document
+
+    class AuthoredProvider:
+        tool_free = True
+
+        def __init__(self):
+            self.consumed = 0
+
+        def call(self, prompt, *, directory, cwd, schema):
+            round_number = self.consumed
+            self.consumed += 1
+            usage = ({"input_tokens": 7, "output_tokens": 2} if round_number == 0 else
+                     {"input_tokens": 11, "output_tokens": 3})
+            status, response = "failed", None
+            if case == "failed_unknown":
+                usage = {}
+            elif case == "denied":
+                usage = {"input_tokens": 100001, "output_tokens": 3}
+            elif case == "sealed":
+                status = "completed"
+                if round_number == 0:
+                    actions = [[], {"op": "seal", "candidate_handle": "unknown-authored-handle"},
+                               {"op": "seal", "candidate_handle": []},
+                               {"op": "submit", "commands": [
+                                   {"op": "add", "tensor": "W", "values": [[1.0]]}],
+                                "intent": "Authored additive edit"}]
+                else:
+                    assert round_number == 1
+                    transcript = json.loads(prompt.split("\n\nJSON transcript:\n", 1)[1])
+                    handle = transcript[-1]["data"]["candidate_handle"]
+                    actions = [{"op": "seal", "candidate_handle": handle}, {"op": "metadata"}]
+                response = {"actions": [json.dumps(action) for action in actions],
+                            "reason": "Authored offline regression"}
+            raw = (json.dumps({"type": "authored.saved_attempt", "round": round_number,
+                               "usage": usage}) + "\n").encode("utf-8")
+            configuration = {"provider": "authored-offline", "tool_free": True}
+            receipt = resign({"schema": "wsp-live-provider-attempt/1", "status": status,
+                              "response": response, "usage": usage,
+                              "invocation": {"prompt_sha256": hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
+                                             "schema_sha256": digest(schema), "configuration": configuration},
+                              "events_sha256": hashlib.sha256(raw).hexdigest(),
+                              "cost": {"amount": None, "currency": "USD", "status": "unknown"},
+                              "unapproved_events": []})
+            directory.mkdir(parents=True)
+            live_provider.write_json(directory / "request.json", {"prompt": prompt, "configuration": configuration})
+            live_provider.write_json(directory / "response-schema.json", schema)
+            live_provider.write_json(directory / "receipt.json", receipt)
+            (directory / "events.jsonl").write_bytes(raw)
+            return receipt
+
+    _, _, broker = run_broker_trial.fixture()
+    private, public = tmp_path / "private", tmp_path / "public"
+    provider = AuthoredProvider()
+    trial = live_provider.run_brokered(provider, broker, prompt=run_broker_trial.PROMPT,
+                                      directory=private, max_rounds=3)
+    audit = broker.evaluate(run_broker_trial.evaluate, evaluator_id="synthetic-boundary/1")
+    public.mkdir()
+    live_provider.write_json(public / "trial.json", trial)
+    live_provider.write_json(public / "audit.json", audit)
+    for i in range(len(trial["attempts"])):
+        live_provider.publish_attempt(private / f"provider-{i}", public / f"provider-{i}")
+
+    charges = [event for event in audit["evaluation"]["trace"] if event["action"] == "provider_usage"]
+    assert provider.consumed == len(trial["attempts"]) == (2 if case == "sealed" else 1)
+    assert all(attempt["cost"]["amount"] is None for attempt in trial["attempts"])
+    assert trial["status"] == ("sealed" if case == "sealed" else "failed")
+    assert audit["status"] == ("succeeded" if case == "sealed" else "abstained")
+    assert len(charges) == (0 if case == "failed_unknown" else 2 if case == "sealed" else 1)
+    expected_usage = ({"input_tokens": 18, "output_tokens": 5} if case == "sealed" else
+                      {"input_tokens": 7, "output_tokens": 2} if case == "failed_known" else
+                      {"input_tokens": 0, "output_tokens": 0})
+    assert {key: audit["evaluation"]["usage"][key] for key in expected_usage} == expected_usage
+    if case == "denied":
+        assert charges[0]["status"] == "denied" and charges[0]["charges"] == {}
+        assert charges[0]["requested_charges"] == {"input_tokens": 100001, "output_tokens": 3}
+    elif charges:
+        assert all(event["status"] == "succeeded" and event["charges"] == event["requested_charges"]
+                   for event in charges)
+    assert run_broker_trial.replay(public)["status"] == "pass"
+
+    # Missing, extra and noncontiguous folders must not change attempt selection.
+    first, moved = public / "provider-0", tmp_path / "moved-provider"
+    first.rename(moved)
+    try:
+        with pytest.raises(AssertionError, match="Provider attempt directories"):
+            run_broker_trial.replay(public)
+    finally:
+        moved.rename(first)
+    extra = public / f"provider-{len(trial['attempts'])}"
+    extra.mkdir()
+    try:
+        with pytest.raises(AssertionError, match="Provider attempt directories"):
+            run_broker_trial.replay(public)
+    finally:
+        extra.rmdir()
+    first.rename(extra)
+    try:
+        with pytest.raises(AssertionError, match="Provider attempt directories"):
+            run_broker_trial.replay(public)
+    finally:
+        extra.rename(first)
+
+    def resign_chain(events, *, accounting=False):
+        previous = None
+        usage = {key: 0 for key in audit["evaluation"]["usage"]}
+        for i, event in enumerate(events):
+            event.update(sequence=i, previous_sha256=previous)
+            if accounting:
+                usage = {key: value + event["charges"].get(key, 0) for key, value in usage.items()}
+                event["usage"] = usage.copy()
+            previous = resign(event)["sha256"]
+        return previous
+
+    if case == "sealed":
+        for mutation in ("response", "missing_handle"):
+            tampered = json.loads(json.dumps(audit))
+            if mutation == "response":
+                tampered["public_trace"][1]["response"]["status"] = "ok"
+                message = "Broker response changed"
+            else:
+                submission = next(event for event in tampered["public_trace"]
+                                  if event["request"]["op"] == "submit")
+                submission["response"].pop("candidate_handle")
+                message = "Malformed saved broker event"
+            resign_chain(tampered["public_trace"])
+            live_provider.write_json(public / "audit.json", resign(tampered))
+            with pytest.raises(AssertionError, match=message):
+                run_broker_trial.replay(public)
+        live_provider.write_json(public / "audit.json", audit)
+
+        tampered_trial = json.loads(json.dumps(trial))
+        tampered_trial["status"] = "invalid"
+        live_provider.write_json(public / "trial.json", resign(tampered_trial))
+        with pytest.raises(AssertionError, match="Brokered trial changed"):
+            run_broker_trial.replay(public)
+        tampered_trial["max_rounds"] = 2
+        live_provider.write_json(public / "trial.json", resign(tampered_trial))
+        with pytest.raises(AssertionError, match="Fixture round budget changed"):
+            run_broker_trial.replay(public)
+        live_provider.write_json(public / "trial.json", trial)
+
+        # Re-sign every affected receipt/trial identity; exact prompt comparison
+        # must still reject a saved request that the shared driver never made.
+        request_path, receipt_path = first / "request.json", first / "receipt.json"
+        original_request, original_receipt = request_path.read_bytes(), receipt_path.read_bytes()
+        request = json.loads(original_request)
+        request["prompt"] += "\nAuthored prompt mutation"
+        receipt = json.loads(original_receipt)
+        receipt["invocation"]["prompt_sha256"] = hashlib.sha256(request["prompt"].encode("utf-8")).hexdigest()
+        resign(receipt)
+        live_provider.write_json(request_path, request)
+        live_provider.write_json(receipt_path, receipt)
+        with pytest.raises(AssertionError, match="Trial receipt changed"):
+            run_broker_trial.replay(public)
+        tampered_trial = json.loads(json.dumps(trial))
+        tampered_trial["attempts"][0] = receipt
+        live_provider.write_json(public / "trial.json", resign(tampered_trial))
+        with pytest.raises(AssertionError, match="Provider prompt changed"):
+            run_broker_trial.replay(public)
+        request_path.write_bytes(original_request)
+        receipt_path.write_bytes(original_receipt)
+        live_provider.write_json(public / "trial.json", trial)
+
+        schema_path = first / "response-schema.json"
+        original_schema = schema_path.read_bytes()
+        schema = json.loads(original_schema)
+        schema["description"] = "Authored schema mutation"
+        live_provider.write_json(schema_path, schema)
+        with pytest.raises(AssertionError, match="Provider schema identity mismatch"):
+            run_broker_trial.replay(public)
+        receipt = json.loads(original_receipt)
+        receipt["invocation"]["schema_sha256"] = digest(schema)
+        resign(receipt)
+        live_provider.write_json(receipt_path, receipt)
+        tampered_trial = json.loads(json.dumps(trial))
+        tampered_trial["attempts"][0] = receipt
+        live_provider.write_json(public / "trial.json", resign(tampered_trial))
+        with pytest.raises(AssertionError, match="Provider response schema changed"):
+            run_broker_trial.replay(public)
+        schema_path.write_bytes(original_schema)
+        receipt_path.write_bytes(original_receipt)
+        live_provider.write_json(public / "trial.json", trial)
+
+    if case == "denied":
+        for mutation in ("requested", "order", "final_usage"):
+            tampered = json.loads(json.dumps(audit))
+            evaluation = tampered["evaluation"]
+            trace = evaluation["trace"]
+            usage_index = next(i for i, event in enumerate(trace) if event["action"] == "provider_usage")
+            if mutation == "requested":
+                trace[usage_index]["requested_charges"]["input_tokens"] += 1
+            elif mutation == "order":
+                metadata_index = next(i for i, event in enumerate(trace) if event["action"] == "metadata")
+                trace[metadata_index], trace[usage_index] = trace[usage_index], trace[metadata_index]
+            else:
+                evaluation["usage"]["input_tokens"] = 1
+            evaluation["trace_head_sha256"] = resign_chain(trace, accounting=True)
+            resign(evaluation)
+            live_provider.write_json(public / "audit.json", resign(tampered))
+            assert verify_trace(trace, expected_head=evaluation["trace_head_sha256"])
+            with pytest.raises(AssertionError, match="Evaluation or provider accounting changed"):
+                run_broker_trial.replay(public)
+        live_provider.write_json(public / "audit.json", audit)

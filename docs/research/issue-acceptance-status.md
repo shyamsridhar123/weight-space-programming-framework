@@ -1008,6 +1008,8 @@ Historical records and criterion statuses are unchanged.
 
 **Remaining requirement / scope limit:** The serving supplement adds cached-head/import/input/export/copy/hash costs, but complete acquisition, encoding, memory, energy and lifecycle costs remain unmeasured.
 
+**Prospective engineering evidence (November 9, 2026):** The separately scoped [raw-text serving receipt](../../provenance/verification/raw-text-serving-20261109.json) records one passing authored check of raw preprocessing, encoding, native float32 inference and queue routing, including a real unchanged-baseline child. Parent-process checks cover admitted and rejected deployment; controlled supervisor failures retain all assignments and partial evidence. This does not measure historical encoding or full lifecycle cost, train/evaluate a lineage or establish operational benefit. Memory, energy, matched crossovers and real queue costs remain unknown. This criterion remains partial and open.
+
 #### #7 c4
 
 - [ ] All primary gain/harm/coverage/cost margins and selection rules are frozen before unseen evaluation; paired units and missingness follow benchmark.
@@ -1139,10 +1141,26 @@ failure status, attempt and trial records persist. Missing, invalid or ambiguous
 usage stays unknown. Denied events preserve requested counters separately from
 admitted totals, which do not measure total consumption or monetary charges.
 Timeout status shares the source guard but has no separately asserted fixture.
-Existing public broker replay does not reconstruct or compare usage accounting.
+The public broker replay at that receipt's source snapshot did not reconstruct
+or compare usage accounting.
 This supplies no independent live editor or provider-origin attestation. The 90
 historical failures' usage, charges and deployment revision remain unknown, with
 no finite total-cost bound; this criterion remains partial and open.
+
+**Later saved-attempt replay supplement, November 9, 2026:** The
+[authored offline receipt](../../provenance/verification/broker-usage-replay-20261109.json)
+records one passing capture that rebuilds ordinary sealing, failed known/unknown
+usage and denied-usage trials through the shared driver in fresh temporary
+directories. Exact prompts, schemas, attempt order, opaque-handle correspondence,
+broker events, complete rebuilt trials and nested evaluation/accounting are
+compared; re-signed corruption checks exercise rejection beyond self-consistent
+hashes. No live provider is constructed. Requested counters, denied events and
+admitted totals remain distinct; zero admission does not establish zero
+consumption. This supplements the prior source snapshot without rerunning or
+repairing historical trials. It establishes consistency under current semantics,
+not provider regeneration, origin attestation, real charges or an independent
+live editor. The 90 historical failures' usage and costs remain unknown, with no
+finite total-cost bound; this criterion remains partial and open.
 
 #### #8 c7
 
@@ -1725,6 +1743,8 @@ measurement and this criterion's partial status remain unchanged.
 
 **Remaining requirement / scope limit:** Peak memory, energy, encoder/preprocessing, transformer scale, multiple model sizes/devices and complete matched crossovers remain absent. Process repeats are engineering units, not lineages.
 
+**Prospective engineering evidence (November 9, 2026):** The [authored raw-text serving check](../../provenance/verification/raw-text-serving-20261109.json) exercises separate initialization/load, whole-batch preprocessing/encoding/native-head/policy timers and enclosing process wall on a pinned CPU float32 package, including one actual baseline child. It adds a future measurement path rather than a trained serving benchmark. Fresh processes do not imply cold file caches; no direct load-through-first-output metric, memory/energy result, model/device generalization, speedup or matched crossover is established. The historical exclusions and this partial/open status remain unchanged.
+
 #### #14 c2
 
 - [ ] Compare overlays/retraining/appropriate LoRA and learned-reader alternatives. Include reader training/model-zoo cost and amortization separately.
@@ -1764,6 +1784,8 @@ measurement and this criterion's partial status remain unchanged.
 **Evidence:** [E04](#e04) · [E06](#e06) · [E15](#e15) · [E16](#e16). Failures, selection/verification and separately measured import/startup/first/warm/repeated serving costs are retained; shared preparation and omitted quantities are disclosed.
 
 **Remaining requirement / scope limit:** Complete cold acquisition/preparation/encoding and full inference maintenance remain unmeasured rather than free. Nested supplements must not be added to broad historical timers.
+
+**Prospective engineering evidence (November 9, 2026):** The [raw-text serving check](../../provenance/verification/raw-text-serving-20261109.json) verifies durable all-job assignment records and separate failure dispositions, preserving interrupted stages as null and completed stage evidence. Success timing samples exclude failed jobs while retaining their denominators. Raw-call wall includes intervening progress writes and excludes output hashing; nested timers are not additive. This authored regression recovers no historical failed work and measures no complete cold acquisition or inference maintenance. This criterion remains partial and open.
 
 #### #14 c6
 
@@ -2009,6 +2031,15 @@ held-out families, trained lineages, live attestation or historical hidden-work
 recovery; no finite total-cost bound follows. This criterion remains partial and
 open.
 
+**Later saved-attempt replay supplement, November 9, 2026:** The
+[same authored offline receipt](../../provenance/verification/broker-usage-replay-20261109.json)
+adds reconstruction and complete canonical comparison of synthetic broker trials
+and nested usage accounting under current semantics, including failed and denied
+attempts. It supplies no independent held-out families, trained lineages, live
+editor or complete hidden-work accounting. No historical trial was replayed or
+repaired; unknown usage, real charges and deployment revision remain unresolved,
+and this criterion remains partial and open.
+
 #### #17 c3
 
 - [ ] Evaluate construction validity, behavior, retained obligations, utility/coverage and cost; no examples does not imply no task information.
@@ -2024,8 +2055,18 @@ open.
 supplies no new live artifacts or construction-validity, behavior, retention or
 utility evidence. Its admitted counters are budget bookkeeping, not total
 consumption or monetary charges. Historical usage and costs remain unknown; no
-finite total-cost bound or replay usage reconstruction follows. This criterion
-remains partial and open.
+finite total-cost bound or replay usage reconstruction followed from that
+receipt's source snapshot. This criterion remains partial and open.
+
+**Later saved-attempt replay supplement, November 9, 2026:** The
+[same authored offline receipt](../../provenance/verification/broker-usage-replay-20261109.json)
+records comparison of complete synthetic evaluation and budget-ledger state,
+including requested counters, denial, admitted charges and ordering. These
+checks establish no live construction artifact, behavior, retention, utility or
+monetary cost. Zero admitted usage does not establish zero resource consumption.
+Historical costs remain unknown with no finite total-cost bound; this criterion
+remains partial and open. The separate supported publication status of #17 c7
+is unchanged.
 
 #### #17 c4
 

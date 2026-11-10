@@ -13,6 +13,7 @@ import json
 from pathlib import Path
 import shutil
 import sys
+from tempfile import TemporaryDirectory
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -57,11 +58,34 @@ def evaluate(candidate):
 
 
 def replay(directory: Path) -> dict:
-    base, task, broker = fixture()
+    directory = Path(directory)
     original = json.loads((directory / "audit.json").read_text(encoding="utf-8"))
     identity = original.copy()
     assert identity.pop("sha256") == digest(identity), "Audit identity mismatch"
-    handles = {}
+    trial = json.loads((directory / "trial.json").read_text(encoding="utf-8"))
+    identity = trial.copy()
+    assert identity.pop("sha256") == digest(identity), "Trial identity mismatch"
+    assert type(trial["max_rounds"]) is int and trial["max_rounds"] == 3, "Fixture round budget changed"
+    assert type(trial["attempts"]) is list and 0 < len(trial["attempts"]) <= 3
+    expected_directories = {f"provider-{i}" for i in range(len(trial["attempts"]))}
+    assert {path.name for path in directory.glob("provider-*") if path.is_dir()} == expected_directories, \
+        "Provider attempt directories do not match trial order"
+    pinned = []
+    for i, embedded in enumerate(trial["attempts"]):
+        source = directory / f"provider-{i}"
+        attempt = json.loads((source / "receipt.json").read_text(encoding="utf-8"))
+        payload = attempt.copy()
+        assert payload.pop("sha256") == digest(payload), "Provider receipt identity mismatch"
+        assert canonical_bytes(attempt) == canonical_bytes(embedded), "Trial receipt changed"
+        request = json.loads((source / "request.json").read_text(encoding="utf-8"))
+        assert hashlib.sha256(request["prompt"].encode("utf-8")).hexdigest() == attempt["invocation"]["prompt_sha256"]
+        schema = json.loads((source / "response-schema.json").read_text(encoding="utf-8"))
+        assert digest(schema) == attempt["invocation"]["schema_sha256"], "Provider schema identity mismatch"
+        publication = json.loads((source / "event-publication.json").read_text(encoding="utf-8"))
+        assert publication["raw_events_sha256"] == attempt["events_sha256"]
+        assert hashlib.sha256((source / "events.jsonl").read_bytes()).hexdigest() == publication["public_events_sha256"]
+        pinned.append((request["prompt"], schema, attempt))
+
     previous = None
     for i, event in enumerate(original["public_trace"]):
         payload = event.copy()
@@ -69,32 +93,92 @@ def replay(directory: Path) -> dict:
         assert digest(payload) == claimed and event["previous_sha256"] == previous
         assert event["sequence"] == i
         previous = claimed
-        request = event["request"].copy()
-        if request["op"] == "harness_deadline_seal":
+
+    _, _, broker = fixture()
+
+    class SavedAttempts:
+        tool_free = True
+
+        def __init__(self):
+            self.consumed = 0
+
+        def call(self, prompt, *, directory, cwd, schema):
+            assert self.consumed < len(pinned), "Replay requested an extra provider attempt"
+            expected_prompt, expected_schema, attempt = pinned[self.consumed]
+            assert prompt == expected_prompt, "Provider prompt changed"
+            assert canonical_bytes(schema) == canonical_bytes(expected_schema), "Provider response schema changed"
+            self.consumed += 1
+            return attempt
+
+    class ReplayBroker:
+        def __init__(self):
+            self.handles = {}
+            self.consumed = 0
+
+        @property
+        def is_sealed(self):
+            return broker.is_sealed
+
+        def record_usage(self, input_tokens, output_tokens):
+            broker.record_usage(input_tokens, output_tokens)
+
+        def translated(self, request):
+            if type(request) is dict and request.get("op") == "seal":
+                handle = request.get("candidate_handle")
+                if type(handle) is str and handle in self.handles:
+                    return request | {"candidate_handle": self.handles[handle]}
+            return request
+
+        def consume_event(self, before):
+            # Adapter failures must escape the driver's recoverable action errors.
+            try:
+                trace = broker.public_trace
+                assert len(trace) == before + 1, "Broker event count changed"
+                assert self.consumed < len(original["public_trace"]), "Replay emitted an extra broker event"
+                actual, expected = trace[-1], original["public_trace"][self.consumed]
+                assert type(expected["request"]) is dict and type(expected["response"]) is dict, \
+                    "Malformed saved broker event"
+                assert canonical_bytes(actual["request"]) == canonical_bytes(self.translated(expected["request"])), \
+                    "Broker request changed"
+                response, saved = actual["response"].copy(), expected["response"].copy()
+                if "candidate_handle" in response or "candidate_handle" in saved:
+                    fresh, old = response.pop("candidate_handle"), saved.pop("candidate_handle")
+                    assert type(old) is str and type(fresh) is str
+                    assert old not in self.handles and fresh not in self.handles.values(), "Repeated candidate handle"
+                    self.handles[old] = fresh
+                assert canonical_bytes(response) == canonical_bytes(saved), "Broker response changed"
+                self.consumed += 1
+                return json.loads(canonical_bytes(expected["response"]))
+            except (ValueError, KeyError, TypeError, RecursionError) as error:
+                raise AssertionError("Malformed saved broker event") from error
+
+        def request(self, request):
+            before = len(broker.public_trace)
+            broker.request(self.translated(request))
+            return self.consume_event(before)
+
+        def abstain(self):
+            before = len(broker.public_trace)
             broker.abstain()
-            continue
-        if request["op"] == "seal" and request["candidate_handle"] is not None:
-            request["candidate_handle"] = handles[request["candidate_handle"]]
-        actual, expected = broker.request(request), event["response"].copy()
-        if "candidate_handle" in expected:
-            handles[expected.pop("candidate_handle")] = actual.pop("candidate_handle")
-        assert actual == expected, "Broker response changed"
+            if len(broker.public_trace) != before:
+                self.consume_event(before)
+
+    provider, adapter = SavedAttempts(), ReplayBroker()
+    with TemporaryDirectory(prefix="wsp-broker-replay-") as temporary:
+        rebuilt_trial = run_brokered(provider, adapter, prompt=PROMPT,
+                                    directory=Path(temporary) / "trial", max_rounds=3)
+    assert provider.consumed == len(pinned), "Unconsumed provider attempts"
+    assert adapter.consumed == len(original["public_trace"]), "Unconsumed broker events"
+    assert canonical_bytes(rebuilt_trial) == canonical_bytes(trial), "Brokered trial changed"
     rebuilt = broker.evaluate(evaluate, evaluator_id="synthetic-boundary/1")
     assert rebuilt["status"] == original["status"]
-    assert rebuilt["evaluation"]["result"] == original["evaluation"]["result"]
+    assert canonical_bytes(rebuilt["evaluation"]) == canonical_bytes(original["evaluation"]), \
+        "Evaluation or provider accounting changed"
     assert [(p["status"], p.get("program")) for p in rebuilt["attempts"]] == [
         (p["status"], p.get("program")) for p in original["attempts"]]
-    for request_path in directory.glob("provider-*/request.json"):
-        attempt = json.loads((request_path.parent / "receipt.json").read_text(encoding="utf-8"))
-        payload = attempt.copy()
-        assert payload.pop("sha256") == digest(payload)
-        request = json.loads(request_path.read_text(encoding="utf-8"))
-        assert hashlib.sha256(request["prompt"].encode()).hexdigest() == attempt["invocation"]["prompt_sha256"]
-        publication = json.loads((request_path.parent / "event-publication.json").read_text(encoding="utf-8"))
-        assert publication["raw_events_sha256"] == attempt["events_sha256"]
-        assert hashlib.sha256((request_path.parent / "events.jsonl").read_bytes()).hexdigest() == publication["public_events_sha256"]
     return {"schema": "wsp-broker-replay/1", "status": "pass", "audit_sha256": original["sha256"],
-            "scope": "independent broker/endpoint replay;_not provider regeneration"}
+            "scope": "saved_attempt_provider_and_broker_usage_replay_under_current_semantics;_"
+                     "not_provider_regeneration_or_origin_attestation;_no_historical_repair"}
 
 
 def main() -> int:
