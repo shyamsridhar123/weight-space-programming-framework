@@ -1,15 +1,29 @@
 # README artwork brief
 
-**Status: planned artwork; no ChatGPT-generated assets exist in this directory.**
+**Status: four generated illustrations selected and embedded in the README.**
 
-The README draft uses the existing walkthrough poster, framework diagram, and
-edit-geometry illustration. The images below are the intended replacements and
-additions. Their filenames are plans, not links to completed files.
+The images share a warm editorial palette and complement the existing walkthrough
+poster and edit-geometry illustration. Their actual identities, dimensions,
+SHA-256 hashes, prompts, reference, and review scope are recorded in the separate
+[generation record](../../../provenance/readme-artwork-20261110.json).
 
 On November 10, 2026, two built-in ChatGPT image-generation attempts failed before
 producing an image: HTTP 404, with the configured provider reported as unavailable.
-No API fallback was used. This brief preserves the prompts so generation can
-resume without changing the technical story.
+Generation subsequently succeeded with OpenAI `gpt-image-2` through the connected
+ElevenLabs Creative Studio. These are OpenAI-generated images, not captures or
+outputs from the ChatGPT web interface. No API-key or CLI fallback was used.
+
+| Asset | Actual size | Purpose |
+| --- | --- | --- |
+| [Hero](hero.png) | 2400 × 900 | Introduce the generic framework and explicit constraints. |
+| [Framework architecture](framework-architecture.png) | 2400 × 1500 | Trace task submissions, caller-run checks, sealed outcomes, and receipts. |
+| [Routing fixture](enterprise-routing.png) | 1280 × 720 | Connect one readout edit to a supplied outage feature and protected-score obligations. |
+| [Distro review](distro-review.png) | 2400 × 1400 | Separate host inspection from independent human decisions and limited eligibility. |
+
+The original routing candidates invented numerical matrix values and used
+passed-check symbols. They were rejected. A reference-driven correction removed
+those claims before selection. The published PNGs are unchanged copies of the
+selected generated outputs; no local image editing or resampling was applied.
 
 ## Shared art direction
 
@@ -23,16 +37,17 @@ and decorative arrows. No Mermaid. Illustrations are conceptual explanations,
 not measured plots, captured interfaces, or proof evidence. Color should support
 text and shape, never carry meaning alone.
 
-Use the built-in ChatGPT image tool for each asset. The dimensions below describe
-the desired composition, not a guarantee of tool output dimensions. After each
-generation, inspect spelling, arrows, technical relationships, and readability
-before copying the selected output into this directory. Record its actual
-dimensions, byte hash, tool, prompt, and any edits in a separate provenance record.
-Do not attribute generated artwork to the historical flowchart renderer.
+The exact generation prompts follow. Their dimensions describe the requested
+composition; the asset table reports actual output sizes. Selected outputs were
+reviewed for spelling, arrows, technical relationships, and misleading claims.
+The surrounding Markdown carries essential explanations, including text too
+small to read comfortably in a reduced diagram. Generated artwork is separate
+from mathematical, implementation, and scientific evidence. Do not attribute it
+to the historical flowchart renderer.
 
 ## 1. Hero
 
-Planned filename: `hero.png`
+Selected filename: `hero.png`
 
 Desired composition: approximately 2400 × 900 pixels.
 
@@ -86,7 +101,7 @@ content inset from image boundaries.
 
 ## 2. Generic framework architecture
 
-Planned filename: `framework-architecture.png`
+Selected filename: `framework-architecture.png`
 
 Desired composition: approximately 2400 × 1500 pixels.
 
@@ -140,7 +155,7 @@ no fabricated measurements, and no text beyond the specified labels.
 
 ## 3. Enterprise support-routing explanation
 
-Planned filename: `enterprise-routing.png`
+Selected filename: `enterprise-routing.png`
 
 Desired composition: approximately 2400 × 1200 pixels.
 
@@ -189,9 +204,28 @@ automatic approvals. Use clear connectors only where specified. No Mermaid,
 neon, decorative robot or brain icons, interface screenshots, or watermarks.
 ```
 
+## 3a. Enterprise correction
+
+Reference generation: `qDOylXUqLqnfkoZVDkZL`. Selected corrected generation:
+`YqwdFRBtLXvM4cl39a4G`. The edit requested a 2400 × 1200 composition;
+the actual output is 1280 × 720. Its content and readability were reviewed at
+the actual size; the source was not enlarged to match the request.
+
+```text
+Edit the supplied reference image, preserving its warm ivory, charcoal, muted-teal and terracotta editorial style, three-panel layout, generous margins and readable typography. Keep the title exactly "One outage. The right team. Explicit protection." Preserve the left panel's telemetry-outage request, old Ordinary Support route, clear downward change arrow and new Platform Operations destination. Preserve its caption "Change the supplied outage feature's route".
+
+Make only these corrections:
+1. Replace the center numerical table with a clean abstract readout-weight grid of blank ivory cells. Exactly ONE cell is terracotta. There must be NO numerical values, percentages, ticket identifiers, feature values, invented measurements, digits or mathematical subscripts anywhere in the image. No table row or column labels are needed. Heading immediately above the grid: "Readout-weight matrix". Under it: "One changed readout weight". A fine terracotta connector runs from the highlighted cell DOWN into a plain card labelled "Actual candidate". Remove the person icon and the extra destination label inside that card. Keep "Inspect the stored weight change" beneath it.
+2. In the right panel, replace ALL checkmarks, ticks, shields, seals and pass icons with plain small EMPTY outline circles. The three teal-outlined obligation rows must read exactly "Billing", "Security", and "Ordinary support". These are obligations to check, not a result or a success claim. Keep the caption "Check protected supplied-feature scores".
+3. Keep a distinct plain card "If checks fail: stop" without a checkmark or seal. This smaller synthetic fixture stops with an error on a failed check; do not depict abstention, a receipt or deployment.
+4. Keep this readable footer exactly: "Synthetic fixture · fixed supplied features · no production or savings claim".
+
+The center grid is conceptual and must not invent numerical weights. Do not introduce any new labels, measurements, code, logos, robots, brains, Mermaid, production claims, proof claims or approval symbols. Preserve the reference image's 2:1 landscape composition. Return the corrected finished image only.
+```
+
 ## 4. Distro review architecture
 
-Planned filename: `distro-review.png`
+Selected filename: `distro-review.png`
 
 Desired composition: approximately 2400 × 1400 pixels.
 
@@ -247,11 +281,11 @@ match this specification.
 
 ## Placement and acceptance
 
-Place the hero immediately below the README title; keep the project description
-as selectable Markdown. Put the enterprise illustration beside the smaller
-Distro fixture explanation so it is not mistaken for the larger enterprise study.
-Replace the existing architecture embed only after the new image passes review.
-Place the Distro architecture with its review workflow.
+The hero sits immediately below the README title; the project description remains
+selectable Markdown. The routing illustration accompanies the smaller Distro
+fixture so it is not mistaken for the larger enterprise study. The framework
+image replaces the previous architecture embed. The Distro image accompanies
+the review workflow.
 
 Inspect each full-resolution asset and its README-width rendering. Verify exact
 wording, task branches, human authority, and assumptions against the source
@@ -263,4 +297,4 @@ Existing diagrams retain their independent
 [renderer provenance](../flowchart-manifest.json). The existing geometry
 illustration retains its
 [source and assumptions](../../../artifacts/explanations/readme-edit/source.json).
-Neither provenance record describes the planned ChatGPT artwork.
+Neither provenance record describes these new OpenAI-generated illustrations.

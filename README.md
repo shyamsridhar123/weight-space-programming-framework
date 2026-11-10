@@ -1,5 +1,7 @@
 # Weight Space Programming Framework
 
+<img src="docs/images/readme/hero.png" width="960" alt="Weight Space Programming Framework: an inspectable change to a weight matrix beside explicitly protected directions. Read, diagnose, edit, create.">
+
 **Read, diagnose, edit, and create neural-network weights—with explicit obligations and inspectable evidence.**
 
 A weight edit can improve one output and disturb another. This research framework
@@ -75,10 +77,7 @@ four kinds of work:
 | **Edit** | A literal edit, a lowered structured proposal, or a compatible complete artifact. |
 | **Create** | A complete artifact, without a parent model. |
 
-<img src="docs/images/architecture.png" width="720" alt="Framework architecture: structured proposals lower to literal edits; answers and complete artifacts enter the session directly. Caller-run checks precede sealed selection or abstention and a receipt; only selected candidates invoke held-out evaluation.">
-
-**Diagram simplification:** Only selected candidates invoke held-out evaluation.
-A sealed abstention returns a receipt without an evaluator call.
+<img src="docs/images/readme/framework-architecture.png" width="960" alt="Framework architecture: read and diagnose answers and complete artifacts enter session history directly; structured edits pass through lowering and native precision. Caller-run checks precede sealed selection or abstention. Only a selected candidate invokes caller-owned held-out evaluation; both outcomes receive a receipt.">
 
 **Declare the task.** Name the artifact semantics, access conditions, budgets,
 requested behavior, and protected behavior. Explicit adapters define how a
@@ -94,7 +93,8 @@ separate records.
 access, budgets, selection, and evaluation. The caller must run applicable
 structural, behavioral, and certificate checks. Recording a candidate does not
 run those checks automatically. Selection is sealed before caller-owned held-out
-evaluation produces its receipt.
+evaluation produces its receipt. A sealed abstention also receives a receipt,
+without an evaluator call.
 
 [Architecture and API](docs/weight-space/v2/architecture.md) ·
 [Task lifecycle](docs/weight-space/v2/workflow.md)
@@ -141,6 +141,11 @@ routing fixture and checks its supplied-feature retention certificate. It change
 one readout weight so the supplied outage feature moves from Ordinary Support to
 Platform Operations. Keep the generated plugin configuration local.
 
+<img src="docs/images/readme/enterprise-routing.png" width="960" alt="A supplied outage feature moves from Ordinary Support to Platform Operations through one readout-weight edit. Protected billing, security, and ordinary-support scores are checked. The fixture is synthetic; business savings and behavior on arbitrary tickets are not established.">
+
+The empty circles mark check obligations. If the fixture's checks fail, generation
+stops with an error; this path does not create a session-abstention receipt.
+
 Ask the host:
 
 > Inspect `change.json`. Explain which route changes, which supplied scores stay
@@ -153,6 +158,8 @@ Ask the host:
 | Prepare a review request | `wsp_prepare_review` |
 | Check the current review status | `wsp_review_status` |
 | Export the complete review history | `wsp_export_review` |
+
+<img src="docs/images/readme/distro-review.png" width="960" alt="Distro's coding host and a workspace-bound companion inspect an exact change and its evidence through the governance runtime. A separate human decision CLI controls approval, rejection, and revocation. Independently retained pins and hashed attachments bind status and complete-history export; eligibility is limited to a local pilot.">
 
 Approval, rejection, and revocation remain separate human actions. Status and
 export reconstruct the complete current request, hash the actual evidence bytes,
@@ -233,8 +240,11 @@ The documentation applies [STE-Pro-Max](https://github.com/shyamsridhar123/STE-P
 guidance: concrete examples, explicit mechanisms, and evidence with its conditions.
 The [revision record](provenance/documentation-revision.json) identifies the
 historical guidance and verification scope. Existing diagrams retain their
-[renderer provenance](docs/images/flowchart-manifest.json); the planned ChatGPT
-artwork has a separate [image brief](docs/images/readme/README.md).
+[renderer provenance](docs/images/flowchart-manifest.json). The four new README
+illustrations were generated with OpenAI `gpt-image-2` through Creative Studio;
+their [artwork brief](docs/images/readme/README.md) and
+[generation record](provenance/readme-artwork-20261110.json) preserve the prompts,
+selected assets, and review limits.
 
 <details>
 <summary>Publication provenance, reproduction, and media credits</summary>
