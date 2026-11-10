@@ -810,6 +810,19 @@ Historical records and criterion statuses are unchanged.
 
 **Remaining requirement / scope limit:** General OS/container/network containment is not established. CLI, JSON and tool limits must not be promoted to complete host isolation.
 
+**Later prospective timeout-cleanup supplement, November 9, 2026:** The
+[authored offline receipt](../../provenance/verification/provider-timeout-cleanup-20261109.json)
+records one passing helper regression with four mocked process outcomes and
+kill calls. After a timeout, subsequently drained pipes yield cleanup `None`
+(`null` in JSON), leaving descendant exit unknown, including after wrapper-kill
+fallback. Exhausted cleanup waits retain `False` and available partial streams;
+ordinary completion retains its prior result. This establishes no native
+cleanup, OS/container/network containment, output-size bound, provider-origin
+or scientific attestation. Earlier evidence and historical outcomes retain
+their scope. **#5 c1 remains partial and Issue #5 stays open; #5 c2 and #8 c6
+remain partial/open.** Historical usage, charges, deployment revision and the
+absence of a finite total-cost bound remain unresolved.
+
 #### #5 c2
 
 - [ ] Implement a real provider adapter with exact provider/model/configuration identity, prompts, tool calls, token/latency/cost usage, errors and human involvement. Keep credential material out of records.

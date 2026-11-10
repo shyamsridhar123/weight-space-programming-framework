@@ -158,6 +158,21 @@ charges and deployment revision, absence of a finite total-cost bound and
 provider-origin attestation remain unresolved. Issue #5 c2 and #8 c6 remain
 partial and open.
 
+**Prospective timeout-cleanup supplement, November 9, 2026.** The communication
+helper now leaves descendant cleanup unknown (`None`, represented as JSON
+`null`) when pipes drain after a timeout, including after wrapper-kill fallback.
+Exhausting both cleanup waits still yields `False`; ordinary completion retains
+its prior result. The
+[authored offline receipt](../../provenance/verification/provider-timeout-cleanup-20261109.json)
+records one passing regression covering four mocked communication sequences,
+retained output and exact requested wait/kill calls. It does not exercise native
+process cleanup, establish containment or an output-size bound, or supply
+live-provider or scientific attestation. No historical stream was inspected or
+rerun. Earlier receipts and historical outcomes retain their scope; the 90
+failures' missing usage, unknown charges and deployment revision, absence of a
+finite total-cost bound and provider-origin attestation remain unresolved.
+Issue #5 c1 stays partial and open; #5 c2 and #8 c6 remain partial/open.
+
 **Prospective saved-attempt broker replay, November 9, 2026.** The separate
 [broker fixture runner](../../scripts/run_broker_trial.py) now pins saved prompts,
 response schemas, embedded attempts and raw/public event-publication identities,
