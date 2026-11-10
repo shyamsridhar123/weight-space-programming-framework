@@ -7,6 +7,19 @@ research draft.
 
 ## Unreleased
 
+- Bound retained subprocess output in the [provider and factory routes](docs/research/broker-control-inventory.md#prospective-output-capture-20261110)
+  with configurable positive-integer byte caps, defaulting to 8 MiB stdout and
+  1 MiB stderr. Cover provider workers, version probes and factory commands;
+  record effective limits, retained-byte identities and capture completeness.
+  Incomplete worker captures retain forensic prefixes but supply no actionable
+  response or trusted usage, cannot authorize subsequent broker actions, and are
+  not retried. Output caps do not undo earlier native activity. Complete failed
+  attempts can retain chargeable usage. Preserve raw bytes separately from
+  replacement-decoded parsing/public derivatives; discard `taskkill` output and
+  bound cleanup under one deadline. This prospective source description claims no validation result,
+  OS containment or descendant-exit attestation. Historical evidence retains its
+  scope; Issue #5 c1 remains partial/open.
+
 - Clarify a proposed [study runner using the existing APIs](docs/research/staged-scientific-compatibility.md):
   prebound forecast-eligibility rules use genuine diagnosis-barrier evidence;
   complete slot counts are written inside the authorized callback; attributed

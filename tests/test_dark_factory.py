@@ -160,42 +160,39 @@ def test_failed_native_startup_and_deadline_leave_receipts(tmp_path):
         assert (tmp_path / f"command-{i:03}.stdout.private").is_file()
 
 
-def test_bounded_communication_timeout_cleanup_is_not_attested(monkeypatch):
-    from unittest.mock import Mock, call
+def test_command_timeout_retains_capture_without_attesting_cleanup(tmp_path, monkeypatch):
+    import hashlib
 
-    from rlcd.weight_space import live_provider
+    stdout, stderr = b"retained stdout", b"retained stderr"
+    process = SimpleNamespace(returncode=-9)
+    capture = {"max_stdout_bytes": 64, "max_stderr_bytes": 32,
+               "stdout_bytes": len(stdout), "stderr_bytes": len(stderr),
+               "stdout_sha256": hashlib.sha256(stdout).hexdigest(),
+               "stderr_sha256": hashlib.sha256(stderr).hexdigest(),
+               "stdout_eof": True, "stderr_eof": True, "overflow": [], "read_errors": [],
+               "stdin_error": None, "returncode": -9, "cleanup_complete": None, "complete": False}
 
-    def forbid_real_processes(*args, **kwargs):
-        pytest.fail("Mocked timeout regression must not launch or terminate real processes")
+    def popen(argv, **kwargs):
+        assert kwargs["bufsize"] == 0 and not kwargs.get("text", False)
+        assert kwargs["stdin"] == subprocess.DEVNULL
+        return process
 
-    for name in ("Popen", "run"):
-        monkeypatch.setattr(subprocess, name, forbid_real_processes)
-    for name in ("kill", "killpg"):
-        monkeypatch.setattr(live_provider.os, name, forbid_real_processes, raising=False)
+    def communicate(candidate, **kwargs):
+        assert candidate is process
+        assert kwargs == {"timeout": 1, "max_stdout_bytes": 64, "max_stderr_bytes": 32}
+        return stdout, stderr, True, None, capture
 
-    def expired(seconds, output=None, stderr=None):
-        return subprocess.TimeoutExpired("mock-provider", seconds, output=output, stderr=stderr)
-
-    output = (b"retained stdout", b"retained stderr")
-    cases = (
-        ([output], (*output, False, True), 0, 0),
-        ([expired(1), output], (*output, True, None), 1, 0),
-        ([expired(1), expired(20), output], (*output, True, None), 1, 1),
-        ([expired(1, stderr=b"initial stderr"), expired(20), expired(5, output=b"partial stdout")],
-         (b"partial stdout", b"initial stderr", True, False), 1, 1),
-    )
-    for steps, expected, tree_kills, wrapper_kills in cases:
-        kill_tree = Mock()
-        monkeypatch.setattr(live_provider, "_kill_tree", kill_tree)
-        process = SimpleNamespace(communicate=Mock(side_effect=steps), kill=Mock())
-        result = live_provider._communicate_bounded(process, timeout=1, input=b"request")
-        assert result[:2] == expected[:2]
-        assert result[2] is expected[2]
-        assert result[3] is expected[3]
-        assert process.communicate.call_args_list == (
-            [call(b"request", timeout=1)] + [call(timeout=20), call(timeout=5)][:len(steps) - 1])
-        assert kill_tree.call_args_list == [call(process)] * tree_kills
-        assert process.kill.call_args_list == [call()] * wrapper_kills
+    monkeypatch.setattr(factory.subprocess, "Popen", popen)
+    monkeypatch.setattr(factory, "_communicate_bounded", communicate)
+    ledger = []
+    with pytest.raises(RuntimeError, match="authored:timeout"):
+        factory.command("authored", ["offline-placeholder"], cwd=tmp_path, run=tmp_path,
+                        ledger=ledger, timeout=1, max_stdout_bytes=64, max_stderr_bytes=32)
+    assert ledger[0]["status"] == "timeout" and ledger[0]["timeout_cleanup_complete"] is None
+    assert ledger[0]["output_capture"] == capture
+    assert json.loads((tmp_path / "command-000.json").read_text(encoding="utf-8")) == ledger[0]
+    assert (tmp_path / "command-000.stdout.private").read_bytes() == stdout
+    assert (tmp_path / "command-000.stderr.private").read_bytes() == stderr
 
 
 def test_command_preserves_raw_output_left_before_receipt_checkpoint(tmp_path):

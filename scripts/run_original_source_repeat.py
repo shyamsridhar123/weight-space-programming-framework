@@ -510,11 +510,20 @@ def replay_live(expected_lock: str, expected_bundle: str) -> dict[str, Any]:
             raise ValueError("A stopped run cannot contain later attempted assignments")
         receipt = read_json(folder / "receipt.json")
         verify_seal(receipt, row["attempt_sha256"], "wsp-live-provider-attempt/1")
+        capture = receipt["invocation"].get("output_capture")
+        worker_capture = capture.get("worker") if type(capture) is dict else None
+        incomplete_capture = "output_capture" in receipt["invocation"] and (
+            type(worker_capture) is not dict or worker_capture.get("complete") is not True)
         publication = read_json(folder / "event-publication.json")
         if (file_hash(folder / "events.jsonl") != publication["public_events_sha256"]
-                or receipt["events_sha256"] != publication["raw_events_sha256"]):
+                or receipt["events_sha256"] != publication["raw_events_sha256"]
+                or not (publication["transform"] == "JSON_reserialization_and_user_profile_prefix_redaction"
+                        or incomplete_capture and publication["transform"] ==
+                        "UTF8_replacement_then_JSON_reserialization_and_user_profile_prefix_redaction")):
             raise ValueError("Public event derivative or disclosed raw identity differs")
         response, usage, tools, errors, diagnostics = parse_events((folder / "events.jsonl").read_text(encoding="utf-8"))
+        if incomplete_capture:
+            response, usage = None, {}
         request = read_json(folder / "request.json")
         prompt = (ORIGINAL / f"runs/{truth}/prompt.txt").read_bytes()
         if (request["prompt"].encode("utf-8") != prompt or request["configuration"] != CodexProvider().configuration()
