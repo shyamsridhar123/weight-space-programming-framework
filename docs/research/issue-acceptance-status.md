@@ -880,8 +880,9 @@ attestation. #5 c2 and #8 c6 remain partial and open.
 [authored offline receipt](../../provenance/verification/provider-surrogate-publication-20261109.json)
 checks ASCII-safe JSON serialization after decoded-string sanitation. One
 handcrafted high-surrogate event remains escaped while a synthetic escaped
-profile prefix is redacted and ordinary Unicode survives decoding. Raw/public
-parser results agree, retaining `invalid_event` and later response/usage. Raw
+profile prefix is redacted and ordinary Unicode survives decoding. In that
+surrogate fixture, raw/public parser results agree, retaining `invalid_event`
+and later response/usage. Raw
 bytes, three inert copied metadata files, separate hashes and the exact
 seven-field publication record are checked. This supplies no live CLI evidence,
 broker usage admission, exhaustive Unicode, malformed raw UTF-8, full verifier
@@ -889,6 +890,19 @@ or arbitrary-data confidentiality coverage. Historical streams were not
 inspected, repaired or rerun; the 90 failures' unknown usage, charges and
 deployment revision, absence of a finite total-cost bound and provider-origin
 attestation remain unresolved. #5 c2 and #8 c6 remain partial and open.
+
+**Later JSON-key sanitation supplement, November 9, 2026:** The
+[publication contract](live-studies.md) and
+[authored offline receipt](../../provenance/verification/provider-public-event-keys-20261109.json)
+describe recursive decoded-key/value sanitation and one passing synthetic
+AST regression with a disclosed test-local JSON sink. Same-object collisions
+omit whole events and roll back their counts; the marker may yield
+`invalid_event`, so no raw/public parser equivalence is claimed. The linked
+contract retains the regex, fallback, strict UTF-8 and verbatim-metadata limits.
+This supplies no production-writer, live-provider, general confidentiality or
+historical-repair evidence. Missing historical usage, charges, deployment
+revision, finite total-cost bound and provider-origin attestation remain
+unresolved. #5 c2 and #8 c6 remain partial and open.
 
 #### #5 c3
 
@@ -1253,7 +1267,8 @@ partial and open.
 [same authored offline receipt](../../provenance/verification/provider-surrogate-publication-20261109.json)
 checks decoded synthetic profile redaction followed by ASCII-safe JSON escaping.
 The public UTF-8 derivative retains a lone surrogate as an escape and preserves
-ordinary Unicode on decoding; its parser result matches raw input, including
+ordinary Unicode on decoding; in that surrogate fixture its parser result
+matches raw input, including
 `invalid_event` and the later response/usage. Raw bytes and inert copied metadata
 remain unchanged, with separate hashes and the exact seven-field publication
 record. This fixture supplies no independent live editor, usage-admission,
@@ -1262,6 +1277,19 @@ evidence. Earlier receipts retain their source scope; no historical stream was
 inspected, repaired or rerun. Missing historical usage and charges, unknown
 deployment revision, the absent finite total-cost bound and provider-origin
 attestation remain unresolved. This criterion and #5 c2 remain partial and open.
+
+**Later JSON-key sanitation supplement, November 9, 2026:** The
+[publication contract](live-studies.md) and
+[same authored offline receipt](../../provenance/verification/provider-public-event-keys-20261109.json)
+record the bounded synthetic AST check with a test-local JSON sink. Decoded-key
+sanitation and same-object collision omission are prospective; a valid raw
+object can become a public string yielding `invalid_event`, without claimed
+raw/public parser equivalence. The linked contract preserves existing raw,
+verbatim-metadata, regex, fallback and strict UTF-8 limits. This supplies no
+production-writer, independent live-editor, usage-admission, provider-origin or
+historical-repair evidence. Earlier receipts retain their scope; missing
+historical usage, charges, deployment revision and finite total-cost bound
+remain unresolved. This criterion and #5 c2 remain partial and open.
 
 #### #8 c7
 
