@@ -7,6 +7,36 @@ research draft.
 
 ## Unreleased
 
+- Add local, slot-attributed persistence for post-unwind
+  [count/reservation correspondence](scripts/staged_scientific_count_receipts.py).
+  Attribution uses caller-retained assignment/slot labels; it authenticates no
+  roster membership and verifies no assignment/slot-to-endpoint mapping. The
+  writer creates exclusively per destination, flushes, calls `fsync` and rereads a canonical
+  join; this establishes no global logical-slot uniqueness. The reader revalidates
+  current evidence against independent labels, correspondence and body-digest
+  expectations, rejecting changed lifecycle without supplying historical replay.
+  Each calls the existing correspondence reader once.
+  The trusted harness must first observe `score` return or unwind and stop all
+  evaluation or evidence-mutating workers. Failed and outcome-unknown lifecycle
+  facts and false authority flags remain. A normal live writer return establishes
+  success of that invocation to its originating caller; surviving files and later
+  reads cannot reconstruct a missing original return. The caller must retain
+  detached original-return snapshots and independent expectations. Count-writer
+  success is separate from callback success; join-writer success cannot promote
+  failed or unknown lifecycle. Count-write placement remains unresolved; companion
+  evidence belongs in sibling storage outside `SelectionAdmission`'s exclusive
+  evidence directory. This caller obligation creates no scientific owner/API,
+  adapter or admission. Valid bytes may survive failed `fsync`; this supplies no
+  execution attestation or observation owner.
+  Scientific ownership/API, the full scientific seal, aggregate integration and
+  durable scientific observation joins remain unresolved; Issue #9 c1 remains
+  partial/open. The
+  [scoped verification](provenance/verification/staged-count-join-20261110.json)
+  records passing synthetic temporary-registry and temporary-file checks of slot
+  attribution, retained-digest and lifecycle-change rejection, exclusive creation,
+  evidence surviving failed `fsync`, and one-time destination capture; that
+  invocation ran neither the native evaluator nor the proposed scientific study.
+
 - Add generic [count/reservation read correspondence](scripts/staged_scientific_count_receipts.py)
   against independent count, binding, reservation and paired row commitments.
   It reads one trusted registry attempt, preserves failed/outcome-unknown
