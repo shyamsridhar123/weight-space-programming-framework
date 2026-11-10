@@ -28,6 +28,7 @@ from __future__ import annotations
 import argparse
 from importlib.metadata import version
 import json
+import math
 import os
 from pathlib import Path
 import platform
@@ -52,7 +53,7 @@ from rlcd.weight_space.research_tasks import (
     parent_from_bytes as _parent_from_bytes,
 )
 
-EVALUATOR_ID = "prospective-support-native-readout/1"
+EVALUATOR_ID = "prospective-support-native-readout/2"
 ROLES = ("target", "protected", "calibration")
 FLAGS = {"provenance_authenticated": False, "semantic_independence_verified": False,
          "scientific_freshness_verified": False, "evaluator_execution_attested": False}
@@ -257,7 +258,7 @@ def prepare(parent_directory: Path, development_path: Path, configuration_path: 
     registry = DataRoleRegistry(registry_path)
     records = [{"assignment_id": item["assignment_id"], "assignment_sha256": digest(item),
                 "proposal_status": "pending", "reason": None} for item in config["assignments"]]
-    manifest = {"schema": "wsp-prospective-support-manifest/1", "experiment_id": config["experiment_id"],
+    manifest = {"schema": "wsp-prospective-support-manifest/2", "experiment_id": config["experiment_id"],
                 "phase": "preparing", "assignments": records, **FLAGS}
     _manifest(run / "manifest.json", manifest)
     try:
@@ -455,6 +456,68 @@ def _outcomes(protocol: dict, status: str) -> list[dict]:
              "reason": record["reason"]} for record in protocol["assignments"]]
 
 
+def _sample_threshold_accounting(protocol: dict, outcomes: list[dict], status: str) -> dict:
+    """Reduce recorded terminal outcomes; this establishes no scoring authority."""
+    try:
+        records = protocol["assignments"]
+        admission = {key: _number(protocol["configuration"]["admission"][key])
+                     for key in ("minimum_target_gain", "maximum_protected_harm")}
+        if (type(records) is not list or not records or type(outcomes) is not list
+                or len(outcomes) != len(records)
+                or any(type(row) is not dict for row in records + outcomes)
+                or status not in ("succeeded", "abstained", "rejected", "failed")
+                or any(not -1 <= value <= 1 for value in admission.values())):
+            raise ValueError("invalid_sample_threshold_accounting")
+        identities = [_name(record["assignment_id"]) for record in records]
+        if (len(set(identities)) != len(identities)
+                or identities != [_name(outcome["assignment_id"]) for outcome in outcomes]):
+            raise ValueError("invalid_sample_threshold_accounting")
+        admitted = scored = complete = successes = 0
+        target_gains, protected_harms = [], []
+        for record, outcome, expected in zip(records, outcomes, _outcomes(protocol, status)):
+            _name(record["reason"])
+            if (record["proposal_status"] not in ("admitted", "abstained", "rejected", "failed")
+                    or any(outcome[key] != value for key, value in expected.items())):
+                raise ValueError("invalid_sample_threshold_accounting")
+            admitted += record["proposal_status"] == "admitted"
+            if record["proposal_status"] != "admitted" or status != "succeeded":
+                if "metrics" in outcome or "meets_frozen_sample_thresholds" in outcome:
+                    raise ValueError("invalid_sample_threshold_accounting")
+                continue
+            metrics = outcome["metrics"]
+            if type(metrics) is not dict or not {"target_gain", "protected_harm"} <= set(metrics):
+                raise ValueError("invalid_sample_threshold_accounting")
+            for key, values in (("target_gain", target_gains), ("protected_harm", protected_harms)):
+                if metrics[key] is not None:
+                    value = _number(metrics[key])
+                    if not -1 <= value <= 1:
+                        raise ValueError("invalid_sample_threshold_accounting")
+                    values.append(value)
+            passed = outcome["meets_frozen_sample_thresholds"]
+            if type(passed) is not bool or passed != _passes(metrics, admission):
+                raise ValueError("invalid_sample_threshold_accounting")
+            scored += 1
+            complete += metrics["target_gain"] is not None and metrics["protected_harm"] is not None
+            successes += passed
+        if (status == "succeeded" and not admitted) or (status == "abstained" and admitted):
+            raise ValueError("invalid_sample_threshold_accounting")
+        assigned = len(records)
+        return {"schema": "wsp-prospective-support-sample-threshold-accounting/1",
+                "assigned_count": assigned, "admitted_count": admitted, "scored_count": scored,
+                "target_gain_observed_count": len(target_gains), "protected_harm_observed_count": len(protected_harms),
+                "complete_endpoint_count": complete, "missing_endpoint_count": assigned - complete,
+                "admitted_missing_endpoint_count": admitted - complete,
+                "sample_threshold_success_count": successes, "artifact_coverage": admitted / assigned,
+                "all_assigned_sample_threshold_success_rate": successes / assigned,
+                "conditional_sample_threshold_success_rate": successes / admitted if admitted else None,
+                "conditional_target_gain_mean": math.fsum(target_gains) / admitted
+                    if admitted and len(target_gains) == admitted else None,
+                "conditional_protected_harm_mean": math.fsum(protected_harms) / admitted
+                    if admitted and len(protected_harms) == admitted else None}
+    except (KeyError, TypeError, AttributeError, OverflowError):
+        raise ValueError("invalid_sample_threshold_accounting") from None
+
+
 def _score_rows(rows: list[dict], protocol: dict, parent: dict, candidates: dict) -> dict:
     """The only prospective computation path; called by registry.score."""
     config = protocol["configuration"]
@@ -473,10 +536,11 @@ def _score_rows(rows: list[dict], protocol: dict, parent: dict, candidates: dict
                 np.asarray(config["queue_map"]), config["queue_map"][spec["desired_code"]])
             outcome.update(candidate_sha256=record["candidate_sha256"], codes=codes.tolist(), metrics=metrics,
                            meets_frozen_sample_thresholds=_passes(metrics, config["admission"]))
-    return {"schema": "wsp-prospective-support-result/1", "protocol_sha256": protocol["protocol_sha256"],
+    accounting = _sample_threshold_accounting(protocol, outcomes, "succeeded")
+    return {"schema": "wsp-prospective-support-result/2", "protocol_sha256": protocol["protocol_sha256"],
             "evaluator_id": EVALUATOR_ID, "input_content_sha256": digest(rows), "row_count": len(rows),
             "feature_sha256": digest(features.tolist()), "parent_codes": parent_codes.tolist(),
-            "assignments": outcomes, **FLAGS}
+            "assignments": outcomes, "sample_threshold_accounting": accounting, **FLAGS}
 
 
 def _verify_report(protocol: dict, registry: DataRoleRegistry, report: dict) -> None:
@@ -489,7 +553,8 @@ def _verify_report(protocol: dict, registry: DataRoleRegistry, report: dict) -> 
         expected = {"attempt_id": protocol["attempt_id"], "registry_id": registry.registry_id,
                     "manifest_sha256": raw["manifest_sha256"], "content_sha256": raw["content_sha256"],
                     "row_sha256": raw["row_sha256"], "result_sha256": digest(result), "binding_sha256": digest(binding)}
-        if (report["schema"] != "wsp-prospective-support-evaluation/1" or report["status"] != "succeeded"
+        accounting = _sample_threshold_accounting(protocol, result["assignments"], "succeeded")
+        if (report["schema"] != "wsp-prospective-support-evaluation/2" or report["status"] != "succeeded"
                 or report["protocol_sha256"] != protocol["protocol_sha256"]
                 or evidence["schema"] != "wsp-data-role-decision/1" or evidence["operation"] != "score"
                 or evidence["verdict"] != "registered_cooperative" or evidence["reason"] != "observed_boundary_passed"
@@ -507,10 +572,12 @@ def _verify_report(protocol: dict, registry: DataRoleRegistry, report: dict) -> 
                        for key in ("reservation_sha256", "lifecycle_sha256"))
                 or evidence["decision_sha256"] != digest({key: value for key, value in evidence.items() if key != "decision_sha256"})
                 or any(document.get(key) is not False for document in (report, result, evidence, current) for key in FLAGS)
-                or result["schema"] != "wsp-prospective-support-result/1" or result["row_count"] != len(raw["row_sha256"])
+                or result["schema"] != "wsp-prospective-support-result/2" or result["row_count"] != len(raw["row_sha256"])
                 or result["protocol_sha256"] != protocol["protocol_sha256"]
                 or result["evaluator_id"] != EVALUATOR_ID or result["input_content_sha256"] != raw["content_sha256"]
                 or canonical_bytes(report["assignments"]) != canonical_bytes(result["assignments"])
+                or canonical_bytes(report["sample_threshold_accounting"]) != canonical_bytes(accounting)
+                or canonical_bytes(result["sample_threshold_accounting"]) != canonical_bytes(accounting)
                 or [row["assignment_id"] for row in result["assignments"]] != [row["assignment_id"] for row in protocol["assignments"]]):
             raise ValueError("prospective_evidence_mismatch")
     except (KeyError, TypeError, AttributeError):
@@ -525,8 +592,9 @@ def evaluate(run_directory: Path, holdout_path: Path, registry_path: Path) -> di
                 "attempt_id": protocol["attempt_id"]})
     manifest = read_json(run / "manifest.json")
     manifest.update(phase="evaluation_requested", assignments=_outcomes(protocol, "outcome_unknown"))
+    manifest.pop("sample_threshold_accounting", None)
     _manifest(run / "manifest.json", manifest)
-    report = {"schema": "wsp-prospective-support-evaluation/1", "protocol_sha256": protocol["protocol_sha256"],
+    report = {"schema": "wsp-prospective-support-evaluation/2", "protocol_sha256": protocol["protocol_sha256"],
               "status": "abstained", "result": None, "evidence": None, "inputs": None,
               "assignments": _outcomes(protocol, "not_scored"), **FLAGS}
     interrupted = None
@@ -545,6 +613,7 @@ def evaluate(run_directory: Path, holdout_path: Path, registry_path: Path) -> di
             result, evidence = registry.score(batch, lambda captured: _score_rows(captured, protocol, parent, candidates),
                                               attempt_id=protocol["attempt_id"], binding=binding)
             report.update(status="succeeded", result=result, evidence=evidence, assignments=result["assignments"])
+            report["sample_threshold_accounting"] = result["sample_threshold_accounting"]
             _verify_report(protocol, registry, report)
     except BaseException as failure:
         evidence = (failure.decision if isinstance(failure, DataRoleError)
@@ -554,9 +623,10 @@ def evaluate(run_directory: Path, holdout_path: Path, registry_path: Path) -> di
                       reason=type(failure).__name__, assignments=_outcomes(protocol, status))
         if not isinstance(failure, Exception):
             interrupted = failure
+    report["sample_threshold_accounting"] = _sample_threshold_accounting(protocol, report["assignments"], report["status"])
     _write_json(run / "evaluation.json", report)
     manifest.update(phase=report["status"], assignments=report["assignments"],
-                    evaluation_sha256=digest(report))
+                    sample_threshold_accounting=report["sample_threshold_accounting"], evaluation_sha256=digest(report))
     _manifest(run / "manifest.json", manifest)
     if interrupted is not None:
         raise interrupted

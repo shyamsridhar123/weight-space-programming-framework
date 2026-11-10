@@ -471,6 +471,59 @@ reservation for the declared cohort and all admitted candidates. Its result
 consumer requires the exact durable successful attempt, binding and result
 commitments rather than accepting a legacy receipt or rerunning predictions.
 
+Terminal reports include `sample_threshold_accounting`, with nested schema
+`wsp-prospective-support-sample-threshold-accounting/1`. It preserves the frozen
+assigned denominator and separates admission, retained scoring and missing
+endpoints:
+
+- `assigned_count` counts every frozen assignment; `admitted_count` counts
+  admitted proposals, including eligible no-ops, rather than files on disk.
+  `scored_count` counts retained successful admitted outcomes in the final
+  accepted report. It does not count physical computation or all durable
+  records: a verification downgrade clears the report's scored outcomes even
+  if a durable successful callback record exists.
+- `target_gain_observed_count` and `protected_harm_observed_count` count the
+  corresponding observed endpoints. `complete_endpoint_count` requires both.
+  `missing_endpoint_count` is assigned minus complete;
+  `admitted_missing_endpoint_count` is admitted minus complete. An unavailable
+  retained metric endpoint is `null`; unscored hypothetical endpoints remain
+  absent. Neither is imputed as a measured failure.
+- `sample_threshold_success_count` requires a retained successful admitted
+  outcome with both endpoints passing the frozen sample admission thresholds.
+  `artifact_coverage` divides admitted by assigned;
+  `all_assigned_sample_threshold_success_rate` divides successes by assigned;
+  `conditional_sample_threshold_success_rate` divides successes by admitted,
+  counting missing admitted outcomes as no threshold success. The conditional
+  rate is `null` when nothing was admitted.
+- `conditional_target_gain_mean` and `conditional_protected_harm_mean` each
+  use all admitted artifacts only when at least one was admitted and that
+  endpoint is present for every one; otherwise the mean is `null`. The reducer
+  validates the producer's endpoint
+  contract: non-boolean finite numbers in `[-1, 1]`, or `null`. Complete means
+  use `math.fsum(values) / admitted_count`. Stored threshold flags must be
+  booleans matching the frozen comparisons.
+
+The pure reducer checks frozen assignment identity, order and proposal status
+against terminal evaluation status. Successful accounting is committed inside
+the callback result; the success consumer compares it canonically with the
+report and a deterministic reduction of recorded assignments, without replaying
+predictions or metrics. Terminal reports include abstention, rejection, failure
+and cancellation. When terminal persistence completes, the same accounting is
+copied into the terminal manifest. The report write and manifest replacement
+are separate operations. Failed or rejected reports retain no scored endpoints.
+Preparation and `outcome_unknown` manifests receive no final rates; errors
+before a report exists and abrupt process death do not manufacture a terminal
+report.
+
+New result, evaluation and manifest schemas use `/2`, and the evaluator is
+`prospective-support-native-readout/2`; protocol and binding schemas remain
+`/1`. Existing source-identity checks still apply. Earlier prepared runs and
+saved reports are not migrated, rewritten or backfilled, and the new success
+consumer does not accept earlier report schemas or promote nonsuccess reports.
+This accounting supplies neither scientific usefulness nor complete costs;
+the [rubrics](prospective-protocol-rubrics.md) retain those separate requirements
+and include a mixed-denominator example. Issue #2 c2/c7 remain partial.
+
 This runner requires a separately supplied cohort committed by its frozen
 configuration. A caller declaration of no development use remains a declaration,
 and frozen sample admission thresholds are not themselves a scientific
@@ -482,6 +535,8 @@ records passing focused and configured engineering checks completed on
 November 9, 2026. Captured source identities were unchanged before and after
 execution; the configured selection retains three declared frozen-study
 deselections. These checks establish the listed engineering behaviors only.
+That receipt predates sample-threshold accounting and does not validate the
+new `/2` result, evaluation or manifest schemas.
 
 The [five prospective protocol rubrics](prospective-protocol-rubrics.md) now
 define reading, diagnosis, editing, creation and transfer separately. Each
