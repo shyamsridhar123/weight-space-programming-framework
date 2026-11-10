@@ -7,6 +7,18 @@ research draft.
 
 ## Unreleased
 
+- Attempt budget accounting once for valid, unambiguous reported usage from
+  failed provider receipts before abstention, retaining failure status and
+  attempt/trial records. Missing, invalid or ambiguous usage stays unknown.
+  Denied events preserve requested counters separately from admitted totals,
+  which do not measure total consumption. The
+  [scoped offline receipt](provenance/verification/provider-failed-response-usage-20261109.json)
+  records one execution of six synthetic provider/broker cases. Timeout status
+  shares the source guard but has no separately asserted fixture. This supplies
+  no replay usage reconstruction, live attestation, historical usage/charge or
+  deployment-revision recovery, or finite total-cost bound. Issue #8 c6 and
+  #17 c2/c3 remain partial and open.
+
 - Preserve known fitted-option timings and broad fit/selection/materialization
   elapsed when calibration fails, retaining the original error and unchanged-parent
   fallback. The original stdlib-only regression covers its captured attempt-writer
