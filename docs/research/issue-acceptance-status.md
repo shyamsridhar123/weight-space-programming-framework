@@ -849,6 +849,20 @@ provider-origin attestation. Earlier receipts retain their source scope; the 90
 historical failures' usage, charges and deployment revision remain unknown, with
 no finite total-cost bound. #5 c2 and #8 c6 remain partial and open.
 
+**Later UTF-8 version-probe supplement, November 9, 2026:** The
+[authored offline receipt](../../provenance/verification/provider-version-utf8-20261109.json)
+records one passing regression for the single `UnicodeError` addition to the
+existing strict UTF-8 version probe startup handler. It injects
+`UnicodeDecodeError` at mocked `subprocess.run`, without exercising actual CLI
+decoding. Assertions cover retained failed
+attempt/trial records, one probe, no workers or retries despite `max_rounds=3`,
+empty streams, null version/response/returncode and unknown usage/cost. No usage
+admission or proposal occurs before normal abstention/sealing; zero admission
+does not establish zero consumption. No historical stream was inspected,
+repaired or rerun. The 90 failures' usage, charges and deployment revision remain
+unknown, with no finite total-cost bound or independent provider-origin
+attestation. #5 c2 and #8 c6 remain partial and open.
+
 #### #5 c3
 
 - [ ] Add leak/adversarial cases for hidden exact-parent extraction, private evaluator access, unauthorized network/files, reconstructed forward calls through allowed tools, and off-ledger attempts.
@@ -1192,6 +1206,21 @@ was rerun. The 90
 historical failures' missing usage and costs, unknown deployment revision and
 absence of a finite total-cost bound remain unchanged. This criterion and #5 c2
 remain partial and open.
+
+**Later UTF-8 version-probe supplement, November 9, 2026:** The
+[same authored offline receipt](../../provenance/verification/provider-version-utf8-20261109.json)
+records one passing regression injecting `UnicodeDecodeError` at mocked
+`subprocess.run` to check failed attempt/trial retention after the existing
+startup handler catches `UnicodeError` from the strict UTF-8 version probe.
+It asserts one probe, no workers or retries
+despite `max_rounds=3`, empty streams, null version/response/returncode and unknown
+usage/cost, with no usage admission or proposal before normal abstention/sealing.
+This exercises neither actual CLI decoding nor an independent live editor;
+zero admission does not establish zero consumption. No historical stream was
+inspected, repaired or rerun. The 90 failures' missing usage and charges, unknown
+deployment revision, absence of a finite total-cost bound and independent
+provider-origin attestation remain unresolved. This criterion and #5 c2 remain
+partial and open.
 
 #### #8 c7
 
