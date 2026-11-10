@@ -66,9 +66,13 @@ and reuses the unchanged checked governance model. These implementation checks
 add no formal statement, Lean execution, Python-to-Lean refinement proof,
 production authority or scientific acceptance. The first pushed integration
 workflow failed before jobs started; the receipt retains that attempt and the
-subsequent matrix-context correction. Hosted and merge results must be inspected
-against the actual publishing PR and commit; this local receipt does not supply
-a passing hosted result or merge attestation.
+subsequent matrix-context correction. The next hosted attempt started jobs but
+failed because the Linux pytest temporary directory's parent was absent and
+Windows Git checkout exceeded its path-length limit. The workflow now creates
+the parent directory and enables Git's long-path support before checkout.
+The receipt retains both job failures. Hosted and merge results must be
+inspected against the actual publishing PR and commit; this local receipt
+does not supply a passing hosted result or merge attestation.
 
 ## November 8 studies and November 9 review
 

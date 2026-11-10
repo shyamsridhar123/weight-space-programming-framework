@@ -1,7 +1,7 @@
 {
   "schema": "wsp-distro-integration-verification/1",
-  "recorded_at_utc": "2026-11-10T15:33:50.279443+00:00",
-  "base_commit": "93b799c6cfc78514c1c9711d331fa3fad991eb71",
+  "recorded_at_utc": "2026-11-10T15:39:46.428805+00:00",
+  "base_commit": "8a4eb2c839cf8f323ba34eff7780a2f5cfc4da81",
   "scope": "Fresh synthetic engineering checks, wheel/source correspondence, isolated installed-wheel MCP smoke and native management-command observations. No scientific study or historical replay.",
   "runtime": {
     "python": "3.12.10",
@@ -47,22 +47,22 @@
       {
         "path": "before.json",
         "bytes": 8676,
-        "sha256": "36512f16fd55e14f574a3a90322f8139dc5088c580f35f9f00336c078c529ad4"
+        "sha256": "497a992d9d69cf013fc99ddd53a43bdd226e221ecf696082fb36c8e5234022b5"
       },
       {
         "path": "after.json",
         "bytes": 8676,
-        "sha256": "36512f16fd55e14f574a3a90322f8139dc5088c580f35f9f00336c078c529ad4"
+        "sha256": "497a992d9d69cf013fc99ddd53a43bdd226e221ecf696082fb36c8e5234022b5"
       },
       {
         "path": "command.json",
         "bytes": 924,
-        "sha256": "476108d3ef4285c3b7cfe75e59a5b49fca20b025bb0de1ac22e88eb99ac1260c"
+        "sha256": "e3360adadd08ab33476925fd5df28de5f73582ef7629c781a2d1c01a4155abc3"
       },
       {
         "path": "stdout.log",
         "bytes": 346,
-        "sha256": "31bcc8205ffbed9086d2a716f05a82a31f3dcc1750252b96da30fb982c2686a3"
+        "sha256": "783ea5f82a79ba3a17dd0dd090a3cf5b2635607f419ad784c0cddacd578a3321"
       },
       {
         "path": "stderr.log",
@@ -72,15 +72,15 @@
       {
         "path": "pytest.xml",
         "bytes": 37195,
-        "sha256": "8500ff12391f428a41abd06cea0a1d0d3bdb281fc2b827507c99c9aed07c88d1"
+        "sha256": "038a043a9a53cf759c48a3af026c6eaadfe32e69797a8c72621565fc9f950b60"
       }
     ]
   },
   "captured_source_and_configuration_identities": [
     {
       "path": ".github/workflows/distro-integration.yml",
-      "bytes": 3540,
-      "sha256": "19972ed601542a369f0311e5ad5566b4ac3d2c00f30ad525981fbe30a6b023b8"
+      "bytes": 3725,
+      "sha256": "3ec7abc3c65d09aab107561eb6e81779dc619bbb95bd5660be455354c6b3829f"
     },
     {
       "path": "README.md",
@@ -540,7 +540,7 @@
     "Native management observations are separate from SDK tool calls. No live Distro-launched model session or native model tool invocation was exercised.",
     "Human decisions require external authorization. Labels, pins and file validation do not authenticate users or provide a trusted current-head store, concurrent-decision serialization or a filesystem sandbox.",
     "Production and scientific authority remain false. The example verifies only supplied fixed-feature effects, not text recognition, unseen tickets or customer savings.",
-    "The initial hosted workflow validation failure is identified explicitly. This local record supplies no passing hosted-CI result or publication/merge attestation; later outcomes must be inspected on the actual PR and publishing commit.",
+    "The retained hosted attempts failed. This local record supplies no passing hosted-CI result or publication/merge attestation; later outcomes must be inspected on the actual PR and publishing commit.",
     "The retained installed-wheel smoke predates this source-bound capture; the wheel's packaged source and skill were compared byte-for-byte to this capture. No claim is made about complete earlier process history."
   ],
   "previous_source_bound_verification": {
@@ -551,6 +551,15 @@
     "recorded_at_utc": "2026-11-10T15:19:02.776299+00:00",
     "focused_check_passed": true,
     "retention": "The initial receipt remains in the identified Git commit. Runtime sources, skill, package metadata and wheel bytes were unchanged for the subsequent workflow-only correction."
+  },
+  "preceding_workflow_correction_verification": {
+    "commit": "8a4eb2c839cf8f323ba34eff7780a2f5cfc4da81",
+    "path": "provenance/verification/distro-integration-20261110.json",
+    "bytes": 21330,
+    "sha256": "af9d7d79e3e37b742fb9e431df243c60f9ee6fa5800ccd5b3ee50b3b6ab009e8",
+    "recorded_at_utc": "2026-11-10T15:33:50.279443+00:00",
+    "focused_check_passed": true,
+    "retention": "The preceding receipt remains in the identified Git commit. Runtime sources, skill, package metadata and wheel bytes remain unchanged for this CI setup correction."
   },
   "initial_hosted_workflow_validation": {
     "workflow": ".github/workflows/distro-integration.yml",
@@ -563,5 +572,36 @@
     "jobs_started": false,
     "check_runs_exposed": false,
     "correction": "Changed RUN_ROOT in jobs.distro-integration.env from the unavailable runner.os context to matrix.os. This source-bound recapture passed after the correction; subsequent hosted execution remains to be inspected on the actual PR and commit."
+  },
+  "hosted_integration_setup_attempt": {
+    "workflow": ".github/workflows/distro-integration.yml",
+    "run_id": 42846097954,
+    "url": "https://github.com/shyamsridhar123/weight-space-programming-framework/actions/runs/42846097954",
+    "event": "pull_request",
+    "head_sha": "8a4eb2c839cf8f323ba34eff7780a2f5cfc4da81",
+    "tested_merge_sha": "5961ea3a597df49d7a363640cd7a57ceec39adba",
+    "status": "completed",
+    "conclusion": "failure",
+    "observed_at_utc": "2026-11-10T15:40:10.952982+00:00",
+    "jobs": [
+      {
+        "job_id": 129933838844,
+        "name": "distro-integration (ubuntu-24.04)",
+        "conclusion": "failure",
+        "step": "Check fresh synthetic governance and Distro fixtures",
+        "diagnostic": "FileNotFoundError when pytest created its basetemp because RUN_ROOT's parent directory did not exist.",
+        "correction": "Create RUN_ROOT with pathlib.Path.mkdir(parents=True, exist_ok=True) before invoking pytest."
+      },
+      {
+        "job_id": 129933839367,
+        "name": "distro-integration (windows-latest)",
+        "conclusion": "failure",
+        "step": "Check out publication",
+        "diagnostic": "Git could not check out an archived nested verification path: Filename too long.",
+        "correction": "Enable Git core.longpaths before checkout."
+      }
+    ],
+    "evidence": "Inspected the actual connector job summaries and decoded job logs. This record identifies the failures without claiming to archive the complete logs.",
+    "subsequent_hosted_execution": "Must be inspected against the later actual PR head; this local record supplies no passing hosted result."
   }
 }

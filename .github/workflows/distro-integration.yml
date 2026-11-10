@@ -31,7 +31,9 @@ jobs:
       PIP_DISABLE_PIP_VERSION_CHECK: "1"
     steps:
       - name: Preserve checked-out file bytes
-        run: git config --global core.autocrlf false
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.longpaths true
 
       - name: Check out publication
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -50,6 +52,7 @@ jobs:
 
       - name: Check fresh synthetic governance and Distro fixtures
         run: |
+          python -c 'import os; from pathlib import Path; Path(os.environ["RUN_ROOT"]).mkdir(parents=True, exist_ok=True)'
           python -m pytest -q -c pytest-engineering.ini \
             tests/test_governance.py \
             tests/test_distro_integration.py \
