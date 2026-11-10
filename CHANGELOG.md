@@ -7,6 +7,16 @@ research draft.
 
 ## Unreleased
 
+- Add first-output timing through complete-batch in-memory
+  receipt validation and six selected stdlib helper cases in
+  `tests/test_serving_metrics.py`; isolated literal checks passed with a
+  [receipt](provenance/verification/serving-first-output-literal-20261110.json). The
+  [first-output contract](REPRODUCING.md#3-run-the-tests) describes timing,
+  summary eligibility and overlap limits. Job/run schemas advance to `/2`;
+  package/policy/batch remain `/1`. Native raw-text serving stays opt-in;
+  this adds no measured latency, performance or impact evidence. #14 remains
+  partial/open.
+
 - Exclude `tests/test_raw_text_serving.py` from configured engineering CI and
   retain it as separate opt-in validation. Its authored model/package fixtures,
   model restoration, preprocessing, native inference and actual baseline child

@@ -1,0 +1,135 @@
+{
+  "schema": "rlcd.serving-first-output-literal-publication/1",
+  "date": "2026-11-10",
+  "integrated_main_base": "bb7c9620d61bf738f0712fe487b3cee23c9a7985",
+  "issue": {
+    "number": 14,
+    "state": "open",
+    "c1": "partial",
+    "c5": "partial"
+  },
+  "accounting": {
+    "job": 2,
+    "run": 2,
+    "package": 1,
+    "policy": 1,
+    "batch": 1,
+    "meaning": "schema revision numbers only"
+  },
+  "checked_source_inputs": {
+    "parent": {
+      "relative_path": "rlcd/__init__.py",
+      "bytes": 71,
+      "sha256": "7016ef5c6d852af09d1c7306a67d19c30a2628a315e4a50c4d9fc0d2b36f0418"
+    },
+    "helper": {
+      "relative_path": "rlcd/serving_metrics.py",
+      "bytes": 2885,
+      "sha256": "f62c0e7b174adcb30d0f84041859c796cbc44f15a78d98aa8e571b7454fbf16f"
+    },
+    "tests": {
+      "relative_path": "tests/test_serving_metrics.py",
+      "bytes": 6809,
+      "sha256": "c2599366b522a304c7b94aa81bb4ee0f1f3911fb482f27de611cfce5ca11a02f"
+    }
+  },
+  "verification_harness": {
+    "bytes": 11486,
+    "sha256": "e06281bec7f5f97caf7ef16f69fc63db985eed0dd02de60145df9ca94c88e59a"
+  },
+  "private_capture_commitments": {
+    "identities.before.json": {
+      "bytes": 1009,
+      "sha256": "7531bc467774c2d15da001d15be83ad27022a804f110fdb3aaace1947b1d89db"
+    },
+    "identities.after.json": {
+      "bytes": 1009,
+      "sha256": "7531bc467774c2d15da001d15be83ad27022a804f110fdb3aaace1947b1d89db"
+    },
+    "result.json": {
+      "bytes": 21616,
+      "sha256": "bef9b6412efb34bdcc65961b7b9d5ec91cbd1fd5339c4629d9285063143612b9"
+    },
+    "stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr.txt": {
+      "bytes": 1136,
+      "sha256": "cbe4145857dd9022be2e54205ea0980c2ba9babc4d7fc577e310d5108d0900ef"
+    }
+  },
+  "recorded_literal_verification": {
+    "status": "passed",
+    "executed": true,
+    "exit_code": 0,
+    "source_identities_unchanged": true,
+    "test_ids": [
+      "_issue14_literal_tests.FirstOutputTimingTests.test_finite_builtin_numbers_zero_and_enclosure_tolerance",
+      "_issue14_literal_tests.FirstOutputTimingTests.test_invalid_scalars_and_overflow_raise_value_error",
+      "_issue14_literal_tests.FirstOutputTimingTests.test_null_until_first_success_including_partial_failure",
+      "_issue14_literal_tests.ServingSummaryTests.test_empty_and_unsuccessful_assignments_have_no_success_samples",
+      "_issue14_literal_tests.ServingSummaryTests.test_successful_first_output_sample_cannot_be_missing_or_null",
+      "_issue14_literal_tests.ServingSummaryTests.test_supervisor_success_controls_samples_and_count_identities"
+    ],
+    "tests_run": 6,
+    "successful": true,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "expected_failures": [],
+    "unexpected_successes": []
+  },
+  "methods": {
+    "selection": "six fixed ordered unittest IDs; no discovery",
+    "loading": "pinned parent, helper, and test bytes loaded explicitly by the pinned harness",
+    "import_check": "recorded before/after origin audit and standard-library import guard",
+    "python_flags": {
+      "isolated": 1,
+      "no_site": 1,
+      "dont_write_bytecode": 1
+    },
+    "recorded_python_version": {
+      "major": 3,
+      "minor": 12
+    },
+    "publication_validation": "strict capture schemas, source pins, exact results, and unchanged recorded identities"
+  },
+  "later_publication_identities": {
+    "scripts/run_raw_text_serving.py": {
+      "bytes": 34842,
+      "sha256": "942cd34e4d66c9d8387e1437250e24e49e53c484e1c3e2997f3b3038f8c98a7b"
+    },
+    "pytest-engineering.ini": {
+      "bytes": 1912,
+      "sha256": "0f9408d9e27d04e1ce9a0463c5ddfcbd04c92dca49e3bb9fd55afca26b72b17b"
+    },
+    "CONTRIBUTING.md": {
+      "bytes": 7764,
+      "sha256": "b049e83eb40bc8122a121ae2720cfc7539596ee1db67e8f76293381ab6cf46d1"
+    },
+    "REPRODUCING.md": {
+      "bytes": 20883,
+      "sha256": "752d272baca1e216b51ac446cdaac92f275247f05d69e2e5a146a7d8eb622ff4"
+    },
+    "CHANGELOG.md": {
+      "bytes": 59729,
+      "sha256": "fc7c5360aba3533532f81d442a0785461c9f51927cb48b8f69820972aff0711f"
+    }
+  },
+  "configured_selection": {
+    "scope": "configured leaf checks selected; native raw-text module excluded",
+    "added_leaf": "tests/test_serving_metrics.py",
+    "excluded_module": "tests/test_raw_text_serving.py",
+    "basis": "publication caller checked the configuration delta separately; this binder records identities only"
+  },
+  "trust_and_scope_limits": [
+    "Evidence is the recorded local literal-check invocation; hosted CI is a separate future verification step.",
+    "The publisher does not execute the harness or any project code.",
+    "No runner, timer, native-serving, performance, or scientific-impact execution is evidenced.",
+    "Runner, configuration, and documentation hashes are later publication identities, not checked literal-test inputs.",
+    "The capture and integrated-main base are caller supplied; commitments do not independently attest execution, freshness, privacy, or Git ancestry.",
+    "The Python installation and standard library are trusted and unhashed; the import guard is not an operating-system sandbox or complete dependency closure.",
+    "Private paths, executable identity, full runtime strings, import maps, arguments, and log text are omitted."
+  ]
+}
