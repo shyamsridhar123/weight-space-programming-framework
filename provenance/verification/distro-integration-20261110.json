@@ -1,7 +1,7 @@
 {
   "schema": "wsp-distro-integration-verification/1",
-  "recorded_at_utc": "2026-11-10T15:19:02.776299+00:00",
-  "base_commit": "31d90e69de4eab30dff6b93d0a064749def5f94c",
+  "recorded_at_utc": "2026-11-10T15:33:50.279443+00:00",
+  "base_commit": "93b799c6cfc78514c1c9711d331fa3fad991eb71",
   "scope": "Fresh synthetic engineering checks, wheel/source correspondence, isolated installed-wheel MCP smoke and native management-command observations. No scientific study or historical replay.",
   "runtime": {
     "python": "3.12.10",
@@ -47,22 +47,22 @@
       {
         "path": "before.json",
         "bytes": 8676,
-        "sha256": "1e28885ea7ab192034370b2614a2cf760b98cfe2cb96afe5c67fc37775154a8c"
+        "sha256": "36512f16fd55e14f574a3a90322f8139dc5088c580f35f9f00336c078c529ad4"
       },
       {
         "path": "after.json",
         "bytes": 8676,
-        "sha256": "1e28885ea7ab192034370b2614a2cf760b98cfe2cb96afe5c67fc37775154a8c"
+        "sha256": "36512f16fd55e14f574a3a90322f8139dc5088c580f35f9f00336c078c529ad4"
       },
       {
         "path": "command.json",
         "bytes": 924,
-        "sha256": "2fc08e9a7e099dc8164fc6c5da22b076cab1d34b2969fd480699330219117f8b"
+        "sha256": "476108d3ef4285c3b7cfe75e59a5b49fca20b025bb0de1ac22e88eb99ac1260c"
       },
       {
         "path": "stdout.log",
         "bytes": 346,
-        "sha256": "3591fccf95f7a7905da61f3bb1ae38b6b8c8e644ee1488c82c7bb07fb4a0a39a"
+        "sha256": "31bcc8205ffbed9086d2a716f05a82a31f3dcc1750252b96da30fb982c2686a3"
       },
       {
         "path": "stderr.log",
@@ -72,7 +72,7 @@
       {
         "path": "pytest.xml",
         "bytes": 37195,
-        "sha256": "1c4d86723677d16bee4cf07031b81dc31cec8e5967707a463bd93ea9838b391e"
+        "sha256": "8500ff12391f428a41abd06cea0a1d0d3bdb281fc2b827507c99c9aed07c88d1"
       }
     ]
   },
@@ -80,7 +80,7 @@
     {
       "path": ".github/workflows/distro-integration.yml",
       "bytes": 3540,
-      "sha256": "a1e4d110e6ce812c4ec5c96233454e5dd812f52206ae55423336586b13cc7cbb"
+      "sha256": "19972ed601542a369f0311e5ad5566b4ac3d2c00f30ad525981fbe30a6b023b8"
     },
     {
       "path": "README.md",
@@ -540,7 +540,28 @@
     "Native management observations are separate from SDK tool calls. No live Distro-launched model session or native model tool invocation was exercised.",
     "Human decisions require external authorization. Labels, pins and file validation do not authenticate users or provide a trusted current-head store, concurrent-decision serialization or a filesystem sandbox.",
     "Production and scientific authority remain false. The example verifies only supplied fixed-feature effects, not text recognition, unseen tickets or customer savings.",
-    "This local record supplies no hosted-CI result or publication/merge attestation. Those outcomes are identified by their actual PR and hosted run.",
+    "The initial hosted workflow validation failure is identified explicitly. This local record supplies no passing hosted-CI result or publication/merge attestation; later outcomes must be inspected on the actual PR and publishing commit.",
     "The retained installed-wheel smoke predates this source-bound capture; the wheel's packaged source and skill were compared byte-for-byte to this capture. No claim is made about complete earlier process history."
-  ]
+  ],
+  "previous_source_bound_verification": {
+    "commit": "93b799c6cfc78514c1c9711d331fa3fad991eb71",
+    "path": "provenance/verification/distro-integration-20261110.json",
+    "bytes": 19976,
+    "sha256": "e1471b248bc86d3eba046580f7d4b566274a804be51408cd089aef5666f8cd2c",
+    "recorded_at_utc": "2026-11-10T15:19:02.776299+00:00",
+    "focused_check_passed": true,
+    "retention": "The initial receipt remains in the identified Git commit. Runtime sources, skill, package metadata and wheel bytes were unchanged for the subsequent workflow-only correction."
+  },
+  "initial_hosted_workflow_validation": {
+    "workflow": ".github/workflows/distro-integration.yml",
+    "run_id": 42845194890,
+    "url": "https://github.com/shyamsridhar123/weight-space-programming-framework/actions/runs/42845194890",
+    "event": "push",
+    "head_sha": "93b799c6cfc78514c1c9711d331fa3fad991eb71",
+    "status": "completed",
+    "conclusion": "failure",
+    "jobs_started": false,
+    "check_runs_exposed": false,
+    "correction": "Changed RUN_ROOT in jobs.distro-integration.env from the unavailable runner.os context to matrix.os. This source-bound recapture passed after the correction; subsequent hosted execution remains to be inspected on the actual PR and commit."
+  }
 }
