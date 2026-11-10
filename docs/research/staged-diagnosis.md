@@ -90,6 +90,14 @@ Each phase is available once. An ordinary selector exception permits continuatio
 
 [`SelectionAdmission`](../../scripts/staged_diagnosis_selection.py) is a study-specific consumer of the public `StagedCohort` phases. The framework remains generic over captured tensor artifacts; this helper fixes the prospective `bias-outlier` and `metadata-uniform` policies, their views and budgets, and the common repair. It accepts one fresh, exact `StagedCohort` with matching roster, protocol and identities, and no `evaluation_plan` key. Controls default to the legacy empty object; the optional native-control recipe below must instead be supplied identically to both constructors before `run()`. The cohort constructor creates the previously nonexistent run directory before the admission owner is constructed. Do not call the cohort phases separately.
 
+The current `structured.py` source pin includes the optional finite-intermediate
+rejection used by the [owned sequential runtime](../weight-space/sequential-runtime.md).
+Selection admission uses unchanged lowering paths. Earlier captured source maps,
+seals and validation receipts retain their original identities; this source
+compatibility update authorizes no scientific execution. The earlier sequential
+runtime receipt does not verify this later selector-pin change or provide cohort
+runtime-restoration or causal-usefulness evidence.
+
 After the trusted harness has selected reviewed source bytes, a concrete integration is:
 
 ```python

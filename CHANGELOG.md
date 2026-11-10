@@ -14,8 +14,12 @@ research draft.
   records one captured regression selection with three NumPy 2.5 deprecation
   warnings from intentional array-header mutation checks. Coverage is limited
   to the declared adapter; caller trust in the expected hash remains required.
-  Generic cohort restoration/usefulness flags remain false. No scientific
-  outcome or earlier receipt scope changes; #9 c1 stays partial and open.
+  Refresh selection-only admission's reviewed arithmetic-source pin for the
+  shared helper change, retaining its exact source checks and all earlier
+  capture and seal records. The earlier runtime receipt does not cover this
+  later source-pin update. Generic cohort restoration/usefulness flags remain
+  false. No scientific outcome or earlier receipt scope changes; #9 c1 stays
+  partial and open.
 
 - Leave descendant cleanup unknown (`None`/JSON `null`) when pipes drain after
   a timeout; retain `False` when cleanup waits are exhausted and preserve
