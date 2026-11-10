@@ -7,6 +7,17 @@ research draft.
 
 ## Unreleased
 
+- Preserve per-field [resource availability](docs/weight-space/resource-accounting.md)
+  across all assigned trained outcomes, including known costs on missing
+  evaluations. Fresh `/2` study summaries expose observed sums and counts;
+  existing total aliases become null when any assigned value is unknown.
+  The [engineering receipt](provenance/verification/resource-coverage-summary-20261109.json)
+  records one passing authored scalar seam check. Runtime identity was captured
+  and unchanged; lockfile agreement was not enforced. Timers retain their
+  producer limits, `analyze_study` remains deferred, and no scientific execution
+  or study replay occurred. Historical results remain unchanged and #14 c0/c5
+  stay partial/open.
+
 - Add generic Boolean [correctness-transition counts](docs/weight-space/classification-metrics.md)
   so corrections and newly incorrect cases remain visible when net accuracy
   cancels them. The caller owns decoding, regions and rates; existing queue
